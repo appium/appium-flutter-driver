@@ -1,4 +1,5 @@
-
+@file:JvmName("_FinderRawMethods")
+@file:JvmMultifileClass
 package pro.truongsinh.appium_flutter.finder
 
 import java.util.Base64

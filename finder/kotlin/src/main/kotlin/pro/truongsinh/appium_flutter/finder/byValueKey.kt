@@ -1,21 +1,19 @@
-@file:JvmName("Finder")
+@file:JvmName("_FinderRawMethods")
 @file:JvmMultifileClass
 package pro.truongsinh.appium_flutter.finder
 
-fun byValueKey(input: String): String {
-  val base64Encoded = serialize(mapOf(
+fun byValueKey(input: String): FlutterElement {
+  return FlutterElement(mapOf(
     "finderType" to "ByValueKey",
     "keyValueType" to "String",
     "keyValueString" to input
     ))
-  return base64Encoded
 }
 
-fun byValueKey(input: Int): String {
-  val base64Encoded = serialize(mapOf(
+fun byValueKey(input: Int): FlutterElement {
+  return FlutterElement(mapOf(
     "finderType" to "ByValueKey",
     "keyValueType" to "int",
     "keyValueString" to input
     ))
-  return base64Encoded
 }

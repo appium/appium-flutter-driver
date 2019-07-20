@@ -44,10 +44,15 @@
 			<version>2.2.4</version>
     </dependency>
     
+    <dependency>
+			<groupId>io.appium</groupId>
+			<artifactId>java-client</artifactId>
+			<version>4.1.2</version>
+		</dependency>
 		<dependency>
 			<groupId>pro.truongsinh</groupId>
 			<artifactId>appium-flutter-finder</artifactId>
-			<version>0.0.1</version>
+			<version>0.0.2</version>
     </dependency>
 
   </dependencies>

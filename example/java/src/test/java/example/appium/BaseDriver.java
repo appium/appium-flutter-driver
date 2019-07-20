@@ -1,18 +1,20 @@
 package example.appium;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServerHasNotBeenStartedLocallyException;
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 
 public class BaseDriver {
-  public AppiumDriver<WebElement> driver;
+  public AppiumDriver<MobileElement> driver;
+  public WebDriverWait wait;
   private static AppiumDriverLocalService service;
 
   @Before
@@ -38,7 +40,8 @@ public class BaseDriver {
 
     capabilities.setCapability("automationName", "Flutter");
 
-    driver = new IOSDriver<>(service.getUrl(), capabilities);
+    driver = new IOSDriver<MobileElement>(service.getUrl(), capabilities);
+    wait = new WebDriverWait(driver, 10);
   }
 
   @After

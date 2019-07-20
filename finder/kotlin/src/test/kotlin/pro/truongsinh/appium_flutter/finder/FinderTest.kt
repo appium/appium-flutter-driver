@@ -15,29 +15,29 @@ class FinderTest {
                 of = pageback(),
                 matching = pageback()
             )
-        )
+        ).id
         assertEquals(expected, observed)
     }
     @Test fun TestBySemanticsLabelString() {
-        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlTZW1hbnRpY3NMYWJlbCIsImlzUmVnRXhwIjpmYWxzZSwibGFiZWwiOiJzaW1wbGUifQ", bySemanticsLabel("simple"))
+        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlTZW1hbnRpY3NMYWJlbCIsImlzUmVnRXhwIjpmYWxzZSwibGFiZWwiOiJzaW1wbGUifQ", bySemanticsLabel("simple").id)
     }
     @Test fun TestBySemanticsLabelRegex() {
-        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlTZW1hbnRpY3NMYWJlbCIsImlzUmVnRXhwIjp0cnVlLCJsYWJlbCI6ImNvbXBsaWNhdGVkIn0", bySemanticsLabel(Regex("complicated")))
+        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlTZW1hbnRpY3NMYWJlbCIsImlzUmVnRXhwIjp0cnVlLCJsYWJlbCI6ImNvbXBsaWNhdGVkIn0", bySemanticsLabel(Regex("complicated")).id)
     }
     @Test fun TestByTooltip() {
-        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlUb29sdGlwTWVzc2FnZSIsInRleHQiOiJteVRleHQifQ", byTooltip("myText"))
+        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlUb29sdGlwTWVzc2FnZSIsInRleHQiOiJteVRleHQifQ", byTooltip("myText").id)
     }
     @Test fun TestByType() {
-        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlUeXBlIiwidHlwZSI6Im15VGV4dCJ9", byType("myText"))
+        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlUeXBlIiwidHlwZSI6Im15VGV4dCJ9", byType("myText").id)
     }
     @Test fun testByValueKeyString() {
         val expectedJsonElement = deserialize("eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjoiNDIiLCJrZXlWYWx1ZVR5cGUiOiJTdHJpbmcifQ")
-        val obserbedJsonElement = deserialize(byValueKey("42"))
+        val obserbedJsonElement = deserialize(byValueKey("42").id)
         assertEquals(true, expectedJsonElement.equals(obserbedJsonElement))
     }
     @Test fun testByValueKeyInt() {
         val expectedJsonElement = deserialize("eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjo0Miwia2V5VmFsdWVUeXBlIjoiaW50In0")
-        val obserbedJsonElement = deserialize(byValueKey(42))
+        val obserbedJsonElement = deserialize(byValueKey(42).id)
         assertEquals(true, expectedJsonElement.equals(obserbedJsonElement))
     }
     @Test fun testDescendant() {
@@ -51,13 +51,13 @@ class FinderTest {
                 of = pageback(),
                 matching = pageback()
             )
-        )
+        ).id
         assertEquals(expected, observed)
     }
     @Test fun testPageback() {
-        assertEquals("eyJmaW5kZXJUeXBlIjoiUGFnZUJhY2sifQ", pageback())
+        assertEquals("eyJmaW5kZXJUeXBlIjoiUGFnZUJhY2sifQ", pageback().id)
     }
     @Test fun testText() {
-        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlUZXh0IiwidGV4dCI6IlRoaXMgaXMgMm5kIHJvdXRlIn0", text("This is 2nd route"))
+        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlUZXh0IiwidGV4dCI6IlRoaXMgaXMgMm5kIHJvdXRlIn0", text("This is 2nd route").id)
     }
 }

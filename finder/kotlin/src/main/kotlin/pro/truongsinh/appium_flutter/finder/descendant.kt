@@ -1,18 +1,17 @@
-@file:JvmName("Finder")
+@file:JvmName("_FinderRawMethods")
 @file:JvmMultifileClass
 package pro.truongsinh.appium_flutter.finder
 
-fun descendant(of: String, matching: String, matchRoot: Boolean = false): String {
+fun descendant(of: FlutterElement, matching: FlutterElement, matchRoot: Boolean = false): FlutterElement {
   val m = mutableMapOf(
     "finderType" to "Descendant",
     "matchRoot" to matchRoot
   )
-  deserialize(of).forEach {
-    print(it.value)
+  of.getRawMap().forEach {
     m.put("of_${it.key}", it.value!!)
   }
-  deserialize(matching).forEach {
+  matching.getRawMap().forEach {
     m.put("matching_${it.key}", it.value!!)
   }
-  return serialize(m)
+  return FlutterElement(m)
 }

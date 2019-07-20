@@ -1,8 +1,7 @@
-@file:JvmName("Finder")
+@file:JvmName("_FinderRawMethods")
 @file:JvmMultifileClass
 package pro.truongsinh.appium_flutter.finder
 
-fun pageback(): String {
-  val base64Encoded = serialize(mapOf("finderType" to "PageBack"))
-  return base64Encoded
+fun pageback(): FlutterElement {
+  return FlutterElement(mapOf("finderType" to "PageBack"))
 }
