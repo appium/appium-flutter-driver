@@ -6,7 +6,7 @@
     "flutter"
   ],
   "version": "0.0.1",
-  "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro",
+  "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -18,12 +18,12 @@
     "lib": "lib"
   },
   "files": [
-    "index.js",
-    "lib",
     "build/index.js",
+    "build/index.d.ts",
     "build/lib"
   ],
   "scripts": {
+    "prepublishOnly": "cp ../README.md ../LICENSE ./",
     "prepare": "gulp prepublish",
     "test": "gulp once",
     "watch": "gulp",
