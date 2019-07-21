@@ -14,7 +14,7 @@ const osSpecificOps = process.env.APPIUM_OS === 'android' ? {
   platformVersion: '12.2',
   deviceName: 'iPhone X',
   noReset: true,
-  app: __dirname +  '/../apps/Runner.app',
+  app: __dirname +  '/../apps/Runner.zip',
 
 } : {};
 
