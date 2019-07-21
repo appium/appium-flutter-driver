@@ -1,0 +1,23 @@
+{
+  "name": "appium",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "webdriverio": "^5.11.5"
+  },
+  "devDependencies": {
+    "@types/node": "^12.6.8",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  },
+  "scripts": {
+    "start": "ts-node src/index.js",
+    "ios": "APPIUM_OS=ios npm start",
+    "android": "APPIUM_OS=android npm start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro",
+  "private": true,
+  "license": "MIT"
+}

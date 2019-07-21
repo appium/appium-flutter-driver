@@ -1,0 +1,44 @@
+{
+  "name": "appium-flutter-driver",
+  "description": "Appium Flutter driver",
+  "keywords": [
+    "appium",
+    "flutter"
+  ],
+  "version": "0.0.1",
+  "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/truongsinh/appium-flutter-driver.git"
+  },
+  "main": "./build/index.js",
+  "bin": {},
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "build/index.js",
+    "build/lib"
+  ],
+  "scripts": {
+    "prepare": "gulp prepublish",
+    "test": "gulp once",
+    "watch": "gulp",
+    "lint": "tslint 'lib/**/*.ts'",
+    "clean": "rm -rf node_modules && rm -f package-lock.json && npm install"
+  },
+  "devDependencies": {
+    "appium-gulp-plugins": "^4.1.0",
+    "gulp": "^4.0.2",
+    "tslint": "^5.18.0"
+  },
+  "dependencies": {
+    "appium-base-driver": "^3.19.0",
+    "appium-uiautomator2-driver": "^1.33.1",
+    "appium-xcuitest-driver": "^2.123.0",
+    "rpc-websockets": "^4.5.1"
+  }
+}
