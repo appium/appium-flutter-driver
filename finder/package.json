@@ -1,0 +1,35 @@
+{
+  "name": "appium-flutter-finder",
+  "description": "Finder for Appium Flutter driver",
+  "keywords": [
+    "appium",
+    "flutter"
+  ],
+  "version": "0.0.1",
+  "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/truongsinh/appium-flutter-driver.git"
+  },
+  "main": "./build/serializer.js",
+  "bin": {},
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "prepublishOnly": "cp ../LICENSE ./",
+    "prepare": "npm run clean && npm run compile",
+    "clean": "rm -rf build",
+    "compile": "tsc",
+    "lint": "tslint 'lib/**/*.ts'"
+  },
+  "devDependencies": {
+    "@types/node": "^12.6.8",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
+  }
+}

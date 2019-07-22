@@ -2,7 +2,7 @@
 // import * as assert from 'assert';
 const wdio = require('webdriverio');
 const assert = require('assert');
-const { find } = require('./find');
+const { byValueKey } = require('appium-flutter-finder');
 
 const osSpecificOps = process.env.APPIUM_OS === 'android' ? {
   platformName: 'Android',
@@ -27,8 +27,8 @@ const opts = {
 };
 
 (async () => {
-  const counterTextFinder = find.byValueKey('counter');
-  const buttonFinder = find.byValueKey('increment');
+  const counterTextFinder = byValueKey('counter');
+  const buttonFinder = byValueKey('increment');
 
   const driver = await wdio.remote(opts);
 

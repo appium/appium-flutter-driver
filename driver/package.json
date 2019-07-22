@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/truongsinh/appium-flutter-driver.git"
   },
-  "main": "./build/driver.js",
+  "main": "./build/driver/lib/driver.js",
   "bin": {},
   "directories": {
     "lib": "lib"

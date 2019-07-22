@@ -3,6 +3,7 @@ import { URL } from 'url';
 // @ts-ignore
 import { Client } from 'rpc-websockets';
 
+import { deserialize } from '../../../finder/lib/deserializer';
 import { FlutterDriver } from '../driver';
 import { log } from '../logger';
 
@@ -92,9 +93,7 @@ export const connectSocket =  async (dartObservatoryURL: string) => {
 };
 
 export const executeElementCommand = async function(this: FlutterDriver, command, elementBase64) {
-  const elementObject = JSON.parse(
-    Buffer.from(elementBase64, `base64`).toString(),
-  );
+  const elementObject = deserialize(elementBase64);
   const serializedCommand = { command, ...elementObject };
   log.debug(`>>> ${JSON.stringify(serializedCommand)}`);
   const data = await executeSocketCommand(this.socket, serializedCommand);
