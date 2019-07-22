@@ -12,28 +12,25 @@
     "type": "git",
     "url": "git+https://github.com/truongsinh/appium-flutter-driver.git"
   },
-  "main": "./build/index.js",
+  "main": "./build/driver.js",
   "bin": {},
   "directories": {
     "lib": "lib"
   },
   "files": [
-    "build/index.js",
-    "build/index.d.ts",
-    "build/lib"
+    "build"
   ],
   "scripts": {
     "prepublishOnly": "cp ../README.md ../LICENSE ./",
-    "prepare": "gulp prepublish",
-    "test": "gulp once",
-    "watch": "gulp",
+    "prepare": "npm run clean && npm run compile",
+    "compile": "tsc",
+    "clean": "rm -rf build",
     "lint": "tslint 'lib/**/*.ts'",
-    "clean": "rm -rf node_modules && rm -f package-lock.json && npm install"
+    "clean-dependency": "rm -rf node_modules && rm -f package-lock.json && npm install"
   },
   "devDependencies": {
-    "appium-gulp-plugins": "^4.1.0",
-    "gulp": "^4.0.2",
-    "tslint": "^5.18.0"
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
   },
   "dependencies": {
     "appium-base-driver": "^3.19.0",

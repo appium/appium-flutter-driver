@@ -2,6 +2,7 @@ import { exec } from 'child_process';
 import { promisify } from 'util';
 const execPromise = promisify(exec);
 
+// @ts-ignore
 import AndroidDriver from 'appium-uiautomator2-driver';
 import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';

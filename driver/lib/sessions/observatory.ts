@@ -1,5 +1,6 @@
 import { URL } from 'url';
 
+// @ts-ignore
 import { Client } from 'rpc-websockets';
 
 import { FlutterDriver } from '../driver';
@@ -8,12 +9,14 @@ import { log } from '../logger';
 const MAX_RETRY_COUNT = 10;
 const RETRY_BACKOFF = 300000;
 
-export class WebSocketDummy {}
+class WebSocketDummy {}
+
+export type NullableWebSocketDummy = WebSocketDummy | null;
 
 // SOCKETS
 export const connectSocket =  async (dartObservatoryURL: string) => {
   let retryCount = 0;
-  let connectedSocket: WebSocketDummy;
+  let connectedSocket: NullableWebSocketDummy = null;
   while (retryCount < MAX_RETRY_COUNT && !connectedSocket) {
     if (retryCount > 0) {
       log.info(
@@ -23,14 +26,14 @@ export const connectSocket =  async (dartObservatoryURL: string) => {
     }
     log.info(`Attempt #` + (retryCount + 1));
 
-    const connectedPromise = new Promise<WebSocketDummy>((resolve) => {
+    const connectedPromise = new Promise<NullableWebSocketDummy>((resolve) => {
       log.info(
         `Connecting to Dart Observatory: ${dartObservatoryURL}`,
       );
 
       const socket = new Client(dartObservatoryURL);
 
-      const removeListenerAndResolve = (r: WebSocketDummy) => {
+      const removeListenerAndResolve = (r: NullableWebSocketDummy) => {
         socket.removeListener(`error`, onErrorListener);
         socket.removeListener(`timeout`, onTimeoutListener);
         socket.removeListener(`open`, onOpenListener);
@@ -114,6 +117,7 @@ export const processLogToGetobservatory = (adbLogs: Array<{message: string}>) =>
   const observatoryUriRegEx = new RegExp(
     `Observatory listening on ((http|\/\/)[a-zA-Z0-9:/=_\\-\.\\[\\]]+)`,
   );
+  // @ts-ignore
   const observatoryMatch = adbLogs
     .map((e) => e.message)
     .reverse()

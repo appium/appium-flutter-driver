@@ -31,7 +31,7 @@ export const createSession = async function(this: FlutterDriver, caps, sessionId
     }
   };
 
-export const deleteSession = async function() {
+export const deleteSession = async function(this: FlutterDriver) {
     log.debug(`Deleting Flutter Driver session`);
 
     if (this.proxydriver !== null) {

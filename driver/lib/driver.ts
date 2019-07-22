@@ -1,3 +1,4 @@
+// @ts-ignore
 import { BaseDriver, errors } from 'appium-base-driver';
 
 import { desiredCapConstraints, IDesiredCapConstraints } from './desired-caps';
@@ -17,8 +18,6 @@ class FlutterDriver extends BaseDriver {
   public locatorStrategies = [`key`, `css selector`];
   public proxydriver: any;
   public device: any;
-  public isolateId: string;
-  public contexts: string[];
 
   // from BaseDriver
   public opts: any;
@@ -83,7 +82,7 @@ class FlutterDriver extends BaseDriver {
     if (!res) {
       return res;
     }
-    // Android emulator with proxy
+    // @ts-ignore
     if (caps.deviceName.toLowerCase() === `android`) {
       if (!caps.avd) {
         const msg = `The desired capabilities must include avd`;

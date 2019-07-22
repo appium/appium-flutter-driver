@@ -1,3 +1,4 @@
+// @ts-ignore
 import XCUITestDriver from 'appium-xcuitest-driver';
 
 import { log } from '../logger';
