@@ -4,15 +4,11 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "appium-flutter-finder": "^0.0.3",
     "webdriverio": "^5.11.5"
   },
-  "devDependencies": {
-    "@types/node": "^12.6.8",
-    "ts-node": "^8.3.0",
-    "typescript": "^3.5.3"
-  },
   "scripts": {
-    "start": "ts-node src/index.js",
+    "start": "node src/index.js",
     "ios": "APPIUM_OS=ios npm start",
     "android": "APPIUM_OS=android npm start",
     "test": "echo \"Error: no test specified\" && exit 1"

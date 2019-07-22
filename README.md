@@ -34,7 +34,7 @@ This snippet, taken from [example dir](https://github.com/truongsinh/appium-flut
 ```js
 const wdio = require('webdriverio');
 const assert = require('assert');
-const { find } = require('./find');
+const { byValueKey } = require('appium-flutter-finder');
 
 const osSpecificOps = process.env.APPIUM_OS === 'android' ? {
   platformName: 'Android',
@@ -46,7 +46,7 @@ const osSpecificOps = process.env.APPIUM_OS === 'android' ? {
   platformVersion: '12.2',
   deviceName: 'iPhone X',
   noReset: true,
-  app: __dirname +  '/../apps/Runner.app',
+  app: __dirname +  '/../apps/Runner.zip',
 
 } : {};
 
@@ -59,8 +59,8 @@ const opts = {
 };
 
 (async () => {
-  const counterTextFinder = find.byValueKey('counter');
-  const buttonFinder = find.byValueKey('increment');
+  const counterTextFinder = byValueKey('counter');
+  const buttonFinder = byValueKey('increment');
 
   const driver = await wdio.remote(opts);
 
@@ -86,20 +86,77 @@ const opts = {
 })();
 ```
 
-## Commands
-Context:
-- `getCurrentContext`
-- `setContext`
-- `getContext`
+## API
 
-Element:
-- `getText`
+Legend:
 
-Gesture:
-- `click`
-- `tapEl`
-- `tap`
-- `performTouch`
+| Icon | Description |
+| - | - |
+| :white_check_mark: | integrated to CI |
+| :ok: | manual tested without CI |
+| :warning: | availalbe without manual tested |
+| :x: | unavailable |
+
+### Finders
+
+| Flutter Driver API | Status | WebDriver  example |
+| - | - | - |
+| [ancestor](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/ancestor.html) | :x: |  |
+| [bySemanticsLabel](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/bySemanticsLabel.html) | :x: |  |
+| [byTooltip](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/byTooltip.html) | :x: |  |
+| [byType](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/byType.html) | :x: |  |
+| [byValueKey](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/byValueKey.html) | :ok: | [`byValueKey('counter')`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L30) |
+| [descendant](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/descendant.html) | :x: |  |
+| [pageBack](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/pageBack.html) | :x: | `pageBack()` |
+| [text](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/text.html) | :x: | `text('foo')` |
+
+### Commands
+
+| Flutter API | Status | WebDriver example | scope |
+| - | - | - | - |
+| [FlutterDriver.connectedTo](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/FlutterDriver.connectedTo.html) | :ok: | [`wdio.remote(opts)`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L33) | Session |
+| [checkHealth](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/checkHealth.html) | :x: |  | Session |
+| [clearTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/clearTimeline.html) | :x: |  | Session |
+| [close](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/close.html) | :x: |  | Session |
+| [enterText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/enterText.html) | :ok: | [`driver.deleteSession();`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L55) | Session |
+| [forceGC](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/forceGC.html) | :x: |  | Session |
+| [getBottomLeft](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getBottomLeft.html) | :x: |  | Widget |
+| [getBottomRight](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getBottomRight.html) | :x: |  | Widget |
+| [getCenter](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getCenter.html) | :x: |  | Widget |
+| [getRenderObjectDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getRenderObjectDiagnostics.html) | :x: |  | Widget |
+| [getRenderTree](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getRenderTree.html) | :x: |  | Session |
+| [getSemanticsId](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getSemanticsId.html) | :x: |  | Widget |
+| [getText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getText.html) | :ok: | [`driver.getElementText(counterTextFinder)`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L44) | Widget |
+| [getTopLeft](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getTopLeft.html) | :x: |  | Widget |
+| [getTopRight](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getTopRight.html) | :x: |  | Widget |
+| [getVmFlags](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getVmFlags.html) | :x: |  | Session |
+| [getWidgetDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getWidgetDiagnostics.html) | :x: |  | Widget |
+| [requestData](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/requestData.html) | :x: |  | Session |
+| [runUnsynchronized](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/runUnsynchronized.html) | :x: |  | Session |
+| [screenshot](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/screenshot.html) | :x: |  | Session |
+| [scroll](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scroll.html) | :x: |  | Widget |
+| [scrollIntoView](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollIntoView.html) | :x: |  | Widget |
+| [scrollUntilVisible](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollUntilVisible.html) | :x: |  | Widget |
+| [setSemantics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setSemantics.html) | :x: |  | Session |
+| [setTextEntryEmulation](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setTextEntryEmulation.html) | :x: |  | Session |
+| [startTracing](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/startTracing.html) | :x: |  | Session |
+| [stopTracingAndDownloadTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/stopTracingAndDownloadTimeline.html) | :x: |  | Session |
+| [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html) | :ok: | [`driver.elementClick(buttonFinder)`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L46) | Widget |
+| [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html) | :ok: | [`driver.touchAction({action: 'tap', element: {elementId: buttonFinder}})`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L47) | Widget |
+| [traceAction](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/traceAction.html) | :x: |  | Session |
+| [waitFor](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitFor.html) | :x: |  | Widget |
+| [waitForAbsent](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitForAbsent.html) | :x: |  | Widget |
+| [waitUntilNoTransientCallbacks](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitUntilNoTransientCallbacks.html) | :x: |  | Widget |
+| :question: | :ok: | setContext | Appium |
+| :question: | :warning: | getCurrentContext | Appium |
+| :question: | :warning: | getContexts | Appium |
+| :question: | :x: | longTap | Widget |
 
 # TODO
-TBD
+- [] iOS Real device
+- [] CI (unit test / integration test with demo app)
+- [] CD (automatic publish to npm)
+- [] `finder` as a seperate package
+- [] switching context between Flutter and [AndroidView](https://api.flutter.dev/flutter/widgets/AndroidView-class.html)
+- [] switching context between Flutter and [UiKitView](https://api.flutter.dev/flutter/widgets/UiKitView-class.html)
+- [] switching context between Flutter and [webview](https://pub.dev/packages/webview_flutter)
