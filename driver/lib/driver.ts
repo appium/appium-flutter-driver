@@ -10,9 +10,9 @@ import { createSession, deleteSession } from './sessions/session';
 import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
   getContexts, getCurrentContext, setContext } from './commands/context';
 import { getText } from './commands/element';
+import { execute } from './commands/execute';
 import { click, performTouch, tap, tapEl } from './commands/gesture';
 import { getScreenshot } from './commands/screen';
-import { execute } from './commands/execute';
 
 class FlutterDriver extends BaseDriver {
   public desiredCapConstraints: IDesiredCapConstraints;
