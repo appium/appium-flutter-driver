@@ -10,8 +10,8 @@ const osSpecificOps =
         platformName: 'Android',
         deviceName: 'Pixel 2',
         // @todo support non-unix style path
-        // app: __dirname + '/../apps/android-real-debug.apk', // download local to run faster and save bandwith
-        app: 'https://github.com/truongsinh/appium-flutter-driver/releases/download/v0.0.4/android-real-debug.apk',
+        app: __dirname + '/../apps/android-real-debug.apk', // download local to run faster and save bandwith
+        // app: 'https://github.com/truongsinh/appium-flutter-driver/releases/download/v0.0.4/android-real-debug.apk',
       }
     : process.env.APPIUM_OS === 'ios'
     ? {
@@ -37,6 +37,11 @@ const opts = {
   const buttonFinder = find.byValueKey('increment');
 
   const driver = await wdio.remote(opts);
+
+  await driver.switchContext('NATIVE_APP');
+  await driver.saveScreenshot('./native-screenshot.png');
+  await driver.switchContext('FLUTTER');
+  await driver.saveScreenshot('./flutter-screenshot.png');
 
   /* new example
   if (process.env.APPIUM_OS === 'android') {
