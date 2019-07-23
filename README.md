@@ -156,10 +156,12 @@ Legend:
 - [ ] iOS Real device
 - [ ] CI (unit test / integration test with demo app)
 - [ ] CD (automatic publish to npm)
-- [ ] `finder` as a seperate package
+- [x] `finder` as a seperate package
 - [ ] switching context between Flutter and [AndroidView](https://api.flutter.dev/flutter/widgets/AndroidView-class.html)
 - [ ] switching context between Flutter and [UiKitView](https://api.flutter.dev/flutter/widgets/UiKitView-class.html)
 - [ ] switching context between Flutter and [webview](https://pub.dev/packages/webview_flutter)
+- [ ] Flutter-version-aware API
+- [ ] Error handling
 
 ## Test Status
 

@@ -10,7 +10,8 @@ const osSpecificOps =
         platformName: 'Android',
         deviceName: 'Pixel 2',
         // @todo support non-unix style path
-        app: __dirname + '/../apps/app-free-debug.apk'
+        // app: __dirname + '/../apps/android-real-debug.apk', // download local to run faster and save bandwith
+        app: 'https://github.com/truongsinh/appium-flutter-driver/releases/download/v0.0.4/android-real-debug.apk',
       }
     : process.env.APPIUM_OS === 'ios'
     ? {
@@ -18,7 +19,8 @@ const osSpecificOps =
         platformVersion: '12.2',
         deviceName: 'iPhone X',
         noReset: true,
-        app: __dirname + '/../apps/Runner.zip'
+        // app: __dirname + '/../apps/ios-sim-debug.zip', // download local to run faster and save bandwith
+        app: 'https://github.com/truongsinh/appium-flutter-driver/releases/download/v0.0.4/ios-sim-debug.zip',
       }
     : {};
 
