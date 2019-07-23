@@ -1,8 +1,8 @@
 # Appium Flutter Driver
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/truongsinh/appium-flutter-driver.svg)](https://greenkeeper.io/)
-[![NPM version](http://img.shields.io/npm/v/appium-flutter-driver.svg)](https://npmjs.org/package/appium-flutter-driver)
-[![Downloads](http://img.shields.io/npm/dm/appium-flutter-driver.svg)](https://npmjs.org/package/appium-flutter-driver)
+[![NPM version](https://img.shields.io/npm/v/appium-flutter-driver.svg)](https://npmjs.org/package/appium-flutter-driver)
+[![Downloads](https://img.shields.io/npm/dm/appium-flutter-driver.svg)](https://npmjs.org/package/appium-flutter-driver)
 [![Dependency Status](https://david-dm.org/truongsinh/appium-flutter-driver.svg)](https://david-dm.org/truongsinh/appium-flutter-driver)
 [![devDependency Status](https://david-dm.org/truongsinh/appium-flutter-driver/dev-status.svg)](https://david-dm.org/truongsinh/appium-flutter-driver#info=devDependencies)
 
@@ -17,7 +17,7 @@ Even though Flutter comes with superb integration test support, [Flutter Driver]
 - writing test in other languages than Dart
 - running integration test for Flutter app with embedded webview or native view, or existing native app with embedded Flutter view
 - running test on multiple devices simultanously
-- running integration test on device farms, such as Sourcelab, AWS, Firebase
+- running integration test on device farms, such as Saucelabs, AWS, Firebase
 
 Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https://github.com/dart-lang/sdk/blob/master/runtime/vm/service/service.md) with extension `ext.flutter.driver`, similar to Flutter Driver, to control the Flutter app-under-test (AUT).
 
@@ -152,11 +152,19 @@ Legend:
 | :question: | :warning: | getContexts | Appium |
 | :question: | :x: | longTap | Widget |
 
-# TODO
-- [] iOS Real device
-- [] CI (unit test / integration test with demo app)
-- [] CD (automatic publish to npm)
-- [] `finder` as a seperate package
-- [] switching context between Flutter and [AndroidView](https://api.flutter.dev/flutter/widgets/AndroidView-class.html)
-- [] switching context between Flutter and [UiKitView](https://api.flutter.dev/flutter/widgets/UiKitView-class.html)
-- [] switching context between Flutter and [webview](https://pub.dev/packages/webview_flutter)
+## TODO
+- [ ] iOS Real device
+- [ ] CI (unit test / integration test with demo app)
+- [ ] CD (automatic publish to npm)
+- [ ] `finder` as a seperate package
+- [ ] switching context between Flutter and [AndroidView](https://api.flutter.dev/flutter/widgets/AndroidView-class.html)
+- [ ] switching context between Flutter and [UiKitView](https://api.flutter.dev/flutter/widgets/UiKitView-class.html)
+- [ ] switching context between Flutter and [webview](https://pub.dev/packages/webview_flutter)
+
+## Test Status
+
+[![Saucelabs Test Status](https://saucelabs.com/browser-matrix/appium-flutter-driver.svg)](https://saucelabs.com/u/appium-flutter-driver)
+
+
+[![Powered by Saucelabs](./saucelabs.svg)](https://saucelabs.com/)
+
