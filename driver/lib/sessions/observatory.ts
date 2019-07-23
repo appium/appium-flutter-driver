@@ -92,8 +92,8 @@ export const connectSocket =  async (dartObservatoryURL: string) => {
   return connectedSocket;
 };
 
-export const executeElementCommand = async function(this: FlutterDriver, command, elementBase64) {
-  const elementObject = deserialize(elementBase64);
+export const executeElementCommand = async function(this: FlutterDriver, command: string, elementBase64?: string) {
+  const elementObject = elementBase64 ? deserialize(elementBase64) : {};
   const serializedCommand = { command, ...elementObject };
   log.debug(`>>> ${JSON.stringify(serializedCommand)}`);
   const data = await executeSocketCommand(this.socket, serializedCommand);

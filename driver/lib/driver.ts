@@ -12,6 +12,7 @@ import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
 import { getText } from './commands/element';
 import { click, performTouch, tap, tapEl } from './commands/gesture';
 import { getScreenshot } from './commands/screen';
+import { execute } from './commands/execute';
 
 class FlutterDriver extends BaseDriver {
   public desiredCapConstraints: IDesiredCapConstraints;
@@ -29,6 +30,7 @@ class FlutterDriver extends BaseDriver {
 
   // session
   public executeElementCommand = executeElementCommand;
+  public execute = execute;
 
   // element
   public getText = getText;

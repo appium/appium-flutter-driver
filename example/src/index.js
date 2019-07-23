@@ -38,6 +38,9 @@ const opts = {
 
   const driver = await wdio.remote(opts);
 
+  const treeString = await driver.execute('flutter: getRenderTree');
+  assert.strictEqual(treeString.substr(0,11),'RenderView#');
+
   await driver.switchContext('NATIVE_APP');
   await driver.saveScreenshot('./native-screenshot.png');
   await driver.switchContext('FLUTTER');
