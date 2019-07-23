@@ -99,16 +99,16 @@ Legend:
 
 ### Finders
 
-| Flutter Driver API | Status | WebDriver  example |
+| Flutter Driver API | Status | WebDriver example |
 | - | - | - |
-| [ancestor](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/ancestor.html) | :x: |  |
-| [bySemanticsLabel](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/bySemanticsLabel.html) | :x: |  |
-| [byTooltip](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/byTooltip.html) | :x: |  |
-| [byType](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/byType.html) | :x: |  |
+| [ancestor](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/ancestor.html) | :ok: |  |
+| [bySemanticsLabel](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/bySemanticsLabel.html) | :ok: |  |
+| [byTooltip](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/byTooltip.html) | :ok: |  |
+| [byType](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/byType.html) | :ok: |  |
 | [byValueKey](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/byValueKey.html) | :ok: | [`byValueKey('counter')`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L30) |
-| [descendant](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/descendant.html) | :x: |  |
-| [pageBack](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/pageBack.html) | :x: | `pageBack()` |
-| [text](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/text.html) | :x: | `text('foo')` |
+| [descendant](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/descendant.html) | :ok: |  |
+| [pageBack](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/pageBack.html) | :ok: | `pageBack()` |
+| [text](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/text.html) | :ok: | `byText('foo')` |
 
 ### Commands
 
