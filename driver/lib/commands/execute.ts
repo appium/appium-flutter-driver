@@ -14,6 +14,8 @@ export const execute = async function(
 
   const command = matching[1].trim();
   switch (command) {
+    case `forceGC`:
+      return forceGC(this);
     case `getRenderTree`:
       return getRenderTree(this);
     case `getBottomLeft`:
@@ -39,3 +41,12 @@ const getOffset = async (
   elementBase64: string,
   offsetType,
 ) => await self.executeElementCommand(`get_offset`, elementBase64, offsetType);
+
+const forceGC = async (self: FlutterDriver) => {
+  const response = await self.socket.call(`_collectAllGarbage`, {
+    isolateId: self.socket.isolateId,
+  });
+  if (response.type !== `Success`) {
+    throw new Error(`Could not forceGC, reponse was ${response}`);
+  }
+};

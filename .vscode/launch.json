@@ -4,7 +4,18 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run test iOS",
+      "env": {
+        "APPIUM_OS": "ios"
+      },
+      "program": "${workspaceFolder}/example/src/index.js",
+      "outFiles": [
+        "${workspaceFolder}/**/*.js"
+      ]
+    },
     {
       "type": "node",
       "request": "launch",
