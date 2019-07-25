@@ -14,6 +14,10 @@ export const execute = async function(
 
   const command = matching[1].trim();
   switch (command) {
+    case `checkHealth`:
+      return checkHealth(this);
+    case `clearTimeline`:
+      return clearTimeline(this);
     case `forceGC`:
       return forceGC(this);
     case `getRenderTree`:
@@ -33,6 +37,9 @@ export const execute = async function(
   }
 };
 
+const checkHealth = async (self: FlutterDriver) =>
+  (await self.executeElementCommand(`get_health`)).status;
+
 const getRenderTree = async (self: FlutterDriver) =>
   (await self.executeElementCommand(`get_render_tree`)).tree;
 
@@ -46,6 +53,13 @@ const forceGC = async (self: FlutterDriver) => {
   const response = await self.socket.call(`_collectAllGarbage`, {
     isolateId: self.socket.isolateId,
   });
+  if (response.type !== `Success`) {
+    throw new Error(`Could not forceGC, reponse was ${response}`);
+  }
+};
+
+const clearTimeline = async (self: FlutterDriver) => {
+  const response = await self.socket.call(`_clearVMTimeline`);
   if (response.type !== `Success`) {
     throw new Error(`Could not forceGC, reponse was ${response}`);
   }

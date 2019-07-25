@@ -23,14 +23,17 @@ Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https:/
 
 ## Installation
 
+In order to use `appium-flutter-driver`, we need to use a patched version of `appium` (see [PR#12945](https://github.com/appium/appium/pull/12945))
+
 ```
-npm install appium-flutter-driver
+npm i -g appium-flutter-driver git://github.com/truongsinh/appium.git#patch-1
 ```
 
 ## Usage
 If you are unfamiliar with running Appium tests, start with [Appium Getting Starting](http://appium.io/docs/en/about-appium/getting-started/) first.
 
 This snippet, taken from [example dir](https://github.com/truongsinh/appium-flutter-driver/tree/master/example), is a script written as an appium client with `webdriverio`, and assumes you have `appium` server (with `appium-flutter-driver` installed) running on the same host and default port (`4723`). For more info, see example's [README.md](https://github.com/truongsinh/appium-flutter-driver/tree/master/example/README.md)
+
 ```js
 const wdio = require('webdriverio');
 const assert = require('assert');
@@ -115,9 +118,9 @@ Legend:
 | Flutter API | Status | WebDriver example | Scope |
 | - | - | - | - |
 | [FlutterDriver.connectedTo](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/FlutterDriver.connectedTo.html) | :ok: | [`wdio.remote(opts)`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L33) | Session |
-| [checkHealth](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/checkHealth.html) | :x: |  | Session |
-| [clearTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/clearTimeline.html) | :x: |  | Session |
-| [close](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/close.html) | :ok: | [`driver.deleteSession();`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L55) | Session |
+| [checkHealth](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/checkHealth.html) | :ok: | `driver.execute('flutter:checkHealth')` | Session |
+| [clearTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/clearTimeline.html) | :ok: | `driver.execute('flutter:clearTimeline')` | Session |
+| [close](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/close.html) | :ok: | [`driver.deleteSession()`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L55) | Session |
 | [enterText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/enterText.html) | :x: |  | Session |
 | [forceGC](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/forceGC.html) | :ok: | `driver.execute('flutter:forceGC')` | Session |
 | [getBottomLeft](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getBottomLeft.html) | :ok: | `driver.execute('flutter:getBottomLeft', buttonFinder)` | Widget |

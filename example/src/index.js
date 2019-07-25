@@ -40,6 +40,8 @@ const opts = {
 
   await validateElementPosition(driver, buttonFinder);
 
+  assert.strictEqual(await driver.execute('flutter:checkHealth'), 'ok');
+  await driver.execute('flutter:clearTimeline');
   await driver.execute('flutter:forceGC');
 
   const treeString = await driver.execute('flutter: getRenderTree');
