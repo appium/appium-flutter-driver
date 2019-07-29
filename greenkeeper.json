@@ -1,0 +1,11 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "driver/package.json",
+        "example/package.json",
+        "finder/package.json"
+      ]
+    }
+  }
+}
