@@ -45,7 +45,7 @@ const opts = {
   await driver.execute('flutter:forceGC');
 
   const treeString = await driver.execute('flutter: getRenderTree');
-  assert.strictEqual(treeString.substr(0,11),'RenderView#');
+  assert.strictEqual(treeString.substr(0, 11), 'RenderView#');
 
   await driver.switchContext('NATIVE_APP');
   await driver.saveScreenshot('./native-screenshot.png');
@@ -113,12 +113,17 @@ const opts = {
 })();
 
 const validateElementPosition = async (driver, buttonFinder) => {
-
-  const bottomLeft = await driver.execute('flutter:getBottomLeft', buttonFinder);
+  const bottomLeft = await driver.execute(
+    'flutter:getBottomLeft',
+    buttonFinder
+  );
   assert.strictEqual(typeof bottomLeft.dx, 'number');
   assert.strictEqual(typeof bottomLeft.dy, 'number');
 
-  const bottomRight = await driver.execute('flutter:getBottomRight', buttonFinder);
+  const bottomRight = await driver.execute(
+    'flutter:getBottomRight',
+    buttonFinder
+  );
   assert.strictEqual(typeof bottomRight.dx, 'number');
   assert.strictEqual(typeof bottomRight.dy, 'number');
 
@@ -133,4 +138,4 @@ const validateElementPosition = async (driver, buttonFinder) => {
   const topRight = await driver.execute('flutter:getTopRight', buttonFinder);
   assert.strictEqual(typeof topRight.dx, 'number');
   assert.strictEqual(typeof topRight.dy, 'number');
-}
+};

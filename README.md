@@ -1,5 +1,6 @@
 # Appium Flutter Driver
 
+[![Build Status](https://api.travis-ci.org/truongsinh/appium-flutter-driver.png?branch=master)](https://travis-ci.org/truongsinh/appium-flutter-driver)
 [![Greenkeeper badge](https://badges.greenkeeper.io/truongsinh/appium-flutter-driver.svg)](https://greenkeeper.io/)
 [![NPM version](https://img.shields.io/npm/v/appium-flutter-driver.svg)](https://npmjs.org/package/appium-flutter-driver)
 [![Downloads](https://img.shields.io/npm/dm/appium-flutter-driver.svg)](https://npmjs.org/package/appium-flutter-driver)

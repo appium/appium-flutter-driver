@@ -1,0 +1,14 @@
+
+language: node_js
+node_js:
+  - "10"
+
+install:
+  - cd driver
+  - npm --version
+  - node --version
+  - npm i
+
+script:
+  - npm run lint
+  - npm publish --dry-run
