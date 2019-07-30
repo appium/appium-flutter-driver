@@ -44,6 +44,14 @@ const opts = {
   await driver.execute('flutter:clearTimeline');
   await driver.execute('flutter:forceGC');
 
+  const renderObjectDiagnostics = await driver.execute(
+    'flutter:getRenderObjectDiagnostics',
+    counterTextFinder,
+    { includeProperties: true, subtreeDepth: 2 }
+  );
+  assert.strictEqual(renderObjectDiagnostics.type, "DiagnosticableTreeNode");
+  assert.strictEqual(renderObjectDiagnostics.children, 1);
+
   const treeString = await driver.execute('flutter: getRenderTree');
   assert.strictEqual(treeString.substr(0, 11), 'RenderView#');
 

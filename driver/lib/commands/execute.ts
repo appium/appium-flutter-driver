@@ -32,6 +32,8 @@ export const execute = async function(
       return getOffset(this, args[0], { offsetType: `topLeft` });
     case `getTopRight`:
       return getOffset(this, args[0], { offsetType: `topRight` });
+    case `getRenderObjectDiagnostics`:
+      return getRenderObjectDiagnostics(this, args[0], args[1]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -63,4 +65,26 @@ const clearTimeline = async (self: FlutterDriver) => {
   if (response.type !== `Success`) {
     throw new Error(`Could not forceGC, reponse was ${response}`);
   }
+};
+
+const getRenderObjectDiagnostics = async (
+  self: FlutterDriver,
+  elementBase64: string,
+  opts: {
+    subtreeDepth: number;
+    includeProperties: boolean;
+  },
+) => {
+  const subtreeDepth = opts.subtreeDepth || 0;
+  const includeProperties = opts.includeProperties || true;
+
+  return (await self.executeElementCommand(
+    `get_diagnostics_tree`,
+    elementBase64,
+    {
+      diagnosticsType: `renderObject`,
+      includeProperties,
+      subtreeDepth,
+    },
+  ));
 };
