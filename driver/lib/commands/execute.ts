@@ -34,6 +34,8 @@ export const execute = async function(
       return getOffset(this, args[0], { offsetType: `topRight` });
     case `getRenderObjectDiagnostics`:
       return getRenderObjectDiagnostics(this, args[0], args[1]);
+    case `getSemanticsId`:
+      return getSemanticsId(this, args[0]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -78,7 +80,7 @@ const getRenderObjectDiagnostics = async (
   const subtreeDepth = opts.subtreeDepth || 0;
   const includeProperties = opts.includeProperties || true;
 
-  return (await self.executeElementCommand(
+  return await self.executeElementCommand(
     `get_diagnostics_tree`,
     elementBase64,
     {
@@ -86,5 +88,8 @@ const getRenderObjectDiagnostics = async (
       includeProperties,
       subtreeDepth,
     },
-  ));
+  );
 };
+
+const getSemanticsId = async (self: FlutterDriver, elementBase64: string) =>
+  (await self.executeElementCommand(`get_semantics_id`, elementBase64)).id;

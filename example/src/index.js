@@ -49,8 +49,14 @@ const opts = {
     counterTextFinder,
     { includeProperties: true, subtreeDepth: 2 }
   );
-  assert.strictEqual(renderObjectDiagnostics.type, "DiagnosticableTreeNode");
-  assert.strictEqual(renderObjectDiagnostics.children, 1);
+  assert.strictEqual(renderObjectDiagnostics.type, 'DiagnosticableTreeNode');
+  assert.strictEqual(renderObjectDiagnostics.children.length, 1);
+
+  const semanticsId = await driver.execute(
+    'flutter:getSemanticsId',
+    counterTextFinder
+  );
+  assert.strictEqual(semanticsId, 4);
 
   const treeString = await driver.execute('flutter: getRenderTree');
   assert.strictEqual(treeString.substr(0, 11), 'RenderView#');
