@@ -1,8 +1,9 @@
+import { encode } from './base64url';
 import { deserialize } from './deserializer';
 
 // @todo consider using protobuf
 function serialize(obj: object) {
-  return Buffer.from(JSON.stringify(obj)).toString(`base64`);
+  return encode(JSON.stringify(obj));
 }
 
 export type SerializableFinder = string;
