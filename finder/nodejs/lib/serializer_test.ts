@@ -51,4 +51,10 @@ describe(`serializer`, () => {
       `eyJmaW5kZXJUeXBlIjoiQnlUb29sdGlwTWVzc2FnZSIsInRleHQiOiJteVRleHQifQ`,
     );
   });
+  it(`byType`, () => {
+    const expected = find.byType(`myText`);
+    expect(expected).toBe(
+      `eyJmaW5kZXJUeXBlIjoiQnlUeXBlIiwidHlwZSI6Im15VGV4dCJ9`,
+    );
+  });
 });

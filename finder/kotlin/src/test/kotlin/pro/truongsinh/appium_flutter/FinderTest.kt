@@ -18,7 +18,7 @@ class FinderJSONTest {
         assertEquals("eyJmaW5kZXJUeXBlIjoiQnlUb29sdGlwTWVzc2FnZSIsInRleHQiOiJteVRleHQifQ", byTooltip("myText"))
     }
     @Test fun TestByType() {
-        assertEquals("42", byTypeJSON())
+        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlUeXBlIiwidHlwZSI6Im15VGV4dCJ9", byType("myText"))
     }
     @Test fun testByValueKeyString() {
         assertEquals("eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjoiNDIiLCJrZXlWYWx1ZVR5cGUiOiJTdHJpbmcifQ", byValueKey("42"))
