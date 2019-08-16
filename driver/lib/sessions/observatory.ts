@@ -103,7 +103,7 @@ export const executeElementCommand = async function(
   const data = await executeSocketCommand(this.socket, serializedCommand);
   if (data.isError) {
     throw new Error(
-      `Cannot getText, server reponse ${JSON.stringify(data, null, 2)}`,
+      `Cannot execute command ${command}, server reponse ${JSON.stringify(data, null, 2)}`,
     );
   }
   return data.response;

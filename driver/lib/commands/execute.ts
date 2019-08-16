@@ -36,6 +36,10 @@ export const execute = async function(
       return getRenderObjectDiagnostics(this, args[0], args[1]);
     case `getSemanticsId`:
       return getSemanticsId(this, args[0]);
+    case `waitForAbsent`:
+      return waitForAbsent(this, args[0]);
+    case `waitFor`:
+      return waitFor(this, args[0]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -93,3 +97,9 @@ const getRenderObjectDiagnostics = async (
 
 const getSemanticsId = async (self: FlutterDriver, elementBase64: string) =>
   (await self.executeElementCommand(`get_semantics_id`, elementBase64)).id;
+
+const waitForAbsent = async (self: FlutterDriver, elementBase64: string) =>
+  (await self.executeElementCommand(`waitForAbsent`, elementBase64));
+
+const waitFor = async (self: FlutterDriver, elementBase64: string) =>
+  (await self.executeElementCommand(`waitFor`, elementBase64));

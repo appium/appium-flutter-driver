@@ -101,7 +101,10 @@ const opts = {
   );
 
   await driver.elementClick(find.byType('FlatButton'));
-  // await driver.waitForAbsent(byTooltip('counter_tooltip'));
+  await driver.execute(
+    'flutter:waitForAbsent',
+    buttonFinder
+  );
 
   assert.strictEqual(
     await driver.getElementText(find.byText('This is 2nd route')),
@@ -109,6 +112,10 @@ const opts = {
   );
 
   await driver.elementClick(find.pageBack());
+  await driver.execute(
+    'flutter:waitFor',
+    buttonFinder
+  );
 
   assert.strictEqual(
     await driver.getElementText(
