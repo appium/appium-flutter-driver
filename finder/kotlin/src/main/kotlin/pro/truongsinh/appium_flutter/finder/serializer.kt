@@ -1,5 +1,5 @@
 
-package pro.truongsinh.appium_flutter
+package pro.truongsinh.appium_flutter.finder
 
 import java.util.Base64
 

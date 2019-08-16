@@ -1,4 +1,4 @@
-package pro.truongsinh.appium_flutter
+package pro.truongsinh.appium_flutter.finder
 
 fun byTooltip(input: String): String {
   val base64Encoded = serialize(mapOf(

@@ -1,8 +1,8 @@
-package pro.truongsinh.appium_flutter
+package pro.truongsinh.appium_flutter.finder
 
-fun ancestor(of: String, matching: String, matchRoot: Boolean = false): String {
+fun descendant(of: String, matching: String, matchRoot: Boolean = false): String {
   val m = mutableMapOf(
-    "finderType" to "Ancestor",
+    "finderType" to "Descendant",
     "matchRoot" to matchRoot
   )
   deserialize(of).forEach {

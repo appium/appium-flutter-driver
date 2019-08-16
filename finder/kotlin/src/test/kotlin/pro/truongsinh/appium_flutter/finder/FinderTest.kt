@@ -1,4 +1,4 @@
-package pro.truongsinh.appium_flutter
+package pro.truongsinh.appium_flutter.finder
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

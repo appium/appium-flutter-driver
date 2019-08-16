@@ -1,3 +1,5 @@
+rootProject.name = "appium-flutter-finder"
+
 pluginManagement {
     resolutionStrategy {
         eachPlugin {
