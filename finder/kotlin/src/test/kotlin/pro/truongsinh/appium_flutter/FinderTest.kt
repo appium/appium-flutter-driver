@@ -5,7 +5,8 @@ import org.junit.Test
 
 class FinderJSONTest {
     @Test fun TestAncestor() {
-        assertEquals("42", ancestorJSON())
+        // val expected = "eyJmaW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJtYXRjaFJvb3QiOmZhbHNlLCJvZl9maW5kZXJUeXBlIjoiQnlTZW1hbnRpY3NMYWJlbCIsIm9mX2lzUmVnRXhwIjp0cnVlLCJvZl9sYWJlbCI6ImNvdW50ZXJfc2VtYW50aWMiLCJtYXRjaGluZ19maW5kZXJUeXBlIjoiQnlUeXBlIiwibWF0Y2hpbmdfdHlwZSI6IlRvb2x0aXAifQ"
+        // assertEquals(expected, ancestor())
     }
     @Test fun TestBySemanticsLabel() {
         assertEquals("42", bySemanticsLabelJSON())
@@ -23,7 +24,7 @@ class FinderJSONTest {
         assertEquals("42", descendantJSON())
     }
     @Test fun testPageback() {
-        assertEquals("42", pagebackJSON())
+        assertEquals("eyJmaW5kZXJUeXBlIjoiUGFnZUJhY2sifQ", pageback())
     }
     @Test fun testText() {
         assertEquals("42", textJSON())

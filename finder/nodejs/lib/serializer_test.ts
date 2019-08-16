@@ -12,4 +12,8 @@ describe(`serializer`, () => {
     });
     expect(expected).toBe(spec.ancestor);
   });
+  it(`pageBack`, () => {
+    const expected = find.pageBack();
+    expect(expected).toBe(`eyJmaW5kZXJUeXBlIjoiUGFnZUJhY2sifQ`);
+  });
 });
