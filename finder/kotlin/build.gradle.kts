@@ -12,7 +12,7 @@ plugins {
 }
 
 repositories {
-    jcenter() 
+    jcenter()
 }
 
 dependencies {
