@@ -11,14 +11,12 @@ val base64 = Base64.getUrlEncoder().withoutPadding()
 
 fun serialize(o: Map<String,*>): String {
   val jsonObject = o.map { 
-    if(it.value is String) {
-      Pair(it.key, JsonLiteral(it.value as String))
-    } else if (it.value is Boolean) {
-      Pair(it.key, JsonLiteral(it.value as Boolean))
-    } else if (it.value is Int) {
-      Pair(it.key, JsonLiteral(it.value as Int))
-    } else {
-      Pair(it.key, JsonNull)
+    val value = it.value
+    when (value) {
+      is String -> Pair(it.key, JsonLiteral(value))
+      is Int -> Pair(it.key, JsonLiteral(value))
+      is Boolean -> Pair(it.key, JsonLiteral(value))
+      else -> Pair(it.key, JsonNull)
     }
   }.toMap()
   @UseExperimental(kotlinx.serialization.ImplicitReflectionSerializer::class)
