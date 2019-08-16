@@ -1,3 +1,5 @@
+@file:JvmName("Finder")
+@file:JvmMultifileClass
 package pro.truongsinh.appium_flutter.finder
 
 fun descendant(of: String, matching: String, matchRoot: Boolean = false): String {
