@@ -18,6 +18,20 @@ describe(`serializer`, () => {
     });
     expect(expected).toBe(observed);
   });
+  it(`descendant`, () => {
+    const expected = `eyJmaW5kZXJUeXBlIjoiRGVzY2VuZGFudCIsIm1hdGNoUm9vdCI6ZmFsc2UsIm9mX2ZpbmRlclR5cGUiOiJEZXNjZW5kYW50Iiwib2ZfbWF0Y2hSb290IjpmYWxzZSwib2Zfb2ZfZmluZGVyVHlwZSI6IlBhZ2VCYWNrIiwib2ZfbWF0Y2hpbmdfZmluZGVyVHlwZSI6IlBhZ2VCYWNrIiwibWF0Y2hpbmdfZmluZGVyVHlwZSI6IkRlc2NlbmRhbnQiLCJtYXRjaGluZ19tYXRjaFJvb3QiOmZhbHNlLCJtYXRjaGluZ19vZl9maW5kZXJUeXBlIjoiUGFnZUJhY2siLCJtYXRjaGluZ19tYXRjaGluZ19maW5kZXJUeXBlIjoiUGFnZUJhY2sifQ`;
+    const observed = find.descendant({
+      of: find.descendant({
+        of: find.pageBack(),
+        matching: find.pageBack(),
+      }),
+      matching: find.descendant({
+        of: find.pageBack(),
+        matching: find.pageBack(),
+      }),
+    });
+    expect(observed).toBe(expected);
+  });
   it(`text`, () => {
     const expected = find.byText(`This is 2nd route`);
     expect(expected).toBe(

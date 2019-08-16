@@ -41,7 +41,18 @@ class FinderJSONTest {
         assertEquals(true, expectedJsonElement.equals(obserbedJsonElement))
     }
     @Test fun testDescendant() {
-        assertEquals("42", descendantJSON())
+        val expected = "eyJmaW5kZXJUeXBlIjoiRGVzY2VuZGFudCIsIm1hdGNoUm9vdCI6ZmFsc2UsIm9mX2ZpbmRlclR5cGUiOiJEZXNjZW5kYW50Iiwib2ZfbWF0Y2hSb290IjpmYWxzZSwib2Zfb2ZfZmluZGVyVHlwZSI6IlBhZ2VCYWNrIiwib2ZfbWF0Y2hpbmdfZmluZGVyVHlwZSI6IlBhZ2VCYWNrIiwibWF0Y2hpbmdfZmluZGVyVHlwZSI6IkRlc2NlbmRhbnQiLCJtYXRjaGluZ19tYXRjaFJvb3QiOmZhbHNlLCJtYXRjaGluZ19vZl9maW5kZXJUeXBlIjoiUGFnZUJhY2siLCJtYXRjaGluZ19tYXRjaGluZ19maW5kZXJUeXBlIjoiUGFnZUJhY2sifQ"
+        val observed = descendant(
+            of = descendant(
+                of = pageback(),
+                matching = pageback()
+            ),
+            matching = descendant(
+                of = pageback(),
+                matching = pageback()
+            )
+        )
+        assertEquals(expected, observed)
     }
     @Test fun testPageback() {
         assertEquals("eyJmaW5kZXJUeXBlIjoiUGFnZUJhY2sifQ", pageback())

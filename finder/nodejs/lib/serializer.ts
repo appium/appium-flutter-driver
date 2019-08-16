@@ -57,7 +57,7 @@ export const byValueKey = (key: string | number) =>
 export const descendant = (args: {
   of: SerializableFinder;
   matching: SerializableFinder;
-  matchRoot: boolean;
+  matchRoot?: boolean;
 }) => {
   const { of, matching, matchRoot = false } = args;
   const a: any = {
