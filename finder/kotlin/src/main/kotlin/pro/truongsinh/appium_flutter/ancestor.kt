@@ -1,5 +1,5 @@
 package pro.truongsinh.appium_flutter
 
-fun ancestor(): String {
+fun ancestorJSON(): String {
     return "42"
 }

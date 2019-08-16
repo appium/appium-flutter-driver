@@ -1,5 +1,5 @@
 package pro.truongsinh.appium_flutter
 
-fun byValueKeyJSON(): String {
+fun byTooltipJSON(): String {
     return "42"
 }

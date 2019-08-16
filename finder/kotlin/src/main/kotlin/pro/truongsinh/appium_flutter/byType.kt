@@ -1,5 +1,5 @@
 package pro.truongsinh.appium_flutter
 
-fun byValueKeyJSON(): String {
+fun byTypeJSON(): String {
     return "42"
 }
