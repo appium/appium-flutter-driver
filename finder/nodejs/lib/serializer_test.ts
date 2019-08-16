@@ -45,4 +45,10 @@ describe(`serializer`, () => {
       `eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjo0Miwia2V5VmFsdWVUeXBlIjoiaW50In0`,
     );
   });
+  it(`byTooltip`, () => {
+    const expected = find.byTooltip(`myText`);
+    expect(expected).toBe(
+      `eyJmaW5kZXJUeXBlIjoiQnlUb29sdGlwTWVzc2FnZSIsInRleHQiOiJteVRleHQifQ`,
+    );
+  });
 });

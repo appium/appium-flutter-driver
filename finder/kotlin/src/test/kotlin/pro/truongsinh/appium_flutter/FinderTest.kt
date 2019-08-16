@@ -15,7 +15,7 @@ class FinderJSONTest {
         assertEquals("eyJmaW5kZXJUeXBlIjoiQnlTZW1hbnRpY3NMYWJlbCIsImlzUmVnRXhwIjp0cnVlLCJsYWJlbCI6ImNvbXBsaWNhdGVkIn0", bySemanticsLabel(Regex("complicated")))
     }
     @Test fun TestByTooltip() {
-        assertEquals("42", byTooltipJSON())
+        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlUb29sdGlwTWVzc2FnZSIsInRleHQiOiJteVRleHQifQ", byTooltip("myText"))
     }
     @Test fun TestByType() {
         assertEquals("42", byTypeJSON())

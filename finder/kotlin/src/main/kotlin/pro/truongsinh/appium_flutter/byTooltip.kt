@@ -1,5 +1,9 @@
 package pro.truongsinh.appium_flutter
 
-fun byTooltipJSON(): String {
-    return "42"
+fun byTooltip(input: String): String {
+  val base64Encoded = serialize(hashMapOf(
+    "finderType" to "ByTooltipMessage",
+    "text" to input
+    ))
+  return base64Encoded
 }
