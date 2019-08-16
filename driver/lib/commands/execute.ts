@@ -66,8 +66,21 @@ const forceGC = async (self: FlutterDriver) => {
   }
 };
 
+const anyPromise = (promises: Array<Promise<any>>) => {
+  const newpArray = promises.map((p) =>
+    p.then((resolvedValue) => Promise.reject(resolvedValue), (rejectedReason) => rejectedReason),
+  );
+  return Promise
+  .all(newpArray)
+  .then((rejectedReasons) => Promise.reject(rejectedReasons), (resolvedValue) => resolvedValue)
+  ;
+};
+
 const clearTimeline = async (self: FlutterDriver) => {
-  const response = await self.socket.call(`_clearVMTimeline`);
+  // @todo backward compatible, need to cleanup later
+  const call1: Promise<any> = self.socket.call(`_clearVMTimeline`);
+  const call2: Promise<any> = self.socket.call(`clearVMTimeline`);
+  const response = await anyPromise([call1, call2]);
   if (response.type !== `Success`) {
     throw new Error(`Could not forceGC, reponse was ${response}`);
   }
