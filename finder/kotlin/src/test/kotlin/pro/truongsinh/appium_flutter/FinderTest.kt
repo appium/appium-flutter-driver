@@ -5,8 +5,18 @@ import org.junit.Test
 
 class FinderJSONTest {
     @Test fun TestAncestor() {
-        // val expected = "eyJmaW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJtYXRjaFJvb3QiOmZhbHNlLCJvZl9maW5kZXJUeXBlIjoiQnlTZW1hbnRpY3NMYWJlbCIsIm9mX2lzUmVnRXhwIjp0cnVlLCJvZl9sYWJlbCI6ImNvdW50ZXJfc2VtYW50aWMiLCJtYXRjaGluZ19maW5kZXJUeXBlIjoiQnlUeXBlIiwibWF0Y2hpbmdfdHlwZSI6IlRvb2x0aXAifQ"
-        // assertEquals(expected, ancestor())
+        val expected = "eyJmaW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJtYXRjaFJvb3QiOmZhbHNlLCJvZl9maW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJvZl9tYXRjaFJvb3QiOmZhbHNlLCJvZl9vZl9maW5kZXJUeXBlIjoiUGFnZUJhY2siLCJvZl9tYXRjaGluZ19maW5kZXJUeXBlIjoiUGFnZUJhY2siLCJtYXRjaGluZ19maW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJtYXRjaGluZ19tYXRjaFJvb3QiOmZhbHNlLCJtYXRjaGluZ19vZl9maW5kZXJUeXBlIjoiUGFnZUJhY2siLCJtYXRjaGluZ19tYXRjaGluZ19maW5kZXJUeXBlIjoiUGFnZUJhY2sifQ"
+        val observed = ancestor(
+            of = ancestor(
+                of = pageback(),
+                matching = pageback()
+            ),
+            matching = ancestor(
+                of = pageback(),
+                matching = pageback()
+            )
+        )
+        assertEquals(expected, observed)
     }
     @Test fun TestBySemanticsLabelString() {
         assertEquals("eyJmaW5kZXJUeXBlIjoiQnlTZW1hbnRpY3NMYWJlbCIsImlzUmVnRXhwIjpmYWxzZSwibGFiZWwiOiJzaW1wbGUifQ", bySemanticsLabel("simple"))

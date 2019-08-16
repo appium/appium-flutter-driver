@@ -10,13 +10,14 @@ val json = Json(JsonConfiguration.Stable)
 val base64encoder = Base64.getUrlEncoder().withoutPadding()
 val base64decoder = Base64.getUrlDecoder()
 
-fun serialize(o: Map<String,*>): String {
+fun serialize(o: Map<String, *>): String {
   val jsonObject = o.map { 
     val value = it.value
     val jsonO = when (value) {
       is String -> JsonLiteral(value)
       is Number -> JsonLiteral(value)
       is Boolean -> JsonLiteral(value)
+      is JsonElement -> value
       else -> JsonNull
     }
     Pair(it.key, jsonO)
@@ -27,7 +28,8 @@ fun serialize(o: Map<String,*>): String {
   return base64Encoded
 }
 
-fun deserialize(base64Encoded: String): JsonElement {
+fun deserialize(base64Encoded: String): Map<String, *> {
   val base64Decoded = String(base64decoder.decode(base64Encoded))
-  return json.parseJson(base64Decoded)
+  val jsonObject = json.parseJson(base64Decoded) as JsonObject
+  return jsonObject.toMap()
 }

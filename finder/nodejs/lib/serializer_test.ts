@@ -5,11 +5,18 @@ import * as find from './serializer';
 
 describe(`serializer`, () => {
   it(`ancestor`, () => {
-    const expected = find.ancestor({
-      of: find.bySemanticsLabel(RegExp(`counter_semantic`)),
-      matching: find.byType(`Tooltip`),
+    const expected = `eyJmaW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJtYXRjaFJvb3QiOmZhbHNlLCJvZl9maW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJvZl9tYXRjaFJvb3QiOmZhbHNlLCJvZl9vZl9maW5kZXJUeXBlIjoiUGFnZUJhY2siLCJvZl9tYXRjaGluZ19maW5kZXJUeXBlIjoiUGFnZUJhY2siLCJtYXRjaGluZ19maW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJtYXRjaGluZ19tYXRjaFJvb3QiOmZhbHNlLCJtYXRjaGluZ19vZl9maW5kZXJUeXBlIjoiUGFnZUJhY2siLCJtYXRjaGluZ19tYXRjaGluZ19maW5kZXJUeXBlIjoiUGFnZUJhY2sifQ`;
+    const observed = find.ancestor({
+      of: find.ancestor({
+        of: find.pageBack(),
+        matching: find.pageBack(),
+      }),
+      matching: find.ancestor({
+        of: find.pageBack(),
+        matching: find.pageBack(),
+      }),
     });
-    expect(expected).toBe(spec.ancestor);
+    expect(expected).toBe(observed);
   });
   it(`text`, () => {
     const expected = find.byText(`This is 2nd route`);
