@@ -9,6 +9,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib")) 
+    testImplementation("junit:junit:4.12")
 }
 
 buildScan {
