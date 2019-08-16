@@ -7,7 +7,8 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 val json = Json(JsonConfiguration.Stable)
-val base64 = Base64.getUrlEncoder().withoutPadding()
+val base64encoder = Base64.getUrlEncoder().withoutPadding()
+val base64decoder = Base64.getUrlDecoder()
 
 fun serialize(o: Map<String,*>): String {
   val jsonObject = o.map { 
@@ -22,6 +23,11 @@ fun serialize(o: Map<String,*>): String {
   }.toMap()
   @UseExperimental(kotlinx.serialization.ImplicitReflectionSerializer::class)
   val jsonStringified = json.stringify(jsonObject)
-  val base64Encoded = base64.encodeToString(jsonStringified.toByteArray())
+  val base64Encoded = base64encoder.encodeToString(jsonStringified.toByteArray())
   return base64Encoded
+}
+
+fun deserialize(base64Encoded: String): JsonElement {
+  val base64Decoded = String(base64decoder.decode(base64Encoded))
+  return json.parseJson(base64Decoded)
 }

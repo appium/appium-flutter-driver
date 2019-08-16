@@ -21,10 +21,14 @@ class FinderJSONTest {
         assertEquals("eyJmaW5kZXJUeXBlIjoiQnlUeXBlIiwidHlwZSI6Im15VGV4dCJ9", byType("myText"))
     }
     @Test fun testByValueKeyString() {
-        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjoiNDIiLCJrZXlWYWx1ZVR5cGUiOiJTdHJpbmcifQ", byValueKey("42"))
+        val expectedJsonElement = deserialize("eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjoiNDIiLCJrZXlWYWx1ZVR5cGUiOiJTdHJpbmcifQ")
+        val obserbedJsonElement = deserialize(byValueKey("42"))
+        assertEquals(true, expectedJsonElement.equals(obserbedJsonElement))
     }
     @Test fun testByValueKeyInt() {
-        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjo0Miwia2V5VmFsdWVUeXBlIjoiaW50In0", byValueKey(42))
+        val expectedJsonElement = deserialize("eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjo0Miwia2V5VmFsdWVUeXBlIjoiaW50In0")
+        val obserbedJsonElement = deserialize(byValueKey(42))
+        assertEquals(true, expectedJsonElement.equals(obserbedJsonElement))
     }
     @Test fun testDescendant() {
         assertEquals("42", descendantJSON())

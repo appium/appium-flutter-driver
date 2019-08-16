@@ -1,7 +1,7 @@
 package pro.truongsinh.appium_flutter
 
 fun byValueKey(input: String): String {
-  val base64Encoded = serialize(hashMapOf(
+  val base64Encoded = serialize(mapOf(
     "finderType" to "ByValueKey",
     "keyValueType" to "String",
     "keyValueString" to input
@@ -10,7 +10,7 @@ fun byValueKey(input: String): String {
 }
 
 fun byValueKey(input: Int): String {
-  val base64Encoded = serialize(hashMapOf(
+  val base64Encoded = serialize(mapOf(
     "finderType" to "ByValueKey",
     "keyValueType" to "int",
     "keyValueString" to input
