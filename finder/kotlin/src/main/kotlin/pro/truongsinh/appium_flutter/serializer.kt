@@ -15,6 +15,8 @@ fun serialize(o: Map<String,*>): String {
       Pair(it.key, JsonLiteral(it.value as String))
     } else if (it.value is Boolean) {
       Pair(it.key, JsonLiteral(it.value as Boolean))
+    } else if (it.value is Int) {
+      Pair(it.key, JsonLiteral(it.value as Int))
     } else {
       Pair(it.key, JsonNull)
     }

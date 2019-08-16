@@ -33,4 +33,16 @@ describe(`serializer`, () => {
       `eyJmaW5kZXJUeXBlIjoiQnlTZW1hbnRpY3NMYWJlbCIsImlzUmVnRXhwIjp0cnVlLCJsYWJlbCI6ImNvbXBsaWNhdGVkIn0`,
     );
   });
+  it(`byValueKey String`, () => {
+    const expected = find.byValueKey(`42`);
+    expect(expected).toBe(
+      `eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjoiNDIiLCJrZXlWYWx1ZVR5cGUiOiJTdHJpbmcifQ`,
+    );
+  });
+  it(`byValueKey Int`, () => {
+    const expected = find.byValueKey(42);
+    expect(expected).toBe(
+      `eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjo0Miwia2V5VmFsdWVUeXBlIjoiaW50In0`,
+    );
+  });
 });

@@ -20,8 +20,11 @@ class FinderJSONTest {
     @Test fun TestByType() {
         assertEquals("42", byTypeJSON())
     }
-    @Test fun testByValueKey() {
-        assertEquals("42", byValueKeyJSON())
+    @Test fun testByValueKeyString() {
+        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjoiNDIiLCJrZXlWYWx1ZVR5cGUiOiJTdHJpbmcifQ", byValueKey("42"))
+    }
+    @Test fun testByValueKeyInt() {
+        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjo0Miwia2V5VmFsdWVUeXBlIjoiaW50In0", byValueKey(42))
     }
     @Test fun testDescendant() {
         assertEquals("42", descendantJSON())
