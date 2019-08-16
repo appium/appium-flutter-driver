@@ -12,6 +12,10 @@ describe(`serializer`, () => {
     });
     expect(expected).toBe(spec.ancestor);
   });
+  it(`text`, () => {
+    const expected = find.byText(`This is 2nd route`);
+    expect(expected).toBe(`eyJmaW5kZXJUeXBlIjoiQnlUZXh0IiwidGV4dCI6IlRoaXMgaXMgMm5kIHJvdXRlIn0`);
+  });
   it(`pageBack`, () => {
     const expected = find.pageBack();
     expect(expected).toBe(`eyJmaW5kZXJUeXBlIjoiUGFnZUJhY2sifQ`);

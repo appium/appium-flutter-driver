@@ -27,6 +27,6 @@ class FinderJSONTest {
         assertEquals("eyJmaW5kZXJUeXBlIjoiUGFnZUJhY2sifQ", pageback())
     }
     @Test fun testText() {
-        assertEquals("42", textJSON())
+        assertEquals("eyJmaW5kZXJUeXBlIjoiQnlUZXh0IiwidGV4dCI6IlRoaXMgaXMgMm5kIHJvdXRlIn0", text("This is 2nd route"))
     }
 }
