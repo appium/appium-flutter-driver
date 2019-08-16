@@ -32,7 +32,7 @@ export const bySemanticsLabel = (label: Pattern) =>
   serialize({
     finderType: `BySemanticsLabel`,
     isRegExp: label instanceof RegExp ? true : false,
-    label: label.toString().slice(1, -1),
+    label: label instanceof RegExp ? label.toString().slice(1, -1) : label,
   });
 
 export const byTooltip = (text: string) =>
