@@ -5,7 +5,7 @@ node_js:
 
 env:
   - NODE_PACKAGE=driver
-  - NODE_PACKAGE=nodejs/finder
+  - NODE_PACKAGE=finder/nodejs
 
 install:
   - cd $NODE_PACKAGE
