@@ -1,6 +1,7 @@
 import { FlutterDriver } from '../driver';
 import { scroll, scrollIntoView, scrollUntilVisible } from './execute/scroll';
 import { waitFor, waitForAbsent } from './execute/wait';
+import { executeSocketCommand } from '../sessions/observatory';
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
 
 export const execute = async function(
@@ -48,6 +49,8 @@ export const execute = async function(
       return scrollUntilVisible(this, args[0], args[1]);
     case `scrollIntoView`:
       return scrollIntoView(this, args[0], args[1]);
+    case `enterText`:
+      return enterText(this, args[0]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -120,3 +123,6 @@ const getRenderObjectDiagnostics = async (
 
 const getSemanticsId = async (self: FlutterDriver, elementBase64: string) =>
   (await self.executeElementCommand(`get_semantics_id`, elementBase64)).id;
+
+const enterText = async (self: FlutterDriver, text: string) =>
+  await executeSocketCommand(self.socket, { command: `enter_text`, text });

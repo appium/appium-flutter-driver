@@ -110,7 +110,7 @@ export const executeElementCommand = async function(
   return data.response;
 };
 
-const executeSocketCommand = async (socket, cmd) =>
+export const executeSocketCommand = async (socket, cmd) =>
   // call an RPC method with parameters
   socket.call(`ext.flutter.driver`, {
     ...cmd,
