@@ -23,6 +23,7 @@
   "scripts": {
     "prepublishOnly": "cp ../README.md ../LICENSE ./",
     "prepare": "npm run clean && npm run compile",
+    "test": "echo no test",
     "compile": "tsc",
     "clean": "rm -rf build",
     "lint": "tslint 'lib/**/*.ts'",
