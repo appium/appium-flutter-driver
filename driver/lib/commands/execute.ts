@@ -1,4 +1,6 @@
 import { FlutterDriver } from '../driver';
+import { scroll, scrollUntilVisible } from './execute/scroll';
+import { waitFor, waitForAbsent } from './execute/wait';
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
 
 export const execute = async function(
@@ -40,6 +42,10 @@ export const execute = async function(
       return waitForAbsent(this, args[0]);
     case `waitFor`:
       return waitFor(this, args[0]);
+    case `scroll`:
+      return scroll(this, args[0], args[1]);
+    case `scrollUntilVisible`:
+      return scrollUntilVisible(this, args[0], args[1]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -68,12 +74,15 @@ const forceGC = async (self: FlutterDriver) => {
 
 const anyPromise = (promises: Array<Promise<any>>) => {
   const newpArray = promises.map((p) =>
-    p.then((resolvedValue) => Promise.reject(resolvedValue), (rejectedReason) => rejectedReason),
+    p.then(
+      (resolvedValue) => Promise.reject(resolvedValue),
+      (rejectedReason) => rejectedReason,
+    ),
   );
-  return Promise
-  .all(newpArray)
-  .then((rejectedReasons) => Promise.reject(rejectedReasons), (resolvedValue) => resolvedValue)
-  ;
+  return Promise.all(newpArray).then(
+    (rejectedReasons) => Promise.reject(rejectedReasons),
+    (resolvedValue) => resolvedValue,
+  );
 };
 
 const clearTimeline = async (self: FlutterDriver) => {
@@ -94,8 +103,7 @@ const getRenderObjectDiagnostics = async (
     includeProperties: boolean;
   },
 ) => {
-  const subtreeDepth = opts.subtreeDepth || 0;
-  const includeProperties = opts.includeProperties || true;
+  const { subtreeDepth = 0, includeProperties = true } = opts;
 
   return await self.executeElementCommand(
     `get_diagnostics_tree`,
@@ -110,9 +118,3 @@ const getRenderObjectDiagnostics = async (
 
 const getSemanticsId = async (self: FlutterDriver, elementBase64: string) =>
   (await self.executeElementCommand(`get_semantics_id`, elementBase64)).id;
-
-const waitForAbsent = async (self: FlutterDriver, elementBase64: string) =>
-  (await self.executeElementCommand(`waitForAbsent`, elementBase64));
-
-const waitFor = async (self: FlutterDriver, elementBase64: string) =>
-  (await self.executeElementCommand(`waitFor`, elementBase64));

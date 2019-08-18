@@ -101,6 +101,7 @@ export const executeElementCommand = async function(
   const serializedCommand = { command, ...elementObject, ...extraArgs };
   log.debug(`>>> ${JSON.stringify(serializedCommand)}`);
   const data = await executeSocketCommand(this.socket, serializedCommand);
+  log.debug(`<<< ${JSON.stringify(data)} | previous command ${command}`);
   if (data.isError) {
     throw new Error(
       `Cannot execute command ${command}, server reponse ${JSON.stringify(data, null, 2)}`,

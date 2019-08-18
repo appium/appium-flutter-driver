@@ -111,6 +111,11 @@ const opts = {
     'This is 2nd route'
   );
 
+  await driver.execute('flutter:scroll', find.byType('ListView'), {dx: 50, dy: -100, durationMilliseconds: 200, frequency: 30});
+  await driver.execute('flutter:scrollUntilVisible', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400});
+  await driver.elementClick(find.byType('TextField'));
+  // await driver.execute('flutter:enterText','I can enter text');
+
   await driver.elementClick(find.pageBack());
   await driver.execute(
     'flutter:waitFor',

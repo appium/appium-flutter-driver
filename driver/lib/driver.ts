@@ -31,6 +31,7 @@ class FlutterDriver extends BaseDriver {
   // session
   public executeElementCommand = executeElementCommand;
   public execute = execute;
+  public executeAsync = execute;
 
   // element
   public getText = getText;

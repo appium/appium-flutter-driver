@@ -12,10 +12,9 @@ export type Pattern = string | RegExp;
 export const ancestor = (args: {
   of: SerializableFinder;
   matching: SerializableFinder;
-  matchRoot: boolean;
+  matchRoot?: boolean;
 }) => {
-  const { of, matching } = args;
-  const matchRoot = args.matchRoot || false;
+  const { of, matching, matchRoot = false } = args;
   const a: any = {
     finderType: `Ancestor`,
     matchRoot,
@@ -60,8 +59,7 @@ export const descendant = (args: {
   matching: SerializableFinder;
   matchRoot: boolean;
 }) => {
-  const { of, matching } = args;
-  const matchRoot = args.matchRoot || false;
+  const { of, matching, matchRoot = false } = args;
   const a: any = {
     finderType: `Descendant`,
     matchRoot,
