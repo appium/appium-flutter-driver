@@ -83,7 +83,7 @@ export const scrollUntilVisible = async (
   return scrollIntoView(self, item, { alignment });
 };
 
-const scrollIntoView = async (
+export const scrollIntoView = async (
   self: FlutterDriver,
   elementBase64: string,
   opts: {

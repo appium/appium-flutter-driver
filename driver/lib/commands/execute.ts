@@ -1,5 +1,5 @@
 import { FlutterDriver } from '../driver';
-import { scroll, scrollUntilVisible } from './execute/scroll';
+import { scroll, scrollIntoView, scrollUntilVisible } from './execute/scroll';
 import { waitFor, waitForAbsent } from './execute/wait';
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
 
@@ -46,6 +46,8 @@ export const execute = async function(
       return scroll(this, args[0], args[1]);
     case `scrollUntilVisible`:
       return scrollUntilVisible(this, args[0], args[1]);
+    case `scrollIntoView`:
+      return scrollIntoView(this, args[0], args[1]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
