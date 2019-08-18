@@ -3,7 +3,7 @@ import { URL } from 'url';
 // @ts-ignore
 import { Client } from 'rpc-websockets';
 
-import { deserialize } from '../../../finder/lib/deserializer';
+import { deserialize } from '../../../finder/nodejs/lib/deserializer';
 import { FlutterDriver } from '../driver';
 import { log } from '../logger';
 
