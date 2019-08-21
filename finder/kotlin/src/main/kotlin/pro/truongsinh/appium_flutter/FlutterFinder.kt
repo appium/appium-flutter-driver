@@ -1,5 +1,7 @@
 package pro.truongsinh.appium_flutter
 
+import java.util.regex.Pattern;
+
 import io.appium.java_client.MobileElement
 import org.openqa.selenium.remote.RemoteWebDriver
 import pro.truongsinh.appium_flutter.finder.FlutterElement
@@ -9,7 +11,7 @@ import pro.truongsinh.appium_flutter.finder.byTooltip as _byTooltip
 import pro.truongsinh.appium_flutter.finder.byType as _byType
 import pro.truongsinh.appium_flutter.finder.byValueKey as _byValueKey
 import pro.truongsinh.appium_flutter.finder.descendant as _descendant
-import pro.truongsinh.appium_flutter.finder.pageback as _pageback
+import pro.truongsinh.appium_flutter.finder.pageBack as _pageBack
 import pro.truongsinh.appium_flutter.finder.text as _text
 
 
@@ -20,12 +22,17 @@ public class FlutterFinder(driver: RemoteWebDriver) {
     f.setParent(driver)
     return f
   }
+  fun ancestor(of: FlutterElement, matching: FlutterElement): FlutterElement {
+    val f = _ancestor(of, matching)
+    f.setParent(driver)
+    return f
+  }
   fun bySemanticsLabel(label: String): FlutterElement {
     val f = _bySemanticsLabel(label)
     f.setParent(driver)
     return f
   }
-  fun bySemanticsLabel(label: Regex): FlutterElement {
+  fun bySemanticsLabel(label: Pattern): FlutterElement {
     val f = _bySemanticsLabel(label)
     f.setParent(driver)
     return f
@@ -55,8 +62,13 @@ public class FlutterFinder(driver: RemoteWebDriver) {
     f.setParent(driver)
     return f
   }
-  fun pageback(): FlutterElement {
-    val f = _pageback()
+  fun descendant(of: FlutterElement, matching: FlutterElement): FlutterElement {
+    val f = _descendant(of, matching)
+    f.setParent(driver)
+    return f
+  }
+  fun pageBack(): FlutterElement {
+    val f = _pageBack()
     f.setParent(driver)
     return f
   }

@@ -2,6 +2,6 @@
 @file:JvmMultifileClass
 package pro.truongsinh.appium_flutter.finder
 
-fun pageback(): FlutterElement {
+fun pageBack(): FlutterElement {
   return FlutterElement(mapOf("finderType" to "PageBack"))
 }

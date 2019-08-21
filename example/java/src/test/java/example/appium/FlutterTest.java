@@ -7,11 +7,11 @@ import static org.junit.Assert.assertEquals;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import java.io.File;
 
 import org.openqa.selenium.OutputType;
 import io.appium.java_client.MobileElement;
-import kotlin.text.Regex;
 import pro.truongsinh.appium_flutter.FlutterFinder;
 
 public class FlutterTest extends BaseDriver {
@@ -71,8 +71,7 @@ public class FlutterTest extends BaseDriver {
 
     find.byTooltip("Increment").click();
 
-    // @todo param override
-    assertEquals(find.descendant(find.byTooltip("counter_tooltip"), find.byValueKey("counter"), false).getText(), "3");
+    assertEquals(find.descendant(find.byTooltip("counter_tooltip"), find.byValueKey("counter")).getText(), "3");
     
     find.byType("FlatButton").click();
     driver.executeScript("flutter:waitForAbsent", buttonFinder);
@@ -101,19 +100,15 @@ public class FlutterTest extends BaseDriver {
     driver.executeScript("flutter:enterText", "I can enter text"); // enter text
     driver.executeScript("flutter:waitFor", find.text("I can enter text")); // verify text appears on UI
 
-    // @todo should be `pageBack`
-    find.pageback().click();
+    find.pageBack().click();
     driver.executeScript("flutter:waitFor", buttonFinder);
 
     find.descendant(
       find.ancestor(
-        // @todo should be Java Pattern
-        find.bySemanticsLabel(new Regex("counter_semantic")),
-        find.byType("Tooltip"),
-        false
+        find.bySemanticsLabel(Pattern.compile("counter_semantic")),
+        find.byType("Tooltip")
         ),
-      find.byType("Text"),
-      false
+      find.byType("Text")
       )
       .click()
       ;

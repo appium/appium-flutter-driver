@@ -2,6 +2,8 @@
 @file:JvmMultifileClass
 package pro.truongsinh.appium_flutter.finder
 
+import java.util.regex.Pattern;
+
 fun bySemanticsLabel(label: String): FlutterElement {
   return FlutterElement(mapOf(
     "finderType" to "BySemanticsLabel",
@@ -10,7 +12,7 @@ fun bySemanticsLabel(label: String): FlutterElement {
     ))
 }
 
-fun bySemanticsLabel(label: Regex): FlutterElement {
+fun bySemanticsLabel(label: Pattern): FlutterElement {
   return FlutterElement(mapOf(
     "finderType" to "BySemanticsLabel",
     "isRegExp" to true,
