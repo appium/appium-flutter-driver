@@ -11,7 +11,7 @@ import java.io.File;
 
 import org.openqa.selenium.OutputType;
 import io.appium.java_client.MobileElement;
-
+import kotlin.text.Regex;
 import pro.truongsinh.appium_flutter.FlutterFinder;
 
 public class FlutterTest extends BaseDriver {
@@ -25,7 +25,8 @@ public class FlutterTest extends BaseDriver {
   public void basicTest () throws InterruptedException {
     MobileElement counterTextFinder = find.byValueKey("counter");
     MobileElement buttonFinder = find.byValueKey("increment");
-    // await validateElementPosition(driver, buttonFinder);
+
+    validateElementPosition(buttonFinder);
 
     assertEquals(driver.executeScript("flutter:checkHealth"), "ok");
     driver.executeScript("flutter:clearTimeline");
@@ -92,9 +93,53 @@ public class FlutterTest extends BaseDriver {
       put("frequency", 30);
     }});
     
-    /*
-    */
+    driver.executeScript("flutter:scrollIntoView", find.byType("ListView"), new HashMap<String, Object>() {{
+      put("alignment", 0.1);
+    }});
 
+    find.byType("TextField").click(); // acquire focus
+    driver.executeScript("flutter:enterText", "I can enter text"); // enter text
+    driver.executeScript("flutter:waitFor", find.text("I can enter text")); // verify text appears on UI
+
+    // @todo should be `pageBack`
+    find.pageback().click();
+    driver.executeScript("flutter:waitFor", buttonFinder);
+
+    find.descendant(
+      find.ancestor(
+        // @todo should be Java Pattern
+        find.bySemanticsLabel(new Regex("counter_semantic")),
+        find.byType("Tooltip"),
+        false
+        ),
+      find.byType("Text"),
+      false
+      )
+      .click()
+      ;
+ 
+    driver.quit();
   }
 
+  private void validateElementPosition(MobileElement buttonFinder) {
+    Map bottomLeft = (Map) driver.executeScript("flutter:getBottomLeft", buttonFinder);
+    assertEquals(bottomLeft.get("dx") instanceof Long, true);
+    assertEquals(bottomLeft.get("dy") instanceof Long, true);
+
+    Map bottomRight = (Map) driver.executeScript("flutter:getBottomRight", buttonFinder);
+    assertEquals(bottomRight.get("dx") instanceof Long, true);
+    assertEquals(bottomRight.get("dy") instanceof Long, true);
+
+    Map center = (Map) driver.executeScript("flutter:getCenter", buttonFinder);
+    assertEquals(center.get("dx") instanceof Long, true);
+    assertEquals(center.get("dy") instanceof Long, true);
+
+    Map topLeft = (Map) driver.executeScript("flutter:getTopLeft", buttonFinder);
+    assertEquals(topLeft.get("dx") instanceof Long, true);
+    assertEquals(topLeft.get("dy") instanceof Long, true);
+
+    Map topRight = (Map) driver.executeScript("flutter:getTopRight", buttonFinder);
+    assertEquals(topRight.get("dx") instanceof Long, true);
+    assertEquals(topRight.get("dy") instanceof Long, true);
+  }
 }
