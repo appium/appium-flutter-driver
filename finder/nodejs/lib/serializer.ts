@@ -32,7 +32,7 @@ export const bySemanticsLabel = (label: Pattern) =>
   serialize({
     finderType: `BySemanticsLabel`,
     isRegExp: label instanceof RegExp ? true : false,
-    label: label.toString().slice(1, -1),
+    label: label instanceof RegExp ? label.toString().slice(1, -1) : label,
   });
 
 export const byTooltip = (text: string) =>
@@ -57,7 +57,7 @@ export const byValueKey = (key: string | number) =>
 export const descendant = (args: {
   of: SerializableFinder;
   matching: SerializableFinder;
-  matchRoot: boolean;
+  matchRoot?: boolean;
 }) => {
   const { of, matching, matchRoot = false } = args;
   const a: any = {
