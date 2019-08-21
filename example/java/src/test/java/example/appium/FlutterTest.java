@@ -47,7 +47,7 @@ public class FlutterTest extends BaseDriver {
       "flutter:getSemanticsId",
       counterTextFinder
     );
-    assertEquals(semanticsId, new Long(4));
+    assertEquals(semanticsId, 4L);
 
     String treeString = (String) driver.executeScript("flutter: getRenderTree");
     assertEquals(treeString.substring(0, 11), "RenderView#");
@@ -59,6 +59,42 @@ public class FlutterTest extends BaseDriver {
     driver.context("FLUTTER");
     File f2 = driver.getScreenshotAs(OutputType.FILE);
     f2.renameTo(new File("./flutter-screenshot.png"));
+
+    assertEquals(counterTextFinder.getText(), "0");
+
+    buttonFinder.click();
+    // @todo tap not working?
+    // buttonFinder.tap(1, 100);
+    buttonFinder.click();
+    assertEquals(counterTextFinder.getText(), "2");
+
+    find.byTooltip("Increment").click();
+
+    // @todo param override
+    assertEquals(find.descendant(find.byTooltip("counter_tooltip"), find.byValueKey("counter"), false).getText(), "3");
+    
+    find.byType("FlatButton").click();
+    driver.executeScript("flutter:waitForAbsent", buttonFinder);
+
+    assertEquals(find.text("This is 2nd route").getText(), "This is 2nd route");
+
+    driver.executeScript("flutter:scrollUntilVisible", find.byType("ListView"), new HashMap<String, Object>() {{
+      put("item", find.byType("TextField"));
+      put("dxScroll", 90);
+      put("dyScroll", -400);
+    }});
+
+    driver.executeScript("flutter:scroll", find.byType("ListView"), new HashMap<String, Object>() {{
+      put("item", find.byType("TextField"));
+      put("dx", 50);
+      put("dy", 100);
+      put("durationMilliseconds", 200);
+      put("frequency", 30);
+    }});
+    
+    /*
+    */
+
   }
 
 }
