@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "appium-base-driver": "^3.19.0",
-    "appium-uiautomator2-driver": "^1.35.0",
+    "appium-uiautomator2-driver": "^1.35.1",
     "appium-xcuitest-driver": "^2.127.0",
     "rpc-websockets": "^4.5.1"
   }
