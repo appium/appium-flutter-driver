@@ -114,8 +114,7 @@ const opts = {
   await driver.execute('flutter:scrollUntilVisible', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400});
   await driver.execute('flutter:scroll', find.byType('ListView'), {dx: 50, dy: 100, durationMilliseconds: 200, frequency: 30});
   await driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1});
-  await driver.elementClick(find.byType('TextField')); // acquire focus
-  await driver.execute('flutter:enterText', 'I can enter text'); // enter text
+  await driver.elementSendKeys(find.byType('TextField'), 'I can enter text');
   await driver.execute('flutter:waitFor', find.byText('I can enter text')); // verify text appears on UI
 
   await driver.elementClick(find.pageBack());

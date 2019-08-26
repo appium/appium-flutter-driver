@@ -59,7 +59,7 @@ void main() {
       await driver.waitForAbsent(find.byTooltip('counter_tooltip'));
       expect(await driver.getText(find.text('This is 2nd route')),
           'This is 2nd route');
-      await driver.scrollUntilVisible(find.byType('ListView'), find.byType('TextField'), dxScroll: 90, dyScroll: -40);
+      await driver.scrollUntilVisible(find.byType('ListView'), find.byType('TextField'), dxScroll: 90, dyScroll: -400);
       await driver.scroll(find.byType('ListView'), 50, 100, Duration(milliseconds: 200), frequency: 30);
       await driver.scrollIntoView(find.byType('ListView'), alignment: 1.4);
       await driver.tap(find.byType('TextField'));

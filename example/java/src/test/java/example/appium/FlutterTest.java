@@ -96,8 +96,7 @@ public class FlutterTest extends BaseDriver {
       put("alignment", 0.1);
     }});
 
-    find.byType("TextField").click(); // acquire focus
-    driver.executeScript("flutter:enterText", "I can enter text"); // enter text
+    find.byType("TextField").sendKeys("I can enter text"); // enter text
     driver.executeScript("flutter:waitFor", find.text("I can enter text")); // verify text appears on UI
 
     find.pageBack().click();
