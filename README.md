@@ -33,6 +33,8 @@ npm i -g appium-flutter-driver git://github.com/truongsinh/appium.git#patch-1
 ## Usage
 If you are unfamiliar with running Appium tests, start with [Appium Getting Starting](http://appium.io/docs/en/about-appium/getting-started/) first.
 
+Your Flutter app-under-test (AUT) must be compiled in `debug` or `profile` mode, because `Flutter Driver does not support running in release mode.`. Also, ensure that your Flutter AUT has `enableFlutterDriverExtension()` before `runApp`.
+
 This snippet, taken from [example dir](https://github.com/truongsinh/appium-flutter-driver/tree/master/example), is a script written as an appium client with `webdriverio`, and assumes you have `appium` server (with `appium-flutter-driver` installed) running on the same host and default port (`4723`). For more info, see example's [README.md](https://github.com/truongsinh/appium-flutter-driver/tree/master/example/README.md)
 
 ```js
@@ -122,8 +124,7 @@ Legend:
 | [checkHealth](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/checkHealth.html) | :ok: | `driver.execute('flutter:checkHealth')` | Session |
 | [clearTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/clearTimeline.html) | :ok: | `driver.execute('flutter:clearTimeline')` | Session |
 | [close](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/close.html) | :ok: | [`driver.deleteSession()`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L55) | Session |
-| [enterText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/enterText.html) | :x: | `driver.elementSendKeys(find.byType('TextField'), 'I can enter text')` (no focus required)\
-`driver.elementClick(find.byType('TextField')); driver.execute('flutter:enterText', 'I can enter text')` (focus required by tap/click first) | Session |
+| [enterText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/enterText.html) | :x: | `driver.elementSendKeys(find.byType('TextField'), 'I can enter text')` (no focus required) <br/> `driver.elementClick(find.byType('TextField')); driver.execute('flutter:enterText', 'I can enter text')` (focus required by tap/click first) | Session |
 | [forceGC](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/forceGC.html) | :ok: | `driver.execute('flutter:forceGC')` | Session |
 | [getBottomLeft](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getBottomLeft.html) | :ok: | `driver.execute('flutter:getBottomLeft', buttonFinder)` | Widget |
 | [getBottomRight](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getBottomRight.html) | :ok: | `driver.execute('flutter:getBottomRight', buttonFinder)` | Widget |
