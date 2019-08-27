@@ -1,6 +1,6 @@
 import { FlutterDriver } from '../driver';
 import { executeSocketCommand } from '../sessions/observatory';
-import { scroll, scrollIntoView, scrollUntilVisible, longTap } from './execute/scroll';
+import { longTap, scroll, scrollIntoView, scrollUntilVisible } from './execute/scroll';
 import { waitFor, waitForAbsent } from './execute/wait';
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
 

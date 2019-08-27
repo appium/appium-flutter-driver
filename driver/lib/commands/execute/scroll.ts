@@ -58,8 +58,8 @@ export const longTap = async (
   }
 
   return await self.executeElementCommand(`scroll`, elementBase64, {
-    dx:0,
-    dy:0,
+    dx: 0,
+    dy: 0,
     duration: durationMilliseconds * 1000,
     frequency,
   });
