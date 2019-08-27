@@ -79,6 +79,10 @@ const opts = {
   */
 
   assert.strictEqual(await driver.getElementText(counterTextFinder), '0');
+  
+  //Long Press on Increment button, it should visible 'increment' tooltip after longTap
+  await driver.execute('flutter:longTap', find.byType('ListView'), {durationMilliseconds: 200, frequency: 30});
+  await driver.saveScreenshot('./flutter-longPress.png');
 
   await driver.elementClick(buttonFinder);
   await driver.touchAction({

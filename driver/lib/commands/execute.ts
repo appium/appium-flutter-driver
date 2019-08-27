@@ -1,6 +1,6 @@
 import { FlutterDriver } from '../driver';
 import { executeSocketCommand } from '../sessions/observatory';
-import { scroll, scrollIntoView, scrollUntilVisible } from './execute/scroll';
+import { scroll, scrollIntoView, scrollUntilVisible, longTap } from './execute/scroll';
 import { waitFor, waitForAbsent } from './execute/wait';
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
 
@@ -51,6 +51,8 @@ export const execute = async function(
       return scrollIntoView(this, args[0], args[1]);
     case `enterText`:
       return enterText(this, args[0]);
+    case `longTap`:
+      return longTap(this, args[0], args[1]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
