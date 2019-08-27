@@ -63,6 +63,16 @@ export const connectSocket =  async (dartObservatoryURL: string) => {
       socket.on(`timeout`, onTimeoutListener);
       const onOpenListener = async () => {
         try {
+          // tslint:disable-next-line:ban-types
+          const originalSocketCall: Function = socket.call;
+          socket.call = async (...args: any) => {
+            try {
+              // `await` is needed so that rejected promise will be thrown and caught
+              return await originalSocketCall.apply(socket, args);
+            } catch (e) {
+              log.errorAndThrow(JSON.stringify(e));
+            }
+          };
           log.info(`Connected to ${dartObservatoryURL}`);
           const vm = await socket.call(`getVM`);
           socket.isolateId = vm.isolates[0].id;
@@ -70,6 +80,16 @@ export const connectSocket =  async (dartObservatoryURL: string) => {
           const isolate = await socket.call(`getIsolate`, {
             isolateId: `${socket.isolateId}`,
           });
+          if (!isolate) {
+            log.errorAndThrow(`Cannot get Dart Isolate`);
+          }
+          if (!Array.isArray(isolate.extensionRPCs)) {
+            log.errorAndThrow(`Cannot get Dart extensionRPCs from isolate ${JSON.stringify(isolate)}`);
+          }
+          if (isolate.extensionRPCs.indexOf(`ext.flutter.driver`) < 0) {
+            const msg = `"ext.flutter.driver" is not found in "extensionRPCs" ${JSON.stringify(isolate.extensionRPCs)}`;
+            log.errorAndThrow(msg);
+          }
           removeListenerAndResolve(socket);
         } catch (e) {
           removeListenerAndResolve(null);
