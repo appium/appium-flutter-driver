@@ -1,3 +1,4 @@
+import { decode } from './base64url';
 // @todo consider using protobuf
 export const deserialize = (base64String: string) =>
-  JSON.parse(Buffer.from(base64String, `base64`).toString());
+  JSON.parse(decode(base64String));

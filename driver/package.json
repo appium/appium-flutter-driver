@@ -5,7 +5,7 @@
     "appium",
     "flutter"
   ],
-  "version": "0.0.11",
+  "version": "0.0.19",
   "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
   "license": "MIT",
   "repository": {
@@ -23,6 +23,7 @@
   "scripts": {
     "prepublishOnly": "cp ../README.md ../LICENSE ./",
     "prepare": "npm run clean && npm run compile",
+    "test": "echo no test",
     "compile": "tsc",
     "clean": "rm -rf build",
     "lint": "tslint 'lib/**/*.ts'",
@@ -33,9 +34,9 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "appium-base-driver": "^3.19.0",
-    "appium-uiautomator2-driver": "^1.33.1",
-    "appium-xcuitest-driver": "^2.123.0",
+    "appium-base-driver": "^3.21.2",
+    "appium-uiautomator2-driver": "^1.35.1",
+    "appium-xcuitest-driver": "^2.127.0",
     "rpc-websockets": "^4.5.1"
   }
 }

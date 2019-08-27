@@ -10,8 +10,8 @@ const osSpecificOps =
         platformName: 'Android',
         deviceName: 'Pixel 2',
         // @todo support non-unix style path
-        // app: __dirname + '/../apps/android-real-debug.apk', // download local to run faster and save bandwith
-        app: 'https://github.com/truongsinh/appium-flutter-driver/releases/download/v0.0.4/android-real-debug.apk',
+        app: __dirname + '/../../apps/android-real-debug.apk' // download local to run faster and save bandwith
+        // app: 'https://github.com/truongsinh/appium-flutter-driver/releases/download/v0.0.4/android-real-debug.apk',
       }
     : process.env.APPIUM_OS === 'ios'
     ? {
@@ -19,8 +19,8 @@ const osSpecificOps =
         platformVersion: '12.2',
         deviceName: 'iPhone X',
         noReset: true,
-        // app: __dirname + '/../apps/ios-sim-debug.zip', // download local to run faster and save bandwith
-        app: 'https://github.com/truongsinh/appium-flutter-driver/releases/download/v0.0.4/ios-sim-debug.zip',
+        app: __dirname + '/../../apps/ios-sim-debug.zip' // download local to run faster and save bandwith
+        // app: 'https://github.com/truongsinh/appium-flutter-driver/releases/download/v0.0.4/ios-sim-debug.zip',
       }
     : {};
 
@@ -101,14 +101,27 @@ const opts = {
   );
 
   await driver.elementClick(find.byType('FlatButton'));
-  // await driver.waitForAbsent(byTooltip('counter_tooltip'));
+  await driver.execute(
+    'flutter:waitForAbsent',
+    buttonFinder
+  );
 
   assert.strictEqual(
     await driver.getElementText(find.byText('This is 2nd route')),
     'This is 2nd route'
   );
 
+  await driver.execute('flutter:scrollUntilVisible', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400});
+  await driver.execute('flutter:scroll', find.byType('ListView'), {dx: 50, dy: 100, durationMilliseconds: 200, frequency: 30});
+  await driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1});
+  await driver.elementSendKeys(find.byType('TextField'), 'I can enter text');
+  await driver.execute('flutter:waitFor', find.byText('I can enter text')); // verify text appears on UI
+
   await driver.elementClick(find.pageBack());
+  await driver.execute(
+    'flutter:waitFor',
+    buttonFinder
+  );
 
   assert.strictEqual(
     await driver.getElementText(

@@ -5,7 +5,7 @@
     "appium",
     "flutter"
   ],
-  "version": "0.0.4",
+  "version": "0.0.16",
   "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
   "license": "MIT",
   "repository": {
@@ -21,14 +21,20 @@
     "build"
   ],
   "scripts": {
-    "prepublishOnly": "cp ../LICENSE ./",
+    "test": "ts-mocha lib/**/*_test.ts",
+    "prepublishOnly": "cp ../../LICENSE ./",
     "prepare": "npm run clean && npm run compile",
     "clean": "rm -rf build",
     "compile": "tsc",
     "lint": "tslint 'lib/**/*.ts'"
   },
   "devDependencies": {
-    "@types/node": "^12.6.8",
+    "@types/expect": "^1.20.4",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.7.2",
+    "expect": "^24.9.0",
+    "mocha": "^6.2.0",
+    "ts-mocha": "^6.0.0",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3"
   }

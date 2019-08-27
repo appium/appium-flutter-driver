@@ -1,4 +1,7 @@
 import { FlutterDriver } from '../driver';
+import { executeSocketCommand } from '../sessions/observatory';
+import { scroll, scrollIntoView, scrollUntilVisible } from './execute/scroll';
+import { waitFor, waitForAbsent } from './execute/wait';
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
 
 export const execute = async function(
@@ -36,6 +39,18 @@ export const execute = async function(
       return getRenderObjectDiagnostics(this, args[0], args[1]);
     case `getSemanticsId`:
       return getSemanticsId(this, args[0]);
+    case `waitForAbsent`:
+      return waitForAbsent(this, args[0]);
+    case `waitFor`:
+      return waitFor(this, args[0]);
+    case `scroll`:
+      return scroll(this, args[0], args[1]);
+    case `scrollUntilVisible`:
+      return scrollUntilVisible(this, args[0], args[1]);
+    case `scrollIntoView`:
+      return scrollIntoView(this, args[0], args[1]);
+    case `enterText`:
+      return enterText(this, args[0]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -62,8 +77,24 @@ const forceGC = async (self: FlutterDriver) => {
   }
 };
 
+const anyPromise = (promises: Array<Promise<any>>) => {
+  const newpArray = promises.map((p) =>
+    p.then(
+      (resolvedValue) => Promise.reject(resolvedValue),
+      (rejectedReason) => rejectedReason,
+    ),
+  );
+  return Promise.all(newpArray).then(
+    (rejectedReasons) => Promise.reject(rejectedReasons),
+    (resolvedValue) => resolvedValue,
+  );
+};
+
 const clearTimeline = async (self: FlutterDriver) => {
-  const response = await self.socket.call(`_clearVMTimeline`);
+  // @todo backward compatible, need to cleanup later
+  const call1: Promise<any> = self.socket.call(`_clearVMTimeline`);
+  const call2: Promise<any> = self.socket.call(`clearVMTimeline`);
+  const response = await anyPromise([call1, call2]);
   if (response.type !== `Success`) {
     throw new Error(`Could not forceGC, reponse was ${response}`);
   }
@@ -77,8 +108,7 @@ const getRenderObjectDiagnostics = async (
     includeProperties: boolean;
   },
 ) => {
-  const subtreeDepth = opts.subtreeDepth || 0;
-  const includeProperties = opts.includeProperties || true;
+  const { subtreeDepth = 0, includeProperties = true } = opts;
 
   return await self.executeElementCommand(
     `get_diagnostics_tree`,
@@ -93,3 +123,6 @@ const getRenderObjectDiagnostics = async (
 
 const getSemanticsId = async (self: FlutterDriver, elementBase64: string) =>
   (await self.executeElementCommand(`get_semantics_id`, elementBase64)).id;
+
+const enterText = async (self: FlutterDriver, text: string) =>
+  await executeSocketCommand(self.socket, { command: `enter_text`, text });

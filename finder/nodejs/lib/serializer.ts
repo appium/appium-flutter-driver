@@ -1,8 +1,9 @@
+import { encode } from './base64url';
 import { deserialize } from './deserializer';
 
 // @todo consider using protobuf
 function serialize(obj: object) {
-  return Buffer.from(JSON.stringify(obj)).toString(`base64`);
+  return encode(JSON.stringify(obj));
 }
 
 export type SerializableFinder = string;
@@ -11,10 +12,9 @@ export type Pattern = string | RegExp;
 export const ancestor = (args: {
   of: SerializableFinder;
   matching: SerializableFinder;
-  matchRoot: boolean;
+  matchRoot?: boolean;
 }) => {
-  const { of, matching } = args;
-  const matchRoot = args.matchRoot || false;
+  const { of, matching, matchRoot = false } = args;
   const a: any = {
     finderType: `Ancestor`,
     matchRoot,
@@ -32,7 +32,7 @@ export const bySemanticsLabel = (label: Pattern) =>
   serialize({
     finderType: `BySemanticsLabel`,
     isRegExp: label instanceof RegExp ? true : false,
-    label: label.toString().slice(1, -1),
+    label: label instanceof RegExp ? label.toString().slice(1, -1) : label,
   });
 
 export const byTooltip = (text: string) =>
@@ -57,10 +57,9 @@ export const byValueKey = (key: string | number) =>
 export const descendant = (args: {
   of: SerializableFinder;
   matching: SerializableFinder;
-  matchRoot: boolean;
+  matchRoot?: boolean;
 }) => {
-  const { of, matching } = args;
-  const matchRoot = args.matchRoot || false;
+  const { of, matching, matchRoot = false } = args;
   const a: any = {
     finderType: `Descendant`,
     matchRoot,
