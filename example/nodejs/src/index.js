@@ -79,6 +79,45 @@ const opts = {
   */
 
   assert.strictEqual(await driver.getElementText(counterTextFinder), '0');
+  
+  //Long Press using flutter command on Increment button, it should visible 'increment' tooltip after longTap
+  await driver.execute('flutter:longTap', find.byValueKey('increment'), {durationMilliseconds: 10000, frequency: 30});
+  
+  //Long Press using TouchAction with wait
+  await driver.touchAction([
+    {
+     action: 'longPress',
+     element: { elementId: buttonFinder }
+    },
+    {
+     action: 'wait',
+     ms: 10000
+    },
+    {
+     action: 'release'
+    }
+  ]);
+
+  //Long Press using TouchAction without wait
+  await driver.touchAction([
+    {
+     action: 'longPress',
+     element: { elementId: buttonFinder }
+    },
+    {
+     action: 'release'
+    }
+  ]);
+
+  //Long Press using TouchAction without wait and release
+  await driver.touchAction([
+    {
+     action: 'longPress',
+     element: { elementId: buttonFinder }
+    },
+  ]);
+
+  await driver.saveScreenshot('./flutter-longPress.png');  
 
   await driver.elementClick(buttonFinder);
   await driver.touchAction({

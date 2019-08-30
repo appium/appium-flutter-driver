@@ -39,6 +39,32 @@ export const scroll = async (
   });
 };
 
+export const longTap = async (
+  self: FlutterDriver,
+  elementBase64: string,
+  opts: {
+    durationMilliseconds: number;
+    frequency?: number;
+  },
+) => {
+  const { durationMilliseconds, frequency = 60 } = opts;
+
+  if (
+    typeof durationMilliseconds !== `number` ||
+    typeof frequency !== `number`
+  ) {
+    // @todo BaseDriver's errors.InvalidArgumentError();
+    throw new Error(`${opts} is not a valid options`);
+  }
+
+  return await self.executeElementCommand(`scroll`, elementBase64, {
+    dx: 0,
+    dy: 0,
+    duration: durationMilliseconds * 1000,
+    frequency,
+  });
+};
+
 export const scrollUntilVisible = async (
   self: FlutterDriver,
   elementBase64: string,
