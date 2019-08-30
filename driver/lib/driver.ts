@@ -11,7 +11,7 @@ import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
   getContexts, getCurrentContext, setContext } from './commands/context';
 import { getText, setValue } from './commands/element';
 import { execute } from './commands/execute';
-import { click, performTouch, tap, tapEl } from './commands/gesture';
+import { click, longTap, performTouch, tap, tapEl } from './commands/gesture';
 import { getScreenshot } from './commands/screen';
 
 class FlutterDriver extends BaseDriver {
@@ -40,6 +40,7 @@ class FlutterDriver extends BaseDriver {
 
   // gesture
   public click = click;
+  public longTap = longTap
   public tapEl = tapEl;
   public tap = tap;
   public performTouch = performTouch;

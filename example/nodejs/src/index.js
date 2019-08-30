@@ -10,7 +10,7 @@ const osSpecificOps =
         platformName: 'Android',
         deviceName: 'Pixel 2',
         // @todo support non-unix style path
-        app: __dirname + '/../../apps/android-real-debug.apk' // download local to run faster and save bandwith
+        app: '__dirname + '/../../apps/android-real-debug.apk' // download local to run faster and save bandwith
         // app: 'https://github.com/truongsinh/appium-flutter-driver/releases/download/v0.0.4/android-real-debug.apk',
       }
     : process.env.APPIUM_OS === 'ios'
@@ -80,9 +80,46 @@ const opts = {
 
   assert.strictEqual(await driver.getElementText(counterTextFinder), '0');
   
-  //Long Press on Increment button, it should visible 'increment' tooltip after longTap
+  //Long Press using flutter command on Increment button, it should visible 'increment' tooltip after longTap
   await driver.execute('flutter:longTap', find.byValueKey('increment'), {durationMilliseconds: 10000, frequency: 30});
-  await driver.saveScreenshot('./flutter-longPress.png');
+  
+  //Long Press using TouchAction with wait
+  await driver.touchAction([
+    {
+     action: 'longPress',
+     element: { elementId: buttonFinder }
+    },
+    {
+     action: 'wait',
+     ms: 10000
+    },
+    {
+     action: 'release'
+    }
+  ]);
+
+  //Long Press using TouchAction without wait
+  await driver.touchAction([
+    {
+     action: 'longPress',
+     element: { elementId: buttonFinder }
+    },
+    {
+     action: 'release'
+    }
+  ]);
+
+  ////Long Press using TouchAction without wait and release
+  await driver.touchAction([
+    {
+     action: 'longPress',
+     element: { elementId: buttonFinder }
+    },
+  ]);
+
+
+  
+  await driver.saveScreenshot('./flutter-longPress.png');  
 
   await driver.elementClick(buttonFinder);
   await driver.touchAction({
