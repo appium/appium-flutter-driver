@@ -109,7 +109,7 @@ const opts = {
     }
   ]);
 
-  ////Long Press using TouchAction without wait and release
+  //Long Press using TouchAction without wait and release
   await driver.touchAction([
     {
      action: 'longPress',
@@ -117,8 +117,6 @@ const opts = {
     },
   ]);
 
-
-  
   await driver.saveScreenshot('./flutter-longPress.png');  
 
   await driver.elementClick(buttonFinder);

@@ -40,7 +40,7 @@ class FlutterDriver extends BaseDriver {
 
   // gesture
   public click = click;
-  public longTap = longTap
+  public longTap = longTap;
   public tapEl = tapEl;
   public tap = tap;
   public performTouch = performTouch;
