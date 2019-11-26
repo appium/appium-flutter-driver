@@ -5,7 +5,7 @@
     "appium",
     "flutter"
   ],
-  "version": "0.0.19",
+  "version": "0.0.20",
   "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
   "license": "MIT",
   "repository": {
@@ -34,9 +34,9 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "appium-base-driver": "^4.0.1",
+    "appium-base-driver": "^5.0.0",
     "appium-uiautomator2-driver": "^1.35.1",
-    "appium-xcuitest-driver": "^2.127.0",
-    "rpc-websockets": "^5.0.1"
+    "appium-xcuitest-driver": "^3.0.0",
+    "rpc-websockets": "^4.5.1"
   }
 }
