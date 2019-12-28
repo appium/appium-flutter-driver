@@ -4,26 +4,22 @@ require 'base64'
 require 'appium_flutter_finder/version'
 
 module AppiumFlutterFinder
-  # test cases: https://github.com/truongsinh/appium-flutter-driver/blob/7f56d739c429990eb30f1c82afd45e37f38939df/finder/kotlin/src/test/kotlin/pro/truongsinh/appium_flutter/finder/FinderTest.kt
-  def by_ancestor
-    # export const ancestor = (args: {
-    #     of: SerializableFinder;
-    # matching: SerializableFinder;
-    # matchRoot?: boolean;
-    # }) => {
-    #     const { of, matching, matchRoot = false } = args;
-    # const a: any = {
-    #     finderType: `Ancestor`,
-    #     matchRoot,
-    # };
-    # Object.entries(deserialize(of)).forEach(
-    #     ([key, value]) => (a[`of_${key}`] = value),
-    #     );
-    # Object.entries(deserialize(matching)).forEach(
-    #     ([key, value]) => (a[`matching_${key}`] = value),
-    #     );
-    # return serialize(a);
-    # };
+  def by_ancestor(serialized_finder:, matching:, match_root: false)
+    by_ancestor_or_descendant(
+      type: 'Ancestor',
+      serialized_finder: serialized_finder,
+      matching: matching,
+      match_root: match_root
+    )
+  end
+
+  def by_descendant(serialized_finder:, matching:, match_root: false)
+    by_ancestor_or_descendant(
+      type: 'Descendant',
+      serialized_finder: serialized_finder,
+      matching: matching,
+      match_root: match_root
+    )
   end
 
   def by_semantics_label(label)
@@ -57,27 +53,6 @@ module AppiumFlutterFinder
     )
   end
 
-  def by_descendant
-    # export const descendant = (args: {
-    #     of: SerializableFinder;
-    # matching: SerializableFinder;
-    # matchRoot?: boolean;
-    # }) => {
-    #     const { of, matching, matchRoot = false } = args;
-    # const a: any = {
-    #     finderType: `Descendant`,
-    #     matchRoot,
-    # };
-    # Object.entries(deserialize(of)).forEach(
-    #     ([key, value]) => (a[`of_${key}`] = value),
-    #     );
-    # Object.entries(deserialize(matching)).forEach(
-    #     ([key, value]) => (a[`matching_${key}`] = value),
-    #     );
-    # return serialize(a);
-    # };
-  end
-
   def page_back
     serialize(
       finderType: 'PageBack'
@@ -95,5 +70,30 @@ module AppiumFlutterFinder
 
   def serialize(hash)
     Base64.strict_encode64(hash.to_json)
+  end
+
+  def by_ancestor_or_descendant(type:, serialized_finder:, matching:, match_root: false)
+    param = { finderType: type, matchRoot: match_root }
+
+    finder = begin
+      JSON.parse(Base64.decode64(serialized_finder))
+    rescue JSONError
+      {}
+    end
+
+    finder.each_key do |key|
+      param["of_#{key}"] = finder[key]
+    end
+
+    matching = begin
+      JSON.parse(Base64.decode64(matching))
+    rescue JSONError
+      {}
+    end
+    matching.each_key do |key|
+      param["matching_#{key}"] = matching[key]
+    end
+
+    serialize param
   end
 end
