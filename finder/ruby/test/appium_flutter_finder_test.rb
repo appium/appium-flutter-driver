@@ -2,7 +2,7 @@ require 'test_helper'
 require_relative '../lib/appium_flutter_finder'
 
 class AppiumFlutterFinderTest < Minitest::Test
-  include AppiumFlutterFinder
+  include Appium::Flutter::Finder
 
   def test_by_ancestor
     assert_equal(

@@ -1,8 +1,6 @@
 # AppiumFlutterFinder
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/appium_flutter_finder`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Ruby finder elements for https://github.com/truongsinh/appium-flutter-driver
 
 ## Installation
 
@@ -22,8 +20,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
 
+```ruby
+include Appium::Flutter::Finder
+
+@driver = ::Appium::Core.for(caps).start_driver
+
+# Send a request to an element
+element = Appium::Flutter::Element.new(
+  @driver,
+  finder: by_text('You have pushed the button this many times:')
+)
+assert element.text == 'You have pushed the button this many times:'
+
+# Get render tree by Flutter
+@driver.execute_script 'flutter:getRenderTree', {}
+```
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -32,4 +44,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/appium_flutter_finder.
+Bug reports and pull requests are welcome on GitHub at https://github.com/truongsinh/appium-flutter-driver/tree/master/finder/ruby .
