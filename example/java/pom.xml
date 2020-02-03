@@ -54,13 +54,6 @@
 			<artifactId>appium-flutter-finder</artifactId>
 			<version>0.0.4</version>
     </dependency>
-		<dependency>
-		<groupId>org.jetbrains.kotlinx</groupId>
-		<artifactId>kotlinx-serialization-runtime</artifactId>
-		<version>0.14.0</version>
-		<scope>runtime</scope>
-	</dependency>
-
   </dependencies>
 
 	<build>
@@ -95,16 +88,6 @@
         <id>local-maven-repo</id>
         <url>file:///Users/truongsinh/Dev/flutter/appium-flutter-driver/finder/kotlin/build/repository</url>
     </repository>
-
-    <repository>
-      <snapshots>
-          <enabled>false</enabled>
-      </snapshots>
-      <id>central</id>
-      <name>bintray</name>
-      <url>http://jcenter.bintray.com</url>
-    </repository>
-
   </repositories>
 
 
