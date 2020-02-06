@@ -1,9 +1,7 @@
-from appium.webdriver import Remote
 import base64
 import json
 
 from appium.webdriver.webelement import WebElement
-
 
 class FlutterElement(WebElement):
     def __init__(self, driver, element_id):
@@ -87,19 +85,3 @@ class FlutterFinder(object):
             param['matching_{}'.format(matching_key)] = matching_value
 
         return self._serialize(param)
-
-
-# Example
-
-driver = Remote('http://localhost:4723/wd/hub', dict(
-    platformName='iOS',
-    automationName='flutter',
-    platformVersion='12.4',
-    deviceName='iPhone 8',
-    app='/Users/kazu/GitHub/flutter_app/build/ios/Debug-iphonesimulator/Runner.app'
-))
-
-finder = FlutterFinder()
-text_finder = finder.by_text('You have pushed the button this many times:')
-element = FlutterElement(driver, text_finder)
-print(element.text)
