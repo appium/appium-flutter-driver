@@ -7,14 +7,13 @@ from setuptools import find_packages, setup
 
 setup(
     name='Appium-Flutter-Finder',
-    version='0.1.0',
+    version='0.1.1',
     description='An extention of finder for Appium flutter',
     long_description=io.open(os.path.join(os.path.dirname('__file__'), 'README.md'), encoding='utf-8').read(),
     long_description_content_type='text/markdown',
     keywords=[
         'appium',
-        'selenium',
-        'selenium 3',
+        'flutter',
         'python client',
         'mobile automation'
     ],
@@ -24,7 +23,7 @@ setup(
     packages=find_packages(include=['appium_flutter_finder*']),
     license='MIT',
     classifiers=[
-        'Development Status :: 4 - Beta',
+        'Development Status :: 0.1 - Beta',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.4',
@@ -36,7 +35,7 @@ setup(
         'Environment :: Win32 (MS Windows)',
         'Intended Audience :: Developers',
         'Intended Audience :: Other Audience',
-        'License :: OSI Approved :: Apache Software License',
+        'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Topic :: Software Development :: Quality Assurance',
         'Topic :: Software Development :: Testing'
