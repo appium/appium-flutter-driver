@@ -46,6 +46,6 @@ build
 *.tgz
 
 # python
-python/build
-python/dist
-python/Appium_Flutter_Finder.egg-info
+finder/python/build
+finder/python/dist
+finder/python/Appium_Flutter_Finder.egg-info
