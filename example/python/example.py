@@ -1,3 +1,5 @@
+import os
+
 from appium.webdriver import Remote
 from appium_flutter_finder import FlutterElement, FlutterFinder
 
@@ -8,7 +10,8 @@ driver = Remote('http://localhost:4723/wd/hub', dict(
     automationName='flutter',
     platformVersion='12.4',
     deviceName='iPhone 8',
-    app='/Users/kazu/GitHub/flutter_app/build/ios/Debug-iphonesimulator/Runner.app'
+    app='{}/../app/app/Runner.zip'.format(
+      os.path.dirname(os.path.realpath(__file__)))
 ))
 
 finder = FlutterFinder()
