@@ -1,6 +1,7 @@
 # Getting the Appium Flutter Finder
 
 There are three ways to install and use the Appium Flutter Finder.
+Supported Python version follows appium python client.
 
 1. Install from [PyPi](https://pypi.org), as ['Appium-Flutter-Finder'](https://pypi.org/project/Appium-Flutter-Finder/).
 
@@ -25,7 +26,7 @@ download and unarchive the source tarball (Appium-Flutter-Finder-X.X.tar.gz).
     python setup.py install
     ```
 
-# release
+# Release
 
 ```
 pip install twine
@@ -33,5 +34,5 @@ pip install twine
 
 ```
 python setup.py sdist
-twine upload dist/Appium-Flutter-Finder-0.1.0.tar.gz
+twine upload dist/Appium-Flutter-Finder-X.X.tar.gz
 ```
