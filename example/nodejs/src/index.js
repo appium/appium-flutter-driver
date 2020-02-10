@@ -140,10 +140,25 @@ const opts = {
   );
 
   await driver.elementClick(find.byType('FlatButton'));
-  await driver.execute(
-    'flutter:waitForAbsent',
-    buttonFinder
-  );
+
+  let firstWaitForAbsentError;
+  try {
+    await driver.execute('flutter:waitForAbsent', buttonFinder, {durationMilliseconds: 1});
+  } catch(e) {
+    firstWaitForAbsentError = e;
+  } finally {
+    // @todo
+  }
+
+  try {
+    await driver.execute('flutter:waitForAbsent', buttonFinder, {durationMilliseconds: 'malformed input'});
+  } catch(e) {
+    firstWaitForAbsentError = e;
+  } finally {
+    // @todo
+  }
+
+  await driver.execute('flutter:waitForAbsent', buttonFinder);
 
   assert.strictEqual(
     await driver.getElementText(find.byText('This is 2nd route')),
