@@ -48,12 +48,13 @@
 			<groupId>io.appium</groupId>
 			<artifactId>java-client</artifactId>
 			<version>4.1.2</version>
-	</dependency>
-	<dependency>
+		</dependency>
+		<dependency>
 			<groupId>pro.truongsinh</groupId>
 			<artifactId>appium-flutter-finder</artifactId>
 			<version>0.0.4</version>
     </dependency>
+
   </dependencies>
 
 	<build>
