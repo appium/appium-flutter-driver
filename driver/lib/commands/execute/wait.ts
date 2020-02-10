@@ -1,40 +1,25 @@
 import { FlutterDriver } from '../../driver';
 
-export const waitForAbsent = async (
+const waitForConstructor = (command: `waitForAbsent` | `waitFor`) => async (
   self: FlutterDriver,
   elementBase64: string,
   durationMilliseconds?: number,
 ) => {
 
-  if (typeof durationMilliseconds === `undefined`) {
-    durationMilliseconds = 10;
-  }
+  let args = {};
 
-  if (typeof durationMilliseconds !== `number`) {
+  if (typeof durationMilliseconds === `number`) {
+    args = {
+      timeout: durationMilliseconds * 1000,
+    };
+  } else if (typeof durationMilliseconds !== `undefined`) {
     // @todo BaseDriver's errors.InvalidArgumentError();
     throw new Error(`durationMilliseconds is not a valid options`);
   }
 
-  await self.executeElementCommand(`waitForAbsent`, elementBase64, {
-    timeout: durationMilliseconds * 1000,
-  });
+  await self.executeElementCommand(command, elementBase64, args);
 };
 
-export const waitFor = async (
-  self: FlutterDriver,
-  elementBase64: string,
-  durationMilliseconds?: number,
-) => {
-  if (typeof durationMilliseconds === `undefined`) {
-    durationMilliseconds = 10;
-  }
+export const waitForAbsent = waitForConstructor(`waitForAbsent`);
 
-  if (typeof durationMilliseconds !== `number`) {
-    // @todo BaseDriver's errors.InvalidArgumentError();
-    throw new Error(`durationMilliseconds is not a valid options`);
-  }
-
-  await self.executeElementCommand(`waitFor`, elementBase64, {
-    timeout: durationMilliseconds * 1000,
-  });
-};
+export const waitFor = waitForConstructor(`waitFor`);
