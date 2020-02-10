@@ -18,3 +18,7 @@ export const setValue = async function(this: FlutterDriver, textInput: string | 
   await clickPromise;
   await this.execute(`flutter:enterText`, [text]);
 };
+
+export const clear = async function(this: FlutterDriver, el: string) {
+  await this.setValue([``], el)
+};
