@@ -40,9 +40,9 @@ export const execute = async function(
     case `getSemanticsId`:
       return getSemanticsId(this, args[0]);
     case `waitForAbsent`:
-      return waitForAbsent(this, args[0], args[1]);
+      return waitForAbsent(this, args[0]);
     case `waitFor`:
-      return waitFor(this, args[0], args[1]);
+      return waitFor(this, args[0]);
     case `scroll`:
       return scroll(this, args[0], args[1]);
     case `scrollUntilVisible`:
