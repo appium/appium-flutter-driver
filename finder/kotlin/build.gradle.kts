@@ -12,12 +12,12 @@ plugins {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
     implementation(kotlin("stdlib")) 
-    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.11.1")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.14.0")
     implementation ("io.appium:java-client:2.1.0")
     testImplementation("junit:junit:4.12")
 }
