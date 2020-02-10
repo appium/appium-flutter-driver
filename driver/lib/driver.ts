@@ -9,7 +9,7 @@ import { createSession, deleteSession } from './sessions/session';
 
 import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
   getContexts, getCurrentContext, setContext } from './commands/context';
-import { getText, setValue } from './commands/element';
+import { clear, getText, setValue } from './commands/element';
 import { execute } from './commands/execute';
 import { click, longTap, performTouch, tap, tapEl } from './commands/gesture';
 import { getScreenshot } from './commands/screen';
@@ -36,6 +36,7 @@ class FlutterDriver extends BaseDriver {
   // element
   public getText = getText;
   public setValue = setValue;
+  public clear = clear;
   public getScreenshot = getScreenshot;
 
   // gesture
