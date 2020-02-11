@@ -24,10 +24,10 @@ Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https:/
 
 ## Installation
 
-In order to use `appium-flutter-driver`, we need to use a patched version of `appium` (see [PR#12945](https://github.com/appium/appium/pull/12945))
+In order to use `appium-flutter-driver`, we need to use `appium` version `1.16.0` or higher
 
 ```
-npm i -g appium-flutter-driver git://github.com/truongsinh/appium.git#patch-1
+npm i -g appium-flutter-driver
 ```
 
 ## Usage
