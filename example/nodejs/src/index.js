@@ -170,6 +170,7 @@ const opts = {
   await driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1});
   await driver.elementSendKeys(find.byType('TextField'), 'I can enter text');
   await driver.execute('flutter:waitFor', find.byText('I can enter text')); // verify text appears on UI
+  await driver.elementClear(find.byType('TextField')); //It can Clear the text field
 
   await driver.elementClick(find.pageBack());
   await driver.execute(
