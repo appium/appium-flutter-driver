@@ -32,16 +32,8 @@ export const startAndroidSession = async (caps) => {
 
 export const getObservatoryWsUri = async (proxydriver) => {
   const urlObject = processLogToGetobservatory(proxydriver.adb.logcat.logs);
-  log.debug(
-    `${proxydriver.adb.executable.path} forward tcp:${
-      urlObject.port
-    } tcp:${urlObject.port}`,
-  );
-  await execPromise(
-    `${proxydriver.adb.executable.path} forward tcp:${
-      urlObject.port
-    } tcp:${urlObject.port}`,
-  );
-
+  const cmd = `${proxydriver.adb.executable.path} forward tcp:${urlObject.port} tcp:${urlObject.port}`;
+  log.debug(cmd);
+  await execPromise(cmd);
   return urlObject.toJSON();
 };
