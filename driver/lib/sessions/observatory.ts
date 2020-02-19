@@ -119,7 +119,7 @@ export const connectSocket = async (dartObservatoryURL: string) => {
   return connectedSocket;
 };
 
-export const executeElementCommand = async function (
+export const executeElementCommand = async function(
   this: FlutterDriver,
   command: string,
   elementBase64?: string,
