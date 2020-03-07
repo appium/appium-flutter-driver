@@ -36,3 +36,10 @@ pip install twine
 python setup.py sdist
 twine upload dist/Appium-Flutter-Finder-X.X.tar.gz
 ```
+
+# Changelog
+
+- 0.1.2
+    - Fix b64encode error in Python 3
+- 0.1.1
+    - Initial release
