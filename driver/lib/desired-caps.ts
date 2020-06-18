@@ -13,6 +13,8 @@ export interface IDesiredCapConstraints {
   app: any;
   avd: any;
   udid: any;
+  retryBackoffTime: any;
+  maxRetryCount: any;
 }
 
 export const desiredCapConstraints: IDesiredCapConstraints = {
@@ -37,5 +39,11 @@ export const desiredCapConstraints: IDesiredCapConstraints = {
   },
   udid: {
     isString: true,
+  },
+  retryBackoffTime: {
+    isNumber: true,
+  },
+  maxRetryCount: {
+    isNumber: true,
   },
 };
