@@ -37,6 +37,18 @@ Your Flutter app-under-test (AUT) must be compiled in `debug` or `profile` mode,
 
 This snippet, taken from [example dir](https://github.com/truongsinh/appium-flutter-driver/tree/master/example), is a script written as an appium client with `webdriverio`, and assumes you have `appium` server (with `appium-flutter-driver` installed) running on the same host and default port (`4723`). For more info, see example's [README.md](https://github.com/truongsinh/appium-flutter-driver/tree/master/example/README.md)
 
+### Desired Capabilities for flutter driver only 
+
+
+| Capability | Description | Example Values |
+| - | - | -|
+| retryBackoffTime | the time wait for socket connection retry for get flutter session (default 300000ms)|500|
+| maxRetryCount    | the count for socket connection retry for get flutter session (default 10)          | 20|
+
+
+
+	
+
 ```js
 const wdio = require('webdriverio');
 const assert = require('assert');
@@ -60,7 +72,8 @@ const opts = {
   port: 4723,
   capabilities: {
     ...osSpecificOps,
-    automationName: 'Flutter'
+    automationName: 'Flutter',
+    retryBackoffTime: 500
   }
 };
 
