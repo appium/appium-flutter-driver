@@ -7,15 +7,12 @@ import { deserialize } from '../../../finder/nodejs/lib/deserializer';
 import { FlutterDriver } from '../driver';
 import { log } from '../logger';
 
-const MAX_RETRY_COUNT = 10;
-const RETRY_BACKOFF = 300000;
-
 class WebSocketDummy { }
 
 export type NullableWebSocketDummy = WebSocketDummy | null;
 
 // SOCKETS
-export const connectSocket = async (dartObservatoryURL: string) => {
+export const connectSocket = async (dartObservatoryURL: string,RETRY_BACKOFF: any=300000,MAX_RETRY_COUNT: any=10) => {
   let retryCount = 0;
   let connectedSocket: NullableWebSocketDummy = null;
   while (retryCount < MAX_RETRY_COUNT && !connectedSocket) {
