@@ -25,7 +25,7 @@ export const startIOSSession = async (caps) => {
   const observatoryWsUri = getObservatoryWsUri(iosdriver);
   return Promise.all([
     iosdriver,
-    connectSocket(await observatoryWsUri),
+    connectSocket(observatoryWsUri, caps.retryBackoffTime ,caps.maxRetryCount),
   ]);
 };
 
