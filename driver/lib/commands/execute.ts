@@ -1,10 +1,9 @@
 import { FlutterDriver } from '../driver';
-import { executeSocketCommand } from '../sessions/observatory';
 import { longTap, scroll, scrollIntoView, scrollUntilVisible } from './execute/scroll';
 import { waitFor, waitForAbsent } from './execute/wait';
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
 
-export const execute = async function(
+export const execute = async function (
   this: FlutterDriver,
   rawCommand: string,
   args: any[],
@@ -71,9 +70,9 @@ const getOffset = async (
 ) => await self.executeElementCommand(`get_offset`, elementBase64, offsetType);
 
 const forceGC = async (self: FlutterDriver) => {
-  const response = await self.socket.call(`_collectAllGarbage`, {
-    isolateId: self.socket.isolateId,
-  });
+  const response = await self.socket!.call(`_collectAllGarbage`, {
+    isolateId: self.socket!.isolateId,
+  }) as { type: string };
   if (response.type !== `Success`) {
     throw new Error(`Could not forceGC, reponse was ${response}`);
   }
@@ -94,8 +93,8 @@ const anyPromise = (promises: Array<Promise<any>>) => {
 
 const clearTimeline = async (self: FlutterDriver) => {
   // @todo backward compatible, need to cleanup later
-  const call1: Promise<any> = self.socket.call(`_clearVMTimeline`);
-  const call2: Promise<any> = self.socket.call(`clearVMTimeline`);
+  const call1: Promise<any> = self.socket!.call(`_clearVMTimeline`);
+  const call2: Promise<any> = self.socket!.call(`clearVMTimeline`);
   const response = await anyPromise([call1, call2]);
   if (response.type !== `Success`) {
     throw new Error(`Could not forceGC, reponse was ${response}`);
@@ -127,4 +126,4 @@ const getSemanticsId = async (self: FlutterDriver, elementBase64: string) =>
   (await self.executeElementCommand(`get_semantics_id`, elementBase64)).id;
 
 const enterText = async (self: FlutterDriver, text: string) =>
-  await executeSocketCommand(self.socket, { command: `enter_text`, text });
+  await self.socket!.executeSocketCommand({ command: `enter_text`, text });
