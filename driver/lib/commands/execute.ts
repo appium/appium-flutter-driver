@@ -3,7 +3,7 @@ import { longTap, scroll, scrollIntoView, scrollUntilVisible } from './execute/s
 import { waitFor, waitForAbsent } from './execute/wait';
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
 
-export const execute = async function (
+export const execute = async function(
   this: FlutterDriver,
   rawCommand: string,
   args: any[],

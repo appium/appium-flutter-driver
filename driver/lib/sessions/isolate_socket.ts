@@ -1,8 +1,8 @@
 import { Client } from 'rpc-websockets';
 
 export class IsolateSocket extends Client {
-    isolateId: number = 0;
-    async executeSocketCommand(cmd) {
+    public isolateId: number = 0;
+    public async executeSocketCommand(cmd) {
         // call an RPC method with parameters
         return this.call(`ext.flutter.driver`, {
             ...cmd,

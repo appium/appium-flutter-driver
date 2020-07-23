@@ -29,6 +29,9 @@ export const desiredCapConstraints: IDesiredCapConstraints = {
   avd: {
     isString: true,
   },
+  maxRetryCount: {
+    isNumber: true,
+  },
   platformName: {
     inclusionCaseInsensitive: [
       `iOS`,
@@ -37,13 +40,10 @@ export const desiredCapConstraints: IDesiredCapConstraints = {
     isString: true,
     presence: true,
   },
-  udid: {
-    isString: true,
-  },
   retryBackoffTime: {
     isNumber: true,
   },
-  maxRetryCount: {
-    isNumber: true,
+  udid: {
+    isString: true,
   },
 };

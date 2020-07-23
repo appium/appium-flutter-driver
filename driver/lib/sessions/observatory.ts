@@ -6,7 +6,10 @@ import { log } from '../logger';
 import { IsolateSocket } from './isolate_socket';
 
 // SOCKETS
-export const connectSocket = async (dartObservatoryURL: string,RETRY_BACKOFF: any=300000,MAX_RETRY_COUNT: any=10) => {
+export const connectSocket = async (
+  dartObservatoryURL: string,
+  RETRY_BACKOFF: any = 300000,
+  MAX_RETRY_COUNT: any = 10) => {
   let retryCount = 0;
   let connectedSocket: IsolateSocket | null = null;
   while (retryCount < MAX_RETRY_COUNT && !connectedSocket) {
@@ -82,7 +85,7 @@ export const connectSocket = async (dartObservatoryURL: string,RETRY_BACKOFF: an
         const isolate = await socket.call(`getIsolate`, {
           isolateId: `${socket.isolateId}`,
         }) as {
-          extensionRPCs: [string] | null
+          extensionRPCs: [string] | null,
         } | null;
         if (!isolate) {
           log.error(`Cannot get main Dart Isolate`);

@@ -5,7 +5,7 @@
     "appium",
     "flutter"
   ],
-  "version": "0.0.24",
+  "version": "0.0.26-dev",
   "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
   "license": "MIT",
   "repository": {
