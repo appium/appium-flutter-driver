@@ -1,5 +1,5 @@
-// @ts-ignore
 import { BaseDriver, errors } from 'appium-base-driver';
+import { IsolateSocket } from './sessions/isolate_socket';
 
 import { desiredCapConstraints, IDesiredCapConstraints } from './desired-caps';
 import { log as logger } from './logger';
@@ -16,7 +16,7 @@ import { getScreenshot } from './commands/screen';
 
 class FlutterDriver extends BaseDriver {
   public desiredCapConstraints: IDesiredCapConstraints;
-  public socket: any;
+  public socket: IsolateSocket | null = null;
   public locatorStrategies = [`key`, `css selector`];
   public proxydriver: any;
   public device: any;
@@ -59,7 +59,6 @@ class FlutterDriver extends BaseDriver {
 
     this.desiredCapConstraints = desiredCapConstraints;
 
-    this.socket = null;
     this.proxydriver = null;
     this.device = null;
   }
