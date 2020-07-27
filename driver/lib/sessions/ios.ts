@@ -1,9 +1,6 @@
 // @ts-ignore
 import XCUITestDriver from 'appium-xcuitest-driver';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-const execPromise = promisify(exec);
-
+import { spawn } from 'child_process';
 import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';
 
@@ -25,7 +22,7 @@ export const startIOSSession = async (caps) => {
   const observatoryWsUri = getObservatoryWsUri(iosdriver);
   return Promise.all([
     iosdriver,
-    connectSocket(observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
+    connectSocket(await observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
   ]);
 };
 
@@ -35,10 +32,18 @@ export const getObservatoryWsUri = async (proxydriver) => {
   if (realDevice) {
     // @todo check if `brew install usbmuxd` is needed
     log.info(`Running on iOS real device, doing "iproxy" now`);
-    const cmd = `iproxy ${urlObject.port} ${urlObject.port} ${udid}`;
-    log.debug(cmd);
-    await execPromise(cmd);
-    log.info(`"iproxy" successfully`);
+    const args = [urlObject.port, urlObject.port, udid];
+    log.debug(`iproxy ${urlObject.port} ${urlObject.port} ${udid}`);
+    const cmd = spawn(`iproxy`, args);
+    let stdout = ``;
+    cmd.stdout.on(`data`, (data) => {
+      stdout += data;
+      if (stdout.includes(`waiting for connection`)) {
+        log.info(`"iproxy" started successfully`);
+      } else {
+        log.debug(`"iproxy" not started successfully ${stdout}`);
+      }
+    });
   } else {
     log.info(`Running on iOS simulator, no "iproxy" needed`);
   }
