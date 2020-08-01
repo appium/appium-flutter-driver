@@ -1,23 +1,17 @@
 import { URL } from 'url';
 
-// @ts-ignore
-import { Client } from 'rpc-websockets';
-
 import { deserialize } from '../../../finder/nodejs/lib/deserializer';
 import { FlutterDriver } from '../driver';
 import { log } from '../logger';
-
-const MAX_RETRY_COUNT = 10;
-const RETRY_BACKOFF = 300000;
-
-class WebSocketDummy { }
-
-export type NullableWebSocketDummy = WebSocketDummy | null;
+import { IsolateSocket } from './isolate_socket';
 
 // SOCKETS
-export const connectSocket = async (dartObservatoryURL: string) => {
+export const connectSocket = async (
+  dartObservatoryURL: string,
+  RETRY_BACKOFF: any = 300000,
+  MAX_RETRY_COUNT: any = 10) => {
   let retryCount = 0;
-  let connectedSocket: NullableWebSocketDummy = null;
+  let connectedSocket: IsolateSocket | null = null;
   while (retryCount < MAX_RETRY_COUNT && !connectedSocket) {
     if (retryCount > 0) {
       log.info(
@@ -27,14 +21,14 @@ export const connectSocket = async (dartObservatoryURL: string) => {
     }
     log.info(`Attempt #` + (retryCount + 1));
 
-    const connectedPromise = new Promise<NullableWebSocketDummy>((resolve) => {
+    const connectedPromise = new Promise<IsolateSocket | null>((resolve) => {
       log.info(
         `Connecting to Dart Observatory: ${dartObservatoryURL}`,
       );
 
-      const socket = new Client(dartObservatoryURL);
+      const socket = new IsolateSocket(dartObservatoryURL);
 
-      const removeListenerAndResolve = (r: NullableWebSocketDummy) => {
+      const removeListenerAndResolve = (r: IsolateSocket | null) => {
         socket.removeListener(`error`, onErrorListener);
         socket.removeListener(`timeout`, onTimeoutListener);
         socket.removeListener(`open`, onOpenListener);
@@ -73,9 +67,14 @@ export const connectSocket = async (dartObservatoryURL: string) => {
           }
         };
         log.info(`Connected to ${dartObservatoryURL}`);
-        const vm = await socket.call(`getVM`);
+        const vm = await socket.call(`getVM`) as {
+          isolates: [{
+            name: string,
+            id: number,
+          }],
+        };
         log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
-        const mainIsolateData = vm.isolates.find((e: { name: string }) => e.name === `main`);
+        const mainIsolateData = vm.isolates.find((e) => e.name === `main`);
         if (!mainIsolateData) {
           log.error(`Cannot get Dart main isolate info`);
           removeListenerAndResolve(null);
@@ -85,7 +84,9 @@ export const connectSocket = async (dartObservatoryURL: string) => {
         // @todo check extension and do health check
         const isolate = await socket.call(`getIsolate`, {
           isolateId: `${socket.isolateId}`,
-        });
+        }) as {
+          extensionRPCs: [string] | null,
+        } | null;
         if (!isolate) {
           log.error(`Cannot get main Dart Isolate`);
           removeListenerAndResolve(null);
@@ -127,7 +128,7 @@ export const executeElementCommand = async function(
   const elementObject = elementBase64 ? deserialize(elementBase64) : {};
   const serializedCommand = { command, ...elementObject, ...extraArgs };
   log.debug(`>>> ${JSON.stringify(serializedCommand)}`);
-  const data = await executeSocketCommand(this.socket, serializedCommand);
+  const data = await this.socket!.executeSocketCommand(serializedCommand);
   log.debug(`<<< ${JSON.stringify(data)} | previous command ${command}`);
   if (data.isError) {
     throw new Error(
@@ -136,13 +137,6 @@ export const executeElementCommand = async function(
   }
   return data.response;
 };
-
-export const executeSocketCommand = async (socket, cmd) =>
-  // call an RPC method with parameters
-  socket.call(`ext.flutter.driver`, {
-    ...cmd,
-    isolateId: socket.isolateId,
-  });
 
 export const processLogToGetobservatory = (adbLogs: Array<{ message: string }>) => {
   const observatoryUriRegEx = new RegExp(

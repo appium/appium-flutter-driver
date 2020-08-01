@@ -1,0 +1,11 @@
+version: 1
+update_configs:
+  - package_manager: "javascript"
+    directory: "/driver"
+    update_schedule: "weekly"
+  - package_manager: "javascript"
+    directory: "/example/nodejs"
+    update_schedule: "weekly"
+  - package_manager: "javascript"
+    directory: "/finder/nodejs"
+    update_schedule: "weekly"

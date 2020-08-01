@@ -25,7 +25,7 @@ export const startAndroidSession = async (caps) => {
   const observatoryWsUri = getObservatoryWsUri(androiddriver);
   return Promise.all([
     androiddriver,
-    connectSocket(await observatoryWsUri),
+    connectSocket(await observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
   ]);
 
 };
