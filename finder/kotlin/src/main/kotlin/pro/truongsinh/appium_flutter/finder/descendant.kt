@@ -2,10 +2,11 @@
 @file:JvmMultifileClass
 package pro.truongsinh.appium_flutter.finder
 
-fun descendant(of: FlutterElement, matching: FlutterElement, matchRoot: Boolean = false): FlutterElement {
+fun descendant(of: FlutterElement, matching: FlutterElement, matchRoot: Boolean = false, firstMatchOnly: Boolean = false): FlutterElement {
   val m = mutableMapOf(
     "finderType" to "Descendant",
-    "matchRoot" to matchRoot
+    "matchRoot" to matchRoot,
+    "firstMatchOnly" to firstMatchOnly
   )
   of.getRawMap().forEach {
     m.put("of_${it.key}", it.value!!)

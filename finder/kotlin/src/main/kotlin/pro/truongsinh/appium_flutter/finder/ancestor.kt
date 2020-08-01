@@ -2,10 +2,11 @@
 @file:JvmMultifileClass
 package pro.truongsinh.appium_flutter.finder
 
-fun ancestor(of: FlutterElement, matching: FlutterElement, matchRoot: Boolean = false): FlutterElement {
+fun ancestor(of: FlutterElement, matching: FlutterElement, matchRoot: Boolean = false, firstMatchOnly: Boolean = false): FlutterElement {
   val m = mutableMapOf(
     "finderType" to "Ancestor",
-    "matchRoot" to matchRoot
+    "matchRoot" to matchRoot,
+    "firstMatchOnly" to firstMatchOnly
   )
   of.getRawMap().forEach {
     m.put("of_${it.key}", it.value!!)

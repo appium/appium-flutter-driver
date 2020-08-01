@@ -18,20 +18,22 @@ class FlutterElement(WebElement):
 
 
 class FlutterFinder(object):
-    def by_ancestor(self, serialized_finder, matching, match_root=False):
+    def by_ancestor(self, serialized_finder, matching, match_root=False, first_match_only=False):
         return self._by_ancestor_or_descendant(
             type_='Ancestor',
             serialized_finder=serialized_finder,
             matching=matching,
-            match_root=match_root
+            match_root=match_root,
+            first_match_only=first_match_only
         )
 
-    def by_descendant(self, serialized_finder, matching, match_root=False):
+    def by_descendant(self, serialized_finder, matching, match_root=False, first_match_only=False):
         return self._by_ancestor_or_descendant(
             type_='Descendant',
             serialized_finder=serialized_finder,
             matching=matching,
-            match_root=match_root
+            match_root=match_root,
+            first_match_only=first_match_only
         )
 
     def by_semantics_label(self, label, isRegExp=False):
@@ -74,8 +76,8 @@ class FlutterFinder(object):
     def _serialize(self, finder_dict):
         return base64.b64encode(_bytes(json.dumps(finder_dict))).decode('UTF-8')
 
-    def _by_ancestor_or_descendant(self, type_, serialized_finder, matching, match_root=False):
-        param = dict(finderType=type_, matchRoot=match_root)
+    def _by_ancestor_or_descendant(self, type_, serialized_finder, matching, match_root=False, first_match_only=False):
+        param = dict(finderType=type_, matchRoot=match_root, firstMatchOnly=first_match_only)
 
         try:
             finder = json.dumps(base64.b64decode(serialized_finder))
