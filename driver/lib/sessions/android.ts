@@ -1,5 +1,6 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import ADB from 'appium-adb';
 const execPromise = promisify(exec);
 
 // @ts-ignore
@@ -32,6 +33,8 @@ export const startAndroidSession = async (caps) => {
 
 export const getObservatoryWsUri = async (proxydriver) => {
   const urlObject = processLogToGetobservatory(proxydriver.adb.logcat.logs);
+  const a = ADB.getRunningAVD("Nexus_10_API_30");
+  log.info(a);
   log.debug(
     `${proxydriver.adb.executable.path} forward tcp:${
       urlObject.port
