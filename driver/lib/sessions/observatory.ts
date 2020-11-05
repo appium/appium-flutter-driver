@@ -97,9 +97,6 @@ export const connectSocket = async (
           removeListenerAndResolve(null);
           return;
         }
-        log.info(`---debug`)
-        log.info(JSON.stringify(isolate.extensionRPCs))
-        log.info(`---debug`)
         if (isolate.extensionRPCs.indexOf(`ext.flutter.driver`) < 0) {
           const msg = `"ext.flutter.driver" is not found in "extensionRPCs" ${JSON.stringify(isolate.extensionRPCs)}`;
           log.error(msg);
