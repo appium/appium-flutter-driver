@@ -8,7 +8,7 @@ import { IsolateSocket } from './isolate_socket';
 // SOCKETS
 export const connectSocket = async (
   dartObservatoryURL: string,
-  RETRY_BACKOFF: any = 300000,
+  RETRY_BACKOFF: any = 10000,
   MAX_RETRY_COUNT: any = 10) => {
   let retryCount = 0;
   let connectedSocket: IsolateSocket | null = null;
@@ -97,6 +97,9 @@ export const connectSocket = async (
           removeListenerAndResolve(null);
           return;
         }
+        log.info(`---debug`)
+        log.info(JSON.stringify(isolate.extensionRPCs))
+        log.info(`---debug`)
         if (isolate.extensionRPCs.indexOf(`ext.flutter.driver`) < 0) {
           const msg = `"ext.flutter.driver" is not found in "extensionRPCs" ${JSON.stringify(isolate.extensionRPCs)}`;
           log.error(msg);

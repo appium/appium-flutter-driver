@@ -33,8 +33,7 @@ export const startAndroidSession = async (caps) => {
 export const getObservatoryWsUri = async (proxydriver , caps) => {
   const urlObject = processLogToGetobservatory(proxydriver.adb.logcat.logs);
   
-  let {udid, emPort} = await androidHelpers.getDeviceInfoFromCaps(caps);
-  
+  let {udid} = await androidHelpers.getDeviceInfoFromCaps(caps);
   log.debug(
     `${proxydriver.adb.executable.path} -s ${udid} forward tcp:${
       urlObject.port
