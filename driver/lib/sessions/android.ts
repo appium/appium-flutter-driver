@@ -7,9 +7,6 @@ const execPromise = promisify(exec);
 import AndroidDriver from 'appium-uiautomator2-driver';
 import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';
-log.info(`---debug`);
-log.info(androidHelpers);
-log.info(`---debug`);
 const setupNewAndroidDriver = async (caps) => {
   const androidArgs = {
     javascriptEnabled: true,
