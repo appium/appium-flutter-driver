@@ -42,6 +42,7 @@ public class BaseDriver {
 
     driver = new IOSDriver<MobileElement>(service.getUrl(), capabilities);
     wait = new WebDriverWait(driver, 10);
+    waitForFirstFrame();
   }
 
   @After
@@ -53,4 +54,8 @@ public class BaseDriver {
       service.stop();
     }
   }
+
+  public void waitForFirstFrame(){
+        driver.executeScript("flutter:waitForFirstFrame");
+    }
 }
