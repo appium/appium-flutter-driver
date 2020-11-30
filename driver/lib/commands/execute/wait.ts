@@ -18,6 +18,7 @@ const waitForConstructor = (command: `waitForAbsent` | `waitFor`) => async (
   }
 
   await self.executeElementCommand(command, elementBase64, args);
+  return elementBase64;
 };
 
 export const waitForAbsent = waitForConstructor(`waitForAbsent`);

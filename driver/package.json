@@ -31,12 +31,13 @@
   },
   "devDependencies": {
     "tslint": "^5.18.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.9.7"
   },
   "dependencies": {
     "appium-base-driver": "^5.0.0",
     "appium-uiautomator2-driver": "^1.35.1",
     "appium-xcuitest-driver": "^3.17.0",
-    "rpc-websockets": "^5.1.1"
+    "rpc-websockets": "^5.1.1",
+    "appium-adb": "^8.8.0"
   }
 }
