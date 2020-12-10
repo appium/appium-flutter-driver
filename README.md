@@ -122,8 +122,8 @@ Legend:
 | - | - | - |
 | [ancestor](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/ancestor.html) | :ok: |  |
 | [bySemanticsLabel](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/bySemanticsLabel.html) | :ok: |  |
-| [byTooltip](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/byTooltip.html) | :ok: |  |
-| [byType](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/byType.html) | :ok: |  |
+| [byTooltip](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/byTooltip.html) | :ok: | ['byTooltip('Increment')'] |
+| [byType](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/byType.html) | :ok: | ['byType('TextField')'] |
 | [byValueKey](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/byValueKey.html) | :ok: | [`byValueKey('counter')`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L30) |
 | [descendant](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/descendant.html) | :ok: |  |
 | [pageBack](https://api.flutter.dev/flutter/flutter_driver/CommonFinders/pageBack.html) | :ok: | `pageBack()` |
