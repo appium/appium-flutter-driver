@@ -1,7 +1,7 @@
 import os
 
 from appium.webdriver import Remote
-from appium_flutter_finder import FlutterElement, FlutterFinder
+from appium_flutter_finder.flutter_finder import FlutterElement, FlutterFinder
 
 # Example
 
