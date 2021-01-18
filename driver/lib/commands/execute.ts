@@ -53,7 +53,7 @@ export const execute = async function(
     case `longTap`:
       return longTap(this, args[0], args[1]);
     case `waitForFirstFrame`:
-      return waitForCondition(this,{ conditionName : "FirstFrameRasterizedCondition"});
+      return waitForCondition(this, { conditionName : `FirstFrameRasterizedCondition`});
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -74,7 +74,7 @@ const getOffset = async (
 const waitForCondition = async (
   self: FlutterDriver,
   conditionName,
-) => await self.executeElementCommand(`waitForCondition`,``, conditionName);
+) => await self.executeElementCommand(`waitForCondition`, conditionName);
 
 const forceGC = async (self: FlutterDriver) => {
   const response = await self.socket!.call(`_collectAllGarbage`, {
@@ -133,5 +133,4 @@ const getSemanticsId = async (self: FlutterDriver, elementBase64: string) =>
   (await self.executeElementCommand(`get_semantics_id`, elementBase64)).id;
 
 const enterText = async (self: FlutterDriver, text: string) =>
-  await self.socket!.executeSocketCommand({ command: `enter_text`, text });             
-      
+  await self.socket!.executeSocketCommand({ command: `enter_text`, text });

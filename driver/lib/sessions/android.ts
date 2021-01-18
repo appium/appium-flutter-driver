@@ -1,6 +1,7 @@
+import { androidHelpers } from 'appium-android-driver';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { androidHelpers } from 'appium-android-driver';
+
 const execPromise = promisify(exec);
 
 // @ts-ignore
@@ -32,8 +33,7 @@ export const startAndroidSession = async (caps) => {
 
 export const getObservatoryWsUri = async (proxydriver , caps) => {
   const urlObject = processLogToGetobservatory(proxydriver.adb.logcat.logs);
-  
-  let {udid} = await androidHelpers.getDeviceInfoFromCaps(caps);
+  const {udid} = await androidHelpers.getDeviceInfoFromCaps(caps);
   log.debug(
     `${proxydriver.adb.executable.path} -s ${udid} forward tcp:${
       urlObject.port
