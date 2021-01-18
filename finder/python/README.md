@@ -38,7 +38,8 @@ twine upload dist/Appium-Flutter-Finder-X.X.tar.gz
 ```
 
 # Changelog
-
+- 0.1.3
+    - Allow `from appium_flutter_finder import FlutterElement, FlutterFinder`
 - 0.1.2
     - Fix b64encode error in Python 3
 - 0.1.1
