@@ -13,6 +13,15 @@
     "url": "git+https://github.com/truongsinh/appium-flutter-driver.git"
   },
   "main": "./build/driver/lib/driver.js",
+  "appium": {
+    "driverName": "flutter",
+    "automationName": "Flutter",
+    "platformNames": [
+      "iOS",
+      "Android"
+    ],
+    "mainClass": "FlutterDriver"
+  },
   "bin": {},
   "directories": {
     "lib": "lib"
