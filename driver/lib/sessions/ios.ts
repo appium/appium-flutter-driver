@@ -32,20 +32,15 @@ export const getObservatoryWsUri = async (proxydriver) => {
   if (realDevice) {
     // @todo check if `brew install usbmuxd` is needed
     log.info(`Running on iOS real device, doing "iproxy" now`);
-    const args = [urlObject.port, urlObject.port, udid];
-    log.debug(`iproxy ${urlObject.port} ${urlObject.port} ${udid}`);
+    const args = [`${urlObject.port}:${urlObject.port}`, "-u", udid];
+    log.debug(`Executing iproxy ${urlObject.port}:${urlObject.port} -u ${udid}`);
     const cmd = spawn(`iproxy`, args);
-    let stdout = ``;
-    cmd.stdout.on(`data`, (data) => {
-      stdout += data;
-      if (stdout.includes(`waiting for connection`)) {
-        log.info(`"iproxy" started successfully`);
-      } else {
-        log.debug(`"iproxy" not started successfully ${stdout}`);
-      }
+    cmd.stderr.on('data', (data) => {
+      log.error(`iproxy stderr: ${data}`);
     });
   } else {
     log.info(`Running on iOS simulator, no "iproxy" needed`);
   }
+
   return urlObject.toJSON();
 };
