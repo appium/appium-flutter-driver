@@ -21,10 +21,12 @@ public class FlutterTest extends BaseDriver {
     super.setUp();
     find = new FlutterFinder(driver);
   }
+
   @Test
   public void basicTest () throws InterruptedException {
+    String buttonFinderKey = "increment";
     MobileElement counterTextFinder = find.byValueKey("counter");
-    MobileElement buttonFinder = find.byValueKey("increment");
+    MobileElement buttonFinder = waitFor(buttonFinderKey);
 
     validateElementPosition(buttonFinder);
 
@@ -63,10 +65,10 @@ public class FlutterTest extends BaseDriver {
 
     assertEquals(counterTextFinder.getText(), "0");
 
-    buttonFinder.click();
+    clickToElement(buttonFinderKey);
     // @todo tap not working?
     // buttonFinder.tap(1, 100);
-    buttonFinder.click();
+    clickToElement(buttonFinderKey);
     assertEquals(counterTextFinder.getText(), "2");
 
     find.byTooltip("Increment").click();
@@ -113,6 +115,15 @@ public class FlutterTest extends BaseDriver {
       ;
  
     driver.quit();
+  }
+
+  private void clickToElement(String locator){
+    MobileElement el = waitFor(locator);
+    el.click();
+  }
+
+  private MobileElement waitFor(String locator){
+     return (MobileElement) driver.executeScript("flutter:waitFor", find.byValueKey(locator), 30);
   }
 
   private void validateElementPosition(MobileElement buttonFinder) {
