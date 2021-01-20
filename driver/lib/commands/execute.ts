@@ -74,7 +74,7 @@ const getOffset = async (
 const waitForCondition = async (
   self: FlutterDriver,
   conditionName,
-) => await self.executeElementCommand(`waitForCondition`, conditionName);
+) => await self.executeElementCommand(`waitForCondition`, ``, conditionName);
 
 const forceGC = async (self: FlutterDriver) => {
   const response = await self.socket!.call(`_collectAllGarbage`, {
