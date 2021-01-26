@@ -22,11 +22,11 @@ export const startIOSSession = async (caps) => {
   const observatoryWsUri = getObservatoryWsUri(iosdriver);
   return Promise.all([
     iosdriver,
-    connectSocket(await observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
+    connectSocket(observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
   ]);
 };
 
-export const getObservatoryWsUri = async (proxydriver) => {
+export const getObservatoryWsUri = (proxydriver) => {
   const urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
   const { udid, realDevice } = proxydriver.opts;
   if (realDevice) {
