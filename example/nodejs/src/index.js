@@ -16,7 +16,7 @@ const osSpecificOps =
     : process.env.APPIUM_OS === 'ios'
     ? {
         platformName: 'iOS',
-        platformVersion: '12.2',
+        platformVersion: '12.4',
         deviceName: 'iPhone X',
         noReset: true,
         app: __dirname + '/../../apps/ios-sim-debug.zip' // download local to run faster and save bandwith
