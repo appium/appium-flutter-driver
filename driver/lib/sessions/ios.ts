@@ -31,8 +31,8 @@ export const getObservatoryWsUri = async (proxydriver) => {
   const urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
   const { udid } = proxydriver.opts;
 
-  if (proxydriver.isRealDevice) {
-    log.info(`Running on iOS real device`);
+  if (proxydriver.isRealDevice()) {
+    log.info('Running on iOS real device');
     const localServer = net.createServer(async (localSocket) => {
       let remoteSocket;
       try {
@@ -43,7 +43,6 @@ export const getObservatoryWsUri = async (proxydriver) => {
       }
 
       const destroyCommChannel = () => {
-        log.info(`Unbinding socket to the port: ${urlObject.port}`);
         remoteSocket.unpipe(localSocket);
         localSocket.unpipe(remoteSocket);
       };
@@ -62,7 +61,7 @@ export const getObservatoryWsUri = async (proxydriver) => {
     localServer.listen(urlObject.port);
     log.info(`Port forwarding to: ${urlObject.port}`);
   } else {
-    log.info(`Running on iOS simulator, no "iproxy" needed`);
+    log.info('Running on iOS simulator');
   }
 
   return urlObject.toJSON();
