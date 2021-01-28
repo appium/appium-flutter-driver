@@ -43,7 +43,7 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "appium-base-driver": "^5.0.0",
+    "appium-base-driver": "^7.4.1",
     "appium-uiautomator2-driver": "^1.35.1",
     "appium-xcuitest-driver": "^3.17.0",
     "rpc-websockets": "^5.1.1",
