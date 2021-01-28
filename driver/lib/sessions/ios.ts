@@ -28,13 +28,7 @@ export const startIOSSession = async (caps) => {
 };
 
 export const getObservatoryWsUri = async (proxydriver) => {
-  let urlObject;
-  try {
-    urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
-  } catch (err) {
-    log.errorAndThrow(`Failed to get the device log: ${err.message}`);
-  };
-
+  const urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
   const { udid } = proxydriver.opts;
 
   if (proxydriver.isRealDevice()) {
