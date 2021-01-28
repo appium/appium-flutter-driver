@@ -1,9 +1,9 @@
 // @ts-ignore
-import XCUITestDriver from 'appium-xcuitest-driver';
 import { utilities } from 'appium-ios-device';
+import XCUITestDriver from 'appium-xcuitest-driver';
+import net from 'net';
 import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';
-import net from 'net';
 
 const setupNewIOSDriver = async (caps) => {
   const iosArgs = {
@@ -32,7 +32,7 @@ export const getObservatoryWsUri = async (proxydriver) => {
   const { udid } = proxydriver.opts;
 
   if (proxydriver.isRealDevice()) {
-    log.info('Running on iOS real device');
+    log.info(`Running on iOS real device`);
     const localServer = net.createServer(async (localSocket) => {
       let remoteSocket;
       try {
@@ -46,12 +46,12 @@ export const getObservatoryWsUri = async (proxydriver) => {
         remoteSocket.unpipe(localSocket);
         localSocket.unpipe(remoteSocket);
       };
-      remoteSocket.once('close', () => {
+      remoteSocket.once(`close`, () => {
         destroyCommChannel();
         localSocket.destroy();
       });
-      localSocket.once('end', destroyCommChannel);
-      localSocket.once('close', () => {
+      localSocket.once(`end`, destroyCommChannel);
+      localSocket.once(`close`, () => {
         destroyCommChannel();
         remoteSocket.destroy();
       });
@@ -61,7 +61,7 @@ export const getObservatoryWsUri = async (proxydriver) => {
     localServer.listen(urlObject.port);
     log.info(`Port forwarding to: ${urlObject.port}`);
   } else {
-    log.info('Running on iOS simulator');
+    log.info(`Running on iOS simulator`);
   }
 
   return urlObject.toJSON();
