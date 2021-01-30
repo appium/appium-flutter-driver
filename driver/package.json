@@ -48,6 +48,9 @@
     "appium-xcuitest-driver": "^3.17.0",
     "rpc-websockets": "^5.1.1",
     "appium-adb": "^8.8.0",
-    "appium-ios-device": "^1.7.1"
+    "appium-ios-device": "^1.7.1",
+    "appium-support": "^2.47.1",
+    "portscanner": "2.2.0",
+    "asyncbox": "^2.3.1"
   }
 }

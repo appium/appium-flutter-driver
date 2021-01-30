@@ -1,9 +1,15 @@
 // @ts-ignore
 import { utilities } from 'appium-ios-device';
+import { timing } from 'appium-support';
+import { checkPortStatus } from 'portscanner';
+import { waitForCondition } from 'asyncbox';
 import XCUITestDriver from 'appium-xcuitest-driver';
 import net from 'net';
 import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';
+
+const LOCALHOST = '127.0.0.1';
+const PORT_CLOSE_TIMEOUT = 15 * 1000; // 15 seconds
 
 const setupNewIOSDriver = async (caps) => {
   const iosArgs = {
@@ -27,12 +33,45 @@ export const startIOSSession = async (caps) => {
   ]);
 };
 
+const waitForPortIsAvailable = async (port) => {
+  let isPortBusy = (await checkPortStatus(port, LOCALHOST)) === 'open';
+  if (isPortBusy) {
+    log.warn(`Port #${port} is busy. Did you quit the previous driver session(s) properly?`);
+    const timer = new timing.Timer().start();
+    try {
+      await waitForCondition(async () => {
+        try {
+          if ((await checkPortStatus(port, LOCALHOST)) !== 'open') {
+            log.info(`Port #${port} has been successfully released after ` +
+              `${timer.getDuration().asMilliSeconds.toFixed(0)}ms`);
+            isPortBusy = false;
+            return true;
+          }
+        } catch (ign) {}
+        return false;
+      }, {
+        waitMs: PORT_CLOSE_TIMEOUT,
+        intervalMs: 300,
+      });
+    } catch (ign) {
+      log.warn(`Did not know how to release port #${port} in ` +
+        `${timer.getDuration().asMilliSeconds.toFixed(0)}ms`);
+    }
+  }
+
+  if (isPortBusy) {
+    throw new Error(`The port :${port} is occupied by an other process. ` +
+      `You can either quit that process or select another free port.`);
+  }
+}
+
 export const getObservatoryWsUri = async (proxydriver) => {
   const urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
   const { udid } = proxydriver.opts;
 
   if (proxydriver.isRealDevice()) {
     log.info(`Running on iOS real device`);
+    await waitForPortIsAvailable(urlObject.port);
     const localServer = net.createServer(async (localSocket) => {
       let remoteSocket;
       try {
