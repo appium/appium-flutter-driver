@@ -110,7 +110,7 @@ export const getObservatoryWsUri = async (proxydriver) => {
   try {
     await listeningPromise;
   } catch (e) {
-    log.errorAndThrow(`Failed to listen the port ${urlObject.port}`);
+    log.errorAndThrow(`Failed to listen the port ${urlObject.port}: ${e}`);
   }
 
   log.info(`Port forwarding to: ${urlObject.port}`);
