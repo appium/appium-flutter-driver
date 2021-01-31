@@ -7,6 +7,7 @@ import XCUITestDriver from 'appium-xcuitest-driver';
 import net from 'net';
 import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';
+import B from 'bluebird';
 
 const LOCALHOST = '127.0.0.1';
 const PORT_CLOSE_TIMEOUT = 15 * 1000; // 15 seconds
@@ -69,39 +70,53 @@ export const getObservatoryWsUri = async (proxydriver) => {
   const urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
   const { udid } = proxydriver.opts;
 
-  if (proxydriver.isRealDevice()) {
-    log.info(`Running on iOS real device`);
-    await waitForPortIsAvailable(urlObject.port);
-    const localServer = net.createServer(async (localSocket) => {
-      let remoteSocket;
-      try {
-        remoteSocket = await utilities.connectPort(udid, urlObject.port);
-      } catch (e) {
-        localSocket.destroy();
-        return;
-      }
-
-      const destroyCommChannel = () => {
-        remoteSocket.unpipe(localSocket);
-        localSocket.unpipe(remoteSocket);
-      };
-      remoteSocket.once(`close`, () => {
-        destroyCommChannel();
-        localSocket.destroy();
-      });
-      localSocket.once(`end`, destroyCommChannel);
-      localSocket.once(`close`, () => {
-        destroyCommChannel();
-        remoteSocket.destroy();
-      });
-      localSocket.pipe(remoteSocket);
-      remoteSocket.pipe(localSocket);
-    });
-    localServer.listen(urlObject.port);
-    log.info(`Port forwarding to: ${urlObject.port}`);
-  } else {
+  if (!proxydriver.isRealDevice()) {
     log.info(`Running on iOS simulator`);
+    return urlObject.toJSON();
   }
 
+  log.info(`Running on iOS real device`);
+  await waitForPortIsAvailable(urlObject.port);
+  const localServer = net.createServer(async (localSocket) => {
+    let remoteSocket;
+    try {
+      remoteSocket = await utilities.connectPort(udid, urlObject.port);
+    } catch (e) {
+      localSocket.destroy();
+      return;
+    }
+
+    const destroyCommChannel = () => {
+      remoteSocket.unpipe(localSocket);
+      localSocket.unpipe(remoteSocket);
+    };
+    remoteSocket.once(`close`, () => {
+      destroyCommChannel();
+      localSocket.destroy();
+    });
+    localSocket.once(`end`, destroyCommChannel);
+    localSocket.once(`close`, () => {
+      destroyCommChannel();
+      remoteSocket.destroy();
+    });
+    localSocket.pipe(remoteSocket);
+    remoteSocket.pipe(localSocket);
+  });
+  const listeningPromise = new B((resolve, reject) => {
+    localServer.once('listening', resolve);
+    localServer.once('error', reject);
+  });
+  localServer.listen(urlObject.port);
+  try {
+    await listeningPromise;
+  } catch (e) {
+    log.errorAndThrow(`Failed to listen the port ${urlObject.port}`);
+  }
+
+  log.info(`Port forwarding to: ${urlObject.port}`);
+
+  process.on('beforeExit', () => {
+    localServer.close();
+  });
   return urlObject.toJSON();
 };
