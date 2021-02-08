@@ -72,8 +72,9 @@ const shouldUseIproxy = (caps) => false;
 const connectPort = async (udid, port, useIProxy) => {
   if (!useIProxy) {
     return await utilities.connectPort(udid, port);
-
   }
+
+  // TODO: Do iproxy stuff.
 
 }
 
