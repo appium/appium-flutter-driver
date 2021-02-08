@@ -27,6 +27,7 @@ const setupNewIOSDriver = async (caps) => {
 export const startIOSSession = async (caps) => {
   log.info(`Starting an IOS proxy session`);
   const iosdriver = await setupNewIOSDriver(caps);
+  // TODO: Allow to switch old format and the new one
   const useIProxy = shouldUseIproxy(caps);
   const observatoryWsUri = await getObservatoryWsUri(iosdriver, useIProxy);
   return Promise.all([
