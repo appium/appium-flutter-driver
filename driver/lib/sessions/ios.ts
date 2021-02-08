@@ -27,7 +27,8 @@ const setupNewIOSDriver = async (caps) => {
 export const startIOSSession = async (caps) => {
   log.info(`Starting an IOS proxy session`);
   const iosdriver = await setupNewIOSDriver(caps);
-  const observatoryWsUri = await getObservatoryWsUri(iosdriver);
+  const useIProxy = shouldUseIproxy(caps);
+  const observatoryWsUri = await getObservatoryWsUri(iosdriver, useIProxy);
   return Promise.all([
     iosdriver,
     connectSocket(observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
@@ -66,7 +67,17 @@ const waitForPortIsAvailable = async (port) => {
   }
 }
 
-export const getObservatoryWsUri = async (proxydriver) => {
+const shouldUseIproxy = (caps) => false;
+
+const connectPort = async (udid, port, useIProxy) => {
+  if (!useIProxy) {
+    return await utilities.connectPort(udid, port);
+
+  }
+
+}
+
+export const getObservatoryWsUri = async (proxydriver, useIProxy) => {
   const urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
   const { udid } = proxydriver.opts;
 
@@ -80,7 +91,7 @@ export const getObservatoryWsUri = async (proxydriver) => {
   const localServer = net.createServer(async (localSocket) => {
     let remoteSocket;
     try {
-      remoteSocket = await utilities.connectPort(udid, urlObject.port);
+      remoteSocket = await connectPort(udid, urlObject.port, useIProxy);
     } catch (e) {
       localSocket.destroy();
       return;
