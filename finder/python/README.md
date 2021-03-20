@@ -26,6 +26,9 @@ download and unarchive the source tarball (Appium-Flutter-Finder-X.X.tar.gz).
     python setup.py install
     ```
 
+# How to use
+Examples can be found out [here](../../example/python/example.py).
+
 # Release
 
 ```
