@@ -19,7 +19,7 @@ const setupNewAndroidDriver = async (...args) => {
 };
 
 export const startAndroidSession = async (caps, ...args) => {
-  log.info(`Starting an Android proxy session: ${JSON.stringify(args)}`);
+  log.info(`Starting an Android proxy session`);
   const androiddriver = await setupNewAndroidDriver(...args);
   const observatoryWsUri = getObservatoryWsUri(androiddriver , caps);
   return Promise.all([
