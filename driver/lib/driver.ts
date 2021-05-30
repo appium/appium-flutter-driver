@@ -1,7 +1,7 @@
 import { BaseDriver, errors } from 'appium-base-driver';
 import { IsolateSocket } from './sessions/isolate_socket';
 
-import { desiredCapConstraints, IDesiredCapConstraints } from './desired-caps';
+import { IDesiredCapConstraints } from './desired-caps';
 import { log as logger } from './logger';
 
 import { executeElementCommand } from './sessions/observatory';
@@ -15,7 +15,6 @@ import { click, longTap, performTouch, tap, tapEl } from './commands/gesture';
 import { getScreenshot } from './commands/screen';
 
 class FlutterDriver extends BaseDriver {
-  public desiredCapConstraints: IDesiredCapConstraints;
   public socket: IsolateSocket | null = null;
   public locatorStrategies = [`key`, `css selector`];
   public proxydriver: any;
@@ -56,16 +55,13 @@ class FlutterDriver extends BaseDriver {
 
   constructor(opts, shouldValidateCaps: boolean) {
     super(opts, shouldValidateCaps);
-
-    this.desiredCapConstraints = desiredCapConstraints;
-
     this.proxydriver = null;
     this.device = null;
   }
 
-  public async createSession(caps: IDesiredCapConstraints) {
-    const [sessionId] = await super.createSession(caps);
-    return createSession.bind(this)(caps, sessionId);
+  public async createSession(...args) {
+    const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)));
+    return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args)));
   }
 
   public async deleteSession() {
@@ -88,13 +84,6 @@ class FlutterDriver extends BaseDriver {
     const res = super.validateDesiredCaps(caps);
     if (!res) {
       return res;
-    }
-    // @ts-ignore
-    if (caps.deviceName.toLowerCase() === `android`) {
-      if (!caps.avd) {
-        const msg = `The desired capabilities must include avd`;
-        logger.errorAndThrow(msg);
-      }
     }
 
     // finally, return true since the superclass check passed, as did this

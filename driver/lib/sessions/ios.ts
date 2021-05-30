@@ -12,21 +12,21 @@ import B from 'bluebird';
 const LOCALHOST = '127.0.0.1';
 const PORT_CLOSE_TIMEOUT = 15 * 1000; // 15 seconds
 
-const setupNewIOSDriver = async (caps) => {
+const setupNewIOSDriver = async (...args) => {
   const iosArgs = {
     javascriptEnabled: true,
   };
 
   const iosdriver = new XCUITestDriver(iosArgs);
-  const capsCopy = Object.assign({}, caps, { newCommandTimeout: 0 });
-  await iosdriver.createSession(capsCopy);
+  // const capsCopy = Object.assign({}, caps, { newCommandTimeout: 0 });
+  await iosdriver.createSession(...args);
 
   return iosdriver;
 };
 
-export const startIOSSession = async (caps) => {
+export const startIOSSession = async (caps, ...args) => {
   log.info(`Starting an IOS proxy session`);
-  const iosdriver = await setupNewIOSDriver(caps);
+  const iosdriver = await setupNewIOSDriver(...args);
   const observatoryWsUri = await getObservatoryWsUri(iosdriver);
   return Promise.all([
     iosdriver,
