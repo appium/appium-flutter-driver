@@ -18,7 +18,6 @@ const setupNewIOSDriver = async (...args) => {
   };
 
   const iosdriver = new XCUITestDriver(iosArgs);
-  // const capsCopy = Object.assign({}, caps, { newCommandTimeout: 0 });
   await iosdriver.createSession(...args);
 
   return iosdriver;

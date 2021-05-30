@@ -13,7 +13,6 @@ const setupNewAndroidDriver = async (...args) => {
     javascriptEnabled: true,
   };
   const androiddriver = new AndroidDriver(androidArgs);
-  // const capsCopy = Object.assign({}, caps, { "appium:newCommandTimeout": 0 });
   await androiddriver.createSession(...args);
 
   return androiddriver;
