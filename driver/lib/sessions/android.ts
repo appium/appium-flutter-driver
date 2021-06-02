@@ -8,21 +8,19 @@ const execPromise = promisify(exec);
 import AndroidDriver from 'appium-uiautomator2-driver';
 import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';
-const setupNewAndroidDriver = async (caps) => {
+const setupNewAndroidDriver = async (...args) => {
   const androidArgs = {
     javascriptEnabled: true,
   };
   const androiddriver = new AndroidDriver(androidArgs);
-  const capsCopy = Object.assign({}, caps, { newCommandTimeout: 0 });
-
-  await androiddriver.createSession(capsCopy);
+  await androiddriver.createSession(...args);
 
   return androiddriver;
 };
 
-export const startAndroidSession = async (caps) => {
+export const startAndroidSession = async (caps, ...args) => {
   log.info(`Starting an Android proxy session`);
-  const androiddriver = await setupNewAndroidDriver(caps);
+  const androiddriver = await setupNewAndroidDriver(...args);
   const observatoryWsUri = getObservatoryWsUri(androiddriver , caps);
   return Promise.all([
     androiddriver,
