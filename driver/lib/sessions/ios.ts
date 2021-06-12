@@ -1,15 +1,15 @@
 // @ts-ignore
 import { utilities } from 'appium-ios-device';
 import { timing } from 'appium-support';
-import { checkPortStatus } from 'portscanner';
-import { waitForCondition } from 'asyncbox';
 import XCUITestDriver from 'appium-xcuitest-driver';
+import { waitForCondition } from 'asyncbox';
+import B from 'bluebird';
 import net from 'net';
+import { checkPortStatus } from 'portscanner';
 import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';
-import B from 'bluebird';
 
-const LOCALHOST = '127.0.0.1';
+const LOCALHOST = `127.0.0.1`;
 const PORT_CLOSE_TIMEOUT = 15 * 1000; // 15 seconds
 
 const setupNewIOSDriver = async (...args) => {
@@ -34,14 +34,14 @@ export const startIOSSession = async (caps, ...args) => {
 };
 
 const waitForPortIsAvailable = async (port) => {
-  let isPortBusy = (await checkPortStatus(port, LOCALHOST)) === 'open';
+  let isPortBusy = (await checkPortStatus(port, LOCALHOST)) === `open`;
   if (isPortBusy) {
     log.warn(`Port #${port} is busy. Did you quit the previous driver session(s) properly?`);
     const timer = new timing.Timer().start();
     try {
       await waitForCondition(async () => {
         try {
-          if ((await checkPortStatus(port, LOCALHOST)) !== 'open') {
+          if ((await checkPortStatus(port, LOCALHOST)) !== `open`) {
             log.info(`Port #${port} has been successfully released after ` +
               `${timer.getDuration().asMilliSeconds.toFixed(0)}ms`);
             isPortBusy = false;
@@ -50,8 +50,8 @@ const waitForPortIsAvailable = async (port) => {
         } catch (ign) {}
         return false;
       }, {
-        waitMs: PORT_CLOSE_TIMEOUT,
         intervalMs: 300,
+        waitMs: PORT_CLOSE_TIMEOUT,
       });
     } catch (ign) {
       log.warn(`Did not know how to release port #${port} in ` +
@@ -102,8 +102,8 @@ export const getObservatoryWsUri = async (proxydriver) => {
     remoteSocket.pipe(localSocket);
   });
   const listeningPromise = new B((resolve, reject) => {
-    localServer.once('listening', resolve);
-    localServer.once('error', reject);
+    localServer.once(`listening`, resolve);
+    localServer.once(`error`, reject);
   });
   localServer.listen(urlObject.port);
   try {
@@ -114,7 +114,7 @@ export const getObservatoryWsUri = async (proxydriver) => {
 
   log.info(`Port forwarding to: ${urlObject.port}`);
 
-  process.on('beforeExit', () => {
+  process.on(`beforeExit`, () => {
     localServer.close();
   });
   return urlObject.toJSON();
