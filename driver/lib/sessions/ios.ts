@@ -47,7 +47,9 @@ const waitForPortIsAvailable = async (port) => {
             isPortBusy = false;
             return true;
           }
-        } catch (ign) {}
+        } catch (ign) {
+          log.console.warn(``);
+        }
         return false;
       }, {
         intervalMs: 300,
@@ -63,7 +65,7 @@ const waitForPortIsAvailable = async (port) => {
     throw new Error(`The port :${port} is occupied by an other process. ` +
       `You can either quit that process or select another free port.`);
   }
-}
+};
 
 export const getObservatoryWsUri = async (proxydriver) => {
   const urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
