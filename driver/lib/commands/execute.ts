@@ -50,6 +50,8 @@ export const execute = async function(
       return scrollIntoView(this, args[0], args[1]);
     case `enterText`:
       return enterText(this, args[0]);
+    case `requestData`:
+      return requestData(this, args[0]);
     case `longTap`:
       return longTap(this, args[0], args[1]);
     case `waitForFirstFrame`:
@@ -134,3 +136,6 @@ const getSemanticsId = async (self: FlutterDriver, elementBase64: string) =>
 
 const enterText = async (self: FlutterDriver, text: string) =>
   await self.socket!.executeSocketCommand({ command: `enter_text`, text });
+
+const requestData = async (self: FlutterDriver, message: string) => 
+  await self.socket!.executeSocketCommand({ command: `request_data`, message });
