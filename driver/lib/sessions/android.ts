@@ -21,7 +21,13 @@ const setupNewAndroidDriver = async (...args) => {
 export const startAndroidSession = async (caps, ...args) => {
   log.info(`Starting an Android proxy session`);
   const androiddriver = await setupNewAndroidDriver(...args);
-  const observatoryWsUri = getObservatoryWsUri(androiddriver , caps);
+  let observatoryWsUri;
+  try {
+    observatoryWsUri = await getObservatoryWsUri(androiddriver , caps);
+  } catch (e) {
+    await androiddriver.deleteSession();
+    throw e;
+  };
   return Promise.all([
     androiddriver,
     connectSocket(await observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
