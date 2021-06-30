@@ -26,7 +26,13 @@ const setupNewIOSDriver = async (...args) => {
 export const startIOSSession = async (caps, ...args) => {
   log.info(`Starting an IOS proxy session`);
   const iosdriver = await setupNewIOSDriver(...args);
-  const observatoryWsUri = await getObservatoryWsUri(iosdriver);
+  let observatoryWsUri;
+  try {
+    observatoryWsUri = await getObservatoryWsUri(iosdriver);
+  } catch (e) {
+    await iosdriver.deleteSession();
+    throw e;
+  };
   return Promise.all([
     iosdriver,
     connectSocket(observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
