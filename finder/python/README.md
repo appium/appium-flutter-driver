@@ -41,6 +41,9 @@ twine upload dist/Appium-Flutter-Finder-X.X.tar.gz
 ```
 
 # Changelog
+- 0.1.4
+    - Remove whitespaces from the decoded JSON
+    - Fix `by_ancestor` and `by_descendant`
 - 0.1.3
     - Allow `from appium_flutter_finder import FlutterElement, FlutterFinder`
 - 0.1.2
