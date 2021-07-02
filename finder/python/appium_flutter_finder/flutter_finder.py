@@ -3,6 +3,7 @@ import json
 
 from appium.webdriver.webelement import WebElement
 
+
 def _bytes(value):
     try:
         return bytes(value, 'UTF-8')  # Python 3
@@ -72,20 +73,23 @@ class FlutterFinder(object):
         ))
 
     def _serialize(self, finder_dict):
-        return base64.b64encode(_bytes(json.dumps(finder_dict))).decode('UTF-8')
+        return base64.b64encode(_bytes(
+            json.dumps(finder_dict, separators=(',', ':')))).decode('UTF-8')
 
     def _by_ancestor_or_descendant(self, type_, serialized_finder, matching, match_root=False):
         param = dict(finderType=type_, matchRoot=match_root)
 
         try:
-            finder = json.dumps(base64.b64decode(serialized_finder))
+            finder = json.loads(base64.b64decode(
+                serialized_finder).decode('utf-8'))
         except:
             finder = dict()
+
         for finder_key, finder_value in finder.items():
             param['of_{}'.format(finder_key)] = finder_value
 
         try:
-            matching = json.dumps(base64.b64decode(matching))
+            matching = json.loads(base64.b64decode(matching).decode('utf-8'))
         except:
             matching = dict()
         for matching_key, matching_value in matching.items():
