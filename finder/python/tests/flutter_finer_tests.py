@@ -14,10 +14,22 @@ class FlutterFinderTest(unittest.TestCase):
                 finder.FlutterFinder().page_back(),
                 finder.FlutterFinder().page_back()
             )
-        ) == \
-            'eyJmaW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJtYXRjaFJvb3QiOmZhbHNlLCJvZl9maW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJvZl9tYXRjaFJvb3QiOmZhbHNlLCJvZl9vZl9maW5kZXJUeXBlIjoiUGFnZUJhY2siLCJvZl9tYXRjaGluZ19maW5kZXJUeXBlIjoiUGFnZUJhY2siLCJtYXRjaGluZ19maW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJtYXRjaGluZ19tYXRjaFJvb3QiOmZhbHNlLCJtYXRjaGluZ19vZl9maW5kZXJUeXBlIjoiUGFnZUJhY2siLCJtYXRjaGluZ19tYXRjaGluZ19maW5kZXJUeXBlIjoiUGFnZUJhY2sifQ=='
+        ) == (
+            'eyJmaW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJtYXRjaFJvb3QiOmZhbHNlLCJvZiI6IntcImZpbmRlclR5cGVcIjogXCJBbmNlc3RvclwiLCBcIm1hdGNoUm9vdFwiOiBmYWxzZSwgXCJvZlwiOiBcIntcXFwiZmluZGVyVHlwZVxcXCI6IFxcXCJQYWdlQmFja1xc'
+            'XCJ9XCIsIFwibWF0Y2hpbmdcIjogXCJ7XFxcImZpbmRlclR5cGVcXFwiOiBcXFwiUGFnZUJhY2tcXFwifVwifSIsIm1hdGNoaW5nIjoie1wiZmluZGVyVHlwZVwiOiBcIkFuY2VzdG9yXCIsIFwibWF0Y2hSb290XCI6IGZhbHNlLCBcIm9mXCI6IFwie1xcXCJm'
+            'aW5kZXJUeXBlXFxcIjogXFxcIlBhZ2VCYWNrXFxcIn1cIiwgXCJtYXRjaGluZ1wiOiBcIntcXFwiZmluZGVyVHlwZVxcXCI6IFxcXCJQYWdlQmFja1xcXCJ9XCJ9In0=')
 
     def test_by_descendant(self):
+        print(finder.FlutterFinder().by_descendant(
+            finder.FlutterFinder().by_descendant(
+                finder.FlutterFinder().page_back(),
+                finder.FlutterFinder().page_back()
+            ),
+            finder.FlutterFinder().by_descendant(
+                finder.FlutterFinder().page_back(),
+                finder.FlutterFinder().page_back()
+            )
+        ))
         assert finder.FlutterFinder().by_descendant(
             finder.FlutterFinder().by_descendant(
                 finder.FlutterFinder().page_back(),
@@ -27,8 +39,10 @@ class FlutterFinderTest(unittest.TestCase):
                 finder.FlutterFinder().page_back(),
                 finder.FlutterFinder().page_back()
             )
-        ) == \
-            'eyJmaW5kZXJUeXBlIjoiRGVzY2VuZGFudCIsIm1hdGNoUm9vdCI6ZmFsc2UsIm9mX2ZpbmRlclR5cGUiOiJEZXNjZW5kYW50Iiwib2ZfbWF0Y2hSb290IjpmYWxzZSwib2Zfb2ZfZmluZGVyVHlwZSI6IlBhZ2VCYWNrIiwib2ZfbWF0Y2hpbmdfZmluZGVyVHlwZSI6IlBhZ2VCYWNrIiwibWF0Y2hpbmdfZmluZGVyVHlwZSI6IkRlc2NlbmRhbnQiLCJtYXRjaGluZ19tYXRjaFJvb3QiOmZhbHNlLCJtYXRjaGluZ19vZl9maW5kZXJUeXBlIjoiUGFnZUJhY2siLCJtYXRjaGluZ19tYXRjaGluZ19maW5kZXJUeXBlIjoiUGFnZUJhY2sifQ=='
+        ) == (
+            'eyJmaW5kZXJUeXBlIjoiRGVzY2VuZGFudCIsIm1hdGNoUm9vdCI6ZmFsc2UsIm9mIjoie1wiZmluZGVyVHlwZVwiOiBcIkRlc2NlbmRhbnRcIiwgXCJtYXRjaFJvb3RcIjogZmFsc2UsIFwib2ZcIjogXCJ7XFxcImZpbmRlclR5cGVcXFwiOiBcXFwiUGFnZUJhY'
+            '2tcXFwifVwiLCBcIm1hdGNoaW5nXCI6IFwie1xcXCJmaW5kZXJUeXBlXFxcIjogXFxcIlBhZ2VCYWNrXFxcIn1cIn0iLCJtYXRjaGluZyI6IntcImZpbmRlclR5cGVcIjogXCJEZXNjZW5kYW50XCIsIFwibWF0Y2hSb290XCI6IGZhbHNlLCBcIm9mXCI6IFwie1'
+            'xcXCJmaW5kZXJUeXBlXFxcIjogXFxcIlBhZ2VCYWNrXFxcIn1cIiwgXCJtYXRjaGluZ1wiOiBcIntcXFwiZmluZGVyVHlwZVxcXCI6IFxcXCJQYWdlQmFja1xcXCJ9XCJ9In0=')
 
     def test_by_semantics_label(self):
         assert finder.FlutterFinder().by_semantics_label('simple') == \
