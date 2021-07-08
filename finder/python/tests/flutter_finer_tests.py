@@ -20,16 +20,6 @@ class FlutterFinderTest(unittest.TestCase):
             'aW5kZXJUeXBlXFxcIjogXFxcIlBhZ2VCYWNrXFxcIn1cIiwgXCJtYXRjaGluZ1wiOiBcIntcXFwiZmluZGVyVHlwZVxcXCI6IFxcXCJQYWdlQmFja1xcXCJ9XCJ9In0=')
 
     def test_by_descendant(self):
-        print(finder.FlutterFinder().by_descendant(
-            finder.FlutterFinder().by_descendant(
-                finder.FlutterFinder().page_back(),
-                finder.FlutterFinder().page_back()
-            ),
-            finder.FlutterFinder().by_descendant(
-                finder.FlutterFinder().page_back(),
-                finder.FlutterFinder().page_back()
-            )
-        ))
         assert finder.FlutterFinder().by_descendant(
             finder.FlutterFinder().by_descendant(
                 finder.FlutterFinder().page_back(),
