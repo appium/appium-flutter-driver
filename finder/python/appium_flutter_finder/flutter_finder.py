@@ -88,7 +88,7 @@ class FlutterFinder(object):
         param.setdefault('of', {})
         for finder_key, finder_value in finder.items():
             param['of'].setdefault(finder_key, finder_value)
-        param['of'] = json.dumps(param['of'])
+        param['of'] = json.dumps(param['of'], separators=(',', ':'))
 
         try:
             matching = json.loads(base64.b64decode(matching).decode('utf-8'))
@@ -97,6 +97,6 @@ class FlutterFinder(object):
         param.setdefault('matching', {})
         for matching_key, matching_value in matching.items():
             param['matching'].setdefault(matching_key, matching_value)
-        param['matching'] = json.dumps(param['matching'])
+        param['matching'] = json.dumps(param['matching'], separators=(',', ':'))
 
         return self._serialize(param)
