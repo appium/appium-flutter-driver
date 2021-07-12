@@ -44,6 +44,9 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Changelog
 
+- 0.2.1
+    - Fix `by_ancestor` and `by_descendant`
+        - https://github.com/truongsinh/appium-flutter-driver/pull/165#issuecomment-877928553
 - 0.2.0
     - Bump ruby_lib_core version to 4+
 
