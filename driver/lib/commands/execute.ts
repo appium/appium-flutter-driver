@@ -56,6 +56,8 @@ export const execute = async function(
       return longTap(this, args[0], args[1]);
     case `waitForFirstFrame`:
       return waitForCondition(this, { conditionName : `FirstFrameRasterizedCondition`});
+    case `setFrameSync`:
+      return setFrameSync(this, args[0], args[1]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -139,3 +141,6 @@ const enterText = async (self: FlutterDriver, text: string) =>
 
 const requestData = async (self: FlutterDriver, message: string) => 
   await self.socket!.executeSocketCommand({ command: `request_data`, message });
+
+const setFrameSync = async (self,bool,durationMilliseconds) => 
+  await self.socket!.executeSocketCommand({ command: `set_frame_sync`, enabled:bool, timeout: durationMilliseconds * 1000 });
