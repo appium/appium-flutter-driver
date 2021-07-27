@@ -41,6 +41,9 @@ twine upload dist/Appium-Flutter-Finder-X.X.tar.gz
 ```
 
 # Changelog
+- 0.1.5
+    - Fix `by_ancestor` and `by_descendant`
+        - https://github.com/truongsinh/appium-flutter-driver/pull/165#issuecomment-877928553
 - 0.1.4
     - Remove whitespaces from the decoded JSON
     - Fix `by_ancestor` and `by_descendant`

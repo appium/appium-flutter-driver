@@ -94,18 +94,23 @@ module Appium
           {}
         end
 
+        of_param = {}
         finder.each_key do |key|
-          param["of_#{key}"] = finder[key]
+          of_param[key] = finder[key]
         end
+        param['of'] = of_param.to_json
 
         matching = begin
           JSON.parse(Base64.decode64(matching))
         rescue JSONError
           {}
         end
+
+        matching_param = {}
         matching.each_key do |key|
-          param["matching_#{key}"] = matching[key]
+          matching_param[key] = matching[key]
         end
+        param['matching'] = matching_param.to_json
 
         serialize param
       end
