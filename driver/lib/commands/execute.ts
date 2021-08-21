@@ -139,8 +139,12 @@ const getSemanticsId = async (self: FlutterDriver, elementBase64: string) =>
 const enterText = async (self: FlutterDriver, text: string) =>
   await self.socket!.executeSocketCommand({ command: `enter_text`, text });
 
-const requestData = async (self: FlutterDriver, message: string) => 
+const requestData = async (self: FlutterDriver, message: string) =>
   await self.socket!.executeSocketCommand({ command: `request_data`, message });
 
-const setFrameSync = async (self,bool,durationMilliseconds) => 
-  await self.socket!.executeSocketCommand({ command: `set_frame_sync`, enabled:bool, timeout: durationMilliseconds * 1000 });
+const setFrameSync = async (self, bool, durationMilliseconds) =>
+  await self.socket!.executeSocketCommand({
+    command: `set_frame_sync`,
+    enabled: bool,
+    timeout: durationMilliseconds * 1000,
+  });
