@@ -4,8 +4,6 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/truongsinh/appium-flutter-driver.svg)](https://greenkeeper.io/)
 [![NPM version](https://img.shields.io/npm/v/appium-flutter-driver.svg)](https://npmjs.org/package/appium-flutter-driver)
 [![Downloads](https://img.shields.io/npm/dm/appium-flutter-driver.svg)](https://npmjs.org/package/appium-flutter-driver)
-[![Dependency Status](https://david-dm.org/truongsinh/appium-flutter-driver.svg)](https://david-dm.org/truongsinh/appium-flutter-driver)
-[![devDependency Status](https://david-dm.org/truongsinh/appium-flutter-driver/dev-status.svg)](https://david-dm.org/truongsinh/appium-flutter-driver#info=devDependencies)
 
 Appium Flutter Driver is a test automation tool for [Flutter](https://flutter.dev) apps on multiple platforms/OSes. Appium Flutter Driver is part of the [Appium](https://github.com/appium/appium) mobile test automation tool.
 
@@ -37,7 +35,7 @@ Your Flutter app-under-test (AUT) must be compiled in `debug` or `profile` mode,
 
 This snippet, taken from [example dir](https://github.com/truongsinh/appium-flutter-driver/tree/master/example), is a script written as an appium client with `webdriverio`, and assumes you have `appium` server (with `appium-flutter-driver` installed) running on the same host and default port (`4723`). For more info, see example's [README.md](https://github.com/truongsinh/appium-flutter-driver/tree/master/example/README.md)
 
-### Desired Capabilities for flutter driver only 
+### Desired Capabilities for flutter driver only
 
 
 | Capability | Description | Example Values |
@@ -47,7 +45,7 @@ This snippet, taken from [example dir](https://github.com/truongsinh/appium-flut
 
 
 
-	
+
 
 ```js
 const wdio = require('webdriverio');
@@ -175,7 +173,6 @@ Legend:
 | :question: | :x: | `longTap` | Widget |
 
 ## TODO
-- [ ] iOS Real device
 - [ ] CI (unit test / integration test with demo app)
 - [ ] CD (automatic publish to npm)
 - [x] `finder` as a seperate package
@@ -186,9 +183,3 @@ Legend:
 - [ ] Error handling
 
 ## Test Status
-
-[![Saucelabs Test Status](https://saucelabs.com/browser-matrix/appium-flutter-driver.svg)](https://saucelabs.com/u/appium-flutter-driver)
-
-
-[![Powered by Saucelabs](./saucelabs.svg)](https://saucelabs.com/)
-
