@@ -27,7 +27,7 @@ export const startAndroidSession = async (caps, ...args) => {
   } catch (e) {
     await androiddriver.deleteSession();
     throw e;
-  };
+  }
   return Promise.all([
     androiddriver,
     connectSocket(await observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),

@@ -32,7 +32,7 @@ export const startIOSSession = async (caps, ...args) => {
   } catch (e) {
     await iosdriver.deleteSession();
     throw e;
-  };
+  }
   return Promise.all([
     iosdriver,
     connectSocket(observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
