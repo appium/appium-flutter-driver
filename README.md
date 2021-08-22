@@ -37,15 +37,10 @@ This snippet, taken from [example dir](https://github.com/truongsinh/appium-flut
 
 ### Desired Capabilities for flutter driver only
 
-
 | Capability | Description | Example Values |
 | - | - | -|
 | retryBackoffTime | the time wait for socket connection retry for get flutter session (default 300000ms)|500|
 | maxRetryCount    | the count for socket connection retry for get flutter session (default 10)          | 20|
-
-
-
-
 
 ```js
 const wdio = require('webdriverio');
@@ -171,6 +166,11 @@ Legend:
 | :question: | :warning: | `getCurrentContext` | Appium |
 | :question: | :warning: | `getContexts` | Appium |
 | :question: | :x: | `longTap` | Widget |
+
+### Note
+- Flutter context does not support page source
+    - Please use `getRenderTree` command instead
+
 
 ## TODO
 - [ ] CI (unit test / integration test with demo app)
