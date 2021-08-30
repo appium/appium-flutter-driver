@@ -6,7 +6,18 @@ export const getCurrentContext = function(this: FlutterDriver) {
   return this.currentContext;
 };
 
-export const setContext = function(this: FlutterDriver, context: string) {
+export const setContext = async function(this: FlutterDriver, context: string) {
+  if ([FLUTTER_CONTEXT_NAME, 'NATIVE_APP'].includes(context)) {
+    // Set 'native context' when flutter driver sets the context to FLUTTER_CONTEXT_NAME
+    if (this.proxydriver) {
+      await this.proxydriver.setContext('NATIVE_APP');
+    };
+  } else {
+    // this case may be 'webview'
+    if (this.proxydriver) {
+      await this.proxydriver.setContext(context);
+    };
+  }
   return (this.currentContext = context);
 };
 
