@@ -10,7 +10,7 @@ import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';
 const setupNewAndroidDriver = async (...args) => {
   const androidArgs = {
-    javascriptEnabled: true
+    javascriptEnabled: true,
   };
   const androiddriver = new AndroidUiautomator2Driver(androidArgs);
   await androiddriver.createSession(...args);
