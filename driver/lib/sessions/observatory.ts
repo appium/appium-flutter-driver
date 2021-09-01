@@ -8,8 +8,8 @@ import { IsolateSocket } from './isolate_socket';
 // SOCKETS
 export const connectSocket = async (
   dartObservatoryURL: string,
-  RETRY_BACKOFF: any = 300000,
-  MAX_RETRY_COUNT: any = 10) => {
+  RETRY_BACKOFF: any = 3000,
+  MAX_RETRY_COUNT: any = 30) => {
   let retryCount = 0;
   let connectedSocket: IsolateSocket | null = null;
   while (retryCount < MAX_RETRY_COUNT && !connectedSocket) {

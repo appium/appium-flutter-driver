@@ -5,15 +5,18 @@ import { promisify } from 'util';
 const execPromise = promisify(exec);
 
 // @ts-ignore
-import AndroidDriver from 'appium-uiautomator2-driver';
+import AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
 import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';
 const setupNewAndroidDriver = async (...args) => {
   const androidArgs = {
-    javascriptEnabled: true,
+    javascriptEnabled: true
   };
-  const androiddriver = new AndroidDriver(androidArgs);
+  const androiddriver = new AndroidUiautomator2Driver(androidArgs);
   await androiddriver.createSession(...args);
+
+  // FIXME: to give server arguments to UIA2
+  androiddriver.relaxedSecurityEnabled = true;
 
   return androiddriver;
 };
