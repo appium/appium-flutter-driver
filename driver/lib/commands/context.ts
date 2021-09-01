@@ -18,7 +18,7 @@ export const setContext = async function(this: FlutterDriver, context: string) {
       await this.proxydriver.setContext(context);
     };
   }
-  return (this.currentContext = context);
+  this.currentContext = context;
 };
 
 export const getContexts = async function(this: FlutterDriver) {
@@ -37,10 +37,6 @@ export const driverShouldDoProxyCmd = function(this: FlutterDriver, command) {
 
   // @todo what if we want to switch to webview of Native?
   if ([`getCurrentContext`, `setContext`, `getContexts`].includes(command)) {
-    return false;
-  }
-
-  if (!this.proxydriver[command]) {
     return false;
   }
 
