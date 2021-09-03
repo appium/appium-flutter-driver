@@ -1,3 +1,4 @@
+import { routeConfiguringFunction } from 'appium-base-driver';
 import { androidHelpers } from 'appium-android-driver';
 import { exec } from 'child_process';
 import { promisify } from 'util';
@@ -13,6 +14,7 @@ const setupNewAndroidDriver = async (...args) => {
     javascriptEnabled: true,
   };
   const androiddriver = new AndroidUiautomator2Driver(androidArgs);
+  routeConfiguringFunction(androiddriver);
   await androiddriver.createSession(...args);
 
   // FIXME: to give server arguments to UIA2

@@ -104,8 +104,14 @@ class FlutterDriver extends BaseDriver {
         // Here we manually reset the FlutterDriver CommandTimeout for commands that goe to proxy.
         this.clearNewCommandTimeout();
 
-        // TODO: Here does not proxy requests to WebView(chromedriver on Android)
         const result = this.proxydriver.executeCommand(cmd, ...args);
+        // let result
+        // if (this.proxydriver[cmd]) {
+        //   result = this.proxydriver.executeCommand(cmd, ...args);
+        // } else {
+        //   if (this.proxydriver.chromedriver)
+        // }
+
         this.startNewCommandTimeout(cmd);
         return result;
       } else {
