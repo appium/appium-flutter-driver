@@ -194,6 +194,6 @@ $ cd driver
 $ npm version <major|minor|patch>
 $ git commit -am 'chore: bump version'
 $ git tag <version number> # e.g. git checkout v0.0.32
-$ git push v0.0.32
+$ git push origin v0.0.32
 $ npm publish
 ```
