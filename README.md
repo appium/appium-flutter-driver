@@ -181,7 +181,7 @@ Please replace them properly with your client.
 - [x] `finder` as a seperate package
 - [ ] switching context between Flutter and [AndroidView](https://api.flutter.dev/flutter/widgets/AndroidView-class.html)
 - [ ] switching context between Flutter and [UiKitView](https://api.flutter.dev/flutter/widgets/UiKitView-class.html)
-- [ ] switching context between Flutter and [webview](https://pub.dev/packages/webview_flutter)
+- [x] switching context between Flutter and [webview](https://pub.dev/packages/webview_flutter) (via UIA2/XCUITest WebView contexts)
 - [ ] Flutter-version-aware API
 - [ ] Error handling
 
