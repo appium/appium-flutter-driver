@@ -14,6 +14,21 @@ import { execute } from './commands/execute';
 import { click, longTap, performTouch, tap, tapEl } from './commands/gesture';
 import { getScreenshot } from './commands/screen';
 
+// Need to not proxy in WebView context
+const WEBVIEW_NO_PROXY = [
+  ['GET', new RegExp('^/session/[^/]+/appium')],
+  ['GET', new RegExp('^/session/[^/]+/context')],
+  ['GET', new RegExp('^/session/[^/]+/element/[^/]+/rect')],
+  ['GET', new RegExp('^/session/[^/]+/log/types$')],
+  ['GET', new RegExp('^/session/[^/]+/orientation')],
+  ['POST', new RegExp('^/session/[^/]+/appium')],
+  ['POST', new RegExp('^/session/[^/]+/context')],
+  ['POST', new RegExp('^/session/[^/]+/log$')],
+  ['POST', new RegExp('^/session/[^/]+/orientation')],
+  ['POST', new RegExp('^/session/[^/]+/touch/multi/perform')],
+  ['POST', new RegExp('^/session/[^/]+/touch/perform')],
+];
+
 class FlutterDriver extends BaseDriver {
   public socket: IsolateSocket | null = null;
   public locatorStrategies = [`key`, `css selector`];
@@ -27,7 +42,7 @@ class FlutterDriver extends BaseDriver {
   public startNewCommandTimeout: any;
   public receiveAsyncResponse: any;
   public proxyReqRes: any;
-  public isProxyActive = false;
+  public proxyWebViewActive = false;
 
   // session
   public executeElementCommand = executeElementCommand;
@@ -105,15 +120,7 @@ class FlutterDriver extends BaseDriver {
         // All proxy commands needs to reset the FlutterDriver CommandTimeout
         // Here we manually reset the FlutterDriver CommandTimeout for commands that goe to proxy.
         this.clearNewCommandTimeout();
-
         const result = this.proxydriver.executeCommand(cmd, ...args);
-        // let result
-        // if (this.proxydriver[cmd]) {
-        //   result = this.proxydriver.executeCommand(cmd, ...args);
-        // } else {
-        //   if (this.proxydriver.chromedriver)
-        // }
-
         this.startNewCommandTimeout(cmd);
         return result;
       } else {
@@ -128,18 +135,24 @@ class FlutterDriver extends BaseDriver {
     }
   }
 
+  public getProxyAvoidList (sessionId) {
+    if ([FLUTTER_CONTEXT_NAME, `NATIVE_APP`].includes(this.currentContext)) {
+      return;
+    }
+
+    return WEBVIEW_NO_PROXY;
+  }
+
   public proxyActive (sessionId) {
-    return this.isProxyActive;
+    // In WebView context, all request should got to each driver
+    // so that they can handle http request properly
+    return this.proxyWebViewActive;
   }
 
   public canProxy (sessionId) {
-    super.canProxy(sessionId);
-
-    if ([FLUTTER_CONTEXT_NAME, `NATIVE_APP`].includes(this.currentContext)) {
-      return false;
-    } else {
-      return true;
-    }
+    // As same as proxyActive, all request should got to each driver
+    // so that they can handle http request properly
+    return this.proxyWebViewActive;
   }
 }
 
