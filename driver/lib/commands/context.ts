@@ -1,13 +1,27 @@
 import { FlutterDriver } from '../driver';
 
 export const FLUTTER_CONTEXT_NAME = `FLUTTER`;
+export const NATIVE_CONTEXT_NAME = `NATIVE_APP`;
 
 export const getCurrentContext = function(this: FlutterDriver) {
   return this.currentContext;
 };
 
-export const setContext = function(this: FlutterDriver, context: string) {
-  return (this.currentContext = context);
+export const setContext = async function(this: FlutterDriver, context: string) {
+  if ([FLUTTER_CONTEXT_NAME, NATIVE_CONTEXT_NAME].includes(context)) {
+    this.proxyWebViewActive = false;
+    // Set 'native context' when flutter driver sets the context to FLUTTER_CONTEXT_NAME
+    if (this.proxydriver) {
+      await this.proxydriver.setContext(NATIVE_CONTEXT_NAME);
+    }
+  } else {
+    // this case may be 'webview'
+    if (this.proxydriver) {
+      await this.proxydriver.setContext(context);
+      this.proxyWebViewActive = true;
+    }
+  }
+  this.currentContext = context;
 };
 
 export const getContexts = async function(this: FlutterDriver) {
@@ -24,12 +38,7 @@ export const driverShouldDoProxyCmd = function(this: FlutterDriver, command) {
     return false;
   }
 
-  // @todo what if we want to switch to webview of Native?
   if ([`getCurrentContext`, `setContext`, `getContexts`].includes(command)) {
-    return false;
-  }
-
-  if (!this.proxydriver[command]) {
     return false;
   }
 
