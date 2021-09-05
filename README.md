@@ -186,3 +186,14 @@ Please replace them properly with your client.
 - [ ] Error handling
 
 ## Test Status
+
+## Release appium-flutter-driver
+
+```
+$ cd driver
+$ npm version <major|minor|patch>
+$ git commit -am 'bump version'
+$ git checkout <version number> # e.g. git checkout v0.0.32
+$ git push v0.0.32
+$ npm publish
+```
