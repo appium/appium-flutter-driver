@@ -16,17 +16,17 @@ import { getScreenshot } from './commands/screen';
 
 // Need to not proxy in WebView context
 const WEBVIEW_NO_PROXY = [
-  ['GET', new RegExp('^/session/[^/]+/appium')],
-  ['GET', new RegExp('^/session/[^/]+/context')],
-  ['GET', new RegExp('^/session/[^/]+/element/[^/]+/rect')],
-  ['GET', new RegExp('^/session/[^/]+/log/types$')],
-  ['GET', new RegExp('^/session/[^/]+/orientation')],
-  ['POST', new RegExp('^/session/[^/]+/appium')],
-  ['POST', new RegExp('^/session/[^/]+/context')],
-  ['POST', new RegExp('^/session/[^/]+/log$')],
-  ['POST', new RegExp('^/session/[^/]+/orientation')],
-  ['POST', new RegExp('^/session/[^/]+/touch/multi/perform')],
-  ['POST', new RegExp('^/session/[^/]+/touch/perform')],
+  [`GET`, new RegExp(`^/session/[^/]+/appium`)],
+  [`GET`, new RegExp(`^/session/[^/]+/context`)],
+  [`GET`, new RegExp(`^/session/[^/]+/element/[^/]+/rect`)],
+  [`GET`, new RegExp(`^/session/[^/]+/log/types$`)],
+  [`GET`, new RegExp(`^/session/[^/]+/orientation`)],
+  [`POST`, new RegExp(`^/session/[^/]+/appium`)],
+  [`POST`, new RegExp(`^/session/[^/]+/context`)],
+  [`POST`, new RegExp(`^/session/[^/]+/log$`)],
+  [`POST`, new RegExp(`^/session/[^/]+/orientation`)],
+  [`POST`, new RegExp(`^/session/[^/]+/touch/multi/perform`)],
+  [`POST`, new RegExp(`^/session/[^/]+/touch/perform`)],
 ];
 
 class FlutterDriver extends BaseDriver {
@@ -41,8 +41,9 @@ class FlutterDriver extends BaseDriver {
   public clearNewCommandTimeout: any;
   public startNewCommandTimeout: any;
   public receiveAsyncResponse: any;
-  public proxyReqRes: any;
-  public proxyWebViewActive = false;
+
+  // to handle WebView context
+  public proxyWebViewActive: boolean = false;
 
   // session
   public executeElementCommand = executeElementCommand;
@@ -135,7 +136,7 @@ class FlutterDriver extends BaseDriver {
     }
   }
 
-  public getProxyAvoidList (sessionId) {
+  public getProxyAvoidList(_) {
     if ([FLUTTER_CONTEXT_NAME, `NATIVE_APP`].includes(this.currentContext)) {
       return;
     }
@@ -143,13 +144,13 @@ class FlutterDriver extends BaseDriver {
     return WEBVIEW_NO_PROXY;
   }
 
-  public proxyActive (sessionId) {
+  public proxyActive(_) {
     // In WebView context, all request should got to each driver
     // so that they can handle http request properly
     return this.proxyWebViewActive;
   }
 
-  public canProxy (sessionId) {
+  public canProxy(_) {
     // As same as proxyActive, all request should got to each driver
     // so that they can handle http request properly
     return this.proxyWebViewActive;
