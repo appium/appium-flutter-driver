@@ -41,6 +41,9 @@ class FlutterDriver extends BaseDriver {
   public clearNewCommandTimeout: any;
   public startNewCommandTimeout: any;
   public receiveAsyncResponse: any;
+  public relaxedSecurityEnabled: any;
+  public denyInsecure: any;
+  public allowInsecure: any;
 
   // to handle WebView context
   public proxyWebViewActive: boolean = false;

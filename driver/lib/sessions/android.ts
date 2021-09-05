@@ -15,9 +15,6 @@ const setupNewAndroidDriver = async (...args) => {
   const androiddriver = new AndroidUiautomator2Driver(androidArgs);
   await androiddriver.createSession(...args);
 
-  // FIXME: to give server arguments to UIA2
-  androiddriver.relaxedSecurityEnabled = true;
-
   return androiddriver;
 };
 
