@@ -8,7 +8,7 @@ import { executeElementCommand } from './sessions/observatory';
 import { createSession, deleteSession } from './sessions/session';
 
 import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
-  getContexts, getCurrentContext, setContext } from './commands/context';
+  getContexts, getCurrentContext, NATIVE_CONTEXT_NAME, setContext } from './commands/context';
 import { clear, getText, setValue } from './commands/element';
 import { execute } from './commands/execute';
 import { click, longTap, performTouch, tap, tapEl } from './commands/gesture';
@@ -140,7 +140,7 @@ class FlutterDriver extends BaseDriver {
   }
 
   public getProxyAvoidList(_) {
-    if ([FLUTTER_CONTEXT_NAME, `NATIVE_APP`].includes(this.currentContext)) {
+    if ([FLUTTER_CONTEXT_NAME, NATIVE_CONTEXT_NAME].includes(this.currentContext)) {
       return;
     }
 
