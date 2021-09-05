@@ -16,6 +16,9 @@ export const setContext = async function(this: FlutterDriver, context: string) {
     // this case may be 'webview'
     if (this.proxydriver) {
       await this.proxydriver.setContext(context);
+      this.proxyReqRes = this.proxydriver.proxyReqRes.bind(this.proxydriver.chromedriver);
+      this.isProxyActive = true;
+
     }
   }
   this.currentContext = context;

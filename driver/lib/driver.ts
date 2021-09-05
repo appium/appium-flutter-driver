@@ -26,6 +26,8 @@ class FlutterDriver extends BaseDriver {
   public clearNewCommandTimeout: any;
   public startNewCommandTimeout: any;
   public receiveAsyncResponse: any;
+  public proxyReqRes: any;
+  public isProxyActive = false;
 
   // session
   public executeElementCommand = executeElementCommand;
@@ -126,6 +128,19 @@ class FlutterDriver extends BaseDriver {
     }
   }
 
+  public proxyActive (sessionId) {
+    return this.isProxyActive;
+  }
+
+  public canProxy (sessionId) {
+    super.canProxy(sessionId);
+
+    if ([FLUTTER_CONTEXT_NAME, `NATIVE_APP`].includes(this.currentContext)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }
 
 export { FlutterDriver };
