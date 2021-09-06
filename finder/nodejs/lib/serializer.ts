@@ -23,13 +23,13 @@ export const ancestor = (args: {
   Object.entries(deserialize(of)).forEach(
     ([key, value]) => (ofParam[key] = value),
   );
-  a['of'] = JSON.stringify(ofParam);
+  a[`of`] = JSON.stringify(ofParam);
 
   const matchingPara: any = {};
   Object.entries(deserialize(matching)).forEach(
     ([key, value]) => (matchingPara[key] = value),
   );
-  a['matching'] = JSON.stringify(matchingPara);
+  a[`matching`] = JSON.stringify(matchingPara);
 
   return serialize(a);
 };
@@ -74,13 +74,13 @@ export const descendant = (args: {
   Object.entries(deserialize(of)).forEach(
     ([key, value]) => (ofParam[key] = value),
   );
-  a['of'] = JSON.stringify(ofParam);
+  a[`of`] = JSON.stringify(ofParam);
 
   const matchingParam: any = {};
   Object.entries(deserialize(matching)).forEach(
     ([key, value]) => (matchingParam[key] = value),
   );
-  a['matching'] = JSON.stringify(matchingParam);
+  a[`matching`] = JSON.stringify(matchingParam);
 
   return serialize(a);
 };
