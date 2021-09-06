@@ -82,8 +82,8 @@ class FlutterFinder(object):
         try:
             finder = json.loads(base64.b64decode(
                 serialized_finder).decode('utf-8'))
-        except:
-            finder = dict()
+        except Exception:
+            finder = {}
 
         param.setdefault('of', {})
         for finder_key, finder_value in finder.items():
@@ -92,8 +92,8 @@ class FlutterFinder(object):
 
         try:
             matching = json.loads(base64.b64decode(matching).decode('utf-8'))
-        except:
-            matching = dict()
+        except Exception:
+            matching = {}
         param.setdefault('matching', {})
         for matching_key, matching_value in matching.items():
             param['matching'].setdefault(matching_key, matching_value)

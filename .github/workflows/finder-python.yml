@@ -32,7 +32,7 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         cd finder/python
-        pylint `ls -R|grep .py$|xargs`
+        pylint tests/ appium_flutter_finder/
     - name: Run tests
       run: |
         cd finder/python
