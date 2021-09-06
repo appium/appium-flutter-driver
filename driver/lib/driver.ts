@@ -7,7 +7,6 @@ import { log as logger } from './logger';
 import { executeElementCommand } from './sessions/observatory';
 import { createSession, deleteSession } from './sessions/session';
 
-
 import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
   getContexts, getCurrentContext, NATIVE_CONTEXT_NAME, setContext } from './commands/context';
 import { clear, getText, setValue } from './commands/element';
