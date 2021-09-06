@@ -6,8 +6,12 @@ name: Finer for NodeJS
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'finder/nodejs/**'
   pull_request:
     branches: [ master ]
+    paths:
+      - 'finder/nodejs/**'
 
 jobs:
   build:
