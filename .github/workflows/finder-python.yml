@@ -28,11 +28,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pylint pytest
-    - name: Install via setup.py
-      run: |
-        cd finder/python
-        python setup.py install
+        pip install pylint pytest Appium-Python-Client
     - name: Analysing the code with pylint
       run: |
         cd finder/python
