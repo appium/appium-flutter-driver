@@ -19,12 +19,18 @@ export const ancestor = (args: {
     finderType: `Ancestor`,
     matchRoot,
   };
+  const ofParam: any = {};
   Object.entries(deserialize(of)).forEach(
-    ([key, value]) => (a[`of_${key}`] = value),
+    ([key, value]) => (ofParam[key] = value),
   );
+  a[`of`] = JSON.stringify(ofParam);
+
+  const matchingPara: any = {};
   Object.entries(deserialize(matching)).forEach(
-    ([key, value]) => (a[`matching_${key}`] = value),
+    ([key, value]) => (matchingPara[key] = value),
   );
+  a[`matching`] = JSON.stringify(matchingPara);
+
   return serialize(a);
 };
 
@@ -64,12 +70,18 @@ export const descendant = (args: {
     finderType: `Descendant`,
     matchRoot,
   };
+  const ofParam: any = {};
   Object.entries(deserialize(of)).forEach(
-    ([key, value]) => (a[`of_${key}`] = value),
+    ([key, value]) => (ofParam[key] = value),
   );
+  a[`of`] = JSON.stringify(ofParam);
+
+  const matchingParam: any = {};
   Object.entries(deserialize(matching)).forEach(
-    ([key, value]) => (a[`matching_${key}`] = value),
+    ([key, value]) => (matchingParam[key] = value),
   );
+  a[`matching`] = JSON.stringify(matchingParam);
+
   return serialize(a);
 };
 

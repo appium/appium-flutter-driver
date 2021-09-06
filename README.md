@@ -191,7 +191,7 @@ Please replace them properly with your client.
 $ cd driver
 $ npm version <major|minor|patch>
 $ git commit -am 'chore: bump version'
-$ git tag <version number> # e.g. git checkout v0.0.32
+$ git tag <version number> # e.g. git tag v0.0.32
 $ git push origin v0.0.32
 $ npm publish
 ```
