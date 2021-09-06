@@ -1,6 +1,5 @@
 // tslint:disable:object-literal-sort-keys
 import expect from 'expect';
-import * as spec from '../../spec.json';
 import * as find from './serializer';
 
 describe(`serializer`, () => {

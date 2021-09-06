@@ -1,17 +1,17 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Finer for NodeJS
 
 on:
   push:
-    paths:
-      - 'driver/**'
     branches: [ master ]
+    paths:
+      - 'finder/nodejs/**'
   pull_request:
-    paths:
-      - 'driver/**'
     branches: [ master ]
+    paths:
+      - 'finder/nodejs/**'
 
 jobs:
   build:
@@ -21,7 +21,6 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v2
@@ -30,7 +29,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: |
-        cd driver
+        cd finder/nodejs
         npm install
         npm run lint
-
+        npm run test
