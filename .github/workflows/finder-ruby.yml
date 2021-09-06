@@ -31,9 +31,9 @@ jobs:
       uses: ruby/setup-ruby@473e4d8fe5dd94ee328fdfca9f8c9c7afc9dae5e
       with:
         ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+        bundler-cache: true
+        working-directory: finder/ruby
     - name: Run tests
       run: |
         cd finder/ruby
-        bundle install
         bundle exec rake
