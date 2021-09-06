@@ -1,8 +1,32 @@
 import { FlutterDriver } from '../driver';
 import { log } from '../logger';
 
-import { startAndroidSession } from './android';
-import { startIOSSession } from './ios';
+import { startAndroidSession, connectAndroidSession} from './android';
+import { startIOSSession, connectIOSSession } from './ios';
+
+export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: any) {
+  try {
+    // setup proxies - if platformName is not empty, make it less case sensitive
+    if (caps.platformName !== null) {
+      const appPlatform = caps.platformName.toLowerCase();
+      switch (appPlatform) {
+        case `ios`:
+          await connectIOSSession(this.proxydriver, caps)
+          break;
+        case `android`:
+          await connectAndroidSession(this.proxydriver, caps)
+          break;
+        default:
+          log.errorAndThrow(
+            `Unsupported platformName: ${caps.platformName}`,
+          );
+      }
+    }
+  } catch (e) {
+    await this.deleteSession();
+    throw e;
+  }
+}
 
 // tslint:disable-next-line:variable-name
 export const createSession = async function(this: FlutterDriver, sessionId, caps, ...args)  {

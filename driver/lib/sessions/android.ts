@@ -35,6 +35,21 @@ export const startAndroidSession = async (caps, ...args) => {
 
 };
 
+export const connectAndroidSession = async (androiddriver, caps) => {
+  log.info(`Connecting to an IOS proxy session`);
+  let observatoryWsUri;
+  try {
+    observatoryWsUri = await getObservatoryWsUri(androiddriver, caps);
+  } catch (e) {
+    await androiddriver.deleteSession();
+    throw e;
+  }
+  return Promise.all([
+    androiddriver,
+    connectSocket(observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
+  ]);
+};
+
 export const getObservatoryWsUri = async (proxydriver , caps) => {
   const urlObject = processLogToGetobservatory(proxydriver.adb.logcat.logs);
   const {udid} = await androidHelpers.getDeviceInfoFromCaps(caps);

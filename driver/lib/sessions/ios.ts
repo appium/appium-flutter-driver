@@ -39,6 +39,21 @@ export const startIOSSession = async (caps, ...args) => {
   ]);
 };
 
+export const connectIOSSession = async (iosdriver, caps) => {
+  log.info(`Connecting to an IOS proxy session`);
+  let observatoryWsUri;
+  try {
+    observatoryWsUri = await getObservatoryWsUri(iosdriver);
+  } catch (e) {
+    await iosdriver.deleteSession();
+    throw e;
+  }
+  return Promise.all([
+    iosdriver,
+    connectSocket(observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
+  ]);
+};
+
 const waitForPortIsAvailable = async (port) => {
   let isPortBusy = (await checkPortStatus(port, LOCALHOST)) === `open`;
   if (isPortBusy) {

@@ -5,7 +5,7 @@ import { IDesiredCapConstraints } from './desired-caps';
 import { log as logger } from './logger';
 
 import { executeElementCommand } from './sessions/observatory';
-import { createSession, deleteSession } from './sessions/session';
+import { createSession, deleteSession, reConnectFlutterDriver } from './sessions/session';
 
 import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
   getContexts, getCurrentContext, NATIVE_CONTEXT_NAME, setContext } from './commands/context';
@@ -34,6 +34,8 @@ class FlutterDriver extends BaseDriver {
   public locatorStrategies = [`key`, `css selector`];
   public proxydriver: any;
   public device: any;
+
+  public internalCaps: any;
 
   // from BaseDriver
   public opts: any;
@@ -78,10 +80,14 @@ class FlutterDriver extends BaseDriver {
     super(opts, shouldValidateCaps);
     this.proxydriver = null;
     this.device = null;
+    this.internalCaps = null;
   }
 
   public async createSession(...args) {
     const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)));
+
+    this.internalCaps = caps;
+
     return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args)));
   }
 
@@ -90,6 +96,11 @@ class FlutterDriver extends BaseDriver {
       deleteSession.bind(this)(),
       super.deleteSession(),
     ]);
+  }
+
+  public async activateApp(appId) {
+    await this.proxydriver.activateApp(appId);
+    await reConnectFlutterDriver(this, this.internalCaps);
   }
 
   public validateLocatorStrategy(strategy: string) {
