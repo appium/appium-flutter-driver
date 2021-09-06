@@ -41,6 +41,8 @@ twine upload dist/Appium-Flutter-Finder-X.X.tar.gz
 ```
 
 # Changelog
+- 0.2.0
+    - Support over Python 3.6
 - 0.1.5
     - Fix `by_ancestor` and `by_descendant`
         - https://github.com/truongsinh/appium-flutter-driver/pull/165#issuecomment-877928553
