@@ -14,6 +14,7 @@ $ npm publish
 ```
 
 ## Changelog
-
+- 0.1.0
+  - Add `firstMatchOnly` in `ancestor` and `descendant`
 - 0.0.23
   - Fix `ancestor` and `descendant`
