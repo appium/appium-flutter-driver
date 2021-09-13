@@ -14,7 +14,7 @@ describe(`serializer`, () => {
         of: find.pageBack(),
         matching: find.pageBack(),
       }),
-      firstMatchOnly: true
+      firstMatchOnly: true,
     });
     expect(observed).toBe(expected);
   });
