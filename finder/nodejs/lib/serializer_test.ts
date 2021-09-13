@@ -4,7 +4,7 @@ import * as find from './serializer';
 
 describe(`serializer`, () => {
   it(`ancestor`, () => {
-    const expected = `eyJmaW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJmaXJzdE1hdGNoT25seSI6ZmFsc2UsIm1hdGNoUm9vdCI6ZmFsc2UsIm9mIjoie1wiZmluZGVyVHlwZVwiOlwiQW5jZXN0b3JcIixcImZpcnN0TWF0Y2hPbmx5XCI6ZmFsc2UsXCJtYXRjaFJvb3RcIjpmYWxzZSxcIm9mXCI6XCJ7XFxcImZpbmRlclR5cGVcXFwiOlxcXCJQYWdlQmFja1xcXCJ9XCIsXCJtYXRjaGluZ1wiOlwie1xcXCJmaW5kZXJUeXBlXFxcIjpcXFwiUGFnZUJhY2tcXFwifVwifSIsIm1hdGNoaW5nIjoie1wiZmluZGVyVHlwZVwiOlwiQW5jZXN0b3JcIixcImZpcnN0TWF0Y2hPbmx5XCI6ZmFsc2UsXCJtYXRjaFJvb3RcIjpmYWxzZSxcIm9mXCI6XCJ7XFxcImZpbmRlclR5cGVcXFwiOlxcXCJQYWdlQmFja1xcXCJ9XCIsXCJtYXRjaGluZ1wiOlwie1xcXCJmaW5kZXJUeXBlXFxcIjpcXFwiUGFnZUJhY2tcXFwifVwifSJ9`;
+    const expected = `eyJmaW5kZXJUeXBlIjoiQW5jZXN0b3IiLCJmaXJzdE1hdGNoT25seSI6dHJ1ZSwibWF0Y2hSb290IjpmYWxzZSwib2YiOiJ7XCJmaW5kZXJUeXBlXCI6XCJBbmNlc3RvclwiLFwiZmlyc3RNYXRjaE9ubHlcIjpmYWxzZSxcIm1hdGNoUm9vdFwiOmZhbHNlLFwib2ZcIjpcIntcXFwiZmluZGVyVHlwZVxcXCI6XFxcIlBhZ2VCYWNrXFxcIn1cIixcIm1hdGNoaW5nXCI6XCJ7XFxcImZpbmRlclR5cGVcXFwiOlxcXCJQYWdlQmFja1xcXCJ9XCJ9IiwibWF0Y2hpbmciOiJ7XCJmaW5kZXJUeXBlXCI6XCJBbmNlc3RvclwiLFwiZmlyc3RNYXRjaE9ubHlcIjpmYWxzZSxcIm1hdGNoUm9vdFwiOmZhbHNlLFwib2ZcIjpcIntcXFwiZmluZGVyVHlwZVxcXCI6XFxcIlBhZ2VCYWNrXFxcIn1cIixcIm1hdGNoaW5nXCI6XCJ7XFxcImZpbmRlclR5cGVcXFwiOlxcXCJQYWdlQmFja1xcXCJ9XCJ9In0`;
     const observed = find.ancestor({
       of: find.ancestor({
         of: find.pageBack(),
@@ -14,6 +14,7 @@ describe(`serializer`, () => {
         of: find.pageBack(),
         matching: find.pageBack(),
       }),
+      firstMatchOnly: true
     });
     expect(observed).toBe(expected);
   });
