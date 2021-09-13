@@ -141,6 +141,7 @@ disable=print-statement,
         no-self-use,
         too-many-ancestors,
         broad-except,
+        line-too-long,
         super-with-arguments, # TODO: remove when it drops python 2.7
         useless-object-inheritance # TODO: remove when it drops python 2.7
 
