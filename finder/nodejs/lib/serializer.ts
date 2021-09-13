@@ -18,8 +18,8 @@ export const ancestor = (args: {
   const { of, matching, matchRoot = false, firstMatchOnly = false} = args;
   const a: any = {
     finderType: `Ancestor`,
-    matchRoot,
     firstMatchOnly,
+    matchRoot,
   };
   const ofParam: any = {};
   Object.entries(deserialize(of)).forEach(
@@ -71,8 +71,8 @@ export const descendant = (args: {
   const { of, matching, matchRoot = false , firstMatchOnly = false} = args;
   const a: any = {
     finderType: `Descendant`,
-    matchRoot,
     firstMatchOnly,
+    matchRoot,
   };
   const ofParam: any = {};
   Object.entries(deserialize(of)).forEach(
