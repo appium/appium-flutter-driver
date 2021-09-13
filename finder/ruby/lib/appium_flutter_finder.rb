@@ -17,7 +17,7 @@ module Appium
 
     # Get find element context for flutter driver
     module Finder
-      def by_ancestor(serialized_finder:, matching:, match_root: false)
+      def by_ancestor(serialized_finder:, matching:, match_root: false, first_match_only: false)
         by_ancestor_or_descendant(
           type: 'Ancestor',
           serialized_finder: serialized_finder,
@@ -26,7 +26,7 @@ module Appium
         )
       end
 
-      def by_descendant(serialized_finder:, matching:, match_root: false)
+      def by_descendant(serialized_finder:, matching:, match_root: false, first_match_only: false)
         by_ancestor_or_descendant(
           type: 'Descendant',
           serialized_finder: serialized_finder,
@@ -85,8 +85,8 @@ module Appium
         Base64.strict_encode64(hash.to_json)
       end
 
-      def by_ancestor_or_descendant(type:, serialized_finder:, matching:, match_root: false)
-        param = { finderType: type, matchRoot: match_root }
+      def by_ancestor_or_descendant(type:, serialized_finder:, matching:, match_root: false, first_match_only: false)
+        param = { finderType: type, matchRoot: match_root, firstMatchOnly: first_match_only}
 
         finder = begin
           JSON.parse(Base64.decode64(serialized_finder))

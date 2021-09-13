@@ -13,11 +13,13 @@ export const ancestor = (args: {
   of: SerializableFinder;
   matching: SerializableFinder;
   matchRoot?: boolean;
+  firstMatchOnly?: boolean;
 }) => {
-  const { of, matching, matchRoot = false } = args;
+  const { of, matching, matchRoot = false, firstMatchOnly = false} = args;
   const a: any = {
     finderType: `Ancestor`,
     matchRoot,
+    firstMatchOnly,
   };
   const ofParam: any = {};
   Object.entries(deserialize(of)).forEach(
@@ -64,11 +66,13 @@ export const descendant = (args: {
   of: SerializableFinder;
   matching: SerializableFinder;
   matchRoot?: boolean;
+  firstMatchOnly?: boolean;
 }) => {
-  const { of, matching, matchRoot = false } = args;
+  const { of, matching, matchRoot = false , firstMatchOnly = false} = args;
   const a: any = {
     finderType: `Descendant`,
     matchRoot,
+    firstMatchOnly,
   };
   const ofParam: any = {};
   Object.entries(deserialize(of)).forEach(
