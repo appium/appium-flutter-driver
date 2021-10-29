@@ -172,6 +172,7 @@ Please replace them properly with your client.
 ### Note
 - Flutter context does not support page source
     - Please use `getRenderTree` command instead
+- You can send appium-xcuitest-driver/appium-uiautomator2-driver commands in `NATIVE_APP` context
 
 ## TODO
 - [ ] CI (unit test / integration test with demo app)
