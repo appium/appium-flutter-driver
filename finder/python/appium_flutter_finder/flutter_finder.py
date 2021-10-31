@@ -7,7 +7,7 @@ from appium.webdriver.webelement import WebElement
 class FlutterElement(WebElement):
     def __init__(self, driver, element_id):
         super(FlutterElement, self).__init__(
-            driver, element_id, w3c=True
+            driver, element_id
         )
 
 
