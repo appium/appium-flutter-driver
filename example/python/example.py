@@ -8,7 +8,7 @@ from appium_flutter_finder.flutter_finder import FlutterElement, FlutterFinder
 driver = Remote('http://localhost:4723/wd/hub', dict(
     platformName='iOS',
     automationName='flutter',
-    platformVersion='14.4',
+    platformVersion='15.0',
     deviceName='iPhone 8',
     app='{}/../app/app/Runner.zip'.format(
       os.path.dirname(os.path.realpath(__file__)))
@@ -30,6 +30,8 @@ back_element = FlutterElement(driver, back_finder)
 back_element.click()
 
 tooltip_finder = finder.by_tooltip("Increment")
+driver.execute_script('flutter:waitFor', tooltip_finder, 100)
+
 floating_button_element = FlutterElement(driver, tooltip_finder)
 floating_button_element.click()
 
