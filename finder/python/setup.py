@@ -39,5 +39,5 @@ setup(
         'Topic :: Software Development :: Quality Assurance',
         'Topic :: Software Development :: Testing'
     ],
-    install_requires=['Appium-Python-Client >= 0.4']
+    install_requires=['Appium-Python-Client >= 0.4, < 2']
 )
