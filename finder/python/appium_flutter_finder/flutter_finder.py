@@ -5,13 +5,9 @@ from appium.webdriver.webelement import WebElement
 
 
 class FlutterElement(WebElement):
-    def __init__(self, driver, element_id):
-        super(FlutterElement, self).__init__(
-            driver, element_id, w3c=True
-        )
+    pass
 
-
-class FlutterFinder(object):
+class FlutterFinder:
     def by_ancestor(self, serialized_finder, matching, match_root=False, first_match_only=False):
         return self._by_ancestor_or_descendant(
             type_='Ancestor',
