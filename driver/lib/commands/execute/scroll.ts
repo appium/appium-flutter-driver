@@ -26,7 +26,7 @@ export const scroll = async (
     throw new Error(`${opts} is not a valid options`);
   }
 
-  if (dx === 0 || dy === 0) {
+  if (dx === 0 && dy === 0) {
     // @todo BaseDriver's errors.InvalidArgumentError();
     throw new Error(`${opts} is not a valid options`);
   }
