@@ -21,7 +21,7 @@ public class FlutterFinder(driver: RemoteWebDriver) {
   private val driver = driver
   private val fileDetector = FileDetector({ _ -> null })
   fun ancestor(of: FlutterElement, matching: FlutterElement, matchRoot: Boolean = false, firstMatchOnly: Boolean = false): FlutterElement {
-    val f = _ancestor(of, matching, matchRoot)
+    val f = _ancestor(of, matching, matchRoot, firstMatchOnly)
     f.setParent(driver)
     f.setFileDetector(fileDetector)
     return f
@@ -63,7 +63,7 @@ public class FlutterFinder(driver: RemoteWebDriver) {
     return f
   }
   fun descendant(of: FlutterElement, matching: FlutterElement, matchRoot: Boolean = false, firstMatchOnly: Boolean = false): FlutterElement {
-    val f = _descendant(of, matching, matchRoot)
+    val f = _descendant(of, matching, matchRoot, firstMatchOnly)
     f.setParent(driver)
     f.setFileDetector(fileDetector)
     return f
