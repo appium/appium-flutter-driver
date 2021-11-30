@@ -9,10 +9,11 @@ class ExampleTests < Minitest::Test
   IOS_CAPS = {
     caps: {
       platformName: 'iOS',
-      automationName: 'flutter',
-      platformVersion: '15.0',
-      deviceName: 'iPhone 8',
-      app: "#{Dir.pwd}/../app/app/Runner.zip"
+      automationName: 'xcuitest',
+      platformVersion: '15.2',
+      deviceName: 'iPad Pro (12.9-inch) (5th generation)',
+      webDriverAgentUrl: 'http://192.168.4.20:8100'
+      # app: "#{Dir.pwd}/../app/app/Runner.zip"
     },
     appium_lib: {
       export_session: true,
@@ -24,6 +25,12 @@ class ExampleTests < Minitest::Test
   def test_run_example_ios_scenario
     @core = ::Appium::Core.for(IOS_CAPS)
     @driver = @core.start_driver
+
+    require 'pry'
+    binding.pry
+
+    @driver.switch_to.alert.dismiss
+    @driver.switch_to.alert.accept
 
     text_finder = by_text 'You have pushed the button this many times:'
     element = ::Appium::Flutter::Element.new(@driver, finder: text_finder)

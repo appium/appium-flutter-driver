@@ -125,17 +125,21 @@ class FlutterDriver extends BaseDriver {
         // Here we manually reset the FlutterDriver CommandTimeout for commands that goe to proxy.
         this.clearNewCommandTimeout();
 
+        // logger.debug(`=====> Current args '${JSON.stringify(args)}'`);
+
         // here bing to this.wda.proxyReqRes.bind(this.wda); in XCUITest
         // https://github.com/appium/appium-xcuitest-driver/blob/da360cfebc77f2367ee00e9f367733bcb9488347/lib/driver.js#L630
         // need to proxy this to remote debugger
-        const result = this.proxydriver.executeCommand(cmd, ...args);
-        logger.debug(`=====> Current context '${this.proxydriver.executeCommand}'`);
+        // 'proxyReqRes' is to proxy commands
+        // const result = await this.proxydriver.executeCommand(cmd, ...args);
+        const result = await this.proxydriver.proxyReqRes(...args);
+        logger.debug(`=====> Current context '${this.proxydriver.isWebContext()}'`);
 
         this.startNewCommandTimeout(cmd);
         return result;
       } else {
         logger.debug(`Executing Flutter driver command '${cmd}'`);
-        return super.executeCommand(cmd, ...args);
+        return await super.executeCommand(cmd, ...args);
       }
     } else {
       logger.debug(`Command Error '${cmd}'`);
