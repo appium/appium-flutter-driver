@@ -37,8 +37,8 @@ This snippet, taken from [example dir](https://github.com/appium-userland/appium
 
 | Capability | Description | Example Values |
 | - | - | -|
-| retryBackoffTime | the time wait for socket connection retry for get flutter session (default 300000ms)|500|
-| maxRetryCount    | the count for socket connection retry for get flutter session (default 10)          | 20|
+| retryBackoffTime | the time wait for socket connection retry for get flutter session (default 3000ms)|500|
+| maxRetryCount    | the count for socket connection retry for get flutter session (default 30)          | 20|
 
 ```js
 const wdio = require('webdriverio');
