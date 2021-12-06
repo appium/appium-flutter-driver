@@ -9,11 +9,12 @@ class ExampleTests < Minitest::Test
   IOS_CAPS = {
     caps: {
       platformName: 'iOS',
-      automationName: 'xcuitest',
-      platformVersion: '15.2',
-      deviceName: 'iPad Pro (12.9-inch) (5th generation)',
-      webDriverAgentUrl: 'http://192.168.4.20:8100'
-      # app: "#{Dir.pwd}/../app/app/Runner.zip"
+      automationName: 'flutter',
+      platformVersion: '15.0',
+      deviceName: 'iPhone 12 Pro',
+      webDriverAgentUrl: 'http://localhost:8100',
+      app: "#{Dir.pwd}/../app/app/Runner.app",
+      includeSafariInWebviews: true
     },
     appium_lib: {
       export_session: true,

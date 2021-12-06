@@ -6,6 +6,7 @@ import { log as logger } from './logger';
 
 import { executeElementCommand } from './sessions/observatory';
 import { createSession, deleteSession } from './sessions/session';
+import { DRIVER_NAME as IOS_DEVICE_NAME } from './sessions/ios'
 
 import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
   getContexts, getCurrentContext, NATIVE_CONTEXT_NAME, setContext } from './commands/context';
@@ -33,6 +34,7 @@ class FlutterDriver extends BaseDriver {
   public socket: IsolateSocket | null = null;
   public locatorStrategies = [`key`, `css selector`];
   public proxydriver: any;
+  public proxydriverName: string;  // to store 'driver name' as proxy to.
   public device: any;
 
   // from BaseDriver
@@ -77,6 +79,7 @@ class FlutterDriver extends BaseDriver {
   constructor(opts, shouldValidateCaps: boolean) {
     super(opts, shouldValidateCaps);
     this.proxydriver = null;
+    this.proxydriverName = '';
     this.device = null;
   }
 
@@ -125,15 +128,7 @@ class FlutterDriver extends BaseDriver {
         // Here we manually reset the FlutterDriver CommandTimeout for commands that goe to proxy.
         this.clearNewCommandTimeout();
 
-        // logger.debug(`=====> Current args '${JSON.stringify(args)}'`);
-
-        // here bing to this.wda.proxyReqRes.bind(this.wda); in XCUITest
-        // https://github.com/appium/appium-xcuitest-driver/blob/da360cfebc77f2367ee00e9f367733bcb9488347/lib/driver.js#L630
-        // need to proxy this to remote debugger
-        // 'proxyReqRes' is to proxy commands
-        // const result = await this.proxydriver.executeCommand(cmd, ...args);
-        const result = await this.proxydriver.proxyReqRes(...args);
-        logger.debug(`=====> Current context '${this.proxydriver.isWebContext()}'`);
+        const result = await this.proxydriver.executeCommand(cmd, ...args);
 
         this.startNewCommandTimeout(cmd);
         return result;
@@ -157,10 +152,12 @@ class FlutterDriver extends BaseDriver {
     return WEBVIEW_NO_PROXY;
   }
 
-  public proxyActive(_) {
+  public proxyActive(sessionId) {
     // In WebView context, all request should got to each driver
-    // so that they can handle http request properly
-    return this.proxyWebViewActive;
+    // so that they can handle http request properly.
+    // On iOS, WebVie context is handled by XCUITest driver while
+    // Android is by chromedriver.
+    return this.proxyWebViewActive && this.proxydriverName === IOS_DEVICE_NAME;
   }
 
   public canProxy(_) {

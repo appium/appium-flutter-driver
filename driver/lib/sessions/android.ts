@@ -3,6 +3,7 @@ import { exec } from 'child_process';
 import { promisify } from 'util';
 
 const execPromise = promisify(exec);
+export const DRIVER_NAME = 'UIAutomator2';
 
 // @ts-ignore
 import AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
