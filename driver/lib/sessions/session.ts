@@ -1,8 +1,8 @@
 import { FlutterDriver } from '../driver';
 import { log } from '../logger';
 
-import { startAndroidSession, DRIVER_NAME as ANDROID_DEVICE_NAME } from './android';
-import { startIOSSession, DRIVER_NAME as IOS_DEVICE_NAME } from './ios';
+import { DRIVER_NAME as ANDROID_DEVICE_NAME, startAndroidSession } from './android';
+import { DRIVER_NAME as IOS_DEVICE_NAME, startIOSSession } from './ios';
 
 // tslint:disable-next-line:variable-name
 export const createSession = async function(this: FlutterDriver, sessionId, caps, ...args)  {

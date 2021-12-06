@@ -4,9 +4,9 @@ import { IsolateSocket } from './sessions/isolate_socket';
 import { IDesiredCapConstraints } from './desired-caps';
 import { log as logger } from './logger';
 
+import { DRIVER_NAME as IOS_DEVICE_NAME } from './sessions/ios';
 import { executeElementCommand } from './sessions/observatory';
 import { createSession, deleteSession } from './sessions/session';
-import { DRIVER_NAME as IOS_DEVICE_NAME } from './sessions/ios'
 
 import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
   getContexts, getCurrentContext, NATIVE_CONTEXT_NAME, setContext } from './commands/context';
@@ -79,7 +79,7 @@ class FlutterDriver extends BaseDriver {
   constructor(opts, shouldValidateCaps: boolean) {
     super(opts, shouldValidateCaps);
     this.proxydriver = null;
-    this.proxydriverName = '';
+    this.proxydriverName = ``;
     this.device = null;
   }
 
