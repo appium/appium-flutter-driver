@@ -152,7 +152,7 @@ class FlutterDriver extends BaseDriver {
     return WEBVIEW_NO_PROXY;
   }
 
-  public proxyActive(sessionId) {
+  public proxyActive(_) {
     // In WebView context, all request should got to each driver
     // so that they can handle http request properly.
     // On iOS, WebVie context is handled by XCUITest driver while

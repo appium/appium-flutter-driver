@@ -27,12 +27,6 @@ class ExampleTests < Minitest::Test
     @core = ::Appium::Core.for(IOS_CAPS)
     @driver = @core.start_driver
 
-    require 'pry'
-    binding.pry
-
-    @driver.switch_to.alert.dismiss
-    @driver.switch_to.alert.accept
-
     text_finder = by_text 'You have pushed the button this many times:'
     element = ::Appium::Flutter::Element.new(@driver, finder: text_finder)
     assert_equal 'You have pushed the button this many times:', element.text
