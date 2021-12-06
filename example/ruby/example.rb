@@ -12,9 +12,7 @@ class ExampleTests < Minitest::Test
       automationName: 'flutter',
       platformVersion: '15.0',
       deviceName: 'iPhone 12 Pro',
-      webDriverAgentUrl: 'http://localhost:8100',
-      app: "#{Dir.pwd}/../app/app/Runner.app",
-      includeSafariInWebviews: true
+      app: "#{Dir.pwd}/../app/app/Runner.zip"
     },
     appium_lib: {
       export_session: true,
