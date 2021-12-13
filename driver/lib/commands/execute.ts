@@ -89,7 +89,7 @@ const forceGC = async (self: FlutterDriver) => {
   }
 };
 
-const anyPromise = (promises: Array<Promise<any>>) => {
+const anyPromise = (promises: Promise<any>[]) => {
   const newpArray = promises.map((p) =>
     p.then(
       (resolvedValue) => Promise.reject(resolvedValue),

@@ -138,7 +138,7 @@ export const executeElementCommand = async function(
   return data.response;
 };
 
-export const processLogToGetobservatory = (adbLogs: Array<{ message: string }>) => {
+export const processLogToGetobservatory = (adbLogs: [{ message: string }]) => {
   const observatoryUriRegEx = new RegExp(
     `Observatory listening on ((http|\/\/)[a-zA-Z0-9:/=_\\-\.\\[\\]]+)`,
   );
