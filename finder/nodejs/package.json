@@ -32,7 +32,7 @@
     "@types/expect": "^1.20.4",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.11.12",
-    "expect": "^24.9.0",
+    "expect": "^27.4.2",
     "mocha": "^6.2.0",
     "ts-mocha": "^8.0.0",
     "tslint": "^6.1.3",
