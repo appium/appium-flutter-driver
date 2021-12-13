@@ -5,15 +5,15 @@
 
 version: 2
 updates:
-  - package_manager: "javascript"
+  - package-ecosystem: "npm"
     directory: "/driver"
     schedule:
       interval: "weekly"
-  - package_manager: "javascript"
+  - package-ecosystem: "npm"
     directory: "/example/nodejs"
     schedule:
       interval: "weekly"
-  - package_manager: "javascript"
+  - package-ecosystem: "npm"
     directory: "/finder/nodejs"
     schedule:
       interval: "weekly"
