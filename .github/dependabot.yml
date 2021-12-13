@@ -17,11 +17,11 @@ updates:
     directory: "/finder/nodejs"
     schedule:
       interval: "weekly"
-  - package-ecosystem: "Python PIP"
+  - package-ecosystem: "pip"
     directory: "/finder/python"
     schedule:
       interval: "weekly"
-  - package-ecosystem: "RubyGems"
+  - package-ecosystem: "bundler"
     directory: "/finder/ruby"
     schedule:
       interval: "weekly"
