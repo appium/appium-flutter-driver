@@ -26,6 +26,7 @@ const osSpecificOps =
 
 const opts = {
   port: 4723,
+  path: '/wd/hub',
   capabilities: {
     ...osSpecificOps,
     automationName: 'Flutter'
@@ -79,10 +80,10 @@ const opts = {
   */
 
   assert.strictEqual(await driver.getElementText(counterTextFinder), '0');
-  
+
   //Long Press using flutter command on Increment button, it should visible 'increment' tooltip after longTap
   await driver.execute('flutter:longTap', find.byValueKey('increment'), {durationMilliseconds: 10000, frequency: 30});
-  
+
   //Long Press using TouchAction with wait
   await driver.touchAction([
     {
@@ -117,7 +118,7 @@ const opts = {
     },
   ]);
 
-  await driver.saveScreenshot('./flutter-longPress.png');  
+  await driver.saveScreenshot('./flutter-longPress.png');
 
   await driver.elementClick(buttonFinder);
   await driver.touchAction({

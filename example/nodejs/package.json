@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "appium-flutter-finder": "^0.0.21",
-    "webdriverio": "^5.11.5"
+    "appium-flutter-finder": "^0.1.0",
+    "webdriverio": "^7.16.11"
   },
   "scripts": {
     "start": "node src/index.js",

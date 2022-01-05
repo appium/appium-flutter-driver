@@ -4,6 +4,7 @@ import { IsolateSocket } from './sessions/isolate_socket';
 import { IDesiredCapConstraints } from './desired-caps';
 import { log as logger } from './logger';
 
+import { DRIVER_NAME as IOS_DEVICE_NAME } from './sessions/ios';
 import { executeElementCommand } from './sessions/observatory';
 import { createSession, deleteSession } from './sessions/session';
 
@@ -33,6 +34,7 @@ class FlutterDriver extends BaseDriver {
   public socket: IsolateSocket | null = null;
   public locatorStrategies = [`key`, `css selector`];
   public proxydriver: any;
+  public proxydriverName: string;  // to store 'driver name' as proxy to.
   public device: any;
 
   // from BaseDriver
@@ -77,6 +79,7 @@ class FlutterDriver extends BaseDriver {
   constructor(opts, shouldValidateCaps: boolean) {
     super(opts, shouldValidateCaps);
     this.proxydriver = null;
+    this.proxydriverName = ``;
     this.device = null;
   }
 
@@ -124,12 +127,12 @@ class FlutterDriver extends BaseDriver {
         // All proxy commands needs to reset the FlutterDriver CommandTimeout
         // Here we manually reset the FlutterDriver CommandTimeout for commands that goe to proxy.
         this.clearNewCommandTimeout();
-        const result = this.proxydriver.executeCommand(cmd, ...args);
+        const result = await this.proxydriver.executeCommand(cmd, ...args);
         this.startNewCommandTimeout(cmd);
         return result;
       } else {
         logger.debug(`Executing Flutter driver command '${cmd}'`);
-        return super.executeCommand(cmd, ...args);
+        return await super.executeCommand(cmd, ...args);
       }
     } else {
       logger.debug(`Command Error '${cmd}'`);
@@ -149,8 +152,11 @@ class FlutterDriver extends BaseDriver {
 
   public proxyActive(_) {
     // In WebView context, all request should got to each driver
-    // so that they can handle http request properly
-    return this.proxyWebViewActive;
+    // so that they can handle http request properly.
+    // On iOS, WebVie context is handled by XCUITest driver while Android is by chromedriver.
+    // It measn XCUITest driver should keep the XCUITest driver as a proxy,
+    // while UIAutomator2 driver should proxy to chromedriver instead of UIA2 proxy.
+    return this.proxyWebViewActive && this.proxydriverName !== IOS_DEVICE_NAME;
   }
 
   public canProxy(_) {

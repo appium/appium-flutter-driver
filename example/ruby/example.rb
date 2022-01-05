@@ -11,7 +11,7 @@ class ExampleTests < Minitest::Test
       platformName: 'iOS',
       automationName: 'flutter',
       platformVersion: '15.0',
-      deviceName: 'iPhone 8',
+      deviceName: 'iPhone 12 Pro',
       app: "#{Dir.pwd}/../app/app/Runner.zip"
     },
     appium_lib: {

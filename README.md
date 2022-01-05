@@ -37,8 +37,8 @@ This snippet, taken from [example dir](https://github.com/appium-userland/appium
 
 | Capability | Description | Example Values |
 | - | - | -|
-| retryBackoffTime | the time wait for socket connection retry for get flutter session (default 300000ms)|500|
-| maxRetryCount    | the count for socket connection retry for get flutter session (default 10)          | 20|
+| retryBackoffTime | the time wait for socket connection retry for get flutter session (default 3000ms)|500|
+| maxRetryCount    | the count for socket connection retry for get flutter session (default 30)          | 20|
 
 ```js
 const wdio = require('webdriverio');
@@ -165,9 +165,10 @@ Please replace them properly with your client.
 | [waitForAbsent](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitForAbsent.html) | :ok: | `driver.execute('flutter:waitForAbsent', buttonFinder)` | Widget |
 | [waitUntilNoTransientCallbacks](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitUntilNoTransientCallbacks.html) | :x: |  | Widget |
 | :question: | :ok: | `setContext` | Appium |
-| :question: | :warning: | `getCurrentContext` | Appium |
-| :question: | :warning: | `getContexts` | Appium |
-| :question: | :x: | `longTap` | Widget |
+| :question: | :ok: | `getCurrentContext` | Appium |
+| :question: | :ok: | `getContexts` | Appium |
+| :question: | :ok: | `driver.execute('flutter:longTap', find.byValueKey('increment'), {durationMilliseconds: 10000, frequency: 30})` | Widget |
+| :question: | :ok: | `driver.execute('flutter:waitForFirstFrame')` | Widget |
 
 ### Note
 - Flutter context does not support page source

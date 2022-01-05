@@ -138,7 +138,7 @@ export const executeElementCommand = async function(
   return data.response;
 };
 
-export const processLogToGetobservatory = (adbLogs: Array<{ message: string }>) => {
+export const processLogToGetobservatory = (adbLogs: [{ message: string }]) => {
   // https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183
   //  e.g. 'Observatory listening on http://127.0.0.1:52817/_w_SwaKs9-g=/'
   // https://github.com/flutter/flutter/blob/52ae102f182afaa0524d0d01d21b2d86d15a11dc/packages/flutter_tools/lib/src/resident_runner.dart#L1386-L1389
