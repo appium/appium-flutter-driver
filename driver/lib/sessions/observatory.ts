@@ -139,8 +139,12 @@ export const executeElementCommand = async function(
 };
 
 export const processLogToGetobservatory = (adbLogs: [{ message: string }]) => {
+  // https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183
+  //  e.g. 'Observatory listening on http://127.0.0.1:52817/_w_SwaKs9-g=/'
+  // https://github.com/flutter/flutter/blob/52ae102f182afaa0524d0d01d21b2d86d15a11dc/packages/flutter_tools/lib/src/resident_runner.dart#L1386-L1389
+  //  e.g. 'An Observatory debugger and profiler on ${device.device.name} is available at: http://127.0.0.1:52817/_w_SwaKs9-g=/'
   const observatoryUriRegEx = new RegExp(
-    `Observatory listening on ((http|\/\/)[a-zA-Z0-9:/=_\\-\.\\[\\]]+)`,
+    `(Observatory listening on |An Observatory debugger and profiler on\\s.+\\sis available at: )((http|\/\/)[a-zA-Z0-9:/=_\\-\.\\[\\]]+)`,
   );
   // @ts-ignore
   const observatoryMatch = adbLogs
@@ -153,7 +157,7 @@ export const processLogToGetobservatory = (adbLogs: [{ message: string }]) => {
     throw new Error(`can't find Observatory`);
   }
 
-  const dartObservatoryURI = observatoryMatch[1];
+  const dartObservatoryURI = observatoryMatch[2];
   const dartObservatoryURL = new URL(dartObservatoryURI);
 
   dartObservatoryURL.protocol = `ws`;
