@@ -155,7 +155,7 @@ Please replace them properly with your client.
 | [scrollIntoView](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollIntoView.html) | :ok: | `driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1})` | Widget |
 | [scrollUntilVisible](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollUntilVisible.html) | :ok: | `driver.execute('flutter:scrollUntilVisible', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400});` | Widget |
 | [setSemantics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setSemantics.html) | :x: |  | Session |
-| [setTextEntryEmulation](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setTextEntryEmulation.html) | :x: |  | Session |
+| [setTextEntryEmulation](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setTextEntryEmulation.html) | :ok: | `driver.execute('flutter:setTextEntryEmulation', false)` | Session |
 | [startTracing](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/startTracing.html) | :x: |  | Session |
 | [stopTracingAndDownloadTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/stopTracingAndDownloadTimeline.html) | :x: |  | Session |
 | [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html) | :ok: | [`driver.elementClick(buttonFinder)`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L46) | Widget |
