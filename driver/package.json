@@ -48,7 +48,7 @@
     "appium-xcuitest-driver": "^3.17.0",
     "bluebird": "^3.1.1",
     "rpc-websockets": "^7.4.16",
-    "appium-adb": "^8.8.0",
+    "appium-adb": "^9.0.0",
     "appium-ios-device": "^1.7.1",
     "appium-support": "^2.47.1",
     "portscanner": "2.2.0",
