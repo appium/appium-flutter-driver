@@ -7,11 +7,11 @@ on:
   push:
     paths:
       - 'driver/**'
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
     paths:
       - 'driver/**'
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:

@@ -4,11 +4,11 @@ on:
   push:
     paths:
       - 'finder/python/**'
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
     paths:
       - 'finder/python/**'
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:

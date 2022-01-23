@@ -11,11 +11,11 @@ on:
   push:
     paths:
       - 'finder/ruby/**'
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
     paths:
       - 'finder/ruby/**'
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   test:
