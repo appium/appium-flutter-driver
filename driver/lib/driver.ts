@@ -1,4 +1,5 @@
-import { BaseDriver, errors } from 'appium-base-driver';
+// @ts-ignore: no 'errors' export module
+import { BaseDriver, errors } from '@appium/base-driver';
 import { IsolateSocket } from './sessions/isolate_socket';
 
 import { IDesiredCapConstraints } from './desired-caps';
@@ -28,7 +29,7 @@ const WEBVIEW_NO_PROXY = [
   [`POST`, new RegExp(`^/session/[^/]+/orientation`)],
   [`POST`, new RegExp(`^/session/[^/]+/touch/multi/perform`)],
   [`POST`, new RegExp(`^/session/[^/]+/touch/perform`)],
-];
+] as [string, RegExp][];
 
 class FlutterDriver extends BaseDriver {
   public socket: IsolateSocket | null = null;
@@ -83,9 +84,9 @@ class FlutterDriver extends BaseDriver {
     this.device = null;
   }
 
-  public async createSession(...args) {
-    const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)));
-    return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args)));
+  public async createSession(...args): Promise<[string, {}]> {
+    const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)) as [{}, {}, {}]);
+    return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args))) as Promise<[string, {}]>;
   }
 
   public async deleteSession() {
@@ -142,15 +143,15 @@ class FlutterDriver extends BaseDriver {
     }
   }
 
-  public getProxyAvoidList(_) {
+  public getProxyAvoidList(): [string, RegExp][] {
     if ([FLUTTER_CONTEXT_NAME, NATIVE_CONTEXT_NAME].includes(this.currentContext)) {
-      return;
+      return [];
     }
 
     return WEBVIEW_NO_PROXY;
   }
 
-  public proxyActive(_) {
+  public proxyActive() {
     // In WebView context, all request should got to each driver
     // so that they can handle http request properly.
     // On iOS, WebVie context is handled by XCUITest driver while Android is by chromedriver.
@@ -159,7 +160,7 @@ class FlutterDriver extends BaseDriver {
     return this.proxyWebViewActive && this.proxydriverName !== IOS_DEVICE_NAME;
   }
 
-  public canProxy(_) {
+  public canProxy() {
     // As same as proxyActive, all request should got to each driver
     // so that they can handle http request properly
     return this.proxyWebViewActive;
