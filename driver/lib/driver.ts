@@ -85,8 +85,8 @@ class FlutterDriver extends BaseDriver {
   }
 
   public async createSession(...args): Promise<[string, {}]> {
-    const [sessionId, caps] = await super.createSession(...args as [{}, {}, {}]);
-    return createSession.bind(this)(sessionId, caps, ...args) as Promise<[string, {}]>;
+    const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)) as [{}, {}, {}]);
+    return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args))) as Promise<[string, {}]>;
   }
 
   public async deleteSession() {
