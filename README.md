@@ -5,9 +5,7 @@
 
 Appium Flutter Driver is a test automation tool for [Flutter](https://flutter.dev) apps on multiple platforms/OSes. Appium Flutter Driver is part of the [Appium](https://github.com/appium/appium) mobile test automation tool maintained by community. Feel free to create PRs to fix issues/improve this driver.
 
-## :warning: pre-0.1.x version
-
-This package is in early stage of experiment, breaking changes and breaking codes are to be expected! All contributions, including non-code, are welcome! See [TODO](#todo) list below.
+This package is still experiment, breaking changes and breaking codes are to be expected! All contributions, including non-code, are welcome! See [TODO](#todo) list below.
 
 ## Flutter Driver vs Appium Flutter Driver
 Even though Flutter comes with superb integration test support, [Flutter Driver](https://flutter.dev/docs/cookbook/testing/integration/introduction), it does not fit some specific use cases, such as
@@ -20,7 +18,8 @@ Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https:/
 
 ## Installation
 
-In order to use `appium-flutter-driver`, we need to use `appium` version `1.16.0` or higher
+In order to use `appium-flutter-driver`, we need to use `appium` version `1.16.0` or higher.
+The version 1.0.0 and higher requires Appium 2.0.
 
 ```
 npm i -g appium-flutter-driver
