@@ -190,6 +190,7 @@ Please replace them properly with your client.
 
 ```
 $ cd driver
+$ npm shrinkwrap  # to specify the dependencies in the npm module
 $ npm version <major|minor|patch>
 $ git commit -am 'chore: bump version'
 $ git tag <version number> # e.g. git tag v0.0.32
