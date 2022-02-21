@@ -9,6 +9,8 @@ module Appium
 
     # Handles flutter elements as Appium Elements
     class Element < ::Selenium::WebDriver::Element
+      attr_reader :id
+
       def initialize(driver, finder:)
         @bridge = driver.bridge
         @id = finder
