@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'appium_flutter_finder', '~> 0.2'
+gem 'appium_flutter_finder', '~> 0.4'
 gem 'appium_lib_core', '~> 5.0'
 gem 'minitest', '~> 5.0'
