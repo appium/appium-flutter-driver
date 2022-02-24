@@ -23,3 +23,9 @@ The sample app has `enableFlutterDriverExtension` in the main.dart for testing p
    // This call ensures the Flutter binding has been set up before creating the
    // MethodChannel-based model.
 ```
+
+## iOS app changes
+
+Add accessibility labels for 
+`Current counter` -> `currentCounter`
+ `Launch FLutter ViewController` -> `launchFlutter`
