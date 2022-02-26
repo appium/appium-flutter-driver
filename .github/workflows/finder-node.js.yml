@@ -5,11 +5,11 @@ name: Finer for NodeJS
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'finder/nodejs/**'
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - 'finder/nodejs/**'
 

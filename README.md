@@ -5,9 +5,7 @@
 
 Appium Flutter Driver is a test automation tool for [Flutter](https://flutter.dev) apps on multiple platforms/OSes. Appium Flutter Driver is part of the [Appium](https://github.com/appium/appium) mobile test automation tool maintained by community. Feel free to create PRs to fix issues/improve this driver.
 
-## :warning: pre-0.1.x version
-
-This package is in early stage of experiment, breaking changes and breaking codes are to be expected! All contributions, including non-code, are welcome! See [TODO](#todo) list below.
+This package is still experiment, breaking changes and breaking codes are to be expected! All contributions, including non-code, are welcome! See [TODO](#todo) list below.
 
 ## Flutter Driver vs Appium Flutter Driver
 Even though Flutter comes with superb integration test support, [Flutter Driver](https://flutter.dev/docs/cookbook/testing/integration/introduction), it does not fit some specific use cases, such as
@@ -20,7 +18,16 @@ Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https:/
 
 ## Installation
 
-In order to use `appium-flutter-driver`, we need to use `appium` version `1.16.0` or higher
+In order to use `appium-flutter-driver`, we need to use `appium` version `1.16.0` or higher.
+The version 1.0.0 and higher requires Appium 2.0.
+
+With Appium 2:
+```
+appium driver install flutter
+```
+
+
+With Appium 1:
 
 ```
 npm i -g appium-flutter-driver
@@ -29,16 +36,16 @@ npm i -g appium-flutter-driver
 ## Usage
 If you are unfamiliar with running Appium tests, start with [Appium Getting Starting](http://appium.io/docs/en/about-appium/getting-started/) first.
 
-Your Flutter app-under-test (AUT) must be compiled in `debug` or `profile` mode, because `Flutter Driver does not support running in release mode.`. Also, ensure that your Flutter AUT has `enableFlutterDriverExtension()` before `runApp`.
+Your Flutter app-under-test (AUT) must be compiled in `debug` or `profile` mode, because `Flutter Driver does not support running in release mode.`. Also, ensure that your Flutter AUT has `enableFlutterDriverExtension()` before `runApp`. Then, please make sure your app imported [`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html) package as well.
 
-This snippet, taken from [example dir](https://github.com/truongsinh/appium-flutter-driver/tree/master/example), is a script written as an appium client with `webdriverio`, and assumes you have `appium` server (with `appium-flutter-driver` installed) running on the same host and default port (`4723`). For more info, see example's [README.md](https://github.com/truongsinh/appium-flutter-driver/tree/master/example/README.md)
+This snippet, taken from [example dir](https://github.com/appium-userland/appium-flutter-driver/tree/main/example), is a script written as an appium client with `webdriverio`, and assumes you have `appium` server (with `appium-flutter-driver` installed) running on the same host and default port (`4723`). For more info, see example's [README.md](https://github.com/truongsinh/appium-flutter-driver/tree/main/example/README.md)
 
 ### Desired Capabilities for flutter driver only
 
 | Capability | Description | Example Values |
 | - | - | -|
-| retryBackoffTime | the time wait for socket connection retry for get flutter session (default 300000ms)|500|
-| maxRetryCount    | the count for socket connection retry for get flutter session (default 10)          | 20|
+| retryBackoffTime | the time wait for socket connection retry for get flutter session (default 3000ms)|500|
+| maxRetryCount    | the count for socket connection retry for get flutter session (default 30)          | 20|
 
 ```js
 const wdio = require('webdriverio');
@@ -155,7 +162,7 @@ Please replace them properly with your client.
 | [scrollIntoView](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollIntoView.html) | :ok: | `driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1})` | Widget |
 | [scrollUntilVisible](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollUntilVisible.html) | :ok: | `driver.execute('flutter:scrollUntilVisible', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400});` | Widget |
 | [setSemantics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setSemantics.html) | :x: |  | Session |
-| [setTextEntryEmulation](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setTextEntryEmulation.html) | :x: |  | Session |
+| [setTextEntryEmulation](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setTextEntryEmulation.html) | :ok: | `driver.execute('flutter:setTextEntryEmulation', false)` | Session |
 | [startTracing](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/startTracing.html) | :x: |  | Session |
 | [stopTracingAndDownloadTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/stopTracingAndDownloadTimeline.html) | :x: |  | Session |
 | [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html) | :ok: | [`driver.elementClick(buttonFinder)`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L46) | Widget |
@@ -165,13 +172,15 @@ Please replace them properly with your client.
 | [waitForAbsent](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitForAbsent.html) | :ok: | `driver.execute('flutter:waitForAbsent', buttonFinder)` | Widget |
 | [waitUntilNoTransientCallbacks](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitUntilNoTransientCallbacks.html) | :x: |  | Widget |
 | :question: | :ok: | `setContext` | Appium |
-| :question: | :warning: | `getCurrentContext` | Appium |
-| :question: | :warning: | `getContexts` | Appium |
-| :question: | :x: | `longTap` | Widget |
+| :question: | :ok: | `getCurrentContext` | Appium |
+| :question: | :ok: | `getContexts` | Appium |
+| :question: | :ok: | `driver.execute('flutter:longTap', find.byValueKey('increment'), {durationMilliseconds: 10000, frequency: 30})` | Widget |
+| :question: | :ok: | `driver.execute('flutter:waitForFirstFrame')` | Widget |
 
 ### Note
 - Flutter context does not support page source
     - Please use `getRenderTree` command instead
+- You can send appium-xcuitest-driver/appium-uiautomator2-driver commands in `NATIVE_APP` context
 
 ## TODO
 - [ ] CI (unit test / integration test with demo app)
@@ -189,9 +198,10 @@ Please replace them properly with your client.
 
 ```
 $ cd driver
+$ npm shrinkwrap  # to specify the dependencies in the npm module
 $ npm version <major|minor|patch>
 $ git commit -am 'chore: bump version'
-$ git tag <version number> # e.g. git checkout v0.0.32
+$ git tag <version number> # e.g. git tag v0.0.32
 $ git push origin v0.0.32
 $ npm publish
 ```

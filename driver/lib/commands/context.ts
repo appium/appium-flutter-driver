@@ -3,7 +3,7 @@ import { FlutterDriver } from '../driver';
 export const FLUTTER_CONTEXT_NAME = `FLUTTER`;
 export const NATIVE_CONTEXT_NAME = `NATIVE_APP`;
 
-export const getCurrentContext = function(this: FlutterDriver) {
+export const getCurrentContext = async function(this: FlutterDriver): Promise<string> {
   return this.currentContext;
 };
 

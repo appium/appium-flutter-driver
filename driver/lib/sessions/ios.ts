@@ -1,6 +1,6 @@
 // @ts-ignore
 import { utilities } from 'appium-ios-device';
-import { timing } from 'appium-support';
+import { timing } from '@appium/support';
 import XCUITestDriver from 'appium-xcuitest-driver';
 import { waitForCondition } from 'asyncbox';
 import B from 'bluebird';
@@ -11,6 +11,7 @@ import { connectSocket, processLogToGetobservatory } from './observatory';
 
 const LOCALHOST = `127.0.0.1`;
 const PORT_CLOSE_TIMEOUT = 15 * 1000; // 15 seconds
+export const DRIVER_NAME = `XCUITest`;
 
 const setupNewIOSDriver = async (...args) => {
   const iosArgs = {

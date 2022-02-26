@@ -5,7 +5,6 @@ version = "0.0.4"
 
 plugins {
     id("kotlinx-serialization") version "1.3.40"
-    `build-scan`
     `maven-publish`
     kotlin("jvm") version "1.3.40" 
     id("org.jetbrains.dokka") version "0.9.17"
@@ -20,13 +19,6 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.14.0")
     implementation ("io.appium:java-client:2.1.0")
     testImplementation("junit:junit:4.12")
-}
-
-buildScan {
-    termsOfServiceUrl = "https://gradle.com/terms-of-service" 
-    termsOfServiceAgree = "yes"
-
-    publishAlways() 
 }
 
 tasks.dokka {    

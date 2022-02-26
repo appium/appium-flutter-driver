@@ -13,18 +13,26 @@ export const ancestor = (args: {
   of: SerializableFinder;
   matching: SerializableFinder;
   matchRoot?: boolean;
+  firstMatchOnly?: boolean;
 }) => {
-  const { of, matching, matchRoot = false } = args;
+  const { of, matching, matchRoot = false, firstMatchOnly = false} = args;
   const a: any = {
     finderType: `Ancestor`,
+    firstMatchOnly,
     matchRoot,
   };
+  const ofParam: any = {};
   Object.entries(deserialize(of)).forEach(
-    ([key, value]) => (a[`of_${key}`] = value),
+    ([key, value]) => (ofParam[key] = value),
   );
+  a[`of`] = JSON.stringify(ofParam);
+
+  const matchingPara: any = {};
   Object.entries(deserialize(matching)).forEach(
-    ([key, value]) => (a[`matching_${key}`] = value),
+    ([key, value]) => (matchingPara[key] = value),
   );
+  a[`matching`] = JSON.stringify(matchingPara);
+
   return serialize(a);
 };
 
@@ -58,18 +66,26 @@ export const descendant = (args: {
   of: SerializableFinder;
   matching: SerializableFinder;
   matchRoot?: boolean;
+  firstMatchOnly?: boolean;
 }) => {
-  const { of, matching, matchRoot = false } = args;
+  const { of, matching, matchRoot = false , firstMatchOnly = false} = args;
   const a: any = {
     finderType: `Descendant`,
+    firstMatchOnly,
     matchRoot,
   };
+  const ofParam: any = {};
   Object.entries(deserialize(of)).forEach(
-    ([key, value]) => (a[`of_${key}`] = value),
+    ([key, value]) => (ofParam[key] = value),
   );
+  a[`of`] = JSON.stringify(ofParam);
+
+  const matchingParam: any = {};
   Object.entries(deserialize(matching)).forEach(
-    ([key, value]) => (a[`matching_${key}`] = value),
+    ([key, value]) => (matchingParam[key] = value),
   );
+  a[`matching`] = JSON.stringify(matchingParam);
+
   return serialize(a);
 };
 

@@ -48,6 +48,8 @@ export const execute = async function(
       return scrollUntilVisible(this, args[0], args[1]);
     case `scrollIntoView`:
       return scrollIntoView(this, args[0], args[1]);
+    case `setTextEntryEmulation`:
+      return setTextEntryEmulation(this, args[0]);
     case `enterText`:
       return enterText(this, args[0]);
     case `requestData`:
@@ -89,7 +91,7 @@ const forceGC = async (self: FlutterDriver) => {
   }
 };
 
-const anyPromise = (promises: Array<Promise<any>>) => {
+const anyPromise = (promises: Promise<any>[]) => {
   const newpArray = promises.map((p) =>
     p.then(
       (resolvedValue) => Promise.reject(resolvedValue),
@@ -148,3 +150,6 @@ const setFrameSync = async (self, bool, durationMilliseconds) =>
     enabled: bool,
     timeout: durationMilliseconds * 1000,
   });
+
+const setTextEntryEmulation = async (self: FlutterDriver, enabled: boolean) =>
+  await self.socket!.executeSocketCommand({ command: `set_text_entry_emulation`, enabled });

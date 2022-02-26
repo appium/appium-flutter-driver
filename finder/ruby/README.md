@@ -43,7 +43,12 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Changelog
-
+- 0.4.1
+    - Add `attr_reader` for `Appium::Flutter::Element#id`
+- 0.4.0
+    - Bump appium_lib_core version to v5+
+- 0.3, 0.3.1
+    - Add `first_match_only` option in `by_ancestor` and `by_descendant`
 - 0.2.1
     - Fix `by_ancestor` and `by_descendant`
         - https://github.com/truongsinh/appium-flutter-driver/pull/165#issuecomment-877928553
@@ -52,4 +57,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/truongsinh/appium-flutter-driver/tree/master/finder/ruby .
+Bug reports and pull requests are welcome on GitHub at https://github.com/truongsinh/appium-flutter-driver/tree/main/finder/ruby .

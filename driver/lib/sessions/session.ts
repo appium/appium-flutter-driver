@@ -1,8 +1,8 @@
 import { FlutterDriver } from '../driver';
 import { log } from '../logger';
 
-import { startAndroidSession, connectAndroidSession} from './android';
-import { startIOSSession, connectIOSSession } from './ios';
+import { DRIVER_NAME as ANDROID_DEVICE_NAME, startAndroidSession, connectAndroidSession } from './android';
+import { DRIVER_NAME as IOS_DEVICE_NAME, startIOSSession, connectIOSSession } from './ios';
 
 export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: any) {
   try {
@@ -40,12 +40,14 @@ export const createSession = async function(this: FlutterDriver, sessionId, caps
             this.proxydriver.relaxedSecurityEnabled = this.relaxedSecurityEnabled;
             this.proxydriver.denyInsecure = this.denyInsecure;
             this.proxydriver.allowInsecure = this.allowInsecure;
+            this.proxydriverName = IOS_DEVICE_NAME;
             break;
           case `android`:
             [this.proxydriver, this.socket] = await startAndroidSession(caps, ...args);
             this.proxydriver.relaxedSecurityEnabled = this.relaxedSecurityEnabled;
             this.proxydriver.denyInsecure = this.denyInsecure;
             this.proxydriver.allowInsecure = this.allowInsecure;
+            this.proxydriverName = ANDROID_DEVICE_NAME;
             break;
           default:
             log.errorAndThrow(
