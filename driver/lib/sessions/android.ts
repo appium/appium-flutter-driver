@@ -36,17 +36,41 @@ export const startAndroidSession = async (caps, ...args) => {
 
 };
 
-export const connectAndroidSession = async (androiddriver, caps) => {
-  log.info(`Connecting to an IOS proxy session`);
+export const connectAndroidSession = async (
+  androiddriver,
+  caps,
+  RETRY_BACKOFF: any = 3000,
+  MAX_RETRY_COUNT: any = 10,
+  ) => {
+  log.info(`Connecting to an Android proxy session`);
   let observatoryWsUri;
   try {
-    observatoryWsUri = await getObservatoryWsUri(androiddriver, caps);
+    await androiddriver.adb.stopLogcat();
+    await androiddriver.adb.startLogcat({
+      format: androiddriver.opts.logcatFormat,
+      filterSpecs: androiddriver.opts.logcatFilterSpecs,
+      clearDeviceLogsOnStart: true
+    });
+
+    let retryCount = 0;
+    while (true) {
+      try {
+        observatoryWsUri = await getObservatoryWsUri(androiddriver, caps);
+        break;
+      } catch (e) {
+        if (retryCount < MAX_RETRY_COUNT) {
+          retryCount += 1;
+          await new Promise((r) => setTimeout(r, RETRY_BACKOFF));
+          continue;
+        }
+        throw e;
+      }
+    }
   } catch (e) {
     await androiddriver.deleteSession();
     throw e;
   }
   return Promise.all([
-    androiddriver,
     connectSocket(observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
   ]);
 };
