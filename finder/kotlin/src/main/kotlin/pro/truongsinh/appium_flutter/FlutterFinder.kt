@@ -1,9 +1,7 @@
 package pro.truongsinh.appium_flutter
 
 import java.util.regex.Pattern
-import java.io.File
 
-import io.appium.java_client.MobileElement
 import org.openqa.selenium.remote.RemoteWebDriver
 import org.openqa.selenium.remote.FileDetector
 import pro.truongsinh.appium_flutter.finder.FlutterElement

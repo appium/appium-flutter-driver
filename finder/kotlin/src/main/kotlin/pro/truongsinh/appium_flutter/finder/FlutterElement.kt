@@ -1,8 +1,8 @@
 package pro.truongsinh.appium_flutter.finder
 
-import io.appium.java_client.MobileElement
+import org.openqa.selenium.remote.RemoteWebElement
 
-public class FlutterElement : MobileElement {
+public class FlutterElement : RemoteWebElement {
   private var _rawMap: Map<String, *>
   constructor(m: Map<String, *>) {
     _rawMap = m
