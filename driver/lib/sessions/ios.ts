@@ -27,6 +27,14 @@ const setupNewIOSDriver = async (...args) => {
 export const startIOSSession = async (caps, ...args) => {
   log.info(`Starting an IOS proxy session`);
   const iosdriver = await setupNewIOSDriver(...args);
+
+  if (caps.observatoryWsUri) {
+    return Promise.all([
+      iosdriver,
+      connectSocket(caps.observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
+    ]);
+  }
+
   let observatoryWsUri;
   try {
     observatoryWsUri = await getObservatoryWsUri(iosdriver);

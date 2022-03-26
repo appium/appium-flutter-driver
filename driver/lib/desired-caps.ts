@@ -15,6 +15,9 @@ export interface IDesiredCapConstraints {
   udid: any;
   retryBackoffTime: any;
   maxRetryCount: any;
+  observatoryWsUri: {
+    isString: boolean;
+  }
 }
 
 export const desiredCapConstraints: IDesiredCapConstraints = {
@@ -46,4 +49,7 @@ export const desiredCapConstraints: IDesiredCapConstraints = {
   udid: {
     isString: true,
   },
+  observatoryWsUri: {
+    isString: true,
+  }
 };
