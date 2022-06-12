@@ -1,8 +1,8 @@
 // @ts-ignore: no 'errors' export module
 import { BaseDriver, errors } from '@appium/base-driver';
+import { W3CCapabilities, Capabilities, DriverData } from '@appium/types';
 import { IsolateSocket } from './sessions/isolate_socket';
 
-import { IDesiredCapConstraints } from './desired-caps';
 import { log as logger } from './logger';
 
 import { DRIVER_NAME as IOS_DEVICE_NAME } from './sessions/ios';
@@ -85,8 +85,8 @@ class FlutterDriver extends BaseDriver {
   }
 
   public async createSession(...args): Promise<[string, {}]> {
-    const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)) as [{}, {}, {}]);
-    return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args))) as Promise<[string, {}]>;
+    const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)) as [W3CCapabilities, W3CCapabilities, W3CCapabilities, DriverData[]]);
+    return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args))) as Promise<[string, {}]>;  // @ts-ignore
   }
 
   public async deleteSession() {
@@ -104,7 +104,7 @@ class FlutterDriver extends BaseDriver {
     super.validateLocatorStrategy(strategy, false);
   }
 
-  public validateDesiredCaps(caps: IDesiredCapConstraints) {
+  public validateDesiredCaps(caps: Capabilities) {
     // check with the base class, and return if it fails
     const res = super.validateDesiredCaps(caps);
     if (!res) {
