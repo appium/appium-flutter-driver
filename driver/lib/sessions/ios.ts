@@ -63,7 +63,7 @@ const waitForPortIsAvailable = async (port) => {
             return true;
           }
         } catch (ign) {
-          log.console.warn(``);
+          log.warn(``);
         }
         return false;
       }, {
