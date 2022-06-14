@@ -27,24 +27,9 @@ const setupNewIOSDriver = async (...args) => {
 export const startIOSSession = async (caps, ...args) => {
   log.info(`Starting an IOS proxy session`);
   const iosdriver = await setupNewIOSDriver(...args);
-
-  if (caps.observatoryWsUri) {
-    return Promise.all([
-      iosdriver,
-      connectSocket(caps.observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
-    ]);
-  }
-
-  let observatoryWsUri;
-  try {
-    observatoryWsUri = await getObservatoryWsUri(iosdriver);
-  } catch (e) {
-    await iosdriver.deleteSession();
-    throw e;
-  }
   return Promise.all([
     iosdriver,
-    connectSocket(observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
+    connectSocket(getObservatoryWsUri, iosdriver, caps),
   ]);
 };
 
@@ -82,7 +67,7 @@ const waitForPortIsAvailable = async (port) => {
   }
 };
 
-export const getObservatoryWsUri = async (proxydriver) => {
+export const getObservatoryWsUri = async (proxydriver, _caps) => {
   const urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
   const { udid } = proxydriver.opts;
 

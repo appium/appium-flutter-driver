@@ -7,19 +7,34 @@ import { IsolateSocket } from './isolate_socket';
 
 // SOCKETS
 export const connectSocket = async (
-  dartObservatoryURL: string,
-  RETRY_BACKOFF: any = 3000,
-  MAX_RETRY_COUNT: any = 30) => {
+  getObservatoryWsUri,
+  driver: any,
+  caps: any) => {
+
+  const retryBackoff = caps.retryBackoffTime || 3000
+  const maxRetryCount = caps.maxRetryCount || 30
+
   let retryCount = 0;
   let connectedSocket: IsolateSocket | null = null;
-  while (retryCount < MAX_RETRY_COUNT && !connectedSocket) {
+  let dartObservatoryURL = ``;
+  let shouldUseCapsObservatoryURL = false
+  if (caps.observatoryWsUri) {
+    dartObservatoryURL = caps.observatoryWsUri;
+    shouldUseCapsObservatoryURL = true;
+  }
+
+  while (retryCount < maxRetryCount && !connectedSocket) {
     if (retryCount > 0) {
       log.info(
-        `Waiting ` + RETRY_BACKOFF / 1000 + ` seconds before trying...`,
+        `Waiting ` + retryBackoff / 1000 + ` seconds before trying...`,
       );
-      await new Promise((r) => setTimeout(r, RETRY_BACKOFF));
+      await new Promise((r) => setTimeout(r, retryBackoff));
     }
     log.info(`Attempt #` + (retryCount + 1));
+
+    if (!shouldUseCapsObservatoryURL) {
+      dartObservatoryURL = await getObservatoryWsUri(driver, caps)
+    }
 
     const connectedPromise = new Promise<IsolateSocket | null>((resolve) => {
       log.info(
@@ -66,7 +81,7 @@ export const connectSocket = async (
             log.errorAndThrow(JSON.stringify(e));
           }
         };
-        log.info(`Connected to ${dartObservatoryURL}`);
+        log.info(`Connecting to ${dartObservatoryURL}`);
         const vm = await socket.call(`getVM`) as {
           isolates: [{
             name: string,
@@ -74,10 +89,12 @@ export const connectSocket = async (
           }],
         };
         log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
-        const mainIsolateData = vm.isolates.find((e) => e.name === `main`);
+        // To accept 'main.dart:main()' and 'main'
+        const mainIsolateData = vm.isolates.find((e) => e.name.includes(`main`));
         if (!mainIsolateData) {
           log.error(`Cannot get Dart main isolate info`);
           removeListenerAndResolve(null);
+          socket.close();
           return;
         }
         socket.isolateId = mainIsolateData.id;
@@ -110,9 +127,9 @@ export const connectSocket = async (
     retryCount++;
     connectedSocket = await connectedPromise;
 
-    if (!connectedSocket && retryCount === MAX_RETRY_COUNT - 1) {
+    if (!connectedSocket && retryCount === maxRetryCount - 1) {
       log.errorAndThrow(
-        `Failed to connect ` + MAX_RETRY_COUNT + ` times. Aborting.`,
+        `Failed to connect ` + maxRetryCount + ` times. Aborting.`,
       );
     }
   }
