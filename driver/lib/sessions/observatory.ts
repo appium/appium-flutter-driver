@@ -90,7 +90,7 @@ export const connectSocket = async (
         };
         log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
         // To accept 'main.dart:main()' and 'main'
-        const mainIsolateData = vm.isolates.find((e) => e.name.includes('main'));
+        const mainIsolateData = vm.isolates.find((e) => e.name.includes(`main`));
         if (!mainIsolateData) {
           log.error(`Cannot get Dart main isolate info`);
           removeListenerAndResolve(null);
