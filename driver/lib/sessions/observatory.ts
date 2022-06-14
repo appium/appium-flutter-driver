@@ -7,7 +7,7 @@ import { IsolateSocket } from './isolate_socket';
 
 // SOCKETS
 export const connectSocket = async (
-  getObservatoryWsUri: Function,
+  getObservatoryWsUri,
   driver: any,
   caps: any) => {
 
@@ -16,7 +16,7 @@ export const connectSocket = async (
 
   let retryCount = 0;
   let connectedSocket: IsolateSocket | null = null;
-  let dartObservatoryURL = '';
+  let dartObservatoryURL = ``;
   let shouldUseCapsObservatoryURL = false
   if (caps.observatoryWsUri) {
     dartObservatoryURL = caps.observatoryWsUri;
@@ -89,7 +89,8 @@ export const connectSocket = async (
           }],
         };
         log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
-        const mainIsolateData = vm.isolates.find((e) => e.name === `main`);
+        // To accept 'main.dart:main()' and 'main'
+        const mainIsolateData = vm.isolates.find((e) => e.name.includes('main'));
         if (!mainIsolateData) {
           log.error(`Cannot get Dart main isolate info`);
           removeListenerAndResolve(null);
