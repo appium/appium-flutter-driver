@@ -1,6 +1,6 @@
 import { FlutterDriver } from '../../driver';
 
-const waitForConstructor = (command: `waitForAbsent` | `waitFor`) => async (
+const waitForConstructor = (command: `waitForAbsent` | `waitFor` | `waitForTappable`) => async (
   self: FlutterDriver,
   elementBase64: string,
   durationMilliseconds?: number,
@@ -24,3 +24,5 @@ const waitForConstructor = (command: `waitForAbsent` | `waitFor`) => async (
 export const waitForAbsent = waitForConstructor(`waitForAbsent`);
 
 export const waitFor = waitForConstructor(`waitFor`);
+
+export const waitForTappable = waitForConstructor(`waitForTappable`);

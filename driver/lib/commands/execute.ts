@@ -1,6 +1,6 @@
 import { FlutterDriver } from '../driver';
 import { longTap, scroll, scrollIntoView, scrollUntilVisible } from './execute/scroll';
-import { waitFor, waitForAbsent } from './execute/wait';
+import { waitFor, waitForAbsent, waitForTappable } from './execute/wait';
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
 
 export const execute = async function(
@@ -42,6 +42,8 @@ export const execute = async function(
       return waitForAbsent(this, args[0], args[1]);
     case `waitFor`:
       return waitFor(this, args[0], args[1]);
+    case `waitForTappable`:
+      return waitForTappable(this, args[0], args[1]);
     case `scroll`:
       return scroll(this, args[0], args[1]);
     case `scrollUntilVisible`:
