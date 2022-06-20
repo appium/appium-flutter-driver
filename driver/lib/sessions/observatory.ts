@@ -88,6 +88,7 @@ export const connectSocket = async (
             id: number,
           }],
         };
+        // TODO: checkc this value in the multiple engine case
         log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
         // To accept 'main.dart:main()' and 'main'
         const mainIsolateData = vm.isolates.find((e) => e.name.includes(`main`));
