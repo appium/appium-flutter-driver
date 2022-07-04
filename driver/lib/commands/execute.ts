@@ -18,6 +18,8 @@ export const execute = async function(
   switch (command) {
     case `getVMInfo`:
       return getVMInfo(this);
+    case `setIsolateId`:
+      return setIsolateId(this, args[0])
     case `checkHealth`:
       return checkHealth(this);
     case `clearTimeline`:
@@ -96,6 +98,13 @@ const forceGC = async (self: FlutterDriver) => {
   if (response.type !== `Success`) {
     throw new Error(`Could not forceGC, reponse was ${response}`);
   }
+};
+
+const setIsolateId = async (self: FlutterDriver, isolateId: string) => {
+  self.socket!.isolateId = isolateId;
+  return await self.socket!.call(`getIsolate`, {
+    isolateId: `${isolateId}`,
+  });
 };
 
 const anyPromise = (promises: Promise<any>[]) => {

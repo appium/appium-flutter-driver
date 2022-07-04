@@ -88,7 +88,6 @@ export const connectSocket = async (
             id: number,
           }],
         };
-        // TODO: checkc this value in the multiple engine case
         log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
         // To accept 'main.dart:main()' and 'main'
         const mainIsolateData = vm.isolates.find((e) => e.name.includes(`main`));
@@ -98,6 +97,7 @@ export const connectSocket = async (
           socket.close();
           return;
         }
+        // e.g. 'isolates/2978358234363215', '2978358234363215'
         socket.isolateId = mainIsolateData.id;
         // @todo check extension and do health check
         const isolate = await socket.call(`getIsolate`, {
