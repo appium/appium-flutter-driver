@@ -181,6 +181,11 @@ Please replace them properly with your client.
 | :question: | :ok: | `driver.execute('flutter:longTap', find.byValueKey('increment'), {durationMilliseconds: 10000, frequency: 30})` | Widget |
 | :question: | :ok: | `driver.execute('flutter:waitForFirstFrame')` | Widget |
 
+### Note
+- Flutter context does not support page source
+    - Please use `getRenderTree` command instead
+- You can send appium-xcuitest-driver/appium-uiautomator2-driver commands in `NATIVE_APP` context
+
 ## Change the flutter engine attache to
 
 1. Get available isolate ids
@@ -192,11 +197,6 @@ Please replace them properly with your client.
 info = driver.execute_script 'flutter:getVMInfo'
 driver.execute_script 'flutter:setIsolateId', info['isolates'][0]['id']
 ```
-
-### Note
-- Flutter context does not support page source
-    - Please use `getRenderTree` command instead
-- You can send appium-xcuitest-driver/appium-uiautomator2-driver commands in `NATIVE_APP` context
 
 ## TODO
 - [ ] CI (unit test / integration test with demo app)
