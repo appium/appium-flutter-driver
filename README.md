@@ -195,16 +195,15 @@ Please replace them properly with your client.
 ```ruby
 # ruby
 info = driver.execute_script 'flutter:getVMInfo'
+# Change the target engine to "info['isolates'][0]['id']"
 driver.execute_script 'flutter:setIsolateId', info['isolates'][0]['id']
 ```
 
 ## TODO
 - [ ] CI (unit test / integration test with demo app)
 - [ ] CD (automatic publish to npm)
-- [x] `finder` as a seperate package
 - [ ] switching context between Flutter and [AndroidView](https://api.flutter.dev/flutter/widgets/AndroidView-class.html)
 - [ ] switching context between Flutter and [UiKitView](https://api.flutter.dev/flutter/widgets/UiKitView-class.html)
-- [x] switching context between Flutter and [webview](https://pub.dev/packages/webview_flutter) (via UIA2/XCUITest WebView contexts)
 - [ ] Flutter-version-aware API
 - [ ] Error handling
 
@@ -214,6 +213,8 @@ driver.execute_script 'flutter:setIsolateId', info['isolates'][0]['id']
 
 ```
 $ cd driver
+$ npm run clean-dependency
+$ rm npm-shrinkwrap.json
 $ npm shrinkwrap  # to specify the dependencies in the npm module
 $ npm version <major|minor|patch>
 $ git commit -am 'chore: bump version'
