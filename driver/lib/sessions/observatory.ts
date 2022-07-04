@@ -138,6 +138,18 @@ export const connectSocket = async (
   return connectedSocket;
 };
 
+export const executeGetVMCommand = async function(this: FlutterDriver) {
+  log.debug(`>>> getVM`);
+  const vm = await this.socket!.call(`getVM`) as {
+    isolates: [{
+      name: string,
+      id: number,
+    }],
+  };
+  log.debug(`<<< ${JSON.stringify(vm)}`);
+  return vm;
+};
+
 export const executeElementCommand = async function(
   this: FlutterDriver,
   command: string,

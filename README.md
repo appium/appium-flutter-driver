@@ -173,6 +173,7 @@ Please replace them properly with your client.
 | [waitForAbsent](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitForAbsent.html) | :ok: | `driver.execute('flutter:waitForAbsent', buttonFinder)` | Widget |
 | [waitForTappable](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitForTappable.html) | :ok: | `driver.execute('flutter:waitForTappable', buttonFinder)` | Widget |
 | [waitUntilNoTransientCallbacks](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitUntilNoTransientCallbacks.html) | :x: |  | Widget |
+| - | :ok: | `getVMInfo` | System |
 | :question: | :ok: | `setContext` | Appium |
 | :question: | :ok: | `getCurrentContext` | Appium |
 | :question: | :ok: | `getContexts` | Appium |
@@ -183,6 +184,7 @@ Please replace them properly with your client.
 - Flutter context does not support page source
     - Please use `getRenderTree` command instead
 - You can send appium-xcuitest-driver/appium-uiautomator2-driver commands in `NATIVE_APP` context
+- `flutter:getVMInfo` returns the VM information
 
 ## TODO
 - [ ] CI (unit test / integration test with demo app)

@@ -16,6 +16,8 @@ export const execute = async function(
 
   const command = matching[1].trim();
   switch (command) {
+    case `getVMInfo`:
+      return getVMInfo(this);
     case `checkHealth`:
       return checkHealth(this);
     case `clearTimeline`:
@@ -69,6 +71,9 @@ export const execute = async function(
 
 const checkHealth = async (self: FlutterDriver) =>
   (await self.executeElementCommand(`get_health`)).status;
+
+const getVMInfo =async (self: FlutterDriver) =>
+  (await self.executeGetVMCommand());
 
 const getRenderTree = async (self: FlutterDriver) =>
   (await self.executeElementCommand(`get_render_tree`)).tree;
