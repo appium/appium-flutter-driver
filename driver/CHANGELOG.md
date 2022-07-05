@@ -1,6 +1,6 @@
 # Changelog
 
-## not yet
+## 1.4.0
 
 - Added `flutter:getIsolate` to get the isolate information [#298](https://github.com/appium-userland/appium-flutter-driver/pull/298)
 
