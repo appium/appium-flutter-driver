@@ -6,7 +6,8 @@ import { IsolateSocket } from './sessions/isolate_socket';
 import { log as logger } from './logger';
 
 import { DRIVER_NAME as IOS_DEVICE_NAME } from './sessions/ios';
-import { executeElementCommand, executeGetVMCommand } from './sessions/observatory';
+import { executeElementCommand, executeGetVMCommand,
+  executeGetIsolateCommand } from './sessions/observatory';
 import { createSession, deleteSession } from './sessions/session';
 
 import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
@@ -54,6 +55,7 @@ class FlutterDriver extends BaseDriver {
   // session
   public executeElementCommand = executeElementCommand;
   public executeGetVMCommand = executeGetVMCommand;
+  public executeGetIsolateCommand = executeGetIsolateCommand;
   public execute = execute;
   public executeAsync = execute;
 

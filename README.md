@@ -134,7 +134,7 @@ The below _WebDriver example_ is by webdriverio.
 `flutter:` prefix commands are [`mobile:` command in appium for Android and iOS](https://appium.io/docs/en/commands/mobile-command/).
 Please replace them properly with your client.
 
-| Flutter API | Status | WebDriver example | Scope |
+| Flutter API | Status | WebDriver example (JavaScript, webdriverio) | Scope |
 | - | - | - | - |
 | [FlutterDriver.connectedTo](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/FlutterDriver.connectedTo.html) | :ok: | [`wdio.remote(opts)`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L33) | Session |
 | [checkHealth](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/checkHealth.html) | :ok: | `driver.execute('flutter:checkHealth')` | Session |
@@ -175,9 +175,10 @@ Please replace them properly with your client.
 | [waitUntilNoTransientCallbacks](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitUntilNoTransientCallbacks.html) | :x: |  | Widget |
 | - | :ok: | `driver.execute('flutter:getVMInfo')` | System |
 | - | :ok: | `driver.execute('flutter:setIsolateId', 'isolates/2978358234363215')` | System |
-| :question: | :ok: | `setContext` | Appium |
-| :question: | :ok: | `getCurrentContext` | Appium |
-| :question: | :ok: | `getContexts` | Appium |
+| - | :ok: | `driver.execute('flutter:getIsolate', 'isolates/2978358234363215')` or `driver.execute('flutter:getIsolate')` | System |
+| - | :ok: | `setContext` | Appium |
+| - | :ok: | `getCurrentContext` | Appium |
+| - | :ok: | `getContexts` | Appium |
 | :question: | :ok: | `driver.execute('flutter:longTap', find.byValueKey('increment'), {durationMilliseconds: 10000, frequency: 30})` | Widget |
 | :question: | :ok: | `driver.execute('flutter:waitForFirstFrame')` | Widget |
 
@@ -190,7 +191,7 @@ Please replace them properly with your client.
 
 1. Get available isolate ids
     - `id` key in the value of `isolates` by `flutter:getVMInfo`
-2. et the id via `setIsolateId`
+2. Set the id via `setIsolateId`
 
 ```ruby
 # ruby
@@ -198,6 +199,14 @@ info = driver.execute_script 'flutter:getVMInfo'
 # Change the target engine to "info['isolates'][0]['id']"
 driver.execute_script 'flutter:setIsolateId', info['isolates'][0]['id']
 ```
+
+## Check current isolate, or a particular isolate
+
+1. Get available isolates
+    - `driver.execute('flutter:getVMInfo').isolates` (JS)
+2. Get a particular isolate or current isolate
+    - Current isolate: `driver.execute('flutter:getIsolate')` (JS)
+    - Particular isolate: `driver.execute('flutter:getIsolate', 'isolates/2978358234363215')` (JS)
 
 ## TODO
 - [ ] CI (unit test / integration test with demo app)
