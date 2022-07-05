@@ -58,6 +58,7 @@
     "asyncbox": "^2.3.1",
     "bluebird": "^3.1.1",
     "portscanner": "2.2.0",
-    "rpc-websockets": "^7.4.16"
+    "rpc-websockets": "^7.4.16",
+    "lodash": "^4.0.0"
   }
 }
