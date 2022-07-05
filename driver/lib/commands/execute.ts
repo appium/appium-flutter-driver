@@ -20,6 +20,8 @@ export const execute = async function(
       return getVMInfo(this);
     case `setIsolateId`:
       return setIsolateId(this, args[0])
+    case `getIsolate`:
+      return getIsolate(this, args[0])
     case `checkHealth`:
       return checkHealth(this);
     case `clearTimeline`:
@@ -106,6 +108,10 @@ const setIsolateId = async (self: FlutterDriver, isolateId: string) => {
     isolateId: `${isolateId}`,
   });
 };
+
+const getIsolate = async (self: FlutterDriver, isolateId: string|undefined) => {
+  return await self.executeGetIsolateCommand(isolateId || self.socket!.isolateId);
+}
 
 const anyPromise = (promises: Promise<any>[]) => {
   const newpArray = promises.map((p) =>

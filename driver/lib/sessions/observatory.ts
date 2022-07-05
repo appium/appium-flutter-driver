@@ -1,9 +1,11 @@
 import { URL } from 'url';
-
+import _ from 'lodash';
 import { deserialize } from '../../../finder/nodejs/lib/deserializer';
 import { FlutterDriver } from '../driver';
 import { log } from '../logger';
 import { IsolateSocket } from './isolate_socket';
+
+const truncateLength = 500;
 
 // SOCKETS
 export const connectSocket = async (
@@ -138,6 +140,17 @@ export const connectSocket = async (
   return connectedSocket;
 };
 
+export const executeGetIsolateCommand = async function(
+  this: FlutterDriver,
+  isolateId: string|number
+) {
+  log.debug(`>>> getIsolate`);
+  const isolate = await this.socket!.call(`getIsolate`, { isolateId: `${isolateId}` });
+  log.debug(`<<< ${_.truncate(JSON.stringify(isolate), {
+    'length': truncateLength, 'omission': `...` })}`);
+  return isolate;
+};
+
 export const executeGetVMCommand = async function(this: FlutterDriver) {
   log.debug(`>>> getVM`);
   const vm = await this.socket!.call(`getVM`) as {
@@ -146,7 +159,8 @@ export const executeGetVMCommand = async function(this: FlutterDriver) {
       id: number,
     }],
   };
-  log.debug(`<<< ${JSON.stringify(vm)}`);
+  log.debug(`<<< ${_.truncate(JSON.stringify(vm), {
+    'length': truncateLength, 'omission': `...` })}`);
   return vm;
 };
 
