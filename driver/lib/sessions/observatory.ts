@@ -147,7 +147,7 @@ export const executeGetIsolateCommand = async function(
   log.debug(`>>> getIsolate`);
   const isolate = await this.socket!.call(`getIsolate`, { isolateId: `${isolateId}` });
   log.debug(`<<< ${_.truncate(JSON.stringify(isolate), {
-    'length': truncateLength, 'omission': '...' })}`);
+    'length': truncateLength, 'omission': `...` })}`);
   return isolate;
 };
 
@@ -160,7 +160,7 @@ export const executeGetVMCommand = async function(this: FlutterDriver) {
     }],
   };
   log.debug(`<<< ${_.truncate(JSON.stringify(vm), {
-    'length': truncateLength, 'omission': '...' })}`);
+    'length': truncateLength, 'omission': `...` })}`);
   return vm;
 };
 
