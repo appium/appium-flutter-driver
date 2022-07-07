@@ -46,7 +46,7 @@ This snippet, taken from [example dir](https://github.com/appium-userland/appium
 | - | - | -|
 | retryBackoffTime | the time wait for socket connection retry for get flutter session (default 3000ms)|500|
 | maxRetryCount    | the count for socket connection retry for get flutter session (default 30)          | 20|
-| observatoryWsUri | the URL to attacch to the Dart VM. In general, the flutter driver finds the WebSocket URL from device log such as logcat. You can skip the find the URL steps by specifying this capability. Then, this driver try to establish a session by following the given WebSocket URL. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
+| observatoryWsUri | the URL to attach to the Dart VM. In general, the flutter driver finds the WebSocket URL from device log such as logcat. You can skip the find the URL steps by specifying this capability. Then, this driver try to establish a session by following the given WebSocket URL. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
 
 ```js
 const wdio = require('webdriverio');
@@ -112,7 +112,7 @@ Legend:
 | - | - |
 | :white_check_mark: | integrated to CI |
 | :ok: | manual tested without CI |
-| :warning: | availalbe without manual tested |
+| :warning: | available without manual tested |
 | :x: | unavailable |
 
 ### Finders

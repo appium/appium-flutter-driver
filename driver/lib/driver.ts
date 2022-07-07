@@ -158,7 +158,7 @@ class FlutterDriver extends BaseDriver {
     // In WebView context, all request should got to each driver
     // so that they can handle http request properly.
     // On iOS, WebVie context is handled by XCUITest driver while Android is by chromedriver.
-    // It measn XCUITest driver should keep the XCUITest driver as a proxy,
+    // It means XCUITest driver should keep the XCUITest driver as a proxy,
     // while UIAutomator2 driver should proxy to chromedriver instead of UIA2 proxy.
     return this.proxyWebViewActive && this.proxydriverName !== IOS_DEVICE_NAME;
   }
