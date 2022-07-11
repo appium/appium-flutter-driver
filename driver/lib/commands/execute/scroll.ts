@@ -2,7 +2,7 @@
 // tslint:disable:object-literal-sort-keys
 
 import { FlutterDriver } from '../../driver';
-import { waitFor } from './wait';
+import { waitFor, waitForTappable } from './wait';
 
 export const scroll = async (
   self: FlutterDriver,
@@ -91,12 +91,12 @@ export const scrollUntilVisible = async (
     throw new Error(`${opts} is not a valid options`);
   }
 
-  // Kick off an (unawaited) waitFor that will complete when the item we're
-  // looking for finally scrolls onscreen. We add an initial pause to give it
+  // Kick off an (unawaited) waitForTappable that will complete when the item we're
+  // looking for finally scrolls onscreen and can be hit-tested. We add an initial pause to give it
   // the chance to complete if the item is already onscreen; if not, scroll
   // repeatedly until we either find the item or time out.
   let isVisible = false;
-  waitFor(self, item).then((_) => {
+  waitForTappable(self, item).then((_) => {
     isVisible = true;
   });
   while (!isVisible) {
