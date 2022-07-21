@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.0
+
+- Use `waitForTappable` in `scrollUntilVisible` [#306](https://github.com/appium-userland/appium-flutter-driver/pull/306)
+
 ## 1.4.0
 
 - Added `flutter:getIsolate` to get the isolate information [#298](https://github.com/appium-userland/appium-flutter-driver/pull/298)
