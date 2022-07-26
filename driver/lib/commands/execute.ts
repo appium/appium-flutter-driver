@@ -16,6 +16,12 @@ export const execute = async function(
 
   const command = matching[1].trim();
   switch (command) {
+    case `getVMInfo`:
+      return getVMInfo(this);
+    case `setIsolateId`:
+      return setIsolateId(this, args[0])
+    case `getIsolate`:
+      return getIsolate(this, args[0])
     case `checkHealth`:
       return checkHealth(this);
     case `clearTimeline`:
@@ -70,6 +76,9 @@ export const execute = async function(
 const checkHealth = async (self: FlutterDriver) =>
   (await self.executeElementCommand(`get_health`)).status;
 
+const getVMInfo =async (self: FlutterDriver) =>
+  (await self.executeGetVMCommand());
+
 const getRenderTree = async (self: FlutterDriver) =>
   (await self.executeElementCommand(`get_render_tree`)).tree;
 
@@ -89,18 +98,29 @@ const forceGC = async (self: FlutterDriver) => {
     isolateId: self.socket!.isolateId,
   }) as { type: string };
   if (response.type !== `Success`) {
-    throw new Error(`Could not forceGC, reponse was ${response}`);
+    throw new Error(`Could not forceGC, response was ${response}`);
   }
 };
 
+const setIsolateId = async (self: FlutterDriver, isolateId: string) => {
+  self.socket!.isolateId = isolateId;
+  return await self.socket!.call(`getIsolate`, {
+    isolateId: `${isolateId}`,
+  });
+};
+
+const getIsolate = async (self: FlutterDriver, isolateId: string|undefined) => {
+  return await self.executeGetIsolateCommand(isolateId || self.socket!.isolateId);
+}
+
 const anyPromise = (promises: Promise<any>[]) => {
-  const newpArray = promises.map((p) =>
+  const newArray = promises.map((p) =>
     p.then(
       (resolvedValue) => Promise.reject(resolvedValue),
       (rejectedReason) => rejectedReason,
     ),
   );
-  return Promise.all(newpArray).then(
+  return Promise.all(newArray).then(
     (rejectedReasons) => Promise.reject(rejectedReasons),
     (resolvedValue) => resolvedValue,
   );
@@ -112,7 +132,7 @@ const clearTimeline = async (self: FlutterDriver) => {
   const call2: Promise<any> = self.socket!.call(`clearVMTimeline`);
   const response = await anyPromise([call1, call2]);
   if (response.type !== `Success`) {
-    throw new Error(`Could not forceGC, reponse was ${response}`);
+    throw new Error(`Could not forceGC, response was ${response}`);
   }
 };
 

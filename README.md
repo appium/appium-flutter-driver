@@ -46,7 +46,7 @@ This snippet, taken from [example dir](https://github.com/appium-userland/appium
 | - | - | -|
 | retryBackoffTime | the time wait for socket connection retry for get flutter session (default 3000ms)|500|
 | maxRetryCount    | the count for socket connection retry for get flutter session (default 30)          | 20|
-| observatoryWsUri | the URL to attacch to the Dart VM. In general, the flutter driver finds the WebSocket URL from device log such as logcat. You can skip the find the URL steps by specifying this capability. Then, this driver try to establish a session by following the given WebSocket URL. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
+| observatoryWsUri | the URL to attach to the Dart VM. In general, the flutter driver finds the WebSocket URL from device log such as logcat. You can skip the find the URL steps by specifying this capability. Then, this driver try to establish a session by following the given WebSocket URL. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
 
 ```js
 const wdio = require('webdriverio');
@@ -112,7 +112,7 @@ Legend:
 | - | - |
 | :white_check_mark: | integrated to CI |
 | :ok: | manual tested without CI |
-| :warning: | availalbe without manual tested |
+| :warning: | available without manual tested |
 | :x: | unavailable |
 
 ### Finders
@@ -134,7 +134,7 @@ The below _WebDriver example_ is by webdriverio.
 `flutter:` prefix commands are [`mobile:` command in appium for Android and iOS](https://appium.io/docs/en/commands/mobile-command/).
 Please replace them properly with your client.
 
-| Flutter API | Status | WebDriver example | Scope |
+| Flutter API | Status | WebDriver example (JavaScript, webdriverio) | Scope |
 | - | - | - | - |
 | [FlutterDriver.connectedTo](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/FlutterDriver.connectedTo.html) | :ok: | [`wdio.remote(opts)`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L33) | Session |
 | [checkHealth](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/checkHealth.html) | :ok: | `driver.execute('flutter:checkHealth')` | Session |
@@ -173,9 +173,12 @@ Please replace them properly with your client.
 | [waitForAbsent](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitForAbsent.html) | :ok: | `driver.execute('flutter:waitForAbsent', buttonFinder)` | Widget |
 | [waitForTappable](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitForTappable.html) | :ok: | `driver.execute('flutter:waitForTappable', buttonFinder)` | Widget |
 | [waitUntilNoTransientCallbacks](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitUntilNoTransientCallbacks.html) | :x: |  | Widget |
-| :question: | :ok: | `setContext` | Appium |
-| :question: | :ok: | `getCurrentContext` | Appium |
-| :question: | :ok: | `getContexts` | Appium |
+| - | :ok: | `driver.execute('flutter:getVMInfo')` | System |
+| - | :ok: | `driver.execute('flutter:setIsolateId', 'isolates/2978358234363215')` | System |
+| - | :ok: | `driver.execute('flutter:getIsolate', 'isolates/2978358234363215')` or `driver.execute('flutter:getIsolate')` | System |
+| - | :ok: | `setContext` | Appium |
+| - | :ok: | `getCurrentContext` | Appium |
+| - | :ok: | `getContexts` | Appium |
 | :question: | :ok: | `driver.execute('flutter:longTap', find.byValueKey('increment'), {durationMilliseconds: 10000, frequency: 30})` | Widget |
 | :question: | :ok: | `driver.execute('flutter:waitForFirstFrame')` | Widget |
 
@@ -184,13 +187,32 @@ Please replace them properly with your client.
     - Please use `getRenderTree` command instead
 - You can send appium-xcuitest-driver/appium-uiautomator2-driver commands in `NATIVE_APP` context
 
+## Change the flutter engine attache to
+
+1. Get available isolate ids
+    - `id` key in the value of `isolates` by `flutter:getVMInfo`
+2. Set the id via `setIsolateId`
+
+```ruby
+# ruby
+info = driver.execute_script 'flutter:getVMInfo'
+# Change the target engine to "info['isolates'][0]['id']"
+driver.execute_script 'flutter:setIsolateId', info['isolates'][0]['id']
+```
+
+## Check current isolate, or a particular isolate
+
+1. Get available isolates
+    - `driver.execute('flutter:getVMInfo').isolates` (JS)
+2. Get a particular isolate or current isolate
+    - Current isolate: `driver.execute('flutter:getIsolate')` (JS)
+    - Particular isolate: `driver.execute('flutter:getIsolate', 'isolates/2978358234363215')` (JS)
+
 ## TODO
 - [ ] CI (unit test / integration test with demo app)
 - [ ] CD (automatic publish to npm)
-- [x] `finder` as a seperate package
 - [ ] switching context between Flutter and [AndroidView](https://api.flutter.dev/flutter/widgets/AndroidView-class.html)
 - [ ] switching context between Flutter and [UiKitView](https://api.flutter.dev/flutter/widgets/UiKitView-class.html)
-- [x] switching context between Flutter and [webview](https://pub.dev/packages/webview_flutter) (via UIA2/XCUITest WebView contexts)
 - [ ] Flutter-version-aware API
 - [ ] Error handling
 
@@ -200,6 +222,8 @@ Please replace them properly with your client.
 
 ```
 $ cd driver
+$ npm run clean-dependency
+$ rm npm-shrinkwrap.json
 $ npm shrinkwrap  # to specify the dependencies in the npm module
 $ npm version <major|minor|patch>
 $ git commit -am 'chore: bump version'
