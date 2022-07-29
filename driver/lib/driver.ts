@@ -1,5 +1,5 @@
 // @ts-ignore: no 'errors' export module
-import { BaseDriver, errors } from '@appium/base-driver';
+import { BaseDriver, errors } from 'appium/driver';
 import { W3CCapabilities, Capabilities, DriverData } from '@appium/types';
 import { IsolateSocket } from './sessions/isolate_socket';
 
