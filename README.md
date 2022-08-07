@@ -222,12 +222,15 @@ driver.execute_script 'flutter:setIsolateId', info['isolates'][0]['id']
 
 ```
 $ cd driver
-$ npm run clean-dependency
 $ rm npm-shrinkwrap.json
+$ npm run clean-dependency
+$ npm prune --production
+$ rm -rf node_modules/appium
 $ npm shrinkwrap  # to specify the dependencies in the npm module
 $ npm version <major|minor|patch>
 $ git commit -am 'chore: bump version'
 $ git tag <version number> # e.g. git tag v0.0.32
 $ git push origin v0.0.32
+$ git push origin main
 $ npm publish
 ```
