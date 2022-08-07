@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.0
+- Update for newer Appium 2 beta
+
 ## 1.5.0
 
 - Use `waitForTappable` in `scrollUntilVisible` [#306](https://github.com/appium-userland/appium-flutter-driver/pull/306)
