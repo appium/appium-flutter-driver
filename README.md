@@ -12,7 +12,7 @@ Even though Flutter comes with superb integration test support, [Flutter Driver]
 - writing test in other languages than Dart
 - running integration test for Flutter app with embedded webview or native view, or existing native app with embedded Flutter view
 - running test on multiple devices simultaneously
-- running integration test on device farms, such as Sauce Labs, AWS, Firebase
+- running integration test on device farms, such as Sauce Labs, HeadSpin, AWS, Firebase
 
 Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https://github.com/dart-lang/sdk/blob/master/runtime/vm/service/service.md) with extension `ext.flutter.driver`, similar to Flutter Driver, to control the Flutter app-under-test (AUT).
 
@@ -36,7 +36,7 @@ npm i -g appium-flutter-driver
 ## Usage
 If you are unfamiliar with running Appium tests, start with [Appium Getting Starting](http://appium.io/docs/en/about-appium/getting-started/) first.
 
-Your Flutter app-under-test (AUT) must be compiled in `debug` or `profile` mode, because `Flutter Driver does not support running in release mode.`. Also, ensure that your Flutter AUT has `enableFlutterDriverExtension()` before `runApp`. Then, please make sure your app imported [`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html) package as well.
+Your Flutter app-under-test (AUT) must be compiled in `debug` or `profile` mode, because `Flutter Driver does not support running in release mode.`. Also, ensure that your Flutter AUT has `enableFlutterDriverExtension()` before `runApp`. Then, please make sure your app imported **[`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html)** package as its devDependencies as well.
 
 This snippet, taken from [example dir](https://github.com/appium-userland/appium-flutter-driver/tree/main/example), is a script written as an appium client with `webdriverio`, and assumes you have `appium` server (with `appium-flutter-driver` installed) running on the same host and default port (`4723`). For more info, see example's [README.md](https://github.com/truongsinh/appium-flutter-driver/tree/main/example/README.md)
 
