@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@appium/schema": "^0.0.8",
-    "@appium/types": "^0.3.0",
+    "@appium/types": "^0.4.0",
     "@wdio/types": "^7.20.0",
     "json-schema": "^0.4.0",
     "tslint": "^6.1.3",
