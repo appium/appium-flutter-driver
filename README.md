@@ -62,16 +62,16 @@ const assert = require('assert');
 const { byValueKey } = require('appium-flutter-finder');
 
 const osSpecificOps = process.env.APPIUM_OS === 'android' ? {
-  platformName: 'Android',
-  deviceName: 'Pixel 2',
+  'platformName': 'Android',
+  'appium:deviceName': 'Pixel 2',
   // @todo support non-unix style path
   app: __dirname +  '/../apps/app-free-debug.apk',
 }: process.env.APPIUM_OS === 'ios' ? {
-  platformName: 'iOS',
-  platformVersion: '12.2',
-  deviceName: 'iPhone X',
-  noReset: true,
-  app: __dirname +  '/../apps/Runner.zip',
+  'platformName': 'iOS',
+  'appium:platformVersion': '12.2',
+  'appium:deviceName': 'iPhone X',
+  'appium:noReset': true,
+  'appium:app': __dirname +  '/../apps/Runner.zip',
 
 } : {};
 
@@ -79,8 +79,8 @@ const opts = {
   port: 4723,
   capabilities: {
     ...osSpecificOps,
-    automationName: 'Flutter',
-    retryBackoffTime: 500
+    'appium:automationName': 'Flutter',
+    'appium:retryBackoffTime': 500
   }
 };
 
