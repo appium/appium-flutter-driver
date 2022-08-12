@@ -48,9 +48,9 @@ This snippet, taken from [example dir](https://github.com/appium-userland/appium
 | maxRetryCount    | the count for socket connection retry for get flutter session (default 30)          | 20|
 | observatoryWsUri | the URL to attach to the Dart VM. In general, the flutter driver finds the WebSocket URL from device log such as logcat. You can skip the find the URL steps by specifying this capability. Then, this driver try to establish a session by following the given WebSocket URL. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
 
-### Ccontext
+### Context
 
-Appium Flutter Driver allow you to send flutter_driver cocmmands to the Dart VM in `FLUTTER` context, but it does not support native Android/iOS automation. Instead, `NATIVE_APP` context provide you to use UIA2 drier for Android and XCUITest for iOS automation. `WEBVIEW_XXXX` cntext helps WebView testing.
+Appium Flutter Driver allow you to send flutter_driver commands to the Dart VM in `FLUTTER` context, but it does not support native Android/iOS automation. Instead, `NATIVE_APP` context provide you to use UIA2 drier for Android and XCUITest for iOS automation. `WEBVIEW_XXXX` cntext helps WebView testing.
 
 Thus, you can automate proper application target by switching its context with `FLUTTER`, `NATIVE_APP` and `WEBVIEW_XXXX`.
 
