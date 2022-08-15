@@ -34,7 +34,7 @@ export const scroll = async (
   return await self.executeElementCommand(`scroll`, elementBase64, {
     dx,
     dy,
-    duration: durationMilliseconds * 1000,
+    duration: durationMilliseconds,
     frequency,
   });
 };
@@ -60,7 +60,7 @@ export const longTap = async (
   return await self.executeElementCommand(`scroll`, elementBase64, {
     dx: 0,
     dy: 0,
-    duration: durationMilliseconds * 1000,
+    duration: durationMilliseconds,
     frequency,
   });
 };

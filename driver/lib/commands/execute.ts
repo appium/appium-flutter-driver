@@ -170,7 +170,7 @@ const setFrameSync = async (self, bool, durationMilliseconds) =>
   await self.socket!.executeSocketCommand({
     command: `set_frame_sync`,
     enabled: bool,
-    timeout: durationMilliseconds * 1000,
+    timeout: durationMilliseconds,
   });
 
 const setTextEntryEmulation = async (self: FlutterDriver, enabled: boolean) =>
