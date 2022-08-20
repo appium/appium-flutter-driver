@@ -10,7 +10,7 @@ const waitForConstructor = (command: `waitForAbsent` | `waitFor` | `waitForTappa
 
   if (typeof durationMilliseconds === `number`) {
     args = {
-      timeout: durationMilliseconds * 1000,
+      timeout: durationMilliseconds,
     };
   } else if (typeof durationMilliseconds !== `undefined`) {
     // @todo BaseDriver's errors.InvalidArgumentError();

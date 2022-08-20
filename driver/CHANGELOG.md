@@ -1,5 +1,10 @@
 # Changelog
 
+## not yet
+- [breaking change]
+    - Do not calculate `* 1000` internally for milliseconds arguments to set ms. [#319](https://github.com/appium-userland/appium-flutter-driver/issues/319)
+        - README/Examples expected the as-is
+
 ## 1.6.0
 - Update for newer Appium 2 beta
 
