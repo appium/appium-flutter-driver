@@ -1,6 +1,6 @@
 // @ts-ignore
 import { utilities } from 'appium-ios-device';
-import { timing } from 'appium/support';
+import { timing } from '@appium/support';
 import XCUITestDriver from 'appium-xcuitest-driver';
 import { waitForCondition } from 'asyncbox';
 import B from 'bluebird';
