@@ -1,6 +1,6 @@
 # Changelog
 
-## not yet
+## 1.7.0
 - [breaking change]
     - Do not calculate `* 1000` internally for milliseconds arguments to set them properly as same as README/examples. [#319](https://github.com/appium-userland/appium-flutter-driver/issues/319)
 
