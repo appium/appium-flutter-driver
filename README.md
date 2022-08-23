@@ -112,6 +112,11 @@ const opts = {
 })();
 ```
 
+## Changelog
+
+- [appium-flutter-driver](driver/CHANGELOG.md)
+- [each finder](finder)
+
 ## API
 
 Legend:
