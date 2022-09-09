@@ -4,8 +4,6 @@
         "tslint:recommended"
     ],
     "jsRules": {},
-    "rules": {
-        "quotemark": [true, "backtick"]
-    },
+    "rules": {},
     "rulesDirectory": []
 }
