@@ -34,7 +34,9 @@ export const scroll = async (
   return await self.executeElementCommand(`scroll`, elementBase64, {
     dx,
     dy,
-    duration: durationMilliseconds,
+    // 'scroll' expects microseconds
+    // https://github.com/flutter/flutter/blob/master/packages/flutter_driver/lib/src/common/gesture.dart#L33-L38
+    duration: durationMilliseconds * 1000,
     frequency,
   });
 };
@@ -60,7 +62,9 @@ export const longTap = async (
   return await self.executeElementCommand(`scroll`, elementBase64, {
     dx: 0,
     dy: 0,
-    duration: durationMilliseconds,
+    // 'scroll' expects microseconds
+    // https://github.com/flutter/flutter/blob/master/packages/flutter_driver/lib/src/common/gesture.dart#L33-L38
+    duration: durationMilliseconds * 1000,
     frequency,
   });
 };
