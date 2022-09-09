@@ -30,7 +30,7 @@ const WEBVIEW_NO_PROXY = [
   [`POST`, new RegExp(`^/session/[^/]+/orientation`)],
   [`POST`, new RegExp(`^/session/[^/]+/touch/multi/perform`)],
   [`POST`, new RegExp(`^/session/[^/]+/touch/perform`)],
-] as [string, RegExp][];
+] as import('@appium/types').RouteMatcher[];
 
 class FlutterDriver extends BaseDriver {
   public socket: IsolateSocket | null = null;
@@ -146,7 +146,7 @@ class FlutterDriver extends BaseDriver {
     }
   }
 
-  public getProxyAvoidList(): [string, RegExp][] {
+  public getProxyAvoidList(): import('@appium/types').RouteMatcher[] {
     if ([FLUTTER_CONTEXT_NAME, NATIVE_CONTEXT_NAME].includes(this.currentContext)) {
       return [];
     }
