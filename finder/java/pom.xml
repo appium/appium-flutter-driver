@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.flutter.appiumfinder</groupId>
+    <artifactId>appium-flutterfinder-java</artifactId>
+    <version>0.4.4</version>
+    <packaging>jar</packaging>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Flutter finder plugin for Appium in java</description>
+    <url>https://github.com/testsigma-eng/appium-flutterfinder-java</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Renju Paul Jose</name>
+            <email>renju.jose@testsigma.com</email>
+            <organization>Testsigma Inc.</organization>
+            <organizationUrl>https://testsigma.com/</organizationUrl>
+        </developer>
+        <developer>
+            <name>ashwith</name>
+            <email>ashwithpoojary98@gmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/testsigma-eng/appium-flutterfinder-java.git</connection>
+        <developerConnection>scm:git:ssh://github.com/testsigma-eng/appium-flutterfinder-java.git</developerConnection>
+        <url>http://github.com/testsigma-eng/appium-flutterfinder-java/tree/master</url>
+    </scm>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <appium.version>8.2.0</appium.version>
+        <junit.version>5.9.1</junit.version>
+        <mockito.version>4.8.0</mockito.version>
+        <google.guava.version>31.1-jre</google.guava.version>
+        <google.gson.version>2.9.1</google.gson.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>${appium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${google.guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${google.gson.version}</version>
+        </dependency>
+    </dependencies>
+    <distributionManagement>
+        <!--                <repository>-->
+        <!--                    <id>github</id>-->
+        <!--                    <name>GitHub testsigma-eng Apache Maven Packages</name>-->
+        <!--                    <url>https://maven.pkg.github.com/testsigma-eng/appium-flutterfinder-java</url>-->
+        <!--                </repository>-->
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>
