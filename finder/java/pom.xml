@@ -68,11 +68,6 @@
         </dependency>
     </dependencies>
     <distributionManagement>
-        <!--                <repository>-->
-        <!--                    <id>github</id>-->
-        <!--                    <name>GitHub testsigma-eng Apache Maven Packages</name>-->
-        <!--                    <url>https://maven.pkg.github.com/testsigma-eng/appium-flutterfinder-java</url>-->
-        <!--                </repository>-->
         <repository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
