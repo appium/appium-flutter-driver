@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Flutter finder plugin for Appium in java</description>
-    <url>https://github.com/testsigma-eng/appium-flutterfinder-java</url>
+    <url>https://github.com/appium-userland/appium-flutter-driver/tree/main/finder/java</url>
 
     <licenses>
         <license>
@@ -21,21 +21,15 @@
 
     <developers>
         <developer>
-            <name>Renju Paul Jose</name>
-            <email>renju.jose@testsigma.com</email>
-            <organization>Testsigma Inc.</organization>
-            <organizationUrl>https://testsigma.com/</organizationUrl>
-        </developer>
-        <developer>
             <name>ashwith</name>
             <email>ashwithpoojary98@gmail.com</email>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/testsigma-eng/appium-flutterfinder-java.git</connection>
-        <developerConnection>scm:git:ssh://github.com/testsigma-eng/appium-flutterfinder-java.git</developerConnection>
-        <url>http://github.com/testsigma-eng/appium-flutterfinder-java/tree/master</url>
+        <connection>scm:git:git://github.com/appium-userland/appium-flutter-driver.git</connection>
+        <developerConnection>scm:git://github.com/appium-userland/appium-flutter-driver.git</developerConnection>
+        <url>https://github.com/appium-userland/appium-flutter-driver/tree/main/</url>
     </scm>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
