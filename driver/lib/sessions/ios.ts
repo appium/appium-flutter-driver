@@ -67,8 +67,15 @@ const waitForPortIsAvailable = async (port) => {
   }
 };
 
-export const getObservatoryWsUri = async (proxydriver, _caps) => {
-  const urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
+export const getObservatoryWsUri = async (proxydriver, caps) => {
+  let urlObject;
+  if (caps.observatoryWsUri) {
+    urlObject = new URL(caps.observatoryWsUri);
+    urlObject.protocol = `ws`;
+  } else {
+    urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
+  }
+
   const { udid } = proxydriver.opts;
 
   if (!proxydriver.isRealDevice()) {
