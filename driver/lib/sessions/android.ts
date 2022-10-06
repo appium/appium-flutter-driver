@@ -34,6 +34,12 @@ export const getObservatoryWsUri = async (proxydriver , caps) => {
   if (caps.observatoryWsUri) {
     urlObject = new URL(caps.observatoryWsUri);
     urlObject.protocol = `ws`;
+
+    // defaults to skip the port-forwarding as backward compatibility
+    if (caps.skipPortForward === undefined || caps.skipPortForward) {
+      return urlObject.toJSON();
+    }
+
   } else {
     urlObject = processLogToGetobservatory(proxydriver.adb.logcat.logs);
   }
