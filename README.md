@@ -21,10 +21,13 @@ Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https:/
 In order to use `appium-flutter-driver`, we need to use `appium` version `1.16.0` or higher.
 The version 1.0.0 and higher requires Appium 2.0.
 
-With Appium 2:
+With Appium 2 (`appium@next`):
 ```
 appium driver install flutter
 ```
+
+> **Note**
+> Please use the latest flutter driver with appium 2 for Flutter v3
 
 
 With Appium 1:
