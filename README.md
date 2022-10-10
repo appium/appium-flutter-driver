@@ -248,6 +248,6 @@ $ git push origin main
 $ npm publish
 ```
 
-### Find java implementation
+### Java implementation
 ````
 https://github.com/ashwithpoojary98/javaflutterfinder
