@@ -21,10 +21,13 @@ Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https:/
 In order to use `appium-flutter-driver`, we need to use `appium` version `1.16.0` or higher.
 The version 1.0.0 and higher requires Appium 2.0.
 
-With Appium 2:
+With Appium 2 (`appium@next`):
 ```
 appium driver install flutter
 ```
+
+> **Note**
+> Please use the latest flutter driver with appium 2 for Flutter v3
 
 
 With Appium 1:
@@ -44,9 +47,9 @@ This snippet, taken from [example dir](https://github.com/appium-userland/appium
 
 | Capability | Description | Example Values |
 | - | - | -|
-| retryBackoffTime | The time wait for socket connection retry for get flutter session (default 3000ms)|500|
-| maxRetryCount    | The count for socket connection retry for get flutter session (default 30)          | 20|
-| observatoryWsUri | The URL to attach to the Dart VM. The flutter driver finds the WebSocket URL from the device log such as logcat. You can skip the find the URL process by specifying this capability. Then, this driver attempt to establish a WebSocket connection against the given WebSocket URL. Note that this capability espects the URL is ready for access by you. This flutter driver does not port-forwarding to the port with this capability. You may need to coordinate the port-forwarding as well. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
+| retryBackoffTime | the time wait for socket connection retry for get flutter session (default 3000ms)|500|
+| maxRetryCount    | the count for socket connection retry for get flutter session (default 30)          | 20|
+| observatoryWsUri | the URL to attach to the Dart VM. The appium flutter driver finds the WebSocket URL from the device log by default. You can skip the finding the URL process by specifying this capability. Then, this driver attempt to establish a WebSocket connection against the given WebSocket URL. Note that this capability espects the URL is ready for access by outside an appium session. This flutter driver does not do port-forwarding with this capability. You may need to coordinate the port-forwarding as well. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
 | skipPortForward | Whether skip port forwarding from the flutter driver local to the device under test with `observatoryWsUri` capability. It helps you to manage the application under test, the observatory URL and the port forwarding configuration. The default is `true`. | true, false |
 
 ### Context
@@ -248,3 +251,7 @@ $ git push origin v0.0.32
 $ git push origin main
 $ npm publish
 ```
+
+### Java implementation
+````
+https://github.com/ashwithpoojary98/javaflutterfinder
