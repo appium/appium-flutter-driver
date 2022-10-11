@@ -49,7 +49,7 @@ This snippet, taken from [example dir](https://github.com/appium-userland/appium
 | - | - | -|
 | retryBackoffTime | the time wait for socket connection retry for get flutter session (default 3000ms)|500|
 | maxRetryCount    | the count for socket connection retry for get flutter session (default 30)          | 20|
-| observatoryWsUri | the URL to attach to the Dart VM. The flutter driver finds the WebSocket URL from the device log such as logcat. You can skip the find the URL process by specifying this capability. Then, this driver attempt to establish a WebSocket connection against the given WebSocket URL. Note that this capability espects the URL is ready for access by you. This flutter driver does not port-forwarding to the port with this capability. You may need to coordinate the port-forwarding as well. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
+| observatoryWsUri | the URL to attach to the Dart VM. The appium flutter driver finds the WebSocket URL from the device log by default. You can skip the finding the URL process by specifying this capability. Then, this driver attempt to establish a WebSocket connection against the given WebSocket URL. Note that this capability espects the URL is ready for access by outside an appium session. This flutter driver does not do port-forwarding with this capability. You may need to coordinate the port-forwarding as well. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
 
 ### Context
 
