@@ -30,7 +30,19 @@ export const startAndroidSession = async (caps, ...args) => {
 };
 
 export const getObservatoryWsUri = async (proxydriver , caps) => {
-  const urlObject = processLogToGetobservatory(proxydriver.adb.logcat.logs);
+  let urlObject;
+  if (caps.observatoryWsUri) {
+    urlObject = new URL(caps.observatoryWsUri);
+    urlObject.protocol = `ws`;
+
+    // defaults to skip the port-forwarding as backward compatibility
+    if (caps.skipPortForward === undefined || caps.skipPortForward) {
+      return urlObject.toJSON();
+    }
+
+  } else {
+    urlObject = processLogToGetobservatory(proxydriver.adb.logcat.logs);
+  }
   const {udid} = await androidHelpers.getDeviceInfoFromCaps(caps);
   log.debug(
     `${proxydriver.adb.executable.path} -s ${udid} forward tcp:${

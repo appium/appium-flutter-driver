@@ -17,7 +17,10 @@ export interface IDesiredCapConstraints {
   maxRetryCount: any;
   observatoryWsUri: {
     isString: boolean;
-  }
+  };
+  skipPortForward: {
+    isBoolean: boolean;
+  };
 }
 
 export const desiredCapConstraints: IDesiredCapConstraints = {
@@ -51,5 +54,8 @@ export const desiredCapConstraints: IDesiredCapConstraints = {
   },
   observatoryWsUri: {
     isString: true,
+  },
+  skipPortForward: {
+    isBoolean: true
   }
 };

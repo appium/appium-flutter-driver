@@ -18,12 +18,6 @@ export const connectSocket = async (
 
   let retryCount = 0;
   let connectedSocket: IsolateSocket | null = null;
-  let dartObservatoryURL = ``;
-  let shouldUseCapsObservatoryURL = false
-  if (caps.observatoryWsUri) {
-    dartObservatoryURL = caps.observatoryWsUri;
-    shouldUseCapsObservatoryURL = true;
-  }
 
   while (retryCount < maxRetryCount && !connectedSocket) {
     if (retryCount > 0) {
@@ -34,9 +28,7 @@ export const connectSocket = async (
     }
     log.info(`Attempt #` + (retryCount + 1));
 
-    if (!shouldUseCapsObservatoryURL) {
-      dartObservatoryURL = await getObservatoryWsUri(driver, caps)
-    }
+    const dartObservatoryURL = await getObservatoryWsUri(driver, caps);
 
     const connectedPromise = new Promise<IsolateSocket | null>((resolve) => {
       log.info(
