@@ -118,15 +118,16 @@ export const scrollIntoView = async (
   elementBase64: string,
   opts: {
     alignment: number;
+    timeout?: number;
   },
 ) => {
-  const { alignment = 0.0 } = opts;
-  if (typeof alignment !== `number`) {
+  const { alignment = 0.0, timeout } = opts;
+  if (typeof alignment !== `number` || (typeof timeout !== `undefined` && typeof timeout !== `number`)) {
     // @todo BaseDriver's errors.InvalidArgumentError();
     throw new Error(`${opts} is not a valid options`);
   }
 
-  return await self.executeElementCommand(`scrollIntoView`, elementBase64, {
-    alignment,
-  });
+  const args = typeof timeout === `number` ? { alignment, timeout } : { alignment };
+
+  return await self.executeElementCommand(`scrollIntoView`, elementBase64, args);
 };

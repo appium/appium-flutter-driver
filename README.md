@@ -177,7 +177,7 @@ Please replace them properly with your client.
 | [screenshot](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/screenshot.html) | :ok: | `driver.takeScreenshot()` | Session |
 | [screenshot](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/screenshot.html) | :ok: | `driver.saveScreenshot('a.png')` | Session |
 | [scroll](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scroll.html) | :ok: | `driver.execute('flutter:scroll', find.byType('ListView'), {dx: 50, dy: -100, durationMilliseconds: 200, frequency: 30})` | Widget |
-| [scrollIntoView](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollIntoView.html) | :ok: | `driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1})` | Widget |
+| [scrollIntoView](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollIntoView.html) | :ok: | `driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1})` <br/> `driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1, timeout: 30000})` | Widget |
 | [scrollUntilVisible](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollUntilVisible.html) | :ok: | `driver.execute('flutter:scrollUntilVisible', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400});` | Widget |
 | [setSemantics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setSemantics.html) | :x: |  | Session |
 | [setTextEntryEmulation](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setTextEntryEmulation.html) | :ok: | `driver.execute('flutter:setTextEntryEmulation', false)` | Session |
