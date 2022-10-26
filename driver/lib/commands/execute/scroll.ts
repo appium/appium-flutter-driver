@@ -127,12 +127,7 @@ export const scrollIntoView = async (
     throw new Error(`${opts} is not a valid options`);
   }
 
-  let args;
-  if (typeof timeout === `number`) {
-    args = { alignment, timeout };
-  } else {
-    args = { alignment };
-  }
+  const args = typeof timeout === `number` ? { alignment, timeout } : { alignment };
 
   return await self.executeElementCommand(`scrollIntoView`, elementBase64, args);
 };
