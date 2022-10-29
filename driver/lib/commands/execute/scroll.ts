@@ -95,6 +95,47 @@ export const scrollUntilVisible = async (
     throw new Error(`${opts} is not a valid options`);
   }
 
+  // An expectation for checking that an element, known to be present on the widget tree, is visible
+  let isVisible = false;
+  waitFor(self, item).then((_) => {
+    isVisible = true;
+  });
+  while (!isVisible) {
+    await scroll(self, elementBase64, {
+      dx: dxScroll,
+      dy: dyScroll,
+      durationMilliseconds: 100,
+    });
+  }
+  return scrollIntoView(self, item, { alignment });
+};
+
+export const scrollUntilTapable = async (
+  self: FlutterDriver,
+  elementBase64: string,
+  opts: {
+    item: string;
+    alignment: number;
+    dxScroll: number;
+    dyScroll: number;
+  },
+) => {
+  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0 } = opts;
+
+  if (
+    typeof alignment !== `number` ||
+    typeof dxScroll !== `number` ||
+    typeof dyScroll !== `number`
+  ) {
+    // @todo BaseDriver's errors.InvalidArgumentError();
+    throw new Error(`${opts} is not a valid options`);
+  }
+
+  if (dxScroll === 0 && dyScroll === 0) {
+    // @todo BaseDriver's errors.InvalidArgumentError();
+    throw new Error(`${opts} is not a valid options`);
+  }
+
   // Kick off an (unawaited) waitForTappable that will complete when the item we're
   // looking for finally scrolls onscreen and can be hit-tested. We add an initial pause to give it
   // the chance to complete if the item is already onscreen; if not, scroll

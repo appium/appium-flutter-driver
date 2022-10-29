@@ -179,6 +179,7 @@ Please replace them properly with your client.
 | [scroll](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scroll.html) | :ok: | `driver.execute('flutter:scroll', find.byType('ListView'), {dx: 50, dy: -100, durationMilliseconds: 200, frequency: 30})` | Widget |
 | [scrollIntoView](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollIntoView.html) | :ok: | `driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1})` <br/> `driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1, timeout: 30000})` | Widget |
 | [scrollUntilVisible](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollUntilVisible.html) | :ok: | `driver.execute('flutter:scrollUntilVisible', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400});` | Widget |
+| [scrollUntilTapable](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollUntilVisible.html) | :ok: | `driver.execute('flutter:scrollUntilTapable', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400});` | Widget |
 | [setSemantics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setSemantics.html) | :x: |  | Session |
 | [setTextEntryEmulation](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setTextEntryEmulation.html) | :ok: | `driver.execute('flutter:setTextEntryEmulation', false)` | Session |
 | [startTracing](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/startTracing.html) | :x: |  | Session |
@@ -203,6 +204,8 @@ Please replace them properly with your client.
 - Flutter context does not support page source
     - Please use `getRenderTree` command instead
 - You can send appium-xcuitest-driver/appium-uiautomator2-driver commands in `NATIVE_APP` context
+- scrollUntilVisible : An expectation for checking that an element, known to be present on the widget tree, is visible. Using waitFor to wait element
+- scrollUntilTapable : An expectation for checking an element is visible and enabled such that you can click it. Using waitTapable to wait element
 
 ## Change the flutter engine attache to
 
