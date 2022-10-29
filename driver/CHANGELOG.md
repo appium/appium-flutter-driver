@@ -1,6 +1,11 @@
 # Changelog
 
-## 1.7.1
+
+## 1.8.0
+- Added `timeout` argument for scrollIntoView [#358](https://github.com/appium-userland/appium-flutter-driver/pull/358)
+- Added `skipPortForward` capability [#343](https://github.com/appium-userland/appium-flutter-driver/pull/343)
+
+## 1.7.2 (1.7.1)
 - Fixed `* 1000` in `scroll` [#330](https://github.com/appium-userland/appium-flutter-driver/pull/330)
 
 ## 1.7.0
