@@ -7,6 +7,9 @@
  - Added `scrollUntilTapable` command to scroll with `waitForTappable` [#360](https://github.com/appium-userland/appium-flutter-driver/pull/360)
 
 ## 1.8.0
+
+Appium `2.0.0-beta.46` and higher is needed as dependencies update in dependent Appium UIA2/XCUITest drivers
+
 - Added `timeout` argument for scrollIntoView [#358](https://github.com/appium-userland/appium-flutter-driver/pull/358)
 - Added `skipPortForward` capability [#343](https://github.com/appium-userland/appium-flutter-driver/pull/343)
 
