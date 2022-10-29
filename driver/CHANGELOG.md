@@ -4,7 +4,7 @@
 - **Breaking change**
     - Revert [#306](https://github.com/appium-userland/appium-flutter-driver/pull/306) (added in v1.5.0). `scrollUntilVisible` uses `waitFor` as same as before v1.5.0.
         - Please use `scrollUntilTapable` instead since this version
- - Added `scrollUntilTapable` to scroll with `waitForTappable` [#360](https://github.com/appium-userland/appium-flutter-driver/pull/360)
+ - Added `scrollUntilTapable` command to scroll with `waitForTappable` [#360](https://github.com/appium-userland/appium-flutter-driver/pull/360)
 
 ## 1.8.0
 - Added `timeout` argument for scrollIntoView [#358](https://github.com/appium-userland/appium-flutter-driver/pull/358)

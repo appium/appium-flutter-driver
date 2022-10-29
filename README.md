@@ -204,8 +204,8 @@ Please replace them properly with your client.
 - Flutter context does not support page source
     - Please use `getRenderTree` command instead
 - You can send appium-xcuitest-driver/appium-uiautomator2-driver commands in `NATIVE_APP` context
-- scrollUntilVisible : An expectation for checking that an element, known to be present on the widget tree, is visible. Using waitFor to wait element
-- scrollUntilTapable : An expectation for checking an element is visible and enabled such that you can click it. Using waitTapable to wait element
+- `scrollUntilVisible` command : An expectation for checking that an element, known to be present on the widget tree, is visible. Using waitFor to wait element
+- `scrollUntilTapable` command : An expectation for checking an element is visible and enabled such that you can click it. Using waitTapable to wait element
 
 ## Change the flutter engine attache to
 
