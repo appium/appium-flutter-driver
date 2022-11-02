@@ -11,7 +11,7 @@ This package is still experiment, breaking changes and breaking codes are to be 
 Even though Flutter comes with superb integration test support, [Flutter Driver](https://flutter.dev/docs/cookbook/testing/integration/introduction), it does not fit some specific use cases, such as
 - writing test in other languages than Dart
 - running integration test for Flutter app with embedded webview or native view, or existing native app with embedded Flutter view
-- running test on multiple devices simultaneously
+- running [test on multiple devices](https://www.headspin.io/global-device-infrastructure) simultaneously
 - running integration test on device farms, such as Sauce Labs, HeadSpin, AWS, Firebase
 
 Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https://github.com/dart-lang/sdk/blob/master/runtime/vm/service/service.md) with extension `ext.flutter.driver`, similar to Flutter Driver, to control the Flutter app-under-test (AUT).
