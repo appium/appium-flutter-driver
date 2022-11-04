@@ -189,7 +189,7 @@ export const processLogToGetobservatory = (deviceLogs: [{ message: string }]) =>
     .find((e) => e.match(observatoryUriRegEx));
   if (!candidate) {
     throw new Error(`No observatory url was found in the device log. ` +
-      `Please make sure the system log in the device under test has expected observatory URL`);
+      `Please make sure the application under test logs an observatory url when the application starts.`);
   }
 
   const observatoryMatch = candidate.match(observatoryUriRegEx);
