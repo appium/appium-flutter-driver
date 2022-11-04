@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.9.1
+- Improved error message when no observatory url found
+
 ## 1.9.0
 - **Breaking change**
     - Revert [#306](https://github.com/appium-userland/appium-flutter-driver/pull/306) (added in v1.5.0). `scrollUntilVisible` uses `waitFor` as same as before v1.5.0.
