@@ -174,7 +174,7 @@ export const executeElementCommand = async function(
   return data.response;
 };
 
-export const processLogToGetobservatory = (adbLogs: [{ message: string }]) => {
+export const processLogToGetobservatory = (deviceLogs: [{ message: string }]) => {
   // https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183
   //  e.g. 'Observatory listening on http://127.0.0.1:52817/_w_SwaKs9-g=/'
   // https://github.com/flutter/flutter/blob/52ae102f182afaa0524d0d01d21b2d86d15a11dc/packages/flutter_tools/lib/src/resident_runner.dart#L1386-L1389
@@ -183,12 +183,16 @@ export const processLogToGetobservatory = (adbLogs: [{ message: string }]) => {
     `(Observatory listening on |An Observatory debugger and profiler on\\s.+\\sis available at: |The Dart VM service is listening on )((http|\/\/)[a-zA-Z0-9:/=_\\-\.\\[\\]]+)`,
   );
   // @ts-ignore
-  const observatoryMatch = adbLogs
+  const candidate = deviceLogs
     .map((e) => e.message)
     .reverse()
-    .find((e) => e.match(observatoryUriRegEx))
-    .match(observatoryUriRegEx);
+    .find((e) => e.match(observatoryUriRegEx));
+  if (!candidate) {
+    throw new Error(`No observatory url was found in the device log. ` +
+      `Please make sure the system log in the device under test has expected observatory URL`);
+  }
 
+  const observatoryMatch = candidate.match(observatoryUriRegEx);
   if (!observatoryMatch) {
     throw new Error(`can't find Observatory`);
   }
