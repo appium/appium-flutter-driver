@@ -99,6 +99,10 @@ class FlutterDriver extends BaseDriver {
     ]);
   }
 
+  public async terminateApp(appId) {
+    return await this.proxydriver.terminateApp(appId);
+  }
+
   public validateLocatorStrategy(strategy: string) {
     // @todo refactor DRY
     if (this.currentContext === `NATIVE_APP`) {
