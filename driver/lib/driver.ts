@@ -1,12 +1,13 @@
 // @ts-ignore: no 'errors' export module
-import { BaseDriver, errors } from '@appium/base-driver';
+import { BaseDriver, errors } from 'appium/driver';
+import { W3CCapabilities, Capabilities, DriverData } from '@appium/types';
 import { IsolateSocket } from './sessions/isolate_socket';
 
-import { IDesiredCapConstraints } from './desired-caps';
 import { log as logger } from './logger';
 
 import { DRIVER_NAME as IOS_DEVICE_NAME } from './sessions/ios';
-import { executeElementCommand } from './sessions/observatory';
+import { executeElementCommand, executeGetVMCommand,
+  executeGetIsolateCommand } from './sessions/observatory';
 import { createSession, deleteSession, reConnectFlutterDriver } from './sessions/session';
 
 import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
@@ -29,7 +30,7 @@ const WEBVIEW_NO_PROXY = [
   [`POST`, new RegExp(`^/session/[^/]+/orientation`)],
   [`POST`, new RegExp(`^/session/[^/]+/touch/multi/perform`)],
   [`POST`, new RegExp(`^/session/[^/]+/touch/perform`)],
-] as [string, RegExp][];
+] as import('@appium/types').RouteMatcher[];
 
 class FlutterDriver extends BaseDriver {
   public socket: IsolateSocket | null = null;
@@ -55,6 +56,8 @@ class FlutterDriver extends BaseDriver {
 
   // session
   public executeElementCommand = executeElementCommand;
+  public executeGetVMCommand = executeGetVMCommand;
+  public executeGetIsolateCommand = executeGetIsolateCommand;
   public execute = execute;
   public executeAsync = execute;
 
@@ -88,11 +91,9 @@ class FlutterDriver extends BaseDriver {
   }
 
   public async createSession(...args): Promise<[string, {}]> {
-    const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)) as [{}, {}, {}]);
-
+    const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)) as [W3CCapabilities, W3CCapabilities, W3CCapabilities, DriverData[]]);
     this.internalCaps = caps;
-
-    return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args))) as Promise<[string, {}]>;
+    return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args))) as Promise<[string, {}]>;  // @ts-ignore
   }
 
   public async deleteSession() {
@@ -119,7 +120,7 @@ class FlutterDriver extends BaseDriver {
     super.validateLocatorStrategy(strategy, false);
   }
 
-  public validateDesiredCaps(caps: IDesiredCapConstraints) {
+  public validateDesiredCaps(caps: Capabilities) {
     // check with the base class, and return if it fails
     const res = super.validateDesiredCaps(caps);
     if (!res) {
@@ -158,7 +159,7 @@ class FlutterDriver extends BaseDriver {
     }
   }
 
-  public getProxyAvoidList(): [string, RegExp][] {
+  public getProxyAvoidList(): import('@appium/types').RouteMatcher[] {
     if ([FLUTTER_CONTEXT_NAME, NATIVE_CONTEXT_NAME].includes(this.currentContext)) {
       return [];
     }
@@ -170,7 +171,7 @@ class FlutterDriver extends BaseDriver {
     // In WebView context, all request should got to each driver
     // so that they can handle http request properly.
     // On iOS, WebVie context is handled by XCUITest driver while Android is by chromedriver.
-    // It measn XCUITest driver should keep the XCUITest driver as a proxy,
+    // It means XCUITest driver should keep the XCUITest driver as a proxy,
     // while UIAutomator2 driver should proxy to chromedriver instead of UIA2 proxy.
     return this.proxyWebViewActive && this.proxydriverName !== IOS_DEVICE_NAME;
   }

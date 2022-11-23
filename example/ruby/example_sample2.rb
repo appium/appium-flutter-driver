@@ -34,6 +34,8 @@ class ExampleTests < Minitest::Test
 
     text_finder = by_text 'Tap me!'
     element = ::Appium::Flutter::Element.new(@driver, finder: text_finder)
+    # @driver.execute_script('flutter:waitForTappable', text_finder, 1000)
+
     assert_equal 'Tap me!', element.text
 
     element.click

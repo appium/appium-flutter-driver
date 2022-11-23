@@ -27,16 +27,9 @@ const setupNewIOSDriver = async (...args) => {
 export const startIOSSession = async (caps, ...args) => {
   log.info(`Starting an IOS proxy session`);
   const iosdriver = await setupNewIOSDriver(...args);
-  let observatoryWsUri;
-  try {
-    observatoryWsUri = await getObservatoryWsUri(iosdriver);
-  } catch (e) {
-    await iosdriver.deleteSession();
-    throw e;
-  }
   return Promise.all([
     iosdriver,
-    connectSocket(observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
+    connectSocket(getObservatoryWsUri, iosdriver, caps),
   ]);
 };
 
@@ -70,7 +63,7 @@ const waitForPortIsAvailable = async (port) => {
             return true;
           }
         } catch (ign) {
-          log.console.warn(``);
+          log.warn(``);
         }
         return false;
       }, {
@@ -89,8 +82,21 @@ const waitForPortIsAvailable = async (port) => {
   }
 };
 
-export const getObservatoryWsUri = async (proxydriver) => {
-  const urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
+export const getObservatoryWsUri = async (proxydriver, caps) => {
+  let urlObject;
+  if (caps.observatoryWsUri) {
+    urlObject = new URL(caps.observatoryWsUri);
+    urlObject.protocol = `ws`;
+
+    // defaults to skip the port-forwarding as backward compatibility
+    if (caps.skipPortForward === undefined || caps.skipPortForward) {
+      return urlObject.toJSON();
+    }
+
+  } else {
+    urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
+  }
+
   const { udid } = proxydriver.opts;
 
   if (!proxydriver.isRealDevice()) {

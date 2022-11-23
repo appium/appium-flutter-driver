@@ -10,8 +10,8 @@ class ExampleTests < Minitest::Test
     caps: {
       platformName: 'iOS',
       automationName: 'flutter',
-      platformVersion: '15.0',
-      deviceName: 'iPhone 12 Pro',
+      platformVersion: '15.5',
+      deviceName: 'iPhone 13',
       app: "#{Dir.pwd}/../app/app/Runner.zip"
     },
     appium_lib: {

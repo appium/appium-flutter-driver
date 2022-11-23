@@ -22,16 +22,9 @@ const setupNewAndroidDriver = async (...args) => {
 export const startAndroidSession = async (caps, ...args) => {
   log.info(`Starting an Android proxy session`);
   const androiddriver = await setupNewAndroidDriver(...args);
-  let observatoryWsUri;
-  try {
-    observatoryWsUri = await getObservatoryWsUri(androiddriver , caps);
-  } catch (e) {
-    await androiddriver.deleteSession();
-    throw e;
-  }
   return Promise.all([
     androiddriver,
-    connectSocket(await observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
+    connectSocket(getObservatoryWsUri, androiddriver, caps),
   ]);
 
 };
@@ -76,7 +69,19 @@ export const connectAndroidSession = async (
 };
 
 export const getObservatoryWsUri = async (proxydriver , caps) => {
-  const urlObject = processLogToGetobservatory(proxydriver.adb.logcat.logs);
+  let urlObject;
+  if (caps.observatoryWsUri) {
+    urlObject = new URL(caps.observatoryWsUri);
+    urlObject.protocol = `ws`;
+
+    // defaults to skip the port-forwarding as backward compatibility
+    if (caps.skipPortForward === undefined || caps.skipPortForward) {
+      return urlObject.toJSON();
+    }
+
+  } else {
+    urlObject = processLogToGetobservatory(proxydriver.adb.logcat.logs);
+  }
   const {udid} = await androidHelpers.getDeviceInfoFromCaps(caps);
   log.debug(
     `${proxydriver.adb.executable.path} -s ${udid} forward tcp:${

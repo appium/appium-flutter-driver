@@ -1,25 +1,34 @@
 import { URL } from 'url';
-
+import _ from 'lodash';
 import { deserialize } from '../../../finder/nodejs/lib/deserializer';
 import { FlutterDriver } from '../driver';
 import { log } from '../logger';
 import { IsolateSocket } from './isolate_socket';
 
+const truncateLength = 500;
+
 // SOCKETS
 export const connectSocket = async (
-  dartObservatoryURL: string,
-  RETRY_BACKOFF: any = 3000,
-  MAX_RETRY_COUNT: any = 30) => {
+  getObservatoryWsUri,
+  driver: any,
+  caps: any) => {
+
+  const retryBackoff = caps.retryBackoffTime || 3000
+  const maxRetryCount = caps.maxRetryCount || 30
+
   let retryCount = 0;
   let connectedSocket: IsolateSocket | null = null;
-  while (retryCount < MAX_RETRY_COUNT && !connectedSocket) {
+
+  while (retryCount < maxRetryCount && !connectedSocket) {
     if (retryCount > 0) {
       log.info(
-        `Waiting ` + RETRY_BACKOFF / 1000 + ` seconds before trying...`,
+        `Waiting ` + retryBackoff / 1000 + ` seconds before trying...`,
       );
-      await new Promise((r) => setTimeout(r, RETRY_BACKOFF));
+      await new Promise((r) => setTimeout(r, retryBackoff));
     }
     log.info(`Attempt #` + (retryCount + 1));
+
+    const dartObservatoryURL = await getObservatoryWsUri(driver, caps);
 
     const connectedPromise = new Promise<IsolateSocket | null>((resolve) => {
       log.info(
@@ -66,7 +75,7 @@ export const connectSocket = async (
             log.errorAndThrow(JSON.stringify(e));
           }
         };
-        log.info(`Connected to ${dartObservatoryURL}`);
+        log.info(`Connecting to ${dartObservatoryURL}`);
         const vm = await socket.call(`getVM`) as {
           isolates: [{
             name: string,
@@ -74,12 +83,15 @@ export const connectSocket = async (
           }],
         };
         log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
-        const mainIsolateData = vm.isolates.find((e) => e.name === `main`);
+        // To accept 'main.dart:main()' and 'main'
+        const mainIsolateData = vm.isolates.find((e) => e.name.includes(`main`));
         if (!mainIsolateData) {
           log.error(`Cannot get Dart main isolate info`);
           removeListenerAndResolve(null);
+          socket.close();
           return;
         }
+        // e.g. 'isolates/2978358234363215', '2978358234363215'
         socket.isolateId = mainIsolateData.id;
         // @todo check extension and do health check
         const isolate = await socket.call(`getIsolate`, {
@@ -110,14 +122,38 @@ export const connectSocket = async (
     retryCount++;
     connectedSocket = await connectedPromise;
 
-    if (!connectedSocket && retryCount === MAX_RETRY_COUNT - 1) {
+    if (!connectedSocket && retryCount === maxRetryCount - 1) {
       log.errorAndThrow(
-        `Failed to connect ` + MAX_RETRY_COUNT + ` times. Aborting.`,
+        `Failed to connect ` + maxRetryCount + ` times. Aborting.`,
       );
     }
   }
   retryCount = 0;
   return connectedSocket;
+};
+
+export const executeGetIsolateCommand = async function(
+  this: FlutterDriver,
+  isolateId: string|number
+) {
+  log.debug(`>>> getIsolate`);
+  const isolate = await this.socket!.call(`getIsolate`, { isolateId: `${isolateId}` });
+  log.debug(`<<< ${_.truncate(JSON.stringify(isolate), {
+    'length': truncateLength, 'omission': `...` })}`);
+  return isolate;
+};
+
+export const executeGetVMCommand = async function(this: FlutterDriver) {
+  log.debug(`>>> getVM`);
+  const vm = await this.socket!.call(`getVM`) as {
+    isolates: [{
+      name: string,
+      id: number,
+    }],
+  };
+  log.debug(`<<< ${_.truncate(JSON.stringify(vm), {
+    'length': truncateLength, 'omission': `...` })}`);
+  return vm;
 };
 
 export const executeElementCommand = async function(
@@ -138,21 +174,25 @@ export const executeElementCommand = async function(
   return data.response;
 };
 
-export const processLogToGetobservatory = (adbLogs: [{ message: string }]) => {
+export const processLogToGetobservatory = (deviceLogs: [{ message: string }]) => {
   // https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183
   //  e.g. 'Observatory listening on http://127.0.0.1:52817/_w_SwaKs9-g=/'
   // https://github.com/flutter/flutter/blob/52ae102f182afaa0524d0d01d21b2d86d15a11dc/packages/flutter_tools/lib/src/resident_runner.dart#L1386-L1389
   //  e.g. 'An Observatory debugger and profiler on ${device.device.name} is available at: http://127.0.0.1:52817/_w_SwaKs9-g=/'
   const observatoryUriRegEx = new RegExp(
-    `(Observatory listening on |An Observatory debugger and profiler on\\s.+\\sis available at: )((http|\/\/)[a-zA-Z0-9:/=_\\-\.\\[\\]]+)`,
+    `(Observatory listening on |An Observatory debugger and profiler on\\s.+\\sis available at: |The Dart VM service is listening on )((http|\/\/)[a-zA-Z0-9:/=_\\-\.\\[\\]]+)`,
   );
   // @ts-ignore
-  const observatoryMatch = adbLogs
+  const candidate = deviceLogs
     .map((e) => e.message)
     .reverse()
-    .find((e) => e.match(observatoryUriRegEx))
-    .match(observatoryUriRegEx);
+    .find((e) => e.match(observatoryUriRegEx));
+  if (!candidate) {
+    throw new Error(`No observatory url was found in the device log. ` +
+      `Please make sure the application under test logs an observatory url when the application starts.`);
+  }
 
+  const observatoryMatch = candidate.match(observatoryUriRegEx);
   if (!observatoryMatch) {
     throw new Error(`can't find Observatory`);
   }
