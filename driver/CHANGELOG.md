@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.10.0
+- Add `terminateApp` support to stop the running application
+    - The behavior is the same as when you call the same endpoint in NATIVE_APP context
+
 ## 1.9.1
 - Improved error message when no observatory url found
 
