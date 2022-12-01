@@ -37,14 +37,14 @@ export const connectIOSSession = async (iosdriver, caps) => {
   log.info(`Connecting to an IOS proxy session`);
   let observatoryWsUri;
   try {
-    observatoryWsUri = await getObservatoryWsUri(iosdriver);
+    observatoryWsUri = await getObservatoryWsUri(iosdriver, caps);
   } catch (e) {
     await iosdriver.deleteSession();
     throw e;
   }
   return Promise.all([
     iosdriver,
-    connectSocket(observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
+    connectSocket(observatoryWsUri, iosdriver, caps),
   ]);
 };
 

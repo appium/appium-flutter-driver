@@ -4,7 +4,7 @@ import { log } from '../logger';
 import { DRIVER_NAME as ANDROID_DEVICE_NAME, startAndroidSession, connectAndroidSession } from './android';
 import { DRIVER_NAME as IOS_DEVICE_NAME, startIOSSession, connectIOSSession } from './ios';
 
-export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: any) {
+export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: any, appId: string) {
   // setup proxies - if platformName is not empty, make it less case sensitive
   if (caps.platformName !== null) {
     const appPlatform = caps.platformName.toLowerCase();
@@ -13,7 +13,7 @@ export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: 
         await connectIOSSession(this.proxydriver, caps)
         break;
       case `android`:
-        await connectAndroidSession(this.proxydriver, caps)
+        [this.socket] = await connectAndroidSession(this.proxydriver, caps, appId)
         break;
       default:
         log.errorAndThrow(

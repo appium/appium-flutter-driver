@@ -104,8 +104,7 @@ class FlutterDriver extends BaseDriver {
   }
 
   public async activateApp(appId) {
-    await this.proxydriver.activateApp(appId);
-    await reConnectFlutterDriver.bind(this)(this.internalCaps);
+    await reConnectFlutterDriver.bind(this)(this.internalCaps, appId);
   }
 
   public async terminateApp(appId) {
