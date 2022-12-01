@@ -32,8 +32,9 @@ export const startAndroidSession = async (caps, ...args) => {
 export const connectAndroidSession = async (
   androiddriver,
   caps,
-  appId
-  ) => {
+  appId) => {
+
+
   log.info(`Connecting to an Android proxy session`);
   try {
     await androiddriver.adb.stopLogcat();
@@ -43,9 +44,10 @@ export const connectAndroidSession = async (
       clearDeviceLogsOnStart: true
     });
   } catch (e) {
+    log.warn(`Failed to start getting logcat`);
     throw e;
   }
-  await await androiddriver.activateApp(appId);
+  await androiddriver.activateApp(appId);
   return Promise.all([
     connectSocket(getObservatoryWsUri, androiddriver, caps),
   ]);
