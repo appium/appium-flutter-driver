@@ -8,7 +8,7 @@ import { log as logger } from './logger';
 import { DRIVER_NAME as IOS_DEVICE_NAME } from './sessions/ios';
 import { executeElementCommand, executeGetVMCommand,
   executeGetIsolateCommand } from './sessions/observatory';
-import { createSession, deleteSession } from './sessions/session';
+import { createSession, deleteSession, reConnectFlutterDriver } from './sessions/session';
 
 import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
   getContexts, getCurrentContext, NATIVE_CONTEXT_NAME, setContext } from './commands/context';
@@ -38,6 +38,9 @@ class FlutterDriver extends BaseDriver {
   public proxydriver: any;
   public proxydriverName: string;  // to store 'driver name' as proxy to.
   public device: any;
+
+  // Used to keep the capabilities internally
+  public internalCaps: any;
 
   // from BaseDriver
   public opts: any;
@@ -85,10 +88,12 @@ class FlutterDriver extends BaseDriver {
     this.proxydriver = null;
     this.proxydriverName = ``;
     this.device = null;
+    this.internalCaps = null;
   }
 
   public async createSession(...args): Promise<[string, {}]> {
     const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)) as [W3CCapabilities, W3CCapabilities, W3CCapabilities, DriverData[]]);
+    this.internalCaps = caps;
     return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args))) as Promise<[string, {}]>;  // @ts-ignore
   }
 
@@ -97,6 +102,11 @@ class FlutterDriver extends BaseDriver {
       deleteSession.bind(this)(),
       super.deleteSession(),
     ]);
+  }
+
+  public async activateApp(appId) {
+    this.proxydriver.activateApp(appId);
+    await reConnectFlutterDriver.bind(this)(this.internalCaps);
   }
 
   public async terminateApp(appId) {

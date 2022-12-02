@@ -33,6 +33,18 @@ export const startIOSSession = async (caps, ...args) => {
   ]);
 };
 
+/**
+ * Connect to the latest observaotry URL
+ * @param androiddriver
+ * @param caps
+ * @returns current socket
+ */
+export const connectIOSSession = async (iosdriver, caps) => {
+  return Promise.all([
+    connectSocket(getObservatoryWsUri, iosdriver, caps),
+  ]);
+};
+
 const waitForPortIsAvailable = async (port) => {
   let isPortBusy = (await checkPortStatus(port, LOCALHOST)) === `open`;
   if (isPortBusy) {

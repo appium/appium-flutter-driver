@@ -29,6 +29,18 @@ export const startAndroidSession = async (caps, ...args) => {
 
 };
 
+/**
+ * Connect to the latest observaotry URL
+ * @param androiddriver
+ * @param caps
+ * @returns current socket
+ */
+export const connectAndroidSession = async (androiddriver, caps) => {
+  return Promise.all([
+    connectSocket(getObservatoryWsUri, androiddriver, caps),
+  ]);
+};
+
 export const getObservatoryWsUri = async (proxydriver , caps) => {
   let urlObject;
   if (caps.observatoryWsUri) {
