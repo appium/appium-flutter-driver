@@ -200,6 +200,8 @@ Please replace them properly with your client.
 | - | :ok: | `getContexts` | Appium |
 | :question: | :ok: | `driver.execute('flutter:longTap', find.byValueKey('increment'), {durationMilliseconds: 10000, frequency: 30})` | Widget |
 | :question: | :ok: | `driver.execute('flutter:waitForFirstFrame')` | Widget |
+| - | :ok: | `activateApp` | Appium |
+| - | :ok: | `terminateApp` | Appium |
 
 ### Note
 - Flutter context does not support page source
