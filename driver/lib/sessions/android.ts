@@ -29,14 +29,13 @@ export const startAndroidSession = async (caps, ...args) => {
 
 };
 
-export const connectAndroidSession = async (
-  androiddriver,
-  caps,
-  appId) => {
-
-
-  log.info(`Connecting to an Android proxy session`);
-  await androiddriver.activateApp(appId);
+/**
+ * Connect to the latest observaotry URL
+ * @param androiddriver
+ * @param caps
+ * @returns current socket
+ */
+export const connectAndroidSession = async (androiddriver, caps) => {
   return Promise.all([
     connectSocket(getObservatoryWsUri, androiddriver, caps),
   ]);

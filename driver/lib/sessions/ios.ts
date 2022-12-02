@@ -33,13 +33,13 @@ export const startIOSSession = async (caps, ...args) => {
   ]);
 };
 
-export const connectIOSSession = async (
-  iosdriver,
-  caps,
-  appId) => {
-
-  log.info(`Connecting to an IOS proxy session`);
-  await iosdriver.activateApp(appId);
+/**
+ * Connect to the latest observaotry URL
+ * @param androiddriver
+ * @param caps
+ * @returns current socket
+ */
+export const connectIOSSession = async (iosdriver, caps) => {
   return Promise.all([
     connectSocket(getObservatoryWsUri, iosdriver, caps),
   ]);

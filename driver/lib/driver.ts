@@ -39,6 +39,7 @@ class FlutterDriver extends BaseDriver {
   public proxydriverName: string;  // to store 'driver name' as proxy to.
   public device: any;
 
+  // Used to keep the capabilities internally
   public internalCaps: any;
 
   // from BaseDriver
@@ -104,7 +105,8 @@ class FlutterDriver extends BaseDriver {
   }
 
   public async activateApp(appId) {
-    await reConnectFlutterDriver.bind(this)(this.internalCaps, appId);
+    this.proxydriver.activateApp(appId);
+    await reConnectFlutterDriver.bind(this)(this.internalCaps);
   }
 
   public async terminateApp(appId) {
