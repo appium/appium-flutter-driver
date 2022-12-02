@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.11.0
+- Add `activateApp` support to start an app
+
 ## 1.10.0
 - Add `terminateApp` support to stop the running application
     - The behavior is the same as when you call the same endpoint in NATIVE_APP context
