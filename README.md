@@ -207,6 +207,7 @@ Please replace them properly with your client.
 - You can send appium-xcuitest-driver/appium-uiautomator2-driver commands in `NATIVE_APP` context
 - `scrollUntilVisible` command : An expectation for checking that an element, known to be present on the widget tree, is visible. Using waitFor to wait element
 - `scrollUntilTapable` command : An expectation for checking an element is visible and enabled such that you can click it. Using waitTapable to wait element
+- `driver.activateApp(appId)` starts the given app and attaches to the observatory URL. The method may raise an exception if no observaotry URL was found.
 
 ## Change the flutter engine attache to
 
@@ -229,7 +230,7 @@ driver.execute_script 'flutter:setIsolateId', info['isolates'][0]['id']
     - Current isolate: `driver.execute('flutter:getIsolate')` (JS)
     - Particular isolate: `driver.execute('flutter:getIsolate', 'isolates/2978358234363215')` (JS)
 
-## TODO
+## TODO?
 - [ ] CI (unit test / integration test with demo app)
 - [ ] CD (automatic publish to npm)
 - [ ] switching context between Flutter and [AndroidView](https://api.flutter.dev/flutter/widgets/AndroidView-class.html)
