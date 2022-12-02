@@ -209,7 +209,7 @@ Please replace them properly with your client.
 - You can send appium-xcuitest-driver/appium-uiautomator2-driver commands in `NATIVE_APP` context
 - `scrollUntilVisible` command : An expectation for checking that an element, known to be present on the widget tree, is visible. Using waitFor to wait element
 - `scrollUntilTapable` command : An expectation for checking an element is visible and enabled such that you can click it. Using waitTapable to wait element
-- `driver.activateApp(appId)` starts the given app and attaches to the observatory URL. The method may raise an exception if no observaotry URL was found.
+- `driver.activateApp(appId)` starts the given app and attaches to the observatory URL in the `FLUTTER` context. The method may raise an exception if no observaotry URL was found.
 
 ## Change the flutter engine attache to
 
