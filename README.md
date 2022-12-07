@@ -24,7 +24,7 @@ Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https:/
 
 With Appium 2 (`appium@next`):
 ```
-appium driver install flutter
+appium driver install --source=npm appium-flutter-driver
 ```
 
 > **Note**
