@@ -51,10 +51,10 @@ export const connectSocket = async (
 
       // Add an 'error' event handler for the client socket
       const onErrorListener = (ex) => {
-        log.error(ex);
-        log.error(
-          `Check Dart Observatory URI ${dartObservatoryURL}`,
-        );
+        log.error(JSON.stringify(ex));
+        log.error(`Check Dart Observatory URI ${
+          _.isString(dartObservatoryURL) ? dartObservatoryURL : 'no URI found in the device log'
+        }`);
         removeListenerAndResolve(null);
       };
       socket.on(`error`, onErrorListener);
