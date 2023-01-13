@@ -27,6 +27,12 @@ const setupNewIOSDriver = async (...args) => {
 export const startIOSSession = async (caps, ...args) => {
   log.info(`Starting an IOS proxy session`);
   const iosdriver = await setupNewIOSDriver(...args);
+
+  // the session starts without any apps
+  if (caps.app === undefined && caps.bundleId === undefined) {
+    return [iosdriver, null];
+  }
+
   return Promise.all([
     iosdriver,
     connectSocket(getObservatoryWsUri, iosdriver, caps),
