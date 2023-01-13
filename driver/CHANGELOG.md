@@ -2,6 +2,7 @@
 
 ## not released yet
 - Support `setClipboard` and `getClipboard` by always proxying the request to the NATIVE_APP context
+- Support non-`app` and non-`bundleId` nor non-`appPackage` session starts
 
 ## 1.11.0
 - Add `activateApp` support to start an app
