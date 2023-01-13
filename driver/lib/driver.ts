@@ -141,7 +141,7 @@ class FlutterDriver extends BaseDriver {
     if (cmd === `receiveAsyncResponse`) {
       logger.debug(`Executing FlutterDriver response '${cmd}'`);
       return await this.receiveAsyncResponse(...args);
-    } else if (this.socket) {
+    } else {
       if (this.driverShouldDoProxyCmd(cmd)) {
         logger.debug(`Executing proxied driver command '${cmd}'`);
 
@@ -157,11 +157,6 @@ class FlutterDriver extends BaseDriver {
         logger.debug(`Executing Flutter driver command '${cmd}'`);
         return await super.executeCommand(cmd, ...args);
       }
-    } else {
-      logger.debug(`Command Error '${cmd}'`);
-      throw new errors.NoSuchDriverError(
-        `Driver is not ready, cannot execute ${cmd}.`,
-      );
     }
   }
 
