@@ -202,6 +202,8 @@ Please replace them properly with your client.
 | :question: | :ok: | `driver.execute('flutter:waitForFirstFrame')` | Widget |
 | - | :ok: | `activateApp('appId')` | Appium |
 | - | :ok: | `terminateApp('appId')` | Appium |
+| - | :ok: | `getClipboard` | Appium |
+| - | :ok: | `setClipboard` | Appium |
 
 ### Note
 - Flutter context does not support page source
@@ -210,6 +212,7 @@ Please replace them properly with your client.
 - `scrollUntilVisible` command : An expectation for checking that an element, known to be present on the widget tree, is visible. Using waitFor to wait element
 - `scrollUntilTapable` command : An expectation for checking an element is visible and enabled such that you can click it. Using waitTapable to wait element
 - `driver.activateApp(appId)` starts the given app and attaches to the observatory URL in the `FLUTTER` context. The method may raise an exception if no observaotry URL was found.
+- `getClipboard` and `setClipboard` depend on each NATIVE_APP context behavior
 
 ## Change the flutter engine attache to
 
