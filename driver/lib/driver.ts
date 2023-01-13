@@ -16,6 +16,7 @@ import { clear, getText, setValue } from './commands/element';
 import { execute } from './commands/execute';
 import { click, longTap, performTouch, tap, tapEl } from './commands/gesture';
 import { getScreenshot } from './commands/screen';
+import { getClipboard, setClipboard } from './commands/clipboard';
 
 // Need to not proxy in WebView context
 const WEBVIEW_NO_PROXY = [
@@ -82,6 +83,10 @@ class FlutterDriver extends BaseDriver {
   public setContext = setContext;
   protected currentContext = FLUTTER_CONTEXT_NAME;
   private driverShouldDoProxyCmd = driverShouldDoProxyCmd;
+
+  // content
+  public getClipboard = getClipboard;
+  public setClipboard = setClipboard;
 
   constructor(opts, shouldValidateCaps: boolean) {
     super(opts, shouldValidateCaps);
