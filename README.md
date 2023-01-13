@@ -202,6 +202,7 @@ Please replace them properly with your client.
 | :question: | :ok: | `driver.execute('flutter:waitForFirstFrame')` | Widget |
 | - | :ok: | `activateApp('appId')` | Appium |
 | - | :ok: | `terminateApp('appId')` | Appium |
+| - | :ok: | `installApp(appPath, options)` | Appium |
 | - | :ok: | `getClipboard` | Appium |
 | - | :ok: | `setClipboard` | Appium |
 
