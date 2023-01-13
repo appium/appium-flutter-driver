@@ -1,3 +1,4 @@
+import { NATIVE_CONTEXT_NAME } from '../commands/context';
 import { FlutterDriver } from '../driver';
 import { log } from '../logger';
 
@@ -51,6 +52,12 @@ export const createSession = async function(this: FlutterDriver, sessionId, caps
               `Unsupported platformName: ${caps.platformName}`,
             );
         }
+      }
+
+      // no app starts
+      if (this.socket === null) {
+        log.info(`Starting the session as ${NATIVE_CONTEXT_NAME} context`);
+        this.setContext(NATIVE_CONTEXT_NAME);
       }
 
       return [sessionId, this.opts];
