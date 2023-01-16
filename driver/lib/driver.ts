@@ -95,6 +95,13 @@ class FlutterDriver extends BaseDriver {
     this.device = null;
     this.internalCaps = null;
   }
+  
+  public async proxyCommand (url, method, body = null) {
+    this.clearNewCommandTimeout();
+    const result = await this.proxydriver.executeCommand(url, method, body);
+    this.startNewCommandTimeout(cmd);
+    return result
+  }
 
   public async createSession(...args): Promise<[string, {}]> {
     const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)) as [W3CCapabilities, W3CCapabilities, W3CCapabilities, DriverData[]]);
