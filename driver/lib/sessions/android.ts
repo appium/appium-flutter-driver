@@ -22,6 +22,12 @@ const setupNewAndroidDriver = async (...args) => {
 export const startAndroidSession = async (caps, ...args) => {
   log.info(`Starting an Android proxy session`);
   const androiddriver = await setupNewAndroidDriver(...args);
+
+  // the session starts without any apps
+  if (caps.app === undefined && caps.appPackage === undefined) {
+    return [androiddriver, null];
+  }
+
   return Promise.all([
     androiddriver,
     connectSocket(getObservatoryWsUri, androiddriver, caps),
