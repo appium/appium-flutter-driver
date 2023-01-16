@@ -1,6 +1,6 @@
 # Changelog
 
-## not released yet
+## 1.12.0
 - Support `setClipboard` and `getClipboard` by always proxying the request to the NATIVE_APP context
 - Support non-`app` and non-`bundleId` nor non-`appPackage` session starts as `FLUTTER` context
 - Add `installApp` to install the test target after the new session request
