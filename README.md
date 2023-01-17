@@ -5,7 +5,7 @@
 
 Appium Flutter Driver is a test automation tool for [Flutter](https://flutter.dev) apps on multiple platforms/OSes. Appium Flutter Driver is part of the [Appium](https://github.com/appium/appium) mobile test automation tool maintained by community. Feel free to create PRs to fix issues/improve this driver.
 
-This package is still experiment, breaking changes and breaking codes are to be expected! All contributions, including non-code, are welcome! See [TODO](#todo) list below.
+All contributions, including non-code, are welcome! See [TODO](#todo) list below.
 
 ## Flutter Driver vs Appium Flutter Driver
 Even though Flutter comes with superb integration test support, [Flutter Driver](https://flutter.dev/docs/cookbook/testing/integration/introduction), it does not fit some specific use cases, such as
@@ -15,6 +15,13 @@ Even though Flutter comes with superb integration test support, [Flutter Driver]
 - running integration test on device farms, such as Sauce Labs, [HeadSpin](https://www.headspin.io/global-device-infrastructure), AWS, Firebase
 
 Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https://github.com/dart-lang/sdk/blob/master/runtime/vm/service/service.md) with extension `ext.flutter.driver`, similar to Flutter Driver, to control the Flutter app-under-test (AUT).
+
+## Appium Flutter Driver or Appium UiAutomator2/XCUITest driver
+- Appium Flutter driver manages the application under test and the device under test via Appium UiAutomator2/XCUITest drivers
+    -  `FLUTTER` context sends commands to the Dart VM directly over the observatory URL
+        - Newer Flutter versions expose its accessibility labels to the system's accessibility features. It means you can find some Flutter elements over `accessibility_id` etc in the vanilla Appium UiAutomator2/XCUITest drivers.
+    - `NATIVE_APP` context is the same as regular Appium UiAutomator2/XCUITest driver
+    - `WEBVIEW` context manages the WebView contents over Appium UiAutomator2/XCUITest driver
 
 ## Installation
 
