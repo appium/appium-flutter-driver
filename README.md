@@ -19,7 +19,7 @@ Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https:/
 ## Appium Flutter Driver or Appium UiAutomator2/XCUITest driver
 - Appium Flutter driver manages the application under test and the device under test via Appium UiAutomator2/XCUITest drivers
     -  `FLUTTER` context sends commands to the Dart VM directly over the observatory URL
-        - Newer Flutter versions expose its accessibility labels to the system's accessibility features. It means you can find some Flutter elements over `accessibility_id` etc in the vanilla Appium UiAutomator2/XCUITest drivers.
+        - Newer Flutter versions expose its accessibility labels to the system's accessibility features. It means you can find some Flutter elements and can interact with them over `accessibility_id` etc in the vanilla Appium UiAutomator2/XCUITest drivers, although some elements require over the Dart VM
     - `NATIVE_APP` context is the same as regular Appium UiAutomator2/XCUITest driver
     - `WEBVIEW` context manages the WebView contents over Appium UiAutomator2/XCUITest driver
 
