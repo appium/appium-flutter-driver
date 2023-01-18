@@ -22,6 +22,7 @@ Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https:/
         - Newer Flutter versions expose its accessibility labels to the system's accessibility features. It means you can find some Flutter elements and can interact with them over `accessibility_id` etc in the vanilla Appium UiAutomator2/XCUITest drivers, although some elements require over the Dart VM
     - `NATIVE_APP` context is the same as regular Appium UiAutomator2/XCUITest driver
     - `WEBVIEW` context manages the WebView contents over Appium UiAutomator2/XCUITest driver
+- Appium UiAutomator2/XCUITest drivers must be enbough to achieve the automation if the application under test had `semanticLabel` properly. Then, accessibility mechanism in each OS can expose elements for them.
 
 ## Installation
 
