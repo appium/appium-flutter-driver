@@ -57,12 +57,12 @@ This snippet, taken from [example dir](https://github.com/appium-userland/appium
 | - | - | -|
 | appium:retryBackoffTime | The time wait for socket connection retry for get flutter session (default 3000ms)|500|
 | appium:maxRetryCount    | The count for socket connection retry for get flutter session (default 30)          | 20|
-| appium:observatoryWsUri | The URL to attach to the Dart VM. The appium flutter driver finds the WebSocket URL from the device log by default. You can skip the finding the URL process by specifying this capability. Then, this driver attempt to establish a WebSocket connection against the given WebSocket URL. Note that this capability espects the URL is ready for access by outside an appium session. This flutter driver does not do port-forwarding with this capability. You may need to coordinate the port-forwarding as well. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
+| appium:observatoryWsUri | The URL to attach to the Dart VM. The appium flutter driver finds the WebSocket URL from the device log by default. You can skip the finding the URL process by specifying this capability. Then, this driver attempt to establish a WebSocket connection against the given WebSocket URL. Note that this capability expects the URL is ready for access by outside an appium session. This flutter driver does not do port-forwarding with this capability. You may need to coordinate the port-forwarding as well. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
 | appium:skipPortForward | Whether skip port forwarding from the flutter driver local to the device under test with `observatoryWsUri` capability. It helps you to manage the application under test, the observatory URL and the port forwarding configuration. The default is `true`. | true, false |
 
 ### Context
 
-Appium Flutter Driver allow you to send flutter_driver commands to the Dart VM in `FLUTTER` context, but it does not support native Android/iOS automation. Instead, `NATIVE_APP` context provide you to use UIA2 drier for Android and XCUITest for iOS automation. `WEBVIEW_XXXX` cntext helps WebView testing.
+Appium Flutter Driver allow you to send flutter_driver commands to the Dart VM in `FLUTTER` context, but it does not support native Android/iOS automation. Instead, `NATIVE_APP` context provide you to use UIA2 driver for Android and XCUITest for iOS automation. `WEBVIEW_XXXX` cntext helps WebView testing.
 
 Thus, you can automate proper application target by switching its context with `FLUTTER`, `NATIVE_APP` and `WEBVIEW_XXXX`.
 
