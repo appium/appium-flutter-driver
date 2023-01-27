@@ -53,6 +53,16 @@ Your Flutter app-under-test (AUT) must be compiled in `debug` or `profile` mode,
 
 This snippet, taken from [example dir](https://github.com/appium-userland/appium-flutter-driver/tree/main/example), is a script written as an appium client with `webdriverio`, and assumes you have `appium` server (with `appium-flutter-driver` installed) running on the same host and default port (`4723`). For more info, see example's [README.md](https://github.com/truongsinh/appium-flutter-driver/tree/main/example/README.md)
 
+### Note
+- Flutter context does not support page source
+    - Please use `getRenderTree` command instead
+- You can send appium-xcuitest-driver/appium-uiautomator2-driver commands in `NATIVE_APP` context
+- `scrollUntilVisible` command : An expectation for checking that an element, known to be present on the widget tree, is visible. Using waitFor to wait element
+- `scrollUntilTapable` command : An expectation for checking an element is visible and enabled such that you can click it. Using waitTapable to wait element
+- `driver.activateApp(appId)` starts the given app and attaches to the observatory URL in the `FLUTTER` context. The method may raise an exception if no observaotry URL was found. The typical case is the `appId` is already running. Then, the driver will fail to find the observatory URL.
+- `getClipboard` and `setClipboard` depend on each `NATIVE_APP` context behavior
+
+
 ### Desired Capabilities for flutter driver only
 
 | Capability | Description | Example Values |
@@ -214,15 +224,6 @@ Please replace them properly with your client.
 | - | :ok: | `installApp(appPath, options)` | Appium |
 | - | :ok: | `getClipboard` | Appium |
 | - | :ok: | `setClipboard` | Appium |
-
-### Note
-- Flutter context does not support page source
-    - Please use `getRenderTree` command instead
-- You can send appium-xcuitest-driver/appium-uiautomator2-driver commands in `NATIVE_APP` context
-- `scrollUntilVisible` command : An expectation for checking that an element, known to be present on the widget tree, is visible. Using waitFor to wait element
-- `scrollUntilTapable` command : An expectation for checking an element is visible and enabled such that you can click it. Using waitTapable to wait element
-- `driver.activateApp(appId)` starts the given app and attaches to the observatory URL in the `FLUTTER` context. The method may raise an exception if no observaotry URL was found. The typical case is the `appId` is already running. Then, the driver will fail to find the observatory URL.
-- `getClipboard` and `setClipboard` depend on each NATIVE_APP context behavior
 
 ## Change the flutter engine attache to
 
