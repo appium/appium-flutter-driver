@@ -247,12 +247,16 @@ driver.execute_script 'flutter:setIsolateId', info['isolates'][0]['id']
     - Particular isolate: `driver.execute('flutter:getIsolate', 'isolates/2978358234363215')` (JS)
 
 ## TODO?
-- [ ] CI (unit test / integration test with demo app)
+
+Items which may be worth to add.
+
 - [ ] CD (automatic publish to npm)
 - [ ] switching context between Flutter and [AndroidView](https://api.flutter.dev/flutter/widgets/AndroidView-class.html)
 - [ ] switching context between Flutter and [UiKitView](https://api.flutter.dev/flutter/widgets/UiKitView-class.html)
-- [ ] Flutter-version-aware API
-- [ ] Error handling
+- [ ] Web: `FLUTTER_WEB` context?
+- [ ] macOS: with https://github.com/appium/appium-mac2-driver
+- [ ] Windws?
+- [ ] Linux?
 
 ## Test Status
 
