@@ -69,6 +69,22 @@ export const longTap = async (
   });
 };
 
+const validateOps = (alignment, dxScroll, dyScroll) => {
+  if (
+    typeof alignment !== `number` ||
+    typeof dxScroll !== `number` ||
+    typeof dyScroll !== `number`
+  ) {
+    return false;
+  }
+
+  if (dxScroll === 0 && dyScroll === 0) {
+    return false;
+  }
+
+  return true;
+}
+
 export const scrollUntilVisible = async (
   self: FlutterDriver,
   elementBase64: string,
@@ -77,35 +93,34 @@ export const scrollUntilVisible = async (
     alignment: number;
     dxScroll: number;
     dyScroll: number;
+    durationMilliseconds: number;
+    frequency?: number;
+    waitTimeout?: number;
   },
 ) => {
-  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0 } = opts;
+  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0, durationMilliseconds = 100, frequency, waitTimeout } = opts;
 
-  if (
-    typeof alignment !== `number` ||
-    typeof dxScroll !== `number` ||
-    typeof dyScroll !== `number`
-  ) {
-    // @todo BaseDriver's errors.InvalidArgumentError();
-    throw new Error(`${opts} is not a valid options`);
-  }
-
-  if (dxScroll === 0 && dyScroll === 0) {
-    // @todo BaseDriver's errors.InvalidArgumentError();
+  if (!validateOps(alignment, dxScroll, dyScroll)) {
     throw new Error(`${opts} is not a valid options`);
   }
 
   // An expectation for checking that an element, known to be present on the widget tree, is visible
   let isVisible = false;
-  waitFor(self, item).then((_) => {
-    isVisible = true;
-  });
-  while (!isVisible) {
-    await scroll(self, elementBase64, {
-      dx: dxScroll,
-      dy: dyScroll,
-      durationMilliseconds: 100,
+  try {
+    waitFor(self, item, waitTimeout).then((_) => {
+      isVisible = true;
     });
+
+    while (!isVisible) {
+      await scroll(self, elementBase64,{
+        dx: dxScroll,
+        dy: dyScroll,
+        durationMilliseconds,
+        frequency
+      });
+    }
+  } catch {
+    return;
   }
   return scrollIntoView(self, item, { alignment });
 };
@@ -118,21 +133,14 @@ export const scrollUntilTapable = async (
     alignment: number;
     dxScroll: number;
     dyScroll: number;
+    durationMilliseconds: number;
+    frequency?: number;
+    waitTimeout?: number;
   },
 ) => {
-  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0 } = opts;
+  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0, durationMilliseconds = 100, frequency, waitTimeout } = opts;
 
-  if (
-    typeof alignment !== `number` ||
-    typeof dxScroll !== `number` ||
-    typeof dyScroll !== `number`
-  ) {
-    // @todo BaseDriver's errors.InvalidArgumentError();
-    throw new Error(`${opts} is not a valid options`);
-  }
-
-  if (dxScroll === 0 && dyScroll === 0) {
-    // @todo BaseDriver's errors.InvalidArgumentError();
+  if (!validateOps(alignment, dxScroll, dyScroll)) {
     throw new Error(`${opts} is not a valid options`);
   }
 
@@ -141,16 +149,23 @@ export const scrollUntilTapable = async (
   // the chance to complete if the item is already onscreen; if not, scroll
   // repeatedly until we either find the item or time out.
   let isVisible = false;
-  waitForTappable(self, item).then((_) => {
-    isVisible = true;
-  });
-  while (!isVisible) {
-    await scroll(self, elementBase64, {
-      dx: dxScroll,
-      dy: dyScroll,
-      durationMilliseconds: 100,
+
+  try {
+    waitForTappable(self, item, waitTimeout).then((_) => {
+      isVisible = true;
     });
+    while (!isVisible) {
+      await scroll(self, elementBase64,{
+        dx: dxScroll,
+        dy: dyScroll,
+        durationMilliseconds,
+        frequency
+      });
+    }
+  } catch {
+    return;
   }
+
   return scrollIntoView(self, item, { alignment });
 };
 
