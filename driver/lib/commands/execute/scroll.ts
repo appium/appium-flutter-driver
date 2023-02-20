@@ -1,6 +1,7 @@
 
 // tslint:disable:object-literal-sort-keys
 
+import _ from 'lodash';
 import { FlutterDriver } from '../../driver';
 import { waitFor, waitForTappable } from './wait';
 
@@ -85,6 +86,18 @@ const validateOps = (alignment, dxScroll, dyScroll) => {
   return true;
 }
 
+const shouldRetry = (startAt, waitTimeout) => {
+  if (!waitTimeout) {
+    return false;
+  }
+
+  if (Date.now() - startAt > _.toInteger(waitTimeout)) {
+    return false;
+  }
+
+  return true;
+}
+
 export const scrollUntilVisible = async (
   self: FlutterDriver,
   elementBase64: string,
@@ -106,22 +119,31 @@ export const scrollUntilVisible = async (
 
   // An expectation for checking that an element, known to be present on the widget tree, is visible
   let isVisible = false;
-  try {
-    waitFor(self, item, waitTimeout).then((_) => {
-      isVisible = true;
-    });
+  const startAt = Date.now()
+  while (isVisible || shouldRetry(startAt, waitTimeout)) {
+    try {
+      waitFor(self, item).then((_) => {
+        isVisible = true;
+      });
 
-    while (!isVisible) {
+      if (isVisible) {
+        // the element is in the view
+        break
+      }
+
       await scroll(self, elementBase64,{
         dx: dxScroll,
         dy: dyScroll,
-        durationMilliseconds,
+        durationMilliseconds: 100,
         frequency
       });
-    }
-  } catch {
+    } catch { /* go to the next scroll */ }
+  }
+
+  if (!isVisible) {
     throw new Error(`Stop scrolling as timeout ${durationMilliseconds}`);
   }
+
   return scrollIntoView(self, item, { alignment });
 };
 
@@ -150,19 +172,28 @@ export const scrollUntilTapable = async (
   // repeatedly until we either find the item or time out.
   let isVisible = false;
 
-  try {
-    waitForTappable(self, item, waitTimeout).then((_) => {
-      isVisible = true;
-    });
-    while (!isVisible) {
+  const startAt = Date.now()
+  while (isVisible || shouldRetry(startAt, waitTimeout)) {
+    try {
+      waitForTappable(self, item).then((_) => {
+        isVisible = true;
+      });
+
+      if (isVisible) {
+        // the element is in the view
+        break
+      }
+
       await scroll(self, elementBase64,{
         dx: dxScroll,
         dy: dyScroll,
-        durationMilliseconds,
+        durationMilliseconds: 100,
         frequency
       });
-    }
-  } catch {
+    } catch { /* go to the next scroll */ }
+  }
+
+  if (!isVisible) {
     throw new Error(`Stop scrolling as timeout ${durationMilliseconds}`);
   }
 
