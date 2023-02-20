@@ -120,7 +120,7 @@ export const scrollUntilVisible = async (
       });
     }
   } catch {
-    return;
+    throw new Error(`Stop scrolling as timeout ${durationMilliseconds}`);
   }
   return scrollIntoView(self, item, { alignment });
 };
@@ -163,7 +163,7 @@ export const scrollUntilTapable = async (
       });
     }
   } catch {
-    return;
+    throw new Error(`Stop scrolling as timeout ${durationMilliseconds}`);
   }
 
   return scrollIntoView(self, item, { alignment });
