@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@appium/tsconfig": "0.2.4",
-    "@appium/schema": "^0.1.0",
+    "@appium/schema": "^0.2.5",
     "@appium/types": "^0.10.0",
     "json-schema": "^0.4.0",
     "tslint": "^6.1.3",
