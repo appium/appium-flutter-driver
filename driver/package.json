@@ -12,8 +12,8 @@
     "type": "git",
     "url": "git+https://github.com/appium-userland/appium-flutter-driver.git"
   },
-  "main": "./build/driver/lib/driver.js",
-  "types": "./build/driver/lib/index.d.ts",
+  "main": "./build/lib/driver.js",
+  "types": "./build/lib/index.d.ts",
   "appium": {
     "driverName": "flutter",
     "automationName": "Flutter",
