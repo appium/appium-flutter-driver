@@ -1,6 +1,7 @@
 
 // tslint:disable:object-literal-sort-keys
 
+import _ from 'lodash';
 import { FlutterDriver } from '../../driver';
 import { waitFor, waitForTappable } from './wait';
 
@@ -69,6 +70,34 @@ export const longTap = async (
   });
 };
 
+const validateOps = (alignment, dxScroll, dyScroll) => {
+  if (
+    typeof alignment !== `number` ||
+    typeof dxScroll !== `number` ||
+    typeof dyScroll !== `number`
+  ) {
+    return false;
+  }
+
+  if (dxScroll === 0 && dyScroll === 0) {
+    return false;
+  }
+
+  return true;
+}
+
+const shouldRetry = (startAt, waitTimeout) => {
+  if (!waitTimeout) {
+    return false;
+  }
+
+  if (Date.now() - startAt > _.toInteger(waitTimeout)) {
+    return false;
+  }
+
+  return true;
+}
+
 export const scrollUntilVisible = async (
   self: FlutterDriver,
   elementBase64: string,
@@ -77,36 +106,44 @@ export const scrollUntilVisible = async (
     alignment: number;
     dxScroll: number;
     dyScroll: number;
+    durationMilliseconds: number;
+    frequency?: number;
+    waitTimeout?: number;
   },
 ) => {
-  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0 } = opts;
+  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0, durationMilliseconds = 100, frequency, waitTimeout } = opts;
 
-  if (
-    typeof alignment !== `number` ||
-    typeof dxScroll !== `number` ||
-    typeof dyScroll !== `number`
-  ) {
-    // @todo BaseDriver's errors.InvalidArgumentError();
-    throw new Error(`${opts} is not a valid options`);
-  }
-
-  if (dxScroll === 0 && dyScroll === 0) {
-    // @todo BaseDriver's errors.InvalidArgumentError();
+  if (!validateOps(alignment, dxScroll, dyScroll)) {
     throw new Error(`${opts} is not a valid options`);
   }
 
   // An expectation for checking that an element, known to be present on the widget tree, is visible
   let isVisible = false;
-  waitFor(self, item).then((_) => {
-    isVisible = true;
-  });
-  while (!isVisible) {
-    await scroll(self, elementBase64, {
-      dx: dxScroll,
-      dy: dyScroll,
-      durationMilliseconds: 100,
-    });
+  const startAt = Date.now()
+  while (isVisible || shouldRetry(startAt, waitTimeout)) {
+    try {
+      waitFor(self, item).then((_value) => {
+        isVisible = true;
+      });
+
+      if (isVisible) {
+        // the element is in the view
+        break
+      }
+
+      await scroll(self, elementBase64,{
+        dx: dxScroll,
+        dy: dyScroll,
+        durationMilliseconds: 100,
+        frequency
+      });
+    } catch { /* go to the next scroll */ }
   }
+
+  if (!isVisible) {
+    throw new Error(`Stop scrolling as timeout ${durationMilliseconds}`);
+  }
+
   return scrollIntoView(self, item, { alignment });
 };
 
@@ -118,21 +155,14 @@ export const scrollUntilTapable = async (
     alignment: number;
     dxScroll: number;
     dyScroll: number;
+    durationMilliseconds: number;
+    frequency?: number;
+    waitTimeout?: number;
   },
 ) => {
-  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0 } = opts;
+  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0, durationMilliseconds = 100, frequency, waitTimeout } = opts;
 
-  if (
-    typeof alignment !== `number` ||
-    typeof dxScroll !== `number` ||
-    typeof dyScroll !== `number`
-  ) {
-    // @todo BaseDriver's errors.InvalidArgumentError();
-    throw new Error(`${opts} is not a valid options`);
-  }
-
-  if (dxScroll === 0 && dyScroll === 0) {
-    // @todo BaseDriver's errors.InvalidArgumentError();
+  if (!validateOps(alignment, dxScroll, dyScroll)) {
     throw new Error(`${opts} is not a valid options`);
   }
 
@@ -141,16 +171,32 @@ export const scrollUntilTapable = async (
   // the chance to complete if the item is already onscreen; if not, scroll
   // repeatedly until we either find the item or time out.
   let isVisible = false;
-  waitForTappable(self, item).then((_) => {
-    isVisible = true;
-  });
-  while (!isVisible) {
-    await scroll(self, elementBase64, {
-      dx: dxScroll,
-      dy: dyScroll,
-      durationMilliseconds: 100,
-    });
+
+  const startAt = Date.now()
+  while (isVisible || shouldRetry(startAt, waitTimeout)) {
+    try {
+      waitForTappable(self, item).then((_value) => {
+        isVisible = true;
+      });
+
+      if (isVisible) {
+        // the element is in the view
+        break
+      }
+
+      await scroll(self, elementBase64,{
+        dx: dxScroll,
+        dy: dyScroll,
+        durationMilliseconds: 100,
+        frequency
+      });
+    } catch { /* go to the next scroll */ }
   }
+
+  if (!isVisible) {
+    throw new Error(`Stop scrolling as timeout ${durationMilliseconds}`);
+  }
+
   return scrollIntoView(self, item, { alignment });
 };
 
