@@ -1,9 +1,9 @@
 import { URL } from 'url';
 import _ from 'lodash';
-import { deserialize } from '../../../finder/nodejs/lib/deserializer';
 import { FlutterDriver } from '../driver';
 import { log } from '../logger';
 import { IsolateSocket } from './isolate_socket';
+import { decode } from './base64url';
 
 const truncateLength = 500;
 
@@ -166,7 +166,7 @@ export const executeElementCommand = async function(
   command: string,
   elementBase64?: string,
   extraArgs = {}) {
-  const elementObject = elementBase64 ? deserialize(elementBase64) : {};
+  const elementObject = elementBase64 ? JSON.parse(decode(elementBase64)) : {};
   const serializedCommand = { command, ...elementObject, ...extraArgs };
   log.debug(`>>> ${JSON.stringify(serializedCommand)}`);
   const data = await this.socket!.executeSocketCommand(serializedCommand);
