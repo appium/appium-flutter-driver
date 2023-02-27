@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.13.0
+- Add arguments in scrollUntilVisible/scrollUntilTapable
+    - `waitTimeoutMilliseconds`: The timeout to try scroll up to the timeout
+    - `durationMilliseconds`: The duration to do a scroll action. `timeout` in [scroll](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scroll.html).
+    - `frequency`: The frequency to for the move events in  [scroll](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scroll.html).
+
+
 ## 1.12.0
 - Support `setClipboard` and `getClipboard` by always proxying the request to the NATIVE_APP context
 - Support non-`app` and non-`bundleId` nor non-`appPackage` session starts as `FLUTTER` context
