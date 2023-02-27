@@ -86,12 +86,12 @@ const validateOps = (alignment, dxScroll, dyScroll) => {
   return true;
 }
 
-const shouldRetry = (startAt, waitTimeout) => {
-  if (!waitTimeout) {
+const shouldRetry = (startAt, waitTimeoutMilliseconds) => {
+  if (!waitTimeoutMilliseconds) {
     return false;
   }
 
-  if (Date.now() - startAt > _.toInteger(waitTimeout)) {
+  if (Date.now() - startAt > _.toInteger(waitTimeoutMilliseconds)) {
     return false;
   }
 
@@ -108,10 +108,10 @@ export const scrollUntilVisible = async (
     dyScroll: number;
     durationMilliseconds: number;
     frequency?: number;
-    waitTimeout?: number;
+    waitTimeoutMilliseconds?: number;
   },
 ) => {
-  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0, durationMilliseconds = 100, frequency, waitTimeout } = opts;
+  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0, durationMilliseconds = 100, frequency, waitTimeoutMilliseconds } = opts;
 
   if (!validateOps(alignment, dxScroll, dyScroll)) {
     throw new Error(`${opts} is not a valid options`);
@@ -120,7 +120,7 @@ export const scrollUntilVisible = async (
   // An expectation for checking that an element, known to be present on the widget tree, is visible
   let isVisible = false;
   const startAt = Date.now()
-  while (isVisible || shouldRetry(startAt, waitTimeout)) {
+  while (isVisible || shouldRetry(startAt, waitTimeoutMilliseconds)) {
     try {
       waitFor(self, item).then((_value) => {
         isVisible = true;
@@ -141,7 +141,7 @@ export const scrollUntilVisible = async (
   }
 
   if (!isVisible) {
-    throw new Error(`Stop scrolling as timeout ${durationMilliseconds}`);
+    throw new Error(`Stop scrolling as timeout ${waitTimeoutMilliseconds}`);
   }
 
   return scrollIntoView(self, item, { alignment });
@@ -157,10 +157,10 @@ export const scrollUntilTapable = async (
     dyScroll: number;
     durationMilliseconds: number;
     frequency?: number;
-    waitTimeout?: number;
+    waitTimeoutMilliseconds?: number;
   },
 ) => {
-  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0, durationMilliseconds = 100, frequency, waitTimeout } = opts;
+  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0, durationMilliseconds = 100, frequency, waitTimeoutMilliseconds } = opts;
 
   if (!validateOps(alignment, dxScroll, dyScroll)) {
     throw new Error(`${opts} is not a valid options`);
@@ -173,7 +173,7 @@ export const scrollUntilTapable = async (
   let isVisible = false;
 
   const startAt = Date.now()
-  while (isVisible || shouldRetry(startAt, waitTimeout)) {
+  while (isVisible || shouldRetry(startAt, waitTimeoutMilliseconds)) {
     try {
       waitForTappable(self, item).then((_value) => {
         isVisible = true;
@@ -194,7 +194,7 @@ export const scrollUntilTapable = async (
   }
 
   if (!isVisible) {
-    throw new Error(`Stop scrolling as timeout ${durationMilliseconds}`);
+    throw new Error(`Stop scrolling as timeout ${waitTimeoutMilliseconds}`);
   }
 
   return scrollIntoView(self, item, { alignment });
