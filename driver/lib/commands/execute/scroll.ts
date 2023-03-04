@@ -88,7 +88,8 @@ const validateOps = (alignment, dxScroll, dyScroll) => {
 
 const shouldRetry = (startAt, waitTimeoutMilliseconds) => {
   if (!waitTimeoutMilliseconds) {
-    return false;
+    // Then, the scroll should continue infinitely
+    return true;
   }
 
   if (Date.now() - startAt > _.toInteger(waitTimeoutMilliseconds)) {
