@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.13.1
+- Fix no `waitTimeoutMilliseconds` argument case for scrollUntilVisible/scrollUntilTapable
+
 ## 1.13.0
 - Add arguments in scrollUntilVisible/scrollUntilTapable
     - `waitTimeoutMilliseconds`: The timeout to try scroll up to the timeout
