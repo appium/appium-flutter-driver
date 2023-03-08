@@ -141,6 +141,11 @@ class FlutterDriver extends BaseDriver {
     return true;
   }
 
+  public async proxyCommand (url, method, body = null) {
+    const result = await this.proxydriver.proxyCommand(url, method, body);
+    return result
+  }
+
   public async executeCommand(cmd: string, ...args: any[]) {
     if (cmd === `receiveAsyncResponse`) {
       logger.debug(`Executing FlutterDriver response '${cmd}'`);
