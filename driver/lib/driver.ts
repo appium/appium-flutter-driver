@@ -160,7 +160,7 @@ class FlutterDriver extends BaseDriver {
         // Here we manually reset the FlutterDriver CommandTimeout for commands that goe to proxy.
         this.clearNewCommandTimeout();
         const result = await this.proxydriver.executeCommand(cmd, ...args);
-        this.startNewCommandTimeout(cmd);
+        this.startNewCommandTimeout();
         return result;
       } else {
         logger.debug(`Executing Flutter driver command '${cmd}'`);
