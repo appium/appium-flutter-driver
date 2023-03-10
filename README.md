@@ -40,11 +40,7 @@ appium driver install --source=npm appium-flutter-driver
 > Please use the latest flutter driver with appium 2 for Flutter v3
 
 
-With Appium 1:
-
-```
-npm i -g appium-flutter-driver
-```
+Appium 1.x could have flutter driver, but the version is deprecated.
 
 ## Usage
 If you are unfamiliar with running Appium tests, start with [Appium Getting Starting](http://appium.io/docs/en/about-appium/getting-started/) first.
