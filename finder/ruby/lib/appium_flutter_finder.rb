@@ -17,21 +17,23 @@ module Appium
 
     # Get find element context for flutter driver
     module Finder
-      def by_ancestor(serialized_finder:, matching:, match_root: false)
+      def by_ancestor(serialized_finder:, matching:, match_root: false, first_match_only: false)
         by_ancestor_or_descendant(
           type: 'Ancestor',
           serialized_finder: serialized_finder,
           matching: matching,
-          match_root: match_root
+          match_root: match_root,
+          first_match_only: first_match_only
         )
       end
 
-      def by_descendant(serialized_finder:, matching:, match_root: false)
+      def by_descendant(serialized_finder:, matching:, match_root: false, first_match_only: false)
         by_ancestor_or_descendant(
           type: 'Descendant',
           serialized_finder: serialized_finder,
           matching: matching,
-          match_root: match_root
+          match_root: match_root,
+          first_match_only: first_match_only
         )
       end
 
@@ -85,8 +87,8 @@ module Appium
         Base64.strict_encode64(hash.to_json)
       end
 
-      def by_ancestor_or_descendant(type:, serialized_finder:, matching:, match_root: false)
-        param = { finderType: type, matchRoot: match_root }
+      def by_ancestor_or_descendant(type:, serialized_finder:, matching:, match_root: false, first_match_only: false)
+        param = { finderType: type, matchRoot: match_root, firstMatchOnly: first_match_only}
 
         finder = begin
           JSON.parse(Base64.decode64(serialized_finder))
@@ -94,18 +96,23 @@ module Appium
           {}
         end
 
+        of_param = {}
         finder.each_key do |key|
-          param["of_#{key}"] = finder[key]
+          of_param[key] = finder[key]
         end
+        param['of'] = of_param.to_json
 
         matching = begin
           JSON.parse(Base64.decode64(matching))
         rescue JSONError
           {}
         end
+
+        matching_param = {}
         matching.each_key do |key|
-          param["matching_#{key}"] = matching[key]
+          matching_param[key] = matching[key]
         end
+        param['matching'] = matching_param.to_json
 
         serialize param
       end

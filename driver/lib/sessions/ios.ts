@@ -1,35 +1,40 @@
 // @ts-ignore
 import { utilities } from 'appium-ios-device';
 import { timing } from 'appium-support';
-import { checkPortStatus } from 'portscanner';
-import { waitForCondition } from 'asyncbox';
 import XCUITestDriver from 'appium-xcuitest-driver';
+import { waitForCondition } from 'asyncbox';
+import B from 'bluebird';
 import net from 'net';
+import { checkPortStatus } from 'portscanner';
 import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';
-import B from 'bluebird';
 
-const LOCALHOST = '127.0.0.1';
+const LOCALHOST = `127.0.0.1`;
 const PORT_CLOSE_TIMEOUT = 15 * 1000; // 15 seconds
+export const DRIVER_NAME = `XCUITest`;
 
-const setupNewIOSDriver = async (caps) => {
+const setupNewIOSDriver = async (...args) => {
   const iosArgs = {
     javascriptEnabled: true,
   };
 
   const iosdriver = new XCUITestDriver(iosArgs);
-  const capsCopy = Object.assign({}, caps, { newCommandTimeout: 0 });
-  await iosdriver.createSession(capsCopy);
+  await iosdriver.createSession(...args);
 
   return iosdriver;
 };
 
-export const startIOSSession = async (caps) => {
+export const startIOSSession = async (caps, ...args) => {
   log.info(`Starting an IOS proxy session`);
-  const iosdriver = await setupNewIOSDriver(caps);
-  // TODO: Allow to switch old format and the new one
+  const iosdriver = await setupNewIOSDriver(...args);
   const useIProxy = shouldUseIproxy(caps);
-  const observatoryWsUri = await getObservatoryWsUri(iosdriver, useIProxy);
+  let observatoryWsUri;
+  try {
+    observatoryWsUri = await getObservatoryWsUri(iosdriver, useIProxy);
+  } catch (e) {
+    await iosdriver.deleteSession();
+    throw e;
+  }
   return Promise.all([
     iosdriver,
     connectSocket(observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),
@@ -37,24 +42,26 @@ export const startIOSSession = async (caps) => {
 };
 
 const waitForPortIsAvailable = async (port) => {
-  let isPortBusy = (await checkPortStatus(port, LOCALHOST)) === 'open';
+  let isPortBusy = (await checkPortStatus(port, LOCALHOST)) === `open`;
   if (isPortBusy) {
     log.warn(`Port #${port} is busy. Did you quit the previous driver session(s) properly?`);
     const timer = new timing.Timer().start();
     try {
       await waitForCondition(async () => {
         try {
-          if ((await checkPortStatus(port, LOCALHOST)) !== 'open') {
+          if ((await checkPortStatus(port, LOCALHOST)) !== `open`) {
             log.info(`Port #${port} has been successfully released after ` +
               `${timer.getDuration().asMilliSeconds.toFixed(0)}ms`);
             isPortBusy = false;
             return true;
           }
-        } catch (ign) {}
+        } catch (ign) {
+          log.console.warn(``);
+        }
         return false;
       }, {
-        waitMs: PORT_CLOSE_TIMEOUT,
         intervalMs: 300,
+        waitMs: PORT_CLOSE_TIMEOUT,
       });
     } catch (ign) {
       log.warn(`Did not know how to release port #${port} in ` +
@@ -66,7 +73,7 @@ const waitForPortIsAvailable = async (port) => {
     throw new Error(`The port :${port} is occupied by an other process. ` +
       `You can either quit that process or select another free port.`);
   }
-}
+};
 
 const shouldUseIproxy = (caps) => false;
 
@@ -116,8 +123,8 @@ export const getObservatoryWsUri = async (proxydriver, useIProxy) => {
     remoteSocket.pipe(localSocket);
   });
   const listeningPromise = new B((resolve, reject) => {
-    localServer.once('listening', resolve);
-    localServer.once('error', reject);
+    localServer.once(`listening`, resolve);
+    localServer.once(`error`, reject);
   });
   localServer.listen(urlObject.port);
   try {
@@ -128,7 +135,7 @@ export const getObservatoryWsUri = async (proxydriver, useIProxy) => {
 
   log.info(`Port forwarding to: ${urlObject.port}`);
 
-  process.on('beforeExit', () => {
+  process.on(`beforeExit`, () => {
     localServer.close();
   });
   return urlObject.toJSON();

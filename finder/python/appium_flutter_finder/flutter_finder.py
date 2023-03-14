@@ -3,35 +3,27 @@ import json
 
 from appium.webdriver.webelement import WebElement
 
-def _bytes(value):
-    try:
-        return bytes(value, 'UTF-8')  # Python 3
-    except TypeError:
-        return value  # Python 2
-
 
 class FlutterElement(WebElement):
-    def __init__(self, driver, element_id):
-        super(FlutterElement, self).__init__(
-            driver, element_id, w3c=True
-        )
+    pass
 
-
-class FlutterFinder(object):
-    def by_ancestor(self, serialized_finder, matching, match_root=False):
+class FlutterFinder:
+    def by_ancestor(self, serialized_finder, matching, match_root=False, first_match_only=False):
         return self._by_ancestor_or_descendant(
             type_='Ancestor',
             serialized_finder=serialized_finder,
             matching=matching,
-            match_root=match_root
+            match_root=match_root,
+            first_match_only=first_match_only
         )
 
-    def by_descendant(self, serialized_finder, matching, match_root=False):
+    def by_descendant(self, serialized_finder, matching, match_root=False, first_match_only=False):
         return self._by_ancestor_or_descendant(
             type_='Descendant',
             serialized_finder=serialized_finder,
             matching=matching,
-            match_root=match_root
+            match_root=match_root,
+            first_match_only=first_match_only
         )
 
     def by_semantics_label(self, label, isRegExp=False):
@@ -72,23 +64,30 @@ class FlutterFinder(object):
         ))
 
     def _serialize(self, finder_dict):
-        return base64.b64encode(_bytes(json.dumps(finder_dict))).decode('UTF-8')
+        return base64.b64encode(
+            bytes(json.dumps(finder_dict, separators=(',', ':')), 'UTF-8')).decode('UTF-8')
 
-    def _by_ancestor_or_descendant(self, type_, serialized_finder, matching, match_root=False):
-        param = dict(finderType=type_, matchRoot=match_root)
+    def _by_ancestor_or_descendant(self, type_, serialized_finder, matching, match_root=False, first_match_only=False):
+        param = dict(finderType=type_, matchRoot=match_root, firstMatchOnly=first_match_only)
 
         try:
-            finder = json.dumps(base64.b64decode(serialized_finder))
-        except:
-            finder = dict()
+            finder = json.loads(base64.b64decode(
+                serialized_finder).decode('utf-8'))
+        except Exception:
+            finder = {}
+
+        param.setdefault('of', {})
         for finder_key, finder_value in finder.items():
-            param['of_{}'.format(finder_key)] = finder_value
+            param['of'].setdefault(finder_key, finder_value)
+        param['of'] = json.dumps(param['of'], separators=(',', ':'))
 
         try:
-            matching = json.dumps(base64.b64decode(matching))
-        except:
-            matching = dict()
+            matching = json.loads(base64.b64decode(matching).decode('utf-8'))
+        except Exception:
+            matching = {}
+        param.setdefault('matching', {})
         for matching_key, matching_value in matching.items():
-            param['matching_{}'.format(matching_key)] = matching_value
+            param['matching'].setdefault(matching_key, matching_value)
+        param['matching'] = json.dumps(param['matching'], separators=(',', ':'))
 
         return self._serialize(param)

@@ -3,27 +3,32 @@ import { exec } from 'child_process';
 import { promisify } from 'util';
 
 const execPromise = promisify(exec);
+export const DRIVER_NAME = `UIAutomator2`;
 
 // @ts-ignore
-import AndroidDriver from 'appium-uiautomator2-driver';
+import AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
 import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';
-const setupNewAndroidDriver = async (caps) => {
+const setupNewAndroidDriver = async (...args) => {
   const androidArgs = {
     javascriptEnabled: true,
   };
-  const androiddriver = new AndroidDriver(androidArgs);
-  const capsCopy = Object.assign({}, caps, { newCommandTimeout: 0 });
-
-  await androiddriver.createSession(capsCopy);
+  const androiddriver = new AndroidUiautomator2Driver(androidArgs);
+  await androiddriver.createSession(...args);
 
   return androiddriver;
 };
 
-export const startAndroidSession = async (caps) => {
+export const startAndroidSession = async (caps, ...args) => {
   log.info(`Starting an Android proxy session`);
-  const androiddriver = await setupNewAndroidDriver(caps);
-  const observatoryWsUri = getObservatoryWsUri(androiddriver , caps);
+  const androiddriver = await setupNewAndroidDriver(...args);
+  let observatoryWsUri;
+  try {
+    observatoryWsUri = await getObservatoryWsUri(androiddriver , caps);
+  } catch (e) {
+    await androiddriver.deleteSession();
+    throw e;
+  }
   return Promise.all([
     androiddriver,
     connectSocket(await observatoryWsUri, caps.retryBackoffTime, caps.maxRetryCount),

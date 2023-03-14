@@ -26,6 +26,9 @@ download and unarchive the source tarball (Appium-Flutter-Finder-X.X.tar.gz).
     python setup.py install
     ```
 
+# How to use
+Examples can be found out [here](../../example/python/example.py).
+
 # Release
 
 ```
@@ -38,6 +41,20 @@ twine upload dist/Appium-Flutter-Finder-X.X.tar.gz
 ```
 
 # Changelog
+- 0.4.0
+    - Bump base Appium-Python-Client to v2
+- 0.3.1
+    - Use Appium-Python-Client 1.x
+- 0.3.0
+    - Add `first_match_only` option in `by_ancestor` and `by_descendant`
+- 0.2.0
+    - Support over Python 3.6
+- 0.1.5
+    - Fix `by_ancestor` and `by_descendant`
+        - https://github.com/truongsinh/appium-flutter-driver/pull/165#issuecomment-877928553
+- 0.1.4
+    - Remove whitespaces from the decoded JSON
+    - Fix `by_ancestor` and `by_descendant`
 - 0.1.3
     - Allow `from appium_flutter_finder import FlutterElement, FlutterFinder`
 - 0.1.2

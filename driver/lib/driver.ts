@@ -1,24 +1,40 @@
 import { BaseDriver, errors } from 'appium-base-driver';
 import { IsolateSocket } from './sessions/isolate_socket';
 
-import { desiredCapConstraints, IDesiredCapConstraints } from './desired-caps';
+import { IDesiredCapConstraints } from './desired-caps';
 import { log as logger } from './logger';
 
+import { DRIVER_NAME as IOS_DEVICE_NAME } from './sessions/ios';
 import { executeElementCommand } from './sessions/observatory';
 import { createSession, deleteSession } from './sessions/session';
 
 import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
-  getContexts, getCurrentContext, setContext } from './commands/context';
+  getContexts, getCurrentContext, NATIVE_CONTEXT_NAME, setContext } from './commands/context';
 import { clear, getText, setValue } from './commands/element';
 import { execute } from './commands/execute';
 import { click, longTap, performTouch, tap, tapEl } from './commands/gesture';
 import { getScreenshot } from './commands/screen';
 
+// Need to not proxy in WebView context
+const WEBVIEW_NO_PROXY = [
+  [`GET`, new RegExp(`^/session/[^/]+/appium`)],
+  [`GET`, new RegExp(`^/session/[^/]+/context`)],
+  [`GET`, new RegExp(`^/session/[^/]+/element/[^/]+/rect`)],
+  [`GET`, new RegExp(`^/session/[^/]+/log/types$`)],
+  [`GET`, new RegExp(`^/session/[^/]+/orientation`)],
+  [`POST`, new RegExp(`^/session/[^/]+/appium`)],
+  [`POST`, new RegExp(`^/session/[^/]+/context`)],
+  [`POST`, new RegExp(`^/session/[^/]+/log$`)],
+  [`POST`, new RegExp(`^/session/[^/]+/orientation`)],
+  [`POST`, new RegExp(`^/session/[^/]+/touch/multi/perform`)],
+  [`POST`, new RegExp(`^/session/[^/]+/touch/perform`)],
+];
+
 class FlutterDriver extends BaseDriver {
-  public desiredCapConstraints: IDesiredCapConstraints;
   public socket: IsolateSocket | null = null;
   public locatorStrategies = [`key`, `css selector`];
   public proxydriver: any;
+  public proxydriverName: string;  // to store 'driver name' as proxy to.
   public device: any;
 
   // from BaseDriver
@@ -27,6 +43,12 @@ class FlutterDriver extends BaseDriver {
   public clearNewCommandTimeout: any;
   public startNewCommandTimeout: any;
   public receiveAsyncResponse: any;
+  public relaxedSecurityEnabled: any;
+  public denyInsecure: any;
+  public allowInsecure: any;
+
+  // to handle WebView context
+  public proxyWebViewActive: boolean = false;
 
   // session
   public executeElementCommand = executeElementCommand;
@@ -56,16 +78,14 @@ class FlutterDriver extends BaseDriver {
 
   constructor(opts, shouldValidateCaps: boolean) {
     super(opts, shouldValidateCaps);
-
-    this.desiredCapConstraints = desiredCapConstraints;
-
     this.proxydriver = null;
+    this.proxydriverName = ``;
     this.device = null;
   }
 
-  public async createSession(caps: IDesiredCapConstraints) {
-    const [sessionId] = await super.createSession(caps);
-    return createSession.bind(this)(caps, sessionId);
+  public async createSession(...args) {
+    const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)));
+    return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args)));
   }
 
   public async deleteSession() {
@@ -89,13 +109,6 @@ class FlutterDriver extends BaseDriver {
     if (!res) {
       return res;
     }
-    // @ts-ignore
-    if (caps.deviceName.toLowerCase() === `android`) {
-      if (!caps.avd) {
-        const msg = `The desired capabilities must include avd`;
-        logger.errorAndThrow(msg);
-      }
-    }
 
     // finally, return true since the superclass check passed, as did this
     return true;
@@ -114,12 +127,12 @@ class FlutterDriver extends BaseDriver {
         // All proxy commands needs to reset the FlutterDriver CommandTimeout
         // Here we manually reset the FlutterDriver CommandTimeout for commands that goe to proxy.
         this.clearNewCommandTimeout();
-        const result = this.proxydriver.executeCommand(cmd, ...args);
+        const result = await this.proxydriver.executeCommand(cmd, ...args);
         this.startNewCommandTimeout(cmd);
         return result;
       } else {
         logger.debug(`Executing Flutter driver command '${cmd}'`);
-        return super.executeCommand(cmd, ...args);
+        return await super.executeCommand(cmd, ...args);
       }
     } else {
       logger.debug(`Command Error '${cmd}'`);
@@ -129,6 +142,28 @@ class FlutterDriver extends BaseDriver {
     }
   }
 
+  public getProxyAvoidList(_) {
+    if ([FLUTTER_CONTEXT_NAME, NATIVE_CONTEXT_NAME].includes(this.currentContext)) {
+      return;
+    }
+
+    return WEBVIEW_NO_PROXY;
+  }
+
+  public proxyActive(_) {
+    // In WebView context, all request should got to each driver
+    // so that they can handle http request properly.
+    // On iOS, WebVie context is handled by XCUITest driver while Android is by chromedriver.
+    // It measn XCUITest driver should keep the XCUITest driver as a proxy,
+    // while UIAutomator2 driver should proxy to chromedriver instead of UIA2 proxy.
+    return this.proxyWebViewActive && this.proxydriverName !== IOS_DEVICE_NAME;
+  }
+
+  public canProxy(_) {
+    // As same as proxyActive, all request should got to each driver
+    // so that they can handle http request properly
+    return this.proxyWebViewActive;
+  }
 }
 
 export { FlutterDriver };

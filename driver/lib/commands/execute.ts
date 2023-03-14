@@ -48,12 +48,18 @@ export const execute = async function(
       return scrollUntilVisible(this, args[0], args[1]);
     case `scrollIntoView`:
       return scrollIntoView(this, args[0], args[1]);
+    case `setTextEntryEmulation`:
+      return setTextEntryEmulation(this, args[0]);
     case `enterText`:
       return enterText(this, args[0]);
+    case `requestData`:
+      return requestData(this, args[0]);
     case `longTap`:
       return longTap(this, args[0], args[1]);
     case `waitForFirstFrame`:
       return waitForCondition(this, { conditionName : `FirstFrameRasterizedCondition`});
+    case `setFrameSync`:
+      return setFrameSync(this, args[0], args[1]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -85,7 +91,7 @@ const forceGC = async (self: FlutterDriver) => {
   }
 };
 
-const anyPromise = (promises: Array<Promise<any>>) => {
+const anyPromise = (promises: Promise<any>[]) => {
   const newpArray = promises.map((p) =>
     p.then(
       (resolvedValue) => Promise.reject(resolvedValue),
@@ -134,3 +140,16 @@ const getSemanticsId = async (self: FlutterDriver, elementBase64: string) =>
 
 const enterText = async (self: FlutterDriver, text: string) =>
   await self.socket!.executeSocketCommand({ command: `enter_text`, text });
+
+const requestData = async (self: FlutterDriver, message: string) =>
+  await self.socket!.executeSocketCommand({ command: `request_data`, message });
+
+const setFrameSync = async (self, bool, durationMilliseconds) =>
+  await self.socket!.executeSocketCommand({
+    command: `set_frame_sync`,
+    enabled: bool,
+    timeout: durationMilliseconds * 1000,
+  });
+
+const setTextEntryEmulation = async (self: FlutterDriver, enabled: boolean) =>
+  await self.socket!.executeSocketCommand({ command: `set_text_entry_emulation`, enabled });
