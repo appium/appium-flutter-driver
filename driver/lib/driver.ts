@@ -33,7 +33,7 @@ const WEBVIEW_NO_PROXY = [
   [`POST`, new RegExp(`^/session/[^/]+/touch/perform`)],
 ] as import('@appium/types').RouteMatcher[];
 
-class FlutterDriver extends BaseDriver {
+class FlutterDriver extends BaseDriver<any> {
   public socket: IsolateSocket | null = null;
   public locatorStrategies = [`key`, `css selector`];
   public proxydriver: any;
