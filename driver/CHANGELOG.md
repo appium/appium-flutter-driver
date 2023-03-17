@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.14.0
+- Fix proxyCommand for plugins [#425](https://github.com/appium-userland/appium-flutter-driver/pull/425)
+- Fix startNewCommandTimeout call [#426](https://github.com/appium-userland/appium-flutter-driver/pull/426)
+
 ## 1.13.1
 - Fix no `waitTimeoutMilliseconds` argument case for scrollUntilVisible/scrollUntilTapable
 
