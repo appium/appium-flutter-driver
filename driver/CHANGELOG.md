@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.14.1
+- Bump the UIA2 version
+
 ## 1.14.0
 - Fix proxyCommand for plugins [#425](https://github.com/appium-userland/appium-flutter-driver/pull/425)
 - Fix startNewCommandTimeout call [#426](https://github.com/appium-userland/appium-flutter-driver/pull/426)
