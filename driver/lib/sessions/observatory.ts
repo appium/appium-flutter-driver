@@ -33,6 +33,7 @@ export const connectSocket = async (
       dartObservatoryURL = await getObservatoryWsUri(driver, caps);
     } catch (e) {
       // go to the next retry with do nothing here
+      log.debug(e)
     }
 
     const connectedPromise = new Promise<IsolateSocket | null>((resolve) => {
