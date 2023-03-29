@@ -1,6 +1,6 @@
 // @ts-ignore: no 'errors' export module
-import { BaseDriver, errors } from 'appium/driver';
-import { W3CCapabilities, Capabilities, DriverData } from '@appium/types';
+import { BaseDriver } from 'appium/driver';
+import { Constraints, DefaultCreateSessionResult, DriverCaps, DriverData, W3CDriverCaps } from '@appium/types';
 import { IsolateSocket } from './sessions/isolate_socket';
 
 import { log as logger } from './logger';
@@ -96,10 +96,10 @@ class FlutterDriver extends BaseDriver<any> {
     this.internalCaps = null;
   }
 
-  public async createSession(...args): Promise<[string, {}]> {
-    const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)) as [W3CCapabilities, W3CCapabilities, W3CCapabilities, DriverData[]]);
+  public async createSession(...args): Promise<DefaultCreateSessionResult<Constraints>> {
+    const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)) as [W3CDriverCaps, W3CDriverCaps, W3CDriverCaps, DriverData[]]);
     this.internalCaps = caps;
-    return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args))) as Promise<[string, {}]>;  // @ts-ignore
+    return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args)));
   }
 
   public async deleteSession() {
@@ -130,7 +130,7 @@ class FlutterDriver extends BaseDriver<any> {
     super.validateLocatorStrategy(strategy, false);
   }
 
-  public validateDesiredCaps(caps: Capabilities) {
+  validateDesiredCaps(caps: any): caps is DriverCaps<Constraints>{
     // check with the base class, and return if it fails
     const res = super.validateDesiredCaps(caps);
     if (!res) {

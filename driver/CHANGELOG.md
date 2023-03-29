@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.14.2
+## 1.14.2, 1.14.3 (the same)
 - Add debug log when an exception occurred in the observatory url finding
 
 ## 1.14.1
