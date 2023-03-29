@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.14.2
+- Add debug log when an exception occurred in the observatory url finding
+
 ## 1.14.1
 - Bump the UIA2 version
 
