@@ -28,6 +28,7 @@
     "lib": "lib"
   },
   "files": [
+    "lib",
     "build",
     "!build/tsconfig.tsbuildinfo"
   ],
