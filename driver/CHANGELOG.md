@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.14.4
+- Fix element parsing for w3c element
+
 ## 1.14.2, 1.14.3 (the same)
 - Add debug log when an exception occurred in the observatory url finding
 
