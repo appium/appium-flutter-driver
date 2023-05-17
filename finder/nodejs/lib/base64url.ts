@@ -1,4 +1,4 @@
-const W3C_ELEMENT: string = 'element-6066-11e4-a52e-4f735466cecf';
+const W3C_ELEMENT: string = `element-6066-11e4-a52e-4f735466cecf`;
 
 export const encode = (input: string) =>
   Buffer.from(input)
