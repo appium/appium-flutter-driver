@@ -1,4 +1,4 @@
-const W3C_ELEMENT = 'element-6066-11e4-a52e-4f735466cecf';
+const W3C_ELEMENT: string = 'element-6066-11e4-a52e-4f735466cecf';
 
 export const encode = (input: string) =>
   Buffer.from(input)
@@ -7,10 +7,7 @@ export const encode = (input: string) =>
     .replace(/\+/g, `-`)
     .replace(/\//g, `_`);
 
-export const decode = (input: string | {ELEMENT: string} | {W3C_ELEMENT: string} ) => {
-
-  console.log(input);
-
+export const decode = (input: string | {ELEMENT: string}) => {
   let base64String: string = ``;
   if (typeof input === `string`) {
     base64String = input;
