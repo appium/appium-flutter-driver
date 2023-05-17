@@ -11,7 +11,9 @@ export const decode = (input: string | {ELEMENT: string}) => {
   let base64String: string = ``;
   if (typeof input === `string`) {
     base64String = input;
+  // @ts-ignore
   } else if (typeof input === `object` && input[W3C_ELEMENT]) {
+    // @ts-ignore
     base64String = input[W3C_ELEMENT];
   } else if (typeof input === `object` && input.ELEMENT) {
     base64String = input.ELEMENT;
