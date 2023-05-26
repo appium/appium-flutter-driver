@@ -36,6 +36,12 @@ With Appium 2 (`appium@next`):
 appium driver install --source=npm appium-flutter-driver
 ```
 
+As a local:
+
+```
+appium driver install --source local /path/to/appium-flutter-driver/driver
+```
+
 > **Note**
 > Please use the latest flutter driver with appium 2 for Flutter v3
 
