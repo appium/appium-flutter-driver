@@ -45,7 +45,7 @@
     "appium": "^2.0.0-beta.40"
   },
   "devDependencies": {
-    "@appium/schema": "^0.2.5",
+    "@appium/schema": "^0.3.0",
     "@appium/tsconfig": "0.2.4",
     "@appium/types": "^0.13.0",
     "appium-flutter-driver": "^1.13.0",
