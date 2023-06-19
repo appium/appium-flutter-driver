@@ -1,12 +1,12 @@
 {
   "name": "appium-flutter-driver",
-  "version": "1.14.4",
+  "version": "1.15.0",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "appium-flutter-driver",
-      "version": "1.14.4",
+      "version": "1.15.0",
       "license": "MIT",
       "dependencies": {
         "appium-adb": "^9.9.0",

@@ -1,5 +1,8 @@
 # Changelog
 
+- 1.15.0
+- Update dependencies such as UIA2/XCUITest drivers
+
 ## 1.14.4
 - Fix element parsing for w3c element
 
