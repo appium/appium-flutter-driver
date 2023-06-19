@@ -5,7 +5,7 @@
     "appium",
     "flutter"
   ],
-  "version": "1.14.3",
+  "version": "1.14.4",
   "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
   "license": "MIT",
   "repository": {
@@ -45,9 +45,9 @@
     "appium": "^2.0.0-beta.40"
   },
   "devDependencies": {
-    "@appium/schema": "^0.2.5",
+    "@appium/schema": "^0.3.0",
     "@appium/tsconfig": "0.3.0",
-    "@appium/types": "^0.10.0",
+    "@appium/types": "^0.13.0",
     "appium-flutter-driver": "^1.13.0",
     "json-schema": "^0.4.0",
     "tslint": "^6.1.3",
