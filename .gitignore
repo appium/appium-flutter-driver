@@ -49,3 +49,8 @@ build
 finder/python/build
 finder/python/dist
 finder/python/Appium_Flutter_Finder.egg-info
+
+#dotnet
+.vs/
+bin/
+obj/
