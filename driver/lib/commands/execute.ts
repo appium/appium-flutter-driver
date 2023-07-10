@@ -70,6 +70,8 @@ export const execute = async function(
       return waitForCondition(this, { conditionName : `FirstFrameRasterizedCondition`});
     case `setFrameSync`:
       return setFrameSync(this, args[0], args[1]);
+    case `clickElement`:
+      return clickElement(this, args[0], args[1]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -177,3 +179,10 @@ const setFrameSync = async (self, bool, durationMilliseconds) =>
 
 const setTextEntryEmulation = async (self: FlutterDriver, enabled: boolean) =>
   await self.socket!.executeSocketCommand({ command: `set_text_entry_emulation`, enabled });
+  
+const clickElement = async (self, elementBase64, opts) => {
+  const {timeout = 1000} = opts;
+  return await self.executeElementCommand(`tap`, elementBase64, {
+        timeout
+  });
+};
