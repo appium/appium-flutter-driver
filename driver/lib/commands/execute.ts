@@ -179,8 +179,8 @@ const setFrameSync = async (self, bool, durationMilliseconds) =>
 
 const setTextEntryEmulation = async (self: FlutterDriver, enabled: boolean) =>
   await self.socket!.executeSocketCommand({ command: `set_text_entry_emulation`, enabled });
-  
-const clickElement = async (self, elementBase64, opts) => {
+
+const clickElement = async (self:FlutterDriver, elementBase64: string, opts) => {
   const {timeout = 1000} = opts;
   return await self.executeElementCommand(`tap`, elementBase64, {
         timeout
