@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Title>Appium Flutter Finder</Title>
+    <Authors>Ibrahim Taha</Authors>
+    <Product>Appium Flutter Finder</Product>
+    <PackageProjectUrl>https://github.com/ikharoub/appium-flutter-driver/tree/AddDotNetFlutterFinder/finder/dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ikharoub/appium-flutter-driver/tree/AddDotNetFlutterFinder/finder/dotnet</RepositoryUrl>
+    <PackageLicenseFile>License.md</PackageLicenseFile>
+    <PackageTags>automation;flutter;appium;testing</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Appium.WebDriver" Version="4.4.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="License.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
