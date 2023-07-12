@@ -42,7 +42,7 @@
     "clean-dependency": "rm -rf node_modules && rm -f package-lock.json && npm install"
   },
   "peerDependencies": {
-    "appium": "^2.0.0-beta.40"
+    "appium": "^2.0.0"
   },
   "devDependencies": {
     "@appium/schema": "^0.3.0",
