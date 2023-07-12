@@ -12,6 +12,10 @@
     "type": "git",
     "url": "git+https://github.com/appium-userland/appium-flutter-driver.git"
   },
+  "engines": {
+    "node": ">=14",
+    "npm": ">=8"
+  },
   "main": "./build/lib/driver.js",
   "types": "./build/lib/index.d.ts",
   "appium": {
