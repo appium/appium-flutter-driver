@@ -1,6 +1,13 @@
 # Changelog
 
-- 1.15.0
+## 1.16.0
+- Update dependencies
+    - UIA2 driver: 2.29.2
+    - XCUITest driver: 4.32.19
+- Added `clickElement` as execute script. It is the same as other `tap` commands
+- Update `peerDependencies` as Appium 2.0
+
+## 1.15.0
 - Update dependencies such as UIA2/XCUITest drivers
 
 ## 1.14.4
