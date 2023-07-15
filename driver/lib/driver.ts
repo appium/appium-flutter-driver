@@ -122,6 +122,14 @@ class FlutterDriver extends BaseDriver<any> {
     return await this.proxydriver.terminateApp(appId);
   }
 
+  public async getOrientation() {
+    return await this.proxydriver.getOrientation();
+  }
+
+  public async setOrientation(orientation) {
+    return await this.proxydriver.setOrientation(orientation);
+  }
+
   public validateLocatorStrategy(strategy: string) {
     // @todo refactor DRY
     if (this.currentContext === `NATIVE_APP`) {
