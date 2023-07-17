@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.17.0
+- Proxy device orientation api to NATIVE_APP context
+
 ## 1.16.0
 - Update dependencies
     - UIA2 driver: 2.29.2
