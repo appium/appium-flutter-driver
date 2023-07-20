@@ -155,7 +155,15 @@ class FlutterDriver extends BaseDriver<any> {
   }
 
   public async executeCommand(cmd: string, ...args: any[]) {
-    if (cmd === `receiveAsyncResponse`) {
+    if (new RegExp(/^[\s]*mobile:[\s]*activateApp$/).test(args[0])) {
+      // to make the behavior as same as this.activateApp
+      await this.proxydriver.executeCommand(cmd, ...args);
+      await reConnectFlutterDriver.bind(this)(this.internalCaps);
+      return;
+    } else if (new RegExp(/^[\s]*mobile:[\s]*terminateApp$/).test(args[0])) {
+      // to make the behavior as same as this.terminateApp
+      return await this.proxydriver.executeCommand(cmd, ...args);
+    } else if (cmd === `receiveAsyncResponse`) {
       logger.debug(`Executing FlutterDriver response '${cmd}'`);
       return await this.receiveAsyncResponse(...args);
     } else {
