@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.17.1
+- Make `mobile:activateApp` and `mobile:terminateApp` behavior same as `activateApp` and `terminateApp`
+
 ## 1.17.0
 - Proxy device orientation api to NATIVE_APP context
 

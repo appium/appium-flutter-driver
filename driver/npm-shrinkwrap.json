@@ -1,12 +1,12 @@
 {
   "name": "appium-flutter-driver",
-  "version": "1.17.0",
+  "version": "1.17.1",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "appium-flutter-driver",
-      "version": "1.17.0",
+      "version": "1.17.1",
       "license": "MIT",
       "dependencies": {
         "appium-adb": "^9.9.0",
@@ -847,7 +847,7 @@
       }
     },
     "node_modules/@xmldom/xmldom": {
-      "version": "0.8.9",
+      "version": "0.8.10",
       "license": "MIT",
       "engines": {
         "node": ">=10.0.0"
@@ -4468,6 +4468,13 @@
         "appium": "^2.0.0-rc.2"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/@xmldom/xmldom": {
+      "version": "0.8.9",
+      "license": "MIT",
+      "engines": {
+        "node": ">=10.0.0"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/semver": {
       "version": "7.5.4",
       "license": "ISC",
@@ -4605,7 +4612,7 @@
       }
     },
     "node_modules/are-we-there-yet": {
-      "version": "4.0.0",
+      "version": "4.0.1",
       "license": "ISC",
       "dependencies": {
         "delegates": "^1.0.0",
@@ -5254,7 +5261,7 @@
       }
     },
     "node_modules/detect-libc": {
-      "version": "2.0.1",
+      "version": "2.0.2",
       "license": "Apache-2.0",
       "optional": true,
       "engines": {
@@ -8592,7 +8599,7 @@
       }
     },
     "@xmldom/xmldom": {
-      "version": "0.8.9"
+      "version": "0.8.10"
     },
     "abort-controller": {
       "version": "3.0.0",
@@ -10998,6 +11005,9 @@
         "ws": "8.13.0"
       },
       "dependencies": {
+        "@xmldom/xmldom": {
+          "version": "0.8.9"
+        },
         "semver": {
           "version": "7.5.4",
           "requires": {
@@ -11101,7 +11111,7 @@
       }
     },
     "are-we-there-yet": {
-      "version": "4.0.0",
+      "version": "4.0.1",
       "requires": {
         "delegates": "^1.0.0",
         "readable-stream": "^4.1.0"
@@ -11501,7 +11511,7 @@
       "version": "1.2.0"
     },
     "detect-libc": {
-      "version": "2.0.1",
+      "version": "2.0.2",
       "optional": true
     },
     "diff": {
