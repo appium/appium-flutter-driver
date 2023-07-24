@@ -63,7 +63,10 @@ This snippet, taken from [example dir](https://github.com/appium-userland/appium
 - `scrollUntilTapable` command : An expectation for checking an element is visible and enabled such that you can click it. Using waitTapable to wait element
 - `driver.activateApp(appId)` starts the given app and attaches to the observatory URL in the `FLUTTER` context. The method may raise an exception if no observaotry URL was found. The typical case is the `appId` is already running. Then, the driver will fail to find the observatory URL.
 - `getClipboard` and `setClipboard` depend on each `NATIVE_APP` context behavior
-
+- Launch via 3rd party tool and attach for an iOS real device (debug/profile build)
+    1. Do not set `app` nor `bundleId` to start a session without launching apps
+    2. Start the app process via 3rd party tools such as [go-ios](https://github.com/danielpaulus/go-ios) to start the app process with debug mode in the middle of the new session process in 1) the above.
+          - Then, the appium flutter session establish the WebSocket and proceed the session
 
 ### Desired Capabilities for flutter driver only
 
