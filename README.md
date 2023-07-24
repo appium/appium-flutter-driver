@@ -230,6 +230,9 @@ Please replace them properly with your client.
 | - | :ok: | `installApp(appPath, options)` | Appium |
 | - | :ok: | `getClipboard` | Appium |
 | - | :ok: | `setClipboard` | Appium |
+| - | :ok: | `connectObservatoryWsUrl` | Flutter Driver |
+
+
 
 ## Change the flutter engine attache to
 
