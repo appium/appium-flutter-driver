@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.18.1
+- Keep using XCUITest driver v4.27.0 for iOS versions lower than 15.
+
 ## 1.18.0
 - Add `flutter:connectObservatoryWsUrl` command to observe the url in the middle
 
