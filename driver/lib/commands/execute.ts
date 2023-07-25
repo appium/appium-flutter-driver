@@ -1,6 +1,9 @@
 import { FlutterDriver } from '../driver';
+import { reConnectFlutterDriver } from '../sessions/session';
 import { longTap, scroll, scrollIntoView, scrollUntilVisible, scrollUntilTapable } from './execute/scroll';
 import { waitFor, waitForAbsent, waitForTappable } from './execute/wait';
+
+
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
 
 export const execute = async function(
@@ -16,6 +19,8 @@ export const execute = async function(
 
   const command = matching[1].trim();
   switch (command) {
+    case `connectObservatoryWsUrl`:
+      return connectObservatoryWsUrl(this);
     case `getVMInfo`:
       return getVMInfo(this);
     case `setIsolateId`:
@@ -76,6 +81,10 @@ export const execute = async function(
       throw new Error(`Command not support: "${rawCommand}"`);
   }
 };
+
+const connectObservatoryWsUrl = async (self: FlutterDriver) => {
+  await reConnectFlutterDriver.bind(self)(self.internalCaps);
+}
 
 const checkHealth = async (self: FlutterDriver) =>
   (await self.executeElementCommand(`get_health`)).status;
