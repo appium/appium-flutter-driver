@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.18.0
+- Add `flutter:connectObservatoryWsUrl` command to observe the url in the middle
+
 ## 1.17.1
 - Make `mobile:activateApp` and `mobile:terminateApp` behavior same as `activateApp` and `terminateApp`
 

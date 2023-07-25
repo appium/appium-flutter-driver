@@ -1,12 +1,12 @@
 {
   "name": "appium-flutter-driver",
-  "version": "1.17.1",
+  "version": "1.18.0",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "appium-flutter-driver",
-      "version": "1.17.1",
+      "version": "1.18.0",
       "license": "MIT",
       "dependencies": {
         "appium-adb": "^9.9.0",
@@ -27,7 +27,7 @@
         "appium-flutter-driver": "^1.13.0",
         "json-schema": "^0.4.0",
         "tslint": "^6.1.3",
-        "type-fest": "^3.0.0",
+        "type-fest": "^4.0.0",
         "typescript": "^5.0.2"
       },
       "engines": {
@@ -39,10 +39,10 @@
       }
     },
     "node_modules/@appium/base-driver": {
-      "version": "9.3.15",
+      "version": "9.3.16",
       "license": "Apache-2.0",
       "dependencies": {
-        "@appium/support": "^4.1.2",
+        "@appium/support": "^4.1.3",
         "@appium/types": "^0.13.2",
         "@colors/colors": "1.5.0",
         "@types/async-lock": "1.4.0",
@@ -84,12 +84,12 @@
       }
     },
     "node_modules/@appium/base-plugin": {
-      "version": "2.2.15",
+      "version": "2.2.16",
       "extraneous": true,
       "license": "Apache-2.0",
       "dependencies": {
-        "@appium/base-driver": "^9.3.15",
-        "@appium/support": "^4.1.2"
+        "@appium/base-driver": "^9.3.16",
+        "@appium/support": "^4.1.3"
       },
       "engines": {
         "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
@@ -97,11 +97,11 @@
       }
     },
     "node_modules/@appium/docutils": {
-      "version": "0.4.4",
+      "version": "0.4.5",
       "extraneous": true,
       "license": "Apache-2.0",
       "dependencies": {
-        "@appium/support": "^4.1.2",
+        "@appium/support": "^4.1.3",
         "@appium/tsconfig": "^0.3.0",
         "@appium/typedoc-plugin-appium": "^0.6.5",
         "@sliphua/lilconfig-ts-loader": "3.2.2",
@@ -119,7 +119,7 @@
         "read-pkg": "5.2.0",
         "semver": "7.5.3",
         "source-map-support": "0.5.21",
-        "teen_process": "2.0.2",
+        "teen_process": "2.0.4",
         "type-fest": "3.11.1",
         "typedoc": "0.23.28",
         "typedoc-plugin-markdown": "3.14.0",
@@ -267,7 +267,7 @@
       }
     },
     "node_modules/@appium/support": {
-      "version": "4.1.2",
+      "version": "4.1.3",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/tsconfig": "^0.3.0",
@@ -319,7 +319,7 @@
         "shell-quote": "1.8.1",
         "source-map-support": "0.5.21",
         "supports-color": "8.1.1",
-        "teen_process": "2.0.2",
+        "teen_process": "2.0.4",
         "type-fest": "3.11.1",
         "uuid": "9.0.0",
         "which": "3.0.1",
@@ -748,7 +748,7 @@
       }
     },
     "node_modules/@types/node": {
-      "version": "20.4.2",
+      "version": "20.4.4",
       "license": "MIT"
     },
     "node_modules/@types/normalize-package-data": {
@@ -1058,7 +1058,7 @@
       }
     },
     "node_modules/appium-ios-simulator": {
-      "version": "5.1.1",
+      "version": "5.1.2",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/support": "^4.0.0",
@@ -4433,13 +4433,13 @@
       }
     },
     "node_modules/appium-xcuitest-driver": {
-      "version": "4.32.21",
+      "version": "4.32.23",
       "license": "Apache-2.0",
       "dependencies": {
-        "@xmldom/xmldom": "0.8.9",
+        "@xmldom/xmldom": "0.8.10",
         "appium-idb": "1.6.13",
         "appium-ios-device": "2.5.4",
-        "appium-ios-simulator": "5.1.1",
+        "appium-ios-simulator": "5.1.2",
         "appium-remote-debugger": "9.1.17",
         "appium-webdriveragent": "5.6.0",
         "appium-xcode": "5.1.4",
@@ -4468,13 +4468,6 @@
         "appium": "^2.0.0-rc.2"
       }
     },
-    "node_modules/appium-xcuitest-driver/node_modules/@xmldom/xmldom": {
-      "version": "0.8.9",
-      "license": "MIT",
-      "engines": {
-        "node": ">=10.0.0"
-      }
-    },
     "node_modules/appium-xcuitest-driver/node_modules/semver": {
       "version": "7.5.4",
       "license": "ISC",
@@ -4496,20 +4489,6 @@
       },
       "engines": {
         "node": ">=10"
-      }
-    },
-    "node_modules/appium-xcuitest-driver/node_modules/teen_process": {
-      "version": "2.0.4",
-      "license": "Apache-2.0",
-      "dependencies": {
-        "bluebird": "3.7.2",
-        "lodash": "4.17.21",
-        "shell-quote": "1.8.1",
-        "source-map-support": "0.5.21"
-      },
-      "engines": {
-        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
-        "npm": ">=8"
       }
     },
     "node_modules/aproba": {
@@ -5956,7 +5935,7 @@
       "license": "ISC"
     },
     "node_modules/jackspeak": {
-      "version": "2.2.1",
+      "version": "2.2.2",
       "license": "BlueOak-1.0.0",
       "dependencies": {
         "@isaacs/cliui": "^8.0.2"
@@ -7566,46 +7545,17 @@
       }
     },
     "node_modules/teen_process": {
-      "version": "2.0.2",
+      "version": "2.0.4",
       "license": "Apache-2.0",
       "dependencies": {
-        "@babel/runtime": "7.19.0",
         "bluebird": "3.7.2",
         "lodash": "4.17.21",
-        "shell-quote": "1.7.3",
-        "source-map-support": "0.5.21",
-        "which": "2.0.2"
+        "shell-quote": "1.8.1",
+        "source-map-support": "0.5.21"
       },
       "engines": {
-        "node": ">=14",
-        "npm": ">=6"
-      }
-    },
-    "node_modules/teen_process/node_modules/@babel/runtime": {
-      "version": "7.19.0",
-      "license": "MIT",
-      "dependencies": {
-        "regenerator-runtime": "^0.13.4"
-      },
-      "engines": {
-        "node": ">=6.9.0"
-      }
-    },
-    "node_modules/teen_process/node_modules/shell-quote": {
-      "version": "1.7.3",
-      "license": "MIT"
-    },
-    "node_modules/teen_process/node_modules/which": {
-      "version": "2.0.2",
-      "license": "ISC",
-      "dependencies": {
-        "isexe": "^2.0.0"
-      },
-      "bin": {
-        "node-which": "bin/node-which"
-      },
-      "engines": {
-        "node": ">= 8"
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
       }
     },
     "node_modules/text-hex": {
@@ -7673,7 +7623,7 @@
       }
     },
     "node_modules/tslib": {
-      "version": "2.6.0",
+      "version": "2.6.1",
       "extraneous": true,
       "license": "0BSD"
     },
@@ -8042,9 +7992,9 @@
   },
   "dependencies": {
     "@appium/base-driver": {
-      "version": "9.3.15",
+      "version": "9.3.16",
       "requires": {
-        "@appium/support": "^4.1.2",
+        "@appium/support": "^4.1.3",
         "@appium/types": "^0.13.2",
         "@colors/colors": "1.5.0",
         "@types/async-lock": "1.4.0",
@@ -8077,18 +8027,18 @@
       }
     },
     "@appium/base-plugin": {
-      "version": "2.2.15",
+      "version": "2.2.16",
       "extraneous": true,
       "requires": {
-        "@appium/base-driver": "^9.3.15",
-        "@appium/support": "^4.1.2"
+        "@appium/base-driver": "^9.3.16",
+        "@appium/support": "^4.1.3"
       }
     },
     "@appium/docutils": {
-      "version": "0.4.4",
+      "version": "0.4.5",
       "extraneous": true,
       "requires": {
-        "@appium/support": "^4.1.2",
+        "@appium/support": "^4.1.3",
         "@appium/tsconfig": "^0.3.0",
         "@appium/typedoc-plugin-appium": "^0.6.5",
         "@sliphua/lilconfig-ts-loader": "3.2.2",
@@ -8106,7 +8056,7 @@
         "read-pkg": "5.2.0",
         "semver": "7.5.3",
         "source-map-support": "0.5.21",
-        "teen_process": "2.0.2",
+        "teen_process": "2.0.4",
         "type-fest": "3.11.1",
         "typedoc": "0.23.28",
         "typedoc-plugin-markdown": "3.14.0",
@@ -8182,7 +8132,7 @@
       }
     },
     "@appium/support": {
-      "version": "4.1.2",
+      "version": "4.1.3",
       "requires": {
         "@appium/tsconfig": "^0.3.0",
         "@appium/types": "^0.13.2",
@@ -8234,7 +8184,7 @@
         "shell-quote": "1.8.1",
         "source-map-support": "0.5.21",
         "supports-color": "8.1.1",
-        "teen_process": "2.0.2",
+        "teen_process": "2.0.4",
         "type-fest": "3.11.1",
         "uuid": "9.0.0",
         "which": "3.0.1",
@@ -8519,7 +8469,7 @@
       }
     },
     "@types/node": {
-      "version": "20.4.2"
+      "version": "20.4.4"
     },
     "@types/normalize-package-data": {
       "version": "2.4.1"
@@ -8739,7 +8689,7 @@
       }
     },
     "appium-ios-simulator": {
-      "version": "5.1.1",
+      "version": "5.1.2",
       "requires": {
         "@appium/support": "^4.0.0",
         "@babel/runtime": "^7.0.0",
@@ -10978,12 +10928,12 @@
       }
     },
     "appium-xcuitest-driver": {
-      "version": "4.32.21",
+      "version": "4.32.23",
       "requires": {
-        "@xmldom/xmldom": "0.8.9",
+        "@xmldom/xmldom": "0.8.10",
         "appium-idb": "1.6.13",
         "appium-ios-device": "2.5.4",
-        "appium-ios-simulator": "5.1.1",
+        "appium-ios-simulator": "5.1.2",
         "appium-remote-debugger": "9.1.17",
         "appium-webdriveragent": "5.6.0",
         "appium-xcode": "5.1.4",
@@ -11005,9 +10955,6 @@
         "ws": "8.13.0"
       },
       "dependencies": {
-        "@xmldom/xmldom": {
-          "version": "0.8.9"
-        },
         "semver": {
           "version": "7.5.4",
           "requires": {
@@ -11020,15 +10967,6 @@
                 "yallist": "^4.0.0"
               }
             }
-          }
-        },
-        "teen_process": {
-          "version": "2.0.4",
-          "requires": {
-            "bluebird": "3.7.2",
-            "lodash": "4.17.21",
-            "shell-quote": "1.8.1",
-            "source-map-support": "0.5.21"
           }
         }
       }
@@ -11936,7 +11874,7 @@
       "version": "2.0.0"
     },
     "jackspeak": {
-      "version": "2.2.1",
+      "version": "2.2.2",
       "requires": {
         "@isaacs/cliui": "^8.0.2",
         "@pkgjs/parseargs": "^0.11.0"
@@ -12961,31 +12899,12 @@
       }
     },
     "teen_process": {
-      "version": "2.0.2",
+      "version": "2.0.4",
       "requires": {
-        "@babel/runtime": "7.19.0",
         "bluebird": "3.7.2",
         "lodash": "4.17.21",
-        "shell-quote": "1.7.3",
-        "source-map-support": "0.5.21",
-        "which": "2.0.2"
-      },
-      "dependencies": {
-        "@babel/runtime": {
-          "version": "7.19.0",
-          "requires": {
-            "regenerator-runtime": "^0.13.4"
-          }
-        },
-        "shell-quote": {
-          "version": "1.7.3"
-        },
-        "which": {
-          "version": "2.0.2",
-          "requires": {
-            "isexe": "^2.0.0"
-          }
-        }
+        "shell-quote": "1.8.1",
+        "source-map-support": "0.5.21"
       }
     },
     "text-hex": {
@@ -13027,7 +12946,7 @@
       }
     },
     "tslib": {
-      "version": "2.6.0",
+      "version": "2.6.1",
       "extraneous": true
     },
     "tunnel-agent": {
