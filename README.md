@@ -21,6 +21,10 @@ Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https:/
     -  `FLUTTER` context sends commands to the Dart VM directly over the observatory URL
         - Newer Flutter versions expose its accessibility labels to the system's accessibility features. It means you can find some Flutter elements and can interact with them over `accessibility_id` etc in the vanilla Appium UiAutomator2/XCUITest drivers, although some elements require over the Dart VM
     - `NATIVE_APP` context is the same as regular Appium UiAutomator2/XCUITest driver
+        - Please refer to each client documentation about available command.
+        - Each driver documentation also may help.
+          - https://github.com/appium/appium-uiautomator2-driver
+          - https://appium.github.io/appium-xcuitest-driver/latest
     - `WEBVIEW` context manages the WebView contents over Appium UiAutomator2/XCUITest driver
 - Appium UiAutomator2/XCUITest drivers must be sufficient to achieve automation if the application under test had `semanticLabel` properly. Then, accessibility mechanism in each OS can expose elements for Appium though OS's accessibility features
     - For example, [Key](https://api.flutter.dev/flutter/foundation/Key-class.html) does not work in the Appium UiAutomator2/XCUITest drivers, but can work in the Appium Flutter Driver
@@ -140,6 +144,27 @@ const opts = {
   driver.deleteSession();
 })();
 ```
+
+### Several ways to start an application
+
+You have a couple of methods to start the application under test with establishing the Dart VM connection as below:
+
+1. Start with `app` in the capabilities
+    1. The most standard method. You may need to start a new session with `app` capability. Then, appium-flutter-driver will start the app, and establish a connection with the Dart VM immediately.
+2. Start with `activate_app`
+    1. Start a session without `app` capability
+    2. Install the application under test via `driver.install_app` or `mobile:installApp` command
+    3. Activate the app via `driver.activate_app` or `mobile:activateApp` command
+        - Then, appium-flutter-driver establish a connection with the Dart VM
+3. Launch app outside the driver
+    1. Start a session without `app` capability
+    2. Install the application under test via `driver.install_app` or `mobile:installApp` command etc
+    3. Calls `flutter:connectObservatoryWsUrl` command to keep finding an observatory URL to the Dart VM
+        - `appium:retryBackoffTime` and `appium:maxRetryCount` will control the duration to keep finding an observatory URL to the Dart VM
+    4. (at the same time) Launch the application under test via outside the appium-flutter-driver
+        - e.g. Launch an iOS process via [ios-go](https://github.com/danielpaulus/go-ios), [iproxy](https://github.com/libimobiledevice/libusbmuxd#iproxy) or [tidevice](https://github.com/alibaba/taobao-iphone-device)
+    5. Once `flutter:connectObservatoryWsUrl` identify the observatory URL, the command will establish a connection to the Dart VM
+
 
 ## Changelog
 
