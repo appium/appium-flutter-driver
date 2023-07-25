@@ -83,7 +83,6 @@ export const execute = async function(
 };
 
 const connectObservatoryWsUrl = async (self: FlutterDriver) => {
-  // todo: gives timeout
   await reConnectFlutterDriver.bind(self)(self.internalCaps);
 }
 
