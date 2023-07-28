@@ -164,7 +164,12 @@ You have a couple of methods to start the application under test with establishi
     4. (at the same time) Launch the application under test via outside the appium-flutter-driver
         - e.g. Launch an iOS process via [ios-go](https://github.com/danielpaulus/go-ios), [iproxy](https://github.com/libimobiledevice/libusbmuxd#iproxy) or [tidevice](https://github.com/alibaba/taobao-iphone-device)
     5. Once `flutter:connectObservatoryWsUrl` identify the observatory URL, the command will establish a connection to the Dart VM
-
+4. Launch app with `flutter:launchApp'` for iOS
+    1. Start a session without `app` capability
+    2. Install the application under test via `driver.install_app` or `mobile:installApp` command etc
+    3. Calls `flutter:launchApp` command to start an iOS app via instrument service
+        - `driver.execute_script 'flutter:launchApp', 'com.example.bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` is example usage
+        - This launching method is the same as the above 3rd party method, but does the same thing only via the appium flutter driver.
 
 ## Changelog
 
@@ -256,8 +261,7 @@ Please replace them properly with your client.
 | - | :ok: | `getClipboard` | Appium |
 | - | :ok: | `setClipboard` | Appium |
 | - | :ok: | `connectObservatoryWsUrl` | Flutter Driver |
-
-
+| - | :ok: | `launchApp`, `driver.execute_script 'flutter:launchApp', 'bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` | Flutter Driver |
 
 ## Change the flutter engine attache to
 

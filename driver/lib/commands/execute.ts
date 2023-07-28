@@ -2,6 +2,7 @@ import { FlutterDriver } from '../driver';
 import { reConnectFlutterDriver } from '../sessions/session';
 import { longTap, scroll, scrollIntoView, scrollUntilVisible, scrollUntilTapable } from './execute/scroll';
 import { waitFor, waitForAbsent, waitForTappable } from './execute/wait';
+import { launchApp } from './../ios/app';
 
 
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
@@ -19,6 +20,8 @@ export const execute = async function(
 
   const command = matching[1].trim();
   switch (command) {
+    case `launchApp`:
+      return flutterLaunchApp(this, args[0], args[1]);
     case `connectObservatoryWsUrl`:
       return connectObservatoryWsUrl(this);
     case `getVMInfo`:
@@ -81,6 +84,14 @@ export const execute = async function(
       throw new Error(`Command not support: "${rawCommand}"`);
   }
 };
+
+const flutterLaunchApp = async (
+  self: FlutterDriver, appId: string, opts
+) => {
+  const { arguments: args = [], environment: env = {}} = opts;
+  await launchApp(self.internalCaps.udid, appId, args, env);
+  await reConnectFlutterDriver.bind(self)(self.internalCaps);
+}
 
 const connectObservatoryWsUrl = async (self: FlutterDriver) => {
   await reConnectFlutterDriver.bind(self)(self.internalCaps);

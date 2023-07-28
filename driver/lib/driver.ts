@@ -17,6 +17,7 @@ import { execute } from './commands/execute';
 import { click, longTap, performTouch, tap, tapEl } from './commands/gesture';
 import { getScreenshot } from './commands/screen';
 import { getClipboard, setClipboard } from './commands/clipboard';
+import { launchApp } from './ios/app';
 
 // Need to not proxy in WebView context
 const WEBVIEW_NO_PROXY = [
