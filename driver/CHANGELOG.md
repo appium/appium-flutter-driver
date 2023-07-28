@@ -1,5 +1,8 @@
 # Changelog
 
+## not released yet
+- Add `flutter:launchApp` to start an app via instrument service natively for iOS
+
 ## 1.18.1
 - Keep using XCUITest driver v4.27.0 for iOS versions lower than 15.
 
