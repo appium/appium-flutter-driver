@@ -1,19 +1,19 @@
 {
   "name": "appium-flutter-driver",
-  "version": "1.19.0",
+  "version": "1.19.1",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "appium-flutter-driver",
-      "version": "1.19.0",
+      "version": "1.19.1",
       "license": "MIT",
       "dependencies": {
         "appium-adb": "^9.9.0",
         "appium-android-driver": "^5.2.2",
         "appium-ios-device": "^2.4.1",
         "appium-uiautomator2-driver": "^2.4.1",
-        "appium-xcuitest-driver": "4.27.0",
+        "appium-xcuitest-driver": "4.30.1",
         "asyncbox": "^2.3.1",
         "bluebird": "^3.1.1",
         "lodash": "^4.0.0",
@@ -4226,16 +4226,16 @@
       }
     },
     "node_modules/appium-xcuitest-driver": {
-      "version": "4.27.0",
+      "version": "4.30.1",
       "license": "Apache-2.0",
       "dependencies": {
         "@xmldom/xmldom": "0.8.7",
-        "appium-idb": "1.6.10",
-        "appium-ios-device": "2.5.0",
-        "appium-ios-simulator": "5.0.7",
-        "appium-remote-debugger": "9.1.14",
-        "appium-webdriveragent": "4.15.1",
-        "appium-xcode": "5.1.0",
+        "appium-idb": "1.6.11",
+        "appium-ios-device": "2.5.2",
+        "appium-ios-simulator": "5.0.8",
+        "appium-remote-debugger": "9.1.15",
+        "appium-webdriveragent": "5.3.0",
+        "appium-xcode": "5.1.1",
         "async-lock": "1.4.0",
         "asyncbox": "2.9.4",
         "bluebird": "3.7.2",
@@ -4248,7 +4248,7 @@
         "moment-timezone": "0.5.43",
         "node-simctl": "7.1.15",
         "portscanner": "2.2.0",
-        "semver": "7.5.0",
+        "semver": "7.5.1",
         "source-map-support": "0.5.21",
         "teen_process": "2.0.2",
         "ws": "8.13.0"
@@ -4258,15 +4258,15 @@
         "npm": ">=8"
       },
       "peerDependencies": {
-        "appium": "^2.0.0-beta.58"
+        "appium": "^2.0.0-beta.64"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/base-driver": {
-      "version": "9.3.6",
+      "version": "9.3.7",
       "license": "Apache-2.0",
       "dependencies": {
-        "@appium/support": "^3.1.10",
-        "@appium/types": "^0.10.4",
+        "@appium/support": "^3.1.11",
+        "@appium/types": "^0.11.0",
         "@colors/colors": "1.5.0",
         "@types/async-lock": "1.4.0",
         "@types/bluebird": "3.5.38",
@@ -4315,12 +4315,12 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/base-plugin": {
-      "version": "2.2.6",
+      "version": "2.2.7",
       "license": "Apache-2.0",
       "peer": true,
       "dependencies": {
-        "@appium/base-driver": "^9.3.6",
-        "@appium/support": "^3.1.10"
+        "@appium/base-driver": "^9.3.7",
+        "@appium/support": "^3.1.11"
       },
       "engines": {
         "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
@@ -4328,14 +4328,15 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils": {
-      "version": "0.3.7",
+      "version": "0.3.13",
       "license": "Apache-2.0",
       "peer": true,
       "dependencies": {
-        "@appium/support": "^3.1.11",
+        "@appium/support": "^4.0.1",
         "@appium/tsconfig": "^0.3.0",
-        "@appium/typedoc-plugin-appium": "^0.6.2",
+        "@appium/typedoc-plugin-appium": "^0.6.4",
         "@sliphua/lilconfig-ts-loader": "3.2.2",
+        "@types/which": "3.0.0",
         "chalk": "4.1.2",
         "consola": "2.15.3",
         "diff": "5.1.0",
@@ -4347,24 +4348,151 @@
         "log-symbols": "4.1.0",
         "pkg-dir": "5.0.0",
         "read-pkg": "5.2.0",
-        "semver": "7.4.0",
+        "semver": "7.5.0",
         "source-map-support": "0.5.21",
         "teen_process": "2.0.2",
-        "type-fest": "3.8.0",
+        "type-fest": "3.10.0",
         "typedoc": "0.23.28",
         "typedoc-plugin-markdown": "3.14.0",
         "typedoc-plugin-resolve-crossmodule-references": "0.3.3",
         "typescript": "4.9.5",
-        "yaml": "2.2.1",
-        "yargs": "17.7.1",
+        "yaml": "2.2.2",
+        "yargs": "17.7.2",
         "yargs-parser": "21.1.1"
       },
       "bin": {
-        "appium-docs": "build/lib/cli/index.js"
+        "appium-docs": "bin/appium-docs.js"
       },
       "engines": {
         "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
         "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/@appium/support": {
+      "version": "4.0.1",
+      "license": "Apache-2.0",
+      "peer": true,
+      "dependencies": {
+        "@appium/tsconfig": "^0.3.0",
+        "@appium/types": "^0.11.1",
+        "@colors/colors": "1.5.0",
+        "@types/archiver": "5.3.2",
+        "@types/base64-stream": "1.0.2",
+        "@types/find-root": "1.1.2",
+        "@types/glob": "8.1.0",
+        "@types/jsftp": "2.1.2",
+        "@types/klaw": "3.0.3",
+        "@types/lockfile": "1.0.2",
+        "@types/mv": "2.1.2",
+        "@types/ncp": "2.0.5",
+        "@types/npmlog": "4.1.4",
+        "@types/pluralize": "0.0.29",
+        "@types/semver": "7.3.13",
+        "@types/shell-quote": "1.7.1",
+        "@types/supports-color": "8.1.1",
+        "@types/teen_process": "2.0.0",
+        "@types/uuid": "9.0.1",
+        "@types/which": "3.0.0",
+        "archiver": "5.3.1",
+        "axios": "1.4.0",
+        "base64-stream": "1.0.0",
+        "bluebird": "3.7.2",
+        "bplist-creator": "0.1.1",
+        "bplist-parser": "0.3.2",
+        "form-data": "4.0.0",
+        "get-stream": "6.0.1",
+        "glob": "8.1.0",
+        "jsftp": "2.1.3",
+        "klaw": "4.1.0",
+        "lockfile": "1.0.4",
+        "lodash": "4.17.21",
+        "log-symbols": "4.1.0",
+        "moment": "2.29.4",
+        "mv": "2.1.1",
+        "ncp": "2.0.0",
+        "npmlog": "7.0.1",
+        "opencv-bindings": "4.5.5",
+        "pkg-dir": "5.0.0",
+        "plist": "3.0.6",
+        "pluralize": "8.0.0",
+        "read-pkg": "5.2.0",
+        "resolve-from": "5.0.0",
+        "sanitize-filename": "1.6.3",
+        "semver": "7.5.0",
+        "sharp": "0.32.1",
+        "shell-quote": "1.8.1",
+        "source-map-support": "0.5.21",
+        "supports-color": "8.1.1",
+        "teen_process": "2.0.2",
+        "type-fest": "3.10.0",
+        "uuid": "9.0.0",
+        "which": "3.0.1",
+        "yauzl": "2.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/@appium/types": {
+      "version": "0.11.1",
+      "license": "Apache-2.0",
+      "peer": true,
+      "dependencies": {
+        "@appium/schema": "^0.2.6",
+        "@appium/tsconfig": "^0.3.0",
+        "@types/express": "4.17.17",
+        "@types/npmlog": "4.1.4",
+        "@types/ws": "8.5.4",
+        "type-fest": "3.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/@types/which": {
+      "version": "3.0.0",
+      "license": "MIT",
+      "peer": true
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/brace-expansion": {
+      "version": "2.0.1",
+      "license": "MIT",
+      "peer": true,
+      "dependencies": {
+        "balanced-match": "^1.0.0"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/emoji-regex": {
+      "version": "8.0.0",
+      "license": "MIT",
+      "peer": true
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/glob": {
+      "version": "8.1.0",
+      "license": "ISC",
+      "peer": true,
+      "dependencies": {
+        "fs.realpath": "^1.0.0",
+        "inflight": "^1.0.4",
+        "inherits": "2",
+        "minimatch": "^5.0.1",
+        "once": "^1.3.0"
+      },
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/isaacs"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/is-fullwidth-code-point": {
+      "version": "3.0.0",
+      "license": "MIT",
+      "peer": true,
+      "engines": {
+        "node": ">=8"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/lru-cache": {
@@ -4378,8 +4506,19 @@
         "node": ">=10"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/minimatch": {
+      "version": "5.1.6",
+      "license": "ISC",
+      "peer": true,
+      "dependencies": {
+        "brace-expansion": "^2.0.1"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/semver": {
-      "version": "7.4.0",
+      "version": "7.5.0",
       "license": "ISC",
       "peer": true,
       "dependencies": {
@@ -4392,21 +4531,57 @@
         "node": ">=10"
       }
     },
-    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/type-fest": {
-      "version": "3.8.0",
-      "license": "(MIT OR CC0-1.0)",
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/string-width": {
+      "version": "4.2.3",
+      "license": "MIT",
       "peer": true,
-      "engines": {
-        "node": ">=14.16"
+      "dependencies": {
+        "emoji-regex": "^8.0.0",
+        "is-fullwidth-code-point": "^3.0.0",
+        "strip-ansi": "^6.0.1"
       },
-      "funding": {
-        "url": "https://github.com/sponsors/sindresorhus"
+      "engines": {
+        "node": ">=8"
       }
     },
-    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/yallist": {
-      "version": "4.0.0",
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/which": {
+      "version": "3.0.1",
       "license": "ISC",
-      "peer": true
+      "peer": true,
+      "dependencies": {
+        "isexe": "^2.0.0"
+      },
+      "bin": {
+        "node-which": "bin/which.js"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/yaml": {
+      "version": "2.2.2",
+      "license": "ISC",
+      "peer": true,
+      "engines": {
+        "node": ">= 14"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/docutils/node_modules/yargs": {
+      "version": "17.7.2",
+      "license": "MIT",
+      "peer": true,
+      "dependencies": {
+        "cliui": "^8.0.1",
+        "escalade": "^3.1.1",
+        "get-caller-file": "^2.0.5",
+        "require-directory": "^2.1.1",
+        "string-width": "^4.2.3",
+        "y18n": "^5.0.5",
+        "yargs-parser": "^21.1.1"
+      },
+      "engines": {
+        "node": ">=12"
+      }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/schema": {
       "version": "0.2.6",
@@ -4415,6 +4590,18 @@
         "@types/json-schema": "7.0.11",
         "json-schema": "0.4.0",
         "source-map-support": "0.5.21"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/strongbox": {
+      "version": "0.3.0",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "env-paths": "2.2.1",
+        "slugify": "1.6.6"
       },
       "engines": {
         "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
@@ -4483,22 +4670,6 @@
         "uuid": "9.0.0",
         "which": "3.0.0",
         "yauzl": "2.10.0"
-      },
-      "engines": {
-        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
-        "npm": ">=8"
-      }
-    },
-    "node_modules/appium-xcuitest-driver/node_modules/@appium/support/node_modules/@appium/types": {
-      "version": "0.11.0",
-      "license": "Apache-2.0",
-      "dependencies": {
-        "@appium/schema": "^0.2.6",
-        "@appium/tsconfig": "^0.3.0",
-        "@types/express": "4.17.17",
-        "@types/npmlog": "4.1.4",
-        "@types/ws": "8.5.4",
-        "type-fest": "3.8.0"
       },
       "engines": {
         "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
@@ -4630,10 +4801,6 @@
         "url": "https://github.com/sponsors/sindresorhus"
       }
     },
-    "node_modules/appium-xcuitest-driver/node_modules/@appium/support/node_modules/yallist": {
-      "version": "4.0.0",
-      "license": "ISC"
-    },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/tsconfig": {
       "version": "0.3.0",
       "license": "Apache-2.0",
@@ -4646,14 +4813,14 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/typedoc-plugin-appium": {
-      "version": "0.6.2",
+      "version": "0.6.4",
       "license": "Apache-2.0",
       "peer": true,
       "dependencies": {
         "handlebars": "4.7.7",
         "lodash": "4.17.21",
         "pluralize": "8.0.0",
-        "type-fest": "3.8.0"
+        "type-fest": "3.10.0"
       },
       "engines": {
         "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
@@ -4667,19 +4834,8 @@
         "typescript": "^4.7.0 || ^5.0.0"
       }
     },
-    "node_modules/appium-xcuitest-driver/node_modules/@appium/typedoc-plugin-appium/node_modules/type-fest": {
-      "version": "3.8.0",
-      "license": "(MIT OR CC0-1.0)",
-      "peer": true,
-      "engines": {
-        "node": ">=14.16"
-      },
-      "funding": {
-        "url": "https://github.com/sponsors/sindresorhus"
-      }
-    },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/types": {
-      "version": "0.10.4",
+      "version": "0.11.0",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/schema": "^0.2.6",
@@ -4705,7 +4861,7 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@babel/code-frame": {
-      "version": "7.18.6",
+      "version": "7.21.4",
       "license": "MIT",
       "dependencies": {
         "@babel/highlight": "^7.18.6"
@@ -4791,7 +4947,7 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@babel/runtime": {
-      "version": "7.21.0",
+      "version": "7.21.5",
       "license": "MIT",
       "dependencies": {
         "regenerator-runtime": "^0.13.11"
@@ -4817,11 +4973,74 @@
         "kuler": "^2.0.0"
       }
     },
-    "node_modules/appium-xcuitest-driver/node_modules/@jimp/bmp": {
-      "version": "0.22.7",
+    "node_modules/appium-xcuitest-driver/node_modules/@isaacs/cliui": {
+      "version": "8.0.2",
+      "license": "ISC",
+      "dependencies": {
+        "string-width": "^5.1.2",
+        "string-width-cjs": "npm:string-width@^4.2.0",
+        "strip-ansi": "^7.0.1",
+        "strip-ansi-cjs": "npm:strip-ansi@^6.0.1",
+        "wrap-ansi": "^8.1.0",
+        "wrap-ansi-cjs": "npm:wrap-ansi@^7.0.0"
+      },
+      "engines": {
+        "node": ">=12"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@isaacs/cliui/node_modules/ansi-regex": {
+      "version": "6.0.1",
+      "license": "MIT",
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/ansi-regex?sponsor=1"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@isaacs/cliui/node_modules/ansi-styles": {
+      "version": "6.2.1",
+      "license": "MIT",
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/ansi-styles?sponsor=1"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@isaacs/cliui/node_modules/strip-ansi": {
+      "version": "7.0.1",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7",
+        "ansi-regex": "^6.0.1"
+      },
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/strip-ansi?sponsor=1"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@isaacs/cliui/node_modules/wrap-ansi": {
+      "version": "8.1.0",
+      "license": "MIT",
+      "dependencies": {
+        "ansi-styles": "^6.1.0",
+        "string-width": "^5.0.1",
+        "strip-ansi": "^7.0.1"
+      },
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/wrap-ansi?sponsor=1"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@jimp/bmp": {
+      "version": "0.22.8",
+      "license": "MIT",
+      "dependencies": {
+        "@jimp/utils": "^0.22.8",
         "bmp-js": "^0.1.0"
       },
       "peerDependencies": {
@@ -4829,10 +5048,10 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/core": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7",
+        "@jimp/utils": "^0.22.8",
         "any-base": "^1.1.0",
         "buffer": "^5.2.0",
         "exif-parser": "^0.1.12",
@@ -4844,17 +5063,17 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/custom": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/core": "^0.22.7"
+        "@jimp/core": "^0.22.8"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/gif": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7",
+        "@jimp/utils": "^0.22.8",
         "gifwrap": "^0.9.2",
         "omggif": "^1.0.9"
       },
@@ -4863,10 +5082,10 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/jpeg": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7",
+        "@jimp/utils": "^0.22.8",
         "jpeg-js": "^0.4.4"
       },
       "peerDependencies": {
@@ -4874,40 +5093,40 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-blit": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-blur": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-circle": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-color": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7",
+        "@jimp/utils": "^0.22.8",
         "tinycolor2": "^1.6.0"
       },
       "peerDependencies": {
@@ -4915,10 +5134,10 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-contain": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5",
@@ -4928,10 +5147,10 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-cover": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5",
@@ -4941,50 +5160,50 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-crop": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-displace": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-dither": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-fisheye": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-flip": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5",
@@ -4992,50 +5211,50 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-gaussian": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-invert": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-mask": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-normalize": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-print": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7",
+        "@jimp/utils": "^0.22.8",
         "load-bmfont": "^1.4.1"
       },
       "peerDependencies": {
@@ -5044,20 +5263,20 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-resize": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-rotate": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5",
@@ -5067,10 +5286,10 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-scale": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5",
@@ -5078,10 +5297,10 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-shadow": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5",
@@ -5090,10 +5309,10 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugin-threshold": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7"
+        "@jimp/utils": "^0.22.8"
       },
       "peerDependencies": {
         "@jimp/custom": ">=0.3.5",
@@ -5102,30 +5321,30 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/plugins": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/plugin-blit": "^0.22.7",
-        "@jimp/plugin-blur": "^0.22.7",
-        "@jimp/plugin-circle": "^0.22.7",
-        "@jimp/plugin-color": "^0.22.7",
-        "@jimp/plugin-contain": "^0.22.7",
-        "@jimp/plugin-cover": "^0.22.7",
-        "@jimp/plugin-crop": "^0.22.7",
-        "@jimp/plugin-displace": "^0.22.7",
-        "@jimp/plugin-dither": "^0.22.7",
-        "@jimp/plugin-fisheye": "^0.22.7",
-        "@jimp/plugin-flip": "^0.22.7",
-        "@jimp/plugin-gaussian": "^0.22.7",
-        "@jimp/plugin-invert": "^0.22.7",
-        "@jimp/plugin-mask": "^0.22.7",
-        "@jimp/plugin-normalize": "^0.22.7",
-        "@jimp/plugin-print": "^0.22.7",
-        "@jimp/plugin-resize": "^0.22.7",
-        "@jimp/plugin-rotate": "^0.22.7",
-        "@jimp/plugin-scale": "^0.22.7",
-        "@jimp/plugin-shadow": "^0.22.7",
-        "@jimp/plugin-threshold": "^0.22.7",
+        "@jimp/plugin-blit": "^0.22.8",
+        "@jimp/plugin-blur": "^0.22.8",
+        "@jimp/plugin-circle": "^0.22.8",
+        "@jimp/plugin-color": "^0.22.8",
+        "@jimp/plugin-contain": "^0.22.8",
+        "@jimp/plugin-cover": "^0.22.8",
+        "@jimp/plugin-crop": "^0.22.8",
+        "@jimp/plugin-displace": "^0.22.8",
+        "@jimp/plugin-dither": "^0.22.8",
+        "@jimp/plugin-fisheye": "^0.22.8",
+        "@jimp/plugin-flip": "^0.22.8",
+        "@jimp/plugin-gaussian": "^0.22.8",
+        "@jimp/plugin-invert": "^0.22.8",
+        "@jimp/plugin-mask": "^0.22.8",
+        "@jimp/plugin-normalize": "^0.22.8",
+        "@jimp/plugin-print": "^0.22.8",
+        "@jimp/plugin-resize": "^0.22.8",
+        "@jimp/plugin-rotate": "^0.22.8",
+        "@jimp/plugin-scale": "^0.22.8",
+        "@jimp/plugin-shadow": "^0.22.8",
+        "@jimp/plugin-threshold": "^0.22.8",
         "timm": "^1.6.1"
       },
       "peerDependencies": {
@@ -5133,10 +5352,10 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/png": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/utils": "^0.22.7",
+        "@jimp/utils": "^0.22.8",
         "pngjs": "^6.0.0"
       },
       "peerDependencies": {
@@ -5151,7 +5370,7 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/tiff": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
         "utif2": "^4.0.1"
@@ -5161,14 +5380,14 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/types": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
-        "@jimp/bmp": "^0.22.7",
-        "@jimp/gif": "^0.22.7",
-        "@jimp/jpeg": "^0.22.7",
-        "@jimp/png": "^0.22.7",
-        "@jimp/tiff": "^0.22.7",
+        "@jimp/bmp": "^0.22.8",
+        "@jimp/gif": "^0.22.8",
+        "@jimp/jpeg": "^0.22.8",
+        "@jimp/png": "^0.22.8",
+        "@jimp/tiff": "^0.22.8",
         "timm": "^1.6.1"
       },
       "peerDependencies": {
@@ -5176,10 +5395,18 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@jimp/utils": {
-      "version": "0.22.7",
+      "version": "0.22.8",
       "license": "MIT",
       "dependencies": {
         "regenerator-runtime": "^0.13.3"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@pkgjs/parseargs": {
+      "version": "0.11.0",
+      "license": "MIT",
+      "optional": true,
+      "engines": {
+        "node": ">=14"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@sidvind/better-ajv-errors": {
@@ -5308,12 +5535,13 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@types/express-serve-static-core": {
-      "version": "4.17.33",
+      "version": "4.17.35",
       "license": "MIT",
       "dependencies": {
         "@types/node": "*",
         "@types/qs": "*",
-        "@types/range-parser": "*"
+        "@types/range-parser": "*",
+        "@types/send": "*"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@types/fancy-log": {
@@ -5367,7 +5595,7 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@types/mime": {
-      "version": "3.0.1",
+      "version": "1.3.2",
       "license": "MIT"
     },
     "node_modules/appium-xcuitest-driver/node_modules/@types/minimatch": {
@@ -5386,7 +5614,7 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@types/node": {
-      "version": "18.16.7",
+      "version": "18.16.9",
       "license": "MIT"
     },
     "node_modules/appium-xcuitest-driver/node_modules/@types/normalize-package-data": {
@@ -5434,6 +5662,14 @@
     "node_modules/appium-xcuitest-driver/node_modules/@types/semver": {
       "version": "7.3.13",
       "license": "MIT"
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@types/send": {
+      "version": "0.17.1",
+      "license": "MIT",
+      "dependencies": {
+        "@types/mime": "^1",
+        "@types/node": "*"
+      }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@types/serve-favicon": {
       "version": "2.5.3",
@@ -5575,17 +5811,17 @@
       "license": "MIT"
     },
     "node_modules/appium-xcuitest-driver/node_modules/appium": {
-      "version": "2.0.0-beta.62",
+      "version": "2.0.0-beta.66",
       "hasInstallScript": true,
       "license": "Apache-2.0",
       "peer": true,
       "dependencies": {
-        "@appium/base-driver": "^9.3.6",
-        "@appium/base-plugin": "^2.2.6",
-        "@appium/docutils": "^0.3.5",
+        "@appium/base-driver": "^9.3.7",
+        "@appium/base-plugin": "^2.2.7",
+        "@appium/docutils": "^0.3.9",
         "@appium/schema": "^0.2.6",
-        "@appium/support": "^3.1.10",
-        "@appium/types": "^0.10.4",
+        "@appium/support": "^3.1.11",
+        "@appium/types": "^0.11.0",
         "@sidvind/better-ajv-errors": "2.1.0",
         "@types/argparse": "2.0.10",
         "@types/bluebird": "3.5.38",
@@ -5609,7 +5845,7 @@
         "ora": "5.4.1",
         "package-changed": "3.0.0",
         "resolve-from": "5.0.0",
-        "semver": "7.3.8",
+        "semver": "7.4.0",
         "source-map-support": "0.5.21",
         "teen_process": "2.0.2",
         "type-fest": "3.8.0",
@@ -5626,10 +5862,10 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/appium-idb": {
-      "version": "1.6.10",
+      "version": "1.6.11",
       "license": "Apache-2.0",
       "dependencies": {
-        "@appium/support": "^3.0.0",
+        "@appium/support": "^4.0.0",
         "@babel/runtime": "^7.0.0",
         "asyncbox": "^2.5.2",
         "bluebird": "^3.1.1",
@@ -5642,11 +5878,166 @@
         "npm": ">=8"
       }
     },
-    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-device": {
-      "version": "2.5.0",
+    "node_modules/appium-xcuitest-driver/node_modules/appium-idb/node_modules/@appium/support": {
+      "version": "4.0.1",
       "license": "Apache-2.0",
       "dependencies": {
-        "@appium/support": "^3.0.0",
+        "@appium/tsconfig": "^0.3.0",
+        "@appium/types": "^0.11.1",
+        "@colors/colors": "1.5.0",
+        "@types/archiver": "5.3.2",
+        "@types/base64-stream": "1.0.2",
+        "@types/find-root": "1.1.2",
+        "@types/glob": "8.1.0",
+        "@types/jsftp": "2.1.2",
+        "@types/klaw": "3.0.3",
+        "@types/lockfile": "1.0.2",
+        "@types/mv": "2.1.2",
+        "@types/ncp": "2.0.5",
+        "@types/npmlog": "4.1.4",
+        "@types/pluralize": "0.0.29",
+        "@types/semver": "7.3.13",
+        "@types/shell-quote": "1.7.1",
+        "@types/supports-color": "8.1.1",
+        "@types/teen_process": "2.0.0",
+        "@types/uuid": "9.0.1",
+        "@types/which": "3.0.0",
+        "archiver": "5.3.1",
+        "axios": "1.4.0",
+        "base64-stream": "1.0.0",
+        "bluebird": "3.7.2",
+        "bplist-creator": "0.1.1",
+        "bplist-parser": "0.3.2",
+        "form-data": "4.0.0",
+        "get-stream": "6.0.1",
+        "glob": "8.1.0",
+        "jsftp": "2.1.3",
+        "klaw": "4.1.0",
+        "lockfile": "1.0.4",
+        "lodash": "4.17.21",
+        "log-symbols": "4.1.0",
+        "moment": "2.29.4",
+        "mv": "2.1.1",
+        "ncp": "2.0.0",
+        "npmlog": "7.0.1",
+        "opencv-bindings": "4.5.5",
+        "pkg-dir": "5.0.0",
+        "plist": "3.0.6",
+        "pluralize": "8.0.0",
+        "read-pkg": "5.2.0",
+        "resolve-from": "5.0.0",
+        "sanitize-filename": "1.6.3",
+        "semver": "7.5.0",
+        "sharp": "0.32.1",
+        "shell-quote": "1.8.1",
+        "source-map-support": "0.5.21",
+        "supports-color": "8.1.1",
+        "teen_process": "2.0.2",
+        "type-fest": "3.10.0",
+        "uuid": "9.0.0",
+        "which": "3.0.1",
+        "yauzl": "2.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-idb/node_modules/@appium/types": {
+      "version": "0.11.1",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@appium/schema": "^0.2.6",
+        "@appium/tsconfig": "^0.3.0",
+        "@types/express": "4.17.17",
+        "@types/npmlog": "4.1.4",
+        "@types/ws": "8.5.4",
+        "type-fest": "3.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-idb/node_modules/@types/which": {
+      "version": "3.0.0",
+      "license": "MIT"
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-idb/node_modules/brace-expansion": {
+      "version": "2.0.1",
+      "license": "MIT",
+      "dependencies": {
+        "balanced-match": "^1.0.0"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-idb/node_modules/glob": {
+      "version": "8.1.0",
+      "license": "ISC",
+      "dependencies": {
+        "fs.realpath": "^1.0.0",
+        "inflight": "^1.0.4",
+        "inherits": "2",
+        "minimatch": "^5.0.1",
+        "once": "^1.3.0"
+      },
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/isaacs"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-idb/node_modules/lru-cache": {
+      "version": "6.0.0",
+      "license": "ISC",
+      "dependencies": {
+        "yallist": "^4.0.0"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-idb/node_modules/minimatch": {
+      "version": "5.1.6",
+      "license": "ISC",
+      "dependencies": {
+        "brace-expansion": "^2.0.1"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-idb/node_modules/semver": {
+      "version": "7.5.0",
+      "license": "ISC",
+      "dependencies": {
+        "lru-cache": "^6.0.0"
+      },
+      "bin": {
+        "semver": "bin/semver.js"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-idb/node_modules/which": {
+      "version": "3.0.1",
+      "license": "ISC",
+      "dependencies": {
+        "isexe": "^2.0.0"
+      },
+      "bin": {
+        "node-which": "bin/which.js"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-device": {
+      "version": "2.5.2",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@appium/support": "^4.0.0",
         "@babel/runtime": "^7.0.0",
         "asyncbox": "^2.9.2",
         "bluebird": "^3.1.1",
@@ -5662,11 +6053,161 @@
         "npm": ">=8"
       }
     },
-    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-simulator": {
-      "version": "5.0.7",
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-device/node_modules/@appium/support": {
+      "version": "4.0.0",
       "license": "Apache-2.0",
       "dependencies": {
-        "@appium/support": "^3.0.0",
+        "@appium/tsconfig": "^0.3.0",
+        "@appium/types": "^0.11.1",
+        "@colors/colors": "1.5.0",
+        "@types/archiver": "5.3.2",
+        "@types/base64-stream": "1.0.2",
+        "@types/find-root": "1.1.2",
+        "@types/glob": "8.1.0",
+        "@types/jsftp": "2.1.2",
+        "@types/klaw": "3.0.3",
+        "@types/lockfile": "1.0.2",
+        "@types/mv": "2.1.2",
+        "@types/ncp": "2.0.5",
+        "@types/npmlog": "4.1.4",
+        "@types/pluralize": "0.0.29",
+        "@types/semver": "7.3.13",
+        "@types/shell-quote": "1.7.1",
+        "@types/supports-color": "8.1.1",
+        "@types/teen_process": "2.0.0",
+        "@types/uuid": "9.0.1",
+        "archiver": "5.3.1",
+        "axios": "1.4.0",
+        "base64-stream": "1.0.0",
+        "bluebird": "3.7.2",
+        "bplist-creator": "0.1.1",
+        "bplist-parser": "0.3.2",
+        "form-data": "4.0.0",
+        "get-stream": "6.0.1",
+        "glob": "8.1.0",
+        "jsftp": "2.1.3",
+        "klaw": "4.1.0",
+        "lockfile": "1.0.4",
+        "lodash": "4.17.21",
+        "log-symbols": "4.1.0",
+        "moment": "2.29.4",
+        "mv": "2.1.1",
+        "ncp": "2.0.0",
+        "npmlog": "7.0.1",
+        "opencv-bindings": "4.5.5",
+        "pkg-dir": "5.0.0",
+        "plist": "3.0.6",
+        "pluralize": "8.0.0",
+        "read-pkg": "5.2.0",
+        "resolve-from": "5.0.0",
+        "sanitize-filename": "1.6.3",
+        "semver": "7.5.0",
+        "sharp": "0.32.1",
+        "shell-quote": "1.8.1",
+        "source-map-support": "0.5.21",
+        "supports-color": "8.1.1",
+        "teen_process": "2.0.2",
+        "type-fest": "3.10.0",
+        "uuid": "9.0.0",
+        "which": "3.0.1",
+        "yauzl": "2.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-device/node_modules/@appium/types": {
+      "version": "0.11.1",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@appium/schema": "^0.2.6",
+        "@appium/tsconfig": "^0.3.0",
+        "@types/express": "4.17.17",
+        "@types/npmlog": "4.1.4",
+        "@types/ws": "8.5.4",
+        "type-fest": "3.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-device/node_modules/brace-expansion": {
+      "version": "2.0.1",
+      "license": "MIT",
+      "dependencies": {
+        "balanced-match": "^1.0.0"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-device/node_modules/glob": {
+      "version": "8.1.0",
+      "license": "ISC",
+      "dependencies": {
+        "fs.realpath": "^1.0.0",
+        "inflight": "^1.0.4",
+        "inherits": "2",
+        "minimatch": "^5.0.1",
+        "once": "^1.3.0"
+      },
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/isaacs"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-device/node_modules/lru-cache": {
+      "version": "6.0.0",
+      "license": "ISC",
+      "dependencies": {
+        "yallist": "^4.0.0"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-device/node_modules/minimatch": {
+      "version": "5.1.6",
+      "license": "ISC",
+      "dependencies": {
+        "brace-expansion": "^2.0.1"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-device/node_modules/semver": {
+      "version": "7.5.0",
+      "license": "ISC",
+      "dependencies": {
+        "lru-cache": "^6.0.0"
+      },
+      "bin": {
+        "semver": "bin/semver.js"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-device/node_modules/which": {
+      "version": "3.0.1",
+      "license": "ISC",
+      "dependencies": {
+        "isexe": "^2.0.0"
+      },
+      "bin": {
+        "node-which": "bin/which.js"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-simulator": {
+      "version": "5.0.8",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@appium/support": "^4.0.0",
         "@babel/runtime": "^7.0.0",
         "@xmldom/xmldom": "^0.x",
         "appium-xcode": "^5.0.0",
@@ -5684,12 +6225,167 @@
         "npm": ">=8"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-simulator/node_modules/@appium/support": {
+      "version": "4.0.1",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@appium/tsconfig": "^0.3.0",
+        "@appium/types": "^0.11.1",
+        "@colors/colors": "1.5.0",
+        "@types/archiver": "5.3.2",
+        "@types/base64-stream": "1.0.2",
+        "@types/find-root": "1.1.2",
+        "@types/glob": "8.1.0",
+        "@types/jsftp": "2.1.2",
+        "@types/klaw": "3.0.3",
+        "@types/lockfile": "1.0.2",
+        "@types/mv": "2.1.2",
+        "@types/ncp": "2.0.5",
+        "@types/npmlog": "4.1.4",
+        "@types/pluralize": "0.0.29",
+        "@types/semver": "7.3.13",
+        "@types/shell-quote": "1.7.1",
+        "@types/supports-color": "8.1.1",
+        "@types/teen_process": "2.0.0",
+        "@types/uuid": "9.0.1",
+        "@types/which": "3.0.0",
+        "archiver": "5.3.1",
+        "axios": "1.4.0",
+        "base64-stream": "1.0.0",
+        "bluebird": "3.7.2",
+        "bplist-creator": "0.1.1",
+        "bplist-parser": "0.3.2",
+        "form-data": "4.0.0",
+        "get-stream": "6.0.1",
+        "glob": "8.1.0",
+        "jsftp": "2.1.3",
+        "klaw": "4.1.0",
+        "lockfile": "1.0.4",
+        "lodash": "4.17.21",
+        "log-symbols": "4.1.0",
+        "moment": "2.29.4",
+        "mv": "2.1.1",
+        "ncp": "2.0.0",
+        "npmlog": "7.0.1",
+        "opencv-bindings": "4.5.5",
+        "pkg-dir": "5.0.0",
+        "plist": "3.0.6",
+        "pluralize": "8.0.0",
+        "read-pkg": "5.2.0",
+        "resolve-from": "5.0.0",
+        "sanitize-filename": "1.6.3",
+        "semver": "7.5.0",
+        "sharp": "0.32.1",
+        "shell-quote": "1.8.1",
+        "source-map-support": "0.5.21",
+        "supports-color": "8.1.1",
+        "teen_process": "2.0.2",
+        "type-fest": "3.10.0",
+        "uuid": "9.0.0",
+        "which": "3.0.1",
+        "yauzl": "2.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-simulator/node_modules/@appium/types": {
+      "version": "0.11.1",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@appium/schema": "^0.2.6",
+        "@appium/tsconfig": "^0.3.0",
+        "@types/express": "4.17.17",
+        "@types/npmlog": "4.1.4",
+        "@types/ws": "8.5.4",
+        "type-fest": "3.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-simulator/node_modules/@types/which": {
+      "version": "3.0.0",
+      "license": "MIT"
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-simulator/node_modules/brace-expansion": {
+      "version": "2.0.1",
+      "license": "MIT",
+      "dependencies": {
+        "balanced-match": "^1.0.0"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-simulator/node_modules/glob": {
+      "version": "8.1.0",
+      "license": "ISC",
+      "dependencies": {
+        "fs.realpath": "^1.0.0",
+        "inflight": "^1.0.4",
+        "inherits": "2",
+        "minimatch": "^5.0.1",
+        "once": "^1.3.0"
+      },
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/isaacs"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-simulator/node_modules/lru-cache": {
+      "version": "6.0.0",
+      "license": "ISC",
+      "dependencies": {
+        "yallist": "^4.0.0"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-simulator/node_modules/minimatch": {
+      "version": "5.1.6",
+      "license": "ISC",
+      "dependencies": {
+        "brace-expansion": "^2.0.1"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-simulator/node_modules/semver": {
+      "version": "7.5.0",
+      "license": "ISC",
+      "dependencies": {
+        "lru-cache": "^6.0.0"
+      },
+      "bin": {
+        "semver": "bin/semver.js"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-ios-simulator/node_modules/which": {
+      "version": "3.0.1",
+      "license": "ISC",
+      "dependencies": {
+        "isexe": "^2.0.0"
+      },
+      "bin": {
+        "node-which": "bin/which.js"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/appium-remote-debugger": {
-      "version": "9.1.14",
+      "version": "9.1.15",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/base-driver": "^9.0.0",
-        "@appium/support": "^3.0.0",
+        "@appium/support": "^4.0.0",
         "@babel/runtime": "^7.0.0",
         "appium-ios-device": "^2.0.0",
         "async-lock": "^1.2.2",
@@ -5705,6 +6401,91 @@
         "node": ">=14",
         "npm": ">=8"
       }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-remote-debugger/node_modules/@appium/support": {
+      "version": "4.0.1",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@appium/tsconfig": "^0.3.0",
+        "@appium/types": "^0.11.1",
+        "@colors/colors": "1.5.0",
+        "@types/archiver": "5.3.2",
+        "@types/base64-stream": "1.0.2",
+        "@types/find-root": "1.1.2",
+        "@types/glob": "8.1.0",
+        "@types/jsftp": "2.1.2",
+        "@types/klaw": "3.0.3",
+        "@types/lockfile": "1.0.2",
+        "@types/mv": "2.1.2",
+        "@types/ncp": "2.0.5",
+        "@types/npmlog": "4.1.4",
+        "@types/pluralize": "0.0.29",
+        "@types/semver": "7.3.13",
+        "@types/shell-quote": "1.7.1",
+        "@types/supports-color": "8.1.1",
+        "@types/teen_process": "2.0.0",
+        "@types/uuid": "9.0.1",
+        "@types/which": "3.0.0",
+        "archiver": "5.3.1",
+        "axios": "1.4.0",
+        "base64-stream": "1.0.0",
+        "bluebird": "3.7.2",
+        "bplist-creator": "0.1.1",
+        "bplist-parser": "0.3.2",
+        "form-data": "4.0.0",
+        "get-stream": "6.0.1",
+        "glob": "8.1.0",
+        "jsftp": "2.1.3",
+        "klaw": "4.1.0",
+        "lockfile": "1.0.4",
+        "lodash": "4.17.21",
+        "log-symbols": "4.1.0",
+        "moment": "2.29.4",
+        "mv": "2.1.1",
+        "ncp": "2.0.0",
+        "npmlog": "7.0.1",
+        "opencv-bindings": "4.5.5",
+        "pkg-dir": "5.0.0",
+        "plist": "3.0.6",
+        "pluralize": "8.0.0",
+        "read-pkg": "5.2.0",
+        "resolve-from": "5.0.0",
+        "sanitize-filename": "1.6.3",
+        "semver": "7.5.0",
+        "sharp": "0.32.1",
+        "shell-quote": "1.8.1",
+        "source-map-support": "0.5.21",
+        "supports-color": "8.1.1",
+        "teen_process": "2.0.2",
+        "type-fest": "3.10.0",
+        "uuid": "9.0.0",
+        "which": "3.0.1",
+        "yauzl": "2.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-remote-debugger/node_modules/@appium/types": {
+      "version": "0.11.1",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@appium/schema": "^0.2.6",
+        "@appium/tsconfig": "^0.3.0",
+        "@types/express": "4.17.17",
+        "@types/npmlog": "4.1.4",
+        "@types/ws": "8.5.4",
+        "type-fest": "3.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-remote-debugger/node_modules/@types/which": {
+      "version": "3.0.0",
+      "license": "MIT"
     },
     "node_modules/appium-xcuitest-driver/node_modules/appium-remote-debugger/node_modules/brace-expansion": {
       "version": "2.0.1",
@@ -5730,6 +6511,16 @@
         "url": "https://github.com/sponsors/isaacs"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-remote-debugger/node_modules/lru-cache": {
+      "version": "6.0.0",
+      "license": "ISC",
+      "dependencies": {
+        "yallist": "^4.0.0"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/appium-remote-debugger/node_modules/minimatch": {
       "version": "5.1.6",
       "license": "ISC",
@@ -5740,12 +6531,39 @@
         "node": ">=10"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-remote-debugger/node_modules/semver": {
+      "version": "7.5.0",
+      "license": "ISC",
+      "dependencies": {
+        "lru-cache": "^6.0.0"
+      },
+      "bin": {
+        "semver": "bin/semver.js"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-remote-debugger/node_modules/which": {
+      "version": "3.0.1",
+      "license": "ISC",
+      "dependencies": {
+        "isexe": "^2.0.0"
+      },
+      "bin": {
+        "node-which": "bin/which.js"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent": {
-      "version": "4.15.1",
+      "version": "5.3.0",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/base-driver": "^9.0.0",
-        "@appium/support": "^3.0.0",
+        "@appium/strongbox": "^0.x",
+        "@appium/support": "^4.0.0",
         "@babel/runtime": "^7.0.0",
         "appium-ios-device": "^2.5.0",
         "appium-ios-simulator": "^5.0.1",
@@ -5763,11 +6581,166 @@
         "npm": ">=8"
       }
     },
-    "node_modules/appium-xcuitest-driver/node_modules/appium-xcode": {
-      "version": "5.1.0",
+    "node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent/node_modules/@appium/support": {
+      "version": "4.0.1",
       "license": "Apache-2.0",
       "dependencies": {
-        "@appium/support": "^3.0.0",
+        "@appium/tsconfig": "^0.3.0",
+        "@appium/types": "^0.11.1",
+        "@colors/colors": "1.5.0",
+        "@types/archiver": "5.3.2",
+        "@types/base64-stream": "1.0.2",
+        "@types/find-root": "1.1.2",
+        "@types/glob": "8.1.0",
+        "@types/jsftp": "2.1.2",
+        "@types/klaw": "3.0.3",
+        "@types/lockfile": "1.0.2",
+        "@types/mv": "2.1.2",
+        "@types/ncp": "2.0.5",
+        "@types/npmlog": "4.1.4",
+        "@types/pluralize": "0.0.29",
+        "@types/semver": "7.3.13",
+        "@types/shell-quote": "1.7.1",
+        "@types/supports-color": "8.1.1",
+        "@types/teen_process": "2.0.0",
+        "@types/uuid": "9.0.1",
+        "@types/which": "3.0.0",
+        "archiver": "5.3.1",
+        "axios": "1.4.0",
+        "base64-stream": "1.0.0",
+        "bluebird": "3.7.2",
+        "bplist-creator": "0.1.1",
+        "bplist-parser": "0.3.2",
+        "form-data": "4.0.0",
+        "get-stream": "6.0.1",
+        "glob": "8.1.0",
+        "jsftp": "2.1.3",
+        "klaw": "4.1.0",
+        "lockfile": "1.0.4",
+        "lodash": "4.17.21",
+        "log-symbols": "4.1.0",
+        "moment": "2.29.4",
+        "mv": "2.1.1",
+        "ncp": "2.0.0",
+        "npmlog": "7.0.1",
+        "opencv-bindings": "4.5.5",
+        "pkg-dir": "5.0.0",
+        "plist": "3.0.6",
+        "pluralize": "8.0.0",
+        "read-pkg": "5.2.0",
+        "resolve-from": "5.0.0",
+        "sanitize-filename": "1.6.3",
+        "semver": "7.5.0",
+        "sharp": "0.32.1",
+        "shell-quote": "1.8.1",
+        "source-map-support": "0.5.21",
+        "supports-color": "8.1.1",
+        "teen_process": "2.0.2",
+        "type-fest": "3.10.0",
+        "uuid": "9.0.0",
+        "which": "3.0.1",
+        "yauzl": "2.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent/node_modules/@appium/types": {
+      "version": "0.11.1",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@appium/schema": "^0.2.6",
+        "@appium/tsconfig": "^0.3.0",
+        "@types/express": "4.17.17",
+        "@types/npmlog": "4.1.4",
+        "@types/ws": "8.5.4",
+        "type-fest": "3.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent/node_modules/@types/which": {
+      "version": "3.0.0",
+      "license": "MIT"
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent/node_modules/brace-expansion": {
+      "version": "2.0.1",
+      "license": "MIT",
+      "dependencies": {
+        "balanced-match": "^1.0.0"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent/node_modules/glob": {
+      "version": "8.1.0",
+      "license": "ISC",
+      "dependencies": {
+        "fs.realpath": "^1.0.0",
+        "inflight": "^1.0.4",
+        "inherits": "2",
+        "minimatch": "^5.0.1",
+        "once": "^1.3.0"
+      },
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/isaacs"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent/node_modules/lru-cache": {
+      "version": "6.0.0",
+      "license": "ISC",
+      "dependencies": {
+        "yallist": "^4.0.0"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent/node_modules/minimatch": {
+      "version": "5.1.6",
+      "license": "ISC",
+      "dependencies": {
+        "brace-expansion": "^2.0.1"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent/node_modules/semver": {
+      "version": "7.5.0",
+      "license": "ISC",
+      "dependencies": {
+        "lru-cache": "^6.0.0"
+      },
+      "bin": {
+        "semver": "bin/semver.js"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent/node_modules/which": {
+      "version": "3.0.1",
+      "license": "ISC",
+      "dependencies": {
+        "isexe": "^2.0.0"
+      },
+      "bin": {
+        "node-which": "bin/which.js"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-xcode": {
+      "version": "5.1.1",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@appium/support": "^4.0.0",
         "@babel/runtime": "^7.0.0",
         "@types/lodash": "^4.14.192",
         "@types/teen_process": "^2.0.0",
@@ -5781,6 +6754,161 @@
       "engines": {
         "node": ">=14",
         "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-xcode/node_modules/@appium/support": {
+      "version": "4.0.1",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@appium/tsconfig": "^0.3.0",
+        "@appium/types": "^0.11.1",
+        "@colors/colors": "1.5.0",
+        "@types/archiver": "5.3.2",
+        "@types/base64-stream": "1.0.2",
+        "@types/find-root": "1.1.2",
+        "@types/glob": "8.1.0",
+        "@types/jsftp": "2.1.2",
+        "@types/klaw": "3.0.3",
+        "@types/lockfile": "1.0.2",
+        "@types/mv": "2.1.2",
+        "@types/ncp": "2.0.5",
+        "@types/npmlog": "4.1.4",
+        "@types/pluralize": "0.0.29",
+        "@types/semver": "7.3.13",
+        "@types/shell-quote": "1.7.1",
+        "@types/supports-color": "8.1.1",
+        "@types/teen_process": "2.0.0",
+        "@types/uuid": "9.0.1",
+        "@types/which": "3.0.0",
+        "archiver": "5.3.1",
+        "axios": "1.4.0",
+        "base64-stream": "1.0.0",
+        "bluebird": "3.7.2",
+        "bplist-creator": "0.1.1",
+        "bplist-parser": "0.3.2",
+        "form-data": "4.0.0",
+        "get-stream": "6.0.1",
+        "glob": "8.1.0",
+        "jsftp": "2.1.3",
+        "klaw": "4.1.0",
+        "lockfile": "1.0.4",
+        "lodash": "4.17.21",
+        "log-symbols": "4.1.0",
+        "moment": "2.29.4",
+        "mv": "2.1.1",
+        "ncp": "2.0.0",
+        "npmlog": "7.0.1",
+        "opencv-bindings": "4.5.5",
+        "pkg-dir": "5.0.0",
+        "plist": "3.0.6",
+        "pluralize": "8.0.0",
+        "read-pkg": "5.2.0",
+        "resolve-from": "5.0.0",
+        "sanitize-filename": "1.6.3",
+        "semver": "7.5.0",
+        "sharp": "0.32.1",
+        "shell-quote": "1.8.1",
+        "source-map-support": "0.5.21",
+        "supports-color": "8.1.1",
+        "teen_process": "2.0.2",
+        "type-fest": "3.10.0",
+        "uuid": "9.0.0",
+        "which": "3.0.1",
+        "yauzl": "2.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-xcode/node_modules/@appium/types": {
+      "version": "0.11.1",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "@appium/schema": "^0.2.6",
+        "@appium/tsconfig": "^0.3.0",
+        "@types/express": "4.17.17",
+        "@types/npmlog": "4.1.4",
+        "@types/ws": "8.5.4",
+        "type-fest": "3.10.0"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-xcode/node_modules/@types/which": {
+      "version": "3.0.0",
+      "license": "MIT"
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-xcode/node_modules/brace-expansion": {
+      "version": "2.0.1",
+      "license": "MIT",
+      "dependencies": {
+        "balanced-match": "^1.0.0"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-xcode/node_modules/glob": {
+      "version": "8.1.0",
+      "license": "ISC",
+      "dependencies": {
+        "fs.realpath": "^1.0.0",
+        "inflight": "^1.0.4",
+        "inherits": "2",
+        "minimatch": "^5.0.1",
+        "once": "^1.3.0"
+      },
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/isaacs"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-xcode/node_modules/lru-cache": {
+      "version": "6.0.0",
+      "license": "ISC",
+      "dependencies": {
+        "yallist": "^4.0.0"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-xcode/node_modules/minimatch": {
+      "version": "5.1.6",
+      "license": "ISC",
+      "dependencies": {
+        "brace-expansion": "^2.0.1"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-xcode/node_modules/semver": {
+      "version": "7.5.0",
+      "license": "ISC",
+      "dependencies": {
+        "lru-cache": "^6.0.0"
+      },
+      "bin": {
+        "semver": "bin/semver.js"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/appium-xcode/node_modules/which": {
+      "version": "3.0.1",
+      "license": "ISC",
+      "dependencies": {
+        "isexe": "^2.0.0"
+      },
+      "bin": {
+        "node-which": "bin/which.js"
+      },
+      "engines": {
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/appium/node_modules/axios": {
@@ -5842,7 +6970,7 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/appium/node_modules/semver": {
-      "version": "7.3.8",
+      "version": "7.4.0",
       "license": "ISC",
       "peer": true,
       "dependencies": {
@@ -5865,11 +6993,6 @@
       "funding": {
         "url": "https://github.com/sponsors/sindresorhus"
       }
-    },
-    "node_modules/appium-xcuitest-driver/node_modules/appium/node_modules/yallist": {
-      "version": "4.0.0",
-      "license": "ISC",
-      "peer": true
     },
     "node_modules/appium-xcuitest-driver/node_modules/aproba": {
       "version": "2.0.0",
@@ -5990,7 +7113,7 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/are-we-there-yet/node_modules/readable-stream": {
-      "version": "4.3.0",
+      "version": "4.4.0",
       "license": "MIT",
       "dependencies": {
         "abort-controller": "^3.0.0",
@@ -6255,6 +7378,10 @@
         "node": ">=8"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/chownr": {
+      "version": "1.1.4",
+      "license": "ISC"
+    },
     "node_modules/appium-xcuitest-driver/node_modules/cli-cursor": {
       "version": "3.1.0",
       "license": "MIT",
@@ -6267,7 +7394,7 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/cli-spinners": {
-      "version": "2.7.0",
+      "version": "2.9.0",
       "license": "MIT",
       "peer": true,
       "engines": {
@@ -6325,12 +7452,14 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/color": {
-      "version": "3.2.1",
+      "version": "4.2.3",
       "license": "MIT",
-      "peer": true,
       "dependencies": {
-        "color-convert": "^1.9.3",
-        "color-string": "^1.6.0"
+        "color-convert": "^2.0.1",
+        "color-string": "^1.9.0"
+      },
+      "engines": {
+        "node": ">=12.5.0"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/color-convert": {
@@ -6350,7 +7479,6 @@
     "node_modules/appium-xcuitest-driver/node_modules/color-string": {
       "version": "1.9.1",
       "license": "MIT",
-      "peer": true,
       "dependencies": {
         "color-name": "^1.0.0",
         "simple-swizzle": "^0.2.2"
@@ -6363,19 +7491,6 @@
         "color-support": "bin.js"
       }
     },
-    "node_modules/appium-xcuitest-driver/node_modules/color/node_modules/color-convert": {
-      "version": "1.9.3",
-      "license": "MIT",
-      "peer": true,
-      "dependencies": {
-        "color-name": "1.1.3"
-      }
-    },
-    "node_modules/appium-xcuitest-driver/node_modules/color/node_modules/color-name": {
-      "version": "1.1.3",
-      "license": "MIT",
-      "peer": true
-    },
     "node_modules/appium-xcuitest-driver/node_modules/colorspace": {
       "version": "1.1.4",
       "license": "MIT",
@@ -6384,6 +7499,28 @@
         "color": "^3.1.3",
         "text-hex": "1.0.x"
       }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/colorspace/node_modules/color": {
+      "version": "3.2.1",
+      "license": "MIT",
+      "peer": true,
+      "dependencies": {
+        "color-convert": "^1.9.3",
+        "color-string": "^1.6.0"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/colorspace/node_modules/color-convert": {
+      "version": "1.9.3",
+      "license": "MIT",
+      "peer": true,
+      "dependencies": {
+        "color-name": "1.1.3"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/colorspace/node_modules/color-name": {
+      "version": "1.1.3",
+      "license": "MIT",
+      "peer": true
     },
     "node_modules/appium-xcuitest-driver/node_modules/combined-stream": {
       "version": "1.0.8",
@@ -6499,7 +7636,6 @@
     "node_modules/appium-xcuitest-driver/node_modules/cross-spawn": {
       "version": "7.0.3",
       "license": "MIT",
-      "peer": true,
       "dependencies": {
         "path-key": "^3.1.0",
         "shebang-command": "^2.0.0",
@@ -6512,7 +7648,6 @@
     "node_modules/appium-xcuitest-driver/node_modules/cross-spawn/node_modules/which": {
       "version": "2.0.2",
       "license": "ISC",
-      "peer": true,
       "dependencies": {
         "isexe": "^2.0.0"
       },
@@ -6526,6 +7661,26 @@
     "node_modules/appium-xcuitest-driver/node_modules/css-selector-parser": {
       "version": "1.4.1",
       "license": "MIT"
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/decompress-response": {
+      "version": "6.0.0",
+      "license": "MIT",
+      "dependencies": {
+        "mimic-response": "^3.1.0"
+      },
+      "engines": {
+        "node": ">=10"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/sindresorhus"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/deep-extend": {
+      "version": "0.6.0",
+      "license": "MIT",
+      "engines": {
+        "node": ">=4.0.0"
+      }
     },
     "node_modules/appium-xcuitest-driver/node_modules/defaults": {
       "version": "1.0.4",
@@ -6564,6 +7719,13 @@
         "npm": "1.2.8000 || >= 1.4.16"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/detect-libc": {
+      "version": "2.0.1",
+      "license": "Apache-2.0",
+      "engines": {
+        "node": ">=8"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/diff": {
       "version": "5.1.0",
       "license": "BSD-3-Clause",
@@ -6579,8 +7741,16 @@
       "version": "0.1.2",
       "license": "MIT"
     },
+    "node_modules/appium-xcuitest-driver/node_modules/eastasianwidth": {
+      "version": "0.2.0",
+      "license": "MIT"
+    },
     "node_modules/appium-xcuitest-driver/node_modules/ee-first": {
       "version": "1.1.1",
+      "license": "MIT"
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/emoji-regex": {
+      "version": "9.2.2",
       "license": "MIT"
     },
     "node_modules/appium-xcuitest-driver/node_modules/enabled": {
@@ -6600,6 +7770,13 @@
       "license": "MIT",
       "dependencies": {
         "once": "^1.4.0"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/env-paths": {
+      "version": "2.2.1",
+      "license": "MIT",
+      "engines": {
+        "node": ">=6"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/error-ex": {
@@ -6648,6 +7825,13 @@
     },
     "node_modules/appium-xcuitest-driver/node_modules/exif-parser": {
       "version": "0.1.12"
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/expand-template": {
+      "version": "2.0.3",
+      "license": "(MIT OR WTFPL)",
+      "engines": {
+        "node": ">=6"
+      }
     },
     "node_modules/appium-xcuitest-driver/node_modules/express": {
       "version": "4.18.2",
@@ -6929,14 +8113,14 @@
       "license": "MIT"
     },
     "node_modules/appium-xcuitest-driver/node_modules/gauge": {
-      "version": "5.0.0",
+      "version": "5.0.1",
       "license": "ISC",
       "dependencies": {
         "aproba": "^1.0.3 || ^2.0.0",
         "color-support": "^1.1.3",
         "console-control-strings": "^1.1.0",
         "has-unicode": "^2.0.1",
-        "signal-exit": "^3.0.7",
+        "signal-exit": "^4.0.1",
         "string-width": "^4.2.3",
         "strip-ansi": "^6.0.1",
         "wide-align": "^1.1.5"
@@ -6954,6 +8138,16 @@
       "license": "MIT",
       "engines": {
         "node": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/gauge/node_modules/signal-exit": {
+      "version": "4.0.2",
+      "license": "ISC",
+      "engines": {
+        "node": ">=14"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/isaacs"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/gauge/node_modules/string-width": {
@@ -6977,11 +8171,12 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/get-intrinsic": {
-      "version": "1.2.0",
+      "version": "1.2.1",
       "license": "MIT",
       "dependencies": {
         "function-bind": "^1.1.1",
         "has": "^1.0.3",
+        "has-proto": "^1.0.1",
         "has-symbols": "^1.0.3"
       },
       "funding": {
@@ -7005,6 +8200,10 @@
         "image-q": "^4.0.0",
         "omggif": "^1.0.10"
       }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/github-from-package": {
+      "version": "0.0.0",
+      "license": "MIT"
     },
     "node_modules/appium-xcuitest-driver/node_modules/global": {
       "version": "4.4.0",
@@ -7053,6 +8252,16 @@
       "license": "MIT",
       "engines": {
         "node": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/has-proto": {
+      "version": "1.0.1",
+      "license": "MIT",
+      "engines": {
+        "node": ">= 0.4"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/ljharb"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/has-symbols": {
@@ -7138,6 +8347,10 @@
       "version": "2.0.4",
       "license": "ISC"
     },
+    "node_modules/appium-xcuitest-driver/node_modules/ini": {
+      "version": "1.3.8",
+      "license": "ISC"
+    },
     "node_modules/appium-xcuitest-driver/node_modules/ipaddr.js": {
       "version": "1.9.1",
       "license": "MIT",
@@ -7150,7 +8363,7 @@
       "license": "MIT"
     },
     "node_modules/appium-xcuitest-driver/node_modules/is-core-module": {
-      "version": "2.11.0",
+      "version": "2.12.0",
       "license": "MIT",
       "dependencies": {
         "has": "^1.0.3"
@@ -7209,6 +8422,22 @@
       "dependencies": {
         "node-fetch": "^2.6.1",
         "whatwg-fetch": "^3.4.1"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/jackspeak": {
+      "version": "2.2.0",
+      "license": "BlueOak-1.0.0",
+      "dependencies": {
+        "@isaacs/cliui": "^8.0.2"
+      },
+      "engines": {
+        "node": ">=14"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/isaacs"
+      },
+      "optionalDependencies": {
+        "@pkgjs/parseargs": "^0.11.0"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/jimp": {
@@ -7545,6 +8774,16 @@
         "node": ">=6"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/mimic-response": {
+      "version": "3.1.0",
+      "license": "MIT",
+      "engines": {
+        "node": ">=10"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/sindresorhus"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/min-document": {
       "version": "2.19.0",
       "dependencies": {
@@ -7580,6 +8819,10 @@
       "funding": {
         "url": "https://github.com/sponsors/isaacs"
       }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/mkdirp-classic": {
+      "version": "0.5.3",
+      "license": "MIT"
     },
     "node_modules/appium-xcuitest-driver/node_modules/moment": {
       "version": "2.29.4",
@@ -7683,6 +8926,10 @@
         "rimraf": "bin.js"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/napi-build-utils": {
+      "version": "1.0.2",
+      "license": "MIT"
+    },
     "node_modules/appium-xcuitest-driver/node_modules/ncp": {
       "version": "2.0.0",
       "license": "MIT",
@@ -7702,8 +8949,22 @@
       "license": "MIT",
       "peer": true
     },
+    "node_modules/appium-xcuitest-driver/node_modules/node-abi": {
+      "version": "3.40.0",
+      "license": "MIT",
+      "dependencies": {
+        "semver": "^7.3.5"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/node-addon-api": {
+      "version": "6.1.0",
+      "license": "MIT"
+    },
     "node_modules/appium-xcuitest-driver/node_modules/node-fetch": {
-      "version": "2.6.9",
+      "version": "2.6.11",
       "license": "MIT",
       "dependencies": {
         "whatwg-url": "^5.0.0"
@@ -7972,7 +9233,6 @@
     "node_modules/appium-xcuitest-driver/node_modules/path-key": {
       "version": "3.1.1",
       "license": "MIT",
-      "peer": true,
       "engines": {
         "node": ">=8"
       }
@@ -7982,11 +9242,11 @@
       "license": "MIT"
     },
     "node_modules/appium-xcuitest-driver/node_modules/path-scurry": {
-      "version": "1.7.0",
+      "version": "1.9.1",
       "license": "BlueOak-1.0.0",
       "dependencies": {
-        "lru-cache": "^9.0.0",
-        "minipass": "^5.0.0"
+        "lru-cache": "^9.1.1",
+        "minipass": "^5.0.0 || ^6.0.0"
       },
       "engines": {
         "node": ">=16 || 14 >=14.17"
@@ -7996,17 +9256,17 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/path-scurry/node_modules/lru-cache": {
-      "version": "9.0.3",
+      "version": "9.1.1",
       "license": "ISC",
       "engines": {
         "node": "14 || >=16.14"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/path-scurry/node_modules/minipass": {
-      "version": "5.0.0",
+      "version": "6.0.0",
       "license": "ISC",
       "engines": {
-        "node": ">=8"
+        "node": ">=16 || 14 >=14.17"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/path-to-regexp": {
@@ -8103,6 +9363,30 @@
         "lodash": "^4.17.14"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/prebuild-install": {
+      "version": "7.1.1",
+      "license": "MIT",
+      "dependencies": {
+        "detect-libc": "^2.0.0",
+        "expand-template": "^2.0.3",
+        "github-from-package": "0.0.0",
+        "minimist": "^1.2.3",
+        "mkdirp-classic": "^0.5.3",
+        "napi-build-utils": "^1.0.1",
+        "node-abi": "^3.3.0",
+        "pump": "^3.0.0",
+        "rc": "^1.2.7",
+        "simple-get": "^4.0.0",
+        "tar-fs": "^2.0.0",
+        "tunnel-agent": "^0.6.0"
+      },
+      "bin": {
+        "prebuild-install": "bin.js"
+      },
+      "engines": {
+        "node": ">=10"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/process": {
       "version": "0.11.10",
       "license": "MIT",
@@ -8128,6 +9412,14 @@
     "node_modules/appium-xcuitest-driver/node_modules/proxy-from-env": {
       "version": "1.1.0",
       "license": "MIT"
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/pump": {
+      "version": "3.0.0",
+      "license": "MIT",
+      "dependencies": {
+        "end-of-stream": "^1.1.0",
+        "once": "^1.3.1"
+      }
     },
     "node_modules/appium-xcuitest-driver/node_modules/punycode": {
       "version": "2.3.0",
@@ -8168,6 +9460,26 @@
       },
       "engines": {
         "node": ">= 0.8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/rc": {
+      "version": "1.2.8",
+      "license": "(BSD-2-Clause OR MIT OR Apache-2.0)",
+      "dependencies": {
+        "deep-extend": "^0.6.0",
+        "ini": "~1.3.0",
+        "minimist": "^1.2.0",
+        "strip-json-comments": "~2.0.1"
+      },
+      "bin": {
+        "rc": "cli.js"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/rc/node_modules/strip-json-comments": {
+      "version": "2.0.1",
+      "license": "MIT",
+      "engines": {
+        "node": ">=0.10.0"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/read-pkg": {
@@ -8238,7 +9550,7 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/readdir-glob": {
-      "version": "1.1.2",
+      "version": "1.1.3",
       "license": "Apache-2.0",
       "dependencies": {
         "minimatch": "^5.1.0"
@@ -8282,10 +9594,10 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/resolve": {
-      "version": "1.22.1",
+      "version": "1.22.2",
       "license": "MIT",
       "dependencies": {
-        "is-core-module": "^2.9.0",
+        "is-core-module": "^2.11.0",
         "path-parse": "^1.0.7",
         "supports-preserve-symlinks-flag": "^1.0.0"
       },
@@ -8316,10 +9628,10 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/rimraf": {
-      "version": "5.0.0",
+      "version": "5.0.1",
       "license": "ISC",
       "dependencies": {
-        "glob": "^10.0.0"
+        "glob": "^10.2.5"
       },
       "bin": {
         "rimraf": "dist/cjs/src/bin.js"
@@ -8338,14 +9650,32 @@
         "balanced-match": "^1.0.0"
       }
     },
-    "node_modules/appium-xcuitest-driver/node_modules/rimraf/node_modules/glob": {
-      "version": "10.1.0",
+    "node_modules/appium-xcuitest-driver/node_modules/rimraf/node_modules/foreground-child": {
+      "version": "3.1.1",
       "license": "ISC",
       "dependencies": {
-        "fs.realpath": "^1.0.0",
-        "minimatch": "^9.0.0",
-        "minipass": "^5.0.0",
+        "cross-spawn": "^7.0.0",
+        "signal-exit": "^4.0.1"
+      },
+      "engines": {
+        "node": ">=14"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/isaacs"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/rimraf/node_modules/glob": {
+      "version": "10.2.6",
+      "license": "ISC",
+      "dependencies": {
+        "foreground-child": "^3.1.0",
+        "jackspeak": "^2.0.3",
+        "minimatch": "^9.0.1",
+        "minipass": "^5.0.0 || ^6.0.2",
         "path-scurry": "^1.7.0"
+      },
+      "bin": {
+        "glob": "dist/cjs/src/bin.js"
       },
       "engines": {
         "node": ">=16 || 14 >=14.17"
@@ -8355,7 +9685,7 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/rimraf/node_modules/minimatch": {
-      "version": "9.0.0",
+      "version": "9.0.1",
       "license": "ISC",
       "dependencies": {
         "brace-expansion": "^2.0.1"
@@ -8368,10 +9698,20 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/rimraf/node_modules/minipass": {
-      "version": "5.0.0",
+      "version": "6.0.2",
       "license": "ISC",
       "engines": {
-        "node": ">=8"
+        "node": ">=16 || 14 >=14.17"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/rimraf/node_modules/signal-exit": {
+      "version": "4.0.2",
+      "license": "ISC",
+      "engines": {
+        "node": ">=14"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/isaacs"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/safe-buffer": {
@@ -8416,7 +9756,7 @@
       "license": "ISC"
     },
     "node_modules/appium-xcuitest-driver/node_modules/semver": {
-      "version": "7.5.0",
+      "version": "7.5.1",
       "license": "ISC",
       "dependencies": {
         "lru-cache": "^6.0.0"
@@ -8437,10 +9777,6 @@
       "engines": {
         "node": ">=10"
       }
-    },
-    "node_modules/appium-xcuitest-driver/node_modules/semver/node_modules/yallist": {
-      "version": "4.0.0",
-      "license": "ISC"
     },
     "node_modules/appium-xcuitest-driver/node_modules/send": {
       "version": "0.18.0",
@@ -8522,10 +9858,30 @@
       "version": "1.2.0",
       "license": "ISC"
     },
+    "node_modules/appium-xcuitest-driver/node_modules/sharp": {
+      "version": "0.32.1",
+      "hasInstallScript": true,
+      "license": "Apache-2.0",
+      "dependencies": {
+        "color": "^4.2.3",
+        "detect-libc": "^2.0.1",
+        "node-addon-api": "^6.1.0",
+        "prebuild-install": "^7.1.1",
+        "semver": "^7.5.0",
+        "simple-get": "^4.0.1",
+        "tar-fs": "^2.1.1",
+        "tunnel-agent": "^0.6.0"
+      },
+      "engines": {
+        "node": ">=14.15.0"
+      },
+      "funding": {
+        "url": "https://opencollective.com/libvips"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/shebang-command": {
       "version": "2.0.0",
       "license": "MIT",
-      "peer": true,
       "dependencies": {
         "shebang-regex": "^3.0.0"
       },
@@ -8536,7 +9892,6 @@
     "node_modules/appium-xcuitest-driver/node_modules/shebang-regex": {
       "version": "3.0.0",
       "license": "MIT",
-      "peer": true,
       "engines": {
         "node": ">=8"
       }
@@ -8549,7 +9904,7 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/shiki": {
-      "version": "0.14.1",
+      "version": "0.14.2",
       "license": "MIT",
       "peer": true,
       "dependencies": {
@@ -8575,18 +9930,64 @@
       "version": "3.0.7",
       "license": "ISC"
     },
+    "node_modules/appium-xcuitest-driver/node_modules/simple-concat": {
+      "version": "1.0.1",
+      "funding": [
+        {
+          "type": "github",
+          "url": "https://github.com/sponsors/feross"
+        },
+        {
+          "type": "patreon",
+          "url": "https://www.patreon.com/feross"
+        },
+        {
+          "type": "consulting",
+          "url": "https://feross.org/support"
+        }
+      ],
+      "license": "MIT"
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/simple-get": {
+      "version": "4.0.1",
+      "funding": [
+        {
+          "type": "github",
+          "url": "https://github.com/sponsors/feross"
+        },
+        {
+          "type": "patreon",
+          "url": "https://www.patreon.com/feross"
+        },
+        {
+          "type": "consulting",
+          "url": "https://feross.org/support"
+        }
+      ],
+      "license": "MIT",
+      "dependencies": {
+        "decompress-response": "^6.0.0",
+        "once": "^1.3.1",
+        "simple-concat": "^1.0.0"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/simple-swizzle": {
       "version": "0.2.2",
       "license": "MIT",
-      "peer": true,
       "dependencies": {
         "is-arrayish": "^0.3.1"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/simple-swizzle/node_modules/is-arrayish": {
       "version": "0.3.2",
+      "license": "MIT"
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/slugify": {
+      "version": "1.6.6",
       "license": "MIT",
-      "peer": true
+      "engines": {
+        "node": ">=8.0.0"
+      }
     },
     "node_modules/appium-xcuitest-driver/node_modules/source-map": {
       "version": "0.6.1",
@@ -8664,7 +10065,80 @@
         "safe-buffer": "~5.2.0"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/string-width": {
+      "version": "5.1.2",
+      "license": "MIT",
+      "dependencies": {
+        "eastasianwidth": "^0.2.0",
+        "emoji-regex": "^9.2.2",
+        "strip-ansi": "^7.0.1"
+      },
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/sindresorhus"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/string-width-cjs": {
+      "name": "string-width",
+      "version": "4.2.3",
+      "license": "MIT",
+      "dependencies": {
+        "emoji-regex": "^8.0.0",
+        "is-fullwidth-code-point": "^3.0.0",
+        "strip-ansi": "^6.0.1"
+      },
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/string-width-cjs/node_modules/emoji-regex": {
+      "version": "8.0.0",
+      "license": "MIT"
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/string-width-cjs/node_modules/is-fullwidth-code-point": {
+      "version": "3.0.0",
+      "license": "MIT",
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/string-width/node_modules/ansi-regex": {
+      "version": "6.0.1",
+      "license": "MIT",
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/ansi-regex?sponsor=1"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/string-width/node_modules/strip-ansi": {
+      "version": "7.0.1",
+      "license": "MIT",
+      "dependencies": {
+        "ansi-regex": "^6.0.1"
+      },
+      "engines": {
+        "node": ">=12"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/strip-ansi?sponsor=1"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/strip-ansi": {
+      "version": "6.0.1",
+      "license": "MIT",
+      "dependencies": {
+        "ansi-regex": "^5.0.1"
+      },
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/strip-ansi-cjs": {
+      "name": "strip-ansi",
       "version": "6.0.1",
       "license": "MIT",
       "dependencies": {
@@ -8710,6 +10184,16 @@
       },
       "funding": {
         "url": "https://github.com/sponsors/ljharb"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/tar-fs": {
+      "version": "2.1.1",
+      "license": "MIT",
+      "dependencies": {
+        "chownr": "^1.1.1",
+        "mkdirp-classic": "^0.5.2",
+        "pump": "^3.0.0",
+        "tar-stream": "^2.1.4"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/tar-stream": {
@@ -8829,6 +10313,29 @@
       "license": "0BSD",
       "peer": true
     },
+    "node_modules/appium-xcuitest-driver/node_modules/tunnel-agent": {
+      "version": "0.6.0",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "safe-buffer": "^5.0.1"
+      },
+      "engines": {
+        "node": "*"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/type-fest": {
+      "version": "3.10.0",
+      "license": "(MIT OR CC0-1.0)",
+      "engines": {
+        "node": ">=14.16"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/sindresorhus"
+      },
+      "peerDependencies": {
+        "typescript": ">=4.7.0"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/type-is": {
       "version": "1.6.18",
       "license": "MIT",
@@ -8894,7 +10401,7 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/typedoc/node_modules/minimatch": {
-      "version": "7.4.3",
+      "version": "7.4.6",
       "license": "ISC",
       "peer": true,
       "dependencies": {
@@ -8958,7 +10465,7 @@
       "license": "WTFPL"
     },
     "node_modules/appium-xcuitest-driver/node_modules/utif2": {
-      "version": "4.0.1",
+      "version": "4.1.0",
       "license": "MIT",
       "dependencies": {
         "pako": "^1.0.11"
@@ -9133,6 +10640,45 @@
         "url": "https://github.com/chalk/wrap-ansi?sponsor=1"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/wrap-ansi-cjs": {
+      "name": "wrap-ansi",
+      "version": "7.0.0",
+      "license": "MIT",
+      "dependencies": {
+        "ansi-styles": "^4.0.0",
+        "string-width": "^4.1.0",
+        "strip-ansi": "^6.0.0"
+      },
+      "engines": {
+        "node": ">=10"
+      },
+      "funding": {
+        "url": "https://github.com/chalk/wrap-ansi?sponsor=1"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/wrap-ansi-cjs/node_modules/emoji-regex": {
+      "version": "8.0.0",
+      "license": "MIT"
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/wrap-ansi-cjs/node_modules/is-fullwidth-code-point": {
+      "version": "3.0.0",
+      "license": "MIT",
+      "engines": {
+        "node": ">=8"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/wrap-ansi-cjs/node_modules/string-width": {
+      "version": "4.2.3",
+      "license": "MIT",
+      "dependencies": {
+        "emoji-regex": "^8.0.0",
+        "is-fullwidth-code-point": "^3.0.0",
+        "strip-ansi": "^6.0.1"
+      },
+      "engines": {
+        "node": ">=8"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/wrap-ansi/node_modules/emoji-regex": {
       "version": "8.0.0",
       "license": "MIT",
@@ -9236,6 +10782,10 @@
         "node": ">=10"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/yallist": {
+      "version": "4.0.0",
+      "license": "ISC"
+    },
     "node_modules/appium-xcuitest-driver/node_modules/yaml": {
       "version": "2.2.1",
       "license": "ISC",
@@ -9244,55 +10794,12 @@
         "node": ">= 14"
       }
     },
-    "node_modules/appium-xcuitest-driver/node_modules/yargs": {
-      "version": "17.7.1",
-      "license": "MIT",
-      "peer": true,
-      "dependencies": {
-        "cliui": "^8.0.1",
-        "escalade": "^3.1.1",
-        "get-caller-file": "^2.0.5",
-        "require-directory": "^2.1.1",
-        "string-width": "^4.2.3",
-        "y18n": "^5.0.5",
-        "yargs-parser": "^21.1.1"
-      },
-      "engines": {
-        "node": ">=12"
-      }
-    },
     "node_modules/appium-xcuitest-driver/node_modules/yargs-parser": {
       "version": "21.1.1",
       "license": "ISC",
       "peer": true,
       "engines": {
         "node": ">=12"
-      }
-    },
-    "node_modules/appium-xcuitest-driver/node_modules/yargs/node_modules/emoji-regex": {
-      "version": "8.0.0",
-      "license": "MIT",
-      "peer": true
-    },
-    "node_modules/appium-xcuitest-driver/node_modules/yargs/node_modules/is-fullwidth-code-point": {
-      "version": "3.0.0",
-      "license": "MIT",
-      "peer": true,
-      "engines": {
-        "node": ">=8"
-      }
-    },
-    "node_modules/appium-xcuitest-driver/node_modules/yargs/node_modules/string-width": {
-      "version": "4.2.3",
-      "license": "MIT",
-      "peer": true,
-      "dependencies": {
-        "emoji-regex": "^8.0.0",
-        "is-fullwidth-code-point": "^3.0.0",
-        "strip-ansi": "^6.0.1"
-      },
-      "engines": {
-        "node": ">=8"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/yauzl": {
@@ -15426,15 +16933,15 @@
       }
     },
     "appium-xcuitest-driver": {
-      "version": "4.27.0",
+      "version": "4.30.1",
       "requires": {
         "@xmldom/xmldom": "0.8.7",
-        "appium-idb": "1.6.10",
-        "appium-ios-device": "2.5.0",
-        "appium-ios-simulator": "5.0.7",
-        "appium-remote-debugger": "9.1.14",
-        "appium-webdriveragent": "4.15.1",
-        "appium-xcode": "5.1.0",
+        "appium-idb": "1.6.11",
+        "appium-ios-device": "2.5.2",
+        "appium-ios-simulator": "5.0.8",
+        "appium-remote-debugger": "9.1.15",
+        "appium-webdriveragent": "5.3.0",
+        "appium-xcode": "5.1.1",
         "async-lock": "1.4.0",
         "asyncbox": "2.9.4",
         "bluebird": "3.7.2",
@@ -15447,17 +16954,17 @@
         "moment-timezone": "0.5.43",
         "node-simctl": "7.1.15",
         "portscanner": "2.2.0",
-        "semver": "7.5.0",
+        "semver": "7.5.1",
         "source-map-support": "0.5.21",
         "teen_process": "2.0.2",
         "ws": "8.13.0"
       },
       "dependencies": {
         "@appium/base-driver": {
-          "version": "9.3.6",
+          "version": "9.3.7",
           "requires": {
-            "@appium/support": "^3.1.10",
-            "@appium/types": "^0.10.4",
+            "@appium/support": "^3.1.11",
+            "@appium/types": "^0.11.0",
             "@colors/colors": "1.5.0",
             "@types/async-lock": "1.4.0",
             "@types/bluebird": "3.5.38",
@@ -15496,21 +17003,22 @@
           }
         },
         "@appium/base-plugin": {
-          "version": "2.2.6",
+          "version": "2.2.7",
           "peer": true,
           "requires": {
-            "@appium/base-driver": "^9.3.6",
-            "@appium/support": "^3.1.10"
+            "@appium/base-driver": "^9.3.7",
+            "@appium/support": "^3.1.11"
           }
         },
         "@appium/docutils": {
-          "version": "0.3.7",
+          "version": "0.3.13",
           "peer": true,
           "requires": {
-            "@appium/support": "^3.1.11",
+            "@appium/support": "^4.0.1",
             "@appium/tsconfig": "^0.3.0",
-            "@appium/typedoc-plugin-appium": "^0.6.2",
+            "@appium/typedoc-plugin-appium": "^0.6.4",
             "@sliphua/lilconfig-ts-loader": "3.2.2",
+            "@types/which": "3.0.0",
             "chalk": "4.1.2",
             "consola": "2.15.3",
             "diff": "5.1.0",
@@ -15522,19 +17030,122 @@
             "log-symbols": "4.1.0",
             "pkg-dir": "5.0.0",
             "read-pkg": "5.2.0",
-            "semver": "7.4.0",
+            "semver": "7.5.0",
             "source-map-support": "0.5.21",
             "teen_process": "2.0.2",
-            "type-fest": "3.8.0",
+            "type-fest": "3.10.0",
             "typedoc": "0.23.28",
             "typedoc-plugin-markdown": "3.14.0",
             "typedoc-plugin-resolve-crossmodule-references": "0.3.3",
             "typescript": "4.9.5",
-            "yaml": "2.2.1",
-            "yargs": "17.7.1",
+            "yaml": "2.2.2",
+            "yargs": "17.7.2",
             "yargs-parser": "21.1.1"
           },
           "dependencies": {
+            "@appium/support": {
+              "version": "4.0.1",
+              "peer": true,
+              "requires": {
+                "@appium/tsconfig": "^0.3.0",
+                "@appium/types": "^0.11.1",
+                "@colors/colors": "1.5.0",
+                "@types/archiver": "5.3.2",
+                "@types/base64-stream": "1.0.2",
+                "@types/find-root": "1.1.2",
+                "@types/glob": "8.1.0",
+                "@types/jsftp": "2.1.2",
+                "@types/klaw": "3.0.3",
+                "@types/lockfile": "1.0.2",
+                "@types/mv": "2.1.2",
+                "@types/ncp": "2.0.5",
+                "@types/npmlog": "4.1.4",
+                "@types/pluralize": "0.0.29",
+                "@types/semver": "7.3.13",
+                "@types/shell-quote": "1.7.1",
+                "@types/supports-color": "8.1.1",
+                "@types/teen_process": "2.0.0",
+                "@types/uuid": "9.0.1",
+                "@types/which": "3.0.0",
+                "archiver": "5.3.1",
+                "axios": "1.4.0",
+                "base64-stream": "1.0.0",
+                "bluebird": "3.7.2",
+                "bplist-creator": "0.1.1",
+                "bplist-parser": "0.3.2",
+                "form-data": "4.0.0",
+                "get-stream": "6.0.1",
+                "glob": "8.1.0",
+                "jsftp": "2.1.3",
+                "klaw": "4.1.0",
+                "lockfile": "1.0.4",
+                "lodash": "4.17.21",
+                "log-symbols": "4.1.0",
+                "moment": "2.29.4",
+                "mv": "2.1.1",
+                "ncp": "2.0.0",
+                "npmlog": "7.0.1",
+                "opencv-bindings": "4.5.5",
+                "pkg-dir": "5.0.0",
+                "plist": "3.0.6",
+                "pluralize": "8.0.0",
+                "read-pkg": "5.2.0",
+                "resolve-from": "5.0.0",
+                "sanitize-filename": "1.6.3",
+                "semver": "7.5.0",
+                "sharp": "0.32.1",
+                "shell-quote": "1.8.1",
+                "source-map-support": "0.5.21",
+                "supports-color": "8.1.1",
+                "teen_process": "2.0.2",
+                "type-fest": "3.10.0",
+                "uuid": "9.0.0",
+                "which": "3.0.1",
+                "yauzl": "2.10.0"
+              }
+            },
+            "@appium/types": {
+              "version": "0.11.1",
+              "peer": true,
+              "requires": {
+                "@appium/schema": "^0.2.6",
+                "@appium/tsconfig": "^0.3.0",
+                "@types/express": "4.17.17",
+                "@types/npmlog": "4.1.4",
+                "@types/ws": "8.5.4",
+                "type-fest": "3.10.0"
+              }
+            },
+            "@types/which": {
+              "version": "3.0.0",
+              "peer": true
+            },
+            "brace-expansion": {
+              "version": "2.0.1",
+              "peer": true,
+              "requires": {
+                "balanced-match": "^1.0.0"
+              }
+            },
+            "emoji-regex": {
+              "version": "8.0.0",
+              "peer": true
+            },
+            "glob": {
+              "version": "8.1.0",
+              "peer": true,
+              "requires": {
+                "fs.realpath": "^1.0.0",
+                "inflight": "^1.0.4",
+                "inherits": "2",
+                "minimatch": "^5.0.1",
+                "once": "^1.3.0"
+              }
+            },
+            "is-fullwidth-code-point": {
+              "version": "3.0.0",
+              "peer": true
+            },
             "lru-cache": {
               "version": "6.0.0",
               "peer": true,
@@ -15542,20 +17153,52 @@
                 "yallist": "^4.0.0"
               }
             },
+            "minimatch": {
+              "version": "5.1.6",
+              "peer": true,
+              "requires": {
+                "brace-expansion": "^2.0.1"
+              }
+            },
             "semver": {
-              "version": "7.4.0",
+              "version": "7.5.0",
               "peer": true,
               "requires": {
                 "lru-cache": "^6.0.0"
               }
             },
-            "type-fest": {
-              "version": "3.8.0",
+            "string-width": {
+              "version": "4.2.3",
+              "peer": true,
+              "requires": {
+                "emoji-regex": "^8.0.0",
+                "is-fullwidth-code-point": "^3.0.0",
+                "strip-ansi": "^6.0.1"
+              }
+            },
+            "which": {
+              "version": "3.0.1",
+              "peer": true,
+              "requires": {
+                "isexe": "^2.0.0"
+              }
+            },
+            "yaml": {
+              "version": "2.2.2",
               "peer": true
             },
-            "yallist": {
-              "version": "4.0.0",
-              "peer": true
+            "yargs": {
+              "version": "17.7.2",
+              "peer": true,
+              "requires": {
+                "cliui": "^8.0.1",
+                "escalade": "^3.1.1",
+                "get-caller-file": "^2.0.5",
+                "require-directory": "^2.1.1",
+                "string-width": "^4.2.3",
+                "y18n": "^5.0.5",
+                "yargs-parser": "^21.1.1"
+              }
             }
           }
         },
@@ -15565,6 +17208,13 @@
             "@types/json-schema": "7.0.11",
             "json-schema": "0.4.0",
             "source-map-support": "0.5.21"
+          }
+        },
+        "@appium/strongbox": {
+          "version": "0.3.0",
+          "requires": {
+            "env-paths": "2.2.1",
+            "slugify": "1.6.6"
           }
         },
         "@appium/support": {
@@ -15630,17 +17280,6 @@
             "yauzl": "2.10.0"
           },
           "dependencies": {
-            "@appium/types": {
-              "version": "0.11.0",
-              "requires": {
-                "@appium/schema": "^0.2.6",
-                "@appium/tsconfig": "^0.3.0",
-                "@types/express": "4.17.17",
-                "@types/npmlog": "4.1.4",
-                "@types/ws": "8.5.4",
-                "type-fest": "3.8.0"
-              }
-            },
             "axios": {
               "version": "1.3.5",
               "requires": {
@@ -15717,9 +17356,6 @@
             },
             "type-fest": {
               "version": "3.8.0"
-            },
-            "yallist": {
-              "version": "4.0.0"
             }
           }
         },
@@ -15730,23 +17366,17 @@
           }
         },
         "@appium/typedoc-plugin-appium": {
-          "version": "0.6.2",
+          "version": "0.6.4",
           "peer": true,
           "requires": {
             "handlebars": "4.7.7",
             "lodash": "4.17.21",
             "pluralize": "8.0.0",
-            "type-fest": "3.8.0"
-          },
-          "dependencies": {
-            "type-fest": {
-              "version": "3.8.0",
-              "peer": true
-            }
+            "type-fest": "3.10.0"
           }
         },
         "@appium/types": {
-          "version": "0.10.4",
+          "version": "0.11.0",
           "requires": {
             "@appium/schema": "^0.2.6",
             "@appium/tsconfig": "^0.3.0",
@@ -15762,7 +17392,7 @@
           }
         },
         "@babel/code-frame": {
-          "version": "7.18.6",
+          "version": "7.21.4",
           "requires": {
             "@babel/highlight": "^7.18.6"
           }
@@ -15816,7 +17446,7 @@
           }
         },
         "@babel/runtime": {
-          "version": "7.21.0",
+          "version": "7.21.5",
           "requires": {
             "regenerator-runtime": "^0.13.11"
           }
@@ -15833,17 +17463,50 @@
             "kuler": "^2.0.0"
           }
         },
-        "@jimp/bmp": {
-          "version": "0.22.7",
+        "@isaacs/cliui": {
+          "version": "8.0.2",
           "requires": {
-            "@jimp/utils": "^0.22.7",
+            "string-width": "^5.1.2",
+            "string-width-cjs": "npm:string-width@^4.2.0",
+            "strip-ansi": "^7.0.1",
+            "strip-ansi-cjs": "npm:strip-ansi@^6.0.1",
+            "wrap-ansi": "^8.1.0",
+            "wrap-ansi-cjs": "npm:wrap-ansi@^7.0.0"
+          },
+          "dependencies": {
+            "ansi-regex": {
+              "version": "6.0.1"
+            },
+            "ansi-styles": {
+              "version": "6.2.1"
+            },
+            "strip-ansi": {
+              "version": "7.0.1",
+              "requires": {
+                "ansi-regex": "^6.0.1"
+              }
+            },
+            "wrap-ansi": {
+              "version": "8.1.0",
+              "requires": {
+                "ansi-styles": "^6.1.0",
+                "string-width": "^5.0.1",
+                "strip-ansi": "^7.0.1"
+              }
+            }
+          }
+        },
+        "@jimp/bmp": {
+          "version": "0.22.8",
+          "requires": {
+            "@jimp/utils": "^0.22.8",
             "bmp-js": "^0.1.0"
           }
         },
         "@jimp/core": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7",
+            "@jimp/utils": "^0.22.8",
             "any-base": "^1.1.0",
             "buffer": "^5.2.0",
             "exif-parser": "^0.1.12",
@@ -15855,185 +17518,185 @@
           }
         },
         "@jimp/custom": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/core": "^0.22.7"
+            "@jimp/core": "^0.22.8"
           }
         },
         "@jimp/gif": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7",
+            "@jimp/utils": "^0.22.8",
             "gifwrap": "^0.9.2",
             "omggif": "^1.0.9"
           }
         },
         "@jimp/jpeg": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7",
+            "@jimp/utils": "^0.22.8",
             "jpeg-js": "^0.4.4"
           }
         },
         "@jimp/plugin-blit": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-blur": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-circle": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-color": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7",
+            "@jimp/utils": "^0.22.8",
             "tinycolor2": "^1.6.0"
           }
         },
         "@jimp/plugin-contain": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-cover": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-crop": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-displace": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-dither": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-fisheye": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-flip": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-gaussian": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-invert": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-mask": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-normalize": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-print": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7",
+            "@jimp/utils": "^0.22.8",
             "load-bmfont": "^1.4.1"
           }
         },
         "@jimp/plugin-resize": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-rotate": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-scale": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-shadow": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugin-threshold": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7"
+            "@jimp/utils": "^0.22.8"
           }
         },
         "@jimp/plugins": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/plugin-blit": "^0.22.7",
-            "@jimp/plugin-blur": "^0.22.7",
-            "@jimp/plugin-circle": "^0.22.7",
-            "@jimp/plugin-color": "^0.22.7",
-            "@jimp/plugin-contain": "^0.22.7",
-            "@jimp/plugin-cover": "^0.22.7",
-            "@jimp/plugin-crop": "^0.22.7",
-            "@jimp/plugin-displace": "^0.22.7",
-            "@jimp/plugin-dither": "^0.22.7",
-            "@jimp/plugin-fisheye": "^0.22.7",
-            "@jimp/plugin-flip": "^0.22.7",
-            "@jimp/plugin-gaussian": "^0.22.7",
-            "@jimp/plugin-invert": "^0.22.7",
-            "@jimp/plugin-mask": "^0.22.7",
-            "@jimp/plugin-normalize": "^0.22.7",
-            "@jimp/plugin-print": "^0.22.7",
-            "@jimp/plugin-resize": "^0.22.7",
-            "@jimp/plugin-rotate": "^0.22.7",
-            "@jimp/plugin-scale": "^0.22.7",
-            "@jimp/plugin-shadow": "^0.22.7",
-            "@jimp/plugin-threshold": "^0.22.7",
+            "@jimp/plugin-blit": "^0.22.8",
+            "@jimp/plugin-blur": "^0.22.8",
+            "@jimp/plugin-circle": "^0.22.8",
+            "@jimp/plugin-color": "^0.22.8",
+            "@jimp/plugin-contain": "^0.22.8",
+            "@jimp/plugin-cover": "^0.22.8",
+            "@jimp/plugin-crop": "^0.22.8",
+            "@jimp/plugin-displace": "^0.22.8",
+            "@jimp/plugin-dither": "^0.22.8",
+            "@jimp/plugin-fisheye": "^0.22.8",
+            "@jimp/plugin-flip": "^0.22.8",
+            "@jimp/plugin-gaussian": "^0.22.8",
+            "@jimp/plugin-invert": "^0.22.8",
+            "@jimp/plugin-mask": "^0.22.8",
+            "@jimp/plugin-normalize": "^0.22.8",
+            "@jimp/plugin-print": "^0.22.8",
+            "@jimp/plugin-resize": "^0.22.8",
+            "@jimp/plugin-rotate": "^0.22.8",
+            "@jimp/plugin-scale": "^0.22.8",
+            "@jimp/plugin-shadow": "^0.22.8",
+            "@jimp/plugin-threshold": "^0.22.8",
             "timm": "^1.6.1"
           }
         },
         "@jimp/png": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/utils": "^0.22.7",
+            "@jimp/utils": "^0.22.8",
             "pngjs": "^6.0.0"
           },
           "dependencies": {
@@ -16043,27 +17706,31 @@
           }
         },
         "@jimp/tiff": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
             "utif2": "^4.0.1"
           }
         },
         "@jimp/types": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
-            "@jimp/bmp": "^0.22.7",
-            "@jimp/gif": "^0.22.7",
-            "@jimp/jpeg": "^0.22.7",
-            "@jimp/png": "^0.22.7",
-            "@jimp/tiff": "^0.22.7",
+            "@jimp/bmp": "^0.22.8",
+            "@jimp/gif": "^0.22.8",
+            "@jimp/jpeg": "^0.22.8",
+            "@jimp/png": "^0.22.8",
+            "@jimp/tiff": "^0.22.8",
             "timm": "^1.6.1"
           }
         },
         "@jimp/utils": {
-          "version": "0.22.7",
+          "version": "0.22.8",
           "requires": {
             "regenerator-runtime": "^0.13.3"
           }
+        },
+        "@pkgjs/parseargs": {
+          "version": "0.11.0",
+          "optional": true
         },
         "@sidvind/better-ajv-errors": {
           "version": "2.1.0",
@@ -16152,11 +17819,12 @@
           }
         },
         "@types/express-serve-static-core": {
-          "version": "4.17.33",
+          "version": "4.17.35",
           "requires": {
             "@types/node": "*",
             "@types/qs": "*",
-            "@types/range-parser": "*"
+            "@types/range-parser": "*",
+            "@types/send": "*"
           }
         },
         "@types/fancy-log": {
@@ -16201,7 +17869,7 @@
           }
         },
         "@types/mime": {
-          "version": "3.0.1"
+          "version": "1.3.2"
         },
         "@types/minimatch": {
           "version": "5.1.2"
@@ -16216,7 +17884,7 @@
           }
         },
         "@types/node": {
-          "version": "18.16.7"
+          "version": "18.16.9"
         },
         "@types/normalize-package-data": {
           "version": "2.4.1"
@@ -16254,6 +17922,13 @@
         },
         "@types/semver": {
           "version": "7.3.13"
+        },
+        "@types/send": {
+          "version": "0.17.1",
+          "requires": {
+            "@types/mime": "^1",
+            "@types/node": "*"
+          }
         },
         "@types/serve-favicon": {
           "version": "2.5.3",
@@ -16347,15 +18022,15 @@
           "version": "1.1.0"
         },
         "appium": {
-          "version": "2.0.0-beta.62",
+          "version": "2.0.0-beta.66",
           "peer": true,
           "requires": {
-            "@appium/base-driver": "^9.3.6",
-            "@appium/base-plugin": "^2.2.6",
-            "@appium/docutils": "^0.3.5",
+            "@appium/base-driver": "^9.3.7",
+            "@appium/base-plugin": "^2.2.7",
+            "@appium/docutils": "^0.3.9",
             "@appium/schema": "^0.2.6",
-            "@appium/support": "^3.1.10",
-            "@appium/types": "^0.10.4",
+            "@appium/support": "^3.1.11",
+            "@appium/types": "^0.11.0",
             "@sidvind/better-ajv-errors": "2.1.0",
             "@types/argparse": "2.0.10",
             "@types/bluebird": "3.5.38",
@@ -16379,7 +18054,7 @@
             "ora": "5.4.1",
             "package-changed": "3.0.0",
             "resolve-from": "5.0.0",
-            "semver": "7.3.8",
+            "semver": "7.4.0",
             "source-map-support": "0.5.21",
             "teen_process": "2.0.2",
             "type-fest": "3.8.0",
@@ -16430,7 +18105,7 @@
               }
             },
             "semver": {
-              "version": "7.3.8",
+              "version": "7.4.0",
               "peer": true,
               "requires": {
                 "lru-cache": "^6.0.0"
@@ -16439,74 +18114,95 @@
             "type-fest": {
               "version": "3.8.0",
               "peer": true
-            },
-            "yallist": {
-              "version": "4.0.0",
-              "peer": true
             }
           }
         },
         "appium-idb": {
-          "version": "1.6.10",
+          "version": "1.6.11",
           "requires": {
-            "@appium/support": "^3.0.0",
+            "@appium/support": "^4.0.0",
             "@babel/runtime": "^7.0.0",
             "asyncbox": "^2.5.2",
             "bluebird": "^3.1.1",
             "lodash": "^4.0.0",
             "source-map-support": "^0.x",
             "teen_process": "^2.0.1"
-          }
-        },
-        "appium-ios-device": {
-          "version": "2.5.0",
-          "requires": {
-            "@appium/support": "^3.0.0",
-            "@babel/runtime": "^7.0.0",
-            "asyncbox": "^2.9.2",
-            "bluebird": "^3.1.1",
-            "bplist-creator": "^0.x",
-            "bplist-parser": "^0.x",
-            "lodash": "^4.17.15",
-            "semver": "^7.0.0",
-            "source-map-support": "^0.x",
-            "uuid": "^9.0.0"
-          }
-        },
-        "appium-ios-simulator": {
-          "version": "5.0.7",
-          "requires": {
-            "@appium/support": "^3.0.0",
-            "@babel/runtime": "^7.0.0",
-            "@xmldom/xmldom": "^0.x",
-            "appium-xcode": "^5.0.0",
-            "async-lock": "^1.0.0",
-            "asyncbox": "^2.3.1",
-            "bluebird": "^3.5.1",
-            "lodash": "^4.2.1",
-            "node-simctl": "^7.1.0",
-            "semver": "^7.0.0",
-            "source-map-support": "^0.x",
-            "teen_process": "^2.0.0"
-          }
-        },
-        "appium-remote-debugger": {
-          "version": "9.1.14",
-          "requires": {
-            "@appium/base-driver": "^9.0.0",
-            "@appium/support": "^3.0.0",
-            "@babel/runtime": "^7.0.0",
-            "appium-ios-device": "^2.0.0",
-            "async-lock": "^1.2.2",
-            "asyncbox": "^2.6.0",
-            "bluebird": "^3.4.7",
-            "fancy-log": "^2.0.0",
-            "glob": "^8.0.3",
-            "lodash": "^4.17.11",
-            "source-map-support": "^0.x",
-            "teen_process": "^2.0.0"
           },
           "dependencies": {
+            "@appium/support": {
+              "version": "4.0.1",
+              "requires": {
+                "@appium/tsconfig": "^0.3.0",
+                "@appium/types": "^0.11.1",
+                "@colors/colors": "1.5.0",
+                "@types/archiver": "5.3.2",
+                "@types/base64-stream": "1.0.2",
+                "@types/find-root": "1.1.2",
+                "@types/glob": "8.1.0",
+                "@types/jsftp": "2.1.2",
+                "@types/klaw": "3.0.3",
+                "@types/lockfile": "1.0.2",
+                "@types/mv": "2.1.2",
+                "@types/ncp": "2.0.5",
+                "@types/npmlog": "4.1.4",
+                "@types/pluralize": "0.0.29",
+                "@types/semver": "7.3.13",
+                "@types/shell-quote": "1.7.1",
+                "@types/supports-color": "8.1.1",
+                "@types/teen_process": "2.0.0",
+                "@types/uuid": "9.0.1",
+                "@types/which": "3.0.0",
+                "archiver": "5.3.1",
+                "axios": "1.4.0",
+                "base64-stream": "1.0.0",
+                "bluebird": "3.7.2",
+                "bplist-creator": "0.1.1",
+                "bplist-parser": "0.3.2",
+                "form-data": "4.0.0",
+                "get-stream": "6.0.1",
+                "glob": "8.1.0",
+                "jsftp": "2.1.3",
+                "klaw": "4.1.0",
+                "lockfile": "1.0.4",
+                "lodash": "4.17.21",
+                "log-symbols": "4.1.0",
+                "moment": "2.29.4",
+                "mv": "2.1.1",
+                "ncp": "2.0.0",
+                "npmlog": "7.0.1",
+                "opencv-bindings": "4.5.5",
+                "pkg-dir": "5.0.0",
+                "plist": "3.0.6",
+                "pluralize": "8.0.0",
+                "read-pkg": "5.2.0",
+                "resolve-from": "5.0.0",
+                "sanitize-filename": "1.6.3",
+                "semver": "7.5.0",
+                "sharp": "0.32.1",
+                "shell-quote": "1.8.1",
+                "source-map-support": "0.5.21",
+                "supports-color": "8.1.1",
+                "teen_process": "2.0.2",
+                "type-fest": "3.10.0",
+                "uuid": "9.0.0",
+                "which": "3.0.1",
+                "yauzl": "2.10.0"
+              }
+            },
+            "@appium/types": {
+              "version": "0.11.1",
+              "requires": {
+                "@appium/schema": "^0.2.6",
+                "@appium/tsconfig": "^0.3.0",
+                "@types/express": "4.17.17",
+                "@types/npmlog": "4.1.4",
+                "@types/ws": "8.5.4",
+                "type-fest": "3.10.0"
+              }
+            },
+            "@types/which": {
+              "version": "3.0.0"
+            },
             "brace-expansion": {
               "version": "2.0.1",
               "requires": {
@@ -16523,19 +18219,431 @@
                 "once": "^1.3.0"
               }
             },
+            "lru-cache": {
+              "version": "6.0.0",
+              "requires": {
+                "yallist": "^4.0.0"
+              }
+            },
             "minimatch": {
               "version": "5.1.6",
               "requires": {
                 "brace-expansion": "^2.0.1"
               }
+            },
+            "semver": {
+              "version": "7.5.0",
+              "requires": {
+                "lru-cache": "^6.0.0"
+              }
+            },
+            "which": {
+              "version": "3.0.1",
+              "requires": {
+                "isexe": "^2.0.0"
+              }
+            }
+          }
+        },
+        "appium-ios-device": {
+          "version": "2.5.2",
+          "requires": {
+            "@appium/support": "^4.0.0",
+            "@babel/runtime": "^7.0.0",
+            "asyncbox": "^2.9.2",
+            "bluebird": "^3.1.1",
+            "bplist-creator": "^0.x",
+            "bplist-parser": "^0.x",
+            "lodash": "^4.17.15",
+            "semver": "^7.0.0",
+            "source-map-support": "^0.x",
+            "uuid": "^9.0.0"
+          },
+          "dependencies": {
+            "@appium/support": {
+              "version": "4.0.0",
+              "requires": {
+                "@appium/tsconfig": "^0.3.0",
+                "@appium/types": "^0.11.1",
+                "@colors/colors": "1.5.0",
+                "@types/archiver": "5.3.2",
+                "@types/base64-stream": "1.0.2",
+                "@types/find-root": "1.1.2",
+                "@types/glob": "8.1.0",
+                "@types/jsftp": "2.1.2",
+                "@types/klaw": "3.0.3",
+                "@types/lockfile": "1.0.2",
+                "@types/mv": "2.1.2",
+                "@types/ncp": "2.0.5",
+                "@types/npmlog": "4.1.4",
+                "@types/pluralize": "0.0.29",
+                "@types/semver": "7.3.13",
+                "@types/shell-quote": "1.7.1",
+                "@types/supports-color": "8.1.1",
+                "@types/teen_process": "2.0.0",
+                "@types/uuid": "9.0.1",
+                "archiver": "5.3.1",
+                "axios": "1.4.0",
+                "base64-stream": "1.0.0",
+                "bluebird": "3.7.2",
+                "bplist-creator": "0.1.1",
+                "bplist-parser": "0.3.2",
+                "form-data": "4.0.0",
+                "get-stream": "6.0.1",
+                "glob": "8.1.0",
+                "jsftp": "2.1.3",
+                "klaw": "4.1.0",
+                "lockfile": "1.0.4",
+                "lodash": "4.17.21",
+                "log-symbols": "4.1.0",
+                "moment": "2.29.4",
+                "mv": "2.1.1",
+                "ncp": "2.0.0",
+                "npmlog": "7.0.1",
+                "opencv-bindings": "4.5.5",
+                "pkg-dir": "5.0.0",
+                "plist": "3.0.6",
+                "pluralize": "8.0.0",
+                "read-pkg": "5.2.0",
+                "resolve-from": "5.0.0",
+                "sanitize-filename": "1.6.3",
+                "semver": "7.5.0",
+                "sharp": "0.32.1",
+                "shell-quote": "1.8.1",
+                "source-map-support": "0.5.21",
+                "supports-color": "8.1.1",
+                "teen_process": "2.0.2",
+                "type-fest": "3.10.0",
+                "uuid": "9.0.0",
+                "which": "3.0.1",
+                "yauzl": "2.10.0"
+              }
+            },
+            "@appium/types": {
+              "version": "0.11.1",
+              "requires": {
+                "@appium/schema": "^0.2.6",
+                "@appium/tsconfig": "^0.3.0",
+                "@types/express": "4.17.17",
+                "@types/npmlog": "4.1.4",
+                "@types/ws": "8.5.4",
+                "type-fest": "3.10.0"
+              }
+            },
+            "brace-expansion": {
+              "version": "2.0.1",
+              "requires": {
+                "balanced-match": "^1.0.0"
+              }
+            },
+            "glob": {
+              "version": "8.1.0",
+              "requires": {
+                "fs.realpath": "^1.0.0",
+                "inflight": "^1.0.4",
+                "inherits": "2",
+                "minimatch": "^5.0.1",
+                "once": "^1.3.0"
+              }
+            },
+            "lru-cache": {
+              "version": "6.0.0",
+              "requires": {
+                "yallist": "^4.0.0"
+              }
+            },
+            "minimatch": {
+              "version": "5.1.6",
+              "requires": {
+                "brace-expansion": "^2.0.1"
+              }
+            },
+            "semver": {
+              "version": "7.5.0",
+              "requires": {
+                "lru-cache": "^6.0.0"
+              }
+            },
+            "which": {
+              "version": "3.0.1",
+              "requires": {
+                "isexe": "^2.0.0"
+              }
+            }
+          }
+        },
+        "appium-ios-simulator": {
+          "version": "5.0.8",
+          "requires": {
+            "@appium/support": "^4.0.0",
+            "@babel/runtime": "^7.0.0",
+            "@xmldom/xmldom": "^0.x",
+            "appium-xcode": "^5.0.0",
+            "async-lock": "^1.0.0",
+            "asyncbox": "^2.3.1",
+            "bluebird": "^3.5.1",
+            "lodash": "^4.2.1",
+            "node-simctl": "^7.1.0",
+            "semver": "^7.0.0",
+            "source-map-support": "^0.x",
+            "teen_process": "^2.0.0"
+          },
+          "dependencies": {
+            "@appium/support": {
+              "version": "4.0.1",
+              "requires": {
+                "@appium/tsconfig": "^0.3.0",
+                "@appium/types": "^0.11.1",
+                "@colors/colors": "1.5.0",
+                "@types/archiver": "5.3.2",
+                "@types/base64-stream": "1.0.2",
+                "@types/find-root": "1.1.2",
+                "@types/glob": "8.1.0",
+                "@types/jsftp": "2.1.2",
+                "@types/klaw": "3.0.3",
+                "@types/lockfile": "1.0.2",
+                "@types/mv": "2.1.2",
+                "@types/ncp": "2.0.5",
+                "@types/npmlog": "4.1.4",
+                "@types/pluralize": "0.0.29",
+                "@types/semver": "7.3.13",
+                "@types/shell-quote": "1.7.1",
+                "@types/supports-color": "8.1.1",
+                "@types/teen_process": "2.0.0",
+                "@types/uuid": "9.0.1",
+                "@types/which": "3.0.0",
+                "archiver": "5.3.1",
+                "axios": "1.4.0",
+                "base64-stream": "1.0.0",
+                "bluebird": "3.7.2",
+                "bplist-creator": "0.1.1",
+                "bplist-parser": "0.3.2",
+                "form-data": "4.0.0",
+                "get-stream": "6.0.1",
+                "glob": "8.1.0",
+                "jsftp": "2.1.3",
+                "klaw": "4.1.0",
+                "lockfile": "1.0.4",
+                "lodash": "4.17.21",
+                "log-symbols": "4.1.0",
+                "moment": "2.29.4",
+                "mv": "2.1.1",
+                "ncp": "2.0.0",
+                "npmlog": "7.0.1",
+                "opencv-bindings": "4.5.5",
+                "pkg-dir": "5.0.0",
+                "plist": "3.0.6",
+                "pluralize": "8.0.0",
+                "read-pkg": "5.2.0",
+                "resolve-from": "5.0.0",
+                "sanitize-filename": "1.6.3",
+                "semver": "7.5.0",
+                "sharp": "0.32.1",
+                "shell-quote": "1.8.1",
+                "source-map-support": "0.5.21",
+                "supports-color": "8.1.1",
+                "teen_process": "2.0.2",
+                "type-fest": "3.10.0",
+                "uuid": "9.0.0",
+                "which": "3.0.1",
+                "yauzl": "2.10.0"
+              }
+            },
+            "@appium/types": {
+              "version": "0.11.1",
+              "requires": {
+                "@appium/schema": "^0.2.6",
+                "@appium/tsconfig": "^0.3.0",
+                "@types/express": "4.17.17",
+                "@types/npmlog": "4.1.4",
+                "@types/ws": "8.5.4",
+                "type-fest": "3.10.0"
+              }
+            },
+            "@types/which": {
+              "version": "3.0.0"
+            },
+            "brace-expansion": {
+              "version": "2.0.1",
+              "requires": {
+                "balanced-match": "^1.0.0"
+              }
+            },
+            "glob": {
+              "version": "8.1.0",
+              "requires": {
+                "fs.realpath": "^1.0.0",
+                "inflight": "^1.0.4",
+                "inherits": "2",
+                "minimatch": "^5.0.1",
+                "once": "^1.3.0"
+              }
+            },
+            "lru-cache": {
+              "version": "6.0.0",
+              "requires": {
+                "yallist": "^4.0.0"
+              }
+            },
+            "minimatch": {
+              "version": "5.1.6",
+              "requires": {
+                "brace-expansion": "^2.0.1"
+              }
+            },
+            "semver": {
+              "version": "7.5.0",
+              "requires": {
+                "lru-cache": "^6.0.0"
+              }
+            },
+            "which": {
+              "version": "3.0.1",
+              "requires": {
+                "isexe": "^2.0.0"
+              }
+            }
+          }
+        },
+        "appium-remote-debugger": {
+          "version": "9.1.15",
+          "requires": {
+            "@appium/base-driver": "^9.0.0",
+            "@appium/support": "^4.0.0",
+            "@babel/runtime": "^7.0.0",
+            "appium-ios-device": "^2.0.0",
+            "async-lock": "^1.2.2",
+            "asyncbox": "^2.6.0",
+            "bluebird": "^3.4.7",
+            "fancy-log": "^2.0.0",
+            "glob": "^8.0.3",
+            "lodash": "^4.17.11",
+            "source-map-support": "^0.x",
+            "teen_process": "^2.0.0"
+          },
+          "dependencies": {
+            "@appium/support": {
+              "version": "4.0.1",
+              "requires": {
+                "@appium/tsconfig": "^0.3.0",
+                "@appium/types": "^0.11.1",
+                "@colors/colors": "1.5.0",
+                "@types/archiver": "5.3.2",
+                "@types/base64-stream": "1.0.2",
+                "@types/find-root": "1.1.2",
+                "@types/glob": "8.1.0",
+                "@types/jsftp": "2.1.2",
+                "@types/klaw": "3.0.3",
+                "@types/lockfile": "1.0.2",
+                "@types/mv": "2.1.2",
+                "@types/ncp": "2.0.5",
+                "@types/npmlog": "4.1.4",
+                "@types/pluralize": "0.0.29",
+                "@types/semver": "7.3.13",
+                "@types/shell-quote": "1.7.1",
+                "@types/supports-color": "8.1.1",
+                "@types/teen_process": "2.0.0",
+                "@types/uuid": "9.0.1",
+                "@types/which": "3.0.0",
+                "archiver": "5.3.1",
+                "axios": "1.4.0",
+                "base64-stream": "1.0.0",
+                "bluebird": "3.7.2",
+                "bplist-creator": "0.1.1",
+                "bplist-parser": "0.3.2",
+                "form-data": "4.0.0",
+                "get-stream": "6.0.1",
+                "glob": "8.1.0",
+                "jsftp": "2.1.3",
+                "klaw": "4.1.0",
+                "lockfile": "1.0.4",
+                "lodash": "4.17.21",
+                "log-symbols": "4.1.0",
+                "moment": "2.29.4",
+                "mv": "2.1.1",
+                "ncp": "2.0.0",
+                "npmlog": "7.0.1",
+                "opencv-bindings": "4.5.5",
+                "pkg-dir": "5.0.0",
+                "plist": "3.0.6",
+                "pluralize": "8.0.0",
+                "read-pkg": "5.2.0",
+                "resolve-from": "5.0.0",
+                "sanitize-filename": "1.6.3",
+                "semver": "7.5.0",
+                "sharp": "0.32.1",
+                "shell-quote": "1.8.1",
+                "source-map-support": "0.5.21",
+                "supports-color": "8.1.1",
+                "teen_process": "2.0.2",
+                "type-fest": "3.10.0",
+                "uuid": "9.0.0",
+                "which": "3.0.1",
+                "yauzl": "2.10.0"
+              }
+            },
+            "@appium/types": {
+              "version": "0.11.1",
+              "requires": {
+                "@appium/schema": "^0.2.6",
+                "@appium/tsconfig": "^0.3.0",
+                "@types/express": "4.17.17",
+                "@types/npmlog": "4.1.4",
+                "@types/ws": "8.5.4",
+                "type-fest": "3.10.0"
+              }
+            },
+            "@types/which": {
+              "version": "3.0.0"
+            },
+            "brace-expansion": {
+              "version": "2.0.1",
+              "requires": {
+                "balanced-match": "^1.0.0"
+              }
+            },
+            "glob": {
+              "version": "8.1.0",
+              "requires": {
+                "fs.realpath": "^1.0.0",
+                "inflight": "^1.0.4",
+                "inherits": "2",
+                "minimatch": "^5.0.1",
+                "once": "^1.3.0"
+              }
+            },
+            "lru-cache": {
+              "version": "6.0.0",
+              "requires": {
+                "yallist": "^4.0.0"
+              }
+            },
+            "minimatch": {
+              "version": "5.1.6",
+              "requires": {
+                "brace-expansion": "^2.0.1"
+              }
+            },
+            "semver": {
+              "version": "7.5.0",
+              "requires": {
+                "lru-cache": "^6.0.0"
+              }
+            },
+            "which": {
+              "version": "3.0.1",
+              "requires": {
+                "isexe": "^2.0.0"
+              }
             }
           }
         },
         "appium-webdriveragent": {
-          "version": "4.15.1",
+          "version": "5.3.0",
           "requires": {
             "@appium/base-driver": "^9.0.0",
-            "@appium/support": "^3.0.0",
+            "@appium/strongbox": "^0.x",
+            "@appium/support": "^4.0.0",
             "@babel/runtime": "^7.0.0",
             "appium-ios-device": "^2.5.0",
             "appium-ios-simulator": "^5.0.1",
@@ -16547,12 +18655,128 @@
             "node-simctl": "^7.0.1",
             "source-map-support": "^0.x",
             "teen_process": "^2.0.0"
+          },
+          "dependencies": {
+            "@appium/support": {
+              "version": "4.0.1",
+              "requires": {
+                "@appium/tsconfig": "^0.3.0",
+                "@appium/types": "^0.11.1",
+                "@colors/colors": "1.5.0",
+                "@types/archiver": "5.3.2",
+                "@types/base64-stream": "1.0.2",
+                "@types/find-root": "1.1.2",
+                "@types/glob": "8.1.0",
+                "@types/jsftp": "2.1.2",
+                "@types/klaw": "3.0.3",
+                "@types/lockfile": "1.0.2",
+                "@types/mv": "2.1.2",
+                "@types/ncp": "2.0.5",
+                "@types/npmlog": "4.1.4",
+                "@types/pluralize": "0.0.29",
+                "@types/semver": "7.3.13",
+                "@types/shell-quote": "1.7.1",
+                "@types/supports-color": "8.1.1",
+                "@types/teen_process": "2.0.0",
+                "@types/uuid": "9.0.1",
+                "@types/which": "3.0.0",
+                "archiver": "5.3.1",
+                "axios": "1.4.0",
+                "base64-stream": "1.0.0",
+                "bluebird": "3.7.2",
+                "bplist-creator": "0.1.1",
+                "bplist-parser": "0.3.2",
+                "form-data": "4.0.0",
+                "get-stream": "6.0.1",
+                "glob": "8.1.0",
+                "jsftp": "2.1.3",
+                "klaw": "4.1.0",
+                "lockfile": "1.0.4",
+                "lodash": "4.17.21",
+                "log-symbols": "4.1.0",
+                "moment": "2.29.4",
+                "mv": "2.1.1",
+                "ncp": "2.0.0",
+                "npmlog": "7.0.1",
+                "opencv-bindings": "4.5.5",
+                "pkg-dir": "5.0.0",
+                "plist": "3.0.6",
+                "pluralize": "8.0.0",
+                "read-pkg": "5.2.0",
+                "resolve-from": "5.0.0",
+                "sanitize-filename": "1.6.3",
+                "semver": "7.5.0",
+                "sharp": "0.32.1",
+                "shell-quote": "1.8.1",
+                "source-map-support": "0.5.21",
+                "supports-color": "8.1.1",
+                "teen_process": "2.0.2",
+                "type-fest": "3.10.0",
+                "uuid": "9.0.0",
+                "which": "3.0.1",
+                "yauzl": "2.10.0"
+              }
+            },
+            "@appium/types": {
+              "version": "0.11.1",
+              "requires": {
+                "@appium/schema": "^0.2.6",
+                "@appium/tsconfig": "^0.3.0",
+                "@types/express": "4.17.17",
+                "@types/npmlog": "4.1.4",
+                "@types/ws": "8.5.4",
+                "type-fest": "3.10.0"
+              }
+            },
+            "@types/which": {
+              "version": "3.0.0"
+            },
+            "brace-expansion": {
+              "version": "2.0.1",
+              "requires": {
+                "balanced-match": "^1.0.0"
+              }
+            },
+            "glob": {
+              "version": "8.1.0",
+              "requires": {
+                "fs.realpath": "^1.0.0",
+                "inflight": "^1.0.4",
+                "inherits": "2",
+                "minimatch": "^5.0.1",
+                "once": "^1.3.0"
+              }
+            },
+            "lru-cache": {
+              "version": "6.0.0",
+              "requires": {
+                "yallist": "^4.0.0"
+              }
+            },
+            "minimatch": {
+              "version": "5.1.6",
+              "requires": {
+                "brace-expansion": "^2.0.1"
+              }
+            },
+            "semver": {
+              "version": "7.5.0",
+              "requires": {
+                "lru-cache": "^6.0.0"
+              }
+            },
+            "which": {
+              "version": "3.0.1",
+              "requires": {
+                "isexe": "^2.0.0"
+              }
+            }
           }
         },
         "appium-xcode": {
-          "version": "5.1.0",
+          "version": "5.1.1",
           "requires": {
-            "@appium/support": "^3.0.0",
+            "@appium/support": "^4.0.0",
             "@babel/runtime": "^7.0.0",
             "@types/lodash": "^4.14.192",
             "@types/teen_process": "^2.0.0",
@@ -16562,6 +18786,122 @@
             "semver": "^7.0.0",
             "source-map-support": "^0.x",
             "teen_process": "^2.0.0"
+          },
+          "dependencies": {
+            "@appium/support": {
+              "version": "4.0.1",
+              "requires": {
+                "@appium/tsconfig": "^0.3.0",
+                "@appium/types": "^0.11.1",
+                "@colors/colors": "1.5.0",
+                "@types/archiver": "5.3.2",
+                "@types/base64-stream": "1.0.2",
+                "@types/find-root": "1.1.2",
+                "@types/glob": "8.1.0",
+                "@types/jsftp": "2.1.2",
+                "@types/klaw": "3.0.3",
+                "@types/lockfile": "1.0.2",
+                "@types/mv": "2.1.2",
+                "@types/ncp": "2.0.5",
+                "@types/npmlog": "4.1.4",
+                "@types/pluralize": "0.0.29",
+                "@types/semver": "7.3.13",
+                "@types/shell-quote": "1.7.1",
+                "@types/supports-color": "8.1.1",
+                "@types/teen_process": "2.0.0",
+                "@types/uuid": "9.0.1",
+                "@types/which": "3.0.0",
+                "archiver": "5.3.1",
+                "axios": "1.4.0",
+                "base64-stream": "1.0.0",
+                "bluebird": "3.7.2",
+                "bplist-creator": "0.1.1",
+                "bplist-parser": "0.3.2",
+                "form-data": "4.0.0",
+                "get-stream": "6.0.1",
+                "glob": "8.1.0",
+                "jsftp": "2.1.3",
+                "klaw": "4.1.0",
+                "lockfile": "1.0.4",
+                "lodash": "4.17.21",
+                "log-symbols": "4.1.0",
+                "moment": "2.29.4",
+                "mv": "2.1.1",
+                "ncp": "2.0.0",
+                "npmlog": "7.0.1",
+                "opencv-bindings": "4.5.5",
+                "pkg-dir": "5.0.0",
+                "plist": "3.0.6",
+                "pluralize": "8.0.0",
+                "read-pkg": "5.2.0",
+                "resolve-from": "5.0.0",
+                "sanitize-filename": "1.6.3",
+                "semver": "7.5.0",
+                "sharp": "0.32.1",
+                "shell-quote": "1.8.1",
+                "source-map-support": "0.5.21",
+                "supports-color": "8.1.1",
+                "teen_process": "2.0.2",
+                "type-fest": "3.10.0",
+                "uuid": "9.0.0",
+                "which": "3.0.1",
+                "yauzl": "2.10.0"
+              }
+            },
+            "@appium/types": {
+              "version": "0.11.1",
+              "requires": {
+                "@appium/schema": "^0.2.6",
+                "@appium/tsconfig": "^0.3.0",
+                "@types/express": "4.17.17",
+                "@types/npmlog": "4.1.4",
+                "@types/ws": "8.5.4",
+                "type-fest": "3.10.0"
+              }
+            },
+            "@types/which": {
+              "version": "3.0.0"
+            },
+            "brace-expansion": {
+              "version": "2.0.1",
+              "requires": {
+                "balanced-match": "^1.0.0"
+              }
+            },
+            "glob": {
+              "version": "8.1.0",
+              "requires": {
+                "fs.realpath": "^1.0.0",
+                "inflight": "^1.0.4",
+                "inherits": "2",
+                "minimatch": "^5.0.1",
+                "once": "^1.3.0"
+              }
+            },
+            "lru-cache": {
+              "version": "6.0.0",
+              "requires": {
+                "yallist": "^4.0.0"
+              }
+            },
+            "minimatch": {
+              "version": "5.1.6",
+              "requires": {
+                "brace-expansion": "^2.0.1"
+              }
+            },
+            "semver": {
+              "version": "7.5.0",
+              "requires": {
+                "lru-cache": "^6.0.0"
+              }
+            },
+            "which": {
+              "version": "3.0.1",
+              "requires": {
+                "isexe": "^2.0.0"
+              }
+            }
           }
         },
         "aproba": {
@@ -16646,7 +18986,7 @@
               }
             },
             "readable-stream": {
-              "version": "4.3.0",
+              "version": "4.4.0",
               "requires": {
                 "abort-controller": "^3.0.0",
                 "buffer": "^6.0.3",
@@ -16819,6 +19159,9 @@
             }
           }
         },
+        "chownr": {
+          "version": "1.1.4"
+        },
         "cli-cursor": {
           "version": "3.1.0",
           "peer": true,
@@ -16827,7 +19170,7 @@
           }
         },
         "cli-spinners": {
-          "version": "2.7.0",
+          "version": "2.9.0",
           "peer": true
         },
         "cliui": {
@@ -16863,24 +19206,10 @@
           "peer": true
         },
         "color": {
-          "version": "3.2.1",
-          "peer": true,
+          "version": "4.2.3",
           "requires": {
-            "color-convert": "^1.9.3",
-            "color-string": "^1.6.0"
-          },
-          "dependencies": {
-            "color-convert": {
-              "version": "1.9.3",
-              "peer": true,
-              "requires": {
-                "color-name": "1.1.3"
-              }
-            },
-            "color-name": {
-              "version": "1.1.3",
-              "peer": true
-            }
+            "color-convert": "^2.0.1",
+            "color-string": "^1.9.0"
           }
         },
         "color-convert": {
@@ -16894,7 +19223,6 @@
         },
         "color-string": {
           "version": "1.9.1",
-          "peer": true,
           "requires": {
             "color-name": "^1.0.0",
             "simple-swizzle": "^0.2.2"
@@ -16909,6 +19237,27 @@
           "requires": {
             "color": "^3.1.3",
             "text-hex": "1.0.x"
+          },
+          "dependencies": {
+            "color": {
+              "version": "3.2.1",
+              "peer": true,
+              "requires": {
+                "color-convert": "^1.9.3",
+                "color-string": "^1.6.0"
+              }
+            },
+            "color-convert": {
+              "version": "1.9.3",
+              "peer": true,
+              "requires": {
+                "color-name": "1.1.3"
+              }
+            },
+            "color-name": {
+              "version": "1.1.3",
+              "peer": true
+            }
           }
         },
         "combined-stream": {
@@ -16977,7 +19326,6 @@
         },
         "cross-spawn": {
           "version": "7.0.3",
-          "peer": true,
           "requires": {
             "path-key": "^3.1.0",
             "shebang-command": "^2.0.0",
@@ -16986,7 +19334,6 @@
           "dependencies": {
             "which": {
               "version": "2.0.2",
-              "peer": true,
               "requires": {
                 "isexe": "^2.0.0"
               }
@@ -16995,6 +19342,15 @@
         },
         "css-selector-parser": {
           "version": "1.4.1"
+        },
+        "decompress-response": {
+          "version": "6.0.0",
+          "requires": {
+            "mimic-response": "^3.1.0"
+          }
+        },
+        "deep-extend": {
+          "version": "0.6.0"
         },
         "defaults": {
           "version": "1.0.4",
@@ -17015,6 +19371,9 @@
         "destroy": {
           "version": "1.2.0"
         },
+        "detect-libc": {
+          "version": "2.0.1"
+        },
         "diff": {
           "version": "5.1.0",
           "peer": true
@@ -17025,8 +19384,14 @@
         "duplexer": {
           "version": "0.1.2"
         },
+        "eastasianwidth": {
+          "version": "0.2.0"
+        },
         "ee-first": {
           "version": "1.1.1"
+        },
+        "emoji-regex": {
+          "version": "9.2.2"
         },
         "enabled": {
           "version": "2.0.0",
@@ -17040,6 +19405,9 @@
           "requires": {
             "once": "^1.4.0"
           }
+        },
+        "env-paths": {
+          "version": "2.2.1"
         },
         "error-ex": {
           "version": "1.3.2",
@@ -17068,6 +19436,9 @@
         },
         "exif-parser": {
           "version": "0.1.12"
+        },
+        "expand-template": {
+          "version": "2.0.3"
         },
         "express": {
           "version": "4.18.2",
@@ -17267,13 +19638,13 @@
           "version": "1.1.1"
         },
         "gauge": {
-          "version": "5.0.0",
+          "version": "5.0.1",
           "requires": {
             "aproba": "^1.0.3 || ^2.0.0",
             "color-support": "^1.1.3",
             "console-control-strings": "^1.1.0",
             "has-unicode": "^2.0.1",
-            "signal-exit": "^3.0.7",
+            "signal-exit": "^4.0.1",
             "string-width": "^4.2.3",
             "strip-ansi": "^6.0.1",
             "wide-align": "^1.1.5"
@@ -17284,6 +19655,9 @@
             },
             "is-fullwidth-code-point": {
               "version": "3.0.0"
+            },
+            "signal-exit": {
+              "version": "4.0.2"
             },
             "string-width": {
               "version": "4.2.3",
@@ -17300,10 +19674,11 @@
           "peer": true
         },
         "get-intrinsic": {
-          "version": "1.2.0",
+          "version": "1.2.1",
           "requires": {
             "function-bind": "^1.1.1",
             "has": "^1.0.3",
+            "has-proto": "^1.0.1",
             "has-symbols": "^1.0.3"
           }
         },
@@ -17316,6 +19691,9 @@
             "image-q": "^4.0.0",
             "omggif": "^1.0.10"
           }
+        },
+        "github-from-package": {
+          "version": "0.0.0"
         },
         "global": {
           "version": "4.4.0",
@@ -17346,6 +19724,9 @@
         },
         "has-flag": {
           "version": "4.0.0"
+        },
+        "has-proto": {
+          "version": "1.0.1"
         },
         "has-symbols": {
           "version": "1.0.3"
@@ -17396,6 +19777,9 @@
         "inherits": {
           "version": "2.0.4"
         },
+        "ini": {
+          "version": "1.3.8"
+        },
         "ipaddr.js": {
           "version": "1.9.1"
         },
@@ -17403,7 +19787,7 @@
           "version": "0.2.1"
         },
         "is-core-module": {
-          "version": "2.11.0",
+          "version": "2.12.0",
           "requires": {
             "has": "^1.0.3"
           }
@@ -17436,6 +19820,13 @@
           "requires": {
             "node-fetch": "^2.6.1",
             "whatwg-fetch": "^3.4.1"
+          }
+        },
+        "jackspeak": {
+          "version": "2.2.0",
+          "requires": {
+            "@isaacs/cliui": "^8.0.2",
+            "@pkgjs/parseargs": "^0.11.0"
           }
         },
         "jimp": {
@@ -17668,6 +20059,9 @@
           "version": "2.1.0",
           "peer": true
         },
+        "mimic-response": {
+          "version": "3.1.0"
+        },
         "min-document": {
           "version": "2.19.0",
           "requires": {
@@ -17685,6 +20079,9 @@
         },
         "mkdirp": {
           "version": "2.1.6"
+        },
+        "mkdirp-classic": {
+          "version": "0.5.3"
         },
         "moment": {
           "version": "2.29.4"
@@ -17757,6 +20154,9 @@
             }
           }
         },
+        "napi-build-utils": {
+          "version": "1.0.2"
+        },
         "ncp": {
           "version": "2.0.0"
         },
@@ -17767,8 +20167,17 @@
           "version": "2.6.2",
           "peer": true
         },
+        "node-abi": {
+          "version": "3.40.0",
+          "requires": {
+            "semver": "^7.3.5"
+          }
+        },
+        "node-addon-api": {
+          "version": "6.1.0"
+        },
         "node-fetch": {
-          "version": "2.6.9",
+          "version": "2.6.11",
           "requires": {
             "whatwg-url": "^5.0.0"
           }
@@ -17928,24 +20337,23 @@
           "version": "1.0.1"
         },
         "path-key": {
-          "version": "3.1.1",
-          "peer": true
+          "version": "3.1.1"
         },
         "path-parse": {
           "version": "1.0.7"
         },
         "path-scurry": {
-          "version": "1.7.0",
+          "version": "1.9.1",
           "requires": {
-            "lru-cache": "^9.0.0",
-            "minipass": "^5.0.0"
+            "lru-cache": "^9.1.1",
+            "minipass": "^5.0.0 || ^6.0.0"
           },
           "dependencies": {
             "lru-cache": {
-              "version": "9.0.3"
+              "version": "9.1.1"
             },
             "minipass": {
-              "version": "5.0.0"
+              "version": "6.0.0"
             }
           }
         },
@@ -18006,6 +20414,23 @@
             }
           }
         },
+        "prebuild-install": {
+          "version": "7.1.1",
+          "requires": {
+            "detect-libc": "^2.0.0",
+            "expand-template": "^2.0.3",
+            "github-from-package": "0.0.0",
+            "minimist": "^1.2.3",
+            "mkdirp-classic": "^0.5.3",
+            "napi-build-utils": "^1.0.1",
+            "node-abi": "^3.3.0",
+            "pump": "^3.0.0",
+            "rc": "^1.2.7",
+            "simple-get": "^4.0.0",
+            "tar-fs": "^2.0.0",
+            "tunnel-agent": "^0.6.0"
+          }
+        },
         "process": {
           "version": "0.11.10"
         },
@@ -18021,6 +20446,13 @@
         },
         "proxy-from-env": {
           "version": "1.1.0"
+        },
+        "pump": {
+          "version": "3.0.0",
+          "requires": {
+            "end-of-stream": "^1.1.0",
+            "once": "^1.3.1"
+          }
         },
         "punycode": {
           "version": "2.3.0",
@@ -18042,6 +20474,20 @@
             "http-errors": "2.0.0",
             "iconv-lite": "0.4.24",
             "unpipe": "1.0.0"
+          }
+        },
+        "rc": {
+          "version": "1.2.8",
+          "requires": {
+            "deep-extend": "^0.6.0",
+            "ini": "~1.3.0",
+            "minimist": "^1.2.0",
+            "strip-json-comments": "~2.0.1"
+          },
+          "dependencies": {
+            "strip-json-comments": {
+              "version": "2.0.1"
+            }
           }
         },
         "read-pkg": {
@@ -18088,7 +20534,7 @@
           }
         },
         "readdir-glob": {
-          "version": "1.1.2",
+          "version": "1.1.3",
           "requires": {
             "minimatch": "^5.1.0"
           },
@@ -18119,9 +20565,9 @@
           "peer": true
         },
         "resolve": {
-          "version": "1.22.1",
+          "version": "1.22.2",
           "requires": {
-            "is-core-module": "^2.9.0",
+            "is-core-module": "^2.11.0",
             "path-parse": "^1.0.7",
             "supports-preserve-symlinks-flag": "^1.0.0"
           }
@@ -18138,9 +20584,9 @@
           }
         },
         "rimraf": {
-          "version": "5.0.0",
+          "version": "5.0.1",
           "requires": {
-            "glob": "^10.0.0"
+            "glob": "^10.2.5"
           },
           "dependencies": {
             "brace-expansion": {
@@ -18149,23 +20595,34 @@
                 "balanced-match": "^1.0.0"
               }
             },
-            "glob": {
-              "version": "10.1.0",
+            "foreground-child": {
+              "version": "3.1.1",
               "requires": {
-                "fs.realpath": "^1.0.0",
-                "minimatch": "^9.0.0",
-                "minipass": "^5.0.0",
+                "cross-spawn": "^7.0.0",
+                "signal-exit": "^4.0.1"
+              }
+            },
+            "glob": {
+              "version": "10.2.6",
+              "requires": {
+                "foreground-child": "^3.1.0",
+                "jackspeak": "^2.0.3",
+                "minimatch": "^9.0.1",
+                "minipass": "^5.0.0 || ^6.0.2",
                 "path-scurry": "^1.7.0"
               }
             },
             "minimatch": {
-              "version": "9.0.0",
+              "version": "9.0.1",
               "requires": {
                 "brace-expansion": "^2.0.1"
               }
             },
             "minipass": {
-              "version": "5.0.0"
+              "version": "6.0.2"
+            },
+            "signal-exit": {
+              "version": "4.0.2"
             }
           }
         },
@@ -18189,7 +20646,7 @@
           "version": "1.2.4"
         },
         "semver": {
-          "version": "7.5.0",
+          "version": "7.5.1",
           "requires": {
             "lru-cache": "^6.0.0"
           },
@@ -18199,9 +20656,6 @@
               "requires": {
                 "yallist": "^4.0.0"
               }
-            },
-            "yallist": {
-              "version": "4.0.0"
             }
           }
         },
@@ -18272,22 +20726,33 @@
         "setprototypeof": {
           "version": "1.2.0"
         },
+        "sharp": {
+          "version": "0.32.1",
+          "requires": {
+            "color": "^4.2.3",
+            "detect-libc": "^2.0.1",
+            "node-addon-api": "^6.1.0",
+            "prebuild-install": "^7.1.1",
+            "semver": "^7.5.0",
+            "simple-get": "^4.0.1",
+            "tar-fs": "^2.1.1",
+            "tunnel-agent": "^0.6.0"
+          }
+        },
         "shebang-command": {
           "version": "2.0.0",
-          "peer": true,
           "requires": {
             "shebang-regex": "^3.0.0"
           }
         },
         "shebang-regex": {
-          "version": "3.0.0",
-          "peer": true
+          "version": "3.0.0"
         },
         "shell-quote": {
           "version": "1.8.1"
         },
         "shiki": {
-          "version": "0.14.1",
+          "version": "0.14.2",
           "peer": true,
           "requires": {
             "ansi-sequence-parser": "^1.1.0",
@@ -18307,18 +20772,30 @@
         "signal-exit": {
           "version": "3.0.7"
         },
+        "simple-concat": {
+          "version": "1.0.1"
+        },
+        "simple-get": {
+          "version": "4.0.1",
+          "requires": {
+            "decompress-response": "^6.0.0",
+            "once": "^1.3.1",
+            "simple-concat": "^1.0.0"
+          }
+        },
         "simple-swizzle": {
           "version": "0.2.2",
-          "peer": true,
           "requires": {
             "is-arrayish": "^0.3.1"
           },
           "dependencies": {
             "is-arrayish": {
-              "version": "0.3.2",
-              "peer": true
+              "version": "0.3.2"
             }
           }
+        },
+        "slugify": {
+          "version": "1.6.6"
         },
         "source-map": {
           "version": "0.6.1"
@@ -18373,8 +20850,49 @@
             "safe-buffer": "~5.2.0"
           }
         },
+        "string-width": {
+          "version": "5.1.2",
+          "requires": {
+            "eastasianwidth": "^0.2.0",
+            "emoji-regex": "^9.2.2",
+            "strip-ansi": "^7.0.1"
+          },
+          "dependencies": {
+            "ansi-regex": {
+              "version": "6.0.1"
+            },
+            "strip-ansi": {
+              "version": "7.0.1",
+              "requires": {
+                "ansi-regex": "^6.0.1"
+              }
+            }
+          }
+        },
+        "string-width-cjs": {
+          "version": "npm:string-width@4.2.3",
+          "requires": {
+            "emoji-regex": "^8.0.0",
+            "is-fullwidth-code-point": "^3.0.0",
+            "strip-ansi": "^6.0.1"
+          },
+          "dependencies": {
+            "emoji-regex": {
+              "version": "8.0.0"
+            },
+            "is-fullwidth-code-point": {
+              "version": "3.0.0"
+            }
+          }
+        },
         "strip-ansi": {
           "version": "6.0.1",
+          "requires": {
+            "ansi-regex": "^5.0.1"
+          }
+        },
+        "strip-ansi-cjs": {
+          "version": "npm:strip-ansi@6.0.1",
           "requires": {
             "ansi-regex": "^5.0.1"
           }
@@ -18394,6 +20912,15 @@
         },
         "supports-preserve-symlinks-flag": {
           "version": "1.0.0"
+        },
+        "tar-fs": {
+          "version": "2.1.1",
+          "requires": {
+            "chownr": "^1.1.1",
+            "mkdirp-classic": "^0.5.2",
+            "pump": "^3.0.0",
+            "tar-stream": "^2.1.4"
+          }
         },
         "tar-stream": {
           "version": "2.2.0",
@@ -18473,6 +21000,16 @@
           "version": "2.5.0",
           "peer": true
         },
+        "tunnel-agent": {
+          "version": "0.6.0",
+          "requires": {
+            "safe-buffer": "^5.0.1"
+          }
+        },
+        "type-fest": {
+          "version": "3.10.0",
+          "requires": {}
+        },
         "type-is": {
           "version": "1.6.18",
           "requires": {
@@ -18498,7 +21035,7 @@
               }
             },
             "minimatch": {
-              "version": "7.4.3",
+              "version": "7.4.6",
               "peer": true,
               "requires": {
                 "brace-expansion": "^2.0.1"
@@ -18544,7 +21081,7 @@
           "version": "1.0.4"
         },
         "utif2": {
-          "version": "4.0.1",
+          "version": "4.1.0",
           "requires": {
             "pako": "^1.0.11"
           }
@@ -18685,6 +21222,30 @@
             }
           }
         },
+        "wrap-ansi-cjs": {
+          "version": "npm:wrap-ansi@7.0.0",
+          "requires": {
+            "ansi-styles": "^4.0.0",
+            "string-width": "^4.1.0",
+            "strip-ansi": "^6.0.0"
+          },
+          "dependencies": {
+            "emoji-regex": {
+              "version": "8.0.0"
+            },
+            "is-fullwidth-code-point": {
+              "version": "3.0.0"
+            },
+            "string-width": {
+              "version": "4.2.3",
+              "requires": {
+                "emoji-regex": "^8.0.0",
+                "is-fullwidth-code-point": "^3.0.0",
+                "strip-ansi": "^6.0.1"
+              }
+            }
+          }
+        },
         "wrappy": {
           "version": "1.0.2"
         },
@@ -18726,41 +21287,12 @@
           "version": "5.0.8",
           "peer": true
         },
+        "yallist": {
+          "version": "4.0.0"
+        },
         "yaml": {
           "version": "2.2.1",
           "peer": true
-        },
-        "yargs": {
-          "version": "17.7.1",
-          "peer": true,
-          "requires": {
-            "cliui": "^8.0.1",
-            "escalade": "^3.1.1",
-            "get-caller-file": "^2.0.5",
-            "require-directory": "^2.1.1",
-            "string-width": "^4.2.3",
-            "y18n": "^5.0.5",
-            "yargs-parser": "^21.1.1"
-          },
-          "dependencies": {
-            "emoji-regex": {
-              "version": "8.0.0",
-              "peer": true
-            },
-            "is-fullwidth-code-point": {
-              "version": "3.0.0",
-              "peer": true
-            },
-            "string-width": {
-              "version": "4.2.3",
-              "peer": true,
-              "requires": {
-                "emoji-regex": "^8.0.0",
-                "is-fullwidth-code-point": "^3.0.0",
-                "strip-ansi": "^6.0.1"
-              }
-            }
-          }
         },
         "yargs-parser": {
           "version": "21.1.1",
