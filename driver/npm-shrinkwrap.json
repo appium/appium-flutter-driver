@@ -1,12 +1,12 @@
 {
   "name": "appium-flutter-driver",
-  "version": "1.18.1",
+  "version": "1.19.0",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "appium-flutter-driver",
-      "version": "1.18.1",
+      "version": "1.19.0",
       "license": "MIT",
       "dependencies": {
         "appium-adb": "^9.9.0",
@@ -646,7 +646,7 @@
       }
     },
     "node_modules/@types/node": {
-      "version": "20.4.4",
+      "version": "20.4.5",
       "license": "MIT"
     },
     "node_modules/@types/normalize-package-data": {
@@ -823,7 +823,7 @@
       }
     },
     "node_modules/ansi-sequence-parser": {
-      "version": "1.1.0",
+      "version": "1.1.1",
       "extraneous": true,
       "license": "MIT"
     },
@@ -10650,7 +10650,7 @@
       }
     },
     "node_modules/io.appium.settings": {
-      "version": "5.0.5",
+      "version": "5.1.0",
       "license": "Apache-2.0",
       "engines": {
         "node": ">=14",
@@ -13047,7 +13047,7 @@
       }
     },
     "@types/node": {
-      "version": "20.4.4"
+      "version": "20.4.5"
     },
     "@types/normalize-package-data": {
       "version": "2.4.1"
@@ -13171,7 +13171,7 @@
       "version": "5.0.1"
     },
     "ansi-sequence-parser": {
-      "version": "1.1.0",
+      "version": "1.1.1",
       "extraneous": true
     },
     "ansi-styles": {
@@ -19633,7 +19633,7 @@
       "version": "3.0.1"
     },
     "io.appium.settings": {
-      "version": "5.0.5"
+      "version": "5.1.0"
     },
     "ipaddr.js": {
       "version": "1.9.1"
