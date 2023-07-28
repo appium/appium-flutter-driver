@@ -260,8 +260,8 @@ Please replace them properly with your client.
 | - | :ok: | `installApp(appPath, options)` | Appium |
 | - | :ok: | `getClipboard` | Appium |
 | - | :ok: | `setClipboard` | Appium |
-| - | :ok: | `connectObservatoryWsUrl` | Flutter Driver |
-| - | :ok: | `launchApp`, `driver.execute_script 'flutter:launchApp', 'bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` | Flutter Driver |
+| - | :ok: | (Ruby) `driver.execute_script 'flutter:connectObservatoryWsUrl'` | Flutter Driver |
+| - | :ok: | (Ruby) `driver.execute_script 'flutter:launchApp', 'bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` | Flutter Driver |
 
 
 > **NOTE**
