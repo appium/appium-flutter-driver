@@ -12,7 +12,7 @@ export const launchApp = async (udid, bundleId, args = [], env = {}) => {
   let instrumentService;
   try {
     instrumentService = await services.startInstrumentService(udid);
-    log.info(`${udid} Launching app ${bundleId} with arguments ${JSON.stringify(args)} and env ${JSON.stringify(env)}`);
+    log.info(`Launching app ${bundleId} with arguments ${JSON.stringify(args)} and env ${JSON.stringify(env)} on device ${udid}`);
     await instrumentService.callChannel(
       INSTRUMENT_CHANNEL.PROCESS_CONTROL,
       'launchSuspendedProcessWithDevicePath:bundleIdentifier:environment:arguments:options:',
