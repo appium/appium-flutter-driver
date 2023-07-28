@@ -263,6 +263,10 @@ Please replace them properly with your client.
 | - | :ok: | `connectObservatoryWsUrl` | Flutter Driver |
 | - | :ok: | `launchApp`, `driver.execute_script 'flutter:launchApp', 'bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` | Flutter Driver |
 
+
+> **NOTE**
+> `flutter:launchApp` launches an app via instrument service. `mobile:activateApp` and `driver.activate_app` are via XCTest API. They are a bit different.
+
 ## Change the flutter engine attache to
 
 1. Get available isolate ids
