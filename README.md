@@ -35,10 +35,12 @@ Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https:/
 - The Appium Flutter Driver version 1.0 and higher require Appium 2.0.0.
     - `1.8.0`+ require over Appium `2.0.0-beta.46`
 
-With Appium 2 (`appium@next`):
+With Appium 2:
 ```
 appium driver install --source=npm appium-flutter-driver
 ```
+
+https://appium.io/docs/en/latest/quickstart/install/
 
 As a local:
 
