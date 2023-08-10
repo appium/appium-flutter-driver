@@ -140,7 +140,7 @@ export const getObservatoryWsUri = async (proxydriver, caps) => {
   try {
     await listeningPromise;
   } catch (e) {
-    throw new Error(`Cannot listen on the local port ${localPort}. Original error: ${e}`);
+    throw new Error(`Cannot listen on the local port ${localPort}. Original error: ${e.message}`);
   }
 
   log.info(`Forwarding the remote port ${remotePort} to the local port ${localPort}`);
