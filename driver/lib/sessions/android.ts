@@ -54,8 +54,8 @@ export const getObservatoryWsUri = async (proxydriver , caps) => {
   const remotePort = urlObject.port;
   const localPort = caps.forwardingPort ?? remotePort;
   urlObject.port = localPort;
-  log.debug(`Forwarding remote port ${urlObject.port} to the local port ${localPort}`);
-  await proxydriver.adb.forwardPort(urlObject.port, localPort);
+  log.debug(`Forwarding remote port ${remotePort} to the local port ${localPort}`);
+  await proxydriver.adb.forwardPort(remotePort, localPort);
   if (!caps.observatoryWsUri && proxydriver.adb.adbHost) {
     urlObject.host = proxydriver.adb.adbHost;
   }
