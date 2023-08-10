@@ -193,8 +193,8 @@ export const executeElementCommand = async function(
 export const processLogToGetobservatory = (deviceLogs: [{ message: string }]) => {
   let dartObservatoryURL: URL|undefined;
   for (const line of deviceLogs.map((e) => e.message).reverse()) {
-    let match: RegExpMatchArray|null;
-    if ((match = line.match(OBSERVATORY_URL_PATTERN))) {
+    const match = line.match(OBSERVATORY_URL_PATTERN);
+    if (match) {
       dartObservatoryURL = new URL(match[2]);
       break;
     }
