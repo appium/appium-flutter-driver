@@ -6,6 +6,16 @@ import { IsolateSocket } from './isolate_socket';
 import { decode } from './base64url';
 
 const truncateLength = 500;
+// https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183
+//  e.g. 'Observatory listening on http://127.0.0.1:52817/_w_SwaKs9-g=/'
+// https://github.com/flutter/flutter/blob/52ae102f182afaa0524d0d01d21b2d86d15a11dc/packages/flutter_tools/lib/src/resident_runner.dart#L1386-L1389
+//  e.g. 'An Observatory debugger and profiler on ${device.device.name} is available at: http://127.0.0.1:52817/_w_SwaKs9-g=/'
+const OBSERVATORY_URL_PATTERN = new RegExp(
+  `(Observatory listening on |` +
+  `An Observatory debugger and profiler on\\s.+\\sis available at: |` +
+  `The Dart VM service is listening on )` +
+  `((http|\/\/)[a-zA-Z0-9:/=_\\-\.\\[\\]]+)`,
+);
 
 // SOCKETS
 export const connectSocket = async (
@@ -181,33 +191,20 @@ export const executeElementCommand = async function(
 };
 
 export const processLogToGetobservatory = (deviceLogs: [{ message: string }]) => {
-  // https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183
-  //  e.g. 'Observatory listening on http://127.0.0.1:52817/_w_SwaKs9-g=/'
-  // https://github.com/flutter/flutter/blob/52ae102f182afaa0524d0d01d21b2d86d15a11dc/packages/flutter_tools/lib/src/resident_runner.dart#L1386-L1389
-  //  e.g. 'An Observatory debugger and profiler on ${device.device.name} is available at: http://127.0.0.1:52817/_w_SwaKs9-g=/'
-  const observatoryUriRegEx = new RegExp(
-    `(Observatory listening on |An Observatory debugger and profiler on\\s.+\\sis available at: |The Dart VM service is listening on )((http|\/\/)[a-zA-Z0-9:/=_\\-\.\\[\\]]+)`,
-  );
-  // @ts-ignore
-  const candidate = deviceLogs
-    .map((e) => e.message)
-    .reverse()
-    .find((e) => e.match(observatoryUriRegEx));
-  if (!candidate) {
-    throw new Error(`No observatory url was found in the device log. ` +
-      `Please make sure the application under test logs an observatory url when the application starts.`);
+  let dartObservatoryURL: URL|undefined;
+  for (const line of deviceLogs.map((e) => e.message).reverse()) {
+    let match: RegExpMatchArray|null;
+    if ((match = line.match(OBSERVATORY_URL_PATTERN))) {
+      dartObservatoryURL = new URL(match[2]);
+      break;
+    }
   }
-
-  const observatoryMatch = candidate.match(observatoryUriRegEx);
-  if (!observatoryMatch) {
-    throw new Error(`can't find Observatory`);
+  if (!dartObservatoryURL) {
+    throw new Error(`No observatory URL matching to '${OBSERVATORY_URL_PATTERN}' was found in the device log. ` +
+      `Please make sure the application under test is configured properly according to ` +
+      `https://github.com/appium-userland/appium-flutter-driver#usage and that it does not crash on startup.`);
   }
-
-  const dartObservatoryURI = observatoryMatch[2];
-  const dartObservatoryURL = new URL(dartObservatoryURI);
-
   dartObservatoryURL.protocol = `ws`;
   dartObservatoryURL.pathname += `ws`;
-
   return dartObservatoryURL;
 };

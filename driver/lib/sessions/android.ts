@@ -1,10 +1,3 @@
-import { androidHelpers } from 'appium-android-driver';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-
-const execPromise = promisify(exec);
-export const DRIVER_NAME = `UIAutomator2`;
-
 // @ts-ignore
 import AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
 import { log } from '../logger';
@@ -19,6 +12,8 @@ const setupNewAndroidDriver = async (...args) => {
   return androiddriver;
 };
 
+export const DRIVER_NAME = `UIAutomator2`;
+
 export const startAndroidSession = async (caps, ...args) => {
   log.info(`Starting an Android proxy session`);
   const androiddriver = await setupNewAndroidDriver(...args);
@@ -28,11 +23,10 @@ export const startAndroidSession = async (caps, ...args) => {
     return [androiddriver, null];
   }
 
-  return Promise.all([
+  return [
     androiddriver,
-    connectSocket(getObservatoryWsUri, androiddriver, caps),
-  ]);
-
+    await connectSocket(getObservatoryWsUri, androiddriver, caps),
+  ];
 };
 
 /**
@@ -41,14 +35,11 @@ export const startAndroidSession = async (caps, ...args) => {
  * @param caps
  * @returns current socket
  */
-export const connectAndroidSession = async (androiddriver, caps) => {
-  return Promise.all([
-    connectSocket(getObservatoryWsUri, androiddriver, caps),
-  ]);
-};
+export const connectAndroidSession = async (androiddriver, caps) =>
+  await connectSocket(getObservatoryWsUri, androiddriver, caps);
 
 export const getObservatoryWsUri = async (proxydriver , caps) => {
-  let urlObject;
+  let urlObject: URL;
   if (caps.observatoryWsUri) {
     urlObject = new URL(caps.observatoryWsUri);
     urlObject.protocol = `ws`;
@@ -57,21 +48,16 @@ export const getObservatoryWsUri = async (proxydriver , caps) => {
     if (caps.skipPortForward === undefined || caps.skipPortForward) {
       return urlObject.toJSON();
     }
-
   } else {
     urlObject = processLogToGetobservatory(proxydriver.adb.logcat.logs);
   }
-  const {udid} = await androidHelpers.getDeviceInfoFromCaps(caps);
-  log.debug(
-    `${proxydriver.adb.executable.path} -s ${udid} forward tcp:${
-      urlObject.port
-    } tcp:${urlObject.port}`,
-  );
-  await execPromise(
-    `${proxydriver.adb.executable.path} -s ${udid} forward tcp:${
-      urlObject.port
-    } tcp:${urlObject.port}`,
-  );
-
+  const remotePort = urlObject.port;
+  const localPort = caps.forwardingPort ?? remotePort;
+  urlObject.port = localPort;
+  log.debug(`Forwarding remote port ${urlObject.port} to the local port ${localPort}`);
+  await proxydriver.adb.forwardPort(urlObject.port, localPort);
+  if (!caps.observatoryWsUri && proxydriver.adb.adbHost) {
+    urlObject.host = proxydriver.adb.adbHost;
+  }
   return urlObject.toJSON();
 };

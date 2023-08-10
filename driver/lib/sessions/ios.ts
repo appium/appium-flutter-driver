@@ -45,11 +45,8 @@ export const startIOSSession = async (caps, ...args) => {
  * @param caps
  * @returns current socket
  */
-export const connectIOSSession = async (iosdriver, caps) => {
-  return Promise.all([
-    connectSocket(getObservatoryWsUri, iosdriver, caps),
-  ]);
-};
+export const connectIOSSession = async (iosdriver, caps) =>
+  await connectSocket(getObservatoryWsUri, iosdriver, caps);
 
 const waitForPortIsAvailable = async (port) => {
   let isPortBusy = (await checkPortStatus(port, LOCALHOST)) === `open`;
@@ -95,24 +92,25 @@ export const getObservatoryWsUri = async (proxydriver, caps) => {
     if (caps.skipPortForward === undefined || caps.skipPortForward) {
       return urlObject.toJSON();
     }
-
   } else {
     urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
   }
-
-  const { udid } = proxydriver.opts;
-
   if (!proxydriver.isRealDevice()) {
     log.info(`Running on iOS simulator`);
     return urlObject.toJSON();
   }
 
+  const remotePort = urlObject.port;
+  const localPort = caps.forwardingPort ?? remotePort;
+  urlObject.port = localPort;
+
   log.info(`Running on iOS real device`);
-  await waitForPortIsAvailable(urlObject.port);
+  const { udid } = proxydriver.opts;
+  await waitForPortIsAvailable(localPort);
   const localServer = net.createServer(async (localSocket) => {
     let remoteSocket;
     try {
-      remoteSocket = await utilities.connectPort(udid, urlObject.port);
+      remoteSocket = await utilities.connectPort(udid, remotePort);
     } catch (e) {
       localSocket.destroy();
       return;
@@ -138,14 +136,14 @@ export const getObservatoryWsUri = async (proxydriver, caps) => {
     localServer.once(`listening`, resolve);
     localServer.once(`error`, reject);
   });
-  localServer.listen(urlObject.port);
+  localServer.listen(localPort);
   try {
     await listeningPromise;
   } catch (e) {
-    log.errorAndThrow(`Failed to listen the port ${urlObject.port}: ${e}`);
+    throw new Error(`Cannot listen on the local port ${localPort}. Original error: ${e}`);
   }
 
-  log.info(`Port forwarding to: ${urlObject.port}`);
+  log.info(`Forwarding the remote port ${remotePort} to the local port ${localPort}`);
 
   process.on(`beforeExit`, () => {
     localServer.close();

@@ -21,6 +21,9 @@ export interface IDesiredCapConstraints {
   skipPortForward: {
     isBoolean: boolean;
   };
+  adbPort: any;
+  remoteAdbHost: any;
+  forwardingPort: any;
 }
 
 export const desiredCapConstraints: IDesiredCapConstraints = {
@@ -57,5 +60,14 @@ export const desiredCapConstraints: IDesiredCapConstraints = {
   },
   skipPortForward: {
     isBoolean: true
-  }
+  },
+  adbPort: {
+    isNumber: true
+  },
+  remoteAdbHost: {
+    isString: true
+  },
+  forwardingPort: {
+    isNumber: true
+  },
 };
