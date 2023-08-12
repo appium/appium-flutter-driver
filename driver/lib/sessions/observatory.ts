@@ -27,125 +27,130 @@ export const connectSocket = async (
   const maxRetryCount = caps.maxRetryCount || 30
 
   let retryCount = 0;
-  let connectedSocket: IsolateSocket | null = null;
-
-  while (retryCount < maxRetryCount && !connectedSocket) {
-    if (retryCount > 0) {
-      log.info(
-        `Waiting ` + retryBackoff / 1000 + ` seconds before trying...`,
-      );
+  let urlFetchError: Error|undefined;
+  let dartObservatoryURL: string|undefined;
+  log.debug(
+    `Establishing a connection to the Dart Observatory. ` +
+    `Will retry ${maxRetryCount} times with ${retryBackoff}ms delay between retries. ` +
+    `These values could be customized by changing 'maxRetryCount' and 'retryBackoffTime' capabilities.`
+  );
+  while (retryCount < maxRetryCount) {
+    if (retryCount > 0 && retryBackoff > 0) {
+      log.info(`Waiting ${retryBackoff}ms before retrying`);
       await new Promise((r) => setTimeout(r, retryBackoff));
     }
-    log.info(`Attempt #` + (retryCount + 1));
+    log.info(`Attempt #${(retryCount + 1)} of ${maxRetryCount}`);
 
-    let dartObservatoryURL;
-    try {
-      dartObservatoryURL = await getObservatoryWsUri(driver, caps);
-    } catch (e) {
-      // go to the next retry with do nothing here
-      log.debug(e)
+    if (!dartObservatoryURL) {
+      try {
+        dartObservatoryURL = await getObservatoryWsUri(driver, caps);
+        urlFetchError = undefined;
+      } catch (e) {
+        urlFetchError = e;
+        log.debug(e.message)
+      }
     }
 
-    const connectedPromise = new Promise<IsolateSocket | null>((resolve) => {
-      log.info(
-        `Connecting to Dart Observatory: ${dartObservatoryURL}`,
-      );
+    if (!urlFetchError) {
+      const connectedPromise = new Promise<IsolateSocket | null>((resolve) => {
+        log.info(`Connecting to Dart Observatory: ${dartObservatoryURL}`);
 
-      const socket = new IsolateSocket(dartObservatoryURL);
+        const socket = new IsolateSocket(dartObservatoryURL);
 
-      const removeListenerAndResolve = (r: IsolateSocket | null) => {
-        socket.removeListener(`error`, onErrorListener);
-        socket.removeListener(`timeout`, onTimeoutListener);
-        socket.removeListener(`open`, onOpenListener);
-        resolve(r);
-      };
+        const removeListenerAndResolve = (r: IsolateSocket | null) => {
+          socket.removeListener(`error`, onErrorListener);
+          socket.removeListener(`timeout`, onTimeoutListener);
+          socket.removeListener(`open`, onOpenListener);
+          resolve(r);
+        };
 
-      // Add an 'error' event handler for the client socket
-      const onErrorListener = (ex) => {
-        log.error(JSON.stringify(ex));
-        log.error(`Check Dart Observatory URI ${
-          _.isString(dartObservatoryURL) ? dartObservatoryURL : 'no URI found in the device log'
-        }`);
-        removeListenerAndResolve(null);
-      };
-      socket.on(`error`, onErrorListener);
-      // Add a 'close' event handler for the client socket
-      socket.on(`close`, () => {
-        log.info(`Connection to ${dartObservatoryURL} closed`);
-        // @todo do we need to set this.socket = null?
-      });
-      // Add a 'timeout' event handler for the client socket
-      const onTimeoutListener = () => {
-        log.error(`Connection to ${dartObservatoryURL} timed out`);
-        removeListenerAndResolve(null);
-      };
-      socket.on(`timeout`, onTimeoutListener);
-      const onOpenListener = async () => {
-        // tslint:disable-next-line:ban-types
-        const originalSocketCall: Function = socket.call;
-        socket.call = async (...args: any) => {
-          try {
-            // `await` is needed so that rejected promise will be thrown and caught
-            return await originalSocketCall.apply(socket, args);
-          } catch (e) {
-            log.errorAndThrow(JSON.stringify(e));
+        // Add an 'error' event handler for the client socket
+        const onErrorListener = (ex) => {
+          log.error(JSON.stringify(ex));
+          removeListenerAndResolve(null);
+        };
+        socket.on(`error`, onErrorListener);
+        // Add a 'close' event handler for the client socket
+        socket.on(`close`, () => {
+          log.info(`Connection to ${dartObservatoryURL} closed`);
+          // @todo do we need to set this.socket = null?
+        });
+        // Add a 'timeout' event handler for the client socket
+        const onTimeoutListener = () => {
+          log.error(`Connection to ${dartObservatoryURL} timed out`);
+          removeListenerAndResolve(null);
+        };
+        socket.on(`timeout`, onTimeoutListener);
+        const onOpenListener = async () => {
+          // tslint:disable-next-line:ban-types
+          const originalSocketCall: Function = socket.call;
+          socket.call = async (...args: any) => {
+            try {
+              // `await` is needed so that rejected promise will be thrown and caught
+              return await originalSocketCall.apply(socket, args);
+            } catch (e) {
+              log.errorAndThrow(JSON.stringify(e));
+            }
+          };
+          log.info(`Connecting to ${dartObservatoryURL}`);
+          const vm = await socket.call(`getVM`) as {
+            isolates: [{
+              name: string,
+              id: number,
+            }],
+          };
+          log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
+          // To accept 'main.dart:main()' and 'main'
+          const mainIsolateData = vm.isolates.find((e) => e.name.includes(`main`));
+          if (!mainIsolateData) {
+            log.error(`Cannot get Dart main isolate info`);
+            removeListenerAndResolve(null);
+            socket.close();
+            return;
           }
+          // e.g. 'isolates/2978358234363215', '2978358234363215'
+          socket.isolateId = mainIsolateData.id;
+          // @todo check extension and do health check
+          const isolate = await socket.call(`getIsolate`, {
+            isolateId: `${socket.isolateId}`,
+          }) as {
+            extensionRPCs: [string] | null,
+          } | null;
+          if (!isolate) {
+            log.error(`Cannot get main Dart Isolate`);
+            removeListenerAndResolve(null);
+            return;
+          }
+          if (!Array.isArray(isolate.extensionRPCs)) {
+            log.error(`Cannot get Dart extensionRPCs from isolate ${JSON.stringify(isolate)}`);
+            removeListenerAndResolve(null);
+            return;
+          }
+          if (isolate.extensionRPCs.indexOf(`ext.flutter.driver`) < 0) {
+            log.error(
+              `"ext.flutter.driver" is not found in "extensionRPCs" ${JSON.stringify(isolate.extensionRPCs)}`
+            );
+            removeListenerAndResolve(null);
+            return;
+          }
+          removeListenerAndResolve(socket);
         };
-        log.info(`Connecting to ${dartObservatoryURL}`);
-        const vm = await socket.call(`getVM`) as {
-          isolates: [{
-            name: string,
-            id: number,
-          }],
-        };
-        log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
-        // To accept 'main.dart:main()' and 'main'
-        const mainIsolateData = vm.isolates.find((e) => e.name.includes(`main`));
-        if (!mainIsolateData) {
-          log.error(`Cannot get Dart main isolate info`);
-          removeListenerAndResolve(null);
-          socket.close();
-          return;
-        }
-        // e.g. 'isolates/2978358234363215', '2978358234363215'
-        socket.isolateId = mainIsolateData.id;
-        // @todo check extension and do health check
-        const isolate = await socket.call(`getIsolate`, {
-          isolateId: `${socket.isolateId}`,
-        }) as {
-          extensionRPCs: [string] | null,
-        } | null;
-        if (!isolate) {
-          log.error(`Cannot get main Dart Isolate`);
-          removeListenerAndResolve(null);
-          return;
-        }
-        if (!Array.isArray(isolate.extensionRPCs)) {
-          log.errorAndThrow(`Cannot get Dart extensionRPCs from isolate ${JSON.stringify(isolate)}`);
-          removeListenerAndResolve(null);
-          return;
-        }
-        if (isolate.extensionRPCs.indexOf(`ext.flutter.driver`) < 0) {
-          const msg = `"ext.flutter.driver" is not found in "extensionRPCs" ${JSON.stringify(isolate.extensionRPCs)}`;
-          log.error(msg);
-          removeListenerAndResolve(null);
-          return;
-        }
-        removeListenerAndResolve(socket);
-      };
-      socket.on(`open`, onOpenListener);
-    });
-    retryCount++;
-    connectedSocket = await connectedPromise;
-
-    if (!connectedSocket && retryCount === maxRetryCount - 1) {
-      log.errorAndThrow(
-        `Failed to connect ` + maxRetryCount + ` times. Aborting.`,
-      );
+        socket.on(`open`, onOpenListener);
+      });
+      const connectedSocket = await connectedPromise;
+      if (connectedSocket) {
+        return connectedSocket;
+      }
     }
+    retryCount++;
   }
-  retryCount = 0;
-  return connectedSocket;
+  throw new Error(
+    urlFetchError
+      ? (`Cannot determine the Dart Observatory URL after ${maxRetryCount} retries. ` +
+        `Original error: ${urlFetchError.message}`)
+      : (`Cannot connect to the Dart Observatory URL ${dartObservatoryURL} after ` +
+        `${maxRetryCount} retries. Check the server log for more details`)
+  );
 };
 
 export const executeGetIsolateCommand = async function(
