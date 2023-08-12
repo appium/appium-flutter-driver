@@ -15,10 +15,8 @@ on:
       - 'finder/nodejs/**'
 
 jobs:
-  build:
-
+  prepare_matrix:
     runs-on: ubuntu-latest
-
     outputs:
       versions: ${{ steps.generate-matrix.outputs.versions }}
     steps:
@@ -26,9 +24,14 @@ jobs:
       id: generate-matrix
       run: echo "versions=$(curl -s https://endoflife.date/api/nodejs.json | jq -c '[[.[] | select(.lts != false)][:3] | .[].cycle | tonumber]')" >> "$GITHUB_OUTPUT"
 
+  build:
+
+    runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version:  ${{ fromJSON(needs.prepare_matrix.outputs.versions) }}
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v2
