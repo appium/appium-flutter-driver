@@ -8,6 +8,7 @@
 name: Ruby
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'finder/ruby/**'
