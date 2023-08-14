@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.20.0
+- Add `adbPort`, `remoteAdbHost` and `forwardingPort` support
+
 ## 1.19.1
 - Use XCUITest driver: 4.31.0
    - Last iOS 14 and lower one work version
