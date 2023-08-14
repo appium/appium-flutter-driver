@@ -53,8 +53,6 @@ export const connectSocket = async (
 
     if (!urlFetchError) {
       const connectedPromise = new Promise<IsolateSocket | null>((resolve) => {
-        log.info(`Connecting to Dart Observatory: ${dartObservatoryURL}`);
-
         const socket = new IsolateSocket(dartObservatoryURL);
 
         const removeListenerAndResolve = (r: IsolateSocket | null) => {
@@ -92,7 +90,7 @@ export const connectSocket = async (
               log.errorAndThrow(JSON.stringify(e));
             }
           };
-          log.info(`Connecting to ${dartObservatoryURL}`);
+          log.info(`Connecting to Dart Observatory: ${dartObservatoryURL}`);
           const vm = await socket.call(`getVM`) as {
             isolates: [{
               name: string,
