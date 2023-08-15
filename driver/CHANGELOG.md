@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.20.0
+## 1.20.2 (1.20.0, 1.20.1 had broken lock file)
 - Add `adbPort`, `remoteAdbHost` and `forwardingPort` support
 
 ## 1.19.1
