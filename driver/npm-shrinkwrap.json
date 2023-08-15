@@ -368,13 +368,64 @@
       }
     },
     "node_modules/@babel/code-frame": {
-      "version": "7.22.5",
+      "version": "7.22.10",
       "license": "MIT",
       "dependencies": {
-        "@babel/highlight": "^7.22.5"
+        "@babel/highlight": "^7.22.10",
+        "chalk": "^2.4.2"
       },
       "engines": {
         "node": ">=6.9.0"
+      }
+    },
+    "node_modules/@babel/code-frame/node_modules/ansi-styles": {
+      "version": "3.2.1",
+      "license": "MIT",
+      "dependencies": {
+        "color-convert": "^1.9.0"
+      },
+      "engines": {
+        "node": ">=4"
+      }
+    },
+    "node_modules/@babel/code-frame/node_modules/chalk": {
+      "version": "2.4.2",
+      "license": "MIT",
+      "dependencies": {
+        "ansi-styles": "^3.2.1",
+        "escape-string-regexp": "^1.0.5",
+        "supports-color": "^5.3.0"
+      },
+      "engines": {
+        "node": ">=4"
+      }
+    },
+    "node_modules/@babel/code-frame/node_modules/color-convert": {
+      "version": "1.9.3",
+      "license": "MIT",
+      "dependencies": {
+        "color-name": "1.1.3"
+      }
+    },
+    "node_modules/@babel/code-frame/node_modules/color-name": {
+      "version": "1.1.3",
+      "license": "MIT"
+    },
+    "node_modules/@babel/code-frame/node_modules/has-flag": {
+      "version": "3.0.0",
+      "license": "MIT",
+      "engines": {
+        "node": ">=4"
+      }
+    },
+    "node_modules/@babel/code-frame/node_modules/supports-color": {
+      "version": "5.5.0",
+      "license": "MIT",
+      "dependencies": {
+        "has-flag": "^3.0.0"
+      },
+      "engines": {
+        "node": ">=4"
       }
     },
     "node_modules/@babel/helper-validator-identifier": {
@@ -385,11 +436,11 @@
       }
     },
     "node_modules/@babel/highlight": {
-      "version": "7.22.5",
+      "version": "7.22.10",
       "license": "MIT",
       "dependencies": {
         "@babel/helper-validator-identifier": "^7.22.5",
-        "chalk": "^2.0.0",
+        "chalk": "^2.4.2",
         "js-tokens": "^4.0.0"
       },
       "engines": {
@@ -447,10 +498,10 @@
       }
     },
     "node_modules/@babel/runtime": {
-      "version": "7.22.6",
+      "version": "7.22.10",
       "license": "MIT",
       "dependencies": {
-        "regenerator-runtime": "^0.13.11"
+        "regenerator-runtime": "^0.14.0"
       },
       "engines": {
         "node": ">=6.9.0"
@@ -645,7 +696,7 @@
       }
     },
     "node_modules/@types/node": {
-      "version": "20.4.5",
+      "version": "20.5.0",
       "license": "MIT"
     },
     "node_modules/@types/normalize-package-data": {
@@ -840,7 +891,7 @@
       }
     },
     "node_modules/appium-adb": {
-      "version": "9.14.2",
+      "version": "9.14.5",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/support": "^4.0.0",
@@ -848,9 +899,9 @@
         "async-lock": "^1.0.0",
         "asyncbox": "^2.6.0",
         "bluebird": "^3.4.7",
-        "ini": "^3.0.0",
+        "ini": "^4.1.1",
         "lodash": "^4.0.0",
-        "lru-cache": "^7.3.0",
+        "lru-cache": "^10.0.0",
         "semver": "^7.0.0",
         "source-map-support": "^0.x",
         "teen_process": "^2.0.1",
@@ -861,8 +912,15 @@
         "npm": ">=8"
       }
     },
+    "node_modules/appium-adb/node_modules/lru-cache": {
+      "version": "10.0.1",
+      "license": "ISC",
+      "engines": {
+        "node": "14 || >=16.14"
+      }
+    },
     "node_modules/appium-android-driver": {
-      "version": "5.14.0",
+      "version": "5.14.4",
       "license": "Apache-2.0",
       "dependencies": {
         "appium-adb": "^9.11.2",
@@ -892,7 +950,7 @@
       }
     },
     "node_modules/appium-chromedriver": {
-      "version": "5.5.2",
+      "version": "5.6.3",
       "hasInstallScript": true,
       "license": "Apache-2.0",
       "dependencies": {
@@ -918,7 +976,7 @@
       }
     },
     "node_modules/appium-ios-device": {
-      "version": "2.5.4",
+      "version": "2.6.1",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/support": "^4.0.0",
@@ -938,13 +996,13 @@
       }
     },
     "node_modules/appium-uiautomator2-driver": {
-      "version": "2.29.2",
+      "version": "2.29.4",
       "license": "Apache-2.0",
       "dependencies": {
         "@babel/runtime": "^7.0.0",
         "appium-adb": "^9.13.1",
         "appium-android-driver": "^5.14.0",
-        "appium-chromedriver": "^5.3.1",
+        "appium-chromedriver": "^5.6.1",
         "appium-uiautomator2-server": "^5.12.2",
         "asyncbox": "^2.3.1",
         "axios": "^1.x",
@@ -964,11 +1022,11 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@appium/base-driver": {
-      "version": "9.3.14",
+      "version": "9.3.16",
       "license": "Apache-2.0",
       "dependencies": {
-        "@appium/support": "^4.1.1",
-        "@appium/types": "^0.13.1",
+        "@appium/support": "^4.1.3",
+        "@appium/types": "^0.13.2",
         "@colors/colors": "1.5.0",
         "@types/async-lock": "1.4.0",
         "@types/bluebird": "3.5.38",
@@ -1006,7 +1064,7 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@appium/schema": {
-      "version": "0.3.0",
+      "version": "0.3.1",
       "license": "Apache-2.0",
       "dependencies": {
         "@types/json-schema": "7.0.12",
@@ -1019,11 +1077,11 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@appium/support": {
-      "version": "4.1.1",
+      "version": "4.1.3",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/tsconfig": "^0.3.0",
-        "@appium/types": "^0.13.1",
+        "@appium/types": "^0.13.2",
         "@colors/colors": "1.5.0",
         "@types/archiver": "5.3.2",
         "@types/base64-stream": "1.0.2",
@@ -1067,11 +1125,11 @@
         "read-pkg": "5.2.0",
         "resolve-from": "5.0.0",
         "sanitize-filename": "1.6.3",
-        "semver": "7.5.1",
+        "semver": "7.5.3",
         "shell-quote": "1.8.1",
         "source-map-support": "0.5.21",
         "supports-color": "8.1.1",
-        "teen_process": "2.0.2",
+        "teen_process": "2.0.4",
         "type-fest": "3.11.1",
         "uuid": "9.0.0",
         "which": "3.0.1",
@@ -1085,47 +1143,37 @@
         "sharp": "0.32.1"
       }
     },
-    "node_modules/appium-uiautomator2-driver/node_modules/@appium/support/node_modules/@babel/runtime": {
-      "version": "7.19.0",
-      "license": "MIT",
-      "dependencies": {
-        "regenerator-runtime": "^0.13.4"
-      },
-      "engines": {
-        "node": ">=6.9.0"
-      }
-    },
-    "node_modules/appium-uiautomator2-driver/node_modules/@appium/support/node_modules/teen_process": {
-      "version": "2.0.2",
+    "node_modules/appium-uiautomator2-driver/node_modules/@appium/support/node_modules/sharp": {
+      "version": "0.32.1",
+      "hasInstallScript": true,
       "license": "Apache-2.0",
+      "optional": true,
       "dependencies": {
-        "@babel/runtime": "7.19.0",
-        "bluebird": "3.7.2",
-        "lodash": "4.17.21",
-        "shell-quote": "1.7.3",
-        "source-map-support": "0.5.21",
-        "which": "2.0.2"
+        "color": "^4.2.3",
+        "detect-libc": "^2.0.1",
+        "node-addon-api": "^6.1.0",
+        "prebuild-install": "^7.1.1",
+        "semver": "^7.5.0",
+        "simple-get": "^4.0.1",
+        "tar-fs": "^2.1.1",
+        "tunnel-agent": "^0.6.0"
       },
       "engines": {
-        "node": ">=14",
-        "npm": ">=6"
+        "node": ">=14.15.0"
+      },
+      "funding": {
+        "url": "https://opencollective.com/libvips"
       }
     },
-    "node_modules/appium-uiautomator2-driver/node_modules/@appium/support/node_modules/teen_process/node_modules/shell-quote": {
-      "version": "1.7.3",
-      "license": "MIT"
-    },
-    "node_modules/appium-uiautomator2-driver/node_modules/@appium/support/node_modules/teen_process/node_modules/which": {
-      "version": "2.0.2",
-      "license": "ISC",
+    "node_modules/appium-uiautomator2-driver/node_modules/@appium/support/node_modules/tar-fs": {
+      "version": "2.1.1",
+      "license": "MIT",
+      "optional": true,
       "dependencies": {
-        "isexe": "^2.0.0"
-      },
-      "bin": {
-        "node-which": "bin/node-which"
-      },
-      "engines": {
-        "node": ">= 8"
+        "chownr": "^1.1.1",
+        "mkdirp-classic": "^0.5.2",
+        "pump": "^3.0.0",
+        "tar-stream": "^2.1.4"
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@appium/tsconfig": {
@@ -1140,10 +1188,10 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@appium/types": {
-      "version": "0.13.1",
+      "version": "0.13.2",
       "license": "Apache-2.0",
       "dependencies": {
-        "@appium/schema": "^0.3.0",
+        "@appium/schema": "^0.3.1",
         "@appium/tsconfig": "^0.3.0",
         "@types/express": "4.17.17",
         "@types/npmlog": "4.1.4",
@@ -1156,10 +1204,11 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@babel/code-frame": {
-      "version": "7.22.5",
+      "version": "7.22.10",
       "license": "MIT",
       "dependencies": {
-        "@babel/highlight": "^7.22.5"
+        "@babel/highlight": "^7.22.10",
+        "chalk": "^2.4.2"
       },
       "engines": {
         "node": ">=6.9.0"
@@ -1173,11 +1222,11 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@babel/highlight": {
-      "version": "7.22.5",
+      "version": "7.22.10",
       "license": "MIT",
       "dependencies": {
         "@babel/helper-validator-identifier": "^7.22.5",
-        "chalk": "^2.0.0",
+        "chalk": "^2.4.2",
         "js-tokens": "^4.0.0"
       },
       "engines": {
@@ -1185,10 +1234,10 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@babel/runtime": {
-      "version": "7.22.5",
+      "version": "7.22.10",
       "license": "MIT",
       "dependencies": {
-        "regenerator-runtime": "^0.13.11"
+        "regenerator-runtime": "^0.14.0"
       },
       "engines": {
         "node": ">=6.9.0"
@@ -1331,7 +1380,7 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@types/node": {
-      "version": "20.3.3",
+      "version": "20.4.9",
       "license": "MIT"
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@types/normalize-package-data": {
@@ -1420,7 +1469,7 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@xmldom/xmldom": {
-      "version": "0.8.8",
+      "version": "0.8.10",
       "license": "MIT",
       "engines": {
         "node": ">=10.0.0"
@@ -1484,7 +1533,7 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/appium-adb": {
-      "version": "9.14.1",
+      "version": "9.14.4",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/support": "^4.0.0",
@@ -1492,9 +1541,9 @@
         "async-lock": "^1.0.0",
         "asyncbox": "^2.6.0",
         "bluebird": "^3.4.7",
-        "ini": "^3.0.0",
+        "ini": "^4.1.1",
         "lodash": "^4.0.0",
-        "lru-cache": "^7.3.0",
+        "lru-cache": "^10.0.0",
         "semver": "^7.0.0",
         "source-map-support": "^0.x",
         "teen_process": "^2.0.1",
@@ -1506,10 +1555,10 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/appium-adb/node_modules/lru-cache": {
-      "version": "7.18.3",
+      "version": "10.0.0",
       "license": "ISC",
       "engines": {
-        "node": ">=12"
+        "node": "14 || >=16.14"
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/appium-android-driver": {
@@ -1550,7 +1599,7 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/appium-chromedriver": {
-      "version": "5.5.1",
+      "version": "5.6.2",
       "hasInstallScript": true,
       "license": "Apache-2.0",
       "dependencies": {
@@ -1562,7 +1611,7 @@
         "asyncbox": "^2.0.2",
         "axios": "^1.x",
         "bluebird": "^3.5.1",
-        "compare-versions": "^5.0.0",
+        "compare-versions": "^6.0.0",
         "fancy-log": "^2.0.0",
         "lodash": "^4.17.4",
         "semver": "^7.0.0",
@@ -1640,6 +1689,10 @@
         "url": "https://github.com/sponsors/isaacs"
       }
     },
+    "node_modules/appium-uiautomator2-driver/node_modules/archiver-utils/node_modules/isarray": {
+      "version": "1.0.0",
+      "license": "MIT"
+    },
     "node_modules/appium-uiautomator2-driver/node_modules/archiver-utils/node_modules/readable-stream": {
       "version": "2.3.8",
       "license": "MIT",
@@ -1665,7 +1718,7 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/are-we-there-yet": {
-      "version": "4.0.0",
+      "version": "4.0.1",
       "license": "ISC",
       "dependencies": {
         "delegates": "^1.0.0",
@@ -1698,13 +1751,14 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/are-we-there-yet/node_modules/readable-stream": {
-      "version": "4.4.1",
+      "version": "4.4.2",
       "license": "MIT",
       "dependencies": {
         "abort-controller": "^3.0.0",
         "buffer": "^6.0.3",
         "events": "^3.3.0",
-        "process": "^0.11.10"
+        "process": "^0.11.10",
+        "string_decoder": "^1.3.0"
       },
       "engines": {
         "node": "^12.22.0 || ^14.17.0 || >=16.0.0"
@@ -2018,7 +2072,7 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/compare-versions": {
-      "version": "5.0.3",
+      "version": "6.1.0",
       "license": "MIT"
     },
     "node_modules/appium-uiautomator2-driver/node_modules/compress-commons": {
@@ -2158,7 +2212,7 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/detect-libc": {
-      "version": "2.0.1",
+      "version": "2.0.2",
       "license": "Apache-2.0",
       "optional": true,
       "engines": {
@@ -2494,7 +2548,7 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/gauge/node_modules/signal-exit": {
-      "version": "4.0.2",
+      "version": "4.1.0",
       "license": "ISC",
       "engines": {
         "node": ">=14"
@@ -2685,14 +2739,14 @@
       "license": "ISC"
     },
     "node_modules/appium-uiautomator2-driver/node_modules/ini": {
-      "version": "3.0.1",
+      "version": "4.1.1",
       "license": "ISC",
       "engines": {
-        "node": "^12.13.0 || ^14.15.0 || >=16.0.0"
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0"
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/io.appium.settings": {
-      "version": "5.0.5",
+      "version": "5.1.0",
       "license": "Apache-2.0",
       "engines": {
         "node": ">=14",
@@ -2711,7 +2765,7 @@
       "license": "MIT"
     },
     "node_modules/appium-uiautomator2-driver/node_modules/is-core-module": {
-      "version": "2.12.1",
+      "version": "2.13.0",
       "license": "MIT",
       "dependencies": {
         "has": "^1.0.3"
@@ -2736,10 +2790,6 @@
       "funding": {
         "url": "https://github.com/sponsors/sindresorhus"
       }
-    },
-    "node_modules/appium-uiautomator2-driver/node_modules/isarray": {
-      "version": "1.0.0",
-      "license": "MIT"
     },
     "node_modules/appium-uiautomator2-driver/node_modules/isexe": {
       "version": "2.0.0",
@@ -2795,6 +2845,10 @@
       "engines": {
         "node": ">= 0.6.3"
       }
+    },
+    "node_modules/appium-uiautomator2-driver/node_modules/lazystream/node_modules/isarray": {
+      "version": "1.0.0",
+      "license": "MIT"
     },
     "node_modules/appium-uiautomator2-driver/node_modules/lazystream/node_modules/readable-stream": {
       "version": "2.3.8",
@@ -3177,7 +3231,7 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/normalize-package-data/node_modules/semver": {
-      "version": "5.7.1",
+      "version": "5.7.2",
       "license": "ISC",
       "bin": {
         "semver": "bin/semver"
@@ -3417,6 +3471,17 @@
         "node": ">=10"
       }
     },
+    "node_modules/appium-uiautomator2-driver/node_modules/prebuild-install/node_modules/tar-fs": {
+      "version": "2.1.1",
+      "license": "MIT",
+      "optional": true,
+      "dependencies": {
+        "chownr": "^1.1.1",
+        "mkdirp-classic": "^0.5.2",
+        "pump": "^3.0.0",
+        "tar-stream": "^2.1.4"
+      }
+    },
     "node_modules/appium-uiautomator2-driver/node_modules/process": {
       "version": "0.11.10",
       "license": "MIT",
@@ -3569,14 +3634,14 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/regenerator-runtime": {
-      "version": "0.13.11",
+      "version": "0.14.0",
       "license": "MIT"
     },
     "node_modules/appium-uiautomator2-driver/node_modules/resolve": {
-      "version": "1.22.2",
+      "version": "1.22.4",
       "license": "MIT",
       "dependencies": {
-        "is-core-module": "^2.11.0",
+        "is-core-module": "^2.13.0",
         "path-parse": "^1.0.7",
         "supports-preserve-symlinks-flag": "^1.0.0"
       },
@@ -3624,7 +3689,7 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/semver": {
-      "version": "7.5.1",
+      "version": "7.5.3",
       "license": "ISC",
       "dependencies": {
         "lru-cache": "^6.0.0"
@@ -3753,28 +3818,6 @@
       "license": "MIT",
       "engines": {
         "node": ">=4.0"
-      }
-    },
-    "node_modules/appium-uiautomator2-driver/node_modules/sharp": {
-      "version": "0.32.1",
-      "hasInstallScript": true,
-      "license": "Apache-2.0",
-      "optional": true,
-      "dependencies": {
-        "color": "^4.2.3",
-        "detect-libc": "^2.0.1",
-        "node-addon-api": "^6.1.0",
-        "prebuild-install": "^7.1.1",
-        "semver": "^7.5.0",
-        "simple-get": "^4.0.1",
-        "tar-fs": "^2.1.1",
-        "tunnel-agent": "^0.6.0"
-      },
-      "engines": {
-        "node": ">=14.15.0"
-      },
-      "funding": {
-        "url": "https://opencollective.com/libvips"
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/shell-quote": {
@@ -3955,17 +3998,6 @@
       },
       "funding": {
         "url": "https://github.com/sponsors/ljharb"
-      }
-    },
-    "node_modules/appium-uiautomator2-driver/node_modules/tar-fs": {
-      "version": "2.1.1",
-      "license": "MIT",
-      "optional": true,
-      "dependencies": {
-        "chownr": "^1.1.1",
-        "mkdirp-classic": "^0.5.2",
-        "pump": "^3.0.0",
-        "tar-stream": "^2.1.4"
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/tar-stream": {
@@ -4188,7 +4220,7 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/xpath": {
-      "version": "0.0.32",
+      "version": "0.0.33",
       "license": "MIT",
       "engines": {
         "node": ">=0.6.0"
@@ -11378,7 +11410,7 @@
       }
     },
     "node_modules/compare-versions": {
-      "version": "6.0.0",
+      "version": "6.1.0",
       "license": "MIT"
     },
     "node_modules/compress-commons": {
@@ -11959,7 +11991,7 @@
       }
     },
     "node_modules/gauge/node_modules/signal-exit": {
-      "version": "4.0.2",
+      "version": "4.1.0",
       "license": "ISC",
       "engines": {
         "node": ">=14"
@@ -12149,10 +12181,10 @@
       "license": "ISC"
     },
     "node_modules/ini": {
-      "version": "3.0.1",
+      "version": "4.1.1",
       "license": "ISC",
       "engines": {
-        "node": "^12.13.0 || ^14.15.0 || >=16.0.0"
+        "node": "^14.17.0 || ^16.13.0 || >=18.0.0"
       }
     },
     "node_modules/io.appium.settings": {
@@ -12175,7 +12207,7 @@
       "license": "MIT"
     },
     "node_modules/is-core-module": {
-      "version": "2.12.1",
+      "version": "2.13.0",
       "license": "MIT",
       "dependencies": {
         "has": "^1.0.3"
@@ -12669,7 +12701,7 @@
       "license": "MIT"
     },
     "node_modules/node-abi": {
-      "version": "3.45.0",
+      "version": "3.46.0",
       "license": "MIT",
       "optional": true,
       "dependencies": {
@@ -13143,7 +13175,7 @@
       }
     },
     "node_modules/regenerator-runtime": {
-      "version": "0.13.11",
+      "version": "0.14.0",
       "license": "MIT"
     },
     "node_modules/require-directory": {
@@ -13163,10 +13195,10 @@
       }
     },
     "node_modules/resolve": {
-      "version": "1.22.2",
+      "version": "1.22.4",
       "license": "MIT",
       "dependencies": {
-        "is-core-module": "^2.11.0",
+        "is-core-module": "^2.13.0",
         "path-parse": "^1.0.7",
         "supports-preserve-symlinks-flag": "^1.0.0"
       },
@@ -13239,7 +13271,7 @@
       }
     },
     "node_modules/rpc-websockets": {
-      "version": "7.5.1",
+      "version": "7.6.0",
       "license": "LGPL-3.0-only",
       "dependencies": {
         "@babel/runtime": "^7.17.2",
@@ -14351,19 +14383,54 @@
       }
     },
     "@babel/code-frame": {
-      "version": "7.22.5",
+      "version": "7.22.10",
       "requires": {
-        "@babel/highlight": "^7.22.5"
+        "@babel/highlight": "^7.22.10",
+        "chalk": "^2.4.2"
+      },
+      "dependencies": {
+        "ansi-styles": {
+          "version": "3.2.1",
+          "requires": {
+            "color-convert": "^1.9.0"
+          }
+        },
+        "chalk": {
+          "version": "2.4.2",
+          "requires": {
+            "ansi-styles": "^3.2.1",
+            "escape-string-regexp": "^1.0.5",
+            "supports-color": "^5.3.0"
+          }
+        },
+        "color-convert": {
+          "version": "1.9.3",
+          "requires": {
+            "color-name": "1.1.3"
+          }
+        },
+        "color-name": {
+          "version": "1.1.3"
+        },
+        "has-flag": {
+          "version": "3.0.0"
+        },
+        "supports-color": {
+          "version": "5.5.0",
+          "requires": {
+            "has-flag": "^3.0.0"
+          }
+        }
       }
     },
     "@babel/helper-validator-identifier": {
       "version": "7.22.5"
     },
     "@babel/highlight": {
-      "version": "7.22.5",
+      "version": "7.22.10",
       "requires": {
         "@babel/helper-validator-identifier": "^7.22.5",
-        "chalk": "^2.0.0",
+        "chalk": "^2.4.2",
         "js-tokens": "^4.0.0"
       },
       "dependencies": {
@@ -14402,9 +14469,9 @@
       }
     },
     "@babel/runtime": {
-      "version": "7.22.6",
+      "version": "7.22.10",
       "requires": {
-        "regenerator-runtime": "^0.13.11"
+        "regenerator-runtime": "^0.14.0"
       }
     },
     "@colors/colors": {
@@ -14553,7 +14620,7 @@
       }
     },
     "@types/node": {
-      "version": "20.4.5"
+      "version": "20.5.0"
     },
     "@types/normalize-package-data": {
       "version": "2.4.1"
@@ -14687,24 +14754,29 @@
       }
     },
     "appium-adb": {
-      "version": "9.14.2",
+      "version": "9.14.5",
       "requires": {
         "@appium/support": "^4.0.0",
         "adbkit-apkreader": "^3.1.2",
         "async-lock": "^1.0.0",
         "asyncbox": "^2.6.0",
         "bluebird": "^3.4.7",
-        "ini": "^3.0.0",
+        "ini": "^4.1.1",
         "lodash": "^4.0.0",
-        "lru-cache": "^7.3.0",
+        "lru-cache": "^10.0.0",
         "semver": "^7.0.0",
         "source-map-support": "^0.x",
         "teen_process": "^2.0.1",
         "utf7": "^1.0.2"
+      },
+      "dependencies": {
+        "lru-cache": {
+          "version": "10.0.1"
+        }
       }
     },
     "appium-android-driver": {
-      "version": "5.14.0",
+      "version": "5.14.4",
       "requires": {
         "appium-adb": "^9.11.2",
         "appium-chromedriver": "^5.2.0",
@@ -14726,7 +14798,7 @@
       }
     },
     "appium-chromedriver": {
-      "version": "5.5.2",
+      "version": "5.6.3",
       "requires": {
         "@appium/base-driver": "^9.1.0",
         "@appium/support": "^4.0.0",
@@ -14746,7 +14818,7 @@
       }
     },
     "appium-ios-device": {
-      "version": "2.5.4",
+      "version": "2.6.1",
       "requires": {
         "@appium/support": "^4.0.0",
         "@babel/runtime": "^7.0.0",
@@ -14761,12 +14833,12 @@
       }
     },
     "appium-uiautomator2-driver": {
-      "version": "2.29.2",
+      "version": "2.29.4",
       "requires": {
         "@babel/runtime": "^7.0.0",
         "appium-adb": "^9.13.1",
         "appium-android-driver": "^5.14.0",
-        "appium-chromedriver": "^5.3.1",
+        "appium-chromedriver": "^5.6.1",
         "appium-uiautomator2-server": "^5.12.2",
         "asyncbox": "^2.3.1",
         "axios": "^1.x",
@@ -14779,10 +14851,10 @@
       },
       "dependencies": {
         "@appium/base-driver": {
-          "version": "9.3.14",
+          "version": "9.3.16",
           "requires": {
-            "@appium/support": "^4.1.1",
-            "@appium/types": "^0.13.1",
+            "@appium/support": "^4.1.3",
+            "@appium/types": "^0.13.2",
             "@colors/colors": "1.5.0",
             "@types/async-lock": "1.4.0",
             "@types/bluebird": "3.5.38",
@@ -14814,7 +14886,7 @@
           }
         },
         "@appium/schema": {
-          "version": "0.3.0",
+          "version": "0.3.1",
           "requires": {
             "@types/json-schema": "7.0.12",
             "json-schema": "0.4.0",
@@ -14822,10 +14894,10 @@
           }
         },
         "@appium/support": {
-          "version": "4.1.1",
+          "version": "4.1.3",
           "requires": {
             "@appium/tsconfig": "^0.3.0",
-            "@appium/types": "^0.13.1",
+            "@appium/types": "^0.13.2",
             "@colors/colors": "1.5.0",
             "@types/archiver": "5.3.2",
             "@types/base64-stream": "1.0.2",
@@ -14869,44 +14941,40 @@
             "read-pkg": "5.2.0",
             "resolve-from": "5.0.0",
             "sanitize-filename": "1.6.3",
-            "semver": "7.5.1",
+            "semver": "7.5.3",
             "sharp": "0.32.1",
             "shell-quote": "1.8.1",
             "source-map-support": "0.5.21",
             "supports-color": "8.1.1",
-            "teen_process": "2.0.2",
+            "teen_process": "2.0.4",
             "type-fest": "3.11.1",
             "uuid": "9.0.0",
             "which": "3.0.1",
             "yauzl": "2.10.0"
           },
           "dependencies": {
-            "@babel/runtime": {
-              "version": "7.19.0",
+            "sharp": {
+              "version": "0.32.1",
+              "optional": true,
               "requires": {
-                "regenerator-runtime": "^0.13.4"
+                "color": "^4.2.3",
+                "detect-libc": "^2.0.1",
+                "node-addon-api": "^6.1.0",
+                "prebuild-install": "^7.1.1",
+                "semver": "^7.5.0",
+                "simple-get": "^4.0.1",
+                "tar-fs": "^2.1.1",
+                "tunnel-agent": "^0.6.0"
               }
             },
-            "teen_process": {
-              "version": "2.0.2",
+            "tar-fs": {
+              "version": "2.1.1",
+              "optional": true,
               "requires": {
-                "@babel/runtime": "7.19.0",
-                "bluebird": "3.7.2",
-                "lodash": "4.17.21",
-                "shell-quote": "1.7.3",
-                "source-map-support": "0.5.21",
-                "which": "2.0.2"
-              },
-              "dependencies": {
-                "shell-quote": {
-                  "version": "1.7.3"
-                },
-                "which": {
-                  "version": "2.0.2",
-                  "requires": {
-                    "isexe": "^2.0.0"
-                  }
-                }
+                "chownr": "^1.1.1",
+                "mkdirp-classic": "^0.5.2",
+                "pump": "^3.0.0",
+                "tar-stream": "^2.1.4"
               }
             }
           }
@@ -14918,9 +14986,9 @@
           }
         },
         "@appium/types": {
-          "version": "0.13.1",
+          "version": "0.13.2",
           "requires": {
-            "@appium/schema": "^0.3.0",
+            "@appium/schema": "^0.3.1",
             "@appium/tsconfig": "^0.3.0",
             "@types/express": "4.17.17",
             "@types/npmlog": "4.1.4",
@@ -14929,26 +14997,27 @@
           }
         },
         "@babel/code-frame": {
-          "version": "7.22.5",
+          "version": "7.22.10",
           "requires": {
-            "@babel/highlight": "^7.22.5"
+            "@babel/highlight": "^7.22.10",
+            "chalk": "^2.4.2"
           }
         },
         "@babel/helper-validator-identifier": {
           "version": "7.22.5"
         },
         "@babel/highlight": {
-          "version": "7.22.5",
+          "version": "7.22.10",
           "requires": {
             "@babel/helper-validator-identifier": "^7.22.5",
-            "chalk": "^2.0.0",
+            "chalk": "^2.4.2",
             "js-tokens": "^4.0.0"
           }
         },
         "@babel/runtime": {
-          "version": "7.22.5",
+          "version": "7.22.10",
           "requires": {
-            "regenerator-runtime": "^0.13.11"
+            "regenerator-runtime": "^0.14.0"
           }
         },
         "@colors/colors": {
@@ -15062,7 +15131,7 @@
           }
         },
         "@types/node": {
-          "version": "20.3.3"
+          "version": "20.4.9"
         },
         "@types/normalize-package-data": {
           "version": "2.4.1"
@@ -15134,7 +15203,7 @@
           }
         },
         "@xmldom/xmldom": {
-          "version": "0.8.8"
+          "version": "0.8.10"
         },
         "abort-controller": {
           "version": "3.0.0",
@@ -15175,16 +15244,16 @@
           }
         },
         "appium-adb": {
-          "version": "9.14.1",
+          "version": "9.14.4",
           "requires": {
             "@appium/support": "^4.0.0",
             "adbkit-apkreader": "^3.1.2",
             "async-lock": "^1.0.0",
             "asyncbox": "^2.6.0",
             "bluebird": "^3.4.7",
-            "ini": "^3.0.0",
+            "ini": "^4.1.1",
             "lodash": "^4.0.0",
-            "lru-cache": "^7.3.0",
+            "lru-cache": "^10.0.0",
             "semver": "^7.0.0",
             "source-map-support": "^0.x",
             "teen_process": "^2.0.1",
@@ -15192,7 +15261,7 @@
           },
           "dependencies": {
             "lru-cache": {
-              "version": "7.18.3"
+              "version": "10.0.0"
             }
           }
         },
@@ -15224,7 +15293,7 @@
           }
         },
         "appium-chromedriver": {
-          "version": "5.5.1",
+          "version": "5.6.2",
           "requires": {
             "@appium/base-driver": "^9.1.0",
             "@appium/support": "^4.0.0",
@@ -15234,7 +15303,7 @@
             "asyncbox": "^2.0.2",
             "axios": "^1.x",
             "bluebird": "^3.5.1",
-            "compare-versions": "^5.0.0",
+            "compare-versions": "^6.0.0",
             "fancy-log": "^2.0.0",
             "lodash": "^4.17.4",
             "semver": "^7.0.0",
@@ -15287,6 +15356,9 @@
                 "path-is-absolute": "^1.0.0"
               }
             },
+            "isarray": {
+              "version": "1.0.0"
+            },
             "readable-stream": {
               "version": "2.3.8",
               "requires": {
@@ -15311,7 +15383,7 @@
           }
         },
         "are-we-there-yet": {
-          "version": "4.0.0",
+          "version": "4.0.1",
           "requires": {
             "delegates": "^1.0.0",
             "readable-stream": "^4.1.0"
@@ -15325,12 +15397,13 @@
               }
             },
             "readable-stream": {
-              "version": "4.4.1",
+              "version": "4.4.2",
               "requires": {
                 "abort-controller": "^3.0.0",
                 "buffer": "^6.0.3",
                 "events": "^3.3.0",
-                "process": "^0.11.10"
+                "process": "^0.11.10",
+                "string_decoder": "^1.3.0"
               }
             }
           }
@@ -15540,7 +15613,7 @@
           }
         },
         "compare-versions": {
-          "version": "5.0.3"
+          "version": "6.1.0"
         },
         "compress-commons": {
           "version": "4.1.1",
@@ -15612,7 +15685,7 @@
           "version": "1.2.0"
         },
         "detect-libc": {
-          "version": "2.0.1",
+          "version": "2.0.2",
           "optional": true
         },
         "duplexer": {
@@ -15842,7 +15915,7 @@
               "version": "3.0.0"
             },
             "signal-exit": {
-              "version": "4.0.2"
+              "version": "4.1.0"
             },
             "string-width": {
               "version": "4.2.3",
@@ -15951,10 +16024,10 @@
           "version": "2.0.4"
         },
         "ini": {
-          "version": "3.0.1"
+          "version": "4.1.1"
         },
         "io.appium.settings": {
-          "version": "5.0.5"
+          "version": "5.1.0"
         },
         "ipaddr.js": {
           "version": "1.9.1"
@@ -15963,7 +16036,7 @@
           "version": "0.2.1"
         },
         "is-core-module": {
-          "version": "2.12.1",
+          "version": "2.13.0",
           "requires": {
             "has": "^1.0.3"
           }
@@ -15976,9 +16049,6 @@
         },
         "is-unicode-supported": {
           "version": "0.1.0"
-        },
-        "isarray": {
-          "version": "1.0.0"
         },
         "isexe": {
           "version": "2.0.0"
@@ -16020,6 +16090,9 @@
             "readable-stream": "^2.0.5"
           },
           "dependencies": {
+            "isarray": {
+              "version": "1.0.0"
+            },
             "readable-stream": {
               "version": "2.3.8",
               "requires": {
@@ -16273,7 +16346,7 @@
           },
           "dependencies": {
             "semver": {
-              "version": "5.7.1"
+              "version": "5.7.2"
             }
           }
         },
@@ -16421,6 +16494,18 @@
             "simple-get": "^4.0.0",
             "tar-fs": "^2.0.0",
             "tunnel-agent": "^0.6.0"
+          },
+          "dependencies": {
+            "tar-fs": {
+              "version": "2.1.1",
+              "optional": true,
+              "requires": {
+                "chownr": "^1.1.1",
+                "mkdirp-classic": "^0.5.2",
+                "pump": "^3.0.0",
+                "tar-stream": "^2.1.4"
+              }
+            }
           }
         },
         "process": {
@@ -16528,12 +16613,12 @@
           }
         },
         "regenerator-runtime": {
-          "version": "0.13.11"
+          "version": "0.14.0"
         },
         "resolve": {
-          "version": "1.22.2",
+          "version": "1.22.4",
           "requires": {
-            "is-core-module": "^2.11.0",
+            "is-core-module": "^2.13.0",
             "path-parse": "^1.0.7",
             "supports-preserve-symlinks-flag": "^1.0.0"
           }
@@ -16554,7 +16639,7 @@
           }
         },
         "semver": {
-          "version": "7.5.1",
+          "version": "7.5.3",
           "requires": {
             "lru-cache": "^6.0.0"
           },
@@ -16650,20 +16735,6 @@
             "xmlbuilder": {
               "version": "9.0.7"
             }
-          }
-        },
-        "sharp": {
-          "version": "0.32.1",
-          "optional": true,
-          "requires": {
-            "color": "^4.2.3",
-            "detect-libc": "^2.0.1",
-            "node-addon-api": "^6.1.0",
-            "prebuild-install": "^7.1.1",
-            "semver": "^7.5.0",
-            "simple-get": "^4.0.1",
-            "tar-fs": "^2.1.1",
-            "tunnel-agent": "^0.6.0"
           }
         },
         "shell-quote": {
@@ -16769,16 +16840,6 @@
         },
         "supports-preserve-symlinks-flag": {
           "version": "1.0.0"
-        },
-        "tar-fs": {
-          "version": "2.1.1",
-          "optional": true,
-          "requires": {
-            "chownr": "^1.1.1",
-            "mkdirp-classic": "^0.5.2",
-            "pump": "^3.0.0",
-            "tar-stream": "^2.1.4"
-          }
         },
         "tar-stream": {
           "version": "2.2.0",
@@ -16909,7 +16970,7 @@
           "version": "15.1.1"
         },
         "xpath": {
-          "version": "0.0.32"
+          "version": "0.0.33"
         },
         "yauzl": {
           "version": "2.10.0",
@@ -21683,7 +21744,7 @@
       "extraneous": true
     },
     "compare-versions": {
-      "version": "6.0.0"
+      "version": "6.1.0"
     },
     "compress-commons": {
       "version": "4.1.1",
@@ -22059,7 +22120,7 @@
       },
       "dependencies": {
         "signal-exit": {
-          "version": "4.0.2"
+          "version": "4.1.0"
         }
       }
     },
@@ -22161,7 +22222,7 @@
       "version": "2.0.4"
     },
     "ini": {
-      "version": "3.0.1"
+      "version": "4.1.1"
     },
     "io.appium.settings": {
       "version": "5.1.0"
@@ -22173,7 +22234,7 @@
       "version": "0.2.1"
     },
     "is-core-module": {
-      "version": "2.12.1",
+      "version": "2.13.0",
       "requires": {
         "has": "^1.0.3"
       }
@@ -22488,7 +22549,7 @@
       "extraneous": true
     },
     "node-abi": {
-      "version": "3.45.0",
+      "version": "3.46.0",
       "optional": true,
       "requires": {
         "semver": "^7.3.5"
@@ -22793,7 +22854,7 @@
       }
     },
     "regenerator-runtime": {
-      "version": "0.13.11"
+      "version": "0.14.0"
     },
     "require-directory": {
       "version": "2.1.1",
@@ -22804,9 +22865,9 @@
       "extraneous": true
     },
     "resolve": {
-      "version": "1.22.2",
+      "version": "1.22.4",
       "requires": {
-        "is-core-module": "^2.11.0",
+        "is-core-module": "^2.13.0",
         "path-parse": "^1.0.7",
         "supports-preserve-symlinks-flag": "^1.0.0"
       }
@@ -22854,7 +22915,7 @@
       }
     },
     "rpc-websockets": {
-      "version": "7.5.1",
+      "version": "7.6.0",
       "requires": {
         "@babel/runtime": "^7.17.2",
         "bufferutil": "^4.0.1",
