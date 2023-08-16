@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci
+      - run: npm install
         working-directory: driver
       - run: npm test
         working-directory: driver
@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
+      - run: npm install
         working-directory: driver
       - name: run
         working-directory: driver
@@ -41,7 +41,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
         working-directory: driver
-      - run: npm ci --only=dev
+      - run: npm install --only=dev
         name: Install dev dependencies for the release
         working-directory: driver
       - run: npx semantic-release --dry-run
