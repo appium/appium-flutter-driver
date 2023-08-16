@@ -44,9 +44,9 @@ jobs:
       - run: npm ci --only=dev
         name: Install dev dependencies for the release
         working-directory: driver
-      - run: npx semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npx semantic-release --dry-run
+        # env:
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # to make the push failure
           # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         name: Release
