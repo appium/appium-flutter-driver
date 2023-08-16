@@ -43,7 +43,7 @@
     "build": "tsc -b",
     "clean": "rm -rf build",
     "lint": "tslint 'lib/**/*.ts'",
-    "clean-dependency": "rm -rf node_modules && rm -f package-lock.json && npm install"
+    "clean-dependency": "rm -rf node_modules && rm -f package-lock.json"
   },
   "peerDependencies": {
     "appium": "^2.0.0"
