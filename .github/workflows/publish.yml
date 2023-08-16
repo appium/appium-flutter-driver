@@ -42,13 +42,14 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-          working-directory: driver
+        working-directory: driver
       - run: npm ci --only=dev
         name: Install dev dependencies for the release
-          working-directory: driver
+        working-directory: driver
       - run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # to make the push failure
           # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         name: Release
+        working-directory: driver
