@@ -30,7 +30,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm install
         working-directory: driver
-      - name: run
+      - name: update npm-shrinkwrap.json
         working-directory: driver
         run: |
           rm npm-shrinkwrap.json
@@ -44,7 +44,7 @@ jobs:
       - run: npm install --only=dev
         name: Install dev dependencies for the release
         working-directory: driver
-      - run: npx semantic-release --dry-run
+      - run: npx semantic-release
         # env:
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # to make the push failure
