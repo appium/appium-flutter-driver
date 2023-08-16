@@ -37,6 +37,7 @@ jobs:
           npm prune --production
           rm -rf node_modules/appium
           npm shrinkwrap
+          git diff
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
