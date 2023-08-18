@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci
+      - run: npm install
         working-directory: driver
       - run: npm test
         working-directory: driver
@@ -24,30 +24,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
+      - run: npm install
         working-directory: driver
-      - name: run
+      - name: update npm-shrinkwrap.json
         working-directory: driver
         run: |
           rm npm-shrinkwrap.json
           npm prune --production
           rm -rf node_modules/appium
           npm shrinkwrap
+          git diff
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
         working-directory: driver
-      - run: npm ci --only=dev
+      - run: npm install --only=dev
         name: Install dev dependencies for the release
         working-directory: driver
-      - run: npx semantic-release --dry-run
-        # env:
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # to make the push failure
-          # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         name: Release
         working-directory: driver
