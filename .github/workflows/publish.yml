@@ -4,7 +4,8 @@
 name: publish driver
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [ master ]
 
 jobs:
   build:
