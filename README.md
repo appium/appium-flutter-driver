@@ -5,8 +5,6 @@
 
 Appium Flutter Driver is a test automation tool for [Flutter](https://flutter.dev) apps on multiple platforms/OSes. Appium Flutter Driver is part of the [Appium](https://github.com/appium/appium) mobile test automation tool maintained by the community. Feel free to create PRs to fix issues/improve this driver.
 
-All contributions, including non-code, are welcome! See [TODO](#todo) list below.
-
 ## Flutter Driver vs Appium Flutter Driver
 Even though Flutter comes with superb integration test support, [Flutter Driver](https://flutter.dev/docs/cookbook/testing/integration/introduction), it does not fit some specific use cases, such as
 - writing test in other languages than Dart
@@ -14,33 +12,28 @@ Even though Flutter comes with superb integration test support, [Flutter Driver]
 - running test on multiple devices simultaneously
 - running integration test on device farms, such as Sauce Labs, [HeadSpin](https://www.headspin.io/global-device-infrastructure), AWS, Firebase
 
-Under the hood, Appium Flutter Driver use the [Dart VM Service Protocol](https://github.com/dart-lang/sdk/blob/master/runtime/vm/service/service.md) with extension `ext.flutter.driver`, similar to Flutter Driver, to control the Flutter app-under-test (AUT).
+Under the hood, Appium Flutter Driver uses the [Dart VM Service Protocol](https://github.com/dart-lang/sdk/blob/master/runtime/vm/service/service.md) with extension `ext.flutter.driver`, similar to Flutter Driver, to control the Flutter app-under-test (AUT).
 
 ## Appium Flutter Driver or Appium UiAutomator2/XCUITest driver
 - Appium Flutter driver manages the application under test and the device under test via Appium UiAutomator2/XCUITest drivers
     -  `FLUTTER` context sends commands to the Dart VM directly over the observatory URL
         - Newer Flutter versions expose its accessibility labels to the system's accessibility features. It means you can find some Flutter elements and can interact with them over `accessibility_id` etc in the vanilla Appium UiAutomator2/XCUITest drivers, although some elements require over the Dart VM
-    - `NATIVE_APP` context is the same as regular Appium UiAutomator2/XCUITest driver
-        - Please refer to each client documentation about available command.
-        - Each driver documentation also may help.
+    - `NATIVE_APP` context is the same as the regular Appium UiAutomator2/XCUITest driver
+        - Please refer to each client's documentation about available commands.
+        - Each driver's documentation also may help.
           - https://github.com/appium/appium-uiautomator2-driver
           - https://appium.github.io/appium-xcuitest-driver/latest
     - `WEBVIEW` context manages the WebView contents over Appium UiAutomator2/XCUITest driver
-- Appium UiAutomator2/XCUITest drivers must be sufficient to achieve automation if the application under test had `semanticLabel` properly. Then, accessibility mechanism in each OS can expose elements for Appium though OS's accessibility features
+- Appium UiAutomator2/XCUITest drivers must be sufficient to achieve automation if the application under test had `semanticLabel` properly. Then, the accessibility mechanism in each OS can expose elements for Appium through OS's accessibility features
     - For example, [Key](https://api.flutter.dev/flutter/foundation/Key-class.html) does not work in the Appium UiAutomator2/XCUITest drivers, but can work in the Appium Flutter Driver
 
 ## Installation
 
-- In order to use `appium-flutter-driver`, we need to use `appium` version `1.16.0` or higher.
-- The Appium Flutter Driver version 1.0 and higher require Appium 2.0.0.
-    - `1.8.0`+ require over Appium `2.0.0-beta.46`
+Appium Flutter Driver version 1.0 and higher require Appium 2.0.
 
-With Appium 2:
 ```
 appium driver install --source=npm appium-flutter-driver
 ```
-
-https://appium.io/docs/en/latest/quickstart/install/
 
 As a local:
 
@@ -48,16 +41,10 @@ As a local:
 appium driver install --source local /path/to/appium-flutter-driver/driver
 ```
 
-> **Note**
-> Please use the latest flutter driver with appium 2 for Flutter v3
-
-
-Appium 1.x could have flutter driver, but the version is deprecated.
-
-## Usage
+## Usage and requirement
 If you are unfamiliar with running Appium tests, start with [Appium Getting Starting](http://appium.io/docs/en/about-appium/getting-started/) first.
 
-Your Flutter app-under-test (AUT) must be compiled in `debug` or `profile` mode, because `Flutter Driver does not support running in release mode.`. Also, ensure that your Flutter AUT has `enableFlutterDriverExtension()` before `runApp`. Then, please make sure your app imported **[`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html)** package as its devDependencies as well like below:
+Your Flutter app-under-test (AUT) must be compiled in `debug` or `profile` mode. The dependency must have **[`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html)** package like the below `pubspec.yaml` example.
 
 ```yaml
 # pubspec.yaml
@@ -67,6 +54,10 @@ dev_dependencies:
 ```
 
 This snippet, taken from [example dir](https://github.com/appium-userland/appium-flutter-driver/tree/main/example), is a script written as an appium client with `webdriverio`, and assumes you have `appium` server (with `appium-flutter-driver` installed) running on the same host and default port (`4723`). For more info, see example's [README.md](https://github.com/truongsinh/appium-flutter-driver/tree/main/example/README.md)
+
+> **Note**
+>
+> This means this driver depends on [`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html).
 
 ### Note
 - Flutter context does not support page source
