@@ -3,7 +3,7 @@
 
 name: publish driver
 
-3 FIXME
+# FIXME
 # npm token kep raising as invalid while it had proper one.
 #on:
 #  push:
