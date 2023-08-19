@@ -59,6 +59,8 @@ This snippet, taken from [example dir](https://github.com/appium-userland/appium
 >
 > This means this driver depends on [`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html).
 
+Each client needs [each finder](finder) module to handle [Finders](#Finders). Appium Flutter Driver communicates with the Dart VM directory in the `FLUTTER` context.
+
 ### Note
 - Flutter context does not support page source
     - Please use `getRenderTree` command instead
@@ -76,9 +78,9 @@ This snippet, taken from [example dir](https://github.com/appium-userland/appium
 
 | Capability | Description | Example Values |
 | - | - | -|
-| appium:retryBackoffTime | The time wait for socket connection retry for get flutter session (default 3000ms)|500|
+| appium:retryBackoffTime | The time wait for socket connection retry to get flutter session (default 3000ms)|500|
 | appium:maxRetryCount    | The count for socket connection retry for get flutter session (default 30)          | 20|
-| appium:observatoryWsUri | The URL to attach to the Dart VM. The appium flutter driver finds the WebSocket URL from the device log by default. You can skip the finding the URL process by specifying this capability. Then, this driver attempt to establish a WebSocket connection against the given WebSocket URL. Note that this capability expects the URL is ready for access by outside an appium session. This flutter driver does not do port-forwarding with this capability. You may need to coordinate the port-forwarding as well. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
+| appium:observatoryWsUri | The URL to attach to the Dart VM. The Appium Flutter Driver finds the WebSocket URL from the device log by default. You can skip the finding the URL process by specifying this capability. Then, this driver attempt to establish a WebSocket connection against the given WebSocket URL. Note that this capability expects the URL is ready for access by outside an appium session. This flutter driver does not do port-forwarding with this capability. You may need to coordinate the port-forwarding as well. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
 | appium:skipPortForward | Whether skip port forwarding from the flutter driver local to the device under test with `observatoryWsUri` capability. It helps you to manage the application under test, the observatory URL and the port forwarding configuration. The default is `true`. | true, false |
 | appium:remoteAdbHost | The IP/hostname of the remote host ADB is running on. This capability only makes sense for Android platform. Providing it will implicitly override the host for the Observatory URL if the latter is determined from device logs. localhost be default | 192.168.1.20
 | appium:adbPort | The port number ADB server is running on. This capability only makes sense for Android platform. 5037 by default | 9999
