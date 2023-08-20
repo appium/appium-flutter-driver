@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.21.0
+- Add `isolateId` capability to configure it
+
 ## 1.20.2 (1.20.0, 1.20.1 had broken lock file)
 - Add `adbPort`, `remoteAdbHost` and `forwardingPort` support
 
