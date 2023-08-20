@@ -26,6 +26,8 @@ export const connectSocket = async (
   const retryBackoff = caps.retryBackoffTime || 3000
   const maxRetryCount = caps.maxRetryCount || 30
 
+  const isolateId = caps.isolateId
+
   let retryCount = 0;
   let urlFetchError: Error|undefined;
   let dartObservatoryURL: string|undefined;
@@ -91,23 +93,30 @@ export const connectSocket = async (
             }
           };
           log.info(`Connecting to Dart Observatory: ${dartObservatoryURL}`);
-          const vm = await socket.call(`getVM`) as {
-            isolates: [{
-              name: string,
-              id: number,
-            }],
-          };
-          log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
-          // To accept 'main.dart:main()' and 'main'
-          const mainIsolateData = vm.isolates.find((e) => e.name.includes(`main`));
-          if (!mainIsolateData) {
-            log.error(`Cannot get Dart main isolate info`);
-            removeListenerAndResolve(null);
-            socket.close();
-            return;
+
+          if (isolateId) {
+            log.info(`Listing the given isolate id: ${isolateId}`);
+            socket.isolateId = isolateId
+          } else {
+            const vm = await socket.call(`getVM`) as {
+              isolates: [{
+                name: string,
+                id: number,
+              }],
+            };
+            log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
+            // To accept 'main.dart:main()' and 'main'
+            const mainIsolateData = vm.isolates.find((e) => e.name.includes(`main`));
+            if (!mainIsolateData) {
+              log.error(`Cannot get Dart main isolate info`);
+              removeListenerAndResolve(null);
+              socket.close();
+              return;
+            }
+            // e.g. 'isolates/2978358234363215', '2978358234363215'
+            socket.isolateId = mainIsolateData.id;
           }
-          // e.g. 'isolates/2978358234363215', '2978358234363215'
-          socket.isolateId = mainIsolateData.id;
+
           // @todo check extension and do health check
           const isolate = await socket.call(`getIsolate`, {
             isolateId: `${socket.isolateId}`,
