@@ -53,7 +53,7 @@ dev_dependencies:
     sdk: flutter
 ```
 
-This snippet, taken from [example dir](https://github.com/appium-userland/appium-flutter-driver/tree/main/example), is a script written as an appium client with `webdriverio`, and assumes you have `appium` server (with `appium-flutter-driver` installed) running on the same host and default port (`4723`). For more info, see example's [README.md](https://github.com/truongsinh/appium-flutter-driver/tree/main/example/README.md)
+This snippet, taken from [example directory](example), is a script written as an appium client with `webdriverio`, and assumes you have `appium` server (with `appium-flutter-driver` installed) running on the same host and default port (`4723`). For more info, see example's [README.md](https://github.com/truongsinh/appium-flutter-driver/tree/main/example/README.md)
 
 > **Note**
 >
@@ -158,6 +158,8 @@ const opts = {
 })();
 ```
 
+Please check [example](example) in this repository for more languages.
+
 ## Several ways to start an application
 
 You have a couple of methods to start the application under test by establishing the Dart VM connection as below:
@@ -232,7 +234,6 @@ Please replace them properly with your client.
 | [checkHealth](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/checkHealth.html) | :ok: | `driver.execute('flutter:checkHealth')` | Session |
 | clearTextbox | :ok: | `driver.elementClear(find.byType('TextField'))` | Session |
 | [clearTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/clearTimeline.html) | :ok: | `driver.execute('flutter:clearTimeline')` | Session |
-| [close](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/close.html) | :ok: | [`driver.deleteSession()`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L55) | Session |
 | [enterText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/enterText.html) | :ok: | `driver.elementSendKeys(find.byType('TextField'), 'I can enter text')` (no focus required) <br/> `driver.elementClick(find.byType('TextField')); driver.execute('flutter:enterText', 'I can enter text')` (focus required by tap/click first) | Session |
 | [forceGC](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/forceGC.html) | :ok: | `driver.execute('flutter:forceGC')` | Session |
 | [getBottomLeft](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getBottomLeft.html) | :ok: | `driver.execute('flutter:getBottomLeft', buttonFinder)` | Widget |
@@ -275,7 +276,6 @@ Please replace them properly with your client.
 | - | :ok: | (Ruby) `driver.execute_script 'flutter:connectObservatoryWsUrl'` | Flutter Driver |
 | - | :ok: | (Ruby) `driver.execute_script 'flutter:launchApp', 'bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` | Flutter Driver |
 
-
 > **NOTE**
 > `flutter:launchApp` launches an app via instrument service. `mobile:activateApp` and `driver.activate_app` are via XCTest API. They are a bit different.
 
@@ -305,6 +305,7 @@ driver.execute_script 'flutter:setIsolateId', info['isolates'][0]['id']
 
 These Appium commands can work across context
 
+- `deleteSession`
 - `setContext`
 - `getCurrentContext`
 - `getContexts`
