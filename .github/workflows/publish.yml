@@ -5,7 +5,8 @@ name: publish driver
 
 # FIXME
 # npm token kep raising as invalid while it had proper one.
-#on:
+on:
+  workflow_dispatch:
 #  push:
 #    branches: [ main ]
 #    # paths:
