@@ -7,10 +7,10 @@ Appium Flutter Driver is a test automation tool for [Flutter](https://flutter.de
 
 ## Flutter Driver vs Appium Flutter Driver
 Even though Flutter comes with superb integration test support, [Flutter Driver](https://flutter.dev/docs/cookbook/testing/integration/introduction), it does not fit some specific use cases, such as
-- writing test in other languages than Dart
-- running integration test for Flutter app with embedded webview or native view, or existing native app with embedded Flutter view
-- running test on multiple devices simultaneously
-- running integration test on device farms, such as Sauce Labs, [HeadSpin](https://www.headspin.io/global-device-infrastructure), AWS, Firebase
+- Writing tests in other languages than Dart
+- Running integration test for Flutter app with embedded webview or native view, or existing native app with embedded Flutter view
+- Running tests on multiple devices simultaneously
+- Running integration tests on device farms that offer Appium support (Please contact the availability for each vendor)
 
 Under the hood, Appium Flutter Driver uses the [Dart VM Service Protocol](https://github.com/dart-lang/sdk/blob/master/runtime/vm/service/service.md) with extension `ext.flutter.driver`, similar to Flutter Driver, to control the Flutter app-under-test (AUT).
 
