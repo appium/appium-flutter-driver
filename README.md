@@ -44,7 +44,7 @@ appium driver install --source local /path/to/appium-flutter-driver/driver
 ## Usage and requirement
 If you are unfamiliar with running Appium tests, start with [Appium Getting Starting](http://appium.io/docs/en/about-appium/getting-started/) first.
 
-Your Flutter app-under-test (AUT) must be compiled in `debug` or `profile` mode. The dependency must have **[`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html)** package like the below `pubspec.yaml` example.
+Your Flutter application must be compiled in `debug` or `profile` mode. The dependency must have **[`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html)** package like the below `pubspec.yaml` example.
 
 ```yaml
 # pubspec.yaml
@@ -74,7 +74,9 @@ Each client needs [each finder](finder) module to handle [Finders](#Finders). Ap
     2. Start the app process via 3rd party tools such as [go-ios](https://github.com/danielpaulus/go-ios) to start the app process with debug mode in the middle of the new session process in 1) the above.
           - Then, the appium flutter session establish the WebSocket and proceed the session
 
-### Desired Capabilities for flutter driver only
+## Capabilities
+
+### For the Appium Flutter Driver only
 
 | Capability | Description | Example Values |
 | - | - | -|
@@ -87,15 +89,22 @@ Each client needs [each finder](finder) module to handle [Finders](#Finders). Ap
 | appium:adbPort | The port number ADB server is running on. This capability only makes sense for Android platform. 5037 by default | 9999
 | appium:forwardingPort | The port number that will be used to forward the traffic from the device under test to locahost. Only applicable if `skipPortForward` is falsy. Not applicable if the test is executed on iOS Simulator. By default, it is the same as in the provided or autodetected Observatory URL. | 9999
 
-### Context
+### UIA2/XCUITest driver
 
-Appium Flutter Driver allow you to send flutter_driver commands to the Dart VM in `FLUTTER` context, but it does not support native Android/iOS automation. Instead, `NATIVE_APP` context provide you to use UIA2 driver for Android and XCUITest for iOS automation. `WEBVIEW_XXXX` cntext helps WebView testing.
+Please check each driver's documentation
+- https://github.com/appium/appium-uiautomator2-driver
+- https://appium.github.io/appium-xcuitest-driver/latest/capabilities/
 
-Thus, you can automate proper application target by switching its context with `FLUTTER`, `NATIVE_APP` and `WEBVIEW_XXXX`.
+## Context Management
+
+Appium Flutter Driver allows you to send [`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html) commands to the Dart VM in the `FLUTTER` context, but it does not support native Android/iOS since the Dart VM can handle in the Dart VM contents. `NATIVE_APP` context provides you to use the UIA2 driver for Android and the XCUITest driver for iOS automation. `WEBVIEW_XXXX` context helps WebView testing over the UIA2/XCUITest driver that is not available via the flutter_driver.
+
+Thus, you need to switch proper contexts, `FLUTTER`, `NATIVE_APP` or `WEBVIEW_XXXX`, to automate a proper application target.
 
 ### Example
 
 ```js
+# webdriverio
 const wdio = require('webdriverio');
 const assert = require('assert');
 const { byValueKey } = require('appium-flutter-finder');
@@ -103,15 +112,13 @@ const { byValueKey } = require('appium-flutter-finder');
 const osSpecificOps = process.env.APPIUM_OS === 'android' ? {
   'platformName': 'Android',
   'appium:deviceName': 'Pixel 2',
-  // @todo support non-unix style path
-  app: __dirname +  '/../apps/app-free-debug.apk',
+  'appium:app': __dirname +  '/../apps/app-free-debug.apk',
 }: process.env.APPIUM_OS === 'ios' ? {
   'platformName': 'iOS',
   'appium:platformVersion': '12.2',
   'appium:deviceName': 'iPhone X',
   'appium:noReset': true,
   'appium:app': __dirname +  '/../apps/Runner.zip',
-
 } : {};
 
 const opts = {
@@ -151,18 +158,18 @@ const opts = {
 })();
 ```
 
-### Several ways to start an application
+## Several ways to start an application
 
-You have a couple of methods to start the application under test with establishing the Dart VM connection as below:
+You have a couple of methods to start the application under test by establishing the Dart VM connection as below:
 
 1. Start with `app` in the capabilities
     1. The most standard method. You may need to start a new session with `app` capability. Then, appium-flutter-driver will start the app, and establish a connection with the Dart VM immediately.
-2. Start with `activate_app`
+2. Start with `activate_app`: for users who want to start the application under test in the middle of a session
     1. Start a session without `app` capability
     2. Install the application under test via `driver.install_app` or `mobile:installApp` command
     3. Activate the app via `driver.activate_app` or `mobile:activateApp` command
         - Then, appium-flutter-driver establish a connection with the Dart VM
-3. Launch app outside the driver
+3. Launch the app outside the driver: for users who want to manage the application under test by yourselves
     1. Start a session without `app` capability
     2. Install the application under test via `driver.install_app` or `mobile:installApp` command etc
     3. Calls `flutter:connectObservatoryWsUrl` command to keep finding an observatory URL to the Dart VM
@@ -170,7 +177,7 @@ You have a couple of methods to start the application under test with establishi
     4. (at the same time) Launch the application under test via outside the appium-flutter-driver
         - e.g. Launch an iOS process via [ios-go](https://github.com/danielpaulus/go-ios), [iproxy](https://github.com/libimobiledevice/libusbmuxd#iproxy) or [tidevice](https://github.com/alibaba/taobao-iphone-device)
     5. Once `flutter:connectObservatoryWsUrl` identify the observatory URL, the command will establish a connection to the Dart VM
-4. Launch app with `flutter:launchApp` for iOS and attach to the Dart VM
+4. Launch the app with `flutter:launchApp` for iOS and attach to the Dart VM: for users whom application under test do not print the observatory url via regular launch/activate app method
     1. Start a session without `app` capability
     2. Install the application under test via `driver.install_app` or `mobile:installApp` command etc
     3. Calls `flutter:launchApp` command to start an iOS app via instrument service
@@ -182,7 +189,14 @@ You have a couple of methods to start the application under test with establishi
 - [appium-flutter-driver](driver/CHANGELOG.md)
 - [each finder](finder)
 
-## API
+
+## Commands for NATIVE_APP/WEBVIEW context
+
+Please check each driver's documentation
+- https://github.com/appium/appium-uiautomator2-driver
+- https://appium.github.io/appium-xcuitest-driver/latest
+
+## Commands for FLUTTER context
 
 Legend:
 
@@ -256,16 +270,8 @@ Please replace them properly with your client.
 | - | :ok: | `driver.execute('flutter:getVMInfo')` | System |
 | - | :ok: | `driver.execute('flutter:setIsolateId', 'isolates/2978358234363215')` | System |
 | - | :ok: | `driver.execute('flutter:getIsolate', 'isolates/2978358234363215')` or `driver.execute('flutter:getIsolate')` | System |
-| - | :ok: | `setContext` | Appium |
-| - | :ok: | `getCurrentContext` | Appium |
-| - | :ok: | `getContexts` | Appium |
 | :question: | :ok: | `driver.execute('flutter:longTap', find.byValueKey('increment'), {durationMilliseconds: 10000, frequency: 30})` | Widget |
 | :question: | :ok: | `driver.execute('flutter:waitForFirstFrame')` | Widget |
-| - | :ok: | `activateApp('appId')` | Appium |
-| - | :ok: | `terminateApp('appId')` | Appium |
-| - | :ok: | `installApp(appPath, options)` | Appium |
-| - | :ok: | `getClipboard` | Appium |
-| - | :ok: | `setClipboard` | Appium |
 | - | :ok: | (Ruby) `driver.execute_script 'flutter:connectObservatoryWsUrl'` | Flutter Driver |
 | - | :ok: | (Ruby) `driver.execute_script 'flutter:launchApp', 'bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` | Flutter Driver |
 
@@ -273,7 +279,8 @@ Please replace them properly with your client.
 > **NOTE**
 > `flutter:launchApp` launches an app via instrument service. `mobile:activateApp` and `driver.activate_app` are via XCTest API. They are a bit different.
 
-## Change the flutter engine attache to
+### `isolate` handling
+#### Change the flutter engine attache to
 
 1. Get available isolate ids
     - `id` key in the value of `isolates` by `flutter:getVMInfo`
@@ -286,7 +293,7 @@ info = driver.execute_script 'flutter:getVMInfo'
 driver.execute_script 'flutter:setIsolateId', info['isolates'][0]['id']
 ```
 
-## Check current isolate, or a particular isolate
+#### Check current isolate, or a particular isolate
 
 1. Get available isolates
     - `driver.execute('flutter:getVMInfo').isolates` (JS)
@@ -294,19 +301,27 @@ driver.execute_script 'flutter:setIsolateId', info['isolates'][0]['id']
     - Current isolate: `driver.execute('flutter:getIsolate')` (JS)
     - Particular isolate: `driver.execute('flutter:getIsolate', 'isolates/2978358234363215')` (JS)
 
+## Commands across contexts
+
+These Appium commands can work across context
+
+- `setContext`
+- `getCurrentContext`
+- `getContexts`
+- `activateApp('appId')`/`mobile:activateApp`
+- `terminateApp('appId')`/`mobile:terminateApp`
+- `installApp(appPath, options)`
+- `getClipboard`
+- `setClipboard`
+
 ## TODO?
 
-Items which may be worth to add.
-
-- [ ] CD (automatic publish to npm)
 - [ ] switching context between Flutter and [AndroidView](https://api.flutter.dev/flutter/widgets/AndroidView-class.html)
 - [ ] switching context between Flutter and [UiKitView](https://api.flutter.dev/flutter/widgets/UiKitView-class.html)
 - [ ] Web: `FLUTTER_WEB` context?
 - [ ] macOS: with https://github.com/appium/appium-mac2-driver
 - [ ] Windws?
 - [ ] Linux?
-
-## Test Status
 
 ## Release appium-flutter-driver
 
@@ -322,5 +337,6 @@ $ npm publish
 ```
 
 ### Java implementation
-````
+```
 https://github.com/ashwithpoojary98/javaflutterfinder
+```
