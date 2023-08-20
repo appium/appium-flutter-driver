@@ -24,7 +24,7 @@ export const connectSocket = async (
   caps: any) => {
 
   const retryBackoff = caps.retryBackoffTime || 3000
-  const maxRetryCount = caps.maxRetryCount || 30
+  const maxRetryCount = caps.maxRetryCount || 10
 
   const isolateId = caps.isolateId
 
