@@ -341,3 +341,6 @@ $ npm publish
 ```
 https://github.com/ashwithpoojary98/javaflutterfinder
 ```
+```
+https://github.com/5v1988/appium-flutter-client
+```
