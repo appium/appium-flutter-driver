@@ -315,6 +315,10 @@ These Appium commands can work across context
 - `getClipboard`
 - `setClipboard`
 
+## Troubleshooting
+
+- input texts https://github.com/appium/appium-flutter-driver/issues/417
+
 ## TODO?
 
 - [ ] switching context between Flutter and [AndroidView](https://api.flutter.dev/flutter/widgets/AndroidView-class.html)
