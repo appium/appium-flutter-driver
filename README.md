@@ -318,6 +318,8 @@ These Appium commands can work across context
 ## Troubleshooting
 
 - input texts https://github.com/appium/appium-flutter-driver/issues/417
+- Looks hanging in `click` https://github.com/appium/appium-flutter-driver/issues/181#issuecomment-1323684510
+    - `flutter:setFrameSync` may help
 
 ## TODO?
 
