@@ -1,4 +1,3 @@
-// @ts-ignore
 import AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
 import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';
@@ -38,7 +37,7 @@ export const startAndroidSession = async (caps, ...args) => {
 export const connectAndroidSession = async (androiddriver, caps) =>
   await connectSocket(getObservatoryWsUri, androiddriver, caps);
 
-export const getObservatoryWsUri = async (proxydriver , caps) => {
+export const getObservatoryWsUri = async (proxydriver, caps) => {
   let urlObject: URL;
   if (caps.observatoryWsUri) {
     urlObject = new URL(caps.observatoryWsUri);
