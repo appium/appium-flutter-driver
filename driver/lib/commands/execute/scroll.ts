@@ -1,6 +1,4 @@
 
-// tslint:disable:object-literal-sort-keys
-
 import _ from 'lodash';
 import { FlutterDriver } from '../../driver';
 import { waitFor, waitForTappable } from './wait';
@@ -92,11 +90,7 @@ const shouldRetry = (startAt, waitTimeoutMilliseconds) => {
     return true;
   }
 
-  if (Date.now() - startAt > _.toInteger(waitTimeoutMilliseconds)) {
-    return false;
-  }
-
-  return true;
+  return Date.now() - startAt < _.toInteger(waitTimeoutMilliseconds);
 };
 
 export const scrollUntilVisible = async (
@@ -121,10 +115,10 @@ export const scrollUntilVisible = async (
   // An expectation for checking that an element, known to be present on the widget tree, is visible
   let isVisible = false;
   const startAt = Date.now();
-  while (isVisible || shouldRetry(startAt, waitTimeoutMilliseconds)) {
+  while (!isVisible || shouldRetry(startAt, waitTimeoutMilliseconds)) {
     (async () => {
       try {
-        await waitFor(self, item);
+        await waitFor(self, item, durationMilliseconds);
         isVisible = true;
       } catch (ign) {}
     })();
@@ -171,10 +165,10 @@ export const scrollUntilTapable = async (
   // repeatedly until we either find the item or time out.
   let isVisible = false;
   const startAt = Date.now();
-  while (isVisible || shouldRetry(startAt, waitTimeoutMilliseconds)) {
+  while (!isVisible || shouldRetry(startAt, waitTimeoutMilliseconds)) {
     (async () => {
       try {
-        await waitForTappable(self, item);
+        await waitForTappable(self, item, durationMilliseconds);
         isVisible = true;
       } catch (ign) {}
     })();
