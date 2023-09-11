@@ -23,10 +23,10 @@ export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: 
         `Unsupported platformName: ${caps.platformName}`,
       );
   }
-}
+};
 
 // tslint:disable-next-line:variable-name
-export const createSession = async function(this: FlutterDriver, sessionId, caps, ...args)  {
+export const createSession = async function(this: FlutterDriver, sessionId, caps, ...args) {
     try {
       // setup proxies - if platformName is not empty, make it less case sensitive
       if (caps.platformName !== null) {

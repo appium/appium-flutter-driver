@@ -3,6 +3,7 @@ import { reConnectFlutterDriver } from '../sessions/session';
 import { longTap, scroll, scrollIntoView, scrollUntilVisible, scrollUntilTapable } from './execute/scroll';
 import { waitFor, waitForAbsent, waitForTappable } from './execute/wait';
 import { launchApp } from './../ios/app';
+import B from 'bluebird';
 
 
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
@@ -27,9 +28,9 @@ export const execute = async function(
     case `getVMInfo`:
       return getVMInfo(this);
     case `setIsolateId`:
-      return setIsolateId(this, args[0])
+      return setIsolateId(this, args[0]);
     case `getIsolate`:
-      return getIsolate(this, args[0])
+      return getIsolate(this, args[0]);
     case `checkHealth`:
       return checkHealth(this);
     case `clearTimeline`:
@@ -75,7 +76,7 @@ export const execute = async function(
     case `longTap`:
       return longTap(this, args[0], args[1]);
     case `waitForFirstFrame`:
-      return waitForCondition(this, { conditionName : `FirstFrameRasterizedCondition`});
+      return waitForCondition(this, { conditionName: `FirstFrameRasterizedCondition`});
     case `setFrameSync`:
       return setFrameSync(this, args[0], args[1]);
     case `clickElement`:
@@ -91,16 +92,16 @@ const flutterLaunchApp = async (
   const { arguments: args = [], environment: env = {}} = opts;
   await launchApp(self.internalCaps.udid, appId, args, env);
   await reConnectFlutterDriver.bind(self)(self.internalCaps);
-}
+};
 
 const connectObservatoryWsUrl = async (self: FlutterDriver) => {
   await reConnectFlutterDriver.bind(self)(self.internalCaps);
-}
+};
 
 const checkHealth = async (self: FlutterDriver) =>
   (await self.executeElementCommand(`get_health`)).status;
 
-const getVMInfo =async (self: FlutterDriver) =>
+const getVMInfo = async (self: FlutterDriver) =>
   (await self.executeGetVMCommand());
 
 const getRenderTree = async (self: FlutterDriver) =>
@@ -133,28 +134,15 @@ const setIsolateId = async (self: FlutterDriver, isolateId: string) => {
   });
 };
 
-const getIsolate = async (self: FlutterDriver, isolateId: string|undefined) => {
-  return await self.executeGetIsolateCommand(isolateId || self.socket!.isolateId);
-}
-
-const anyPromise = (promises: Promise<any>[]) => {
-  const newArray = promises.map((p) =>
-    p.then(
-      (resolvedValue) => Promise.reject(resolvedValue),
-      (rejectedReason) => rejectedReason,
-    ),
-  );
-  return Promise.all(newArray).then(
-    (rejectedReasons) => Promise.reject(rejectedReasons),
-    (resolvedValue) => resolvedValue,
-  );
-};
+const getIsolate = async (
+  self: FlutterDriver, isolateId: string|undefined
+) => await self.executeGetIsolateCommand(isolateId || self.socket!.isolateId);
 
 const clearTimeline = async (self: FlutterDriver) => {
   // @todo backward compatible, need to cleanup later
   const call1: Promise<any> = self.socket!.call(`_clearVMTimeline`);
   const call2: Promise<any> = self.socket!.call(`clearVMTimeline`);
-  const response = await anyPromise([call1, call2]);
+  const response = await B.any([call1, call2]);
   if (response.type !== `Success`) {
     throw new Error(`Could not forceGC, response was ${response}`);
   }
