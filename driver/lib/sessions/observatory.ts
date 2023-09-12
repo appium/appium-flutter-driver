@@ -17,12 +17,14 @@ const OBSERVATORY_URL_PATTERN = new RegExp(
   `The Dart VM service is listening on )` +
   `((http|//)[a-zA-Z0-9:/=_\\-.\\[\\]]+)`,
 );
+type AnyDriver = import('appium-xcuitest-driver').XCUITestDriver | import('appium-uiautomator2-driver').AndroidUiautomator2Driver;
 
 // SOCKETS
 export const connectSocket = async (
-  getObservatoryWsUri,
-  driver: any,
-  caps: any) => {
+  getObservatoryWsUri: (driver: AnyDriver, caps: any) => Promise<string>,
+  driver: AnyDriver,
+  caps: Record<string, any>
+): Promise<IsolateSocket> => {
 
   const retryBackoff = caps.retryBackoffTime || 3000;
   const maxRetryCount = caps.maxRetryCount || 10;
@@ -66,7 +68,7 @@ export const connectSocket = async (
         };
 
         // Add an 'error' event handler for the client socket
-        const onErrorListener = (ex) => {
+        const onErrorListener = (ex: Error) => {
           log.error(JSON.stringify(ex));
           removeListenerAndResolve(null);
         };
@@ -166,8 +168,7 @@ export const executeGetIsolateCommand = async function(
 ) {
   log.debug(`>>> getIsolate`);
   const isolate = await this.socket!.call(`getIsolate`, { isolateId: `${isolateId}` });
-  log.debug(`<<< ${_.truncate(JSON.stringify(isolate), {
-    'length': truncateLength, 'omission': `...` })}`);
+  log.debug(`<<< ${_.truncate(JSON.stringify(isolate), {'length': truncateLength})}`);
   return isolate;
 };
 
@@ -179,8 +180,7 @@ export const executeGetVMCommand = async function(this: FlutterDriver) {
       id: number,
     }],
   };
-  log.debug(`<<< ${_.truncate(JSON.stringify(vm), {
-    'length': truncateLength, 'omission': `...` })}`);
+  log.debug(`<<< ${_.truncate(JSON.stringify(vm), {'length': truncateLength})}`);
   return vm;
 };
 
@@ -202,7 +202,7 @@ export const executeElementCommand = async function(
   return data.response;
 };
 
-export const processLogToGetobservatory = (deviceLogs: [{ message: string }]) => {
+export const processLogToGetobservatory = (deviceLogs: [{ message: string }]): URL => {
   let dartObservatoryURL: URL|undefined;
   for (const line of deviceLogs.map((e) => e.message).reverse()) {
     const match = line.match(OBSERVATORY_URL_PATTERN);

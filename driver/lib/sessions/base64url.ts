@@ -1,6 +1,6 @@
 const W3C_ELEMENT = `element-6066-11e4-a52e-4f735466cecf`;
 
-export const decode = (input: string | {ELEMENT: string}) => {
+export const decode = (input: string | {ELEMENT: string}): string => {
   let base64String = ``;
   if (typeof input === `string`) {
     base64String = input;

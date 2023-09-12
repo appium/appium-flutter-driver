@@ -3,12 +3,8 @@ import { log } from './../logger';
 
 /**
  * Launch the given bundle id via instrument service.
- *
- * @param udid
- * @param bundleId
- * @returns
  */
-export const launchApp = async (udid, bundleId, args = [], env = {}) => {
+export const launchApp = async (udid: string, bundleId: string, args = [], env = {}): Promise<boolean> => {
   let instrumentService;
   try {
     instrumentService = await services.startInstrumentService(udid);
