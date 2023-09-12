@@ -48,6 +48,17 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   public proxydriverName: string; // to store 'driver name' as proxy to.
   public device: any;
 
+  // FIXME: from BaseDriver
+  public opts: any;
+  public caps: any;
+  public clearNewCommandTimeout: any;
+  public startNewCommandTimeout: any;
+  public relaxedSecurityEnabled: any;
+  public denyInsecure: any;
+  public allowInsecure: any;
+  public desiredCapConstraints: any;
+  public log: any;
+
   // Used to keep the capabilities internally
   public internalCaps: DriverCaps<FluttertDriverConstraints>;
 
@@ -211,4 +222,3 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
 }
 
 export { FlutterDriver };
-
