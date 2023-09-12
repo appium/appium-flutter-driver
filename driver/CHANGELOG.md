@@ -1,5 +1,8 @@
 # Changelog
 
+## not yet
+- `skipAttachObservatoryUrl` option for `mobile:activateApp` to prevent trying to attach to an observatory url after activating the app.
+
 ## 1.21.1
 - `appium:maxRetryCount` is 10 by default as optimization
 
