@@ -1,6 +1,6 @@
 # Changelog
 
-## not yet
+## 1.22.0
 - `skipAttachObservatoryUrl` option for `mobile:activateApp` to prevent trying to attach to an observatory url after activating the app.
 
 ## 1.21.1
