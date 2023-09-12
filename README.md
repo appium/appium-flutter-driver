@@ -310,6 +310,7 @@ These Appium commands can work across context
 - `getCurrentContext`
 - `getContexts`
 - `activateApp('appId')`/`mobile:activateApp`
+    - `mobile:activateApp` has `skipAttachObservatoryUrl` key to not try to attach to an observatory url. e.g. `driver.execute_script 'mobile:activateApp', {skipAttachObservatoryUrl: true, appId: 'com.android.chrome'}`
 - `terminateApp('appId')`/`mobile:terminateApp`
 - `installApp(appPath, options)`
 - `getClipboard`
