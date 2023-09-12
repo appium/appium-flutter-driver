@@ -31,4 +31,4 @@ export const launchApp = async (udid, bundleId, args = [], env = {}) => {
       instrumentService.close();
     }
   }
-}
+};

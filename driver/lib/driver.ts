@@ -17,7 +17,6 @@ import { execute } from './commands/execute';
 import { click, longTap, performTouch, tap, tapEl } from './commands/gesture';
 import { getScreenshot } from './commands/screen';
 import { getClipboard, setClipboard } from './commands/clipboard';
-import { launchApp } from './ios/app';
 
 // Need to not proxy in WebView context
 const WEBVIEW_NO_PROXY = [
@@ -38,7 +37,7 @@ class FlutterDriver extends BaseDriver<any> {
   public socket: IsolateSocket | null = null;
   public locatorStrategies = [`key`, `css selector`];
   public proxydriver: any;
-  public proxydriverName: string;  // to store 'driver name' as proxy to.
+  public proxydriverName: string; // to store 'driver name' as proxy to.
   public device: any;
 
   // Used to keep the capabilities internally
@@ -55,7 +54,7 @@ class FlutterDriver extends BaseDriver<any> {
   public allowInsecure: any;
 
   // to handle WebView context
-  public proxyWebViewActive: boolean = false;
+  public proxyWebViewActive = false;
 
   // session
   public executeElementCommand = executeElementCommand;
@@ -139,7 +138,7 @@ class FlutterDriver extends BaseDriver<any> {
     super.validateLocatorStrategy(strategy, false);
   }
 
-  validateDesiredCaps(caps: any): caps is DriverCaps<Constraints>{
+  validateDesiredCaps(caps: any): caps is DriverCaps<Constraints> {
     // check with the base class, and return if it fails
     const res = super.validateDesiredCaps(caps);
     if (!res) {
@@ -152,7 +151,7 @@ class FlutterDriver extends BaseDriver<any> {
 
   public async proxyCommand (url, method, body = null) {
     const result = await this.proxydriver.proxyCommand(url, method, body);
-    return result
+    return result;
   }
 
   public async executeCommand(cmd: string, ...args: any[]) {

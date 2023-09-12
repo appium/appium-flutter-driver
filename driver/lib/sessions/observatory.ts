@@ -4,6 +4,7 @@ import { FlutterDriver } from '../driver';
 import { log } from '../logger';
 import { IsolateSocket } from './isolate_socket';
 import { decode } from './base64url';
+import B from 'bluebird';
 
 const truncateLength = 500;
 // https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183
@@ -14,7 +15,7 @@ const OBSERVATORY_URL_PATTERN = new RegExp(
   `(Observatory listening on |` +
   `An Observatory debugger and profiler on\\s.+\\sis available at: |` +
   `The Dart VM service is listening on )` +
-  `((http|\/\/)[a-zA-Z0-9:/=_\\-\.\\[\\]]+)`,
+  `((http|//)[a-zA-Z0-9:/=_\\-.\\[\\]]+)`,
 );
 
 // SOCKETS
@@ -23,10 +24,10 @@ export const connectSocket = async (
   driver: any,
   caps: any) => {
 
-  const retryBackoff = caps.retryBackoffTime || 3000
-  const maxRetryCount = caps.maxRetryCount || 10
+  const retryBackoff = caps.retryBackoffTime || 3000;
+  const maxRetryCount = caps.maxRetryCount || 10;
 
-  const isolateId = caps.isolateId
+  const isolateId = caps.isolateId;
 
   let retryCount = 0;
   let urlFetchError: Error|undefined;
@@ -39,7 +40,7 @@ export const connectSocket = async (
   while (retryCount < maxRetryCount) {
     if (retryCount > 0 && retryBackoff > 0) {
       log.info(`Waiting ${retryBackoff}ms before retrying`);
-      await new Promise((r) => setTimeout(r, retryBackoff));
+      await B.delay(retryBackoff);
     }
     log.info(`Attempt #${(retryCount + 1)} of ${maxRetryCount}`);
 
@@ -49,7 +50,7 @@ export const connectSocket = async (
         urlFetchError = undefined;
       } catch (e) {
         urlFetchError = e;
-        log.debug(e.message)
+        log.debug(e.message);
       }
     }
 
@@ -82,8 +83,7 @@ export const connectSocket = async (
         };
         socket.on(`timeout`, onTimeoutListener);
         const onOpenListener = async () => {
-          // tslint:disable-next-line:ban-types
-          const originalSocketCall: Function = socket.call;
+          const originalSocketCall = socket.call;
           socket.call = async (...args: any) => {
             try {
               // `await` is needed so that rejected promise will be thrown and caught
@@ -96,7 +96,7 @@ export const connectSocket = async (
 
           if (isolateId) {
             log.info(`Listing the given isolate id: ${isolateId}`);
-            socket.isolateId = isolateId
+            socket.isolateId = isolateId;
           } else {
             const vm = await socket.call(`getVM`) as {
               isolates: [{

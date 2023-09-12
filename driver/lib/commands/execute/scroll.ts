@@ -1,6 +1,4 @@
 
-// tslint:disable:object-literal-sort-keys
-
 import _ from 'lodash';
 import { FlutterDriver } from '../../driver';
 import { waitFor, waitForTappable } from './wait';
@@ -84,7 +82,7 @@ const validateOps = (alignment, dxScroll, dyScroll) => {
   }
 
   return true;
-}
+};
 
 const shouldRetry = (startAt, waitTimeoutMilliseconds) => {
   if (!waitTimeoutMilliseconds) {
@@ -92,12 +90,8 @@ const shouldRetry = (startAt, waitTimeoutMilliseconds) => {
     return true;
   }
 
-  if (Date.now() - startAt > _.toInteger(waitTimeoutMilliseconds)) {
-    return false;
-  }
-
-  return true;
-}
+  return Date.now() - startAt < _.toInteger(waitTimeoutMilliseconds);
+};
 
 export const scrollUntilVisible = async (
   self: FlutterDriver,
@@ -120,22 +114,20 @@ export const scrollUntilVisible = async (
 
   // An expectation for checking that an element, known to be present on the widget tree, is visible
   let isVisible = false;
-  const startAt = Date.now()
-  while (isVisible || shouldRetry(startAt, waitTimeoutMilliseconds)) {
-    try {
-      waitFor(self, item).then((_value) => {
+  const startAt = Date.now();
+  while (!isVisible || shouldRetry(startAt, waitTimeoutMilliseconds)) {
+    (async () => {
+      try {
+        await waitFor(self, item, durationMilliseconds);
         isVisible = true;
-      });
+      } catch (ign) {}
+    })();
 
-      if (isVisible) {
-        // the element is in the view
-        break
-      }
-
-      await scroll(self, elementBase64,{
+    try {
+      await scroll(self, elementBase64, {
         dx: dxScroll,
         dy: dyScroll,
-        durationMilliseconds: 100,
+        durationMilliseconds,
         frequency
       });
     } catch { /* go to the next scroll */ }
@@ -172,23 +164,20 @@ export const scrollUntilTapable = async (
   // the chance to complete if the item is already onscreen; if not, scroll
   // repeatedly until we either find the item or time out.
   let isVisible = false;
-
-  const startAt = Date.now()
-  while (isVisible || shouldRetry(startAt, waitTimeoutMilliseconds)) {
-    try {
-      waitForTappable(self, item).then((_value) => {
+  const startAt = Date.now();
+  while (!isVisible || shouldRetry(startAt, waitTimeoutMilliseconds)) {
+    (async () => {
+      try {
+        await waitForTappable(self, item, durationMilliseconds);
         isVisible = true;
-      });
+      } catch (ign) {}
+    })();
 
-      if (isVisible) {
-        // the element is in the view
-        break
-      }
-
-      await scroll(self, elementBase64,{
+    try {
+      await scroll(self, elementBase64, {
         dx: dxScroll,
         dy: dyScroll,
-        durationMilliseconds: 100,
+        durationMilliseconds,
         frequency
       });
     } catch { /* go to the next scroll */ }
