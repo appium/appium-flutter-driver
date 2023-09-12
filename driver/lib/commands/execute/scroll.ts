@@ -68,7 +68,7 @@ export const longTap = async (
   });
 };
 
-const validateOps = (alignment, dxScroll, dyScroll) => {
+const validateOps = (alignment: any, dxScroll: any, dyScroll: any): boolean => {
   if (
     typeof alignment !== `number` ||
     typeof dxScroll !== `number` ||
@@ -84,7 +84,7 @@ const validateOps = (alignment, dxScroll, dyScroll) => {
   return true;
 };
 
-const shouldRetry = (startAt, waitTimeoutMilliseconds) => {
+const shouldRetry = (startAt: number, waitTimeoutMilliseconds?: number): boolean => {
   if (!waitTimeoutMilliseconds) {
     // Then, the scroll should continue infinitely
     return true;

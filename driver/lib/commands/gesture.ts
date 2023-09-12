@@ -19,7 +19,7 @@ export const tapEl = async function(
 
 export const tap = async function(
   this: FlutterDriver,
-  gestures,
+  gestures: Record<string, any>[],
   longPress: boolean,
 ) {
   // parse the given gestures array to call the appropriate tap method
@@ -30,8 +30,8 @@ export const tap = async function(
 
 export const longTap = async function(
   this: FlutterDriver,
-  gestures,
-  ms,
+  gestures: Record<string, any>[],
+  ms: number,
 ) {
   // pass duration if the wait action given by user.
   // If wait action is missing taking 10000 ms default
@@ -39,7 +39,7 @@ export const longTap = async function(
   return await longClick(this, elementId, {durationMilliseconds: ms, frequency: 30});
 };
 
-export const performTouch = async function(this: FlutterDriver, gestures) {
+export const performTouch = async function(this: FlutterDriver, gestures: Record<string, any>[]) {
   if (gestures.length === 3) {
     if (
       gestures[0].action === `longPress` && gestures[1].action === `wait` &&
