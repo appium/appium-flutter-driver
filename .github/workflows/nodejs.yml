@@ -41,7 +41,7 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install -g appium@next
+    - run: npm install -g appium
     - run: |
         cd driver
         npm install

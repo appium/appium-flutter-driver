@@ -57,7 +57,6 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   public denyInsecure: any;
   public allowInsecure: any;
   public desiredCapConstraints: any;
-  public log: any;
 
   // Used to keep the capabilities internally
   public internalCaps: DriverCaps<FluttertDriverConstraints>;
