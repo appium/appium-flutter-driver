@@ -24,12 +24,12 @@ export const setContext = async function(this: FlutterDriver, context: string) {
   this.currentContext = context;
 };
 
-export const getContexts = async function(this: FlutterDriver) {
+export const getContexts = async function(this: FlutterDriver): Promise<string[]> {
   const nativeContext = await this.proxydriver.getContexts();
   return [...nativeContext, FLUTTER_CONTEXT_NAME];
 };
 
-export const driverShouldDoProxyCmd = function(this: FlutterDriver, command) {
+export const driverShouldDoProxyCmd = function(this: FlutterDriver, command: string): boolean {
   if (!this.proxydriver) {
     return false;
   }

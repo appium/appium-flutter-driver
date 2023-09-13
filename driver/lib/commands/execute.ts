@@ -22,65 +22,65 @@ export const execute = async function(
   const command = matching[1].trim();
   switch (command) {
     case `launchApp`:
-      return flutterLaunchApp(this, args[0], args[1]);
+      return await flutterLaunchApp(this, args[0], args[1]);
     case `connectObservatoryWsUrl`:
-      return connectObservatoryWsUrl(this);
+      return await connectObservatoryWsUrl(this);
     case `getVMInfo`:
-      return getVMInfo(this);
+      return await getVMInfo(this);
     case `setIsolateId`:
-      return setIsolateId(this, args[0]);
+      return await setIsolateId(this, args[0]);
     case `getIsolate`:
-      return getIsolate(this, args[0]);
+      return await getIsolate(this, args[0]);
     case `checkHealth`:
-      return checkHealth(this);
+      return await checkHealth(this);
     case `clearTimeline`:
-      return clearTimeline(this);
+      return await clearTimeline(this);
     case `forceGC`:
-      return forceGC(this);
+      return await forceGC(this);
     case `getRenderTree`:
-      return getRenderTree(this);
+      return await getRenderTree(this);
     case `getBottomLeft`:
-      return getOffset(this, args[0], { offsetType: `bottomLeft` });
+      return await getOffset(this, args[0], { offsetType: `bottomLeft` });
     case `getBottomRight`:
-      return getOffset(this, args[0], { offsetType: `bottomRight` });
+      return await getOffset(this, args[0], { offsetType: `bottomRight` });
     case `getCenter`:
-      return getOffset(this, args[0], { offsetType: `center` });
+      return await getOffset(this, args[0], { offsetType: `center` });
     case `getTopLeft`:
-      return getOffset(this, args[0], { offsetType: `topLeft` });
+      return await getOffset(this, args[0], { offsetType: `topLeft` });
     case `getTopRight`:
-      return getOffset(this, args[0], { offsetType: `topRight` });
+      return await getOffset(this, args[0], { offsetType: `topRight` });
     case `getRenderObjectDiagnostics`:
-      return getRenderObjectDiagnostics(this, args[0], args[1]);
+      return await getRenderObjectDiagnostics(this, args[0], args[1]);
     case `getSemanticsId`:
-      return getSemanticsId(this, args[0]);
+      return await getSemanticsId(this, args[0]);
     case `waitForAbsent`:
-      return waitForAbsent(this, args[0], args[1]);
+      return await waitForAbsent(this, args[0], args[1]);
     case `waitFor`:
-      return waitFor(this, args[0], args[1]);
+      return await waitFor(this, args[0], args[1]);
     case `waitForTappable`:
-      return waitForTappable(this, args[0], args[1]);
+      return await waitForTappable(this, args[0], args[1]);
     case `scroll`:
-      return scroll(this, args[0], args[1]);
+      return await scroll(this, args[0], args[1]);
     case `scrollUntilVisible`:
-      return scrollUntilVisible(this, args[0], args[1]);
+      return await scrollUntilVisible(this, args[0], args[1]);
     case `scrollUntilTapable`:
-      return scrollUntilTapable(this, args[0], args[1]);
+      return await scrollUntilTapable(this, args[0], args[1]);
     case `scrollIntoView`:
-      return scrollIntoView(this, args[0], args[1]);
+      return await scrollIntoView(this, args[0], args[1]);
     case `setTextEntryEmulation`:
-      return setTextEntryEmulation(this, args[0]);
+      return await setTextEntryEmulation(this, args[0]);
     case `enterText`:
-      return enterText(this, args[0]);
+      return await enterText(this, args[0]);
     case `requestData`:
-      return requestData(this, args[0]);
+      return await requestData(this, args[0]);
     case `longTap`:
-      return longTap(this, args[0], args[1]);
+      return await longTap(this, args[0], args[1]);
     case `waitForFirstFrame`:
-      return waitForCondition(this, { conditionName: `FirstFrameRasterizedCondition`});
+      return await waitForCondition(this, { conditionName: `FirstFrameRasterizedCondition`});
     case `setFrameSync`:
-      return setFrameSync(this, args[0], args[1]);
+      return await setFrameSync(this, args[0], args[1]);
     case `clickElement`:
-      return clickElement(this, args[0], args[1]);
+      return await clickElement(this, args[0], args[1]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -90,7 +90,7 @@ const flutterLaunchApp = async (
   self: FlutterDriver, appId: string, opts
 ) => {
   const { arguments: args = [], environment: env = {}} = opts;
-  await launchApp(self.internalCaps.udid, appId, args, env);
+  await launchApp(self.internalCaps.udid!, appId, args, env);
   await reConnectFlutterDriver.bind(self)(self.internalCaps);
 };
 
@@ -110,12 +110,12 @@ const getRenderTree = async (self: FlutterDriver) =>
 const getOffset = async (
   self: FlutterDriver,
   elementBase64: string,
-  offsetType,
+  offsetType: {offsetType: string},
 ) => await self.executeElementCommand(`get_offset`, elementBase64, offsetType);
 
 const waitForCondition = async (
   self: FlutterDriver,
-  conditionName,
+  conditionName: {conditionName: string},
 ) => await self.executeElementCommand(`waitForCondition`, ``, conditionName);
 
 const forceGC = async (self: FlutterDriver) => {
@@ -178,7 +178,7 @@ const enterText = async (self: FlutterDriver, text: string) =>
 const requestData = async (self: FlutterDriver, message: string) =>
   await self.socket!.executeSocketCommand({ command: `request_data`, message });
 
-const setFrameSync = async (self, bool, durationMilliseconds) =>
+const setFrameSync = async (self, bool: boolean, durationMilliseconds: number) =>
   await self.socket!.executeSocketCommand({
     command: `set_frame_sync`,
     enabled: bool,

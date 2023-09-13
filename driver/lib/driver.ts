@@ -1,6 +1,9 @@
 // @ts-ignore: no 'errors' export module
 import { BaseDriver } from 'appium/driver';
-import { Constraints, DefaultCreateSessionResult, DriverCaps, DriverData, W3CDriverCaps } from '@appium/types';
+import {
+  DefaultCreateSessionResult, DriverCaps, DriverData, W3CDriverCaps,
+  RouteMatcher
+} from '@appium/types';
 import { IsolateSocket } from './sessions/isolate_socket';
 
 import { log as logger } from './logger';
@@ -17,7 +20,12 @@ import { execute } from './commands/execute';
 import { click, longTap, performTouch, tap, tapEl } from './commands/gesture';
 import { getScreenshot } from './commands/screen';
 import { getClipboard, setClipboard } from './commands/clipboard';
+import { desiredCapConstraints } from './desired-caps';
+import XCUITestDriver from 'appium-xcuitest-driver';
+import AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
 
+
+type FluttertDriverConstraints = typeof desiredCapConstraints;
 // Need to not proxy in WebView context
 const WEBVIEW_NO_PROXY = [
   [`GET`, new RegExp(`^/session/[^/]+/appium`)],
@@ -33,25 +41,17 @@ const WEBVIEW_NO_PROXY = [
   [`POST`, new RegExp(`^/session/[^/]+/touch/perform`)],
 ] as import('@appium/types').RouteMatcher[];
 
-class FlutterDriver extends BaseDriver<any> {
-  public socket: IsolateSocket | null = null;
+class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
+  public socket: IsolateSocket | null;
   public locatorStrategies = [`key`, `css selector`];
-  public proxydriver: any;
+  public proxydriver: XCUITestDriver | AndroidUiautomator2Driver;
   public proxydriverName: string; // to store 'driver name' as proxy to.
   public device: any;
 
   // Used to keep the capabilities internally
-  public internalCaps: any;
+  public internalCaps: DriverCaps<FluttertDriverConstraints>;
 
-  // from BaseDriver
-  public opts: any;
-  public caps: any;
-  public clearNewCommandTimeout: any;
-  public startNewCommandTimeout: any;
-  public receiveAsyncResponse: any;
-  public relaxedSecurityEnabled: any;
-  public denyInsecure: any;
-  public allowInsecure: any;
+  public receiveAsyncResponse: (...args: any[]) => Promise<any>;
 
   // to handle WebView context
   public proxyWebViewActive = false;
@@ -90,13 +90,13 @@ class FlutterDriver extends BaseDriver<any> {
 
   constructor(opts, shouldValidateCaps: boolean) {
     super(opts, shouldValidateCaps);
-    this.proxydriver = null;
+    this.socket = null;
     this.proxydriverName = ``;
     this.device = null;
-    this.internalCaps = null;
+    this.desiredCapConstraints = desiredCapConstraints;
   }
 
-  public async createSession(...args): Promise<DefaultCreateSessionResult<Constraints>> {
+  public async createSession(...args): Promise<DefaultCreateSessionResult<FluttertDriverConstraints>> {
     const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)) as [W3CDriverCaps, W3CDriverCaps, W3CDriverCaps, DriverData[]]);
     this.internalCaps = caps;
     return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args)));
@@ -109,24 +109,24 @@ class FlutterDriver extends BaseDriver<any> {
     ]);
   }
 
-  public async installApp(appPath, opts = {}) {
+  public async installApp(appPath: string, opts = {}) {
     this.proxydriver.installApp(appPath, opts);
   }
 
-  public async activateApp(appId) {
+  public async activateApp(appId: string) {
     this.proxydriver.activateApp(appId);
     await reConnectFlutterDriver.bind(this)(this.internalCaps);
   }
 
-  public async terminateApp(appId) {
+  public async terminateApp(appId: string) {
     return await this.proxydriver.terminateApp(appId);
   }
 
-  public async getOrientation() {
+  public async getOrientation(): Promise<string> {
     return await this.proxydriver.getOrientation();
   }
 
-  public async setOrientation(orientation) {
+  public async setOrientation(orientation: string) {
     return await this.proxydriver.setOrientation(orientation);
   }
 
@@ -138,7 +138,7 @@ class FlutterDriver extends BaseDriver<any> {
     super.validateLocatorStrategy(strategy, false);
   }
 
-  validateDesiredCaps(caps: any): caps is DriverCaps<Constraints> {
+  validateDesiredCaps(caps: DriverCaps<FluttertDriverConstraints>): caps is DriverCaps<FluttertDriverConstraints> {
     // check with the base class, and return if it fails
     const res = super.validateDesiredCaps(caps);
     if (!res) {
@@ -149,15 +149,16 @@ class FlutterDriver extends BaseDriver<any> {
     return true;
   }
 
-  public async proxyCommand (url, method, body = null) {
+  public async proxyCommand (url: string, method: string, body = null) {
     const result = await this.proxydriver.proxyCommand(url, method, body);
     return result;
   }
 
-  public async executeCommand(cmd: string, ...args: any[]) {
+  public async executeCommand(cmd: string, ...args: [string, [{skipAttachObservatoryUrl: string, any: any}]]) {
     if (new RegExp(/^[\s]*mobile:[\s]*activateApp$/).test(args[0])) {
-      // to make the behavior as same as this.activateApp
+      const { skipAttachObservatoryUrl = false } = args[1][0];
       await this.proxydriver.executeCommand(cmd, ...args);
+      if (skipAttachObservatoryUrl) { return; }
       await reConnectFlutterDriver.bind(this)(this.internalCaps);
       return;
     } else if (new RegExp(/^[\s]*mobile:[\s]*terminateApp$/).test(args[0])) {
@@ -185,7 +186,7 @@ class FlutterDriver extends BaseDriver<any> {
     }
   }
 
-  public getProxyAvoidList(): import('@appium/types').RouteMatcher[] {
+  public getProxyAvoidList(): RouteMatcher[] {
     if ([FLUTTER_CONTEXT_NAME, NATIVE_CONTEXT_NAME].includes(this.currentContext)) {
       return [];
     }
@@ -193,7 +194,7 @@ class FlutterDriver extends BaseDriver<any> {
     return WEBVIEW_NO_PROXY;
   }
 
-  public proxyActive() {
+  public proxyActive(): boolean {
     // In WebView context, all request should got to each driver
     // so that they can handle http request properly.
     // On iOS, WebVie context is handled by XCUITest driver while Android is by chromedriver.
@@ -202,7 +203,7 @@ class FlutterDriver extends BaseDriver<any> {
     return this.proxyWebViewActive && this.proxydriverName !== IOS_DEVICE_NAME;
   }
 
-  public canProxy() {
+  public canProxy(): boolean {
     // As same as proxyActive, all request should got to each driver
     // so that they can handle http request properly
     return this.proxyWebViewActive;
@@ -210,3 +211,4 @@ class FlutterDriver extends BaseDriver<any> {
 }
 
 export { FlutterDriver };
+

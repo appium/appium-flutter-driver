@@ -4,7 +4,7 @@ const waitForConstructor = (command: `waitForAbsent` | `waitFor` | `waitForTappa
   self: FlutterDriver,
   elementBase64: string,
   durationMilliseconds?: number,
-) => {
+): Promise<string> => {
 
   let args = {};
 

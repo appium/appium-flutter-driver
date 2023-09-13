@@ -1,39 +1,6 @@
-export interface IDesiredCapConstraints {
-  deviceName?: string;
-  platformName: {
-    presence: boolean;
-    isString: boolean;
-    inclusionCaseInsensitive: string[];
-  };
-  automationName: {
-    presence: boolean;
-    isString: boolean;
-    inclusionCaseInsensitive: string[];
-  };
-  app: any;
-  avd: any;
-  udid: any;
-  retryBackoffTime: any;
-  maxRetryCount: any;
-  observatoryWsUri: {
-    isString: boolean;
-  };
-  skipPortForward: {
-    isBoolean: boolean;
-  };
-  adbPort: any;
-  remoteAdbHost: any;
-  forwardingPort: any;
-}
-
-export const desiredCapConstraints: IDesiredCapConstraints = {
+export const desiredCapConstraints = {
   app: {
     isString: true,
-  },
-  automationName: {
-    inclusionCaseInsensitive: [`Flutter`],
-    isString: true,
-    presence: true,
   },
   avd: {
     isString: true,
@@ -43,8 +10,8 @@ export const desiredCapConstraints: IDesiredCapConstraints = {
   },
   platformName: {
     inclusionCaseInsensitive: [
-      `iOS`,
-      `Android`,
+      'iOS',
+      'Android',
     ],
     isString: true,
     presence: true,
@@ -70,4 +37,4 @@ export const desiredCapConstraints: IDesiredCapConstraints = {
   forwardingPort: {
     isNumber: true
   },
-};
+} as const;
