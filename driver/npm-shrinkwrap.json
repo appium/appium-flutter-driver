@@ -1,12 +1,12 @@
 {
   "name": "appium-flutter-driver",
-  "version": "1.22.0",
+  "version": "1.23.0",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "appium-flutter-driver",
-      "version": "1.22.0",
+      "version": "1.23.0",
       "license": "MIT",
       "dependencies": {
         "appium-adb": "^9.14.4",
@@ -469,7 +469,7 @@
       }
     },
     "node_modules/@babel/helper-validator-identifier": {
-      "version": "7.22.15",
+      "version": "7.22.19",
       "license": "MIT",
       "engines": {
         "node": ">=6.9.0"
@@ -739,7 +739,7 @@
       "license": "MIT"
     },
     "node_modules/@types/body-parser": {
-      "version": "1.19.2",
+      "version": "1.19.3",
       "license": "MIT",
       "dependencies": {
         "@types/connect": "*",
@@ -783,7 +783,7 @@
       "license": "MIT"
     },
     "node_modules/@types/http-errors": {
-      "version": "2.0.1",
+      "version": "2.0.2",
       "license": "MIT"
     },
     "node_modules/@types/jsftp": {
@@ -835,7 +835,7 @@
       }
     },
     "node_modules/@types/node": {
-      "version": "20.6.0",
+      "version": "20.6.2",
       "license": "MIT"
     },
     "node_modules/@types/normalize-package-data": {
@@ -1033,7 +1033,7 @@
       }
     },
     "node_modules/appium-adb": {
-      "version": "9.14.10",
+      "version": "9.14.11",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/support": "^4.0.0",
@@ -1061,10 +1061,10 @@
       }
     },
     "node_modules/appium-android-driver": {
-      "version": "5.14.8",
+      "version": "5.14.9",
       "license": "Apache-2.0",
       "dependencies": {
-        "appium-adb": "^9.14.10",
+        "appium-adb": "^9.14.11",
         "appium-chromedriver": "^5.2.0",
         "asyncbox": "^2.8.0",
         "axios": "^1.x",
@@ -1073,7 +1073,7 @@
         "lodash": "^4.17.4",
         "lru-cache": "^7.3.0",
         "moment": "^2.24.0",
-        "moment-timezone": "^0.5.26",
+        "moment-timezone": "^0.x",
         "portfinder": "^1.0.6",
         "portscanner": "2.2.0",
         "semver": "^7.0.0",
@@ -1091,7 +1091,7 @@
       }
     },
     "node_modules/appium-chromedriver": {
-      "version": "5.6.8",
+      "version": "5.6.9",
       "hasInstallScript": true,
       "license": "Apache-2.0",
       "dependencies": {
@@ -1135,12 +1135,12 @@
       }
     },
     "node_modules/appium-uiautomator2-driver": {
-      "version": "2.29.7",
+      "version": "2.29.8",
       "license": "Apache-2.0",
       "dependencies": {
         "@babel/runtime": "^7.0.0",
         "appium-adb": "^9.14.10",
-        "appium-android-driver": "^5.14.8",
+        "appium-android-driver": "^5.14.9",
         "appium-chromedriver": "^5.6.5",
         "appium-uiautomator2-server": "^5.12.2",
         "asyncbox": "^2.3.1",
@@ -8191,7 +8191,7 @@
       }
     },
     "node_modules/cli-spinners": {
-      "version": "2.9.0",
+      "version": "2.9.1",
       "extraneous": true,
       "license": "MIT",
       "engines": {
@@ -10291,7 +10291,7 @@
       }
     },
     "node_modules/resolve": {
-      "version": "1.22.4",
+      "version": "1.22.6",
       "license": "MIT",
       "dependencies": {
         "is-core-module": "^2.13.0",
@@ -11653,7 +11653,7 @@
       }
     },
     "@babel/helper-validator-identifier": {
-      "version": "7.22.15"
+      "version": "7.22.19"
     },
     "@babel/highlight": {
       "version": "7.22.13",
@@ -11817,7 +11817,7 @@
       "version": "3.5.38"
     },
     "@types/body-parser": {
-      "version": "1.19.2",
+      "version": "1.19.3",
       "requires": {
         "@types/connect": "*",
         "@types/node": "*"
@@ -11855,7 +11855,7 @@
       "version": "1.1.2"
     },
     "@types/http-errors": {
-      "version": "2.0.1"
+      "version": "2.0.2"
     },
     "@types/jsftp": {
       "version": "2.1.2",
@@ -11897,7 +11897,7 @@
       }
     },
     "@types/node": {
-      "version": "20.6.0"
+      "version": "20.6.2"
     },
     "@types/normalize-package-data": {
       "version": "2.4.1"
@@ -12036,7 +12036,7 @@
       }
     },
     "appium-adb": {
-      "version": "9.14.10",
+      "version": "9.14.11",
       "requires": {
         "@appium/support": "^4.0.0",
         "adbkit-apkreader": "^3.1.2",
@@ -12057,9 +12057,9 @@
       }
     },
     "appium-android-driver": {
-      "version": "5.14.8",
+      "version": "5.14.9",
       "requires": {
-        "appium-adb": "^9.14.10",
+        "appium-adb": "^9.14.11",
         "appium-chromedriver": "^5.2.0",
         "asyncbox": "^2.8.0",
         "axios": "^1.x",
@@ -12068,7 +12068,7 @@
         "lodash": "^4.17.4",
         "lru-cache": "^7.3.0",
         "moment": "^2.24.0",
-        "moment-timezone": "^0.5.26",
+        "moment-timezone": "^0.x",
         "portfinder": "^1.0.6",
         "portscanner": "2.2.0",
         "semver": "^7.0.0",
@@ -12079,7 +12079,7 @@
       }
     },
     "appium-chromedriver": {
-      "version": "5.6.8",
+      "version": "5.6.9",
       "requires": {
         "@appium/base-driver": "^9.1.0",
         "@appium/support": "^4.0.0",
@@ -12112,11 +12112,11 @@
       }
     },
     "appium-uiautomator2-driver": {
-      "version": "2.29.7",
+      "version": "2.29.8",
       "requires": {
         "@babel/runtime": "^7.0.0",
         "appium-adb": "^9.14.10",
-        "appium-android-driver": "^5.14.8",
+        "appium-android-driver": "^5.14.9",
         "appium-chromedriver": "^5.6.5",
         "appium-uiautomator2-server": "^5.12.2",
         "asyncbox": "^2.3.1",
@@ -16795,7 +16795,7 @@
       }
     },
     "cli-spinners": {
-      "version": "2.9.0",
+      "version": "2.9.1",
       "extraneous": true
     },
     "cliui": {
@@ -18130,7 +18130,7 @@
       "extraneous": true
     },
     "resolve": {
-      "version": "1.22.4",
+      "version": "1.22.6",
       "requires": {
         "is-core-module": "^2.13.0",
         "path-parse": "^1.0.7",

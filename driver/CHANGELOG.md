@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.23.0
+- try the latest observatory url every attempt in connectSocket
+
 ## 1.22.0
 - `skipAttachObservatoryUrl` option for `mobile:activateApp` to prevent trying to attach to an observatory url after activating the app.
 
