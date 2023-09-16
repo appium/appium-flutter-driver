@@ -8,4 +8,7 @@ npm prune --production
 rm -rf node_modules/appium
 npm shrinkwrap
 
+# to install types again
+npm install
+
 echo "complete the refreshment"
