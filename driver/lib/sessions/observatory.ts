@@ -46,14 +46,13 @@ export const connectSocket = async (
     }
     log.info(`Attempt #${(retryCount + 1)} of ${maxRetryCount}`);
 
-    if (!dartObservatoryURL) {
-      try {
-        dartObservatoryURL = await getObservatoryWsUri(driver, caps);
-        urlFetchError = undefined;
-      } catch (e) {
-        urlFetchError = e;
-        log.debug(e.message);
-      }
+    // Every attempt gets the latest observatory url
+    try {
+      dartObservatoryURL = await getObservatoryWsUri(driver, caps);
+      urlFetchError = undefined;
+    } catch (e) {
+      urlFetchError = e;
+      log.debug(e.message);
     }
 
     if (!urlFetchError) {
