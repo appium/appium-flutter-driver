@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.0
+- Update Appium XCUITest driver dependency to 5.2.0. It supports iOS 15+.
+
 ## 1.23.0
 - try the latest observatory url every attempt in connectSocket
 
