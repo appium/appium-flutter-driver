@@ -27,48 +27,49 @@ class FlutterFinder:
         )
 
     def by_semantics_label(self, label, isRegExp=False):
-        return self._serialize(dict(
-            finderType='BySemanticsLabel',
-            isRegExp=isRegExp,
-            label=label
-        ))
+        return self._serialize({
+            'finderType': 'BySemanticsLabel',
+            'isRegExp': isRegExp,
+            'label': label
+        })
 
     def by_tooltip(self, text):
-        return self._serialize(dict(
-            finderType='ByTooltipMessage',
-            text=text
-        ))
+        return self._serialize({
+            'finderType': 'ByTooltipMessage',
+            'text': text
+        })
 
     def by_text(self, text):
-        return self._serialize(dict(
-            finderType='ByText',
-            text=text
-        ))
+        return self._serialize({
+            'finderType': 'ByText',
+            'text': text
+        })
 
     def by_type(self, type_):
-        return self._serialize(dict(
-            finderType='ByType',
-            type=type_
-        ))
+        return self._serialize({
+            'finderType': 'ByType',
+            'type': type_
+        })
 
     def by_value_key(self, key):
-        return self._serialize(dict(
-            finderType='ByValueKey',
-            keyValueString=key,
-            keyValueType='String' if isinstance(key, str) else 'int'
-        ))
+        return self._serialize({
+            'finderType': 'ByValueKey',
+            'keyValueString': key,
+            'keyValueType': 'String' if isinstance(key, str) else 'int'
+        })
 
     def page_back(self):
-        return self._serialize(dict(
-            finderType='PageBack'
-        ))
+        return self._serialize({
+            'finderType': 'PageBack'
+        })
 
     def _serialize(self, finder_dict):
+        # type: (dict) -> str
         return base64.b64encode(
             bytes(json.dumps(finder_dict, separators=(',', ':')), 'UTF-8')).decode('UTF-8')
 
     def _by_ancestor_or_descendant(self, type_, serialized_finder, matching, match_root=False, first_match_only=False):
-        param = dict(finderType=type_, matchRoot=match_root, firstMatchOnly=first_match_only)
+        param = {'finderType': type_, 'matchRoot': match_root, 'firstMatchOnly': first_match_only}
 
         try:
             finder = json.loads(base64.b64decode(
