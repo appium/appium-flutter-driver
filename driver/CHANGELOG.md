@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.0
+- Update Appium XCUITest driver dependency to 5.2.0. It supports iOS 15+.
+
+## 1.23.0
+- try the latest observatory url every attempt in connectSocket
+
 ## 1.22.0
 - `skipAttachObservatoryUrl` option for `mobile:activateApp` to prevent trying to attach to an observatory url after activating the app.
 
