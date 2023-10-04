@@ -44,8 +44,6 @@ appium driver install --source local /path/to/appium-flutter-driver/driver
 ## Usage and requirement
 If you are unfamiliar with running Appium tests, start with [Quickstart Intro](https://appium.io/docs/en/latest/quickstart/) first.
 
-enableFlutterDriverExtension
-
 Your Flutter application must be compiled in `debug` or `profile` mode. The dependency must have **[`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html)** package like the below `pubspec.yaml` example with [`enableFlutterDriverExtension`](https://api.flutter.dev/flutter/flutter_driver_extension/flutter_driver_extension-library.html) configuration in the `main.dart`.
 
 ```yaml
