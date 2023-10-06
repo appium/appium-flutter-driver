@@ -195,7 +195,7 @@ export const executeElementCommand = async function(
   log.debug(`<<< ${JSON.stringify(data)} | previous command ${command}`);
   if (data.isError) {
     throw new Error(
-      `Cannot execute command ${command}, server reponse ${JSON.stringify(data, null, 2)}`,
+      `Cannot execute command ${command}, server response ${JSON.stringify(data, null, 2)}`,
     );
   }
   return data.response;
