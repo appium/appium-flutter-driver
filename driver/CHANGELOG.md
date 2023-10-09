@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.0
+- Update Appium XCUITest driver dependency to 5.6.0
+
 ## 2.0.0
 - Update Appium XCUITest driver dependency to 5.2.0. It supports iOS 15+.
 
