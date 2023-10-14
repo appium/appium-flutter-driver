@@ -69,7 +69,7 @@ class FlutterFinder:
             bytes(json.dumps(finder_dict, separators=(',', ':')), 'UTF-8')).decode('UTF-8')
 
     def _by_ancestor_or_descendant(self, type_, serialized_finder, matching, match_root=False, first_match_only=False):
-        param = {'finderType': type_, 'matchRoot': match_root, 'firstMatchOnly': first_match_only}
+        param = {'finderType': type_, 'matchRoot': str(match_root).lower(), 'firstMatchOnly': str(first_match_only).lower()}
 
         try:
             finder = json.loads(base64.b64decode(
