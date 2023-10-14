@@ -71,8 +71,8 @@ namespace AppiumFlutterFinder
             => new FlutterBy(new
             {
                 finderType = "Ancestor",
-                matchRoot,
-                firstMatchOnly,
+                matchRoot = matchRoot.ToString().ToLower(),
+                firstMatchOnly = firstMatchOnly.ToString().ToLower(),
                 of = of.JsonSearchCriteria,
                 matching = matching.JsonSearchCriteria,
             });
@@ -84,8 +84,8 @@ namespace AppiumFlutterFinder
             => new FlutterBy(new
             {
                 finderType = "Descendant",
-                matchRoot,
-                firstMatchOnly,
+                matchRoot = matchRoot.ToString().ToLower(),
+                firstMatchOnly = firstMatchOnly.ToString().ToLower(),
                 of = of.JsonSearchCriteria,
                 matching = matching.JsonSearchCriteria,
             });
@@ -93,4 +93,3 @@ namespace AppiumFlutterFinder
 
     }
 }
-
