@@ -24,8 +24,8 @@ module Appium
           type: 'Ancestor',
           serialized_finder: serialized_finder,
           matching: matching,
-          match_root: match_root.to_s,
-          first_match_only: first_match_only.to_s
+          match_root: match_root,
+          first_match_only: first_match_only
         )
       end
 
@@ -34,8 +34,8 @@ module Appium
           type: 'Descendant',
           serialized_finder: serialized_finder,
           matching: matching,
-          match_root: match_root.to_s,
-          first_match_only: first_match_only.to_s
+          match_root: match_root,
+          first_match_only: first_match_only
         )
       end
 
@@ -90,7 +90,7 @@ module Appium
       end
 
       def by_ancestor_or_descendant(type:, serialized_finder:, matching:, match_root: false, first_match_only: false)
-        param = { finderType: type, matchRoot: match_root, firstMatchOnly: first_match_only}
+        param = { finderType: type, matchRoot: match_root.to_s, firstMatchOnly: first_match_only.to_s}
 
         finder = begin
           JSON.parse(Base64.decode64(serialized_finder))
