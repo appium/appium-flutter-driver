@@ -7,7 +7,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='Appium-Flutter-Finder',
-    version='0.4.0',
+    version='0.6.1',
     description='An extension of finder for Appium flutter',
     long_description=io.open(os.path.join(os.path.dirname('__file__'), 'README.md'), encoding='utf-8').read(),
     long_description_content_type='text/markdown',
@@ -38,5 +38,5 @@ setup(
         'Topic :: Software Development :: Quality Assurance',
         'Topic :: Software Development :: Testing'
     ],
-    install_requires=['Appium-Python-Client >= .0.0, < 4']
+    install_requires=['Appium-Python-Client >= 2.0.0, < 4']
 )

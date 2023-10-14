@@ -41,6 +41,12 @@ twine upload dist/Appium-Flutter-Finder-X.X.tar.gz
 ```
 
 # Changelog
+- 0.6.1
+    - Fix package
+- 0.6.0
+    - Fix type of `match_root` and `first_match_only` in `by_ancestor` and `by_descendant
+- 0.5.0
+    - Allow Appium-Python-Client to be v3
 - 0.4.0
     - Bump base Appium-Python-Client to v2
 - 0.3.1
