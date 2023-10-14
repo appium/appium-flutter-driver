@@ -27,6 +27,7 @@ jobs:
         dotnet-version: 6.0.x
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: finder/dotnet
     - name: Build
       run: dotnet build --no-restore
       working-directory: finder/dotnet

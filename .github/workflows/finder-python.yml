@@ -31,10 +31,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install pylint pytest Appium-Python-Client
     - name: Analyzing the code with pylint
-      run: |
-        cd finder/python
-        pylint tests/ appium_flutter_finder/
+      run: pylint tests/ appium_flutter_finder/
+      working-directory: finder/python
     - name: Run tests
-      run: |
-        cd finder/python
-        pytest tests/**
+      run: pytest tests/**
+      working-directory: finder/python

@@ -42,7 +42,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: |
-        cd finder/nodejs
         npm install
         npm run lint
         npm run test
+      working-directory: finder/nodejs

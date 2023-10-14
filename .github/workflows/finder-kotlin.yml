@@ -27,6 +27,5 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
     - name: Run tests
-      run: |
-        cd finder/kotlin
-        ./gradlew test
+      run: ./gradlew test
+      working-directory: finder/kotlin

@@ -35,6 +35,5 @@ jobs:
         bundler-cache: true
         working-directory: finder/ruby
     - name: Run tests
-      run: |
-        cd finder/ruby
-        bundle exec rake
+      run: bundle exec rake
+      working-directory: finder/ruby
