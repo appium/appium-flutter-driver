@@ -28,5 +28,5 @@ jobs:
         distribution: 'temurin'
     - name: Run tests
       run: |
-        cd finder/python
+        cd finder/kotlin
         ./gradlew test
