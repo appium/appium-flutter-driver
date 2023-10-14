@@ -24,8 +24,8 @@ module Appium
           type: 'Ancestor',
           serialized_finder: serialized_finder,
           matching: matching,
-          match_root: match_root,
-          first_match_only: first_match_only
+          match_root: match_root.to_s,
+          first_match_only: first_match_only.to_s
         )
       end
 
@@ -34,8 +34,8 @@ module Appium
           type: 'Descendant',
           serialized_finder: serialized_finder,
           matching: matching,
-          match_root: match_root,
-          first_match_only: first_match_only
+          match_root: match_root.to_s,
+          first_match_only: first_match_only.to_s
         )
       end
 
