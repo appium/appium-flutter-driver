@@ -14,6 +14,8 @@ $ npm publish
 ```
 
 ## Changelog
+- 0.2.0
+    - Fix type of `matchRoot` and `firstMatchOnly` in `ancestor` and `descendant`
 - 0.1.0
   - Add `firstMatchOnly` in `ancestor` and `descendant`
 - 0.0.23
