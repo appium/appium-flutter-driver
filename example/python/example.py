@@ -2,12 +2,14 @@ import os
 
 from appium.webdriver import Remote
 
-from appium.options.common.base import AppiumOptions
+# from appium.options.common.base import AppiumOptions
+# AppiumOptions also can be used, but this may not have iOS specific commands.
+from appium.options.ios.xcuitest.base import XCUITestOptions
 from appium_flutter_finder.flutter_finder import FlutterElement, FlutterFinder
 
 # Example
 
-options = AppiumOptions()
+options = XCUITestOptions()
 options.automation_name = 'flutter'
 options.platform_name = 'ios'
 options.set_capability('platformVersion', '17.0')
