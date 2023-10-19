@@ -1,19 +1,26 @@
 import os
 
 from appium.webdriver import Remote
+
+# from appium.options.common.base import AppiumOptions
+# AppiumOptions also can be used, but this may not have iOS specific commands.
+from appium.options.ios.xcuitest.base import XCUITestOptions
 from appium_flutter_finder.flutter_finder import FlutterElement, FlutterFinder
 
 # Example
 
-driver = Remote('http://localhost:4723/wd/hub', dict(
-    platformName='iOS',
-    automationName='flutter',
-    platformVersion='15.0',
-    deviceName='iPhone 8',
-    app='{}/../app/app/Runner.zip'.format(
-      os.path.dirname(os.path.realpath(__file__)))
-))
+options = XCUITestOptions()
+options.automation_name = 'flutter'
+options.platform_name = 'ios'
+options.set_capability('platformVersion', '17.0')
+options.set_capability('deviceName', 'iPhone 15')
+options.set_capability('app', f'{os.path.dirname(os.path.realpath(__file__))}/../sample2/IOSFullScreen.zip')
 
+driver = Remote('http://localhost:4723', options=options)
+
+driver.quit()
+
+# below tests are different from the 'IOSFullScreen.zip'
 finder = FlutterFinder()
 
 text_finder = finder.by_text('You have pushed the button this many times:')
