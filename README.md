@@ -225,7 +225,7 @@ Legend:
 ### Commands
 
 The below _WebDriver example_ is by webdriverio.
-`flutter:` prefix commands are [`mobile:` command in appium for Android and iOS](https://appium.io/docs/en/commands/mobile-command/).
+`flutter:` prefix commands are [`mobile:` command in appium for Android and iOS](https://appium.io/docs/en/latest/guides/execute-methods/).
 Please replace them properly with your client.
 
 | Flutter API | Status | WebDriver example (JavaScript, webdriverio) | Scope |
