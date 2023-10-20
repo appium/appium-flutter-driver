@@ -7,6 +7,7 @@ import net from 'net';
 import { checkPortStatus } from 'portscanner';
 import { log } from '../logger';
 import { connectSocket, processLogToGetobservatory } from './observatory';
+import { InitialOpts } from '@appium/types';
 
 const LOCALHOST = `127.0.0.1`;
 const PORT_CLOSE_TIMEOUT = 15 * 1000; // 15 seconds
@@ -15,11 +16,7 @@ type IsolateSocket = import('./isolate_socket').IsolateSocket;
 
 
 const setupNewIOSDriver = async (...args: any[]): Promise<XCUITestDriver> => {
-  const iosArgs = {
-    javascriptEnabled: true,
-  };
-
-  const iosdriver = new XCUITestDriver(iosArgs);
+  const iosdriver = new XCUITestDriver({} as InitialOpts);
   await iosdriver.createSession(...args);
 
   return iosdriver;
