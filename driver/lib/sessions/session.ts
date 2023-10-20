@@ -23,7 +23,7 @@ export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: 
   }
 };
 
-export const createSession = async function(this: FlutterDriver, sessionId: string, caps, ...args) {
+export const createSession: any = async function(this: FlutterDriver, sessionId: string, caps, ...args) {
   try {
     // setup proxies - if platformName is not empty, make it less case sensitive
     if (caps.platformName) {
