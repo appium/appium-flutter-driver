@@ -72,7 +72,7 @@
   },
   "dependencies": {
     "appium-adb": "^9.14.4",
-    "appium-android-driver": "^5.2.2",
+    "appium-android-driver": "^7.0.2",
     "appium-ios-device": "^2.4.1",
     "appium-uiautomator2-driver": "^2.29.4",
     "appium-xcuitest-driver": "5.7.0",
