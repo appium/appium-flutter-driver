@@ -73,6 +73,7 @@ Each client needs [each finder](finder) module to handle [Finders](#Finders). Ap
     1. Do not set `app` nor `bundleId` to start a session without launching apps
     2. Start the app process via 3rd party tools such as [go-ios](https://github.com/danielpaulus/go-ios) to start the app process with debug mode in the middle of the new session process in 1) the above.
           - Then, the appium flutter session establish the WebSocket and proceed the session
+- keyboard interaction may not work in Android because of https://github.com/flutter/flutter/issues/15415 that is caused by [`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html)
 
 ## Capabilities
 
