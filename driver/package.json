@@ -71,7 +71,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "appium-adb": "^9.14.4",
+    "appium-adb": "^11.0.1",
     "appium-android-driver": "^7.0.2",
     "appium-ios-device": "^2.4.1",
     "appium-uiautomator2-driver": "^2.29.4",
