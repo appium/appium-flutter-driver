@@ -1,24 +1,18 @@
 import { utilities } from 'appium-ios-device';
-import { timing } from '@appium/support';
 import XCUITestDriver from 'appium-xcuitest-driver';
-import { waitForCondition } from 'asyncbox';
 import B from 'bluebird';
 import net from 'net';
 import { checkPortStatus } from 'portscanner';
 import { log } from '../logger';
-import { connectSocket, processLogToGetobservatory } from './observatory';
-import { InitialOpts } from '@appium/types';
+import { connectSocket, fetchObservatoryUrl } from './observatory';
+import type { InitialOpts } from '@appium/types';
+import type { IsolateSocket } from './isolate_socket';
 
 const LOCALHOST = `127.0.0.1`;
-const PORT_CLOSE_TIMEOUT = 15 * 1000; // 15 seconds
-export const DRIVER_NAME = `XCUITest`;
-type IsolateSocket = import('./isolate_socket').IsolateSocket;
-
 
 const setupNewIOSDriver = async (...args: any[]): Promise<XCUITestDriver> => {
   const iosdriver = new XCUITestDriver({} as InitialOpts);
   await iosdriver.createSession(...args);
-
   return iosdriver;
 };
 
@@ -33,10 +27,10 @@ export const startIOSSession = async (
     return [iosdriver, null];
   }
 
-  return Promise.all([
+  return [
     iosdriver,
-    connectSocket(getObservatoryWsUri, iosdriver, caps),
-  ]);
+    await connectSocket(getObservatoryWsUri, iosdriver, caps),
+  ];
 };
 
 export const connectIOSSession = async (
@@ -44,39 +38,14 @@ export const connectIOSSession = async (
 ): Promise<IsolateSocket> =>
   await connectSocket(getObservatoryWsUri, iosdriver, caps);
 
-const waitForPortIsAvailable = async (port) => {
-  let isPortBusy = (await checkPortStatus(port, LOCALHOST)) === `open`;
-  if (isPortBusy) {
-    log.warn(`Port #${port} is busy. Did you quit the previous driver session(s) properly?`);
-    const timer = new timing.Timer().start();
-    try {
-      await waitForCondition(async () => {
-        try {
-          if ((await checkPortStatus(port, LOCALHOST)) !== `open`) {
-            log.info(`Port #${port} has been successfully released after ` +
-              `${timer.getDuration().asMilliSeconds.toFixed(0)}ms`);
-            isPortBusy = false;
-            return true;
-          }
-        } catch (ign) {
-          log.warn(``);
-        }
-        return false;
-      }, {
-        intervalMs: 300,
-        waitMs: PORT_CLOSE_TIMEOUT,
-      });
-    } catch (ign) {
-      log.warn(`Did not know how to release port #${port} in ` +
-        `${timer.getDuration().asMilliSeconds.toFixed(0)}ms`);
-    }
+async function requireFreePort (port: number) {
+  if ((await checkPortStatus(port, LOCALHOST)) !== `open`) {
+    return;
   }
-
-  if (isPortBusy) {
-    throw new Error(`The port :${port} is occupied by an other process. ` +
-      `You can either quit that process or select another free port.`);
-  }
-};
+  log.warn(`Port #${port} is busy. Did you quit the previous driver session(s) properly?`);
+  throw new Error(`The port :${port} is occupied by an other process. ` +
+    `You can either quit that process or select another free port.`);
+}
 
 export const getObservatoryWsUri = async (
   proxydriver: XCUITestDriver, caps: Record<string, any>
@@ -91,7 +60,7 @@ export const getObservatoryWsUri = async (
       return urlObject.toJSON();
     }
   } else {
-    urlObject = processLogToGetobservatory(proxydriver.logs.syslog.logs);
+    urlObject = fetchObservatoryUrl(proxydriver.logs.syslog.logs);
   }
   if (!proxydriver.isRealDevice()) {
     log.info(`Running on iOS simulator`);
@@ -104,7 +73,7 @@ export const getObservatoryWsUri = async (
 
   log.info(`Running on iOS real device`);
   const { udid } = proxydriver.opts;
-  await waitForPortIsAvailable(localPort);
+  await requireFreePort(localPort);
   const localServer = net.createServer(async (localSocket) => {
     let remoteSocket;
     try {

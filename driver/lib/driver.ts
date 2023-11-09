@@ -1,20 +1,19 @@
 // @ts-ignore: no 'errors' export module
 import { BaseDriver } from 'appium/driver';
-import {
+import type {
   DefaultCreateSessionResult, DriverCaps, DriverData, W3CDriverCaps,
   RouteMatcher
 } from '@appium/types';
-import { IsolateSocket } from './sessions/isolate_socket';
-
+import type { IsolateSocket } from './sessions/isolate_socket';
 import { log as logger } from './logger';
-
-import { DRIVER_NAME as IOS_DEVICE_NAME } from './sessions/ios';
-import { executeElementCommand, executeGetVMCommand,
-  executeGetIsolateCommand } from './sessions/observatory';
+import {
+  executeElementCommand, executeGetVMCommand, executeGetIsolateCommand
+} from './sessions/observatory';
 import { createSession, deleteSession, reConnectFlutterDriver } from './sessions/session';
-
-import { driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
-  getContexts, getCurrentContext, NATIVE_CONTEXT_NAME, setContext } from './commands/context';
+import {
+  driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
+  getContexts, getCurrentContext, NATIVE_CONTEXT_NAME, setContext
+} from './commands/context';
 import { clear, getText, setValue } from './commands/element';
 import { execute } from './commands/execute';
 import { click, longTap, performTouch, tap, tapEl } from './commands/gesture';
@@ -45,7 +44,6 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   public socket: IsolateSocket | null;
   public locatorStrategies = [`key`, `css selector`];
   public proxydriver: XCUITestDriver | AndroidUiautomator2Driver;
-  public proxydriverName: string; // to store 'driver name' as proxy to.
   public device: any;
 
   // Used to keep the capabilities internally
@@ -91,7 +89,6 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   constructor(opts, shouldValidateCaps: boolean) {
     super(opts, shouldValidateCaps);
     this.socket = null;
-    this.proxydriverName = ``;
     this.device = null;
     this.desiredCapConstraints = desiredCapConstraints;
   }
@@ -103,10 +100,9 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async deleteSession() {
-    await Promise.all([
-      deleteSession.bind(this)(),
-      super.deleteSession(),
-    ]);
+    this.log.debug(`Deleting Flutter Driver session`);
+    await deleteSession.bind(this);
+    await super.deleteSession();
   }
 
   public async installApp(appPath: string, opts = {}) {
@@ -174,7 +170,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
         // There are 2 CommandTimeout (FlutterDriver and proxy)
         // Only FlutterDriver CommandTimeout is used; Proxy is disabled
         // All proxy commands needs to reset the FlutterDriver CommandTimeout
-        // Here we manually reset the FlutterDriver CommandTimeout for commands that goe to proxy.
+        // Here we manually reset the FlutterDriver CommandTimeout for commands that goes to proxy.
         this.clearNewCommandTimeout();
         const result = await this.proxydriver.executeCommand(cmd, ...args);
         this.startNewCommandTimeout();
@@ -197,10 +193,10 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   public proxyActive(): boolean {
     // In WebView context, all request should got to each driver
     // so that they can handle http request properly.
-    // On iOS, WebVie context is handled by XCUITest driver while Android is by chromedriver.
+    // On iOS, WebView context is handled by XCUITest driver while Android is by chromedriver.
     // It means XCUITest driver should keep the XCUITest driver as a proxy,
     // while UIAutomator2 driver should proxy to chromedriver instead of UIA2 proxy.
-    return this.proxyWebViewActive && this.proxydriverName !== IOS_DEVICE_NAME;
+    return this.proxyWebViewActive && this.proxydriver.constructor.name !== XCUITestDriver.name;
   }
 
   public canProxy(): boolean {

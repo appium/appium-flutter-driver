@@ -1,4 +1,5 @@
-import { FlutterDriver } from '../driver';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import type { FlutterDriver } from '../driver';
 import { reConnectFlutterDriver } from '../sessions/session';
 import { longTap, scroll, scrollIntoView, scrollUntilVisible, scrollUntilTapable } from './execute/scroll';
 import { waitFor, waitForAbsent, waitForTappable } from './execute/wait';

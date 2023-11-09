@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@appium/tsconfig/tsconfig.json",
   "compilerOptions": {
+    "esModuleInterop": true,
     "strict": false,  // TODO: make this flag true
     "outDir": "build",
     "types": ["node"],

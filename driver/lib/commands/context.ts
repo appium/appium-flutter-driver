@@ -1,4 +1,4 @@
-import { FlutterDriver } from '../driver';
+import type { FlutterDriver } from '../driver';
 
 export const FLUTTER_CONTEXT_NAME = `FLUTTER`;
 export const NATIVE_CONTEXT_NAME = `NATIVE_APP`;
