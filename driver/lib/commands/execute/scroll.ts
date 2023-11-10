@@ -115,7 +115,7 @@ export const scrollUntilVisible = async (
   // An expectation for checking that an element, known to be present on the widget tree, is visible
   let isVisible = false;
   const startAt = Date.now();
-  while (!isVisible || shouldRetry(startAt, waitTimeoutMilliseconds)) {
+  while (!isVisible && shouldRetry(startAt, waitTimeoutMilliseconds)) {
     (async () => {
       try {
         await waitFor(self, item, durationMilliseconds);
@@ -165,7 +165,7 @@ export const scrollUntilTapable = async (
   // repeatedly until we either find the item or time out.
   let isVisible = false;
   const startAt = Date.now();
-  while (!isVisible || shouldRetry(startAt, waitTimeoutMilliseconds)) {
+  while (!isVisible && shouldRetry(startAt, waitTimeoutMilliseconds)) {
     (async () => {
       try {
         await waitForTappable(self, item, durationMilliseconds);
