@@ -1,15 +1,18 @@
-const W3C_ELEMENT = `element-6066-11e4-a52e-4f735466cecf`;
+import _ from 'lodash';
+import { util } from '@appium/support';
 
 export const decode = (input: string | {ELEMENT: string}): string => {
   let base64String = ``;
-  if (typeof input === `string`) {
+  if (_.isString(input)) {
     base64String = input;
-  } else if (typeof input === `object` && input[W3C_ELEMENT]) {
-    base64String = input[W3C_ELEMENT];
-  } else if (typeof input === `object` && input.ELEMENT) {
+  } else if (_.has(input, util.W3C_WEB_ELEMENT_IDENTIFIER)) {
+    base64String = input[util.W3C_WEB_ELEMENT_IDENTIFIER];
+  } else if (_.has(input, 'ELEMENT')) {
     base64String = input.ELEMENT;
   } else {
-    throw new Error(`input is invalid ${JSON.stringify(input)}`);
+    throw new Error(
+      `Input is is expceted to be a base64-encoded string or a valid element object. ` +
+      `${JSON.stringify(input)} has been provided instead`);
   }
   return Buffer.from(base64String, `base64`).toString();
 };

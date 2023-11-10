@@ -52,10 +52,9 @@
   },
   "devDependencies": {
     "@appium/eslint-config-appium": "^8.0.4",
-    "@appium/eslint-config-appium-ts": "^0.3.1",
-    "@appium/schema": "^0.4.1",
-    "@appium/tsconfig": "^0.3.0",
-    "@appium/types": "^0.14.1",
+    "@appium/eslint-config-appium-ts": "^0.x",
+    "@appium/tsconfig": "^0.x",
+    "@appium/types": "^0.x",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "eslint": "^8.46.0",
@@ -64,9 +63,7 @@
     "eslint-plugin-import": "^2.28.0",
     "eslint-plugin-mocha": "^10.1.0",
     "eslint-plugin-promise": "^6.1.1",
-    "json-schema": "^0.4.0",
     "semantic-release": "^22.0.5",
-    "type-fest": "^4.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   },
@@ -75,11 +72,11 @@
     "appium-android-driver": "^7.0.2",
     "appium-ios-device": "^2.4.1",
     "appium-uiautomator2-driver": "^2.29.4",
-    "appium-xcuitest-driver": "5.8.1",
+    "appium-xcuitest-driver": "^5.8.1",
     "asyncbox": "^3.0.0",
     "bluebird": "^3.1.1",
     "lodash": "^4.0.0",
-    "portscanner": "2.2.0",
+    "portscanner": "^2.2.0",
     "rpc-websockets": "^7.4.16"
   }
 }

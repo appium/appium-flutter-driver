@@ -1,8 +1,16 @@
-import { FlutterDriver } from '../driver';
+import type { FlutterDriver } from '../driver';
 import _ from 'lodash';
+import {
+  startAndroidSession, connectAndroidSession
+} from './android';
+import {
+  startIOSSession, connectIOSSession
+} from './ios';
 
-import { DRIVER_NAME as ANDROID_DEVICE_NAME, startAndroidSession, connectAndroidSession } from './android';
-import { DRIVER_NAME as IOS_DEVICE_NAME, startIOSSession, connectIOSSession } from './ios';
+const PLATFORM = {
+  IOS: 'ios',
+  ANDROID: 'android',
+} as const;
 
 export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: Record<string, any>) {
   // setup proxies - if platformName is not empty, make it less case sensitive
@@ -10,44 +18,42 @@ export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: 
     this.log.errorAndThrow(`No platformName was given`);
   }
 
-  const appPlatform = _.toLower(caps.platformName);
-  switch (appPlatform) {
-    case `ios`:
+  switch (_.toLower(caps.platformName)) {
+    case PLATFORM.IOS:
       this.socket = await connectIOSSession(this.proxydriver, caps);
       break;
-    case `android`:
+    case PLATFORM.ANDROID:
       this.socket = await connectAndroidSession(this.proxydriver, caps);
       break;
     default:
-      this.log.errorAndThrow(`Unsupported platformName: ${caps.platformName}`);
+      this.log.errorAndThrow(
+        `Unsupported platformName: ${caps.platformName}. ` +
+        `Only the following platforms are supported: ${_.keys(PLATFORM)}`
+      );
   }
 };
 
 export const createSession: any = async function(this: FlutterDriver, sessionId: string, caps, ...args) {
   try {
     // setup proxies - if platformName is not empty, make it less case sensitive
-    if (caps.platformName) {
-      const appPlatform = _.toLower(caps.platformName);
-      switch (appPlatform) {
-        case `ios`:
-          [this.proxydriver, this.socket] = await startIOSSession(caps, ...args);
-          this.proxydriver.relaxedSecurityEnabled = this.relaxedSecurityEnabled;
-          this.proxydriver.denyInsecure = this.denyInsecure;
-          this.proxydriver.allowInsecure = this.allowInsecure;
-          this.proxydriverName = IOS_DEVICE_NAME;
-          break;
-        case `android`:
-          [this.proxydriver, this.socket] = await startAndroidSession(caps, ...args);
-          this.proxydriver.relaxedSecurityEnabled = this.relaxedSecurityEnabled;
-          this.proxydriver.denyInsecure = this.denyInsecure;
-          this.proxydriver.allowInsecure = this.allowInsecure;
-          this.proxydriverName = ANDROID_DEVICE_NAME;
-          break;
-        default:
-          this.log.errorAndThrow(
-            `Unsupported platformName: ${caps.platformName}`,
-          );
-      }
+    switch (_.toLower(caps.platformName)) {
+      case PLATFORM.IOS:
+        [this.proxydriver, this.socket] = await startIOSSession(caps, ...args);
+        this.proxydriver.relaxedSecurityEnabled = this.relaxedSecurityEnabled;
+        this.proxydriver.denyInsecure = this.denyInsecure;
+        this.proxydriver.allowInsecure = this.allowInsecure;
+        break;
+      case PLATFORM.ANDROID:
+        [this.proxydriver, this.socket] = await startAndroidSession(caps, ...args);
+        this.proxydriver.relaxedSecurityEnabled = this.relaxedSecurityEnabled;
+        this.proxydriver.denyInsecure = this.denyInsecure;
+        this.proxydriver.allowInsecure = this.allowInsecure;
+        break;
+      default:
+        this.log.errorAndThrow(
+          `Unsupported platformName: ${caps.platformName}. ` +
+          `Only the following platforms are supported: ${_.keys(PLATFORM)}`
+        );
     }
 
     return [sessionId, this.opts];
@@ -58,10 +64,12 @@ export const createSession: any = async function(this: FlutterDriver, sessionId:
 };
 
 export const deleteSession = async function(this: FlutterDriver) {
-  this.log.debug(`Deleting Flutter Driver session`);
-
   if (this.proxydriver) {
-    await this.proxydriver.deleteSession();
+    try {
+      await this.proxydriver.deleteSession();
+    } catch (e) {
+      this.log.warn(e.message);
+    }
     this.proxydriver = null;
   }
 };

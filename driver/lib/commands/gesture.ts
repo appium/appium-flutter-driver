@@ -1,4 +1,4 @@
-import { FlutterDriver } from '../driver';
+import type { FlutterDriver } from '../driver';
 import { longTap as longClick} from './execute/scroll';
 
 export const click = async function(this: FlutterDriver, el: string) {

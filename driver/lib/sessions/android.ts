@@ -1,17 +1,13 @@
 import AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
 import { log } from '../logger';
-import { connectSocket, processLogToGetobservatory } from './observatory';
-import { InitialOpts } from '@appium/types';
-
-export const DRIVER_NAME = `UIAutomator2`;
-type IsolateSocket = import('./isolate_socket').IsolateSocket;
-
+import { connectSocket, fetchObservatoryUrl } from './observatory';
+import type { InitialOpts } from '@appium/types';
+import type { IsolateSocket } from './isolate_socket';
 
 const setupNewAndroidDriver = async (...args: any[]): Promise<AndroidUiautomator2Driver> => {
   const androiddriver = new AndroidUiautomator2Driver({} as InitialOpts);
-  // @ts-ignore
+  //@ts-ignore Args are ok
   await androiddriver.createSession(...args);
-
   return androiddriver;
 };
 
@@ -48,7 +44,7 @@ export const getObservatoryWsUri = async (proxydriver: AndroidUiautomator2Driver
       return urlObject.toJSON();
     }
   } else {
-    urlObject = processLogToGetobservatory(proxydriver.adb.logcat!.logs as [{message: string}]);
+    urlObject = fetchObservatoryUrl(proxydriver.adb.logcat!.logs as [{message: string}]);
   }
   const remotePort = urlObject.port;
   const localPort = caps.forwardingPort ?? remotePort;

@@ -1,10 +1,12 @@
 import { URL } from 'url';
 import _ from 'lodash';
-import { FlutterDriver } from '../driver';
+import type { FlutterDriver } from '../driver';
 import { log } from '../logger';
 import { IsolateSocket } from './isolate_socket';
 import { decode } from './base64url';
 import B from 'bluebird';
+import type XCUITestDriver from 'appium-xcuitest-driver';
+import type AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
 
 const truncateLength = 500;
 // https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183
@@ -17,7 +19,7 @@ const OBSERVATORY_URL_PATTERN = new RegExp(
   `The Dart VM service is listening on )` +
   `((http|//)[a-zA-Z0-9:/=_\\-.\\[\\]]+)`,
 );
-type AnyDriver = import('appium-xcuitest-driver').XCUITestDriver | import('appium-uiautomator2-driver').AndroidUiautomator2Driver;
+type AnyDriver = XCUITestDriver | AndroidUiautomator2Driver;
 
 // SOCKETS
 export const connectSocket = async (
@@ -201,7 +203,7 @@ export const executeElementCommand = async function(
   return data.response;
 };
 
-export const processLogToGetobservatory = (deviceLogs: [{ message: string }]): URL => {
+export const fetchObservatoryUrl = (deviceLogs: [{ message: string }]): URL => {
   let dartObservatoryURL: URL|undefined;
   for (const line of deviceLogs.map((e) => e.message).reverse()) {
     const match = line.match(OBSERVATORY_URL_PATTERN);
