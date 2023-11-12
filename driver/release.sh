@@ -4,7 +4,7 @@ echo "refreshing dependencies"
 rm npm-shrinkwrap.json
 APPIUM_SKIP_CHROMEDRIVER_INSTALL=1 npm run clean-dependency
 npm install --production
-npm prune --production
+npm prune --omit=dev --omit=peer
 rm -rf node_modules/appium
 npm shrinkwrap
 
