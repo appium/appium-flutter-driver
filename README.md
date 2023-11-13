@@ -187,6 +187,8 @@ You have a couple of methods to start the application under test by establishing
         - `driver.execute_script 'flutter:launchApp', 'com.example.bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` is example usage
         - This launching method is the same as the above 3rd party method, but does the same thing only via the appium flutter driver.
 
+Please make sure the target app process stops before starting the target app with the above.
+
 ## Changelog
 
 - [appium-flutter-driver](driver/CHANGELOG.md)
