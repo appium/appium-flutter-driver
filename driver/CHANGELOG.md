@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.2.2
+- fix: scrollUntilVisible and scrollUntilTapable https://github.com/appium/appium-flutter-driver/pull/622
+
+## 2.2.1
+- fix: typescript syntaxes
 
 ## 2.2.0
 - Update Appium UIAutomation2 driver dependency to 7.0.2
