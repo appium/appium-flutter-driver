@@ -24,8 +24,9 @@ Under the hood, Appium Flutter Driver uses the [Dart VM Service Protocol](https:
           - https://github.com/appium/appium-uiautomator2-driver
           - https://appium.github.io/appium-xcuitest-driver/latest
     - `WEBVIEW` context manages the WebView contents over Appium UiAutomator2/XCUITest driver
-- Appium UiAutomator2/XCUITest drivers must be sufficient to achieve automation if the application under test had `semanticLabel` properly. Then, the accessibility mechanism in each OS can expose elements for Appium through OS's accessibility features
+- Appium UiAutomator2/XCUITest drivers must be sufficient to achieve automation if the application under test had `semanticLabel` properly. Then, the accessibility mechanism in each OS can expose elements for Appium through OS's accessibility features. Then, this driver is not necessary. (Recommended)
     - For example, [Key](https://api.flutter.dev/flutter/foundation/Key-class.html) does not work in the Appium UiAutomator2/XCUITest drivers, but can work in the Appium Flutter Driver
+    - Potentially https://github.com/flutter/flutter/pull/138331 will allow [Key](https://api.flutter.dev/flutter/foundation/Key-class.html) to be `resource-id` or `accessibilityIdentifier`, then UiAutomator2/XCUITest drivers also can handle `Key` without this driver
 
 ## Installation
 
