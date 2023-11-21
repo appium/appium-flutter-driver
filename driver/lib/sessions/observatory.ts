@@ -154,7 +154,14 @@ export const connectSocket = async (
       }
     }
 
-    // TODO: should remove the port forward for Android and iOS before the retrial.
+
+    // TODO: define the same method name.
+    // ios
+    flutterDriver.localServer?.close();
+    // Android
+    if (flutterDriver.portForwardLocalPort) {
+      await driver.adb.removePortForward(flutterDriver.portForwardLocalPort);
+    }
 
     retryCount++;
   }

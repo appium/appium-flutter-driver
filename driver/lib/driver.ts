@@ -126,7 +126,6 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
       }
       this.proxydriver = null;
     }
-    // TODO: should remove the port forward for Android and iOS.
 
     await super.deleteSession();
   }
