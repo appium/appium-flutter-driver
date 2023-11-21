@@ -152,6 +152,9 @@ export const connectSocket = async (
         return connectedSocket;
       }
     }
+
+    // TODO: should remove the port forward for Android and iOS before the retrial.
+
     retryCount++;
   }
   throw new Error(
