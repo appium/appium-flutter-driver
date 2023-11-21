@@ -54,7 +54,7 @@ export const connectSocket = async (
       urlFetchError = undefined;
     } catch (e) {
       urlFetchError = e;
-      log.debug(e.message);
+      log.debug(`Got an error while finding an observatory url. Original error: ${e.message}`);
     }
 
     if (!urlFetchError) {
