@@ -7,6 +7,7 @@ import { log } from '../logger';
 import { connectSocket, fetchObservatoryUrl } from './observatory';
 import type { InitialOpts } from '@appium/types';
 import type { IsolateSocket } from './isolate_socket';
+import { FlutterDriver } from '../driver';
 
 const LOCALHOST = `127.0.0.1`;
 
@@ -17,6 +18,7 @@ const setupNewIOSDriver = async (...args: any[]): Promise<XCUITestDriver> => {
 };
 
 export const startIOSSession = async (
+  flutterDriver: FlutterDriver,
   caps: Record<string, any>, ...args: any[]
 ): Promise<[XCUITestDriver, IsolateSocket|null]> => {
   log.info(`Starting an IOS proxy session`);
@@ -29,14 +31,15 @@ export const startIOSSession = async (
 
   return [
     iosdriver,
-    await connectSocket(getObservatoryWsUri, iosdriver, caps),
+    await connectSocket(getObservatoryWsUri, flutterDriver, iosdriver, caps),
   ];
 };
 
 export const connectIOSSession = async (
+  flutterDriver: FlutterDriver,
   iosdriver: XCUITestDriver, caps: Record<string, any>
 ): Promise<IsolateSocket> =>
-  await connectSocket(getObservatoryWsUri, iosdriver, caps);
+  await connectSocket(getObservatoryWsUri, flutterDriver, iosdriver, caps);
 
 async function requireFreePort (port: number) {
   if ((await checkPortStatus(port, LOCALHOST)) !== `open`) {
@@ -48,6 +51,7 @@ async function requireFreePort (port: number) {
 }
 
 export const getObservatoryWsUri = async (
+  flutterDriver: FlutterDriver,
   proxydriver: XCUITestDriver, caps: Record<string, any>
 ): Promise<string> => {
   let urlObject;
@@ -74,7 +78,7 @@ export const getObservatoryWsUri = async (
   log.info(`Running on iOS real device`);
   const { udid } = proxydriver.opts;
   await requireFreePort(localPort);
-  const localServer = net.createServer(async (localSocket) => {
+  flutterDriver.localServer = net.createServer(async (localSocket) => {
     let remoteSocket;
     try {
       remoteSocket = await utilities.connectPort(udid, remotePort);
@@ -100,10 +104,10 @@ export const getObservatoryWsUri = async (
     remoteSocket.pipe(localSocket);
   });
   const listeningPromise = new B((resolve, reject) => {
-    localServer.once(`listening`, resolve);
-    localServer.once(`error`, reject);
+    flutterDriver.localServer.once(`listening`, resolve);
+    flutterDriver.localServer.once(`error`, reject);
   });
-  localServer.listen(localPort);
+  flutterDriver.localServer.listen(localPort);
   try {
     await listeningPromise;
   } catch (e) {
@@ -113,7 +117,7 @@ export const getObservatoryWsUri = async (
   log.info(`Forwarding the remote port ${remotePort} to the local port ${localPort}`);
 
   process.on(`beforeExit`, () => {
-    localServer.close();
+    flutterDriver.localServer.close();
   });
   return urlObject.toJSON();
 };

@@ -23,7 +23,8 @@ type AnyDriver = XCUITestDriver | AndroidUiautomator2Driver;
 
 // SOCKETS
 export const connectSocket = async (
-  getObservatoryWsUri: (driver: AnyDriver, caps: any) => Promise<string>,
+  getObservatoryWsUri: (flutterDriver: FlutterDriver, driver: AnyDriver, caps: any) => Promise<string>,
+  flutterDriver: FlutterDriver,
   driver: AnyDriver,
   caps: Record<string, any>
 ): Promise<IsolateSocket> => {
@@ -50,7 +51,7 @@ export const connectSocket = async (
 
     // Every attempt gets the latest observatory url
     try {
-      dartObservatoryURL = await getObservatoryWsUri(driver, caps);
+      dartObservatoryURL = await getObservatoryWsUri(flutterDriver, driver, caps);
       urlFetchError = undefined;
     } catch (e) {
       urlFetchError = e;

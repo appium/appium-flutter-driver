@@ -9,7 +9,7 @@ import { log as logger } from './logger';
 import {
   executeElementCommand, executeGetVMCommand, executeGetIsolateCommand
 } from './sessions/observatory';
-import { createSession, deleteSession, reConnectFlutterDriver } from './sessions/session';
+import { createSession, reConnectFlutterDriver } from './sessions/session';
 import {
   driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
   getContexts, getCurrentContext, NATIVE_CONTEXT_NAME, setContext
@@ -45,6 +45,10 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   public locatorStrategies = [`key`, `css selector`];
   public proxydriver: XCUITestDriver | AndroidUiautomator2Driver;
   public device: any;
+
+  public portForwardLocalPort: string | null;
+  public portForwardRemotePort: string | null;
+  public localServer: any;
 
   // Used to keep the capabilities internally
   public internalCaps: DriverCaps<FluttertDriverConstraints>;
@@ -91,6 +95,10 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     this.socket = null;
     this.device = null;
     this.desiredCapConstraints = desiredCapConstraints;
+
+    this.portForwardRemotePort = null;
+    this.portForwardLocalPort = null;
+    this.localServer = null;
   }
 
   public async createSession(...args): Promise<DefaultCreateSessionResult<FluttertDriverConstraints>> {
@@ -101,7 +109,25 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
 
   public async deleteSession() {
     this.log.debug(`Deleting Flutter Driver session`);
-    await deleteSession.bind(this);
+
+    // ios
+    this.localServer?.close();
+
+    // android
+    if (this.portForwardLocalPort) {
+      await this.proxydriver.adb.removePortForward(this.portForwardLocalPort);
+    }
+
+    if (this.proxydriver) {
+      try {
+        await this.proxydriver.deleteSession();
+      } catch (e) {
+        this.log.warn(e.message);
+      }
+      this.proxydriver = null;
+    }
+    // TODO: should remove the port forward for Android and iOS.
+
     await super.deleteSession();
   }
 
@@ -207,4 +233,3 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
 }
 
 export { FlutterDriver };
-
