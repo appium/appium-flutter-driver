@@ -1,11 +1,6 @@
 // @ts-ignore: no 'errors' export module
 import _ from 'lodash';
 import { BaseDriver } from 'appium/driver';
-import type {
-  DefaultCreateSessionResult, DriverCaps, DriverData, W3CDriverCaps,
-  RouteMatcher
-} from '@appium/types';
-import type { IsolateSocket } from './sessions/isolate_socket';
 import { log as logger } from './logger';
 import {
   executeElementCommand, executeGetVMCommand, executeGetIsolateCommand
@@ -24,6 +19,12 @@ import { getClipboard, setClipboard } from './commands/clipboard';
 import { desiredCapConstraints } from './desired-caps';
 import XCUITestDriver from 'appium-xcuitest-driver';
 import AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
+import type {
+  DefaultCreateSessionResult, DriverCaps, DriverData, W3CDriverCaps,
+  RouteMatcher
+} from '@appium/types';
+import type { IsolateSocket } from './sessions/isolate_socket';
+import type { Server } from 'rpc-websockets';
 
 
 type FluttertDriverConstraints = typeof desiredCapConstraints;
@@ -49,7 +50,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   public device: any;
 
   public portForwardLocalPort: string | null;
-  public localServer: any;
+  public localServer: Server | null;
 
   // Used to keep the capabilities internally
   public internalCaps: DriverCaps<FluttertDriverConstraints>;
