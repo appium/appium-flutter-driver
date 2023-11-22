@@ -1,4 +1,5 @@
 // @ts-ignore: no 'errors' export module
+import _ from 'lodash';
 import { BaseDriver } from 'appium/driver';
 import type {
   DefaultCreateSessionResult, DriverCaps, DriverData, W3CDriverCaps,
@@ -9,7 +10,7 @@ import { log as logger } from './logger';
 import {
   executeElementCommand, executeGetVMCommand, executeGetIsolateCommand
 } from './sessions/observatory';
-import { createSession, reConnectFlutterDriver } from './sessions/session';
+import { createSession, reConnectFlutterDriver, PLATFORM } from './sessions/session';
 import {
   driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
   getContexts, getCurrentContext, NATIVE_CONTEXT_NAME, setContext
@@ -47,7 +48,6 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   public device: any;
 
   public portForwardLocalPort: string | null;
-  public portForwardRemotePort: string | null;
   public localServer: any;
 
   // Used to keep the capabilities internally
@@ -96,7 +96,6 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     this.device = null;
     this.desiredCapConstraints = desiredCapConstraints;
 
-    this.portForwardRemotePort = null;
     this.portForwardLocalPort = null;
     this.localServer = null;
   }
@@ -108,17 +107,22 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async deleteSession() {
-    this.log.debug(`Deleting Flutter Driver session`);
+    this.log.info(`Deleting Flutter Driver session`);
 
-    // ios
-    this.localServer?.close();
-
-    // android
-    if (this.portForwardLocalPort) {
-      await this.proxydriver.adb.removePortForward(this.portForwardLocalPort);
-    }
+    this.log.info('Cleanup the port forward');
+    switch (_.toLower(this.internalCaps.platformName)) {
+      case PLATFORM.IOS:
+        this.localServer?.close();
+        break;
+      case PLATFORM.ANDROID:
+        if (this.portForwardLocalPort) {
+          await this.proxydriver.adb.removePortForward(this.portForwardLocalPort);
+        }
+        break;
+      }
 
     if (this.proxydriver) {
+      this.log.info('Deleting the proxy driver session.');
       try {
         await this.proxydriver.deleteSession();
       } catch (e) {

@@ -42,6 +42,7 @@ export const createSession: any = async function(this: FlutterDriver, sessionId:
         this.proxydriver.relaxedSecurityEnabled = this.relaxedSecurityEnabled;
         this.proxydriver.denyInsecure = this.denyInsecure;
         this.proxydriver.allowInsecure = this.allowInsecure;
+
         break;
       case PLATFORM.ANDROID:
         [this.proxydriver, this.socket] = await startAndroidSession(this, caps, ...args);

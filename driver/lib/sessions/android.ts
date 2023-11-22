@@ -52,10 +52,10 @@ export const getObservatoryWsUri = async (
   } else {
     urlObject = fetchObservatoryUrl(proxydriver.adb.logcat!.logs as [{message: string}]);
   }
-  flutterDriver.portForwardRemotePort = urlObject.port;
-  flutterDriver.portForwardLocalPort = caps.forwardingPort ?? flutterDriver.portForwardRemotePort;
+  const remotePort = urlObject.port;
+  flutterDriver.portForwardLocalPort = caps.forwardingPort ?? remotePort;
   urlObject.port = flutterDriver.portForwardLocalPort!;
-  await proxydriver.adb.forwardPort(flutterDriver.portForwardLocalPort!, flutterDriver.portForwardRemotePort);
+  await proxydriver.adb.forwardPort(flutterDriver.portForwardLocalPort!, remotePort);
   if (!caps.observatoryWsUri && proxydriver.adb.adbHost) {
     urlObject.host = proxydriver.adb.adbHost;
   }
