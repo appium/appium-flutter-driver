@@ -97,7 +97,10 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     this.device = null;
     this.desiredCapConstraints = desiredCapConstraints;
 
+    // Used to keep the port for port forward to clear the pair.
     this.portForwardLocalPort = null;
+
+    // Used for iOS to end the local server to proxy the request.
     this.localServer = null;
   }
 
@@ -114,6 +117,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     switch (_.toLower(this.internalCaps.platformName)) {
       case PLATFORM.IOS:
         this.localServer?.close();
+        this.localServer = null;
         break;
       case PLATFORM.ANDROID:
         if (this.portForwardLocalPort) {
