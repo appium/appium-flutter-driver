@@ -6,11 +6,8 @@ import {
 import {
   startIOSSession, connectIOSSession
 } from './ios';
+import { PLATFORM } from '../platform';
 
-const PLATFORM = {
-  IOS: 'ios',
-  ANDROID: 'android',
-} as const;
 
 export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: Record<string, any>) {
   // setup proxies - if platformName is not empty, make it less case sensitive

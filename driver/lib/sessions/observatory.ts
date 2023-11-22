@@ -7,6 +7,7 @@ import { decode } from './base64url';
 import B from 'bluebird';
 import type XCUITestDriver from 'appium-xcuitest-driver';
 import type AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
+import { PLATFORM } from '../platform';
 
 const truncateLength = 500;
 // https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183
@@ -154,13 +155,16 @@ export const connectSocket = async (
       }
     }
 
-
-    // TODO: define the same method name.
-    // ios
-    flutterDriver.localServer?.close();
-    // Android
-    if (flutterDriver.portForwardLocalPort) {
-      await driver.adb.removePortForward(flutterDriver.portForwardLocalPort);
+    // re-create the port forward
+    switch (_.toLower(caps.platformName)) {
+      case PLATFORM.IOS:
+        flutterDriver.localServer?.close();
+        break;
+      case PLATFORM.ANDROID:
+        if (flutterDriver.portForwardLocalPort) {
+          await driver.adb.removePortForward(flutterDriver.portForwardLocalPort);
+        }
+        break;
     }
 
     retryCount++;

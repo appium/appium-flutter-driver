@@ -10,7 +10,8 @@ import { log as logger } from './logger';
 import {
   executeElementCommand, executeGetVMCommand, executeGetIsolateCommand
 } from './sessions/observatory';
-import { createSession, reConnectFlutterDriver, PLATFORM } from './sessions/session';
+import { PLATFORM } from './platform';
+import { createSession, reConnectFlutterDriver } from './sessions/session';
 import {
   driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
   getContexts, getCurrentContext, NATIVE_CONTEXT_NAME, setContext
