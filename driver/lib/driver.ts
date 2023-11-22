@@ -24,7 +24,7 @@ import type {
   RouteMatcher
 } from '@appium/types';
 import type { IsolateSocket } from './sessions/isolate_socket';
-import type { Server } from 'rpc-websockets';
+import type { Server } from 'node:net';
 
 
 type FluttertDriverConstraints = typeof desiredCapConstraints;

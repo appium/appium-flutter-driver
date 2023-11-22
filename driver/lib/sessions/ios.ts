@@ -104,10 +104,10 @@ export const getObservatoryWsUri = async (
     remoteSocket.pipe(localSocket);
   });
   const listeningPromise = new B((resolve, reject) => {
-    flutterDriver.localServer.once(`listening`, resolve);
-    flutterDriver.localServer.once(`error`, reject);
+    flutterDriver.localServer?.once(`listening`, resolve);
+    flutterDriver.localServer?.once(`error`, reject);
   });
-  flutterDriver.localServer.listen(localPort);
+  flutterDriver.localServer?.listen(localPort);
   try {
     await listeningPromise;
   } catch (e) {
@@ -117,7 +117,7 @@ export const getObservatoryWsUri = async (
   log.info(`Forwarding the remote port ${remotePort} to the local port ${localPort}`);
 
   process.on(`beforeExit`, () => {
-    flutterDriver.localServer.close();
+    flutterDriver.localServer?.close();
   });
   return urlObject.toJSON();
 };
