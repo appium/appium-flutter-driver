@@ -7,6 +7,7 @@ import { decode } from './base64url';
 import B from 'bluebird';
 import type XCUITestDriver from 'appium-xcuitest-driver';
 import type AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
+import { PLATFORM } from '../platform';
 
 const truncateLength = 500;
 // https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183
@@ -23,7 +24,8 @@ type AnyDriver = XCUITestDriver | AndroidUiautomator2Driver;
 
 // SOCKETS
 export const connectSocket = async (
-  getObservatoryWsUri: (driver: AnyDriver, caps: any) => Promise<string>,
+  getObservatoryWsUri: (flutterDriver: FlutterDriver, driver: AnyDriver, caps: any) => Promise<string>,
+  flutterDriver: FlutterDriver,
   driver: AnyDriver,
   caps: Record<string, any>
 ): Promise<IsolateSocket> => {
@@ -50,11 +52,11 @@ export const connectSocket = async (
 
     // Every attempt gets the latest observatory url
     try {
-      dartObservatoryURL = await getObservatoryWsUri(driver, caps);
+      dartObservatoryURL = await getObservatoryWsUri(flutterDriver, driver, caps);
       urlFetchError = undefined;
     } catch (e) {
       urlFetchError = e;
-      log.debug(e.message);
+      log.debug(`Got an error while finding an observatory url. Original error: ${e.message}`);
     }
 
     if (!urlFetchError) {
@@ -152,6 +154,19 @@ export const connectSocket = async (
         return connectedSocket;
       }
     }
+
+    // re-create the port forward
+    switch (_.toLower(caps.platformName)) {
+      case PLATFORM.IOS:
+        flutterDriver.localServer?.close();
+        break;
+      case PLATFORM.ANDROID:
+        if (flutterDriver.portForwardLocalPort) {
+          await driver.adb.removePortForward(flutterDriver.portForwardLocalPort);
+        }
+        break;
+    }
+
     retryCount++;
   }
   throw new Error(

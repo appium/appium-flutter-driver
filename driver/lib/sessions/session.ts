@@ -6,11 +6,8 @@ import {
 import {
   startIOSSession, connectIOSSession
 } from './ios';
+import { PLATFORM } from '../platform';
 
-const PLATFORM = {
-  IOS: 'ios',
-  ANDROID: 'android',
-} as const;
 
 export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: Record<string, any>) {
   // setup proxies - if platformName is not empty, make it less case sensitive
@@ -20,10 +17,10 @@ export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: 
 
   switch (_.toLower(caps.platformName)) {
     case PLATFORM.IOS:
-      this.socket = await connectIOSSession(this.proxydriver, caps);
+      this.socket = await connectIOSSession(this, this.proxydriver, caps);
       break;
     case PLATFORM.ANDROID:
-      this.socket = await connectAndroidSession(this.proxydriver, caps);
+      this.socket = await connectAndroidSession(this, this.proxydriver, caps);
       break;
     default:
       this.log.errorAndThrow(
@@ -38,13 +35,14 @@ export const createSession: any = async function(this: FlutterDriver, sessionId:
     // setup proxies - if platformName is not empty, make it less case sensitive
     switch (_.toLower(caps.platformName)) {
       case PLATFORM.IOS:
-        [this.proxydriver, this.socket] = await startIOSSession(caps, ...args);
+        [this.proxydriver, this.socket] = await startIOSSession(this, caps, ...args);
         this.proxydriver.relaxedSecurityEnabled = this.relaxedSecurityEnabled;
         this.proxydriver.denyInsecure = this.denyInsecure;
         this.proxydriver.allowInsecure = this.allowInsecure;
+
         break;
       case PLATFORM.ANDROID:
-        [this.proxydriver, this.socket] = await startAndroidSession(caps, ...args);
+        [this.proxydriver, this.socket] = await startAndroidSession(this, caps, ...args);
         this.proxydriver.relaxedSecurityEnabled = this.relaxedSecurityEnabled;
         this.proxydriver.denyInsecure = this.denyInsecure;
         this.proxydriver.allowInsecure = this.allowInsecure;
@@ -60,16 +58,5 @@ export const createSession: any = async function(this: FlutterDriver, sessionId:
   } catch (e) {
     await this.deleteSession();
     throw e;
-  }
-};
-
-export const deleteSession = async function(this: FlutterDriver) {
-  if (this.proxydriver) {
-    try {
-      await this.proxydriver.deleteSession();
-    } catch (e) {
-      this.log.warn(e.message);
-    }
-    this.proxydriver = null;
   }
 };

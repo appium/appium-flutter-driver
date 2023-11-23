@@ -1,15 +1,12 @@
 // @ts-ignore: no 'errors' export module
+import _ from 'lodash';
 import { BaseDriver } from 'appium/driver';
-import type {
-  DefaultCreateSessionResult, DriverCaps, DriverData, W3CDriverCaps,
-  RouteMatcher
-} from '@appium/types';
-import type { IsolateSocket } from './sessions/isolate_socket';
 import { log as logger } from './logger';
 import {
   executeElementCommand, executeGetVMCommand, executeGetIsolateCommand
 } from './sessions/observatory';
-import { createSession, deleteSession, reConnectFlutterDriver } from './sessions/session';
+import { PLATFORM } from './platform';
+import { createSession, reConnectFlutterDriver } from './sessions/session';
 import {
   driverShouldDoProxyCmd, FLUTTER_CONTEXT_NAME,
   getContexts, getCurrentContext, NATIVE_CONTEXT_NAME, setContext
@@ -22,6 +19,12 @@ import { getClipboard, setClipboard } from './commands/clipboard';
 import { desiredCapConstraints } from './desired-caps';
 import XCUITestDriver from 'appium-xcuitest-driver';
 import AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
+import type {
+  DefaultCreateSessionResult, DriverCaps, DriverData, W3CDriverCaps,
+  RouteMatcher
+} from '@appium/types';
+import type { IsolateSocket } from './sessions/isolate_socket';
+import type { Server } from 'node:net';
 
 
 type FluttertDriverConstraints = typeof desiredCapConstraints;
@@ -45,6 +48,9 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   public locatorStrategies = [`key`, `css selector`];
   public proxydriver: XCUITestDriver | AndroidUiautomator2Driver;
   public device: any;
+
+  public portForwardLocalPort: string | null;
+  public localServer: Server | null;
 
   // Used to keep the capabilities internally
   public internalCaps: DriverCaps<FluttertDriverConstraints>;
@@ -91,6 +97,12 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     this.socket = null;
     this.device = null;
     this.desiredCapConstraints = desiredCapConstraints;
+
+    // Used to keep the port for port forward to clear the pair.
+    this.portForwardLocalPort = null;
+
+    // Used for iOS to end the local server to proxy the request.
+    this.localServer = null;
   }
 
   public async createSession(...args): Promise<DefaultCreateSessionResult<FluttertDriverConstraints>> {
@@ -100,8 +112,31 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async deleteSession() {
-    this.log.debug(`Deleting Flutter Driver session`);
-    await deleteSession.bind(this);
+    this.log.info(`Deleting Flutter Driver session`);
+
+    this.log.info('Cleanup the port forward');
+    switch (_.toLower(this.internalCaps.platformName)) {
+      case PLATFORM.IOS:
+        this.localServer?.close();
+        this.localServer = null;
+        break;
+      case PLATFORM.ANDROID:
+        if (this.portForwardLocalPort) {
+          await this.proxydriver.adb.removePortForward(this.portForwardLocalPort);
+        }
+        break;
+      }
+
+    if (this.proxydriver) {
+      this.log.info('Deleting the proxy driver session.');
+      try {
+        await this.proxydriver.deleteSession();
+      } catch (e) {
+        this.log.warn(e.message);
+      }
+      this.proxydriver = null;
+    }
+
     await super.deleteSession();
   }
 
@@ -207,4 +242,3 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
 }
 
 export { FlutterDriver };
-
