@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.2.3
+- fix leftover portforward
+
 ## 2.2.2
 - fix: scrollUntilVisible and scrollUntilTapable https://github.com/appium/appium-flutter-driver/pull/622
 
