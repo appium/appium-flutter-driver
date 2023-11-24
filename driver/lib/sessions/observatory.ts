@@ -72,7 +72,7 @@ export const connectSocket = async (
 
         // Add an 'error' event handler for the client socket
         const onErrorListener = (ex: Error) => {
-          log.error(JSON.stringify(ex));
+          log.error(`Connection to ${dartObservatoryURL} got an error: ${ex.message}`);
           removeListenerAndResolve(null);
         };
         socket.on(`error`, onErrorListener);
