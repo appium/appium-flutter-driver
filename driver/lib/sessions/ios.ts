@@ -95,11 +95,14 @@ export const getObservatoryWsUri = async (
       destroyCommChannel();
       localSocket.destroy();
     });
+    remoteSocket.on('error', (e) => log.debug(e));
+
     localSocket.once(`end`, destroyCommChannel);
     localSocket.once(`close`, () => {
       destroyCommChannel();
       remoteSocket.destroy();
     });
+    localSocket.on('error', (e) => log.warn(e.message));
     localSocket.pipe(remoteSocket);
     remoteSocket.pipe(localSocket);
   });
@@ -111,6 +114,7 @@ export const getObservatoryWsUri = async (
   try {
     await listeningPromise;
   } catch (e) {
+    flutterDriver.localServer = null;
     throw new Error(`Cannot listen on the local port ${localPort}. Original error: ${e.message}`);
   }
 
@@ -118,6 +122,7 @@ export const getObservatoryWsUri = async (
 
   process.on(`beforeExit`, () => {
     flutterDriver.localServer?.close();
+    flutterDriver.localServer = null;
   });
   return urlObject.toJSON();
 };
