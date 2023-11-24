@@ -227,7 +227,9 @@ export const fetchObservatoryUrl = (deviceLogs: [{ message: string }]): URL => {
       break;
     }
   }
-  if (!dartObservatoryURL) {
+  if (dartObservatoryURL) {
+    log.info(`${dartObservatoryURL.href} was found.`);
+  } else {
     throw new Error(`No observatory URL matching to '${OBSERVATORY_URL_PATTERN}' was found in the device log. ` +
       `Please make sure the application under test is configured properly according to ` +
       `https://github.com/appium-userland/appium-flutter-driver#usage and that it does not crash on startup.`);
