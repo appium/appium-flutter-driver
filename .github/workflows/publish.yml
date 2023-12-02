@@ -36,17 +36,16 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
-      - run: npm install
+      - run: npm install --no-package-lock
         working-directory: driver
       - name: update npm-shrinkwrap.json
         working-directory: driver
         run: |
-          rm npm-shrinkwrap.json
-          npm prune --production
-          rm -rf node_modules/appium
-          npm shrinkwrap
+          rm -rf package-lock.json node_modules
+          npm prune --omit=dev --omit=peer --no-package-lock
+          npm shrinkwrap --omit=dev --omit=peer
           git diff
-      - run: npm install --only=dev
+      - run: npm install --only=dev --no-package-lock
         name: Install dev dependencies for the release
         working-directory: driver
       - run: npx semantic-release --branches main
