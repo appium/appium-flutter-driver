@@ -28,6 +28,7 @@ Under the hood, Appium Flutter Driver uses the [Dart VM Service Protocol](https:
     - For example, [Key](https://api.flutter.dev/flutter/foundation/Key-class.html) does not work in the Appium UiAutomator2/XCUITest drivers, but can work in the Appium Flutter Driver
     - https://github.com/flutter/flutter/pull/138331 will introduce `identifier` for `Semantics` and `SemanticsProperties`, then it will be `resource-id` and `accessibilityIdentifier` for Android and iOS, then UiAutomator2/XCUITest drivers also can handle `Key` without this driver
         - `"appium:disableIdLocatorAutocompletion": true` would be necessary to make `resource-id` idea work without any package name prefix like Android compose.
+        - e.g. https://github.com/flutter/flutter/issues/17988#issuecomment-1867097631
 
 ## Installation
 
