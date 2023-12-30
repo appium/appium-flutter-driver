@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0
+- Update Appium UIAutomation2 driver dependency to 2.37.0
+- Update Appium XCUITest driver dependency to 5.12.1
+
 ## 2.2.3
 - fix leftover portforward
 
@@ -10,7 +14,7 @@
 - fix: typescript syntaxes
 
 ## 2.2.0
-- Update Appium UIAutomation2 driver dependency to 7.0.2
+- Update Appium UIAutomation2 driver dependency to 2.34.1
 - Update Appium XCUITest driver dependency to 5.7.0
 
 ## 2.1.0
