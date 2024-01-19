@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.4.0
+- Update Appium UIAutomation2 driver dependency to 2.42.1
+- Update Appium XCUITest driver dependency to 5.14.0
+- Add `doctor` command
+
 ## 2.3.0
 - Update Appium UIAutomation2 driver dependency to 2.37.0
 - Update Appium XCUITest driver dependency to 5.12.1
