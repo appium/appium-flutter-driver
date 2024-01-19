@@ -25,7 +25,15 @@
       "iOS",
       "Android"
     ],
-    "mainClass": "FlutterDriver"
+    "mainClass": "FlutterDriver",
+    "doctor": {
+      "checks": [
+        "./node_modules/appium-uiautomator2-driver/build/lib/doctor/required-checks.js",
+        "./node_modules/appium-uiautomator2-driver/build/lib/doctor/optional-checks.js",
+        "./node_modules/appium-xcuitest-driver/build/lib/doctor/required-checks.js",
+        "./node_modules/appium-xcuitest-driver/build/lib/doctor/optional-checks.js"
+      ]
+    }
   },
   "bin": {},
   "directories": {
@@ -48,7 +56,7 @@
     "clean-dependency": "rm -rf node_modules && rm -f package-lock.json"
   },
   "peerDependencies": {
-    "appium": "^2.0.0"
+    "appium": "^2.4.1"
   },
   "devDependencies": {
     "@appium/eslint-config-appium": "^8.0.4",
@@ -69,10 +77,10 @@
   },
   "dependencies": {
     "appium-adb": "^11.0.1",
-    "appium-android-driver": "^7.0.2",
+    "appium-android-driver": "^7.5.1",
     "appium-ios-device": "^2.4.1",
-    "appium-uiautomator2-driver": "^2.29.4",
-    "appium-xcuitest-driver": "^5.8.1",
+    "appium-uiautomator2-driver": "^2.39.0",
+    "appium-xcuitest-driver": "^5.13.0",
     "asyncbox": "^3.0.0",
     "bluebird": "^3.1.1",
     "lodash": "^4.0.0",
