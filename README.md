@@ -64,6 +64,10 @@ This snippet, taken from [example directory](example), is a script written as an
 
 Each client needs [each finder](finder) module to handle [Finders](#Finders). Appium Flutter Driver communicates with the Dart VM directory in the `FLUTTER` context.
 
+### Doctor
+Since driver version 2.4.0 you can automate the validation for the most of the above requirements as well as various optional ones needed by driver extensions by running the `appium driver doctor flutter` server command.
+The check runs for Android for UIAutomator2 driver and iOS for XCUITest driver.
+
 ### Note
 - Flutter context does not support page source
     - Please use `getRenderTree` command instead
