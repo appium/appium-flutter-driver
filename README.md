@@ -347,6 +347,7 @@ These Appium commands can work across context
 $ cd driver
 $ sh release.sh
 $ npm version <major|minor|patch>
+# update changelog
 $ git commit -am 'chore: bump version'
 $ git tag <version number> # e.g. git tag v0.0.32
 $ git push origin v0.0.32

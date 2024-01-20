@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.4.1
+- Removed unused dependencies
+
 ## 2.4.0
 - Update Appium UIAutomation2 driver dependency to 2.42.1
 - Update Appium XCUITest driver dependency to 5.14.0
