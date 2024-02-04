@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.4.2
+- Removed unused dependencies
+
 ## 2.4.1
 - Removed unused dependencies
 
