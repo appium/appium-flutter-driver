@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.5.0
+- Update Appium XCUITest driver dependency to 6.0.1
+
 ## 2.4.2
 - Removed unused dependencies
 
