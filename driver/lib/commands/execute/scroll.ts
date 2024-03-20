@@ -114,15 +114,14 @@ export const scrollUntilVisible = async (
 
   // An expectation for checking that an element, known to be present on the widget tree, is visible
   let isVisible = false;
+  (async () => {
+    try {
+      await waitFor(self, item, waitTimeoutMilliseconds);
+      isVisible = true;
+    } catch (ign) {}
+  })();
   const startAt = Date.now();
   while (!isVisible && shouldRetry(startAt, waitTimeoutMilliseconds)) {
-    (async () => {
-      try {
-        await waitFor(self, item, durationMilliseconds);
-        isVisible = true;
-      } catch (ign) {}
-    })();
-
     try {
       await scroll(self, elementBase64, {
         dx: dxScroll,
@@ -164,15 +163,14 @@ export const scrollUntilTapable = async (
   // the chance to complete if the item is already onscreen; if not, scroll
   // repeatedly until we either find the item or time out.
   let isVisible = false;
+  (async () => {
+    try {
+      await waitForTappable(self, item, waitTimeoutMilliseconds);
+      isVisible = true;
+    } catch (ign) {}
+  })();
   const startAt = Date.now();
   while (!isVisible && shouldRetry(startAt, waitTimeoutMilliseconds)) {
-    (async () => {
-      try {
-        await waitForTappable(self, item, durationMilliseconds);
-        isVisible = true;
-      } catch (ign) {}
-    })();
-
     try {
       await scroll(self, elementBase64, {
         dx: dxScroll,
