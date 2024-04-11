@@ -71,6 +71,15 @@ Each client needs [each finder](finder) module to handle [Finders](#Finders). Ap
 Since driver version 2.4.0 you can automate the validation for the most of the above requirements as well as various optional ones needed by driver extensions by running the `appium driver doctor flutter` server command.
 The check runs for Android for UIAutomator2 driver and iOS for XCUITest driver.
 
+`SKIP_ANDROID` or `SKIP_IOS` environment variable helps to skip these checks.
+
+```
+# skip Android check
+SKIP_ANDROID=1 appium driver doctor flutter
+# skip iOS check
+SKIP_IOS=1 appium driver doctor flutter
+```
+
 ### Note
 - Flutter context does not support page source
     - Please use `getRenderTree` command instead

@@ -28,10 +28,7 @@
     "mainClass": "FlutterDriver",
     "doctor": {
       "checks": [
-        "./node_modules/appium-uiautomator2-driver/build/lib/doctor/required-checks.js",
-        "./node_modules/appium-uiautomator2-driver/build/lib/doctor/optional-checks.js",
-        "./node_modules/appium-xcuitest-driver/build/lib/doctor/required-checks.js",
-        "./node_modules/appium-xcuitest-driver/build/lib/doctor/optional-checks.js"
+        "./build/lib/doctor/checks.js"
       ]
     }
   },
@@ -77,8 +74,9 @@
   },
   "dependencies": {
     "appium-ios-device": "^2.4.1",
+    "appium-android-driver": "^9.0.3",
     "appium-uiautomator2-driver": "^3.0.0",
-    "appium-xcuitest-driver": "^6.0.1",
+    "appium-xcuitest-driver": "^7.11.1",
     "bluebird": "^3.1.1",
     "lodash": "^4.0.0",
     "portscanner": "^2.2.0",
