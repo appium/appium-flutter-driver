@@ -61,6 +61,8 @@ This snippet, taken from [example directory](example), is a script written as an
 > **Note**
 >
 > This means this driver depends on [`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html).
+> In the past, the Flutter team announced replacing `flutter_driver` with `integration_test`, but according to [this ticket](https://github.com/flutter/flutter/issues/148028), this discussion is still ongoing.
+> So flutter_driver would continue to be maintained for now.
 
 Each client needs [each finder](finder) module to handle [Finders](#Finders). Appium Flutter Driver communicates with the Dart VM directory in the `FLUTTER` context.
 
