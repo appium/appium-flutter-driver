@@ -80,6 +80,6 @@
     "bluebird": "^3.1.1",
     "lodash": "^4.0.0",
     "portscanner": "^2.2.0",
-    "rpc-websockets": "^7.4.16"
+    "rpc-websockets": "^8.0.1"
   }
 }
