@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.0
+- Update Appium UIAutomation2 driver dependency to 3.5.4
+- Update Appium XCUITest driver dependency to 7.17.5
+
 ## 2.6.0
 - Update Appium XCUITest driver dependency to 7.11.1
 - `doctor` command can skip Android or iOS with environment variables
