@@ -19,7 +19,7 @@ class ExampleTests < Minitest::Test
       wait_timeout: 20,
       wait_interval: 1
     }
-  }.freeze
+  }
 
   def test_run_example_ios_scenario
     @core = ::Appium::Core.for(IOS_CAPS)
