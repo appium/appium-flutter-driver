@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.7.1
+- add logs around set context
+
 ## 2.7.0
 - Update Appium UIAutomation2 driver dependency to 3.5.4
 - Update Appium XCUITest driver dependency to 7.17.5
