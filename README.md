@@ -14,6 +14,17 @@ Even though Flutter comes with superb integration test support, [Flutter Driver]
 
 Under the hood, Appium Flutter Driver uses the [Dart VM Service Protocol](https://github.com/dart-lang/sdk/blob/master/runtime/vm/service/service.md) with extension `ext.flutter.driver`, similar to Flutter Driver, to control the Flutter app-under-test (AUT).
 
+## Appium drivers for Flutter
+
+Appium community currently has two drivers for Flutter environment:
+
+- Appium Flutter driver (this driver)
+    - Run Flutter commands over websocekt connection against the observaory URL (calls Flutter APIs directly)
+    - Base APIs are [`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html)
+- [`Appium Flutter Integration Driver`](https://github.com/AppiumTestDistribution/appium-flutter-integration-driver)
+    - Run a server on DartVM as part of the application under test and calls Flutter APIs via the server
+    - Base APIs are [`integration_test`](https://github.com/flutter/flutter/tree/main/packages/integration_test#integration_test)
+
 ## Appium Flutter Driver or Appium UiAutomator2/XCUITest driver
 - Appium Flutter driver manages the application under test and the device under test via Appium UiAutomator2/XCUITest drivers
     -  `FLUTTER` context sends commands to the Dart VM directly over the observatory URL
