@@ -66,9 +66,6 @@ This snippet, taken from [example directory](example), is a script written as an
 
 Each client needs [each finder](finder) module to handle [Finders](#Finders). Appium Flutter Driver communicates with the Dart VM directory in the `FLUTTER` context.
 
-> **Note**
-> [Expand deprecation policy to package:flutter_driver](https://github.com/flutter/flutter/issues/139249) potentially means this driver will no longer work by the future Flutter updates. They do not cover all cases that can cover the flutter_driver, such as permission dialog handling, thus we're not sure when the time comes though.
-
 ### Doctor
 Since driver version 2.4.0 you can automate the validation for the most of the above requirements as well as various optional ones needed by driver extensions by running the `appium driver doctor flutter` server command.
 The check runs for Android for UIAutomator2 driver and iOS for XCUITest driver.
