@@ -22,7 +22,7 @@ Appium community currently has two drivers for Flutter environment:
     - Run Flutter commands over websocekt connection against the observaory URL (calls Flutter APIs directly)
     - Base APIs are [`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html)
 - [`Appium Flutter Integration Driver`](https://github.com/AppiumTestDistribution/appium-flutter-integration-driver)
-    - Run a server on DartVM as part of the application under test and calls Flutter APIs via the server
+    - Run a server on DartVM as part of the application under test in order to call Flutter APIs via the server
     - Base APIs are [`integration_test`](https://github.com/flutter/flutter/tree/main/packages/integration_test#integration_test)
 
 ## Appium Flutter Driver or Appium UiAutomator2/XCUITest driver
