@@ -21,8 +21,7 @@ fun serialize(o: Map<String, *>): String {
 @UseExperimental(ImplicitReflectionSerializer::class)
 fun jsonObjectFrom(o: Map<String, *>): Map<String, JsonElement> {
   return o.map {
-    val value = it.value
-    val jsonO = when (value) {
+    val jsonO = when (val value = it.value) {
       is String -> JsonLiteral(value)
       is Number -> JsonLiteral(value)
       is Boolean -> JsonLiteral(value)
