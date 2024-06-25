@@ -271,7 +271,8 @@ Please replace them properly with your client.
 | [getBottomLeft](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getBottomLeft.html) | :ok: | `driver.execute('flutter:getBottomLeft', buttonFinder)` | Widget |
 | [getBottomRight](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getBottomRight.html) | :ok: | `driver.execute('flutter:getBottomRight', buttonFinder)` | Widget |
 | [getCenter](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getCenter.html) | :ok: | `driver.execute('flutter:getCenter', buttonFinder)` | Widget |
-| [getRenderObjectDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getRenderObjectDiagnostics.html) | :ok: | `driver.execute('flutter:getRenderObjectDiagnostics', counterTextFinder)` | Widget |
+| [getRenderObjectDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getRenderObjectDiagnostics.html) | :ok: | `driver.execute('flutter:getRenderObjectDiagnostics', counterTextFinder, { includeProperties: true, subtreeDepth: 2 })` | Widget |
+| [getWidgetDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getWidgetDiagnostics.html) | :ok: | `driver.execute('flutter:getWidgetDiagnostics', counterTextFinder, { includeProperties: true, subtreeDepth: 2 })` | Widget |
 | [getRenderTree](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getRenderTree.html) | :ok: | `driver.execute('flutter: getRenderTree')` | Session |
 | [getSemanticsId](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getSemanticsId.html) | :ok: | `driver.execute('flutter:getSemanticsId', counterTextFinder)` | Widget |
 | [getText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getText.html) | :ok: | [`driver.getElementText(counterTextFinder)`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L44) | Widget |
