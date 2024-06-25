@@ -53,7 +53,7 @@ export const execute = async function(
     case `getRenderObjectDiagnostics`:
       return await getRenderObjectDiagnostics(this, args[0], args[1]);
     case `getWidgetDiagnostics`:
-      return await getWidgetDiagnostics(this, args[0], args[1]);      
+      return await getWidgetDiagnostics(this, args[0], args[1]);
     case `getSemanticsId`:
       return await getSemanticsId(this, args[0]);
     case `waitForAbsent`:
