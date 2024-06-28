@@ -272,14 +272,13 @@ Please replace them properly with your client.
 | [getBottomRight](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getBottomRight.html) | :ok: | `driver.execute('flutter:getBottomRight', buttonFinder)` | Widget |
 | [getCenter](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getCenter.html) | :ok: | `driver.execute('flutter:getCenter', buttonFinder)` | Widget |
 | [getRenderObjectDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getRenderObjectDiagnostics.html) | :ok: | `driver.execute('flutter:getRenderObjectDiagnostics', counterTextFinder, { includeProperties: true, subtreeDepth: 2 })` | Widget |
-| [getWidgetDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getWidgetDiagnostics.html) | :ok: | `driver.execute('flutter:getWidgetDiagnostics', counterTextFinder, { includeProperties: true, subtreeDepth: 2 })` | Widget |
+| [getWidgetDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getWidgetDiagnostics.html) | :ok: (v2.8.0+) | `driver.execute('flutter:getWidgetDiagnostics', counterTextFinder, { includeProperties: true, subtreeDepth: 2 })` | Widget |
 | [getRenderTree](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getRenderTree.html) | :ok: | `driver.execute('flutter: getRenderTree')` | Session |
 | [getSemanticsId](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getSemanticsId.html) | :ok: | `driver.execute('flutter:getSemanticsId', counterTextFinder)` | Widget |
 | [getText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getText.html) | :ok: | [`driver.getElementText(counterTextFinder)`](https://github.com/truongsinh/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L44) | Widget |
 | [getTopLeft](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getTopLeft.html) | :ok: | `driver.execute('flutter:getTopLeft', buttonFinder)` | Widget |
 | [getTopRight](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getTopRight.html) | :ok: | `driver.execute('flutter:getTopRight', buttonFinder)` | Widget |
 | [getVmFlags](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getVmFlags.html) | :x: |  | Session |
-| [getWidgetDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getWidgetDiagnostics.html) | :x: |  | Widget |
 | [requestData](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/requestData.html) | :ok: | `driver.execute('flutter:requestData', json.dumps({"deepLink": "myapp://item/id1"}))`  | Session |
 | [runUnsynchronized](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/runUnsynchronized.html) | :x: |  | Session |
 | [setFrameSync](https://api.flutter.dev/flutter/flutter_driver/SetFrameSync-class.html) |:ok:| `driver.execute('flutter:setFrameSync', bool , durationMilliseconds)`| Session |
