@@ -26,16 +26,16 @@ Appium community currently has two drivers for Flutter environment:
     - Base APIs are [`integration_test`](https://github.com/flutter/flutter/tree/main/packages/integration_test#integration_test)
 
 ## Appium Flutter Driver or Appium UiAutomator2/XCUITest driver
-- Appium Flutter driver manages the application under test and the device under test via Appium UiAutomator2/XCUITest drivers
-    -  `FLUTTER` context sends commands to the Dart VM directly over the observatory URL
-        - Newer Flutter versions expose its accessibility labels to the system's accessibility features. It means you can find some Flutter elements and can interact with them over `accessibility_id` etc in the vanilla Appium UiAutomator2/XCUITest drivers, although some elements require over the Dart VM
-    - `NATIVE_APP` context is the same as the regular Appium UiAutomator2/XCUITest driver
-        - Please refer to each client's documentation about available commands.
-        - Each driver's documentation also may help.
-          - https://github.com/appium/appium-uiautomator2-driver
-          - https://appium.github.io/appium-xcuitest-driver/latest
+
+As a baseline, we recommend using [official testing tools and strategy](https://docs.flutter.dev/testing/overview) to test Flutter apps as possible in Dart.
+
+If you'd like to test a release app, whcih can be released from app store as-is, Appium [UIAutomator2](https://github.com/appium/appium-uiautomator2-driver)/[XCUITest](https://github.com/appium/appium-xcuitest-driver) driver is a good choise. Since Flutter 3.19, Flutter apps can expose [`identifier` for `SemanticsProperties`](https://api.flutter.dev/flutter/semantics/SemanticsProperties/identifier.html) as `resource-id` in Android and `accessibilityIdentifier` in iOS. They should help to achieve automation against release apps with Appium [UIAutomator2](https://github.com/appium/appium-uiautomator2-driver)/[XCUITest](https://github.com/appium/appium-xcuitest-driver) as blackbox testing.
+
+- Appium Flutter driver has three contexts to manage the application under test and the device under test. To achieve the `FLUTTER` context, the test package requires testing tools to import. The application under test cannot release as-is.
+    - `FLUTTER` context sends commands to the Dart VM directly over the observatory URL. This allows you to interact with Flutter elements directly.
+    - `NATIVE_APP` context is the same as the regular Appium [UIAutomator2](https://github.com/appium/appium-uiautomator2-driver)/[XCUITest](https://github.com/appium/appium-xcuitest-driver) driver
     - `WEBVIEW` context manages the WebView contents over Appium UiAutomator2/XCUITest driver
-- (**Recommended** if possible) Appium UiAutomator2/XCUITest drivers must be sufficient to achieve automation if the application under test had `semanticLabel` properly. Then, the accessibility mechanism in each OS can expose elements for Appium through OS's accessibility features. Then, this driver is not necessary.
+- (**Recommended** if possible) Appium [UIAutomator2](https://github.com/appium/appium-uiautomator2-driver)/[XCUITest](https://github.com/appium/appium-xcuitest-driver) driver directly must be sufficient to achieve automation if the application under test had `semanticLabel` properly. Then, the accessibility mechanism in each OS can expose elements for Appium through OS's accessibility features.
     - For example, [Key](https://api.flutter.dev/flutter/foundation/Key-class.html) does not work in the Appium UiAutomator2/XCUITest drivers, but can work in the Appium Flutter Driver
     - Flutter 3.19 may have [`identifier` for `SemanticsProperties`](https://api.flutter.dev/flutter/semantics/SemanticsProperties/identifier.html) (introduced by https://github.com/flutter/flutter/pull/138331). It sets `resource-id` and `accessibilityIdentifier` for Android and iOS, then UiAutomator2/XCUITest drivers also can handle `Key` without this driver
         - `"appium:disableIdLocatorAutocompletion": true` would be necessary to make `resource-id` idea work without any package name prefix like Android compose.
