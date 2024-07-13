@@ -38,7 +38,7 @@ If you'd like to test a release app, whcih can be released from app store as-is,
 - (**Recommended** if possible) Appium [UIAutomator2](https://github.com/appium/appium-uiautomator2-driver)/[XCUITest](https://github.com/appium/appium-xcuitest-driver) driver directly must be sufficient to achieve automation if the application under test had `semanticLabel` properly. Then, the accessibility mechanism in each OS can expose elements for Appium through OS's accessibility features.
     - For example, [Key](https://api.flutter.dev/flutter/foundation/Key-class.html) does not work in the Appium UiAutomator2/XCUITest drivers, but can work in the Appium Flutter Driver
     - Flutter 3.19 may have [`identifier` for `SemanticsProperties`](https://api.flutter.dev/flutter/semantics/SemanticsProperties/identifier.html) (introduced by https://github.com/flutter/flutter/pull/138331). It sets `resource-id` and `accessibilityIdentifier` for Android and iOS, then UiAutomator2/XCUITest drivers also can handle `Key` without this driver
-        - `"appium:disableIdLocatorAutocompletion": true` would be necessary to make `resource-id` idea work without any package name prefix like Android compose.
+        - `"appium:settings[disableIdLocatorAutocompletion]": true` or configuring `disableIdLocatorAutocompletion` via [Settings API](https://appium.io/docs/en/latest/guides/settings/) would be necessary to make `resource-id` idea work without any package name prefix like Android compose.
         - e.g. https://github.com/flutter/flutter/issues/17988#issuecomment-1867097631
 
 ## Installation
