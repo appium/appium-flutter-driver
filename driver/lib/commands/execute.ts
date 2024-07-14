@@ -52,6 +52,8 @@ export const execute = async function(
       return await getOffset(this, args[0], { offsetType: `topRight` });
     case `getRenderObjectDiagnostics`:
       return await getRenderObjectDiagnostics(this, args[0], args[1]);
+    case `getWidgetDiagnostics`:
+      return await getWidgetDiagnostics(this, args[0], args[1]);
     case `getSemanticsId`:
       return await getSemanticsId(this, args[0]);
     case `waitForAbsent`:
@@ -164,6 +166,27 @@ const getRenderObjectDiagnostics = async (
     elementBase64,
     {
       diagnosticsType: `renderObject`,
+      includeProperties,
+      subtreeDepth,
+    },
+  );
+};
+
+const getWidgetDiagnostics = async (
+  self: FlutterDriver,
+  elementBase64: string,
+  opts: {
+    subtreeDepth: number;
+    includeProperties: boolean;
+  },
+) => {
+  const { subtreeDepth = 0, includeProperties = true } = opts;
+
+  return await self.executeElementCommand(
+    `get_diagnostics_tree`,
+    elementBase64,
+    {
+      diagnosticsType: `widget`,
       includeProperties,
       subtreeDepth,
     },

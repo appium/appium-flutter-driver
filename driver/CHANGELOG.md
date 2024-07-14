@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.8.0
+- Support `getWidgetDiagnostics`
+
 ## 2.7.1
 - add logs around set context
 
