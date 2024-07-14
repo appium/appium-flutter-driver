@@ -13,6 +13,7 @@ import java.io.File;
 import org.openqa.selenium.OutputType;
 import io.appium.java_client.MobileElement;
 import pro.truongsinh.appium_flutter.FlutterFinder;
+import pro.truongsinh.appium_flutter.finder.FlutterElement;
 
 public class FlutterTest extends BaseDriver {
   protected FlutterFinder find;
@@ -25,7 +26,7 @@ public class FlutterTest extends BaseDriver {
   @Test
   public void basicTest () throws InterruptedException {
     String buttonFinderKey = "increment";
-    MobileElement counterTextFinder = find.byValueKey("counter");
+    FlutterElement counterTextFinder = find.byValueKey("counter");
     MobileElement buttonFinder = waitFor(buttonFinderKey);
 
     validateElementPosition(buttonFinder);
@@ -73,7 +74,7 @@ public class FlutterTest extends BaseDriver {
 
     find.byTooltip("Increment").click();
 
-    assertEquals(find.descendant(find.byTooltip("counter_tooltip"), find.byValueKey("counter")).getText(), "3");
+    assertEquals(find.descendant(find.byTooltip("counter_tooltip"), find.byValueKey("counter"), false, false).getText(), "3");
     
     find.byType("FlatButton").click();
     driver.executeScript("flutter:waitForAbsent", buttonFinder);
@@ -107,9 +108,9 @@ public class FlutterTest extends BaseDriver {
     find.descendant(
       find.ancestor(
         find.bySemanticsLabel(Pattern.compile("counter_semantic")),
-        find.byType("Tooltip")
+        find.byType("Tooltip"), false, false
         ),
-      find.byType("Text")
+      find.byType("Text"), false, false
       )
       .click()
       ;
