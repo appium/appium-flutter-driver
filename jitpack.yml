@@ -2,5 +2,5 @@ jdk:
   - openjdk17
 install:
   - cd finder/kotlin
-  - ./gradlew :library:publishToMavenLocal
+  - ./gradlew publishToMavenLocal
 
