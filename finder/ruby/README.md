@@ -1,6 +1,6 @@
 # AppiumFlutterFinder
 
-Ruby finder elements for https://github.com/truongsinh/appium-flutter-driver
+Ruby finder elements for https://github.com/appium/appium-flutter-driver
 
 ## Installation
 
