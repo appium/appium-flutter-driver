@@ -28,11 +28,23 @@ An example of snapshot of the `main`.
 	}
 ```
 
+```groovy
+	dependencies {
+	    testImplementation 'com.github.appium:appium-flutter-driver:kotlin-finder-0.0.7'
+	}
+```
+
+
 Please check https://docs.jitpack.io/ for more details about the jitpack usage.
 
 ## Package name
 
 `pro.truongsinh.appium_flutter` is this project's package name space.
+
+## Changlogs
+
+- 0.0.7
+    - Available via jitpack
 
 # Other Java implementations
 
