@@ -379,9 +379,8 @@ $ npm publish
 ```
 
 ### Java implementation
-```
-https://github.com/ashwithpoojary98/javaflutterfinder
-```
-```
-https://github.com/5v1988/appium-flutter-client
-```
+
+- https://github.com/appium/appium-flutter-driver/tree/main/finder/kotlin via jitpack
+- https://github.com/ashwithpoojary98/javaflutterfinder
+- https://github.com/5v1988/appium-flutter-client
+

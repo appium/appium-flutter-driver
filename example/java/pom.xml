@@ -45,18 +45,17 @@
     </dependency>
     
     <dependency>
-			<groupId>io.appium</groupId>
-			<artifactId>java-client</artifactId>
-			<version>4.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>pro.truongsinh</groupId>
-			<artifactId>appium-flutter-finder</artifactId>
-			<version>0.0.4</version>
-    </dependency>
+		<groupId>io.appium</groupId>
+		<artifactId>java-client</artifactId>
+		<version>4.1.2</version>
+	</dependency>
+	<dependency>
+		<groupId>com.github.appium</groupId>
+		<artifactId>appium-flutter-driver</artifactId>
+		<version>main-SNAPSHOT</version>
+	</dependency>
 
   </dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -84,12 +83,9 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-
-    <repository>
-        <id>local-maven-repo</id>
-        <url>file:///Users/truongsinh/Dev/flutter/appium-flutter-driver/finder/kotlin/build/repository</url>
-    </repository>
-  </repositories>
-
-
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
 </project>
