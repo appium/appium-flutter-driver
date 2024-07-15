@@ -24,7 +24,7 @@ An example of snapshot of the `main`.
 - gradle file
 ```groovy
 	dependencies {
-	        implementation 'com.github.appium:appium-flutter-driver:main-SNAPSHOT'
+	    testImplementation 'com.github.appium:appium-flutter-driver:main-SNAPSHOT'
 	}
 ```
 
