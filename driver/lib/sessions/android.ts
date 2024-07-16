@@ -1,24 +1,32 @@
 import AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
-import { log } from '../logger';
-import { connectSocket, fetchObservatoryUrl } from './observatory';
-import type { InitialOpts } from '@appium/types';
+import { connectSocket, extractObservatoryUrl, OBSERVATORY_URL_PATTERN } from './observatory';
+import type { InitialOpts, StringRecord } from '@appium/types';
 import type { IsolateSocket } from './isolate_socket';
 import { FlutterDriver } from '../driver';
+import { LogMonitor } from './log-monitor';
+import type { LogEntry } from './log-monitor';
 
-const setupNewAndroidDriver = async (...args: any[]): Promise<AndroidUiautomator2Driver> => {
-  const androiddriver = new AndroidUiautomator2Driver({} as InitialOpts);
-  //@ts-ignore Args are ok
-  await androiddriver.createSession(...args);
-  return androiddriver;
-};
-
-export const startAndroidSession = async (
-  flutterDriver: FlutterDriver,
+export async function startAndroidSession(
+  this: FlutterDriver,
   caps: Record<string, any>,
   ...args: any[]
-): Promise<[AndroidUiautomator2Driver, IsolateSocket|null]> => {
-  log.info(`Starting an Android proxy session`);
-  const androiddriver = await setupNewAndroidDriver(...args);
+): Promise<[AndroidUiautomator2Driver, IsolateSocket|null]> {
+  this.log.info(`Starting an Android proxy session`);
+  const androiddriver = new AndroidUiautomator2Driver({} as InitialOpts);
+  if (!caps.observatoryWsUri) {
+    androiddriver.eventEmitter.once('syslogStarted', (syslog) => {
+      this._logmon = new LogMonitor(syslog, async (entry: LogEntry) => {
+        if (extractObservatoryUrl(entry)) {
+          this.log.debug(`Matched the syslog line '${entry.message}'`);
+          return true;
+        }
+        return false;
+      });
+      this._logmon.start();
+    });
+  }
+  //@ts-ignore Args are ok
+  await androiddriver.createSession(...args);
 
   // the session starts without any apps
   if (caps.app === undefined && caps.appPackage === undefined) {
@@ -27,19 +35,24 @@ export const startAndroidSession = async (
 
   return [
     androiddriver,
-    await connectSocket(getObservatoryWsUri, flutterDriver, androiddriver, caps),
+    await connectAndroidSession.bind(this)(androiddriver, caps),
   ];
-};
+}
 
-export const connectAndroidSession = async (
-  flutterDriver: FlutterDriver, androiddriver: AndroidUiautomator2Driver, caps: Record<string, any>
-): Promise<IsolateSocket> =>
-  await connectSocket(getObservatoryWsUri, flutterDriver, androiddriver, caps);
+export async function connectAndroidSession (
+  this: FlutterDriver,
+  androiddriver: AndroidUiautomator2Driver,
+  caps: Record<string, any>
+): Promise<IsolateSocket> {
+  const observatoryWsUri = await getObservatoryWsUri.bind(this)(androiddriver, caps);
+  return await connectSocket.bind(this)(observatoryWsUri, caps);
+}
 
-export const getObservatoryWsUri = async (
-  flutterDriver: FlutterDriver,
+export async function getObservatoryWsUri (
+  this: FlutterDriver,
   proxydriver: AndroidUiautomator2Driver,
-  caps): Promise<string> => {
+  caps: StringRecord,
+): Promise<string> {
   let urlObject: URL;
   if (caps.observatoryWsUri) {
     urlObject = new URL(caps.observatoryWsUri);
@@ -50,14 +63,27 @@ export const getObservatoryWsUri = async (
       return urlObject.toJSON();
     }
   } else {
-    urlObject = fetchObservatoryUrl(proxydriver.adb.logcat!.logs as [{message: string}]);
+    if (!this._logmon) {
+      throw new Error(
+        `The mandatory logcat service must be running in order to initialize the Flutter driver. ` +
+        `Have you disabled it in capabilities?`
+      );
+    }
+    if (!this._logmon.lastMatch) {
+      throw new Error(
+        `No observatory URL matching to '${OBSERVATORY_URL_PATTERN}' was found in the device log. ` +
+        `Please make sure the application under test is configured properly according to ` +
+        `https://github.com/appium-userland/appium-flutter-driver#usage and that it does not crash on startup.`
+      );
+    }
+    urlObject = extractObservatoryUrl(this._logmon.lastMatch) as URL;
   }
   const remotePort = urlObject.port;
-  flutterDriver.portForwardLocalPort = caps.forwardingPort ?? remotePort;
-  urlObject.port = flutterDriver.portForwardLocalPort!;
-  await proxydriver.adb.forwardPort(flutterDriver.portForwardLocalPort!, remotePort);
+  this.portForwardLocalPort = caps.forwardingPort ?? remotePort;
+  urlObject.port = this.portForwardLocalPort as string;
+  await proxydriver.adb.forwardPort(this.portForwardLocalPort as string, remotePort);
   if (!caps.observatoryWsUri && proxydriver.adb.adbHost) {
     urlObject.host = proxydriver.adb.adbHost;
   }
   return urlObject.toJSON();
-};
+}

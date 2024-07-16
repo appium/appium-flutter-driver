@@ -17,10 +17,10 @@ export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: 
 
   switch (_.toLower(caps.platformName)) {
     case PLATFORM.IOS:
-      this.socket = await connectIOSSession(this, this.proxydriver, caps);
+      this.socket = await connectIOSSession.bind(this)(this.proxydriver, caps);
       break;
     case PLATFORM.ANDROID:
-      this.socket = await connectAndroidSession(this, this.proxydriver, caps);
+      this.socket = await connectAndroidSession.bind(this)(this.proxydriver, caps);
       break;
     default:
       this.log.errorAndThrow(
@@ -35,14 +35,14 @@ export const createSession: any = async function(this: FlutterDriver, sessionId:
     // setup proxies - if platformName is not empty, make it less case sensitive
     switch (_.toLower(caps.platformName)) {
       case PLATFORM.IOS:
-        [this.proxydriver, this.socket] = await startIOSSession(this, caps, ...args);
+        [this.proxydriver, this.socket] = await startIOSSession.bind(this)(caps, ...args);
         this.proxydriver.relaxedSecurityEnabled = this.relaxedSecurityEnabled;
         this.proxydriver.denyInsecure = this.denyInsecure;
         this.proxydriver.allowInsecure = this.allowInsecure;
 
         break;
       case PLATFORM.ANDROID:
-        [this.proxydriver, this.socket] = await startAndroidSession(this, caps, ...args);
+        [this.proxydriver, this.socket] = await startAndroidSession.bind(this)(caps, ...args);
         this.proxydriver.relaxedSecurityEnabled = this.relaxedSecurityEnabled;
         this.proxydriver.denyInsecure = this.denyInsecure;
         this.proxydriver.allowInsecure = this.allowInsecure;
