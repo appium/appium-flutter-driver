@@ -13,7 +13,8 @@ class ExampleTests < Minitest::Test
       platformVersion: '17.4',
       deviceName: 'iPhone 15 Plus',
       app: "#{Dir.pwd}/../sample2/iOSFullScreen.zip",
-      showIOSLog: true
+      showIOSLog: true,
+      wdaLaunchTimeout: 600_000
     },
     appium_lib: {
       export_session: true,
