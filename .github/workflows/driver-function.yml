@@ -1,0 +1,74 @@
+name: Run quick functionality check
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'driver/**'
+    branches: [ main ]
+  pull_request:
+    paths:
+      - 'driver/**'
+    branches: [ main ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ios_test:
+    runs-on: macos-14
+
+    env:
+      XCODE_VERSION: 15.3
+      IOS_DEVICE_NAME: iPhone 15 Plus
+      IOS_VERSION: 17.4
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 'lts/*'
+
+    - name: Select Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: ${{ env.XCODE_VERSION }}
+    - run: defaults write com.apple.iphonesimulator PasteboardAutomaticSync -bool false
+
+    - uses: futureware-tech/simulator-action@v3
+      with:
+        # https://github.com/actions/runner-images/blob/main/images/macos/macos-14-arm64-Readme.md
+        model: ${{ env.IOS_DEVICE_NAME }}
+        os_version: ${{ env.IOS_VERSION }}
+
+    # Start Appium
+    - run: npm install -g appium
+    - run: |
+        npm install
+        nohup appium --log-timestamp --log-no-colors > appium.log &
+      working-directory:
+        driver
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2
+    - name: Install dependencies
+      run: bundle install
+
+    # Run tests
+    - run: bundle exec ruby example_sample2_ios.rb
+      name: Run tests
+      working-directory:
+        example/ruby
+
+    - name: Save server output
+      if: ${{ always() }}
+      uses: actions/upload-artifact@master
+      with:
+        name: appium-ios-${{matrix.test_targets.name}}.log
+        path: |
+          driver/appium.log
