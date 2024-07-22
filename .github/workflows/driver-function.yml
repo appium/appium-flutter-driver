@@ -139,6 +139,8 @@ jobs:
         arch: ${{ env.ARCH }}
         script: |
           cd example/ruby
+          pwd
+          ls
           ruby example_sample2.rb
         target: google_apis
         profile: Nexus 5X
