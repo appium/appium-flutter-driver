@@ -137,7 +137,9 @@ jobs:
       with:
         api-level: ${{ env.API_LEVEL }}
         arch: ${{ env.ARCH }}
-        script: ruby example_sample2.rb
+        script: |
+          cd example/ruby
+          ruby example_sample2.rb
         target: google_apis
         profile: Nexus 5X
         disable-spellchecker: true

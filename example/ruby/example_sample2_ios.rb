@@ -12,7 +12,8 @@ class ExampleTests < Minitest::Test
       automationName: 'flutter',
       platformVersion: '17.4',
       deviceName: 'iPhone 15 Plus',
-      app: "#{Dir.pwd}/../sample2/iOSFullScreen.zip"
+      app: "#{Dir.pwd}/../sample2/iOSFullScreen.zip",
+      showIOSLog: true
     },
     appium_lib: {
       export_session: true,

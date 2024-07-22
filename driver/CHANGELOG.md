@@ -1,5 +1,9 @@
 # Changelog
 
+## not released
+- Tune syslog scanning
+    - Drop `appium:maxRetryCount` and `appium:retryBackoffTime`
+
 ## 2.8.0
 - Support `getWidgetDiagnostics`
 
