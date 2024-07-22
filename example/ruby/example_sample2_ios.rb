@@ -10,8 +10,8 @@ class ExampleTests < Minitest::Test
     caps: {
       platformName: 'iOS',
       automationName: 'flutter',
-      platformVersion: '15.5',
-      deviceName: 'iPhone 13',
+      platformVersion: '17.4',
+      deviceName: 'iPhone 15 Plus',
       app: "#{Dir.pwd}/../sample2/iOSFullScreen.zip"
     },
     appium_lib: {
@@ -21,10 +21,16 @@ class ExampleTests < Minitest::Test
     }
   }
 
-  def test_run_example_ios
+  def setup
     @core = ::Appium::Core.for(CAPS)
-    @driver = @core.start_driver
+    @driver = @core.start_driver server_url: 'http://localhost:4723'
+  end
 
+  def teardown
+    @driver&.quit
+  end
+
+  def test_run_example_ios
     @driver.context = 'NATIVE_APP'
 
     element = @driver.find_element :accessibility_id, 'launchFlutter'
