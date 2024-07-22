@@ -3,26 +3,38 @@ import XCUITestDriver from 'appium-xcuitest-driver';
 import B from 'bluebird';
 import net from 'net';
 import { checkPortStatus } from 'portscanner';
-import { log } from '../logger';
-import { connectSocket, fetchObservatoryUrl } from './observatory';
+import {
+  connectSocket,
+  extractObservatoryUrl,
+  OBSERVATORY_URL_PATTERN
+} from './observatory';
 import type { InitialOpts } from '@appium/types';
 import type { IsolateSocket } from './isolate_socket';
-import { FlutterDriver } from '../driver';
+import { LogMonitor } from './log-monitor';
+import type { LogEntry } from './log-monitor';
+import type { FlutterDriver } from '../driver';
 
 const LOCALHOST = `127.0.0.1`;
 
-const setupNewIOSDriver = async (...args: any[]): Promise<XCUITestDriver> => {
-  const iosdriver = new XCUITestDriver({} as InitialOpts);
-  await iosdriver.createSession(...args);
-  return iosdriver;
-};
-
-export const startIOSSession = async (
-  flutterDriver: FlutterDriver,
+export async function startIOSSession(
+  this: FlutterDriver,
   caps: Record<string, any>, ...args: any[]
-): Promise<[XCUITestDriver, IsolateSocket|null]> => {
-  log.info(`Starting an IOS proxy session`);
-  const iosdriver = await setupNewIOSDriver(...args);
+): Promise<[XCUITestDriver, IsolateSocket|null]> {
+  this.log.info(`Starting an IOS proxy session`);
+  const iosdriver = new XCUITestDriver({} as InitialOpts);
+  if (!caps.observatoryWsUri) {
+    iosdriver.eventEmitter.once('syslogStarted', (syslog) => {
+      this._logmon = new LogMonitor(syslog, async (entry: LogEntry) => {
+        if (extractObservatoryUrl(entry)) {
+          this.log.debug(`Matched the syslog line '${entry.message}'`);
+          return true;
+        }
+        return false;
+      });
+      this._logmon.start();
+    });
+  }
+  await iosdriver.createSession(...args);
 
   // the session starts without any apps
   if (caps.app === undefined && caps.bundleId === undefined) {
@@ -31,29 +43,35 @@ export const startIOSSession = async (
 
   return [
     iosdriver,
-    await connectSocket(getObservatoryWsUri, flutterDriver, iosdriver, caps),
+    await connectIOSSession.bind(this)(iosdriver, caps),
   ];
-};
+}
 
-export const connectIOSSession = async (
-  flutterDriver: FlutterDriver,
-  iosdriver: XCUITestDriver, caps: Record<string, any>
-): Promise<IsolateSocket> =>
-  await connectSocket(getObservatoryWsUri, flutterDriver, iosdriver, caps);
+export async function connectIOSSession(
+  this: FlutterDriver,
+  iosdriver: XCUITestDriver,
+  caps: Record<string, any>
+): Promise<IsolateSocket> {
+  const observatoryWsUri = await getObservatoryWsUri.bind(this)(iosdriver, caps);
+  return await connectSocket.bind(this)(observatoryWsUri, iosdriver, caps);
+}
 
-async function requireFreePort (port: number) {
+async function requireFreePort(
+  this: FlutterDriver,
+  port: number
+) {
   if ((await checkPortStatus(port, LOCALHOST)) !== `open`) {
     return;
   }
-  log.warn(`Port #${port} is busy. Did you quit the previous driver session(s) properly?`);
+  this.log.warn(`Port #${port} is busy. Did you quit the previous driver session(s) properly?`);
   throw new Error(`The port :${port} is occupied by an other process. ` +
     `You can either quit that process or select another free port.`);
 }
 
-export const getObservatoryWsUri = async (
-  flutterDriver: FlutterDriver,
+export async function getObservatoryWsUri (
+  this: FlutterDriver,
   proxydriver: XCUITestDriver, caps: Record<string, any>
-): Promise<string> => {
+): Promise<string> {
   let urlObject;
   if (caps.observatoryWsUri) {
     urlObject = new URL(caps.observatoryWsUri);
@@ -64,10 +82,23 @@ export const getObservatoryWsUri = async (
       return urlObject.toJSON();
     }
   } else {
-    urlObject = fetchObservatoryUrl(proxydriver.logs.syslog.logs);
+    if (!this._logmon) {
+      throw new Error(
+        `The mandatory syslog service must be running in order to initialize the Flutter driver. ` +
+        `Have you disabled it in capabilities?`
+      );
+    }
+    if (!this._logmon.lastMatch) {
+      throw new Error(
+        `No observatory URL matching to '${OBSERVATORY_URL_PATTERN}' was found in the device log. ` +
+        `Please make sure the application under test is configured properly according to ` +
+        `https://github.com/appium-userland/appium-flutter-driver#usage and that it does not crash on startup.`
+      );
+    }
+    urlObject = extractObservatoryUrl(this._logmon.lastMatch) as URL;
   }
   if (!proxydriver.isRealDevice()) {
-    log.info(`Running on iOS simulator`);
+    this.log.info(`Running on iOS simulator`);
     return urlObject.toJSON();
   }
 
@@ -75,10 +106,10 @@ export const getObservatoryWsUri = async (
   const localPort = caps.forwardingPort ?? remotePort;
   urlObject.port = localPort;
 
-  log.info(`Running on iOS real device`);
+  this.log.info(`Running on iOS real device`);
   const { udid } = proxydriver.opts;
-  await requireFreePort(localPort);
-  flutterDriver.localServer = net.createServer(async (localSocket) => {
+  await requireFreePort.bind(this)(localPort);
+  this.localServer = net.createServer(async (localSocket) => {
     let remoteSocket;
     try {
       remoteSocket = await utilities.connectPort(udid, remotePort);
@@ -95,34 +126,34 @@ export const getObservatoryWsUri = async (
       destroyCommChannel();
       localSocket.destroy();
     });
-    remoteSocket.on('error', (e) => log.debug(e));
+    remoteSocket.on('error', (e) => this.log.debug(e));
 
     localSocket.once(`end`, destroyCommChannel);
     localSocket.once(`close`, () => {
       destroyCommChannel();
       remoteSocket.destroy();
     });
-    localSocket.on('error', (e) => log.warn(e.message));
+    localSocket.on('error', (e) => this.log.warn(e.message));
     localSocket.pipe(remoteSocket);
     remoteSocket.pipe(localSocket);
   });
   const listeningPromise = new B((resolve, reject) => {
-    flutterDriver.localServer?.once(`listening`, resolve);
-    flutterDriver.localServer?.once(`error`, reject);
+    this.localServer?.once(`listening`, resolve);
+    this.localServer?.once(`error`, reject);
   });
-  flutterDriver.localServer?.listen(localPort);
+  this.localServer?.listen(localPort);
   try {
     await listeningPromise;
   } catch (e) {
-    flutterDriver.localServer = null;
+    this.localServer = null;
     throw new Error(`Cannot listen on the local port ${localPort}. Original error: ${e.message}`);
   }
 
-  log.info(`Forwarding the remote port ${remotePort} to the local port ${localPort}`);
+  this.log.info(`Forwarding the remote port ${remotePort} to the local port ${localPort}`);
 
   process.on(`beforeExit`, () => {
-    flutterDriver.localServer?.close();
-    flutterDriver.localServer = null;
+    this.localServer?.close();
+    this.localServer = null;
   });
   return urlObject.toJSON();
-};
+}

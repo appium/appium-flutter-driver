@@ -74,9 +74,9 @@
   },
   "dependencies": {
     "appium-ios-device": "^2.7.18",
-    "appium-android-driver": "^9.6.5",
-    "appium-uiautomator2-driver": "^3.5.4",
-    "appium-xcuitest-driver": "^7.17.5",
+    "appium-android-driver": "^9.8.0",
+    "appium-uiautomator2-driver": "^3.7.3",
+    "appium-xcuitest-driver": "^7.24.0",
     "bluebird": "^3.1.1",
     "lodash": "^4.0.0",
     "portscanner": "^2.2.0",
