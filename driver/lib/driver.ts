@@ -25,6 +25,7 @@ import type {
 } from '@appium/types';
 import type { IsolateSocket } from './sessions/isolate_socket';
 import type { Server } from 'node:net';
+import type { LogMonitor } from './sessions/log-monitor';
 
 
 type FluttertDriverConstraints = typeof desiredCapConstraints;
@@ -51,6 +52,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
 
   public portForwardLocalPort: string | null;
   public localServer: Server | null;
+  protected _logmon: LogMonitor | null;
 
   // Used to keep the capabilities internally
   public internalCaps: DriverCaps<FluttertDriverConstraints>;
@@ -96,6 +98,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     super(opts, shouldValidateCaps);
     this.socket = null;
     this.device = null;
+    this._logmon = null;
     this.desiredCapConstraints = desiredCapConstraints;
 
     // Used to keep the port for port forward to clear the pair.
@@ -106,13 +109,19 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async createSession(...args): Promise<DefaultCreateSessionResult<FluttertDriverConstraints>> {
-    const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)) as [W3CDriverCaps, W3CDriverCaps, W3CDriverCaps, DriverData[]]);
+    const [sessionId, caps] = await super.createSession(...JSON.parse(JSON.stringify(args)) as [
+      W3CDriverCaps, W3CDriverCaps, W3CDriverCaps, DriverData[]
+    ]);
     this.internalCaps = caps;
     return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args)));
   }
 
   public async deleteSession() {
     this.log.info(`Deleting Flutter Driver session`);
+
+    this._logmon?.stop();
+    this._logmon = null;
+    this.proxydriver?.eventEmitter?.removeAllListeners('syslogStarted');
 
     this.log.info('Cleanup the port forward');
     switch (_.toLower(this.internalCaps.platformName)) {
