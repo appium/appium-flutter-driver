@@ -132,7 +132,7 @@ jobs:
       run: bundle install
       working-directory: example/ruby
 
-    - name: Install dependencies and run tests
+    - name: Run tests
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: ${{ env.API_LEVEL }}
