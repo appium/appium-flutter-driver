@@ -56,14 +56,11 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.2
-    - name: Install dependencies
-      run: bundle install
-
-    # Run tests
-    - run: bundle exec ruby example_sample2_ios.rb
-      name: Run tests
-      working-directory:
-        example/ruby
+    - name: Install deps and run tests
+      run: |
+        bundle install
+        bundle exec ruby example_sample2_ios.rb
+      working-directory: example/ruby
 
     - name: Save server output
       if: ${{ always() }}
@@ -130,19 +127,17 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.2
-    - name: Install dependencies
-      run: bundle install
-      working-directory: example/ruby
 
     # Run tests
 
-    - name: run tests
+    - name: Install dependencies and run tests
       uses: reactivecircus/android-emulator-runner@v2
       with:
         api-level: ${{ env.API_LEVEL }}
         arch: ${{ env.ARCH }}
         script: |
           cd example/ruby
+          bundle install
           bundle exec ruby example_sample2.rb
         target: google_apis
         profile: Nexus 5X
