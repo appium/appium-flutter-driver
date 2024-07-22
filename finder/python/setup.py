@@ -19,7 +19,7 @@ setup(
     ],
     author='Kazuaki Matsuo',
     author_email='fly.49.89.over@gmail.com',
-    url='https://github.com/appium-userland/appium-flutter-driver',
+    url='https://github.com/appium/appium-flutter-driver',
     packages=find_packages(include=['appium_flutter_finder*']),
     license='MIT',
     classifiers=[
