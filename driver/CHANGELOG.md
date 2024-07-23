@@ -1,8 +1,10 @@
 # Changelog
 
-## not released
-- Tune syslog scanning
-    - Drop `appium:maxRetryCount` and `appium:retryBackoffTime`
+## 2.9.0
+- Tune syslog scanning to find the observatory url
+    - Drop `appium:maxRetryCount` and `appium:retryBackoffTime` as no usage
+- Update Appium UIAutomation2 driver dependency to 3.7.3
+- Update XCUITest driver dependency to 7.24.0
 
 ## 2.8.0
 - Support `getWidgetDiagnostics`
