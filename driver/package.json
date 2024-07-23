@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/appium-userland/appium-flutter-driver.git"
+    "url": "git+https://github.com/appium/appium-flutter-driver.git"
   },
   "engines": {
     "node": ">=14",

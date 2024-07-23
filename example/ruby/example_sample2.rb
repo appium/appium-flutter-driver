@@ -12,7 +12,7 @@ class ExampleTests < Minitest::Test
       automationName: 'flutter',
       udid: 'emulator-5554',
       deviceName: 'Android',
-      app: "#{Dir.pwd}/../sample2/app-debug.apk"
+      app: "#{Dir.pwd}/example/sample2/app-debug.apk"
     },
     appium_lib: {
       export_session: true,
@@ -21,10 +21,16 @@ class ExampleTests < Minitest::Test
     }
   }
 
-  def test_run_example_android
+  def setup
     @core = ::Appium::Core.for(CAPS)
     @driver = @core.start_driver server_url: 'http://localhost:4723'
+  end
 
+  def teardown
+    @driver&.quit
+  end
+
+  def test_run_example_android
     @driver.context = 'NATIVE_APP'
 
     element = @driver.find_element :id, 'dev.flutter.example.androidfullscreen:id/launch_button'

@@ -31,6 +31,7 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      fail-fast: false
       matrix:
         node-version: ${{ fromJSON(needs.prepare_matrix.outputs.versions) }}
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/

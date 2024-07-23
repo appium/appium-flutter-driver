@@ -110,8 +110,6 @@ SKIP_IOS=1 appium driver doctor flutter
 
 | Capability | Description | Example Values |
 | - | - | -|
-| appium:retryBackoffTime | The time wait for socket connection retry to get flutter session (default 3000ms)|500|
-| appium:maxRetryCount    | The count for socket connection retry for get flutter session (default 10)          | 20|
 | appium:observatoryWsUri | The URL to attach to the Dart VM. The Appium Flutter Driver finds the WebSocket URL from the device log by default. You can skip the finding the URL process by specifying this capability. Then, this driver attempt to establish a WebSocket connection against the given WebSocket URL. Note that this capability expects the URL is ready for access by outside an appium session. This flutter driver does not do port-forwarding with this capability. You may need to coordinate the port-forwarding as well. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
 | appium:isolateId | The isolate id to attach to as the initial attempt. A session can change the isolate with `flutter:setIsolateId` command. The default behavior finds `main` isolate id and attaches it. | `isolates/2978358234363215`, `2978358234363215` |
 | appium:skipPortForward | Whether skip port forwarding from the flutter driver local to the device under test with `observatoryWsUri` capability. It helps you to manage the application under test, the observatory URL and the port forwarding configuration. The default is `true`. | true, false |
@@ -205,7 +203,6 @@ You have a couple of methods to start the application under test by establishing
     1. Start a session without `app` capability
     2. Install the application under test via `driver.install_app` or `mobile:installApp` command etc
     3. Calls `flutter:connectObservatoryWsUrl` command to keep finding an observatory URL to the Dart VM
-        - `appium:retryBackoffTime` and `appium:maxRetryCount` will control the duration to keep finding an observatory URL to the Dart VM
     4. (at the same time) Launch the application under test via outside the appium-flutter-driver
         - e.g. Launch an iOS process via [ios-go](https://github.com/danielpaulus/go-ios), [iproxy](https://github.com/libimobiledevice/libusbmuxd#iproxy) or [tidevice](https://github.com/alibaba/taobao-iphone-device)
     5. Once `flutter:connectObservatoryWsUrl` identify the observatory URL, the command will establish a connection to the Dart VM
