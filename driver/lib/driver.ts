@@ -131,7 +131,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
         break;
       case PLATFORM.ANDROID:
         if (this.portForwardLocalPort) {
-          await this.proxydriver.adb.removePortForward(this.portForwardLocalPort);
+          await this.proxydriver?.adb?.removePortForward(this.portForwardLocalPort);
         }
         break;
       }
