@@ -13,7 +13,6 @@ class ExampleTests < Minitest::Test
       platformVersion: '17.4',
       deviceName: 'iPhone 15 Plus',
       app: "#{Dir.pwd}/../sample2/iOSFullScreen.zip",
-      showIOSLog: true,
       wdaLaunchTimeout: 600_000
     },
     appium_lib: {
@@ -59,5 +58,13 @@ class ExampleTests < Minitest::Test
 
     element = @driver.wait_until { |d| d.find_element :accessibility_id, 'currentCounter' }
     assert_equal 'Current counter: 2', element.text
+
+    @driver.context = 'FLUTTER'
+    @driver.terminate_app 'samples.flutter.example.IOSFullScreen'
+    @driver.activate_app 'samples.flutter.example.IOSFullScreen'
+
+    text_finder = by_text 'Tap me!'
+    element = ::Appium::Flutter::Element.new(@driver, finder: text_finder)
+    assert_equal 'Tap me!', element.text
   end
 end

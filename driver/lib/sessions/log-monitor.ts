@@ -1,5 +1,5 @@
 import type {EventEmitter} from 'node:events';
-
+import { log as logger } from '../logger';
 export interface LogEntry {
   timestamp: number;
   level: string,
@@ -23,6 +23,10 @@ export class LogMonitor {
 
   get started(): boolean {
     return Boolean(this._outputListener);
+  }
+
+  clearlastMatch() {
+    this._lastMatch = null;
   }
 
   get lastMatch(): LogEntry | null {
@@ -53,6 +57,7 @@ export class LogMonitor {
 
   private async _onOutput(logEntry: LogEntry): Promise<void> {
     if (await this._filter(logEntry)) {
+      logger.info(`>>>>> ${logEntry.message}`);
       this._lastMatch = logEntry;
     }
   }

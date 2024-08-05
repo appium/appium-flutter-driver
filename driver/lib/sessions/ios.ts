@@ -50,9 +50,10 @@ export async function startIOSSession(
 export async function connectIOSSession(
   this: FlutterDriver,
   iosdriver: XCUITestDriver,
-  caps: Record<string, any>
+  caps: Record<string, any>,
+  clear=false
 ): Promise<IsolateSocket> {
-  const observatoryWsUri = await getObservatoryWsUri.bind(this)(iosdriver, caps);
+  const observatoryWsUri = await getObservatoryWsUri.bind(this)(iosdriver, caps, clear=clear);
   return await connectSocket.bind(this)(observatoryWsUri, iosdriver, caps);
 }
 
@@ -70,8 +71,20 @@ async function requireFreePort(
 
 export async function getObservatoryWsUri (
   this: FlutterDriver,
-  proxydriver: XCUITestDriver, caps: Record<string, any>
+  proxydriver: XCUITestDriver, caps: Record<string, any>,
+  clear: boolean = false
 ): Promise<string> {
+  if (clear) {
+    this._logmon?.clearlastMatch();
+    this._logmon?.stop();
+    this._logmon?.start();
+
+    this.log.info('waiting a bit');
+    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    await sleep(5000);
+    this.log.info('ok');
+  }
+
   let urlObject;
   if (caps.observatoryWsUri) {
     urlObject = new URL(caps.observatoryWsUri);
@@ -95,6 +108,7 @@ export async function getObservatoryWsUri (
         `https://github.com/appium/appium-flutter-driver#usage and that it does not crash on startup.`
       );
     }
+    // 'this._logmon.lastMatch' should be proper one
     urlObject = extractObservatoryUrl(this._logmon.lastMatch) as URL;
   }
   if (!proxydriver.isRealDevice()) {
