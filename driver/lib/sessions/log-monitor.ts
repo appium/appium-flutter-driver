@@ -1,5 +1,4 @@
 import type {EventEmitter} from 'node:events';
-import { log as logger } from '../logger';
 import { retryInterval } from 'asyncbox';
 export interface LogEntry {
   timestamp: number;
@@ -80,7 +79,6 @@ export class LogMonitor {
 
   private async _onOutput(logEntry: LogEntry): Promise<void> {
     if (await this._filter(logEntry)) {
-      logger.info(`>>>>> ${logEntry.message}`);
       this._lastMatch = logEntry;
     }
   }
