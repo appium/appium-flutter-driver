@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.9.1
+- Fix observatory url finding after an app activation
+    - Bring `appium:maxRetryCount` and `appium:retryBackoffTime` back to use for the observaotry url findings.
+
 ## 2.9.0
 - Tune syslog scanning to find the observatory url
     - Drop `appium:maxRetryCount` and `appium:retryBackoffTime` as no usage

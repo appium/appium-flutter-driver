@@ -13,7 +13,10 @@ class ExampleTests < Minitest::Test
       platformVersion: '17.4',
       deviceName: 'iPhone 15 Plus',
       app: "#{Dir.pwd}/../sample2/iOSFullScreen.zip",
-      wdaLaunchTimeout: 600_000
+      wdaLaunchTimeout: 600_000,
+      maxRetryCount: 20,
+      retryBackoffTime: 5000,
+
     },
     appium_lib: {
       export_session: true,

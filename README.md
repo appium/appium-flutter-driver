@@ -110,6 +110,8 @@ SKIP_IOS=1 appium driver doctor flutter
 
 | Capability | Description | Example Values |
 | - | - | -|
+| appium:retryBackoffTime | The interval to find the observetory url from logs. (default 3000ms)|500|
+| appium:maxRetryCount    | The count to find the observatory url. (default 20)          | 10|
 | appium:observatoryWsUri | The URL to attach to the Dart VM. The Appium Flutter Driver finds the WebSocket URL from the device log by default. You can skip the finding the URL process by specifying this capability. Then, this driver attempt to establish a WebSocket connection against the given WebSocket URL. Note that this capability expects the URL is ready for access by outside an appium session. This flutter driver does not do port-forwarding with this capability. You may need to coordinate the port-forwarding as well. | 'ws://127.0.0.1:60992/aaaaaaaaaaa=/ws' |
 | appium:isolateId | The isolate id to attach to as the initial attempt. A session can change the isolate with `flutter:setIsolateId` command. The default behavior finds `main` isolate id and attaches it. | `isolates/2978358234363215`, `2978358234363215` |
 | appium:skipPortForward | Whether skip port forwarding from the flutter driver local to the device under test with `observatoryWsUri` capability. It helps you to manage the application under test, the observatory URL and the port forwarding configuration. The default is `true`. | true, false |
