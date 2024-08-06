@@ -12,7 +12,7 @@ class ExampleTests < Minitest::Test
       automationName: 'flutter',
       udid: 'emulator-5554',
       deviceName: 'Android',
-      app: "#{Dir.pwd}/sample2/app-debug.apk"
+      app: "#{Dir.pwd}/example/sample2/app-debug.apk"
     },
     appium_lib: {
       export_session: true,

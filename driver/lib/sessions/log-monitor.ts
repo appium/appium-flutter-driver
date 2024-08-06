@@ -6,7 +6,7 @@ export interface LogEntry {
   message: string;
 }
 
-const DEFAULT_MAX_RETRY_COUNT = 20;
+const DEFAULT_MAX_RETRY_COUNT = 10;
 const DEFAULT_BACKOFF_TIME_MS = 3000;
 
 export type Filter = (x: LogEntry) => Promise<boolean>;
