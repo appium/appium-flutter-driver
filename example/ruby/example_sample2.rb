@@ -12,7 +12,9 @@ class ExampleTests < Minitest::Test
       automationName: 'flutter',
       udid: 'emulator-5554',
       deviceName: 'Android',
-      app: "#{Dir.pwd}/example/sample2/app-debug.apk"
+      app: "#{Dir.pwd}/example/sample2/app-debug.apk",
+      maxRetryCount: 20,
+      retryBackoffTime: 5000,
     },
     appium_lib: {
       export_session: true,
