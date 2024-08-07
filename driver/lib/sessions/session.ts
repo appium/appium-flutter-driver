@@ -17,10 +17,10 @@ export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: 
 
   switch (_.toLower(caps.platformName)) {
     case PLATFORM.IOS:
-      this.socket = await connectIOSSession.bind(this)(this.proxydriver, caps);
+      this.socket = await connectIOSSession.bind(this)(this.proxydriver, caps, true);
       break;
     case PLATFORM.ANDROID:
-      this.socket = await connectAndroidSession.bind(this)(this.proxydriver, caps);
+      this.socket = await connectAndroidSession.bind(this)(this.proxydriver, caps, true);
       break;
     default:
       this.log.errorAndThrow(

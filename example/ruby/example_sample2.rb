@@ -12,7 +12,9 @@ class ExampleTests < Minitest::Test
       automationName: 'flutter',
       udid: 'emulator-5554',
       deviceName: 'Android',
-      app: "#{Dir.pwd}/example/sample2/app-debug.apk"
+      app: "#{Dir.pwd}/example/sample2/app-debug.apk",
+      maxRetryCount: 20,
+      retryBackoffTime: 5000,
     },
     appium_lib: {
       export_session: true,
@@ -59,5 +61,13 @@ class ExampleTests < Minitest::Test
 
     element = @driver.wait_until { |d| d.find_element :id, 'dev.flutter.example.androidfullscreen:id/counter_label' }
     assert_equal 'Current count: 2', element.text
+
+    @driver.context = 'FLUTTER'
+    @driver.terminate_app 'dev.flutter.example.androidfullscreen'
+    @driver.activate_app 'dev.flutter.example.androidfullscreen'
+
+    text_finder = by_text 'Tap me!'
+    element = ::Appium::Flutter::Element.new(@driver, finder: text_finder)
+    assert_equal 'Tap me!', element.text
   end
 end

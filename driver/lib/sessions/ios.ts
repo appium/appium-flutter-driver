@@ -50,9 +50,10 @@ export async function startIOSSession(
 export async function connectIOSSession(
   this: FlutterDriver,
   iosdriver: XCUITestDriver,
-  caps: Record<string, any>
+  caps: Record<string, any>,
+  clearLog: boolean = false
 ): Promise<IsolateSocket> {
-  const observatoryWsUri = await getObservatoryWsUri.bind(this)(iosdriver, caps);
+  const observatoryWsUri = await getObservatoryWsUri.bind(this)(iosdriver, caps, clearLog);
   return await connectSocket.bind(this)(observatoryWsUri, iosdriver, caps);
 }
 
@@ -70,8 +71,15 @@ async function requireFreePort(
 
 export async function getObservatoryWsUri (
   this: FlutterDriver,
-  proxydriver: XCUITestDriver, caps: Record<string, any>
+  proxydriver: XCUITestDriver, caps: Record<string, any>,
+  clearLog: boolean = false
 ): Promise<string> {
+  if (clearLog) {
+    this._logmon?.clearlastMatch();
+    this._logmon?.stop();
+    this._logmon?.start();
+  }
+
   let urlObject;
   if (caps.observatoryWsUri) {
     urlObject = new URL(caps.observatoryWsUri);
@@ -88,14 +96,18 @@ export async function getObservatoryWsUri (
         `Have you disabled it in capabilities?`
       );
     }
-    if (!this._logmon.lastMatch) {
+    const lastMatch = await this._logmon.waitForLastMatchExist(
+      caps.maxRetryCount,
+      caps.retryBackoffTime
+    );
+    if (!lastMatch) {
       throw new Error(
         `No observatory URL matching to '${OBSERVATORY_URL_PATTERN}' was found in the device log. ` +
         `Please make sure the application under test is configured properly according to ` +
         `https://github.com/appium/appium-flutter-driver#usage and that it does not crash on startup.`
       );
     }
-    urlObject = extractObservatoryUrl(this._logmon.lastMatch) as URL;
+    urlObject = extractObservatoryUrl(lastMatch) as URL;
   }
   if (!proxydriver.isRealDevice()) {
     this.log.info(`Running on iOS simulator`);
