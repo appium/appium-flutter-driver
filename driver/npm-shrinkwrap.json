@@ -1,18 +1,19 @@
 {
   "name": "appium-flutter-driver",
-  "version": "2.9.1",
+  "version": "2.9.2",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "appium-flutter-driver",
-      "version": "2.9.1",
+      "version": "2.9.2",
       "license": "MIT",
       "dependencies": {
         "appium-android-driver": "^9.8.0",
         "appium-ios-device": "^2.7.18",
         "appium-uiautomator2-driver": "^3.7.3",
         "appium-xcuitest-driver": "^7.24.0",
+        "asyncbox": "^3.0.0",
         "bluebird": "^3.1.1",
         "lodash": "^4.0.0",
         "portscanner": "^2.2.0",
