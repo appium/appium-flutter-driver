@@ -353,6 +353,7 @@ These Appium commands can work across context
 - Looks hanging in `click` https://github.com/appium/appium-flutter-driver/issues/181#issuecomment-1323684510
     - `flutter:setFrameSync` may help
 - `flutter:waitFor` would help to handle "an element does not exist/is not enabled" behavior. [exmaple issue](https://github.com/appium/appium-flutter-driver/issues/693)
+- Appium Inspector does not work with FLUTTER context
 
 ## TODO?
 
