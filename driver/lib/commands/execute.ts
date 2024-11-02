@@ -84,6 +84,8 @@ export const execute = async function(
       return await setFrameSync(this, args[0], args[1]);
     case `clickElement`:
       return await clickElement(this, args[0], args[1]);
+    case `commandExtension`:
+      return await commandExtension(this, args[0]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -217,4 +219,54 @@ const clickElement = async (self:FlutterDriver, elementBase64: string, opts) => 
   return await self.executeElementCommand(`tap`, elementBase64, {
         timeout
   });
+};
+
+const commandExtension = async (
+  self: FlutterDriver,
+  commandPayload: { command: string; [key: string]: any }
+) => {
+  const { command, ...params } = commandPayload;
+  const commandMapping: {
+    [key: string]: (self: FlutterDriver, params: any) => Promise<any>
+  } = {
+  `dragAndDrop`: dragAndDropCommand,
+  `commandExtension`: async (self, params) => {
+    const innerCommand = Object.keys(params)[0];
+    const innerParams = params[innerCommand];
+    if (commandMapping[innerCommand]) {
+        return await commandMapping[innerCommand](self, innerParams);
+    } else {
+        throw new Error(`Inner command not supported: "${innerCommand}"`);
+    }
+ },
+};
+
+  const commandHandler = commandMapping[command];
+  if (commandHandler) {
+    return await commandHandler(self, params);
+  } else {
+    throw new Error(`Command not supported`);
+  }
+};
+
+const dragAndDropCommand = async (
+  self: FlutterDriver,
+  params: {
+    startX: string;
+    startY: string;
+    endX: string;
+    endY: string;
+    duration: string;
+ }
+) => {
+  const { startX, startY, endX, endY, duration } = params;
+  const commandPayload = {
+    command: `dragAndDrop`,
+    startX,
+    startY,
+    endX,
+    endY,
+    duration
+ };
+ return await self.socket!.executeSocketCommand(commandPayload);
 };
