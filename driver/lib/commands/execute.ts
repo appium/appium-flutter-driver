@@ -229,23 +229,23 @@ const commandExtension = async (
   const commandMapping: {
     [key: string]: (self: FlutterDriver, params: any) => Promise<any>
   } = {
-  `dragAndDrop`: dragAndDropCommand,
-  `commandExtension`: async (self, params) => {
-    const innerCommand = Object.keys(params)[0];
-    const innerParams = params[innerCommand];
-    if (commandMapping[innerCommand]) {
+    'dragAndDrop': dragAndDropCommand,
+    'commandExtension': async (self, params) => {
+      const innerCommand = Object.keys(params)[0];
+      const innerParams = params[innerCommand];
+      if (commandMapping[innerCommand]) {
         return await commandMapping[innerCommand](self, innerParams);
-    } else {
-        throw new Error(`Inner command not supported: "${innerCommand}"`);
-    }
- },
-};
+      } else {
+        throw new Error(`Inner command not supported: '${innerCommand}'`);
+      }
+    },
+  };
 
   const commandHandler = commandMapping[command];
   if (commandHandler) {
     return await commandHandler(self, params);
   } else {
-    throw new Error(`Command not supported`);
+    throw new Error(`Command not supported: '${command}'`);
   }
 };
 
@@ -257,16 +257,16 @@ const dragAndDropCommand = async (
     endX: string;
     endY: string;
     duration: string;
- }
+  }
 ) => {
   const { startX, startY, endX, endY, duration } = params;
   const commandPayload = {
-    command: `dragAndDrop`,
+    command: 'dragAndDrop',
     startX,
     startY,
     endX,
     endY,
-    duration
- };
- return await self.socket!.executeSocketCommand(commandPayload);
+    duration,
+  };
+  return await self.socket!.executeSocketCommand(commandPayload);
 };
