@@ -245,7 +245,7 @@ const commandExtension = async (
   if (commandHandler) {
     return await commandHandler(self, params);
   } else {
-    throw new Error(`Command not supported: '${command}'`);
+    throw new Error(`Command not supported`);
   }
 };
 
