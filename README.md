@@ -306,13 +306,11 @@ Please replace them properly with your client.
 | :question:                                                                                                                         | :ok: | `driver.execute('flutter:waitForFirstFrame')` | Widget            |
 | -                                                                                                                                  | :ok: | (Ruby) `driver.execute_script 'flutter:connectObservatoryWsUrl'` | Flutter Driver    |
 | -                                                                                                                                  | :ok: | (Ruby) `driver.execute_script 'flutter:launchApp', 'bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` | Flutter Driver    |
-| dragAndDrop                                                                                                                        | :ok: | (Python) `driver.execute_script('flutter:commandExtension', payload)` | Command Extension |
+| dragAndDropWithCommandExtension                                                                                                    | :ok: | (Python) `driver.execute_script('flutter:dragAndDropWithCommandExtension', payload)` | Command Extension |
 
 **NOTE**
+>`flutter:launchApp` launches an app via instrument service. `mobile:activateApp` and `driver.activate_app` are via XCTest API. They are a bit different.
 
-- `flutter:launchApp` launches an app via instrument service. `mobile:activateApp` and `driver.activate_app` are via XCTest API. They are a bit different.
-
-- `flutter:commandExtension` is a command extension to flutter driver, which uses [CommandExtension-class](https://api.flutter.dev/flutter/flutter_driver_extension/CommandExtension-class.html) in the `ext.flutter.driver`, how to use it is [here](example/dart/README.md).
 
 ### `isolate` handling
 #### Change the flutter engine attache to
@@ -350,6 +348,56 @@ These Appium commands can work across context
 - `installApp(appPath, options)`
 - `getClipboard`
 - `setClipboard`
+
+## Command Extension (Flutter Driver)
+
+This is a command extension for Flutter Driver, utilizing the [CommandExtension-class](https://api.flutter.dev/flutter/flutter_driver_extension/CommandExtension-class.html) within `ext.flutter.driver`
+
+Available commands:
+
+- `dragAndDropWithCommandExtension` – performs a drag-and-drop action on the screen by specifying the start and end coordinates and the action duration.
+
+### How to use
+
+Copy the [extended_commands.dart](extended_commands.dart) file to the `lib` folder of your Flutter project.
+
+The entry point must include the `List<CommandExtension>?` commands argument in either `main.dart` or `test_main.dart` to properly handle the command extension.
+
+
+```dart
+import 'extended_commands.dart';
+
+
+void main() {
+  enableFlutterDriverExtension(
+      commands: [DragCommandExtension()]);
+  runApp(const MyApp());
+}
+```
+
+#### Simple example using `dragAndDropWithCommandExtension` command in Python
+
+```python
+# python
+coord_item_1 = driver.execute_script("flutter:getCenter", item_1)
+coord_item_2 = driver.execute_script("flutter:getCenter", item_2)
+start_x = coord_item_1["dx"]
+start_y = coord_item_1["dy"]
+end_y = coord_item_2["dy"]
+
+payload = {
+    "startX": start_x,
+    "startY": start_y,
+    "endX": "0",
+    "endY": end_y,
+    "duration": "15000" # minimum 15000ms needed to drag n drop
+}
+
+driver.execute_script("flutter:dragAndDropWithCommandExtension", payload)
+```
+
+For debugging or testing in other programming languages, you can use the APK available in this [repository](https://github.com/Alpaca00/command-driven-list) or build an IPA.
+
 
 ## Troubleshooting
 
