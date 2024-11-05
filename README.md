@@ -67,7 +67,7 @@ dev_dependencies:
     sdk: flutter
 ```
 
-This snippet, taken from [example directory](example), is a script written as an appium client with `webdriverio`, and assumes you have `appium` server (with `appium-flutter-driver` installed) running on the same host and default port (`4723`). For more info, see example's [README.md](https://github.com/appium/appium-flutter-driver/tree/main/example/README.md)
+This snippet, taken from [example directory](example), is a script written as an appium client with `webdriverio`, and assumes you have `appium` server (with `appium-flutter-driver` installed) running on the same host and default port (`4723`). For more info, see example's [README.md](https://github.com/appium/appium-flutter-driver/tree/main/example/nodejs/README.md)
 
 > **Note**
 >
