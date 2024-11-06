@@ -2,6 +2,8 @@
 
 ## 2.10.0
 - Adds `flutter:dragAndDropWithCommandExtension` command. Please check the README about how to use the command properly.
+- Update Appium UIAutomator2 driver dependency to 3.8.1
+- Update Appium XCUITest driver dependency to 7.28.3
 
 ## 2.9.2
 - Fix observatory url finding after an app activation
