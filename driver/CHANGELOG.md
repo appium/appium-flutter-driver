@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.10.0
+- Adds `flutter:dragAndDropWithCommandExtension` command. Please check the README about how to use the command properly.
+
 ## 2.9.2
 - Fix observatory url finding after an app activation
     - Bring `appium:maxRetryCount` and `appium:retryBackoffTime` back to use for the observaotry url findings.
