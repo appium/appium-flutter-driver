@@ -259,56 +259,58 @@ The below _WebDriver example_ is by webdriverio.
 `flutter:` prefix commands are [`mobile:` command in appium for Android and iOS](https://appium.io/docs/en/latest/guides/execute-methods/).
 Please replace them properly with your client.
 
-| Flutter API | Status | WebDriver example (JavaScript, webdriverio) | Scope |
-| - | - | - | - |
-| [FlutterDriver.connectedTo](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/FlutterDriver.connectedTo.html) | :ok: | [`wdio.remote(opts)`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L33) | Session |
-| [checkHealth](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/checkHealth.html) | :ok: | `driver.execute('flutter:checkHealth')` | Session |
-| clearTextbox | :ok: | `driver.elementClear(find.byType('TextField'))` | Session |
-| [clearTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/clearTimeline.html) | :ok: | `driver.execute('flutter:clearTimeline')` | Session |
-| [enterText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/enterText.html) | :ok: | `driver.elementSendKeys(find.byType('TextField'), 'I can enter text')` (no focus required) <br/> `driver.elementClick(find.byType('TextField')); driver.execute('flutter:enterText', 'I can enter text')` (focus required by tap/click first) | Session |
-| [forceGC](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/forceGC.html) | :ok: | `driver.execute('flutter:forceGC')` | Session |
-| [getBottomLeft](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getBottomLeft.html) | :ok: | `driver.execute('flutter:getBottomLeft', buttonFinder)` | Widget |
-| [getBottomRight](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getBottomRight.html) | :ok: | `driver.execute('flutter:getBottomRight', buttonFinder)` | Widget |
-| [getCenter](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getCenter.html) | :ok: | `driver.execute('flutter:getCenter', buttonFinder)` | Widget |
-| [getRenderObjectDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getRenderObjectDiagnostics.html) | :ok: | `driver.execute('flutter:getRenderObjectDiagnostics', counterTextFinder, { includeProperties: true, subtreeDepth: 2 })` | Widget |
-| [getWidgetDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getWidgetDiagnostics.html) | :ok: (v2.8.0+) | `driver.execute('flutter:getWidgetDiagnostics', counterTextFinder, { includeProperties: true, subtreeDepth: 2 })` | Widget |
-| [getRenderTree](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getRenderTree.html) | :ok: | `driver.execute('flutter: getRenderTree')` | Session |
-| [getSemanticsId](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getSemanticsId.html) | :ok: | `driver.execute('flutter:getSemanticsId', counterTextFinder)` | Widget |
-| [getText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getText.html) | :ok: | [`driver.getElementText(counterTextFinder)`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L44) | Widget |
-| [getTopLeft](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getTopLeft.html) | :ok: | `driver.execute('flutter:getTopLeft', buttonFinder)` | Widget |
-| [getTopRight](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getTopRight.html) | :ok: | `driver.execute('flutter:getTopRight', buttonFinder)` | Widget |
-| [getVmFlags](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getVmFlags.html) | :x: |  | Session |
-| [requestData](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/requestData.html) | :ok: | `driver.execute('flutter:requestData', json.dumps({"deepLink": "myapp://item/id1"}))`  | Session |
-| [runUnsynchronized](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/runUnsynchronized.html) | :x: |  | Session |
-| [setFrameSync](https://api.flutter.dev/flutter/flutter_driver/SetFrameSync-class.html) |:ok:| `driver.execute('flutter:setFrameSync', bool , durationMilliseconds)`| Session |
-| [screenshot](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/screenshot.html) | :ok: | `driver.takeScreenshot()` | Session |
-| [screenshot](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/screenshot.html) | :ok: | `driver.saveScreenshot('a.png')` | Session |
-| [scroll](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scroll.html) | :ok: | `driver.execute('flutter:scroll', find.byType('ListView'), {dx: 50, dy: -100, durationMilliseconds: 200, frequency: 30})` | Widget |
-| [scrollIntoView](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollIntoView.html) | :ok: | `driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1})` <br/> `driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1, timeout: 30000})` | Widget |
-| [scrollUntilVisible](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollUntilVisible.html) | :ok: | `driver.execute('flutter:scrollUntilVisible', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400});`, `driver.execute('flutter:scrollUntilVisible', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400, waitTimeoutMilliseconds: 20000});` | Widget |
-| [scrollUntilTapable](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollUntilVisible.html) | :ok: | `driver.execute('flutter:scrollUntilTapable', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400});`, `driver.execute('flutter:scrollUntilTapable', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400, waitTimeoutMilliseconds: 20000});` | Widget |
-| [setSemantics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setSemantics.html) | :x: |  | Session |
-| [setTextEntryEmulation](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setTextEntryEmulation.html) | :ok: | `driver.execute('flutter:setTextEntryEmulation', false)` | Session |
-| [startTracing](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/startTracing.html) | :x: |  | Session |
-| [stopTracingAndDownloadTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/stopTracingAndDownloadTimeline.html) | :x: |  | Session |
-| [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html) | :ok: | [`driver.elementClick(buttonFinder)`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L46) | Widget |
-| [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html) | :ok: | [`driver.touchAction({action: 'tap', element: {elementId: buttonFinder}})`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L47) | Widget |
-| [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html) | :ok: | [`driver.execute('flutter:clickElement', buttonFinder, {timeout:5000})`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L47) | Widget |
-| [traceAction](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/traceAction.html) | :x: |  | Session |
-| [waitFor](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitFor.html) | :ok: | `driver.execute('flutter:waitFor', buttonFinder, 100)` | Widget |
-| [waitForAbsent](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitForAbsent.html) | :ok: | `driver.execute('flutter:waitForAbsent', buttonFinder)` | Widget |
-| [waitForTappable](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitForTappable.html) | :ok: | `driver.execute('flutter:waitForTappable', buttonFinder)` | Widget |
-| [waitUntilNoTransientCallbacks](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitUntilNoTransientCallbacks.html) | :x: |  | Widget |
-| - | :ok: | `driver.execute('flutter:getVMInfo')` | System |
-| - | :ok: | `driver.execute('flutter:setIsolateId', 'isolates/2978358234363215')` | System |
-| - | :ok: | `driver.execute('flutter:getIsolate', 'isolates/2978358234363215')` or `driver.execute('flutter:getIsolate')` | System |
-| :question: | :ok: | `driver.execute('flutter:longTap', find.byValueKey('increment'), {durationMilliseconds: 10000, frequency: 30})` | Widget |
-| :question: | :ok: | `driver.execute('flutter:waitForFirstFrame')` | Widget |
-| - | :ok: | (Ruby) `driver.execute_script 'flutter:connectObservatoryWsUrl'` | Flutter Driver |
-| - | :ok: | (Ruby) `driver.execute_script 'flutter:launchApp', 'bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` | Flutter Driver |
+| Flutter API                                                                                                                        | Status | WebDriver example (JavaScript, webdriverio) | Scope             |
+|------------------------------------------------------------------------------------------------------------------------------------| - | - |-------------------|
+| [FlutterDriver.connectedTo](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/FlutterDriver.connectedTo.html)           | :ok: | [`wdio.remote(opts)`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L33) | Session           |
+| [checkHealth](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/checkHealth.html)                                       | :ok: | `driver.execute('flutter:checkHealth')` | Session           |
+| clearTextbox                                                                                                                       | :ok: | `driver.elementClear(find.byType('TextField'))` | Session           |
+| [clearTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/clearTimeline.html)                                   | :ok: | `driver.execute('flutter:clearTimeline')` | Session           |
+| [enterText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/enterText.html)                                           | :ok: | `driver.elementSendKeys(find.byType('TextField'), 'I can enter text')` (no focus required) <br/> `driver.elementClick(find.byType('TextField')); driver.execute('flutter:enterText', 'I can enter text')` (focus required by tap/click first) | Session           |
+| [forceGC](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/forceGC.html)                                               | :ok: | `driver.execute('flutter:forceGC')` | Session           |
+| [getBottomLeft](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getBottomLeft.html)                                   | :ok: | `driver.execute('flutter:getBottomLeft', buttonFinder)` | Widget            |
+| [getBottomRight](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getBottomRight.html)                                 | :ok: | `driver.execute('flutter:getBottomRight', buttonFinder)` | Widget            |
+| [getCenter](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getCenter.html)                                           | :ok: | `driver.execute('flutter:getCenter', buttonFinder)` | Widget            |
+| [getRenderObjectDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getRenderObjectDiagnostics.html)         | :ok: | `driver.execute('flutter:getRenderObjectDiagnostics', counterTextFinder, { includeProperties: true, subtreeDepth: 2 })` | Widget            |
+| [getWidgetDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getWidgetDiagnostics.html)                     | :ok: (v2.8.0+) | `driver.execute('flutter:getWidgetDiagnostics', counterTextFinder, { includeProperties: true, subtreeDepth: 2 })` | Widget            |
+| [getRenderTree](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getRenderTree.html)                                   | :ok: | `driver.execute('flutter: getRenderTree')` | Session           |
+| [getSemanticsId](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getSemanticsId.html)                                 | :ok: | `driver.execute('flutter:getSemanticsId', counterTextFinder)` | Widget            |
+| [getText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getText.html)                                               | :ok: | [`driver.getElementText(counterTextFinder)`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L44) | Widget            |
+| [getTopLeft](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getTopLeft.html)                                         | :ok: | `driver.execute('flutter:getTopLeft', buttonFinder)` | Widget            |
+| [getTopRight](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getTopRight.html)                                       | :ok: | `driver.execute('flutter:getTopRight', buttonFinder)` | Widget            |
+| [getVmFlags](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getVmFlags.html)                                         | :x: |  | Session           |
+| [requestData](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/requestData.html)                                       | :ok: | `driver.execute('flutter:requestData', json.dumps({"deepLink": "myapp://item/id1"}))`  | Session           |
+| [runUnsynchronized](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/runUnsynchronized.html)                           | :x: |  | Session           |
+| [setFrameSync](https://api.flutter.dev/flutter/flutter_driver/SetFrameSync-class.html)                                             |:ok:| `driver.execute('flutter:setFrameSync', bool , durationMilliseconds)`| Session           |
+| [screenshot](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/screenshot.html)                                         | :ok: | `driver.takeScreenshot()` | Session           |
+| [screenshot](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/screenshot.html)                                         | :ok: | `driver.saveScreenshot('a.png')` | Session           |
+| [scroll](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scroll.html)                                                 | :ok: | `driver.execute('flutter:scroll', find.byType('ListView'), {dx: 50, dy: -100, durationMilliseconds: 200, frequency: 30})` | Widget            |
+| [scrollIntoView](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollIntoView.html)                                 | :ok: | `driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1})` <br/> `driver.execute('flutter:scrollIntoView', find.byType('TextField'), {alignment: 0.1, timeout: 30000})` | Widget            |
+| [scrollUntilVisible](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollUntilVisible.html)                         | :ok: | `driver.execute('flutter:scrollUntilVisible', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400});`, `driver.execute('flutter:scrollUntilVisible', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400, waitTimeoutMilliseconds: 20000});` | Widget            |
+| [scrollUntilTapable](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/scrollUntilVisible.html)                         | :ok: | `driver.execute('flutter:scrollUntilTapable', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400});`, `driver.execute('flutter:scrollUntilTapable', find.byType('ListView'), {item:find.byType('TextField'), dxScroll: 90, dyScroll: -400, waitTimeoutMilliseconds: 20000});` | Widget            |
+| [setSemantics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setSemantics.html)                                     | :x: |  | Session           |
+| [setTextEntryEmulation](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/setTextEntryEmulation.html)                   | :ok: | `driver.execute('flutter:setTextEntryEmulation', false)` | Session           |
+| [startTracing](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/startTracing.html)                                     | :x: |  | Session           |
+| [stopTracingAndDownloadTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/stopTracingAndDownloadTimeline.html) | :x: |  | Session           |
+| [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html)                                                       | :ok: | [`driver.elementClick(buttonFinder)`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L46) | Widget            |
+| [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html)                                                       | :ok: | [`driver.touchAction({action: 'tap', element: {elementId: buttonFinder}})`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L47) | Widget            |
+| [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html)                                                       | :ok: | [`driver.execute('flutter:clickElement', buttonFinder, {timeout:5000})`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L47) | Widget            |
+| [traceAction](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/traceAction.html)                                       | :x: |  | Session           |
+| [waitFor](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitFor.html)                                               | :ok: | `driver.execute('flutter:waitFor', buttonFinder, 100)` | Widget            |
+| [waitForAbsent](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitForAbsent.html)                                   | :ok: | `driver.execute('flutter:waitForAbsent', buttonFinder)` | Widget            |
+| [waitForTappable](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitForTappable.html)                               | :ok: | `driver.execute('flutter:waitForTappable', buttonFinder)` | Widget            |
+| [waitUntilNoTransientCallbacks](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitUntilNoTransientCallbacks.html)   | :x: |  | Widget            |
+| -                                                                                                                                  | :ok: | `driver.execute('flutter:getVMInfo')` | System            |
+| -                                                                                                                                  | :ok: | `driver.execute('flutter:setIsolateId', 'isolates/2978358234363215')` | System            |
+| -                                                                                                                                  | :ok: | `driver.execute('flutter:getIsolate', 'isolates/2978358234363215')` or `driver.execute('flutter:getIsolate')` | System            |
+| :question:                                                                                                                         | :ok: | `driver.execute('flutter:longTap', find.byValueKey('increment'), {durationMilliseconds: 10000, frequency: 30})` | Widget            |
+| :question:                                                                                                                         | :ok: | `driver.execute('flutter:waitForFirstFrame')` | Widget            |
+| -                                                                                                                                  | :ok: | (Ruby) `driver.execute_script 'flutter:connectObservatoryWsUrl'` | Flutter Driver    |
+| -                                                                                                                                  | :ok: | (Ruby) `driver.execute_script 'flutter:launchApp', 'bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` | Flutter Driver    |
+| dragAndDropWithCommandExtension                                                                                                    | :ok: | (Python) `driver.execute_script('flutter:dragAndDropWithCommandExtension', payload)` | Command Extension |
 
-> **NOTE**
-> `flutter:launchApp` launches an app via instrument service. `mobile:activateApp` and `driver.activate_app` are via XCTest API. They are a bit different.
+**NOTE**
+>`flutter:launchApp` launches an app via instrument service. `mobile:activateApp` and `driver.activate_app` are via XCTest API. They are a bit different.
+
 
 ### `isolate` handling
 #### Change the flutter engine attache to
@@ -346,6 +348,56 @@ These Appium commands can work across context
 - `installApp(appPath, options)`
 - `getClipboard`
 - `setClipboard`
+
+## Command Extension (Flutter Driver)
+
+This is a command extension for Flutter Driver, utilizing the [CommandExtension-class](https://api.flutter.dev/flutter/flutter_driver_extension/CommandExtension-class.html) within `ext.flutter.driver`
+
+Available commands:
+
+- `dragAndDropWithCommandExtension` – performs a drag-and-drop action on the screen by specifying the start and end coordinates and the action duration.
+
+### How to use
+
+Copy the [extended_commands.dart](extended_commands.dart) file to the `lib` folder of your Flutter project.
+
+The entry point must include the `List<CommandExtension>?` commands argument in either `main.dart` or `test_main.dart` to properly handle the command extension.
+
+
+```dart
+import 'extended_commands.dart';
+
+
+void main() {
+  enableFlutterDriverExtension(
+      commands: [DragCommandExtension()]);
+  runApp(const MyApp());
+}
+```
+
+#### Simple example using `dragAndDropWithCommandExtension` command in Python
+
+```python
+# python
+coord_item_1 = driver.execute_script("flutter:getCenter", item_1)
+coord_item_2 = driver.execute_script("flutter:getCenter", item_2)
+start_x = coord_item_1["dx"]
+start_y = coord_item_1["dy"]
+end_y = coord_item_2["dy"]
+
+payload = {
+    "startX": start_x,
+    "startY": start_y,
+    "endX": "0",
+    "endY": end_y,
+    "duration": "15000" # minimum 15000ms needed to drag n drop
+}
+
+driver.execute_script("flutter:dragAndDropWithCommandExtension", payload)
+```
+
+For debugging or testing in other programming languages, you can use the APK available in this [repository](https://github.com/Alpaca00/command-driven-list) or build an IPA.
+
 
 ## Troubleshooting
 

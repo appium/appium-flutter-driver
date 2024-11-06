@@ -84,6 +84,8 @@ export const execute = async function(
       return await setFrameSync(this, args[0], args[1]);
     case `clickElement`:
       return await clickElement(this, args[0], args[1]);
+    case `dragAndDropWithCommandExtension`:
+      return await dragAndDropWithCommandExtension(this, args[0]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -217,4 +219,26 @@ const clickElement = async (self:FlutterDriver, elementBase64: string, opts) => 
   return await self.executeElementCommand(`tap`, elementBase64, {
         timeout
   });
+};
+
+const dragAndDropWithCommandExtension = async (
+  self: FlutterDriver,
+  params: {
+    startX: string;
+    startY: string;
+    endX: string;
+    endY: string;
+    duration: string;
+  }
+) => {
+  const { startX, startY, endX, endY, duration } = params;
+  const commandPayload = {
+    command: 'dragAndDropWithCommandExtension',
+    startX,
+    startY,
+    endX,
+    endY,
+    duration,
+  };
+  return await self.socket!.executeSocketCommand(commandPayload);
 };
