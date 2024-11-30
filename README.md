@@ -355,10 +355,13 @@ This is a command extension for Flutter Driver, utilizing the [CommandExtension-
 Available commands:
 
 - `dragAndDropWithCommandExtension` – performs a drag-and-drop action on the screen by specifying the start and end coordinates and the action duration.
+- `getTextWithCommandExtension` - get text data from Text widget that contains TextSpan widgets. 
 
 ### How to use
 
-Copy the [extended_commands.dart](extended_commands.dart) file to the `lib` folder of your Flutter project.
+Copy the sample dart files to the `lib` folder of your project. Please note that you don't need to copy all files, just copy the file matched with the command you need.
+- dragAndDropWithCommandExtension: [extended_commands.dart](extended_commands.dart)
+- getTextWithCommandExtension: [get_text_command.dart](get_text_command.dart) 
 
 The entry point must include the `List<CommandExtension>?` commands argument in either `main.dart` or `test_main.dart` to properly handle the command extension.
 
@@ -374,7 +377,7 @@ void main() {
 }
 ```
 
-#### Simple example using `dragAndDropWithCommandExtension` command in Python
+### Simple example using `dragAndDropWithCommandExtension` command in Python
 
 ```python
 # python
@@ -393,6 +396,16 @@ payload = {
 }
 
 driver.execute_script("flutter:dragAndDropWithCommandExtension", payload)
+```
+
+#### Simple example using `getTextWithCommandExtension` command in nodejs
+
+```typescript
+import {byValueKey} from "appium-flutter-finder";
+const payload = {
+    'findBy': byValueKey('amount'),
+  };
+const result = await driver.execute('flutter:getTextWithCommandExtension', payload);
 ```
 
 For debugging or testing in other programming languages, you can use the APK available in this [repository](https://github.com/Alpaca00/command-driven-list) or build an IPA.
