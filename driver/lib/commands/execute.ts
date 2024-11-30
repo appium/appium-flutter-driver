@@ -20,75 +20,78 @@ export const execute = async function(
     throw new Error(`Command not support: "${rawCommand}"`);
   }
 
-  const command = matching[1].trim();
-  switch (command) {
-    case `launchApp`:
-      return await flutterLaunchApp(this, args[0], args[1]);
-    case `connectObservatoryWsUrl`:
-      return await connectObservatoryWsUrl(this);
-    case `getVMInfo`:
-      return await getVMInfo(this);
-    case `setIsolateId`:
-      return await setIsolateId(this, args[0]);
-    case `getIsolate`:
-      return await getIsolate(this, args[0]);
-    case `checkHealth`:
-      return await checkHealth(this);
-    case `clearTimeline`:
-      return await clearTimeline(this);
-    case `forceGC`:
-      return await forceGC(this);
-    case `getRenderTree`:
-      return await getRenderTree(this);
-    case `getBottomLeft`:
-      return await getOffset(this, args[0], { offsetType: `bottomLeft` });
-    case `getBottomRight`:
-      return await getOffset(this, args[0], { offsetType: `bottomRight` });
-    case `getCenter`:
-      return await getOffset(this, args[0], { offsetType: `center` });
-    case `getTopLeft`:
-      return await getOffset(this, args[0], { offsetType: `topLeft` });
-    case `getTopRight`:
-      return await getOffset(this, args[0], { offsetType: `topRight` });
-    case `getRenderObjectDiagnostics`:
-      return await getRenderObjectDiagnostics(this, args[0], args[1]);
-    case `getWidgetDiagnostics`:
-      return await getWidgetDiagnostics(this, args[0], args[1]);
-    case `getSemanticsId`:
-      return await getSemanticsId(this, args[0]);
-    case `waitForAbsent`:
-      return await waitForAbsent(this, args[0], args[1]);
-    case `waitFor`:
-      return await waitFor(this, args[0], args[1]);
-    case `waitForTappable`:
-      return await waitForTappable(this, args[0], args[1]);
-    case `scroll`:
-      return await scroll(this, args[0], args[1]);
-    case `scrollUntilVisible`:
-      return await scrollUntilVisible(this, args[0], args[1]);
-    case `scrollUntilTapable`:
-      return await scrollUntilTapable(this, args[0], args[1]);
-    case `scrollIntoView`:
-      return await scrollIntoView(this, args[0], args[1]);
-    case `setTextEntryEmulation`:
-      return await setTextEntryEmulation(this, args[0]);
-    case `enterText`:
-      return await enterText(this, args[0]);
-    case `requestData`:
-      return await requestData(this, args[0]);
-    case `longTap`:
-      return await longTap(this, args[0], args[1]);
-    case `waitForFirstFrame`:
-      return await waitForCondition(this, { conditionName: `FirstFrameRasterizedCondition`});
-    case `setFrameSync`:
-      return await setFrameSync(this, args[0], args[1]);
-    case `clickElement`:
-      return await clickElement(this, args[0], args[1]);
-    case `dragAndDropWithCommandExtension`:
-      return await dragAndDropWithCommandExtension(this, args[0]);
-    default:
-      throw new Error(`Command not support: "${rawCommand}"`);
-  }
+    const command = matching[1].trim();
+
+    switch (command) {
+        case `launchApp`:
+            return await flutterLaunchApp(this, args[0], args[1]);
+        case `connectObservatoryWsUrl`:
+            return await connectObservatoryWsUrl(this);
+        case `getVMInfo`:
+            return await getVMInfo(this);
+        case `setIsolateId`:
+            return await setIsolateId(this, args[0]);
+        case `getIsolate`:
+            return await getIsolate(this, args[0]);
+        case `checkHealth`:
+            return await checkHealth(this);
+        case `clearTimeline`:
+            return await clearTimeline(this);
+        case `forceGC`:
+            return await forceGC(this);
+        case `getRenderTree`:
+            return await getRenderTree(this);
+        case `getBottomLeft`:
+            return await getOffset(this, args[0], {offsetType: `bottomLeft`});
+        case `getBottomRight`:
+            return await getOffset(this, args[0], {offsetType: `bottomRight`});
+        case `getCenter`:
+            return await getOffset(this, args[0], {offsetType: `center`});
+        case `getTopLeft`:
+            return await getOffset(this, args[0], {offsetType: `topLeft`});
+        case `getTopRight`:
+            return await getOffset(this, args[0], {offsetType: `topRight`});
+        case `getRenderObjectDiagnostics`:
+            return await getRenderObjectDiagnostics(this, args[0], args[1]);
+        case `getWidgetDiagnostics`:
+            return await getWidgetDiagnostics(this, args[0], args[1]);
+        case `getSemanticsId`:
+            return await getSemanticsId(this, args[0]);
+        case `waitForAbsent`:
+            return await waitForAbsent(this, args[0], args[1]);
+        case `waitFor`:
+            return await waitFor(this, args[0], args[1]);
+        case `waitForTappable`:
+            return await waitForTappable(this, args[0], args[1]);
+        case `scroll`:
+            return await scroll(this, args[0], args[1]);
+        case `scrollUntilVisible`:
+            return await scrollUntilVisible(this, args[0], args[1]);
+        case `scrollUntilTapable`:
+            return await scrollUntilTapable(this, args[0], args[1]);
+        case `scrollIntoView`:
+            return await scrollIntoView(this, args[0], args[1]);
+        case `setTextEntryEmulation`:
+            return await setTextEntryEmulation(this, args[0]);
+        case `enterText`:
+            return await enterText(this, args[0]);
+        case `requestData`:
+            return await requestData(this, args[0]);
+        case `longTap`:
+            return await longTap(this, args[0], args[1]);
+        case `waitForFirstFrame`:
+            return await waitForCondition(this, {conditionName: `FirstFrameRasterizedCondition`});
+        case `setFrameSync`:
+            return await setFrameSync(this, args[0], args[1]);
+        case `clickElement`:
+            return await clickElement(this, args[0], args[1]);
+        case `dragAndDropWithCommandExtension`:
+            return await dragAndDropWithCommandExtension(this, args[0]);
+        case `getTextWithCommandExtension`:
+            return await getTextWithCommandExtension(this, args[0]);
+        default:
+            throw new Error(`Command not support: "${rawCommand}"`);
+    }
 };
 
 const flutterLaunchApp = async (
@@ -242,3 +245,11 @@ const dragAndDropWithCommandExtension = async (
   };
   return await self.socket!.executeSocketCommand(commandPayload);
 };
+
+async function getTextWithCommandExtension(self: FlutterDriver, params: { findBy: string; }) {
+    const payload = {
+        command: 'getTextWithCommandExtension',
+        findBy: params.findBy,
+    };
+    return await self.socket!.executeSocketCommand(payload);
+}
