@@ -368,16 +368,17 @@ The entry point must include the `List<CommandExtension>?` commands argument in 
 
 ```dart
 import 'extended_commands.dart';
+import 'get_text_command.dart';
 
 
 void main() {
   enableFlutterDriverExtension(
-      commands: [DragCommandExtension()]);
+      commands: [DragCommandExtension(), GetTextCommandExtension()]);
   runApp(const MyApp());
 }
 ```
 
-### Simple example using `dragAndDropWithCommandExtension` command in Python
+#### Simple example using `dragAndDropWithCommandExtension` command in Python
 
 ```python
 # python
