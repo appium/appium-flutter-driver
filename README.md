@@ -355,29 +355,32 @@ This is a command extension for Flutter Driver, utilizing the [CommandExtension-
 Available commands:
 
 - `dragAndDropWithCommandExtension` – performs a drag-and-drop action on the screen by specifying the start and end coordinates and the action duration.
+- `getTextWithCommandExtension` - get text data from Text widget that contains TextSpan widgets. 
 
 ### How to use
 
-Copy the [extended_commands.dart](extended_commands.dart) file to the `lib` folder of your Flutter project.
+Copy the sample dart files to the `lib` folder of your project. Please note that you don't need to copy all files, just copy the file matched with the command you need.
+- dragAndDropWithCommandExtension: [drag_commands.dart](./example/dart/drag_commands.dart)
+- getTextWithCommandExtension: [get_text_command.dart](./example/dart/get_text_command.dart) 
 
 The entry point must include the `List<CommandExtension>?` commands argument in either `main.dart` or `test_main.dart` to properly handle the command extension.
 
 
 ```dart
-import 'extended_commands.dart';
-
+import 'drag_commands.dart';
+import 'get_text_command.dart';
 
 void main() {
   enableFlutterDriverExtension(
-      commands: [DragCommandExtension()]);
+      commands: [DragCommandExtension(), GetTextCommandExtension()]);
   runApp(const MyApp());
 }
 ```
 
-#### Simple example using `dragAndDropWithCommandExtension` command in Python
+#### Simple examples in Python
 
 ```python
-# python
+# Extended commands: flutter:dragAndDropWithCommandExtension
 coord_item_1 = driver.execute_script("flutter:getCenter", item_1)
 coord_item_2 = driver.execute_script("flutter:getCenter", item_2)
 start_x = coord_item_1["dx"]
@@ -393,6 +396,38 @@ payload = {
 }
 
 driver.execute_script("flutter:dragAndDropWithCommandExtension", payload)
+
+# Extended commands: flutter:getTextWithCommandExtension
+text_finder = finder.by_value_key('amount')
+get_text_payload = {
+    'findBy': text_finder,
+}
+result = driver.execute_script('flutter:getTextWithCommandExtension', payload)
+print(result)
+```
+
+#### Simple examples in nodejs
+
+```typescript
+// Extended commands: flutter:dragAndDropWithCommandExtension
+const payload = {
+  "startX": "100",
+  "startY": "100",
+  "endX": "100",
+  "endY": "600",
+  "duration": "15000"
+}
+const result = await driver.execute("flutter:dragAndDropWithCommandExtension", payload);
+console.log(JSON.stringify(result));
+
+// Extended commands: flutter:getTextWithCommandExtension
+import {byValueKey} from "appium-flutter-finder";
+const payload = {
+    'findBy': byValueKey('amount'),
+  };
+const getTextResult = await driver.execute('flutter:getTextWithCommandExtension', payload);
+console.log(JSON.stringify(getTextResult));
+
 ```
 
 For debugging or testing in other programming languages, you can use the APK available in this [repository](https://github.com/Alpaca00/command-driven-list) or build an IPA.
