@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.11.0
+- Adds `flutter:getTextWithCommandExtension` command. Please check the README about how to use the command properly.
+- Update Appium UIAutomator2 driver dependency to 3.9.1
+- Update Appium XCUITest driver dependency to 7.32.0
+
 ## 2.10.0
 - Adds `flutter:dragAndDropWithCommandExtension` command. Please check the README about how to use the command properly.
 - Update Appium UIAutomator2 driver dependency to 3.8.1

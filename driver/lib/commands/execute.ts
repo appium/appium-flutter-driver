@@ -86,6 +86,8 @@ export const execute = async function(
       return await clickElement(this, args[0], args[1]);
     case `dragAndDropWithCommandExtension`:
       return await dragAndDropWithCommandExtension(this, args[0]);
+    case `getTextWithCommandExtension`:
+      return await getTextWithCommandExtension(this, args[0]);
     default:
       throw new Error(`Command not support: "${rawCommand}"`);
   }
@@ -241,4 +243,12 @@ const dragAndDropWithCommandExtension = async (
     duration,
   };
   return await self.socket!.executeSocketCommand(commandPayload);
+};
+
+const getTextWithCommandExtension = async (self: FlutterDriver, params: { findBy: string; }) => {
+  const payload = {
+      command: 'getTextWithCommandExtension',
+      findBy: params.findBy,
+  };
+  return await self.socket!.executeSocketCommand(payload);
 };
