@@ -18,7 +18,7 @@ import { getScreenshot } from './commands/screen';
 import { getClipboard, setClipboard } from './commands/clipboard';
 import { desiredCapConstraints } from './desired-caps';
 import XCUITestDriver from 'appium-xcuitest-driver';
-import AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
+import { AndroidUiautomator2Driver } from 'appium-uiautomator2-driver';
 import type {
   DefaultCreateSessionResult, DriverCaps, DriverData, W3CDriverCaps,
   RouteMatcher
