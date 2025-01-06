@@ -1,4 +1,4 @@
-import AndroidUiautomator2Driver from 'appium-uiautomator2-driver';
+import { AndroidUiautomator2Driver } from 'appium-uiautomator2-driver';
 import { connectSocket, extractObservatoryUrl, OBSERVATORY_URL_PATTERN } from './observatory';
 import type { InitialOpts, StringRecord } from '@appium/types';
 import type { IsolateSocket } from './isolate_socket';

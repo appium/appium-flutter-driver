@@ -125,7 +125,7 @@ export async function getObservatoryWsUri (
     let remoteSocket;
     try {
       remoteSocket = await utilities.connectPort(udid, remotePort);
-    } catch (e) {
+    } catch {
       localSocket.destroy();
       return;
     }

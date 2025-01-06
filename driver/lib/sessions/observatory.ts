@@ -180,7 +180,7 @@ export function extractObservatoryUrl(logEntry: LogEntry): URL | null {
     result.protocol = `ws`;
     result.pathname += `ws`;
     return result;
-  } catch (ign) {
+  } catch {
     return null;
   }
 }

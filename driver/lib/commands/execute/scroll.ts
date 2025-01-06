@@ -118,7 +118,7 @@ export const scrollUntilVisible = async (
     try {
       await waitFor(self, item, waitTimeoutMilliseconds);
       isVisible = true;
-    } catch (ign) {}
+    } catch {}
   })();
   const startAt = Date.now();
   while (!isVisible && shouldRetry(startAt, waitTimeoutMilliseconds)) {
@@ -167,7 +167,7 @@ export const scrollUntilTapable = async (
     try {
       await waitForTappable(self, item, waitTimeoutMilliseconds);
       isVisible = true;
-    } catch (ign) {}
+    } catch {}
   })();
   const startAt = Date.now();
   while (!isVisible && shouldRetry(startAt, waitTimeoutMilliseconds)) {
