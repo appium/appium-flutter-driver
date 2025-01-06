@@ -440,6 +440,7 @@ For debugging or testing in other programming languages, you can use the APK ava
     - `flutter:setFrameSync` may help
 - `flutter:waitFor` would help to handle "an element does not exist/is not enabled" behavior. [exmaple issue](https://github.com/appium/appium-flutter-driver/issues/693)
 - Appium Inspector does not work with FLUTTER context
+- `enableFlutterDriverExtension()` must be called before calling `WidgetsFlutterBinding.ensureInitialized` to avoid `Binding is already initialized to WidgetsFlutterBinding` error which could cause `"ext.flutter.driver" is not found in "extensionRPCs"` error. [issue](https://github.com/appium/appium-flutter-driver/issues/756)
 
 ## TODO?
 
