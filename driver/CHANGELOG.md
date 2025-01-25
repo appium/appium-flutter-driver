@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.12.0
+- Update Appium UIAutomator2 driver dependency to 3.10.0
+- Update Appium XCUITest driver dependency to 7.35.1
+
 ## 2.11.0
 - Adds `flutter:getTextWithCommandExtension` command. Please check the README about how to use the command properly.
 - Update Appium UIAutomator2 driver dependency to 3.9.1
