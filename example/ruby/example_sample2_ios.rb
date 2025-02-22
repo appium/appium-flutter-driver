@@ -10,8 +10,8 @@ class ExampleTests < Minitest::Test
     caps: {
       platformName: 'iOS',
       automationName: 'flutter',
-      platformVersion: '17.4',
-      deviceName: 'iPhone 15 Plus',
+      platformVersion: '18.4',
+      deviceName: 'iPhone 16 Plus',
       app: "#{Dir.pwd}/../sample2/iOSFullScreen.zip",
       wdaLaunchTimeout: 600_000,
       maxRetryCount: 20,
@@ -27,7 +27,7 @@ class ExampleTests < Minitest::Test
 
   def setup
     @core = ::Appium::Core.for(CAPS)
-    @driver = @core.start_driver server_url: 'http://localhost:4723'
+    @driver = @core.start_driver server_url: 'http://localhost:4723/wd/hub'
   end
 
   def teardown
