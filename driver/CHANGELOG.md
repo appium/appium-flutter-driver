@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.14.1
+- Fix lint
+
 ## 2.14.0
 - Update Appium UIAutomator2 driver dependency to 4.0.3
 - Update Appium XCUITest driver dependency to 8.3.2
