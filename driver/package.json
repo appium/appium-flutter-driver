@@ -1,16 +1,17 @@
 {
-  "name": "appium-flutter-driver",
-  "description": "Appium Flutter driver",
+  "name": "flutter_driver_fork",
+  "description": "flutter_driver_fork",
   "keywords": [
     "appium",
-    "flutter"
+    "flutter",
+    "flutter_driver_fork"
   ],
-  "version": "2.14.1",
+  "version": "0.0.1",
   "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/appium/appium-flutter-driver.git"
+    "url": "git+https://github.com/Time2HackJS/appium-flutter-driver.git"
   },
   "engines": {
     "node": ">=14",
@@ -19,8 +20,8 @@
   "main": "./build/lib/driver.js",
   "types": "./build/lib/index.d.ts",
   "appium": {
-    "driverName": "flutter",
-    "automationName": "Flutter",
+    "driverName": "flutter_fork",
+    "automationName": "Flutter_Fork",
     "platformNames": [
       "iOS",
       "Android"
@@ -68,8 +69,8 @@
   },
   "dependencies": {
     "appium-ios-device": "^2.7.18",
-    "appium-android-driver": "^10.0.0",
-    "appium-uiautomator2-driver": "^4.0.0",
+    "appium-android-driver": "^9.8.0",
+    "appium-uiautomator2-driver": "^3.7.3",
     "appium-xcuitest-driver": "^8.3.0",
     "asyncbox": "^3.0.0",
     "bluebird": "^3.1.1",

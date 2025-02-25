@@ -89,7 +89,7 @@ export const execute = async function(
     case `getTextWithCommandExtension`:
       return await getTextWithCommandExtension(this, args[0]);
     default:
-      throw new Error(`Command not support: "${rawCommand}"`);
+      return await tryExecuteCustom(this, command, args[0]);
   }
 };
 
@@ -252,3 +252,16 @@ const getTextWithCommandExtension = async (self: FlutterDriver, params: { findBy
   };
   return await self.socket!.executeSocketCommand(payload);
 };
+
+const tryExecuteCustom = async (self: FlutterDriver, command: string, args: Map<string, string>) => {
+  const payload = {
+    command: command,
+    ...args
+  };
+
+  try {
+    return await self.socket!.executeSocketCommand(payload);
+  } catch {
+    throw new Error(`Error while executing custom command ${command}`);
+  }
+}

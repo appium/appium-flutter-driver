@@ -1,2 +1,0 @@
-Appium-Flutter-Finder ~= 0.7.0
-Appium-Python-Client ~= 4.0.0
