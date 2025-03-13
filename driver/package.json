@@ -39,7 +39,9 @@
   "files": [
     "lib",
     "build",
-    "!build/tsconfig.tsbuildinfo"
+    "!build/tsconfig.tsbuildinfo",
+    "LICENSE",
+    "npm-shrinkwrap.json"
   ],
   "scripts": {
     "build": "tsc -b",
