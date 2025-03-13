@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.14.2
+- Fix package to include npm-shrinkwrap.json explicitly
+- Update Appium UIAutomator2 driver dependency to 4.1.1
+- Update Appium XCUITest driver dependency to 8.4.1
+
 ## 2.14.1
 - Fix lint
 

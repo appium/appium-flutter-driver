@@ -1,12 +1,12 @@
 {
   "name": "appium-flutter-driver",
-  "version": "2.14.1",
+  "version": "2.14.2",
   "lockfileVersion": 2,
   "requires": true,
   "packages": {
     "": {
       "name": "appium-flutter-driver",
-      "version": "2.14.1",
+      "version": "2.14.2",
       "license": "MIT",
       "dependencies": {
         "appium-android-driver": "^10.0.0",
@@ -17,7 +17,7 @@
         "bluebird": "^3.1.1",
         "lodash": "^4.0.0",
         "portscanner": "^2.2.0",
-        "rpc-websockets": "^9.0.1"
+        "rpc-websockets": "^10.0.0"
       },
       "devDependencies": {
         "@appium/eslint-config-appium-ts": "^1.x",
@@ -28,7 +28,7 @@
         "eslint": "^9.17.0",
         "semantic-release": "^23.0.0",
         "ts-node": "^10.9.1",
-        "typescript": "~5.5"
+        "typescript": "~5.7"
       },
       "engines": {
         "node": ">=14",
@@ -39,16 +39,16 @@
       }
     },
     "node_modules/@appium/base-driver": {
-      "version": "9.16.2",
-      "resolved": "https://registry.npmjs.org/@appium/base-driver/-/base-driver-9.16.2.tgz",
-      "integrity": "sha512-vuQf9XQKGAMl5d5pM63FOrnRJUSVjw6J5kPXApfnkTJovwyV9SViYptnCB/TcahjX2bHQ+fUka82MWzHKPzpHg==",
+      "version": "9.16.3",
+      "resolved": "https://registry.npmjs.org/@appium/base-driver/-/base-driver-9.16.3.tgz",
+      "integrity": "sha512-+KviEBWMlHoBh/Ezs4bF1uRFw3gBHivljy8yp2dKHvFt4ZZlJo6wxmfmU5fknob0TuRkViwcD2auL64AQLsGAw==",
       "dependencies": {
-        "@appium/support": "^6.0.6",
-        "@appium/types": "^0.25.1",
+        "@appium/support": "^6.0.7",
+        "@appium/types": "^0.25.2",
         "@colors/colors": "1.6.0",
         "async-lock": "1.4.1",
         "asyncbox": "3.0.0",
-        "axios": "1.7.9",
+        "axios": "1.8.2",
         "bluebird": "3.7.2",
         "body-parser": "1.20.3",
         "express": "4.21.2",
@@ -61,7 +61,7 @@
         "path-to-regexp": "8.2.0",
         "serve-favicon": "2.5.0",
         "source-map-support": "0.5.21",
-        "type-fest": "4.35.0",
+        "type-fest": "4.37.0",
         "validate.js": "0.13.1"
       },
       "engines": {
@@ -101,16 +101,16 @@
       }
     },
     "node_modules/@appium/support": {
-      "version": "6.0.6",
-      "resolved": "https://registry.npmjs.org/@appium/support/-/support-6.0.6.tgz",
-      "integrity": "sha512-qgj1uxHF7Suqi8wdWFBrG12dhLMAthpX973L7JHutM2jneynoIUaKtSXdd6zg0ZG/9clfY0C/06pIQTQljj+Lg==",
+      "version": "6.0.7",
+      "resolved": "https://registry.npmjs.org/@appium/support/-/support-6.0.7.tgz",
+      "integrity": "sha512-3LYvWhquHzlxq2ojvuAmta2tPk68B6oKZ9lMv2lyI6q7mR7FE8hl96Wy+qk9JjGfqJHYRNrrf9rTWr0E//UtQg==",
       "dependencies": {
         "@appium/logger": "^1.6.1",
-        "@appium/tsconfig": "^0.3.4",
-        "@appium/types": "^0.25.1",
+        "@appium/tsconfig": "^0.3.5",
+        "@appium/types": "^0.25.2",
         "@colors/colors": "1.6.0",
         "archiver": "7.0.1",
-        "axios": "1.7.9",
+        "axios": "1.8.2",
         "base64-stream": "1.0.0",
         "bluebird": "3.7.2",
         "bplist-creator": "0.1.1",
@@ -136,8 +136,8 @@
         "shell-quote": "1.8.2",
         "source-map-support": "0.5.21",
         "supports-color": "8.1.1",
-        "teen_process": "2.2.3",
-        "type-fest": "4.35.0",
+        "teen_process": "2.3.1",
+        "type-fest": "4.37.0",
         "uuid": "11.1.0",
         "which": "4.0.0",
         "yauzl": "3.2.0"
@@ -151,11 +151,11 @@
       }
     },
     "node_modules/@appium/tsconfig": {
-      "version": "0.3.4",
-      "resolved": "https://registry.npmjs.org/@appium/tsconfig/-/tsconfig-0.3.4.tgz",
-      "integrity": "sha512-tX719/ekarAWmJb+AaG6//8+3qQITshTgTZor0EbdEwA2KG3bGPwMIoCp10np6/qFr+sMZC0CbuKJruHSCDhhw==",
+      "version": "0.3.5",
+      "resolved": "https://registry.npmjs.org/@appium/tsconfig/-/tsconfig-0.3.5.tgz",
+      "integrity": "sha512-T8G5oe3is0Gn56PkeYjXracc0CS26L/obVuX7PHwEDcn1UKiJXFa2MYY73dRAWKJumAIIsJjssNUu6VttdWZWw==",
       "dependencies": {
-        "@tsconfig/node14": "14.1.2"
+        "@tsconfig/node14": "14.1.3"
       },
       "engines": {
         "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
@@ -163,14 +163,14 @@
       }
     },
     "node_modules/@appium/types": {
-      "version": "0.25.1",
-      "resolved": "https://registry.npmjs.org/@appium/types/-/types-0.25.1.tgz",
-      "integrity": "sha512-2Lu5qwFNQa+iPw98XdB5/7tXKO7dugZHXfAsF050wgJkJJ4kDemVFJ4yr1YqM7DYmgqZnt+k0EfzshLODCHXTA==",
+      "version": "0.25.2",
+      "resolved": "https://registry.npmjs.org/@appium/types/-/types-0.25.2.tgz",
+      "integrity": "sha512-BQ/AaHJzFzJPjZp4GElq3CMT83LdaJwO4i+azdLNO3jZKyMoX4hF/LoiiS/cOyYOXpirxHjSHmHuNOeusiVNVQ==",
       "dependencies": {
         "@appium/logger": "^1.6.1",
         "@appium/schema": "^0.8.1",
-        "@appium/tsconfig": "^0.3.4",
-        "type-fest": "4.35.0"
+        "@appium/tsconfig": "^0.3.5",
+        "type-fest": "4.37.0"
       },
       "engines": {
         "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
@@ -267,14 +267,14 @@
       }
     },
     "node_modules/@tsconfig/node14": {
-      "version": "14.1.2",
-      "resolved": "https://registry.npmjs.org/@tsconfig/node14/-/node14-14.1.2.tgz",
-      "integrity": "sha512-1vncsbfCZ3TBLPxesRYz02Rn7SNJfbLoDVkcZ7F/ixOV6nwxwgdhD1mdPcc5YQ413qBJ8CvMxXMFfJ7oawjo7Q=="
+      "version": "14.1.3",
+      "resolved": "https://registry.npmjs.org/@tsconfig/node14/-/node14-14.1.3.tgz",
+      "integrity": "sha512-ZC9/Kq2c0+4l8sDx/z3YQyP7+OSMTQr/xxJaSFHLGhGL0t9bPjuX1Zwmg3C2VB5KWGgI8MXMRShXRJroy4utGA=="
     },
     "node_modules/@types/node": {
-      "version": "22.13.5",
-      "resolved": "https://registry.npmjs.org/@types/node/-/node-22.13.5.tgz",
-      "integrity": "sha512-+lTU0PxZXn0Dr1NBtC7Y8cR21AJr87dLLU953CWA6pMxxv/UDc7jYAY90upcrie1nRcD6XNG5HOYEDtgW5TxAg==",
+      "version": "22.13.10",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-22.13.10.tgz",
+      "integrity": "sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw==",
       "dependencies": {
         "undici-types": "~6.20.0"
       }
@@ -290,17 +290,17 @@
       "integrity": "sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw=="
     },
     "node_modules/@types/ws": {
-      "version": "8.5.14",
-      "resolved": "https://registry.npmjs.org/@types/ws/-/ws-8.5.14.tgz",
-      "integrity": "sha512-bd/YFLW+URhBzMXurx7lWByOu+xzU9+kb3RboOteXYDfW+tr+JZa99OyNmPINEGB/ahzKrEuc8rcv4gnpJmxTw==",
+      "version": "8.18.0",
+      "resolved": "https://registry.npmjs.org/@types/ws/-/ws-8.18.0.tgz",
+      "integrity": "sha512-8svvI3hMyvN0kKCJMvTJP/x6Y/EoQbepff882wL+Sn5QsXb3etnamgrJq4isrBxSJj5L2AuXcI0+bgkoAXGUJw==",
       "dependencies": {
         "@types/node": "*"
       }
     },
     "node_modules/@xmldom/xmldom": {
-      "version": "0.9.7",
-      "resolved": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.9.7.tgz",
-      "integrity": "sha512-syvR8iIJjpTZ/stv7l89UAViwGFh6lbheeOaqSxkYx9YNmIVvPTRH+CT/fpykFtUx5N+8eSMDRvggF9J8GEPzQ==",
+      "version": "0.9.8",
+      "resolved": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.9.8.tgz",
+      "integrity": "sha512-p96FSY54r+WJ50FIOsCOjyj/wavs8921hG5+kVMmZgKcvIKxMXHTrjNJvRgWa/zuX3B6t2lijLNFaOyuxUH+2A==",
       "engines": {
         "node": ">=14.6"
       }
@@ -375,9 +375,9 @@
       }
     },
     "node_modules/appium-android-driver": {
-      "version": "10.1.2",
-      "resolved": "https://registry.npmjs.org/appium-android-driver/-/appium-android-driver-10.1.2.tgz",
-      "integrity": "sha512-Le1aRhWRjghZazeTfSJORIb8OUJtmaGHZpN6bUqIXrZ5x1IYuHWw8azObfrgB+7Xs3mQvP1RvdRrVTBth8L6zw==",
+      "version": "10.2.1",
+      "resolved": "https://registry.npmjs.org/appium-android-driver/-/appium-android-driver-10.2.1.tgz",
+      "integrity": "sha512-zRi8tSTvaqh8r14eD8doC/NlGQNdcwXEbMwWhInBGonhbn7HPBgtp9iSFXfStfB0PTJsJnyItuTJDC3iXwoDxw==",
       "dependencies": {
         "@appium/support": "^6.0.0",
         "@colors/colors": "^1.6.0",
@@ -386,7 +386,7 @@
         "asyncbox": "^3.0.0",
         "axios": "^1.x",
         "bluebird": "^3.4.7",
-        "io.appium.settings": "^5.12.24",
+        "io.appium.settings": "^5.14.3",
         "lodash": "^4.17.4",
         "lru-cache": "^10.0.1",
         "moment": "^2.24.0",
@@ -407,9 +407,9 @@
       }
     },
     "node_modules/appium-chromedriver": {
-      "version": "7.0.6",
-      "resolved": "https://registry.npmjs.org/appium-chromedriver/-/appium-chromedriver-7.0.6.tgz",
-      "integrity": "sha512-+ycgTuznlRbnvRr8uJBG7adhBcG7sov9FYaPxdg119EGsazaIc2MT8d/2MPBOh8Y9ms8SOf8RL26kXMsImIEpA==",
+      "version": "7.0.9",
+      "resolved": "https://registry.npmjs.org/appium-chromedriver/-/appium-chromedriver-7.0.9.tgz",
+      "integrity": "sha512-7T0HTszqwz4jQbtZpZ669BQYgtLcEucyTIEmHnv72pvmshrwNr/KELouRkY7VcazzW88w+bpcYh3/3bzs9Si2w==",
       "dependencies": {
         "@appium/base-driver": "^9.1.0",
         "@appium/support": "^6.0.0",
@@ -452,19 +452,19 @@
       }
     },
     "node_modules/appium-uiautomator2-driver": {
-      "version": "4.0.3",
-      "resolved": "https://registry.npmjs.org/appium-uiautomator2-driver/-/appium-uiautomator2-driver-4.0.3.tgz",
-      "integrity": "sha512-msvWCmPAOkhCIastuIp65tLccRIQEWdbb5fahlf+FDqnvn4rfZRWekdk6fuBTuC6WS0NXf2fN+EL5iR9d+siCg==",
+      "version": "4.1.1",
+      "resolved": "https://registry.npmjs.org/appium-uiautomator2-driver/-/appium-uiautomator2-driver-4.1.1.tgz",
+      "integrity": "sha512-KoFyivgRlbL+BhPdHVBvJE6dpvScruVEcYdhdzDf/CUsPyb5Ugjd8n3oCEkAHn9Cou+dxnZWPE4wJQz+AVpIiw==",
       "hasShrinkwrap": true,
       "dependencies": {
         "appium-adb": "^12.12.0",
-        "appium-android-driver": "^10.1.2",
+        "appium-android-driver": "^10.2.1",
         "appium-uiautomator2-server": "^7.2.0",
         "asyncbox": "^3.0.0",
         "axios": "^1.6.5",
         "bluebird": "^3.5.1",
         "css-selector-parser": "^3.0.0",
-        "io.appium.settings": "^5.12.22",
+        "io.appium.settings": "^5.14.3",
         "lodash": "^4.17.4",
         "portscanner": "^2.2.0",
         "source-map-support": "^0.x",
@@ -512,6 +512,29 @@
       },
       "optionalDependencies": {
         "spdy": "4.0.2"
+      }
+    },
+    "node_modules/appium-uiautomator2-driver/node_modules/@appium/base-driver/node_modules/axios": {
+      "version": "1.7.9",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-1.7.9.tgz",
+      "integrity": "sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==",
+      "license": "MIT",
+      "dependencies": {
+        "follow-redirects": "^1.15.6",
+        "form-data": "^4.0.0",
+        "proxy-from-env": "^1.1.0"
+      }
+    },
+    "node_modules/appium-uiautomator2-driver/node_modules/@appium/base-driver/node_modules/type-fest": {
+      "version": "4.35.0",
+      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.35.0.tgz",
+      "integrity": "sha512-2/AwEFQDFEy30iOLjrvHDIH7e4HEWH+f1Yl1bI5XMqzuoCUqwYCdxachgsgv0og/JdVZUhbfjcJAoHj5L1753A==",
+      "license": "(MIT OR CC0-1.0)",
+      "engines": {
+        "node": ">=16"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/sindresorhus"
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@appium/logger": {
@@ -595,6 +618,45 @@
         "sharp": "0.33.5"
       }
     },
+    "node_modules/appium-uiautomator2-driver/node_modules/@appium/support/node_modules/axios": {
+      "version": "1.7.9",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-1.7.9.tgz",
+      "integrity": "sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==",
+      "license": "MIT",
+      "dependencies": {
+        "follow-redirects": "^1.15.6",
+        "form-data": "^4.0.0",
+        "proxy-from-env": "^1.1.0"
+      }
+    },
+    "node_modules/appium-uiautomator2-driver/node_modules/@appium/support/node_modules/teen_process": {
+      "version": "2.2.3",
+      "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.2.3.tgz",
+      "integrity": "sha512-8L540OalWH83qc6LHV5VMr0DjdP7KWUHQwTOImtWaG2ElW8BvLTh6M9871oGmmpOMb2BpOJQn2+09ZHWYsdTUA==",
+      "license": "Apache-2.0",
+      "dependencies": {
+        "bluebird": "^3.7.2",
+        "lodash": "^4.17.21",
+        "shell-quote": "^1.8.1",
+        "source-map-support": "^0.x"
+      },
+      "engines": {
+        "node": "^16.13.0 || >=18.0.0",
+        "npm": ">=8"
+      }
+    },
+    "node_modules/appium-uiautomator2-driver/node_modules/@appium/support/node_modules/type-fest": {
+      "version": "4.35.0",
+      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.35.0.tgz",
+      "integrity": "sha512-2/AwEFQDFEy30iOLjrvHDIH7e4HEWH+f1Yl1bI5XMqzuoCUqwYCdxachgsgv0og/JdVZUhbfjcJAoHj5L1753A==",
+      "license": "(MIT OR CC0-1.0)",
+      "engines": {
+        "node": ">=16"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/sindresorhus"
+      }
+    },
     "node_modules/appium-uiautomator2-driver/node_modules/@appium/tsconfig": {
       "version": "0.3.4",
       "resolved": "https://registry.npmjs.org/@appium/tsconfig/-/tsconfig-0.3.4.tgz",
@@ -622,6 +684,18 @@
       "engines": {
         "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
         "npm": ">=8"
+      }
+    },
+    "node_modules/appium-uiautomator2-driver/node_modules/@appium/types/node_modules/type-fest": {
+      "version": "4.35.0",
+      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.35.0.tgz",
+      "integrity": "sha512-2/AwEFQDFEy30iOLjrvHDIH7e4HEWH+f1Yl1bI5XMqzuoCUqwYCdxachgsgv0og/JdVZUhbfjcJAoHj5L1753A==",
+      "license": "(MIT OR CC0-1.0)",
+      "engines": {
+        "node": ">=16"
+      },
+      "funding": {
+        "url": "https://github.com/sponsors/sindresorhus"
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@babel/code-frame": {
@@ -725,9 +799,9 @@
       "license": "MIT"
     },
     "node_modules/appium-uiautomator2-driver/node_modules/@xmldom/xmldom": {
-      "version": "0.9.7",
-      "resolved": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.9.7.tgz",
-      "integrity": "sha512-syvR8iIJjpTZ/stv7l89UAViwGFh6lbheeOaqSxkYx9YNmIVvPTRH+CT/fpykFtUx5N+8eSMDRvggF9J8GEPzQ==",
+      "version": "0.9.8",
+      "resolved": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.9.8.tgz",
+      "integrity": "sha512-p96FSY54r+WJ50FIOsCOjyj/wavs8921hG5+kVMmZgKcvIKxMXHTrjNJvRgWa/zuX3B6t2lijLNFaOyuxUH+2A==",
       "license": "MIT",
       "engines": {
         "node": ">=14.6"
@@ -808,9 +882,9 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/appium-android-driver": {
-      "version": "10.1.2",
-      "resolved": "https://registry.npmjs.org/appium-android-driver/-/appium-android-driver-10.1.2.tgz",
-      "integrity": "sha512-Le1aRhWRjghZazeTfSJORIb8OUJtmaGHZpN6bUqIXrZ5x1IYuHWw8azObfrgB+7Xs3mQvP1RvdRrVTBth8L6zw==",
+      "version": "10.2.1",
+      "resolved": "https://registry.npmjs.org/appium-android-driver/-/appium-android-driver-10.2.1.tgz",
+      "integrity": "sha512-zRi8tSTvaqh8r14eD8doC/NlGQNdcwXEbMwWhInBGonhbn7HPBgtp9iSFXfStfB0PTJsJnyItuTJDC3iXwoDxw==",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/support": "^6.0.0",
@@ -820,7 +894,7 @@
         "asyncbox": "^3.0.0",
         "axios": "^1.x",
         "bluebird": "^3.4.7",
-        "io.appium.settings": "^5.12.24",
+        "io.appium.settings": "^5.14.3",
         "lodash": "^4.17.4",
         "lru-cache": "^10.0.1",
         "moment": "^2.24.0",
@@ -841,9 +915,9 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/appium-chromedriver": {
-      "version": "7.0.6",
-      "resolved": "https://registry.npmjs.org/appium-chromedriver/-/appium-chromedriver-7.0.6.tgz",
-      "integrity": "sha512-+ycgTuznlRbnvRr8uJBG7adhBcG7sov9FYaPxdg119EGsazaIc2MT8d/2MPBOh8Y9ms8SOf8RL26kXMsImIEpA==",
+      "version": "7.0.8",
+      "resolved": "https://registry.npmjs.org/appium-chromedriver/-/appium-chromedriver-7.0.8.tgz",
+      "integrity": "sha512-X2MfK/xMVoUHFuQHSTuJaEF/ZGmP0tGc/5P6AzCYWdmOUmloxEXTeq+jkodh6/5MAanOcnnI3bhBpqGvwCjqjQ==",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/base-driver": "^9.1.0",
@@ -866,9 +940,9 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/appium-uiautomator2-server": {
-      "version": "7.2.3",
-      "resolved": "https://registry.npmjs.org/appium-uiautomator2-server/-/appium-uiautomator2-server-7.2.3.tgz",
-      "integrity": "sha512-PgYxwqLKfMRFIN2bqmpmH7U4wZEHDpd8WUyexfVF9cParSSIwhE3coXRfZLsUWgvrEBSXuS+A+6NIY7Ra7dlUA==",
+      "version": "7.2.5",
+      "resolved": "https://registry.npmjs.org/appium-uiautomator2-server/-/appium-uiautomator2-server-7.2.5.tgz",
+      "integrity": "sha512-Q4h7U4QOYfWL5IdYW4WNUveg7j/wjmJLFtfahgiZmKcAapCLqmwu9WFJmvGsThlsn3nj6yt7QVhOh/wa4/01Bg==",
       "license": "Apache-2.0",
       "engines": {
         "node": ">=14",
@@ -950,9 +1024,9 @@
       "license": "MIT"
     },
     "node_modules/appium-uiautomator2-driver/node_modules/axios": {
-      "version": "1.7.9",
-      "resolved": "https://registry.npmjs.org/axios/-/axios-1.7.9.tgz",
-      "integrity": "sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==",
+      "version": "1.8.2",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-1.8.2.tgz",
+      "integrity": "sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==",
       "license": "MIT",
       "dependencies": {
         "follow-redirects": "^1.15.6",
@@ -1146,13 +1220,13 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/call-bound": {
-      "version": "1.0.3",
-      "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.3.tgz",
-      "integrity": "sha512-YTd+6wGlNlPxSuri7Y6X8tY2dmm12UMH66RpKMhiX6rsk5wXXnYgbUcOt8kiS31/AjfoTOvCsE+w8nZQLQnzHA==",
+      "version": "1.0.4",
+      "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz",
+      "integrity": "sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==",
       "license": "MIT",
       "dependencies": {
-        "call-bind-apply-helpers": "^1.0.1",
-        "get-intrinsic": "^1.2.6"
+        "call-bind-apply-helpers": "^1.0.2",
+        "get-intrinsic": "^1.3.0"
       },
       "engines": {
         "node": ">= 0.4"
@@ -1710,12 +1784,12 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/foreground-child": {
-      "version": "3.3.0",
-      "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.0.tgz",
-      "integrity": "sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==",
+      "version": "3.3.1",
+      "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.1.tgz",
+      "integrity": "sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==",
       "license": "ISC",
       "dependencies": {
-        "cross-spawn": "^7.0.0",
+        "cross-spawn": "^7.0.6",
         "signal-exit": "^4.0.1"
       },
       "engines": {
@@ -1815,17 +1889,17 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/get-intrinsic": {
-      "version": "1.2.7",
-      "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.2.7.tgz",
-      "integrity": "sha512-VW6Pxhsrk0KAOqs3WEd0klDiF/+V7gQOpAvY1jVU/LHmaD/kQO4523aiJuikX/QAKYiW6x8Jh+RJej1almdtCA==",
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.3.0.tgz",
+      "integrity": "sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==",
       "license": "MIT",
       "dependencies": {
-        "call-bind-apply-helpers": "^1.0.1",
+        "call-bind-apply-helpers": "^1.0.2",
         "es-define-property": "^1.0.1",
         "es-errors": "^1.3.0",
-        "es-object-atoms": "^1.0.0",
+        "es-object-atoms": "^1.1.1",
         "function-bind": "^1.1.2",
-        "get-proto": "^1.0.0",
+        "get-proto": "^1.0.1",
         "gopd": "^1.2.0",
         "has-symbols": "^1.1.0",
         "hasown": "^2.0.2",
@@ -2127,9 +2201,9 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/io.appium.settings": {
-      "version": "5.12.24",
-      "resolved": "https://registry.npmjs.org/io.appium.settings/-/io.appium.settings-5.12.24.tgz",
-      "integrity": "sha512-WKo91Gir5thxNzVLC8PUqMj39fGrsW5StK6XztfGLHpMWy953jyh/TBZEePNBgp7cFM8wdC8p5MCetFJNdr0sA==",
+      "version": "5.14.4",
+      "resolved": "https://registry.npmjs.org/io.appium.settings/-/io.appium.settings-5.14.4.tgz",
+      "integrity": "sha512-6W+sGscwQUtF55ffbSI/1jSoycPD081hQs4bARE3ojGLlOQBPcYVfqUDXyubr0FViqyqk5my/rEHv4mTShOaSQ==",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/logger": "^1.3.0",
@@ -3720,9 +3794,9 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/teen_process": {
-      "version": "2.2.3",
-      "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.2.3.tgz",
-      "integrity": "sha512-8L540OalWH83qc6LHV5VMr0DjdP7KWUHQwTOImtWaG2ElW8BvLTh6M9871oGmmpOMb2BpOJQn2+09ZHWYsdTUA==",
+      "version": "2.3.1",
+      "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.3.1.tgz",
+      "integrity": "sha512-duT4gPj7HxEYy+AR4bJ9MNwf8GMLpJd+sNRAK2PTx53FpCcaiXVft3ePZh3hO6PY8NFWZMxTC3ZAtxyztScEsw==",
       "license": "Apache-2.0",
       "dependencies": {
         "bluebird": "^3.7.2",
@@ -3769,9 +3843,9 @@
       }
     },
     "node_modules/appium-uiautomator2-driver/node_modules/type-fest": {
-      "version": "4.35.0",
-      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.35.0.tgz",
-      "integrity": "sha512-2/AwEFQDFEy30iOLjrvHDIH7e4HEWH+f1Yl1bI5XMqzuoCUqwYCdxachgsgv0og/JdVZUhbfjcJAoHj5L1753A==",
+      "version": "4.37.0",
+      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.37.0.tgz",
+      "integrity": "sha512-S/5/0kFftkq27FPNye0XM1e2NsnoD/3FS+pBmbjmmtLT6I+i344KoOf7pvXreaFsDamWeaJX55nczA1m5PsBDg==",
       "license": "(MIT OR CC0-1.0)",
       "engines": {
         "node": ">=16"
@@ -4048,17 +4122,17 @@
       }
     },
     "node_modules/appium-xcuitest-driver": {
-      "version": "8.3.2",
-      "resolved": "https://registry.npmjs.org/appium-xcuitest-driver/-/appium-xcuitest-driver-8.3.2.tgz",
-      "integrity": "sha512-4ZuXQKbz3XFe6D8aXm1QByrP8D5QrB8KglCgML9EP3/9yFQYjj0R8xkJIcd2GrZXrx6V/TbSEPcpSXy5hQA5yA==",
+      "version": "8.4.1",
+      "resolved": "https://registry.npmjs.org/appium-xcuitest-driver/-/appium-xcuitest-driver-8.4.1.tgz",
+      "integrity": "sha512-n9stgEN+wNaEVA8FcBWSBi5jNJhuLo4+Ulo/jw5Y/otpsuO0cm2aFSNzo0LrFlD3wDjLaiXsdeDn91hUG3Yarw==",
       "hasShrinkwrap": true,
       "dependencies": {
         "@colors/colors": "^1.6.0",
         "appium-idb": "^1.6.13",
         "appium-ios-device": "^2.8.0",
         "appium-ios-simulator": "^6.2.0",
-        "appium-remote-debugger": "^12.1.1",
-        "appium-webdriveragent": "^9.0.4",
+        "appium-remote-debugger": "^12.2.0",
+        "appium-webdriveragent": "^9.1.0",
         "appium-xcode": "^5.1.4",
         "async-lock": "^1.4.0",
         "asyncbox": "^3.0.0",
@@ -4085,17 +4159,17 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/base-driver": {
-      "version": "9.16.2",
-      "resolved": "https://registry.npmjs.org/@appium/base-driver/-/base-driver-9.16.2.tgz",
-      "integrity": "sha512-vuQf9XQKGAMl5d5pM63FOrnRJUSVjw6J5kPXApfnkTJovwyV9SViYptnCB/TcahjX2bHQ+fUka82MWzHKPzpHg==",
+      "version": "9.16.3",
+      "resolved": "https://registry.npmjs.org/@appium/base-driver/-/base-driver-9.16.3.tgz",
+      "integrity": "sha512-+KviEBWMlHoBh/Ezs4bF1uRFw3gBHivljy8yp2dKHvFt4ZZlJo6wxmfmU5fknob0TuRkViwcD2auL64AQLsGAw==",
       "license": "Apache-2.0",
       "dependencies": {
-        "@appium/support": "^6.0.6",
-        "@appium/types": "^0.25.1",
+        "@appium/support": "^6.0.7",
+        "@appium/types": "^0.25.2",
         "@colors/colors": "1.6.0",
         "async-lock": "1.4.1",
         "asyncbox": "3.0.0",
-        "axios": "1.7.9",
+        "axios": "1.8.2",
         "bluebird": "3.7.2",
         "body-parser": "1.20.3",
         "express": "4.21.2",
@@ -4108,7 +4182,7 @@
         "path-to-regexp": "8.2.0",
         "serve-favicon": "2.5.0",
         "source-map-support": "0.5.21",
-        "type-fest": "4.35.0",
+        "type-fest": "4.37.0",
         "validate.js": "0.13.1"
       },
       "engines": {
@@ -4117,6 +4191,17 @@
       },
       "optionalDependencies": {
         "spdy": "4.0.2"
+      }
+    },
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/base-driver/node_modules/axios": {
+      "version": "1.8.2",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-1.8.2.tgz",
+      "integrity": "sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==",
+      "license": "MIT",
+      "dependencies": {
+        "follow-redirects": "^1.15.6",
+        "form-data": "^4.0.0",
+        "proxy-from-env": "^1.1.0"
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/logger": {
@@ -4164,17 +4249,17 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/support": {
-      "version": "6.0.6",
-      "resolved": "https://registry.npmjs.org/@appium/support/-/support-6.0.6.tgz",
-      "integrity": "sha512-qgj1uxHF7Suqi8wdWFBrG12dhLMAthpX973L7JHutM2jneynoIUaKtSXdd6zg0ZG/9clfY0C/06pIQTQljj+Lg==",
+      "version": "6.0.7",
+      "resolved": "https://registry.npmjs.org/@appium/support/-/support-6.0.7.tgz",
+      "integrity": "sha512-3LYvWhquHzlxq2ojvuAmta2tPk68B6oKZ9lMv2lyI6q7mR7FE8hl96Wy+qk9JjGfqJHYRNrrf9rTWr0E//UtQg==",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/logger": "^1.6.1",
-        "@appium/tsconfig": "^0.3.4",
-        "@appium/types": "^0.25.1",
+        "@appium/tsconfig": "^0.3.5",
+        "@appium/types": "^0.25.2",
         "@colors/colors": "1.6.0",
         "archiver": "7.0.1",
-        "axios": "1.7.9",
+        "axios": "1.8.2",
         "base64-stream": "1.0.0",
         "bluebird": "3.7.2",
         "bplist-creator": "0.1.1",
@@ -4200,8 +4285,8 @@
         "shell-quote": "1.8.2",
         "source-map-support": "0.5.21",
         "supports-color": "8.1.1",
-        "teen_process": "2.2.3",
-        "type-fest": "4.35.0",
+        "teen_process": "2.3.1",
+        "type-fest": "4.37.0",
         "uuid": "11.1.0",
         "which": "4.0.0",
         "yauzl": "3.2.0"
@@ -4214,13 +4299,24 @@
         "sharp": "0.33.5"
       }
     },
+    "node_modules/appium-xcuitest-driver/node_modules/@appium/support/node_modules/axios": {
+      "version": "1.8.2",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-1.8.2.tgz",
+      "integrity": "sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==",
+      "license": "MIT",
+      "dependencies": {
+        "follow-redirects": "^1.15.6",
+        "form-data": "^4.0.0",
+        "proxy-from-env": "^1.1.0"
+      }
+    },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/tsconfig": {
-      "version": "0.3.4",
-      "resolved": "https://registry.npmjs.org/@appium/tsconfig/-/tsconfig-0.3.4.tgz",
-      "integrity": "sha512-tX719/ekarAWmJb+AaG6//8+3qQITshTgTZor0EbdEwA2KG3bGPwMIoCp10np6/qFr+sMZC0CbuKJruHSCDhhw==",
+      "version": "0.3.5",
+      "resolved": "https://registry.npmjs.org/@appium/tsconfig/-/tsconfig-0.3.5.tgz",
+      "integrity": "sha512-T8G5oe3is0Gn56PkeYjXracc0CS26L/obVuX7PHwEDcn1UKiJXFa2MYY73dRAWKJumAIIsJjssNUu6VttdWZWw==",
       "license": "Apache-2.0",
       "dependencies": {
-        "@tsconfig/node14": "14.1.2"
+        "@tsconfig/node14": "14.1.3"
       },
       "engines": {
         "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
@@ -4228,15 +4324,15 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@appium/types": {
-      "version": "0.25.1",
-      "resolved": "https://registry.npmjs.org/@appium/types/-/types-0.25.1.tgz",
-      "integrity": "sha512-2Lu5qwFNQa+iPw98XdB5/7tXKO7dugZHXfAsF050wgJkJJ4kDemVFJ4yr1YqM7DYmgqZnt+k0EfzshLODCHXTA==",
+      "version": "0.25.2",
+      "resolved": "https://registry.npmjs.org/@appium/types/-/types-0.25.2.tgz",
+      "integrity": "sha512-BQ/AaHJzFzJPjZp4GElq3CMT83LdaJwO4i+azdLNO3jZKyMoX4hF/LoiiS/cOyYOXpirxHjSHmHuNOeusiVNVQ==",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/logger": "^1.6.1",
         "@appium/schema": "^0.8.1",
-        "@appium/tsconfig": "^0.3.4",
-        "type-fest": "4.35.0"
+        "@appium/tsconfig": "^0.3.5",
+        "type-fest": "4.37.0"
       },
       "engines": {
         "node": "^14.17.0 || ^16.13.0 || >=18.0.0",
@@ -4332,21 +4428,21 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@tsconfig/node14": {
-      "version": "14.1.2",
-      "resolved": "https://registry.npmjs.org/@tsconfig/node14/-/node14-14.1.2.tgz",
-      "integrity": "sha512-1vncsbfCZ3TBLPxesRYz02Rn7SNJfbLoDVkcZ7F/ixOV6nwxwgdhD1mdPcc5YQ413qBJ8CvMxXMFfJ7oawjo7Q==",
+      "version": "14.1.3",
+      "resolved": "https://registry.npmjs.org/@tsconfig/node14/-/node14-14.1.3.tgz",
+      "integrity": "sha512-ZC9/Kq2c0+4l8sDx/z3YQyP7+OSMTQr/xxJaSFHLGhGL0t9bPjuX1Zwmg3C2VB5KWGgI8MXMRShXRJroy4utGA==",
       "license": "MIT"
     },
     "node_modules/appium-xcuitest-driver/node_modules/@types/lodash": {
-      "version": "4.17.15",
-      "resolved": "https://registry.npmjs.org/@types/lodash/-/lodash-4.17.15.tgz",
-      "integrity": "sha512-w/P33JFeySuhN6JLkysYUK2gEmy9kHHFN7E8ro0tkfmlDOgxBDzWEZ/J8cWA+fHqFevpswDTFZnDx+R9lbL6xw==",
+      "version": "4.17.16",
+      "resolved": "https://registry.npmjs.org/@types/lodash/-/lodash-4.17.16.tgz",
+      "integrity": "sha512-HX7Em5NYQAXKW+1T+FiuG27NGwzJfCX3s1GjOa7ujxZa52kjJLOr4FUxT+giF6Tgxv1e+/czV/iTtBw27WTU9g==",
       "license": "MIT"
     },
     "node_modules/appium-xcuitest-driver/node_modules/@types/node": {
-      "version": "22.13.4",
-      "resolved": "https://registry.npmjs.org/@types/node/-/node-22.13.4.tgz",
-      "integrity": "sha512-ywP2X0DYtX3y08eFVx5fNIw7/uIv8hYUKgXoK8oayJlLnKcRfEYCxWMVE1XagUdVtCJlZT1AU4LXEABW+L1Peg==",
+      "version": "22.13.10",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-22.13.10.tgz",
+      "integrity": "sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw==",
       "license": "MIT",
       "dependencies": {
         "undici-types": "~6.20.0"
@@ -4368,9 +4464,9 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/@xmldom/xmldom": {
-      "version": "0.9.7",
-      "resolved": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.9.7.tgz",
-      "integrity": "sha512-syvR8iIJjpTZ/stv7l89UAViwGFh6lbheeOaqSxkYx9YNmIVvPTRH+CT/fpykFtUx5N+8eSMDRvggF9J8GEPzQ==",
+      "version": "0.9.8",
+      "resolved": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.9.8.tgz",
+      "integrity": "sha512-p96FSY54r+WJ50FIOsCOjyj/wavs8921hG5+kVMmZgKcvIKxMXHTrjNJvRgWa/zuX3B6t2lijLNFaOyuxUH+2A==",
       "license": "MIT",
       "engines": {
         "node": ">=14.6"
@@ -4492,9 +4588,9 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/appium-remote-debugger": {
-      "version": "12.1.5",
-      "resolved": "https://registry.npmjs.org/appium-remote-debugger/-/appium-remote-debugger-12.1.5.tgz",
-      "integrity": "sha512-LUcaNRHZjCMVMxn8APemZoHygMECDyvGbMul9R1IxJTTHiFhKsWTaNBD9AiPsZFO4OSXv4R4oRP0sVM8Wn81YA==",
+      "version": "12.2.0",
+      "resolved": "https://registry.npmjs.org/appium-remote-debugger/-/appium-remote-debugger-12.2.0.tgz",
+      "integrity": "sha512-j1l3c3JgSS7tYR4fmRo76zTHuI9mvHSqGzMIwp6EkTpI7YLuTgKcpI0h6pPGxMGV9/YzcREv+0yvHPXvh+/Jgw==",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/base-driver": "^9.0.0",
@@ -4513,9 +4609,9 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/appium-webdriveragent": {
-      "version": "9.0.4",
-      "resolved": "https://registry.npmjs.org/appium-webdriveragent/-/appium-webdriveragent-9.0.4.tgz",
-      "integrity": "sha512-V9du7DGa+p5GIeurxgm2Yx5KY1DLxTbmfkmRQuvW2c+6J1JYPmhOVKkMhpJMXQSIo+j0Pf6MaYNGe1bbOkoLrw==",
+      "version": "9.1.0",
+      "resolved": "https://registry.npmjs.org/appium-webdriveragent/-/appium-webdriveragent-9.1.0.tgz",
+      "integrity": "sha512-+RExPxu8QNs8uUTWGbzh5kVmkJZQ2NQP6BGoGDIrDWZoNgENYIxRAnBzTv3I0Ugem6v9XRlskpY8O+IfyHg54w==",
       "license": "Apache-2.0",
       "dependencies": {
         "@appium/base-driver": "^9.0.0",
@@ -4633,9 +4729,9 @@
       "license": "MIT"
     },
     "node_modules/appium-xcuitest-driver/node_modules/axios": {
-      "version": "1.7.9",
-      "resolved": "https://registry.npmjs.org/axios/-/axios-1.7.9.tgz",
-      "integrity": "sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==",
+      "version": "1.8.3",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-1.8.3.tgz",
+      "integrity": "sha512-iP4DebzoNlP/YN2dpwCgb8zoCmhtkajzS48JvwmkSkXvPI3DHc7m+XYL5tGnSlJtR6nImXZmdCuN5aP8dh1d8A==",
       "license": "MIT",
       "dependencies": {
         "follow-redirects": "^1.15.6",
@@ -4829,13 +4925,13 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/call-bound": {
-      "version": "1.0.3",
-      "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.3.tgz",
-      "integrity": "sha512-YTd+6wGlNlPxSuri7Y6X8tY2dmm12UMH66RpKMhiX6rsk5wXXnYgbUcOt8kiS31/AjfoTOvCsE+w8nZQLQnzHA==",
+      "version": "1.0.4",
+      "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz",
+      "integrity": "sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==",
       "license": "MIT",
       "dependencies": {
-        "call-bind-apply-helpers": "^1.0.1",
-        "get-intrinsic": "^1.2.6"
+        "call-bind-apply-helpers": "^1.0.2",
+        "get-intrinsic": "^1.3.0"
       },
       "engines": {
         "node": ">= 0.4"
@@ -5396,12 +5492,12 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/foreground-child": {
-      "version": "3.3.0",
-      "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.0.tgz",
-      "integrity": "sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==",
+      "version": "3.3.1",
+      "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.1.tgz",
+      "integrity": "sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==",
       "license": "ISC",
       "dependencies": {
-        "cross-spawn": "^7.0.0",
+        "cross-spawn": "^7.0.6",
         "signal-exit": "^4.0.1"
       },
       "engines": {
@@ -5501,17 +5597,17 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/get-intrinsic": {
-      "version": "1.2.7",
-      "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.2.7.tgz",
-      "integrity": "sha512-VW6Pxhsrk0KAOqs3WEd0klDiF/+V7gQOpAvY1jVU/LHmaD/kQO4523aiJuikX/QAKYiW6x8Jh+RJej1almdtCA==",
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.3.0.tgz",
+      "integrity": "sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==",
       "license": "MIT",
       "dependencies": {
-        "call-bind-apply-helpers": "^1.0.1",
+        "call-bind-apply-helpers": "^1.0.2",
         "es-define-property": "^1.0.1",
         "es-errors": "^1.3.0",
-        "es-object-atoms": "^1.0.0",
+        "es-object-atoms": "^1.1.1",
         "function-bind": "^1.1.2",
-        "get-proto": "^1.0.0",
+        "get-proto": "^1.0.1",
         "gopd": "^1.2.0",
         "has-symbols": "^1.1.0",
         "hasown": "^2.0.2",
@@ -7445,9 +7541,9 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/teen_process": {
-      "version": "2.2.3",
-      "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.2.3.tgz",
-      "integrity": "sha512-8L540OalWH83qc6LHV5VMr0DjdP7KWUHQwTOImtWaG2ElW8BvLTh6M9871oGmmpOMb2BpOJQn2+09ZHWYsdTUA==",
+      "version": "2.3.1",
+      "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.3.1.tgz",
+      "integrity": "sha512-duT4gPj7HxEYy+AR4bJ9MNwf8GMLpJd+sNRAK2PTx53FpCcaiXVft3ePZh3hO6PY8NFWZMxTC3ZAtxyztScEsw==",
       "license": "Apache-2.0",
       "dependencies": {
         "bluebird": "^3.7.2",
@@ -7494,9 +7590,9 @@
       }
     },
     "node_modules/appium-xcuitest-driver/node_modules/type-fest": {
-      "version": "4.35.0",
-      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.35.0.tgz",
-      "integrity": "sha512-2/AwEFQDFEy30iOLjrvHDIH7e4HEWH+f1Yl1bI5XMqzuoCUqwYCdxachgsgv0og/JdVZUhbfjcJAoHj5L1753A==",
+      "version": "4.37.0",
+      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.37.0.tgz",
+      "integrity": "sha512-S/5/0kFftkq27FPNye0XM1e2NsnoD/3FS+pBmbjmmtLT6I+i344KoOf7pvXreaFsDamWeaJX55nczA1m5PsBDg==",
       "license": "(MIT OR CC0-1.0)",
       "engines": {
         "node": ">=16"
@@ -7692,9 +7788,9 @@
       "license": "ISC"
     },
     "node_modules/appium-xcuitest-driver/node_modules/ws": {
-      "version": "8.18.0",
-      "resolved": "https://registry.npmjs.org/ws/-/ws-8.18.0.tgz",
-      "integrity": "sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==",
+      "version": "8.18.1",
+      "resolved": "https://registry.npmjs.org/ws/-/ws-8.18.1.tgz",
+      "integrity": "sha512-RKW2aJZMXeMxVpnZ6bck+RswznaxmzdULiBr6KY7XkTnW8uvt0iT9H5DkHUChXrc+uurzwa0rVI16n/Xzjdz1w==",
       "license": "MIT",
       "engines": {
         "node": ">=10.0.0"
@@ -7849,9 +7945,9 @@
       "integrity": "sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q=="
     },
     "node_modules/axios": {
-      "version": "1.7.9",
-      "resolved": "https://registry.npmjs.org/axios/-/axios-1.7.9.tgz",
-      "integrity": "sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==",
+      "version": "1.8.2",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-1.8.2.tgz",
+      "integrity": "sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==",
       "dependencies": {
         "follow-redirects": "^1.15.6",
         "form-data": "^4.0.0",
@@ -8038,12 +8134,12 @@
       }
     },
     "node_modules/call-bound": {
-      "version": "1.0.3",
-      "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.3.tgz",
-      "integrity": "sha512-YTd+6wGlNlPxSuri7Y6X8tY2dmm12UMH66RpKMhiX6rsk5wXXnYgbUcOt8kiS31/AjfoTOvCsE+w8nZQLQnzHA==",
+      "version": "1.0.4",
+      "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz",
+      "integrity": "sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==",
       "dependencies": {
-        "call-bind-apply-helpers": "^1.0.1",
-        "get-intrinsic": "^1.2.6"
+        "call-bind-apply-helpers": "^1.0.2",
+        "get-intrinsic": "^1.3.0"
       },
       "engines": {
         "node": ">= 0.4"
@@ -8616,11 +8712,11 @@
       }
     },
     "node_modules/foreground-child": {
-      "version": "3.3.0",
-      "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.0.tgz",
-      "integrity": "sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==",
+      "version": "3.3.1",
+      "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.1.tgz",
+      "integrity": "sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==",
       "dependencies": {
-        "cross-spawn": "^7.0.0",
+        "cross-spawn": "^7.0.6",
         "signal-exit": "^4.0.1"
       },
       "engines": {
@@ -8721,16 +8817,16 @@
       }
     },
     "node_modules/get-intrinsic": {
-      "version": "1.2.7",
-      "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.2.7.tgz",
-      "integrity": "sha512-VW6Pxhsrk0KAOqs3WEd0klDiF/+V7gQOpAvY1jVU/LHmaD/kQO4523aiJuikX/QAKYiW6x8Jh+RJej1almdtCA==",
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.3.0.tgz",
+      "integrity": "sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==",
       "dependencies": {
-        "call-bind-apply-helpers": "^1.0.1",
+        "call-bind-apply-helpers": "^1.0.2",
         "es-define-property": "^1.0.1",
         "es-errors": "^1.3.0",
-        "es-object-atoms": "^1.0.0",
+        "es-object-atoms": "^1.1.1",
         "function-bind": "^1.1.2",
-        "get-proto": "^1.0.0",
+        "get-proto": "^1.0.1",
         "gopd": "^1.2.0",
         "has-symbols": "^1.1.0",
         "hasown": "^2.0.2",
@@ -9006,9 +9102,9 @@
       }
     },
     "node_modules/io.appium.settings": {
-      "version": "5.12.24",
-      "resolved": "https://registry.npmjs.org/io.appium.settings/-/io.appium.settings-5.12.24.tgz",
-      "integrity": "sha512-WKo91Gir5thxNzVLC8PUqMj39fGrsW5StK6XztfGLHpMWy953jyh/TBZEePNBgp7cFM8wdC8p5MCetFJNdr0sA==",
+      "version": "5.14.4",
+      "resolved": "https://registry.npmjs.org/io.appium.settings/-/io.appium.settings-5.14.4.tgz",
+      "integrity": "sha512-6W+sGscwQUtF55ffbSI/1jSoycPD081hQs4bARE3ojGLlOQBPcYVfqUDXyubr0FViqyqk5my/rEHv4mTShOaSQ==",
       "dependencies": {
         "@appium/logger": "^1.3.0",
         "asyncbox": "^3.0.0",
@@ -9990,9 +10086,9 @@
       }
     },
     "node_modules/rpc-websockets": {
-      "version": "9.0.4",
-      "resolved": "https://registry.npmjs.org/rpc-websockets/-/rpc-websockets-9.0.4.tgz",
-      "integrity": "sha512-yWZWN0M+bivtoNLnaDbtny4XchdAIF5Q4g/ZsC5UC61Ckbp0QczwO8fg44rV3uYmY4WHd+EZQbn90W1d8ojzqQ==",
+      "version": "10.0.0",
+      "resolved": "https://registry.npmjs.org/rpc-websockets/-/rpc-websockets-10.0.0.tgz",
+      "integrity": "sha512-ci68pI2x0TZdrRbpFx8oiBosNUKR1a2Y9kADVwwhX6UUq+B1E9oqNXnxq20WvTwR7+3Dsow1qAtU8pPGoZE4sw==",
       "dependencies": {
         "@swc/helpers": "^0.5.11",
         "@types/uuid": "^8.3.4",
@@ -10556,9 +10652,9 @@
       }
     },
     "node_modules/teen_process": {
-      "version": "2.2.3",
-      "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.2.3.tgz",
-      "integrity": "sha512-8L540OalWH83qc6LHV5VMr0DjdP7KWUHQwTOImtWaG2ElW8BvLTh6M9871oGmmpOMb2BpOJQn2+09ZHWYsdTUA==",
+      "version": "2.3.1",
+      "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.3.1.tgz",
+      "integrity": "sha512-duT4gPj7HxEYy+AR4bJ9MNwf8GMLpJd+sNRAK2PTx53FpCcaiXVft3ePZh3hO6PY8NFWZMxTC3ZAtxyztScEsw==",
       "dependencies": {
         "bluebird": "^3.7.2",
         "lodash": "^4.17.21",
@@ -10605,9 +10701,9 @@
       "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="
     },
     "node_modules/type-fest": {
-      "version": "4.35.0",
-      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.35.0.tgz",
-      "integrity": "sha512-2/AwEFQDFEy30iOLjrvHDIH7e4HEWH+f1Yl1bI5XMqzuoCUqwYCdxachgsgv0og/JdVZUhbfjcJAoHj5L1753A==",
+      "version": "4.37.0",
+      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.37.0.tgz",
+      "integrity": "sha512-S/5/0kFftkq27FPNye0XM1e2NsnoD/3FS+pBmbjmmtLT6I+i344KoOf7pvXreaFsDamWeaJX55nczA1m5PsBDg==",
       "engines": {
         "node": ">=16"
       },
@@ -10628,9 +10724,9 @@
       }
     },
     "node_modules/typescript": {
-      "version": "5.5.4",
-      "resolved": "https://registry.npmjs.org/typescript/-/typescript-5.5.4.tgz",
-      "integrity": "sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==",
+      "version": "5.7.3",
+      "resolved": "https://registry.npmjs.org/typescript/-/typescript-5.7.3.tgz",
+      "integrity": "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==",
       "bin": {
         "tsc": "bin/tsc",
         "tsserver": "bin/tsserver"
@@ -10866,9 +10962,9 @@
       "integrity": "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ=="
     },
     "node_modules/ws": {
-      "version": "8.18.0",
-      "resolved": "https://registry.npmjs.org/ws/-/ws-8.18.0.tgz",
-      "integrity": "sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==",
+      "version": "8.18.1",
+      "resolved": "https://registry.npmjs.org/ws/-/ws-8.18.1.tgz",
+      "integrity": "sha512-RKW2aJZMXeMxVpnZ6bck+RswznaxmzdULiBr6KY7XkTnW8uvt0iT9H5DkHUChXrc+uurzwa0rVI16n/Xzjdz1w==",
       "engines": {
         "node": ">=10.0.0"
       },
@@ -11034,16 +11130,16 @@
   },
   "dependencies": {
     "@appium/base-driver": {
-      "version": "9.16.2",
-      "resolved": "https://registry.npmjs.org/@appium/base-driver/-/base-driver-9.16.2.tgz",
-      "integrity": "sha512-vuQf9XQKGAMl5d5pM63FOrnRJUSVjw6J5kPXApfnkTJovwyV9SViYptnCB/TcahjX2bHQ+fUka82MWzHKPzpHg==",
+      "version": "9.16.3",
+      "resolved": "https://registry.npmjs.org/@appium/base-driver/-/base-driver-9.16.3.tgz",
+      "integrity": "sha512-+KviEBWMlHoBh/Ezs4bF1uRFw3gBHivljy8yp2dKHvFt4ZZlJo6wxmfmU5fknob0TuRkViwcD2auL64AQLsGAw==",
       "requires": {
-        "@appium/support": "^6.0.6",
-        "@appium/types": "^0.25.1",
+        "@appium/support": "^6.0.7",
+        "@appium/types": "^0.25.2",
         "@colors/colors": "1.6.0",
         "async-lock": "1.4.1",
         "asyncbox": "3.0.0",
-        "axios": "1.7.9",
+        "axios": "1.8.2",
         "bluebird": "3.7.2",
         "body-parser": "1.20.3",
         "express": "4.21.2",
@@ -11057,7 +11153,7 @@
         "serve-favicon": "2.5.0",
         "source-map-support": "0.5.21",
         "spdy": "4.0.2",
-        "type-fest": "4.35.0",
+        "type-fest": "4.37.0",
         "validate.js": "0.13.1"
       }
     },
@@ -11082,16 +11178,16 @@
       }
     },
     "@appium/support": {
-      "version": "6.0.6",
-      "resolved": "https://registry.npmjs.org/@appium/support/-/support-6.0.6.tgz",
-      "integrity": "sha512-qgj1uxHF7Suqi8wdWFBrG12dhLMAthpX973L7JHutM2jneynoIUaKtSXdd6zg0ZG/9clfY0C/06pIQTQljj+Lg==",
+      "version": "6.0.7",
+      "resolved": "https://registry.npmjs.org/@appium/support/-/support-6.0.7.tgz",
+      "integrity": "sha512-3LYvWhquHzlxq2ojvuAmta2tPk68B6oKZ9lMv2lyI6q7mR7FE8hl96Wy+qk9JjGfqJHYRNrrf9rTWr0E//UtQg==",
       "requires": {
         "@appium/logger": "^1.6.1",
-        "@appium/tsconfig": "^0.3.4",
-        "@appium/types": "^0.25.1",
+        "@appium/tsconfig": "^0.3.5",
+        "@appium/types": "^0.25.2",
         "@colors/colors": "1.6.0",
         "archiver": "7.0.1",
-        "axios": "1.7.9",
+        "axios": "1.8.2",
         "base64-stream": "1.0.0",
         "bluebird": "3.7.2",
         "bplist-creator": "0.1.1",
@@ -11118,30 +11214,30 @@
         "shell-quote": "1.8.2",
         "source-map-support": "0.5.21",
         "supports-color": "8.1.1",
-        "teen_process": "2.2.3",
-        "type-fest": "4.35.0",
+        "teen_process": "2.3.1",
+        "type-fest": "4.37.0",
         "uuid": "11.1.0",
         "which": "4.0.0",
         "yauzl": "3.2.0"
       }
     },
     "@appium/tsconfig": {
-      "version": "0.3.4",
-      "resolved": "https://registry.npmjs.org/@appium/tsconfig/-/tsconfig-0.3.4.tgz",
-      "integrity": "sha512-tX719/ekarAWmJb+AaG6//8+3qQITshTgTZor0EbdEwA2KG3bGPwMIoCp10np6/qFr+sMZC0CbuKJruHSCDhhw==",
+      "version": "0.3.5",
+      "resolved": "https://registry.npmjs.org/@appium/tsconfig/-/tsconfig-0.3.5.tgz",
+      "integrity": "sha512-T8G5oe3is0Gn56PkeYjXracc0CS26L/obVuX7PHwEDcn1UKiJXFa2MYY73dRAWKJumAIIsJjssNUu6VttdWZWw==",
       "requires": {
-        "@tsconfig/node14": "14.1.2"
+        "@tsconfig/node14": "14.1.3"
       }
     },
     "@appium/types": {
-      "version": "0.25.1",
-      "resolved": "https://registry.npmjs.org/@appium/types/-/types-0.25.1.tgz",
-      "integrity": "sha512-2Lu5qwFNQa+iPw98XdB5/7tXKO7dugZHXfAsF050wgJkJJ4kDemVFJ4yr1YqM7DYmgqZnt+k0EfzshLODCHXTA==",
+      "version": "0.25.2",
+      "resolved": "https://registry.npmjs.org/@appium/types/-/types-0.25.2.tgz",
+      "integrity": "sha512-BQ/AaHJzFzJPjZp4GElq3CMT83LdaJwO4i+azdLNO3jZKyMoX4hF/LoiiS/cOyYOXpirxHjSHmHuNOeusiVNVQ==",
       "requires": {
         "@appium/logger": "^1.6.1",
         "@appium/schema": "^0.8.1",
-        "@appium/tsconfig": "^0.3.4",
-        "type-fest": "4.35.0"
+        "@appium/tsconfig": "^0.3.5",
+        "type-fest": "4.37.0"
       }
     },
     "@babel/code-frame": {
@@ -11209,14 +11305,14 @@
       }
     },
     "@tsconfig/node14": {
-      "version": "14.1.2",
-      "resolved": "https://registry.npmjs.org/@tsconfig/node14/-/node14-14.1.2.tgz",
-      "integrity": "sha512-1vncsbfCZ3TBLPxesRYz02Rn7SNJfbLoDVkcZ7F/ixOV6nwxwgdhD1mdPcc5YQ413qBJ8CvMxXMFfJ7oawjo7Q=="
+      "version": "14.1.3",
+      "resolved": "https://registry.npmjs.org/@tsconfig/node14/-/node14-14.1.3.tgz",
+      "integrity": "sha512-ZC9/Kq2c0+4l8sDx/z3YQyP7+OSMTQr/xxJaSFHLGhGL0t9bPjuX1Zwmg3C2VB5KWGgI8MXMRShXRJroy4utGA=="
     },
     "@types/node": {
-      "version": "22.13.5",
-      "resolved": "https://registry.npmjs.org/@types/node/-/node-22.13.5.tgz",
-      "integrity": "sha512-+lTU0PxZXn0Dr1NBtC7Y8cR21AJr87dLLU953CWA6pMxxv/UDc7jYAY90upcrie1nRcD6XNG5HOYEDtgW5TxAg==",
+      "version": "22.13.10",
+      "resolved": "https://registry.npmjs.org/@types/node/-/node-22.13.10.tgz",
+      "integrity": "sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw==",
       "requires": {
         "undici-types": "~6.20.0"
       }
@@ -11232,17 +11328,17 @@
       "integrity": "sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw=="
     },
     "@types/ws": {
-      "version": "8.5.14",
-      "resolved": "https://registry.npmjs.org/@types/ws/-/ws-8.5.14.tgz",
-      "integrity": "sha512-bd/YFLW+URhBzMXurx7lWByOu+xzU9+kb3RboOteXYDfW+tr+JZa99OyNmPINEGB/ahzKrEuc8rcv4gnpJmxTw==",
+      "version": "8.18.0",
+      "resolved": "https://registry.npmjs.org/@types/ws/-/ws-8.18.0.tgz",
+      "integrity": "sha512-8svvI3hMyvN0kKCJMvTJP/x6Y/EoQbepff882wL+Sn5QsXb3etnamgrJq4isrBxSJj5L2AuXcI0+bgkoAXGUJw==",
       "requires": {
         "@types/node": "*"
       }
     },
     "@xmldom/xmldom": {
-      "version": "0.9.7",
-      "resolved": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.9.7.tgz",
-      "integrity": "sha512-syvR8iIJjpTZ/stv7l89UAViwGFh6lbheeOaqSxkYx9YNmIVvPTRH+CT/fpykFtUx5N+8eSMDRvggF9J8GEPzQ=="
+      "version": "0.9.8",
+      "resolved": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.9.8.tgz",
+      "integrity": "sha512-p96FSY54r+WJ50FIOsCOjyj/wavs8921hG5+kVMmZgKcvIKxMXHTrjNJvRgWa/zuX3B6t2lijLNFaOyuxUH+2A=="
     },
     "abort-controller": {
       "version": "3.0.0",
@@ -11292,9 +11388,9 @@
       }
     },
     "appium-android-driver": {
-      "version": "10.1.2",
-      "resolved": "https://registry.npmjs.org/appium-android-driver/-/appium-android-driver-10.1.2.tgz",
-      "integrity": "sha512-Le1aRhWRjghZazeTfSJORIb8OUJtmaGHZpN6bUqIXrZ5x1IYuHWw8azObfrgB+7Xs3mQvP1RvdRrVTBth8L6zw==",
+      "version": "10.2.1",
+      "resolved": "https://registry.npmjs.org/appium-android-driver/-/appium-android-driver-10.2.1.tgz",
+      "integrity": "sha512-zRi8tSTvaqh8r14eD8doC/NlGQNdcwXEbMwWhInBGonhbn7HPBgtp9iSFXfStfB0PTJsJnyItuTJDC3iXwoDxw==",
       "requires": {
         "@appium/support": "^6.0.0",
         "@colors/colors": "^1.6.0",
@@ -11303,7 +11399,7 @@
         "asyncbox": "^3.0.0",
         "axios": "^1.x",
         "bluebird": "^3.4.7",
-        "io.appium.settings": "^5.12.24",
+        "io.appium.settings": "^5.14.3",
         "lodash": "^4.17.4",
         "lru-cache": "^10.0.1",
         "moment": "^2.24.0",
@@ -11317,9 +11413,9 @@
       }
     },
     "appium-chromedriver": {
-      "version": "7.0.6",
-      "resolved": "https://registry.npmjs.org/appium-chromedriver/-/appium-chromedriver-7.0.6.tgz",
-      "integrity": "sha512-+ycgTuznlRbnvRr8uJBG7adhBcG7sov9FYaPxdg119EGsazaIc2MT8d/2MPBOh8Y9ms8SOf8RL26kXMsImIEpA==",
+      "version": "7.0.9",
+      "resolved": "https://registry.npmjs.org/appium-chromedriver/-/appium-chromedriver-7.0.9.tgz",
+      "integrity": "sha512-7T0HTszqwz4jQbtZpZ669BQYgtLcEucyTIEmHnv72pvmshrwNr/KELouRkY7VcazzW88w+bpcYh3/3bzs9Si2w==",
       "requires": {
         "@appium/base-driver": "^9.1.0",
         "@appium/support": "^6.0.0",
@@ -11354,18 +11450,18 @@
       }
     },
     "appium-uiautomator2-driver": {
-      "version": "4.0.3",
-      "resolved": "https://registry.npmjs.org/appium-uiautomator2-driver/-/appium-uiautomator2-driver-4.0.3.tgz",
-      "integrity": "sha512-msvWCmPAOkhCIastuIp65tLccRIQEWdbb5fahlf+FDqnvn4rfZRWekdk6fuBTuC6WS0NXf2fN+EL5iR9d+siCg==",
+      "version": "4.1.1",
+      "resolved": "https://registry.npmjs.org/appium-uiautomator2-driver/-/appium-uiautomator2-driver-4.1.1.tgz",
+      "integrity": "sha512-KoFyivgRlbL+BhPdHVBvJE6dpvScruVEcYdhdzDf/CUsPyb5Ugjd8n3oCEkAHn9Cou+dxnZWPE4wJQz+AVpIiw==",
       "requires": {
         "appium-adb": "^12.12.0",
-        "appium-android-driver": "^10.1.2",
+        "appium-android-driver": "^10.2.1",
         "appium-uiautomator2-server": "^7.2.0",
         "asyncbox": "^3.0.0",
         "axios": "^1.6.5",
         "bluebird": "^3.5.1",
         "css-selector-parser": "^3.0.0",
-        "io.appium.settings": "^5.12.22",
+        "io.appium.settings": "^5.14.3",
         "lodash": "^4.17.4",
         "portscanner": "^2.2.0",
         "source-map-support": "^0.x",
@@ -11399,6 +11495,23 @@
             "spdy": "4.0.2",
             "type-fest": "4.35.0",
             "validate.js": "0.13.1"
+          },
+          "dependencies": {
+            "axios": {
+              "version": "1.7.9",
+              "resolved": "https://registry.npmjs.org/axios/-/axios-1.7.9.tgz",
+              "integrity": "sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==",
+              "requires": {
+                "follow-redirects": "^1.15.6",
+                "form-data": "^4.0.0",
+                "proxy-from-env": "^1.1.0"
+              }
+            },
+            "type-fest": {
+              "version": "4.35.0",
+              "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.35.0.tgz",
+              "integrity": "sha512-2/AwEFQDFEy30iOLjrvHDIH7e4HEWH+f1Yl1bI5XMqzuoCUqwYCdxachgsgv0og/JdVZUhbfjcJAoHj5L1753A=="
+            }
           }
         },
         "@appium/logger": {
@@ -11463,6 +11576,34 @@
             "uuid": "11.1.0",
             "which": "4.0.0",
             "yauzl": "3.2.0"
+          },
+          "dependencies": {
+            "axios": {
+              "version": "1.7.9",
+              "resolved": "https://registry.npmjs.org/axios/-/axios-1.7.9.tgz",
+              "integrity": "sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==",
+              "requires": {
+                "follow-redirects": "^1.15.6",
+                "form-data": "^4.0.0",
+                "proxy-from-env": "^1.1.0"
+              }
+            },
+            "teen_process": {
+              "version": "2.2.3",
+              "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.2.3.tgz",
+              "integrity": "sha512-8L540OalWH83qc6LHV5VMr0DjdP7KWUHQwTOImtWaG2ElW8BvLTh6M9871oGmmpOMb2BpOJQn2+09ZHWYsdTUA==",
+              "requires": {
+                "bluebird": "^3.7.2",
+                "lodash": "^4.17.21",
+                "shell-quote": "^1.8.1",
+                "source-map-support": "^0.x"
+              }
+            },
+            "type-fest": {
+              "version": "4.35.0",
+              "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.35.0.tgz",
+              "integrity": "sha512-2/AwEFQDFEy30iOLjrvHDIH7e4HEWH+f1Yl1bI5XMqzuoCUqwYCdxachgsgv0og/JdVZUhbfjcJAoHj5L1753A=="
+            }
           }
         },
         "@appium/tsconfig": {
@@ -11482,6 +11623,13 @@
             "@appium/schema": "^0.8.1",
             "@appium/tsconfig": "^0.3.4",
             "type-fest": "4.35.0"
+          },
+          "dependencies": {
+            "type-fest": {
+              "version": "4.35.0",
+              "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.35.0.tgz",
+              "integrity": "sha512-2/AwEFQDFEy30iOLjrvHDIH7e4HEWH+f1Yl1bI5XMqzuoCUqwYCdxachgsgv0og/JdVZUhbfjcJAoHj5L1753A=="
+            }
           }
         },
         "@babel/code-frame": {
@@ -11551,9 +11699,9 @@
           "integrity": "sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA=="
         },
         "@xmldom/xmldom": {
-          "version": "0.9.7",
-          "resolved": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.9.7.tgz",
-          "integrity": "sha512-syvR8iIJjpTZ/stv7l89UAViwGFh6lbheeOaqSxkYx9YNmIVvPTRH+CT/fpykFtUx5N+8eSMDRvggF9J8GEPzQ=="
+          "version": "0.9.8",
+          "resolved": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.9.8.tgz",
+          "integrity": "sha512-p96FSY54r+WJ50FIOsCOjyj/wavs8921hG5+kVMmZgKcvIKxMXHTrjNJvRgWa/zuX3B6t2lijLNFaOyuxUH+2A=="
         },
         "abort-controller": {
           "version": "3.0.0",
@@ -11603,9 +11751,9 @@
           }
         },
         "appium-android-driver": {
-          "version": "10.1.2",
-          "resolved": "https://registry.npmjs.org/appium-android-driver/-/appium-android-driver-10.1.2.tgz",
-          "integrity": "sha512-Le1aRhWRjghZazeTfSJORIb8OUJtmaGHZpN6bUqIXrZ5x1IYuHWw8azObfrgB+7Xs3mQvP1RvdRrVTBth8L6zw==",
+          "version": "10.2.1",
+          "resolved": "https://registry.npmjs.org/appium-android-driver/-/appium-android-driver-10.2.1.tgz",
+          "integrity": "sha512-zRi8tSTvaqh8r14eD8doC/NlGQNdcwXEbMwWhInBGonhbn7HPBgtp9iSFXfStfB0PTJsJnyItuTJDC3iXwoDxw==",
           "requires": {
             "@appium/support": "^6.0.0",
             "@colors/colors": "^1.6.0",
@@ -11614,7 +11762,7 @@
             "asyncbox": "^3.0.0",
             "axios": "^1.x",
             "bluebird": "^3.4.7",
-            "io.appium.settings": "^5.12.24",
+            "io.appium.settings": "^5.14.3",
             "lodash": "^4.17.4",
             "lru-cache": "^10.0.1",
             "moment": "^2.24.0",
@@ -11628,9 +11776,9 @@
           }
         },
         "appium-chromedriver": {
-          "version": "7.0.6",
-          "resolved": "https://registry.npmjs.org/appium-chromedriver/-/appium-chromedriver-7.0.6.tgz",
-          "integrity": "sha512-+ycgTuznlRbnvRr8uJBG7adhBcG7sov9FYaPxdg119EGsazaIc2MT8d/2MPBOh8Y9ms8SOf8RL26kXMsImIEpA==",
+          "version": "7.0.8",
+          "resolved": "https://registry.npmjs.org/appium-chromedriver/-/appium-chromedriver-7.0.8.tgz",
+          "integrity": "sha512-X2MfK/xMVoUHFuQHSTuJaEF/ZGmP0tGc/5P6AzCYWdmOUmloxEXTeq+jkodh6/5MAanOcnnI3bhBpqGvwCjqjQ==",
           "requires": {
             "@appium/base-driver": "^9.1.0",
             "@appium/support": "^6.0.0",
@@ -11648,9 +11796,9 @@
           }
         },
         "appium-uiautomator2-server": {
-          "version": "7.2.3",
-          "resolved": "https://registry.npmjs.org/appium-uiautomator2-server/-/appium-uiautomator2-server-7.2.3.tgz",
-          "integrity": "sha512-PgYxwqLKfMRFIN2bqmpmH7U4wZEHDpd8WUyexfVF9cParSSIwhE3coXRfZLsUWgvrEBSXuS+A+6NIY7Ra7dlUA=="
+          "version": "7.2.5",
+          "resolved": "https://registry.npmjs.org/appium-uiautomator2-server/-/appium-uiautomator2-server-7.2.5.tgz",
+          "integrity": "sha512-Q4h7U4QOYfWL5IdYW4WNUveg7j/wjmJLFtfahgiZmKcAapCLqmwu9WFJmvGsThlsn3nj6yt7QVhOh/wa4/01Bg=="
         },
         "archiver": {
           "version": "7.0.1",
@@ -11711,9 +11859,9 @@
           "integrity": "sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q=="
         },
         "axios": {
-          "version": "1.7.9",
-          "resolved": "https://registry.npmjs.org/axios/-/axios-1.7.9.tgz",
-          "integrity": "sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==",
+          "version": "1.8.2",
+          "resolved": "https://registry.npmjs.org/axios/-/axios-1.8.2.tgz",
+          "integrity": "sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==",
           "requires": {
             "follow-redirects": "^1.15.6",
             "form-data": "^4.0.0",
@@ -11855,12 +12003,12 @@
           }
         },
         "call-bound": {
-          "version": "1.0.3",
-          "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.3.tgz",
-          "integrity": "sha512-YTd+6wGlNlPxSuri7Y6X8tY2dmm12UMH66RpKMhiX6rsk5wXXnYgbUcOt8kiS31/AjfoTOvCsE+w8nZQLQnzHA==",
+          "version": "1.0.4",
+          "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz",
+          "integrity": "sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==",
           "requires": {
-            "call-bind-apply-helpers": "^1.0.1",
-            "get-intrinsic": "^1.2.6"
+            "call-bind-apply-helpers": "^1.0.2",
+            "get-intrinsic": "^1.3.0"
           }
         },
         "chalk": {
@@ -12236,11 +12384,11 @@
           "integrity": "sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ=="
         },
         "foreground-child": {
-          "version": "3.3.0",
-          "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.0.tgz",
-          "integrity": "sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==",
+          "version": "3.3.1",
+          "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.1.tgz",
+          "integrity": "sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==",
           "requires": {
-            "cross-spawn": "^7.0.0",
+            "cross-spawn": "^7.0.6",
             "signal-exit": "^4.0.1"
           },
           "dependencies": {
@@ -12309,16 +12457,16 @@
           "integrity": "sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA=="
         },
         "get-intrinsic": {
-          "version": "1.2.7",
-          "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.2.7.tgz",
-          "integrity": "sha512-VW6Pxhsrk0KAOqs3WEd0klDiF/+V7gQOpAvY1jVU/LHmaD/kQO4523aiJuikX/QAKYiW6x8Jh+RJej1almdtCA==",
+          "version": "1.3.0",
+          "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.3.0.tgz",
+          "integrity": "sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==",
           "requires": {
-            "call-bind-apply-helpers": "^1.0.1",
+            "call-bind-apply-helpers": "^1.0.2",
             "es-define-property": "^1.0.1",
             "es-errors": "^1.3.0",
-            "es-object-atoms": "^1.0.0",
+            "es-object-atoms": "^1.1.1",
             "function-bind": "^1.1.2",
-            "get-proto": "^1.0.0",
+            "get-proto": "^1.0.1",
             "gopd": "^1.2.0",
             "has-symbols": "^1.1.0",
             "hasown": "^2.0.2",
@@ -12523,9 +12671,9 @@
           "integrity": "sha512-+N0ngpO3e7cRUWOJAS7qw0IZIVc6XPrW4MlFBdD066F2L4k1L6ker3hLqSq7iXxU5tgS4WGkIUElWn5vogAEnw=="
         },
         "io.appium.settings": {
-          "version": "5.12.24",
-          "resolved": "https://registry.npmjs.org/io.appium.settings/-/io.appium.settings-5.12.24.tgz",
-          "integrity": "sha512-WKo91Gir5thxNzVLC8PUqMj39fGrsW5StK6XztfGLHpMWy953jyh/TBZEePNBgp7cFM8wdC8p5MCetFJNdr0sA==",
+          "version": "5.14.4",
+          "resolved": "https://registry.npmjs.org/io.appium.settings/-/io.appium.settings-5.14.4.tgz",
+          "integrity": "sha512-6W+sGscwQUtF55ffbSI/1jSoycPD081hQs4bARE3ojGLlOQBPcYVfqUDXyubr0FViqyqk5my/rEHv4mTShOaSQ==",
           "requires": {
             "@appium/logger": "^1.3.0",
             "asyncbox": "^3.0.0",
@@ -13621,9 +13769,9 @@
           }
         },
         "teen_process": {
-          "version": "2.2.3",
-          "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.2.3.tgz",
-          "integrity": "sha512-8L540OalWH83qc6LHV5VMr0DjdP7KWUHQwTOImtWaG2ElW8BvLTh6M9871oGmmpOMb2BpOJQn2+09ZHWYsdTUA==",
+          "version": "2.3.1",
+          "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.3.1.tgz",
+          "integrity": "sha512-duT4gPj7HxEYy+AR4bJ9MNwf8GMLpJd+sNRAK2PTx53FpCcaiXVft3ePZh3hO6PY8NFWZMxTC3ZAtxyztScEsw==",
           "requires": {
             "bluebird": "^3.7.2",
             "lodash": "^4.17.21",
@@ -13658,9 +13806,9 @@
           }
         },
         "type-fest": {
-          "version": "4.35.0",
-          "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.35.0.tgz",
-          "integrity": "sha512-2/AwEFQDFEy30iOLjrvHDIH7e4HEWH+f1Yl1bI5XMqzuoCUqwYCdxachgsgv0og/JdVZUhbfjcJAoHj5L1753A=="
+          "version": "4.37.0",
+          "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.37.0.tgz",
+          "integrity": "sha512-S/5/0kFftkq27FPNye0XM1e2NsnoD/3FS+pBmbjmmtLT6I+i344KoOf7pvXreaFsDamWeaJX55nczA1m5PsBDg=="
         },
         "type-is": {
           "version": "1.6.18",
@@ -13832,16 +13980,16 @@
       }
     },
     "appium-xcuitest-driver": {
-      "version": "8.3.2",
-      "resolved": "https://registry.npmjs.org/appium-xcuitest-driver/-/appium-xcuitest-driver-8.3.2.tgz",
-      "integrity": "sha512-4ZuXQKbz3XFe6D8aXm1QByrP8D5QrB8KglCgML9EP3/9yFQYjj0R8xkJIcd2GrZXrx6V/TbSEPcpSXy5hQA5yA==",
+      "version": "8.4.1",
+      "resolved": "https://registry.npmjs.org/appium-xcuitest-driver/-/appium-xcuitest-driver-8.4.1.tgz",
+      "integrity": "sha512-n9stgEN+wNaEVA8FcBWSBi5jNJhuLo4+Ulo/jw5Y/otpsuO0cm2aFSNzo0LrFlD3wDjLaiXsdeDn91hUG3Yarw==",
       "requires": {
         "@colors/colors": "^1.6.0",
         "appium-idb": "^1.6.13",
         "appium-ios-device": "^2.8.0",
         "appium-ios-simulator": "^6.2.0",
-        "appium-remote-debugger": "^12.1.1",
-        "appium-webdriveragent": "^9.0.4",
+        "appium-remote-debugger": "^12.2.0",
+        "appium-webdriveragent": "^9.1.0",
         "appium-xcode": "^5.1.4",
         "async-lock": "^1.4.0",
         "asyncbox": "^3.0.0",
@@ -13861,16 +14009,16 @@
       },
       "dependencies": {
         "@appium/base-driver": {
-          "version": "9.16.2",
-          "resolved": "https://registry.npmjs.org/@appium/base-driver/-/base-driver-9.16.2.tgz",
-          "integrity": "sha512-vuQf9XQKGAMl5d5pM63FOrnRJUSVjw6J5kPXApfnkTJovwyV9SViYptnCB/TcahjX2bHQ+fUka82MWzHKPzpHg==",
+          "version": "9.16.3",
+          "resolved": "https://registry.npmjs.org/@appium/base-driver/-/base-driver-9.16.3.tgz",
+          "integrity": "sha512-+KviEBWMlHoBh/Ezs4bF1uRFw3gBHivljy8yp2dKHvFt4ZZlJo6wxmfmU5fknob0TuRkViwcD2auL64AQLsGAw==",
           "requires": {
-            "@appium/support": "^6.0.6",
-            "@appium/types": "^0.25.1",
+            "@appium/support": "^6.0.7",
+            "@appium/types": "^0.25.2",
             "@colors/colors": "1.6.0",
             "async-lock": "1.4.1",
             "asyncbox": "3.0.0",
-            "axios": "1.7.9",
+            "axios": "1.8.2",
             "bluebird": "3.7.2",
             "body-parser": "1.20.3",
             "express": "4.21.2",
@@ -13884,8 +14032,20 @@
             "serve-favicon": "2.5.0",
             "source-map-support": "0.5.21",
             "spdy": "4.0.2",
-            "type-fest": "4.35.0",
+            "type-fest": "4.37.0",
             "validate.js": "0.13.1"
+          },
+          "dependencies": {
+            "axios": {
+              "version": "1.8.2",
+              "resolved": "https://registry.npmjs.org/axios/-/axios-1.8.2.tgz",
+              "integrity": "sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==",
+              "requires": {
+                "follow-redirects": "^1.15.6",
+                "form-data": "^4.0.0",
+                "proxy-from-env": "^1.1.0"
+              }
+            }
           }
         },
         "@appium/logger": {
@@ -13918,16 +14078,16 @@
           }
         },
         "@appium/support": {
-          "version": "6.0.6",
-          "resolved": "https://registry.npmjs.org/@appium/support/-/support-6.0.6.tgz",
-          "integrity": "sha512-qgj1uxHF7Suqi8wdWFBrG12dhLMAthpX973L7JHutM2jneynoIUaKtSXdd6zg0ZG/9clfY0C/06pIQTQljj+Lg==",
+          "version": "6.0.7",
+          "resolved": "https://registry.npmjs.org/@appium/support/-/support-6.0.7.tgz",
+          "integrity": "sha512-3LYvWhquHzlxq2ojvuAmta2tPk68B6oKZ9lMv2lyI6q7mR7FE8hl96Wy+qk9JjGfqJHYRNrrf9rTWr0E//UtQg==",
           "requires": {
             "@appium/logger": "^1.6.1",
-            "@appium/tsconfig": "^0.3.4",
-            "@appium/types": "^0.25.1",
+            "@appium/tsconfig": "^0.3.5",
+            "@appium/types": "^0.25.2",
             "@colors/colors": "1.6.0",
             "archiver": "7.0.1",
-            "axios": "1.7.9",
+            "axios": "1.8.2",
             "base64-stream": "1.0.0",
             "bluebird": "3.7.2",
             "bplist-creator": "0.1.1",
@@ -13954,30 +14114,42 @@
             "shell-quote": "1.8.2",
             "source-map-support": "0.5.21",
             "supports-color": "8.1.1",
-            "teen_process": "2.2.3",
-            "type-fest": "4.35.0",
+            "teen_process": "2.3.1",
+            "type-fest": "4.37.0",
             "uuid": "11.1.0",
             "which": "4.0.0",
             "yauzl": "3.2.0"
+          },
+          "dependencies": {
+            "axios": {
+              "version": "1.8.2",
+              "resolved": "https://registry.npmjs.org/axios/-/axios-1.8.2.tgz",
+              "integrity": "sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==",
+              "requires": {
+                "follow-redirects": "^1.15.6",
+                "form-data": "^4.0.0",
+                "proxy-from-env": "^1.1.0"
+              }
+            }
           }
         },
         "@appium/tsconfig": {
-          "version": "0.3.4",
-          "resolved": "https://registry.npmjs.org/@appium/tsconfig/-/tsconfig-0.3.4.tgz",
-          "integrity": "sha512-tX719/ekarAWmJb+AaG6//8+3qQITshTgTZor0EbdEwA2KG3bGPwMIoCp10np6/qFr+sMZC0CbuKJruHSCDhhw==",
+          "version": "0.3.5",
+          "resolved": "https://registry.npmjs.org/@appium/tsconfig/-/tsconfig-0.3.5.tgz",
+          "integrity": "sha512-T8G5oe3is0Gn56PkeYjXracc0CS26L/obVuX7PHwEDcn1UKiJXFa2MYY73dRAWKJumAIIsJjssNUu6VttdWZWw==",
           "requires": {
-            "@tsconfig/node14": "14.1.2"
+            "@tsconfig/node14": "14.1.3"
           }
         },
         "@appium/types": {
-          "version": "0.25.1",
-          "resolved": "https://registry.npmjs.org/@appium/types/-/types-0.25.1.tgz",
-          "integrity": "sha512-2Lu5qwFNQa+iPw98XdB5/7tXKO7dugZHXfAsF050wgJkJJ4kDemVFJ4yr1YqM7DYmgqZnt+k0EfzshLODCHXTA==",
+          "version": "0.25.2",
+          "resolved": "https://registry.npmjs.org/@appium/types/-/types-0.25.2.tgz",
+          "integrity": "sha512-BQ/AaHJzFzJPjZp4GElq3CMT83LdaJwO4i+azdLNO3jZKyMoX4hF/LoiiS/cOyYOXpirxHjSHmHuNOeusiVNVQ==",
           "requires": {
             "@appium/logger": "^1.6.1",
             "@appium/schema": "^0.8.1",
-            "@appium/tsconfig": "^0.3.4",
-            "type-fest": "4.35.0"
+            "@appium/tsconfig": "^0.3.5",
+            "type-fest": "4.37.0"
           }
         },
         "@babel/code-frame": {
@@ -14037,19 +14209,19 @@
           "optional": true
         },
         "@tsconfig/node14": {
-          "version": "14.1.2",
-          "resolved": "https://registry.npmjs.org/@tsconfig/node14/-/node14-14.1.2.tgz",
-          "integrity": "sha512-1vncsbfCZ3TBLPxesRYz02Rn7SNJfbLoDVkcZ7F/ixOV6nwxwgdhD1mdPcc5YQ413qBJ8CvMxXMFfJ7oawjo7Q=="
+          "version": "14.1.3",
+          "resolved": "https://registry.npmjs.org/@tsconfig/node14/-/node14-14.1.3.tgz",
+          "integrity": "sha512-ZC9/Kq2c0+4l8sDx/z3YQyP7+OSMTQr/xxJaSFHLGhGL0t9bPjuX1Zwmg3C2VB5KWGgI8MXMRShXRJroy4utGA=="
         },
         "@types/lodash": {
-          "version": "4.17.15",
-          "resolved": "https://registry.npmjs.org/@types/lodash/-/lodash-4.17.15.tgz",
-          "integrity": "sha512-w/P33JFeySuhN6JLkysYUK2gEmy9kHHFN7E8ro0tkfmlDOgxBDzWEZ/J8cWA+fHqFevpswDTFZnDx+R9lbL6xw=="
+          "version": "4.17.16",
+          "resolved": "https://registry.npmjs.org/@types/lodash/-/lodash-4.17.16.tgz",
+          "integrity": "sha512-HX7Em5NYQAXKW+1T+FiuG27NGwzJfCX3s1GjOa7ujxZa52kjJLOr4FUxT+giF6Tgxv1e+/czV/iTtBw27WTU9g=="
         },
         "@types/node": {
-          "version": "22.13.4",
-          "resolved": "https://registry.npmjs.org/@types/node/-/node-22.13.4.tgz",
-          "integrity": "sha512-ywP2X0DYtX3y08eFVx5fNIw7/uIv8hYUKgXoK8oayJlLnKcRfEYCxWMVE1XagUdVtCJlZT1AU4LXEABW+L1Peg==",
+          "version": "22.13.10",
+          "resolved": "https://registry.npmjs.org/@types/node/-/node-22.13.10.tgz",
+          "integrity": "sha512-I6LPUvlRH+O6VRUqYOcMudhaIdUVWfsjnZavnsraHvpBwaEyMN29ry+0UVJhImYL16xsscu0aske3yA+uPOWfw==",
           "requires": {
             "undici-types": "~6.20.0"
           }
@@ -14068,9 +14240,9 @@
           }
         },
         "@xmldom/xmldom": {
-          "version": "0.9.7",
-          "resolved": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.9.7.tgz",
-          "integrity": "sha512-syvR8iIJjpTZ/stv7l89UAViwGFh6lbheeOaqSxkYx9YNmIVvPTRH+CT/fpykFtUx5N+8eSMDRvggF9J8GEPzQ=="
+          "version": "0.9.8",
+          "resolved": "https://registry.npmjs.org/@xmldom/xmldom/-/xmldom-0.9.8.tgz",
+          "integrity": "sha512-p96FSY54r+WJ50FIOsCOjyj/wavs8921hG5+kVMmZgKcvIKxMXHTrjNJvRgWa/zuX3B6t2lijLNFaOyuxUH+2A=="
         },
         "abort-controller": {
           "version": "3.0.0",
@@ -14151,9 +14323,9 @@
           }
         },
         "appium-remote-debugger": {
-          "version": "12.1.5",
-          "resolved": "https://registry.npmjs.org/appium-remote-debugger/-/appium-remote-debugger-12.1.5.tgz",
-          "integrity": "sha512-LUcaNRHZjCMVMxn8APemZoHygMECDyvGbMul9R1IxJTTHiFhKsWTaNBD9AiPsZFO4OSXv4R4oRP0sVM8Wn81YA==",
+          "version": "12.2.0",
+          "resolved": "https://registry.npmjs.org/appium-remote-debugger/-/appium-remote-debugger-12.2.0.tgz",
+          "integrity": "sha512-j1l3c3JgSS7tYR4fmRo76zTHuI9mvHSqGzMIwp6EkTpI7YLuTgKcpI0h6pPGxMGV9/YzcREv+0yvHPXvh+/Jgw==",
           "requires": {
             "@appium/base-driver": "^9.0.0",
             "@appium/support": "^6.0.0",
@@ -14167,9 +14339,9 @@
           }
         },
         "appium-webdriveragent": {
-          "version": "9.0.4",
-          "resolved": "https://registry.npmjs.org/appium-webdriveragent/-/appium-webdriveragent-9.0.4.tgz",
-          "integrity": "sha512-V9du7DGa+p5GIeurxgm2Yx5KY1DLxTbmfkmRQuvW2c+6J1JYPmhOVKkMhpJMXQSIo+j0Pf6MaYNGe1bbOkoLrw==",
+          "version": "9.1.0",
+          "resolved": "https://registry.npmjs.org/appium-webdriveragent/-/appium-webdriveragent-9.1.0.tgz",
+          "integrity": "sha512-+RExPxu8QNs8uUTWGbzh5kVmkJZQ2NQP6BGoGDIrDWZoNgENYIxRAnBzTv3I0Ugem6v9XRlskpY8O+IfyHg54w==",
           "requires": {
             "@appium/base-driver": "^9.0.0",
             "@appium/strongbox": "^0.x",
@@ -14261,9 +14433,9 @@
           "integrity": "sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q=="
         },
         "axios": {
-          "version": "1.7.9",
-          "resolved": "https://registry.npmjs.org/axios/-/axios-1.7.9.tgz",
-          "integrity": "sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==",
+          "version": "1.8.3",
+          "resolved": "https://registry.npmjs.org/axios/-/axios-1.8.3.tgz",
+          "integrity": "sha512-iP4DebzoNlP/YN2dpwCgb8zoCmhtkajzS48JvwmkSkXvPI3DHc7m+XYL5tGnSlJtR6nImXZmdCuN5aP8dh1d8A==",
           "requires": {
             "follow-redirects": "^1.15.6",
             "form-data": "^4.0.0",
@@ -14405,12 +14577,12 @@
           }
         },
         "call-bound": {
-          "version": "1.0.3",
-          "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.3.tgz",
-          "integrity": "sha512-YTd+6wGlNlPxSuri7Y6X8tY2dmm12UMH66RpKMhiX6rsk5wXXnYgbUcOt8kiS31/AjfoTOvCsE+w8nZQLQnzHA==",
+          "version": "1.0.4",
+          "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz",
+          "integrity": "sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==",
           "requires": {
-            "call-bind-apply-helpers": "^1.0.1",
-            "get-intrinsic": "^1.2.6"
+            "call-bind-apply-helpers": "^1.0.2",
+            "get-intrinsic": "^1.3.0"
           }
         },
         "chalk": {
@@ -14786,11 +14958,11 @@
           "integrity": "sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ=="
         },
         "foreground-child": {
-          "version": "3.3.0",
-          "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.0.tgz",
-          "integrity": "sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==",
+          "version": "3.3.1",
+          "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.1.tgz",
+          "integrity": "sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==",
           "requires": {
-            "cross-spawn": "^7.0.0",
+            "cross-spawn": "^7.0.6",
             "signal-exit": "^4.0.1"
           },
           "dependencies": {
@@ -14859,16 +15031,16 @@
           "integrity": "sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA=="
         },
         "get-intrinsic": {
-          "version": "1.2.7",
-          "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.2.7.tgz",
-          "integrity": "sha512-VW6Pxhsrk0KAOqs3WEd0klDiF/+V7gQOpAvY1jVU/LHmaD/kQO4523aiJuikX/QAKYiW6x8Jh+RJej1almdtCA==",
+          "version": "1.3.0",
+          "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.3.0.tgz",
+          "integrity": "sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==",
           "requires": {
-            "call-bind-apply-helpers": "^1.0.1",
+            "call-bind-apply-helpers": "^1.0.2",
             "es-define-property": "^1.0.1",
             "es-errors": "^1.3.0",
-            "es-object-atoms": "^1.0.0",
+            "es-object-atoms": "^1.1.1",
             "function-bind": "^1.1.2",
-            "get-proto": "^1.0.0",
+            "get-proto": "^1.0.1",
             "gopd": "^1.2.0",
             "has-symbols": "^1.1.0",
             "hasown": "^2.0.2",
@@ -16197,9 +16369,9 @@
           }
         },
         "teen_process": {
-          "version": "2.2.3",
-          "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.2.3.tgz",
-          "integrity": "sha512-8L540OalWH83qc6LHV5VMr0DjdP7KWUHQwTOImtWaG2ElW8BvLTh6M9871oGmmpOMb2BpOJQn2+09ZHWYsdTUA==",
+          "version": "2.3.1",
+          "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.3.1.tgz",
+          "integrity": "sha512-duT4gPj7HxEYy+AR4bJ9MNwf8GMLpJd+sNRAK2PTx53FpCcaiXVft3ePZh3hO6PY8NFWZMxTC3ZAtxyztScEsw==",
           "requires": {
             "bluebird": "^3.7.2",
             "lodash": "^4.17.21",
@@ -16234,9 +16406,9 @@
           }
         },
         "type-fest": {
-          "version": "4.35.0",
-          "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.35.0.tgz",
-          "integrity": "sha512-2/AwEFQDFEy30iOLjrvHDIH7e4HEWH+f1Yl1bI5XMqzuoCUqwYCdxachgsgv0og/JdVZUhbfjcJAoHj5L1753A=="
+          "version": "4.37.0",
+          "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.37.0.tgz",
+          "integrity": "sha512-S/5/0kFftkq27FPNye0XM1e2NsnoD/3FS+pBmbjmmtLT6I+i344KoOf7pvXreaFsDamWeaJX55nczA1m5PsBDg=="
         },
         "type-is": {
           "version": "1.6.18",
@@ -16364,9 +16536,9 @@
           "integrity": "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ=="
         },
         "ws": {
-          "version": "8.18.0",
-          "resolved": "https://registry.npmjs.org/ws/-/ws-8.18.0.tgz",
-          "integrity": "sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==",
+          "version": "8.18.1",
+          "resolved": "https://registry.npmjs.org/ws/-/ws-8.18.1.tgz",
+          "integrity": "sha512-RKW2aJZMXeMxVpnZ6bck+RswznaxmzdULiBr6KY7XkTnW8uvt0iT9H5DkHUChXrc+uurzwa0rVI16n/Xzjdz1w==",
           "requires": {}
         },
         "xmlbuilder": {
@@ -16476,9 +16648,9 @@
       "integrity": "sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q=="
     },
     "axios": {
-      "version": "1.7.9",
-      "resolved": "https://registry.npmjs.org/axios/-/axios-1.7.9.tgz",
-      "integrity": "sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==",
+      "version": "1.8.2",
+      "resolved": "https://registry.npmjs.org/axios/-/axios-1.8.2.tgz",
+      "integrity": "sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==",
       "requires": {
         "follow-redirects": "^1.15.6",
         "form-data": "^4.0.0",
@@ -16629,12 +16801,12 @@
       }
     },
     "call-bound": {
-      "version": "1.0.3",
-      "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.3.tgz",
-      "integrity": "sha512-YTd+6wGlNlPxSuri7Y6X8tY2dmm12UMH66RpKMhiX6rsk5wXXnYgbUcOt8kiS31/AjfoTOvCsE+w8nZQLQnzHA==",
+      "version": "1.0.4",
+      "resolved": "https://registry.npmjs.org/call-bound/-/call-bound-1.0.4.tgz",
+      "integrity": "sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==",
       "requires": {
-        "call-bind-apply-helpers": "^1.0.1",
-        "get-intrinsic": "^1.2.6"
+        "call-bind-apply-helpers": "^1.0.2",
+        "get-intrinsic": "^1.3.0"
       }
     },
     "chalk": {
@@ -17071,11 +17243,11 @@
       "integrity": "sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ=="
     },
     "foreground-child": {
-      "version": "3.3.0",
-      "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.0.tgz",
-      "integrity": "sha512-Ld2g8rrAyMYFXBhEqMz8ZAHBi4J4uS1i/CxGMDnjyFWddMXLVcDp051DZfu+t7+ab7Wv6SMqpWmyFIj5UbfFvg==",
+      "version": "3.3.1",
+      "resolved": "https://registry.npmjs.org/foreground-child/-/foreground-child-3.3.1.tgz",
+      "integrity": "sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==",
       "requires": {
-        "cross-spawn": "^7.0.0",
+        "cross-spawn": "^7.0.6",
         "signal-exit": "^4.0.1"
       },
       "dependencies": {
@@ -17150,16 +17322,16 @@
       "extraneous": true
     },
     "get-intrinsic": {
-      "version": "1.2.7",
-      "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.2.7.tgz",
-      "integrity": "sha512-VW6Pxhsrk0KAOqs3WEd0klDiF/+V7gQOpAvY1jVU/LHmaD/kQO4523aiJuikX/QAKYiW6x8Jh+RJej1almdtCA==",
+      "version": "1.3.0",
+      "resolved": "https://registry.npmjs.org/get-intrinsic/-/get-intrinsic-1.3.0.tgz",
+      "integrity": "sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==",
       "requires": {
-        "call-bind-apply-helpers": "^1.0.1",
+        "call-bind-apply-helpers": "^1.0.2",
         "es-define-property": "^1.0.1",
         "es-errors": "^1.3.0",
-        "es-object-atoms": "^1.0.0",
+        "es-object-atoms": "^1.1.1",
         "function-bind": "^1.1.2",
-        "get-proto": "^1.0.0",
+        "get-proto": "^1.0.1",
         "gopd": "^1.2.0",
         "has-symbols": "^1.1.0",
         "hasown": "^2.0.2",
@@ -17364,9 +17536,9 @@
       "integrity": "sha512-+N0ngpO3e7cRUWOJAS7qw0IZIVc6XPrW4MlFBdD066F2L4k1L6ker3hLqSq7iXxU5tgS4WGkIUElWn5vogAEnw=="
     },
     "io.appium.settings": {
-      "version": "5.12.24",
-      "resolved": "https://registry.npmjs.org/io.appium.settings/-/io.appium.settings-5.12.24.tgz",
-      "integrity": "sha512-WKo91Gir5thxNzVLC8PUqMj39fGrsW5StK6XztfGLHpMWy953jyh/TBZEePNBgp7cFM8wdC8p5MCetFJNdr0sA==",
+      "version": "5.14.4",
+      "resolved": "https://registry.npmjs.org/io.appium.settings/-/io.appium.settings-5.14.4.tgz",
+      "integrity": "sha512-6W+sGscwQUtF55ffbSI/1jSoycPD081hQs4bARE3ojGLlOQBPcYVfqUDXyubr0FViqyqk5my/rEHv4mTShOaSQ==",
       "requires": {
         "@appium/logger": "^1.3.0",
         "asyncbox": "^3.0.0",
@@ -18100,9 +18272,9 @@
       }
     },
     "rpc-websockets": {
-      "version": "9.0.4",
-      "resolved": "https://registry.npmjs.org/rpc-websockets/-/rpc-websockets-9.0.4.tgz",
-      "integrity": "sha512-yWZWN0M+bivtoNLnaDbtny4XchdAIF5Q4g/ZsC5UC61Ckbp0QczwO8fg44rV3uYmY4WHd+EZQbn90W1d8ojzqQ==",
+      "version": "10.0.0",
+      "resolved": "https://registry.npmjs.org/rpc-websockets/-/rpc-websockets-10.0.0.tgz",
+      "integrity": "sha512-ci68pI2x0TZdrRbpFx8oiBosNUKR1a2Y9kADVwwhX6UUq+B1E9oqNXnxq20WvTwR7+3Dsow1qAtU8pPGoZE4sw==",
       "requires": {
         "@swc/helpers": "^0.5.11",
         "@types/uuid": "^8.3.4",
@@ -18525,9 +18697,9 @@
       }
     },
     "teen_process": {
-      "version": "2.2.3",
-      "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.2.3.tgz",
-      "integrity": "sha512-8L540OalWH83qc6LHV5VMr0DjdP7KWUHQwTOImtWaG2ElW8BvLTh6M9871oGmmpOMb2BpOJQn2+09ZHWYsdTUA==",
+      "version": "2.3.1",
+      "resolved": "https://registry.npmjs.org/teen_process/-/teen_process-2.3.1.tgz",
+      "integrity": "sha512-duT4gPj7HxEYy+AR4bJ9MNwf8GMLpJd+sNRAK2PTx53FpCcaiXVft3ePZh3hO6PY8NFWZMxTC3ZAtxyztScEsw==",
       "requires": {
         "bluebird": "^3.7.2",
         "lodash": "^4.17.21",
@@ -18567,9 +18739,9 @@
       "integrity": "sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w=="
     },
     "type-fest": {
-      "version": "4.35.0",
-      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.35.0.tgz",
-      "integrity": "sha512-2/AwEFQDFEy30iOLjrvHDIH7e4HEWH+f1Yl1bI5XMqzuoCUqwYCdxachgsgv0og/JdVZUhbfjcJAoHj5L1753A=="
+      "version": "4.37.0",
+      "resolved": "https://registry.npmjs.org/type-fest/-/type-fest-4.37.0.tgz",
+      "integrity": "sha512-S/5/0kFftkq27FPNye0XM1e2NsnoD/3FS+pBmbjmmtLT6I+i344KoOf7pvXreaFsDamWeaJX55nczA1m5PsBDg=="
     },
     "type-is": {
       "version": "1.6.18",
@@ -18581,9 +18753,9 @@
       }
     },
     "typescript": {
-      "version": "5.5.4",
-      "resolved": "https://registry.npmjs.org/typescript/-/typescript-5.5.4.tgz",
-      "integrity": "sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q=="
+      "version": "5.7.3",
+      "resolved": "https://registry.npmjs.org/typescript/-/typescript-5.7.3.tgz",
+      "integrity": "sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw=="
     },
     "undici-types": {
       "version": "6.20.0",
@@ -18756,9 +18928,9 @@
       "integrity": "sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ=="
     },
     "ws": {
-      "version": "8.18.0",
-      "resolved": "https://registry.npmjs.org/ws/-/ws-8.18.0.tgz",
-      "integrity": "sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==",
+      "version": "8.18.1",
+      "resolved": "https://registry.npmjs.org/ws/-/ws-8.18.1.tgz",
+      "integrity": "sha512-RKW2aJZMXeMxVpnZ6bck+RswznaxmzdULiBr6KY7XkTnW8uvt0iT9H5DkHUChXrc+uurzwa0rVI16n/Xzjdz1w==",
       "requires": {}
     },
     "xmlbuilder": {
