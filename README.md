@@ -19,7 +19,7 @@ Under the hood, Appium Flutter Driver uses the [Dart VM Service Protocol](https:
 Appium community currently has two drivers for Flutter environment:
 
 - Appium Flutter driver (this driver)
-    - Run Flutter commands over websocekt connection against the observaory URL (calls Flutter APIs directly)
+    - Run Flutter commands over websocket connection against the observaory URL (calls Flutter APIs directly)
     - Base APIs are [`flutter_driver`](https://api.flutter.dev/flutter/flutter_driver/flutter_driver-library.html)
 - [`Appium Flutter Integration Driver`](https://github.com/AppiumTestDistribution/appium-flutter-integration-driver)
     - Run a server on DartVM as part of the application under test in order to call Flutter APIs via the server
