@@ -5,7 +5,7 @@
     "appium",
     "flutter"
   ],
-  "version": "2.14.2",
+  "version": "2.15.0",
   "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
   "license": "MIT",
   "repository": {
@@ -71,8 +71,8 @@
   "dependencies": {
     "appium-ios-device": "^2.7.18",
     "appium-android-driver": "^10.0.0",
-    "appium-uiautomator2-driver": "^4.0.0",
-    "appium-xcuitest-driver": "^8.3.0",
+    "appium-uiautomator2-driver": "^4.2.3",
+    "appium-xcuitest-driver": "^9.2.3",
     "asyncbox": "^3.0.0",
     "bluebird": "^3.1.1",
     "lodash": "^4.0.0",

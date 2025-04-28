@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.15.0
+- Update Appium UIAutomator2 driver dependency to 4.2.3
+- Update Appium XCUITest driver dependency to 9.2.3
+
 ## 2.14.2
 - Fix package to include npm-shrinkwrap.json explicitly
 - Update Appium UIAutomator2 driver dependency to 4.1.1
