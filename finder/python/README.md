@@ -41,6 +41,8 @@ twine upload dist/Appium-Flutter-Finder-X.X.tar.gz
 ```
 
 # Changelog
+- 0.8.0
+    - Update the limit of python appium client version
 - 0.7.0
     - Update the limit of python appium client version
 - 0.6.1
