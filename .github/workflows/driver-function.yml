@@ -20,9 +20,9 @@ jobs:
     runs-on: macos-14
 
     env:
-      XCODE_VERSION: 15.3
-      IOS_DEVICE_NAME: iPhone 15 Plus
-      IOS_VERSION: 17.4
+      XCODE_VERSION: 16.2
+      IOS_DEVICE_NAME: iPhone 16 Plus
+      IOS_VERSION: 18.2
 
     steps:
     - uses: actions/checkout@v3

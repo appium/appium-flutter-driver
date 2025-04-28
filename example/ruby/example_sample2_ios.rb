@@ -10,8 +10,8 @@ class ExampleTests < Minitest::Test
     caps: {
       platformName: 'iOS',
       automationName: 'flutter',
-      platformVersion: '18.4',
-      deviceName: 'iPhone 16 Plus',
+      platformVersion: ENV["IOS_VERSION"] || '18.4',
+      deviceName: ENV["IOS_DEVICE_NAME"] || 'iPhone 16 Plus',
       app: "#{Dir.pwd}/../sample2/iOSFullScreen.zip",
       wdaLaunchTimeout: 600_000,
       maxRetryCount: 20,
