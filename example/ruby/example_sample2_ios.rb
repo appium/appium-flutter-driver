@@ -27,7 +27,7 @@ class ExampleTests < Minitest::Test
 
   def setup
     @core = ::Appium::Core.for(CAPS)
-    @driver = @core.start_driver server_url: 'http://localhost:4723/wd/hub'
+    @driver = @core.start_driver server_url: 'http://localhost:4723'
   end
 
   def teardown
