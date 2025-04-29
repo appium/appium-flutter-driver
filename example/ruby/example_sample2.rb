@@ -12,8 +12,8 @@ class ExampleTests < Minitest::Test
       automationName: 'flutter',
       udid: 'emulator-5554',
       deviceName: 'Android',
-      app: "#{Dir.pwd}/example/sample2/app-debug.apk",
-      maxRetryCount: 60,
+      app: "#{Dir.pwd}/../sample2/app-debug.apk",
+      maxRetryCount: 120,
       retryBackoffTime: 10000,
     },
     appium_lib: {
