@@ -114,10 +114,10 @@ export async function connectSocket(
               throw new Error(`"ext.flutter.driver" is not found in "extensionRPCs" ${JSON.stringify(isolate.extensionRPCs)}`);
             }
           }
-        )
+        );
       } catch (e) {
         this.log.error(e.message);
-        removeListenerAndResolve(null)
+        removeListenerAndResolve(null);
         return;
       }
       removeListenerAndResolve(socket);
