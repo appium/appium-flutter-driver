@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.15.1
+- Add a retry logic to check `ext.flutter.driver` module existence
+
 ## 2.15.0
 - Update Appium UIAutomator2 driver dependency to 4.2.3
 - Update Appium XCUITest driver dependency to 9.2.3
