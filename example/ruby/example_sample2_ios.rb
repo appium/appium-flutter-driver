@@ -14,7 +14,7 @@ class ExampleTests < Minitest::Test
       deviceName: ENV["IOS_DEVICE_NAME"] || 'iPhone 16 Plus',
       app: "#{Dir.pwd}/../sample2/iOSFullScreen.zip",
       wdaLaunchTimeout: 600_000,
-      maxRetryCount: 120,
+      maxRetryCount: 60,
       retryBackoffTime: 10000,
 
     },
