@@ -4,6 +4,7 @@ import type { FlutterDriver } from '../driver';
 import { IsolateSocket } from './isolate_socket';
 import { decode } from './base64url';
 import type { LogEntry } from './log-monitor';
+import { retryInterval } from 'asyncbox';
 
 const truncateLength = 500;
 // https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183
@@ -16,6 +17,9 @@ export const OBSERVATORY_URL_PATTERN = new RegExp(
   `The Dart VM service is listening on )` +
   `((http|//)[a-zA-Z0-9:/=_\\-.\\[\\]]+)`,
 );
+
+const moduleCheckIntervalCount = 30;
+const moduleCheckIntervalMs = 500;
 
 // SOCKETS
 export async function connectSocket(
@@ -89,26 +93,30 @@ export async function connectSocket(
         socket.isolateId = mainIsolateData.id;
       }
 
-      // @todo check extension and do health check
-      const isolate = await socket.call(`getIsolate`, {
-        isolateId: `${socket.isolateId}`,
-      }) as {
-        extensionRPCs: [string] | null,
-      } | null;
-      if (!isolate) {
-        this.log.error(`Cannot get main Dart Isolate`);
-        removeListenerAndResolve(null);
-        return;
-      }
-      if (!Array.isArray(isolate.extensionRPCs)) {
-        this.log.error(`Cannot get Dart extensionRPCs from isolate ${JSON.stringify(isolate)}`);
-        removeListenerAndResolve(null);
-        return;
-      }
-      if (isolate.extensionRPCs.indexOf(`ext.flutter.driver`) < 0) {
-        this.log.error(
-          `"ext.flutter.driver" is not found in "extensionRPCs" ${JSON.stringify(isolate.extensionRPCs)}`
+      // It could take time to load the expected module.
+      try {
+        await retryInterval(
+          moduleCheckIntervalCount,
+          moduleCheckIntervalMs,
+          async () => {
+            const isolate = await socket.call(`getIsolate`, {
+              isolateId: `${socket.isolateId}`,
+            }) as {
+              extensionRPCs: [string] | null,
+            } | null;
+            if (!isolate) {
+              throw new Error(`Cannot get main Dart Isolate`);
+            }
+            if (!Array.isArray(isolate.extensionRPCs)) {
+              throw new Error(`Cannot get Dart extensionRPCs from isolate ${JSON.stringify(isolate)}`);
+            }
+            if (isolate.extensionRPCs.indexOf(`ext.flutter.driver`) < 0) {
+              throw new Error(`"ext.flutter.driver" is not found in "extensionRPCs" ${JSON.stringify(isolate.extensionRPCs)}`);
+            }
+          }
         );
+      } catch (e) {
+        this.log.error(e.message);
         removeListenerAndResolve(null);
         return;
       }
