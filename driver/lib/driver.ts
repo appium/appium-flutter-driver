@@ -163,11 +163,21 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async getOrientation(): Promise<string> {
-    return await this.proxydriver.getOrientation();
+    switch (_.toLower(this.internalCaps.platformName)) {
+      case PLATFORM.IOS:
+        return await this.proxydriver.proxyCommand('/orientation', 'GET');
+      default:
+        return await this.proxydriver.getOrientation();
+      }
   }
 
   public async setOrientation(orientation: string) {
-    return await this.proxydriver.setOrientation(orientation);
+    switch (_.toLower(this.internalCaps.platformName)) {
+      case PLATFORM.IOS:
+        return await this.proxydriver.proxyCommand('/orientation', 'POST', {orientation});
+      default:
+        return await this.proxydriver.setOrientation(orientation);
+      }
   }
 
   public validateLocatorStrategy(strategy: string) {
@@ -207,6 +217,11 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     } else if (cmd === `receiveAsyncResponse`) {
       logger.debug(`Executing FlutterDriver response '${cmd}'`);
       return await this.receiveAsyncResponse(...args);
+    } else if ([`setOrientation`, `getOrientation`].includes(cmd)) {
+      // should handle the command for ios and android differently
+      // in the flutter driver.
+      logger.debug(`Executing FlutterDriver command '${cmd}'`);
+      return await super.executeCommand(cmd, ...args);
     } else {
       if (this.driverShouldDoProxyCmd(cmd)) {
         logger.debug(`Executing proxied driver command '${cmd}'`);

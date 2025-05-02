@@ -37,6 +37,11 @@ class ExampleTests < Minitest::Test
   def test_run_example_ios
     @driver.context = 'NATIVE_APP'
 
+    @driver.orientation = :landscape
+    assert_equal @driver.orientation, :landscape
+    @driver.orientation = :portrait
+    assert_equal @driver.orientation, :portrait
+
     element = @driver.find_element :accessibility_id, 'launchFlutter'
     element.click
 

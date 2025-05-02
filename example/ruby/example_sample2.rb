@@ -38,6 +38,12 @@ class ExampleTests < Minitest::Test
     element = @driver.find_element :id, 'dev.flutter.example.androidfullscreen:id/launch_button'
     element.click
 
+    @driver.orientation = :landscape
+    assert_equal @driver.orientation, :landscape
+    @driver.orientation = :portrait
+    assert_equal @driver.orientation, :portrait
+
+
     @driver.context = 'FLUTTER'
 
     text_finder = by_text 'Tap me!'
