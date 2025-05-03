@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.15.2
+- Fix device orientation change for iOS
+- Update Appium XCUITest driver dependency to 9.2.4
+
 ## 2.15.1
 - Add a retry logic to check `ext.flutter.driver` module existence
 
