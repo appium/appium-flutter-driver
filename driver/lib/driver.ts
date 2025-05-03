@@ -218,8 +218,10 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
       logger.debug(`Executing FlutterDriver response '${cmd}'`);
       return await this.receiveAsyncResponse(...args);
     } else if ([`setOrientation`, `getOrientation`].includes(cmd)) {
-      // should handle the command for ios and android differently
-      // in the flutter driver.
+      // The `setOrientation` and `getOrientation` commands are handled differently
+      // for iOS and Android platforms. These commands are deferred to the base driver's
+      // implementation (`super.executeCommand`) to ensure compatibility with both platforms
+      // and to leverage the platform-specific logic already implemented in the base driver.
       logger.debug(`Executing FlutterDriver command '${cmd}'`);
       return await super.executeCommand(cmd, ...args);
     } else {
