@@ -309,6 +309,21 @@ Please replace them properly with your client.
 | - | :ok: | (Ruby) `driver.execute_script 'flutter:connectObservatoryWsUrl'` | Flutter Driver |
 | - | :ok: | (Ruby) `driver.execute_script 'flutter:launchApp', 'bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` | Flutter Driver |
 
+## 📌 Additional Flutter Assertions (Custom)
+
+The following commands extend `appium-flutter-driver` to include widget visibility assertions. These are executed via the `driver.execute()` command (or your client equivalent).
+
+| **Assertion**      | **Status** | **Usage Example**                                                                                                                                                                                | **Target** |
+| ------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
+| `assertVisible`    | ✅          | `driver.execute('flutter:assertVisible', { key: 'myKey' })`<br>`driver.execute('flutter:assertVisible', { text: 'Login' })`<br>`driver.execute('flutter:assertVisible', { label: 'Info icon' })` | Widget     |
+| `assertNotVisible` | ✅          | Same as above                                                                                                                                                                                    | Widget     |
+| `assertTextEquals` | ✅          | `driver.execute('flutter:assertTextEquals', { key: 'greeting' }, 'Hello')`                                                                                                                       | Widget     |
+| `assertPresent`    | ✅          | Same as above                                                                                                                                                                                    | Widget     |
+| `assertAbsent`     | ✅          | Same as above                                                                                                                                                                                    | Widget     |
+
+Flutter API	Status	WebDriver example (JavaScript, WebDriverIO)	Scope
+
+
 > **NOTE**
 > `flutter:launchApp` launches an app via instrument service. `mobile:activateApp` and `driver.activate_app` are via XCTest API. They are a bit different.
 
