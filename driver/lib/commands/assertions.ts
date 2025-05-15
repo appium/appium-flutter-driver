@@ -1,6 +1,11 @@
 import { FlutterDriver } from '../driver';
 import { waitFor, waitForAbsent, waitForTappable } from './execute/wait';
-import { byValueKey, byText, byTooltip, serializeFinder } from './finder';
+import { byValueKey, byText, byTooltip } from 'appium-flutter-finder';
+import type { SerializableFinder } from 'appium-flutter-finder';
+
+const serializeFinder = (finder: SerializableFinder): string => {
+  return Buffer.from(JSON.stringify(finder)).toString('base64');
+};
 
 type FinderInput =
   | { key: string }
@@ -19,7 +24,6 @@ function getFinderBase64(input: FinderInput): string {
   }
   throw new Error('Invalid finder input: must provide key, text, or label');
 }
-
 /**
  * Asserts that an element is visible within a timeout.
  */
