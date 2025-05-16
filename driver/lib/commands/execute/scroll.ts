@@ -43,26 +43,24 @@ export const scroll = async (
 export const longTap = async (
   self: FlutterDriver,
   elementBase64: string,
-  opts: {
+  durationOrOptions: number | {
     durationMilliseconds: number;
     frequency?: number;
-  },
+  } = 1000, // Default to 1000ms if nothing provided
 ) => {
-  const { durationMilliseconds, frequency = 60 } = opts;
+  const options = typeof durationOrOptions === 'number'
+    ? { durationMilliseconds: durationOrOptions }
+    : durationOrOptions;
 
-  if (
-    typeof durationMilliseconds !== `number` ||
-    typeof frequency !== `number`
-  ) {
-    // @todo BaseDriver's errors.InvalidArgumentError();
-    throw new Error(`${opts} is not a valid options`);
+  const { durationMilliseconds, frequency = 60 } = options;
+
+  if (typeof durationMilliseconds !== 'number' || typeof frequency !== 'number') {
+    throw new Error(`Invalid longTap options: ${JSON.stringify(options)}`);
   }
 
-  return await self.executeElementCommand(`scroll`, elementBase64, {
+  return await self.executeElementCommand('scroll', elementBase64, {
     dx: 0,
     dy: 0,
-    // 'scroll' expects microseconds
-    // https://github.com/flutter/flutter/blob/master/packages/flutter_driver/lib/src/common/gesture.dart#L33-L38
     duration: durationMilliseconds * 1000,
     frequency,
   });

@@ -69,8 +69,9 @@
     "typescript": "~5.8"
   },
   "dependencies": {
-    "appium-ios-device": "^2.7.18",
     "appium-android-driver": "^10.0.0",
+    "appium-flutter-finder": "^0.2.0",
+    "appium-ios-device": "^2.7.18",
     "appium-uiautomator2-driver": "^4.2.3",
     "appium-xcuitest-driver": "^9.2.3",
     "asyncbox": "^3.0.0",
