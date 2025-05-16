@@ -311,16 +311,37 @@ Please replace them properly with your client.
 
 ## 📌 Additional Flutter Assertions (Custom)
 
-The following commands extend `appium-flutter-driver` to include widget visibility assertions. These are executed via the `driver.execute()` command (or your client equivalent).
+# Flutter Visibility Assertions for Appium
 
-| **Assertion**      | **Status** | **Usage Example**                                                                                                                                                                                | **Target** |
-| ------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
-| `assertVisible`    | ✅          | `driver.execute('flutter:assertVisible', { key: 'myKey' })`<br>`driver.execute('flutter:assertVisible', { text: 'Login' })`<br>`driver.execute('flutter:assertVisible', { label: 'Info icon' })` | Widget     |
-| `assertNotVisible` | ✅          | Same as above                                                                                                                                                                                    | Widget     |
-| `assertTextEquals` | ✅          | `driver.execute('flutter:assertTextEquals', { key: 'greeting' }, 'Hello')`                                                                                                                       | Widget     |
-| `assertPresent`    | ✅          | Same as above                                                                                                                                                                                    | Widget     |
-| `assertAbsent`     | ✅          | Same as above                                                                                                                                                                                    | Widget     |
+This module extends the `appium-flutter-driver` with custom visibility-related commands using `driver.execute()`.
 
+## ✅ Supported Commands
+
+| **Command**         | **Status** | **Example Usage**                                                                                                         | **Target** |
+|---------------------|------------|--------------------------------------------------------------------------------------------------------------------------|------------|
+| `assertVisible`     | ✅         | `driver.execute('flutter:assertVisible', { key: 'myKey' })`<br>`driver.execute('flutter:assertVisible', { text: 'Login' })` | Widget     |
+| `assertNotVisible`  | ✅         | `driver.execute('flutter:assertNotVisible', { key: 'hiddenWidget' })`                                                   | Widget     |
+| `assertTappable`    | ✅         | `driver.execute('flutter:assertTappable', { label: 'Submit' })`                                                          | Widget     |
+
+## 🔍 Input Formats
+
+Each assertion supports the following input formats:
+
+- `{ key: 'valueKey' }`
+- `{ text: 'Text on widget' }`
+- `{ label: 'Tooltip text' }`
+
+These map to Flutter finders:
+- `byValueKey`
+- `byText`
+- `byTooltip`
+
+## 📦 Integration
+
+These commands are typically invoked using a client helper method like:
+
+```ts
+await assertVisible(driver, { key: 'submit_button' });
 Flutter API	Status	WebDriver example (JavaScript, WebDriverIO)	Scope
 
 

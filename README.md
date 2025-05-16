@@ -307,17 +307,37 @@ Please replace them properly with your client.
 | -                                                                                                                                  | :ok: | (Ruby) `driver.execute_script 'flutter:launchApp', 'bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` | Flutter Driver    |
 | dragAndDropWithCommandExtension                                                                                                    | :ok: | (Python) `driver.execute_script('flutter:dragAndDropWithCommandExtension', payload)` | Command Extension |
 
-## 📌 Additional Flutter Assertions (Custom)
+# Flutter Visibility Assertions for Appium
 
-The following commands extend `appium-flutter-driver` to include widget visibility assertions. These are executed via the `driver.execute()` command (or your client equivalent).
+This module extends the `appium-flutter-driver` with custom visibility-related commands using `driver.execute()`.
 
-| **Assertion**      | **Status** | **Usage Example**                                                                                                                                                                                | **Target** |
-| ------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
-| `assertVisible`    | ✅          | `driver.execute('flutter:assertVisible', { key: 'myKey' })`<br>`driver.execute('flutter:assertVisible', { text: 'Login' })`<br>`driver.execute('flutter:assertVisible', { label: 'Info icon' })` | Widget     |
-| `assertNotVisible` | ✅          | Same as above                                                                                                                                                                                    | Widget     |
-| `assertTextEquals` | ✅          | `driver.execute('flutter:assertTextEquals', { key: 'greeting' }, 'Hello')`                                                                                                                       | Widget     |
-| `assertPresent`    | ✅          | Same as above                                                                                                                                                                                    | Widget     |
-| `assertAbsent`     | ✅          | Same as above                                                                                                                                                                                    | Widget     |
+## ✅ Supported Commands
+
+| **Command**         | **Status** | **Example Usage**                                                                                                         | **Target** |
+|---------------------|------------|--------------------------------------------------------------------------------------------------------------------------|------------|
+| `assertVisible`     | ✅         | `driver.execute('flutter:assertVisible', { key: 'myKey' })`<br>`driver.execute('flutter:assertVisible', { text: 'Login' })` | Widget     |
+| `assertNotVisible`  | ✅         | `driver.execute('flutter:assertNotVisible', { key: 'hiddenWidget' })`                                                   | Widget     |
+| `assertTappable`    | ✅         | `driver.execute('flutter:assertTappable', { label: 'Submit' })`                                                          | Widget     |
+
+## 🔍 Input Formats
+
+Each assertion supports the following input formats:
+
+- `{ key: 'valueKey' }`
+- `{ text: 'Text on widget' }`
+- `{ label: 'Tooltip text' }`
+
+These map to Flutter finders:
+- `byValueKey`
+- `byText`
+- `byTooltip`
+
+## 📦 Integration
+
+These commands are typically invoked using a client helper method like:
+
+```ts
+await assertVisible(driver, { key: 'submit_button' });
 
 **NOTE**
 >`flutter:launchApp` launches an app via instrument service. `mobile:activateApp` and `driver.activate_app` are via XCTest API. They are a bit different.
