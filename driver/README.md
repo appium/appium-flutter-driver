@@ -324,7 +324,9 @@ This module extends the `appium-flutter-driver` with custom visibility-related c
 | `assertTappable`    | ✅         | `driver.execute('flutter:assertTappable', { label: 'Submit' })`                                                          | Widget     |
 | `tap`               | ✅         | `driver.execute('flutter:tap', [{ key: 'submit_button' }])`                                                              | Widget     |
 | `click`             | ✅         | `driver.execute('flutter:click', { text: 'Continue' })`                                                                  | Widget     |
-| `getText`           | ✅         | `driver.execute('flutter:getText', { key: 'counterText' })`                                                              | Widget     |
+| `getText`           | ✅         | `driver.execute('flutter:getText', { key: 'counterText' })`                             | Widget      |
+| `pageBack`          | ✅         | `await driver.execute('flutter:pageBack')`                                              | Navigation  |
+| `clear`             | ✅         | `await driver.execute('flutter:clear', { key: 'emailInput' })`                          | Input Field |
 
 ## 🔍 Input Formats
 
