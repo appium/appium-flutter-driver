@@ -166,13 +166,13 @@ const commandHandlers: CommandMap = {
   tap: async (driver, gestures: Record<string, any>[], longPress: boolean = false) =>
     await tap.call(driver, gestures, longPress),
 
-  click: async (driver, input: FinderInput) => 
+  click: async (driver, input: FinderInput) =>
     await click.call(driver, input),
-  getText: async (driver, element: string) => 
+  getText: async (driver, element: string) =>
     await getText.call(driver, element),
-  pageBack: async (driver) => 
+  pageBack: async (driver) =>
     await pageBack.call(driver),
-  clear:    async (driver, input: FinderInput) => 
+  clear: async (driver, input: FinderInput) =>
     await clear.call(driver, input),
 
   getTextWithCommandExtension: async (driver, params: { findBy: string }) =>
