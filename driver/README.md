@@ -317,13 +317,14 @@ This module extends the `appium-flutter-driver` with custom visibility-related c
 
 ✅ Supported Commands
 
-| **Command**         | **Status** | **Example Usage**                                                                                  | **Target** |
-|---------------------|------------|-----------------------------------------------------------------------------------------------------|------------|
+| **Command**         | **Status** | **Example Usage**                                                                                                         | **Target** |
+|---------------------|------------|--------------------------------------------------------------------------------------------------------------------------|------------|
 | `assertVisible`     | ✅         | `driver.execute('flutter:assertVisible', { key: 'myKey' })`<br>`driver.execute('flutter:assertVisible', { text: 'Login' })` | Widget     |
-| `assertNotVisible`  | ✅         | `driver.execute('flutter:assertNotVisible', { key: 'hiddenWidget' })`                              | Widget     |
-| `assertTappable`    | ✅         | `driver.execute('flutter:assertTappable', { label: 'Submit' })`                                     | Widget     |
-| `tap`               | ✅         | `driver.execute('flutter:tap', [{ key: 'submit_button' }])`                                         | Widget     |
-| `click`             | ✅         | `driver.execute('flutter:click', { text: 'Continue' })`                                             | Widget     |
+| `assertNotVisible`  | ✅         | `driver.execute('flutter:assertNotVisible', { key: 'hiddenWidget' })`                                                   | Widget     |
+| `assertTappable`    | ✅         | `driver.execute('flutter:assertTappable', { label: 'Submit' })`                                                          | Widget     |
+| `tap`               | ✅         | `driver.execute('flutter:tap', [{ key: 'submit_button' }])`                                                              | Widget     |
+| `click`             | ✅         | `driver.execute('flutter:click', { text: 'Continue' })`                                                                  | Widget     |
+| `getText`           | ✅         | `driver.execute('flutter:getText', { key: 'counterText' })`                                                              | Widget     |
 
 ## 🔍 Input Formats
 
