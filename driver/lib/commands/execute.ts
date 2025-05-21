@@ -134,8 +134,8 @@ const commandHandlers: CommandMap = {
     await driver.socket!.executeSocketCommand({ command: 'enter_text', text }),
   requestData: async (driver, message: string) =>
     await driver.socket!.executeSocketCommand({ command: 'request_data', message }),
-  longTap: async (driver, finder: string, durationOrOptions?: LongTapOptions) => 
-    await longTap(driver, finder, durationOrOptions),   
+  longTap: async (driver, finder: string, durationOrOptions?: LongTapOptions) =>
+    await longTap(driver, finder, durationOrOptions),
   waitForFirstFrame: async (driver) =>
     await driver.executeElementCommand('waitForCondition', '', { conditionName: 'FirstFrameRasterizedCondition' }),
   setFrameSync: async (driver, enabled: boolean, durationMilliseconds: number) =>
@@ -154,7 +154,7 @@ const commandHandlers: CommandMap = {
       ...params,
     }),
   assertVisible: async (driver, input: FinderInput, timeout = 5000) =>
-  await assertVisible(driver, input, timeout),
+    await assertVisible(driver, input, timeout),
 
   assertNotVisible: async (driver, input: FinderInput, timeout = 5000) =>
     await assertNotVisible(driver, input, timeout),
@@ -166,6 +166,7 @@ const commandHandlers: CommandMap = {
     await tap.call(driver, gestures, longPress),
 
   click: async (driver, input: FinderInput) => await click.call(driver, input),
+  getText: async (driver, element: string) => await getText.call(driver, element),
 
   getTextWithCommandExtension: async (driver, params: { findBy: string }) =>
     await driver.socket!.executeSocketCommand({
