@@ -315,13 +315,15 @@ Please replace them properly with your client.
 
 This module extends the `appium-flutter-driver` with custom visibility-related commands using `driver.execute()`.
 
-## ✅ Supported Commands
+✅ Supported Commands
 
-| **Command**         | **Status** | **Example Usage**                                                                                                         | **Target** |
-|---------------------|------------|--------------------------------------------------------------------------------------------------------------------------|------------|
+| **Command**         | **Status** | **Example Usage**                                                                                  | **Target** |
+|---------------------|------------|-----------------------------------------------------------------------------------------------------|------------|
 | `assertVisible`     | ✅         | `driver.execute('flutter:assertVisible', { key: 'myKey' })`<br>`driver.execute('flutter:assertVisible', { text: 'Login' })` | Widget     |
-| `assertNotVisible`  | ✅         | `driver.execute('flutter:assertNotVisible', { key: 'hiddenWidget' })`                                                   | Widget     |
-| `assertTappable`    | ✅         | `driver.execute('flutter:assertTappable', { label: 'Submit' })`                                                          | Widget     |
+| `assertNotVisible`  | ✅         | `driver.execute('flutter:assertNotVisible', { key: 'hiddenWidget' })`                              | Widget     |
+| `assertTappable`    | ✅         | `driver.execute('flutter:assertTappable', { label: 'Submit' })`                                     | Widget     |
+| `tap`               | ✅         | `driver.execute('flutter:tap', [{ key: 'submit_button' }])`                                         | Widget     |
+| `click`             | ✅         | `driver.execute('flutter:click', { text: 'Continue' })`                                             | Widget     |
 
 ## 🔍 Input Formats
 
@@ -343,7 +345,7 @@ These commands are typically invoked using a client helper method like:
 ```ts
 await assertVisible(driver, { key: 'submit_button' });
 Flutter API	Status	WebDriver example (JavaScript, WebDriverIO)	Scope
-
+```  
 
 > **NOTE**
 > `flutter:launchApp` launches an app via instrument service. `mobile:activateApp` and `driver.activate_app` are via XCTest API. They are a bit different.

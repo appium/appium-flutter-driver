@@ -70,9 +70,9 @@ const commandHandlers: CommandMap = {
   checkHealth: async (driver) => (await driver.executeElementCommand('get_health')).status,
   getVMInfo: async (driver) => await driver.executeGetVMCommand(),
   getRenderTree: async (driver) => (await driver.executeElementCommand('get_render_tree')).tree,
-  getOffset: async (driver, elementBase64: string, options: OffsetOptions) => 
+  getOffset: async (driver, elementBase64: string, options: OffsetOptions) =>
     await driver.executeElementCommand('get_offset', elementBase64, options),
-  waitForCondition: async (driver, conditionName: string) => 
+  waitForCondition: async (driver, conditionName: string) =>
     await driver.executeElementCommand('waitForCondition', '', { conditionName }),
   forceGC: async (driver) => {
     const response = await driver.socket!.call('_collectAllGarbage', {
@@ -86,7 +86,7 @@ const commandHandlers: CommandMap = {
     driver.socket!.isolateId = isolateId;
     return await driver.socket!.call('getIsolate', { isolateId });
   },
-  getIsolate: async (driver, isolateId?: string) => 
+  getIsolate: async (driver, isolateId?: string) =>
     await driver.executeGetIsolateCommand(isolateId || driver.socket!.isolateId!),
   clearTimeline: async (driver) => {
     const call1 = driver.socket!.call('_clearVMTimeline');
@@ -112,33 +112,33 @@ const commandHandlers: CommandMap = {
       subtreeDepth,
     });
   },
-  getSemanticsId: async (driver, elementBase64: string) => 
+  getSemanticsId: async (driver, elementBase64: string) =>
     (await driver.executeElementCommand('get_semantics_id', elementBase64)).id,
-  waitForAbsent: async (driver, finder: string, timeout?: number) => 
+  waitForAbsent: async (driver, finder: string, timeout?: number) =>
     await waitForAbsent(driver, finder, timeout),
-  waitFor: async (driver, finder: string, timeout?: number) => 
+  waitFor: async (driver, finder: string, timeout?: number) =>
     await waitFor(driver, finder, timeout),
-  waitForTappable: async (driver, finder: string, timeout?: number) => 
+  waitForTappable: async (driver, finder: string, timeout?: number) =>
     await waitForTappable(driver, finder, timeout),
-  scroll: async (driver, finder: string, opts: any) => 
+  scroll: async (driver, finder: string, opts: any) =>
     await scroll(driver, finder, opts),
-  scrollUntilVisible: async (driver, finder: string, opts: any) => 
+  scrollUntilVisible: async (driver, finder: string, opts: any) =>
     await scrollUntilVisible(driver, finder, opts),
-  scrollUntilTapable: async (driver, finder: string, opts: any) => 
+  scrollUntilTapable: async (driver, finder: string, opts: any) =>
     await scrollUntilTapable(driver, finder, opts),
-  scrollIntoView: async (driver, finder: string, opts: any) => 
+  scrollIntoView: async (driver, finder: string, opts: any) =>
     await scrollIntoView(driver, finder, opts),
-  setTextEntryEmulation: async (driver, enabled: boolean) => 
+  setTextEntryEmulation: async (driver, enabled: boolean) =>
     await driver.socket!.executeSocketCommand({ command: 'set_text_entry_emulation', enabled }),
-  enterText: async (driver, text: string) => 
+  enterText: async (driver, text: string) =>
     await driver.socket!.executeSocketCommand({ command: 'enter_text', text }),
-  requestData: async (driver, message: string) => 
+  requestData: async (driver, message: string) =>
     await driver.socket!.executeSocketCommand({ command: 'request_data', message }),
-  longTap: async (driver, finder: string, durationOrOptions?: number | LongTapOptions) => 
-  await longTap(driver, finder, durationOrOptions),   
-  waitForFirstFrame: async (driver) => 
+  longTap: async (driver, finder: string, durationOrOptions?: LongTapOptions) => 
+    await longTap(driver, finder, durationOrOptions),   
+  waitForFirstFrame: async (driver) =>
     await driver.executeElementCommand('waitForCondition', '', { conditionName: 'FirstFrameRasterizedCondition' }),
-  setFrameSync: async (driver, enabled: boolean, durationMilliseconds: number) => 
+  setFrameSync: async (driver, enabled: boolean, durationMilliseconds: number) =>
     await driver.socket!.executeSocketCommand({
       command: 'set_frame_sync',
       enabled,
@@ -148,7 +148,7 @@ const commandHandlers: CommandMap = {
     const { timeout = 1000 } = opts;
     return await driver.executeElementCommand('tap', finder, { timeout });
   },
-  dragAndDropWithCommandExtension: async (driver, params: DragAndDropParams) => 
+  dragAndDropWithCommandExtension: async (driver, params: DragAndDropParams) =>
     await driver.socket!.executeSocketCommand({
       command: 'dragAndDropWithCommandExtension',
       ...params,
@@ -161,15 +161,13 @@ const commandHandlers: CommandMap = {
 
   assertTappable: async (driver, input: FinderInput, timeout = 5000) =>
     await assertTappable(driver, input, timeout),
-  
+
   tap: async (driver, gestures: Record<string, any>[], longPress: boolean = false) =>
     await tap.call(driver, gestures, longPress),
 
   click: async (driver, input: FinderInput) => await click.call(driver, input),
 
-  getText: async (driver: FlutterDriver, finder: string) =>
-    await getText.bind(driver)(finder),
-  getTextWithCommandExtension: async (driver, params: { findBy: string }) => 
+  getTextWithCommandExtension: async (driver, params: { findBy: string }) =>
     await driver.socket!.executeSocketCommand({
       command: 'getTextWithCommandExtension',
       findBy: params.findBy,
@@ -187,7 +185,7 @@ export const execute = async function (
 
   const command = matching[1].trim();
   const handler = commandHandlers[command];
-  
+
   if (!handler) {
     throw new Error(`Command not supported: "${rawCommand}"`);
   }

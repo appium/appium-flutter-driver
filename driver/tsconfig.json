@@ -7,7 +7,6 @@
     "outDir": "build",
     "types": ["node"],
     "checkJs": true
-
   },
   "include": ["lib"]
 }
