@@ -325,7 +325,6 @@ This module extends the `appium-flutter-driver` with custom visibility-related c
 | `tap`               | ✅         | `driver.execute('flutter:tap', [{ key: 'submit_button' }])`                                                              | Widget     |
 | `click`             | ✅         | `driver.execute('flutter:click', { text: 'Continue' })`                                                                  | Widget     |
 | `getText`           | ✅         | `driver.execute('flutter:getText', { key: 'counterText' })`                             | Widget      |
-| `pageBack`          | ✅         | `await driver.execute('flutter:pageBack')`                                              | Navigation  |
 | `clear`             | ✅         | `await driver.execute('flutter:clear', { key: 'emailInput' })`                          | Input Field |
 
 ## 🔍 Input Formats
@@ -347,8 +346,7 @@ These commands are typically invoked using a client helper method like:
 
 ```ts
 await assertVisible(driver, { key: 'submit_button' });
-Flutter API	Status	WebDriver example (JavaScript, WebDriverIO)	Scope
-```  
+```
 
 > **NOTE**
 > `flutter:launchApp` launches an app via instrument service. `mobile:activateApp` and `driver.activate_app` are via XCTest API. They are a bit different.

@@ -320,7 +320,6 @@ This module extends the `appium-flutter-driver` with custom visibility-related c
 | `tap`               | ✅         | `driver.execute('flutter:tap', [{ key: 'submit_button' }])`                                                              | Widget     |
 | `click`             | ✅         | `driver.execute('flutter:click', { text: 'Continue' })`                                                                  | Widget     |
  `getText`           | ✅         | `driver.execute('flutter:getText', { key: 'counterText' })`                             | Widget      |
-| `pageBack`          | ✅         | `await driver.execute('flutter:pageBack')`                                              | Navigation  |
 | `clear`             | ✅         | `await driver.execute('flutter:clear', { key: 'emailInput' })`                          | Input Field |
 
 
@@ -344,6 +343,7 @@ These commands are typically invoked using a client helper method like:
 
 ```ts
 await assertVisible(driver, { key: 'submit_button' });
+```
 
 **NOTE**
 >`flutter:launchApp` launches an app via instrument service. `mobile:activateApp` and `driver.activate_app` are via XCTest API. They are a bit different.
@@ -393,13 +393,13 @@ This is a command extension for Flutter Driver, utilizing the [CommandExtension-
 Available commands:
 
 - `dragAndDropWithCommandExtension` – performs a drag-and-drop action on the screen by specifying the start and end coordinates and the action duration.
-- `getTextWithCommandExtension` - get text data from Text widget that contains TextSpan widgets. 
+- `getTextWithCommandExtension` - get text data from Text widget that contains TextSpan widgets.
 
 ### How to use
 
 Copy the sample dart files to the `lib` folder of your project. Please note that you don't need to copy all files, just copy the file matched with the command you need.
 - dragAndDropWithCommandExtension: [drag_commands.dart](./example/dart/drag_commands.dart)
-- getTextWithCommandExtension: [get_text_command.dart](./example/dart/get_text_command.dart) 
+- getTextWithCommandExtension: [get_text_command.dart](./example/dart/get_text_command.dart)
 
 The entry point must include the `List<CommandExtension>?` commands argument in either `main.dart` or `test_main.dart` to properly handle the command extension.
 

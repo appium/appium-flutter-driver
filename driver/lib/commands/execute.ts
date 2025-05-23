@@ -6,8 +6,7 @@ import {
   scroll,
   scrollIntoView,
   scrollUntilVisible,
-  scrollUntilTapable,
-  pageBack
+  scrollUntilTapable
 } from './execute/scroll';
 import {
   waitFor,
@@ -170,8 +169,6 @@ const commandHandlers: CommandMap = {
     await click.call(driver, input),
   getText: async (driver, element: string) =>
     await getText.call(driver, element),
-  pageBack: async (driver) =>
-    await pageBack.call(driver),
   clear: async (driver, input: FinderInput) =>
     await clear.call(driver, input),
 

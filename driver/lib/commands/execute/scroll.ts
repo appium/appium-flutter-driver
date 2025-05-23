@@ -204,13 +204,3 @@ export const scrollIntoView = async (
 
   return await self.executeElementCommand(`scrollIntoView`, elementBase64, args);
 };
-
-
-export const pageBack = async function (this: FlutterDriver): Promise<void> {
-  if (this.proxydriver && typeof this.proxydriver.back === 'function') {
-    return await this.proxydriver.back(); // use platform driver
-  }
-
-  // fallback
-  throw new Error(`Back navigation is not supported on this platform.`);
-};
