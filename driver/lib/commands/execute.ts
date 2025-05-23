@@ -134,7 +134,7 @@ const commandHandlers: CommandMap = {
     await driver.socket!.executeSocketCommand({ command: 'enter_text', text }),
   requestData: async (driver, message: string) =>
     await driver.socket!.executeSocketCommand({ command: 'request_data', message }),
-  longTap: async (driver, finder: string, durationOrOptions?: LongTapOptions) =>
+  longTap: async (driver, finder: string, durationOrOptions: LongTapOptions) =>
     await longTap(driver, finder, durationOrOptions),
   waitForFirstFrame: async (driver) =>
     await driver.executeElementCommand('waitForCondition', '', { conditionName: 'FirstFrameRasterizedCondition' }),

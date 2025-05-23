@@ -43,16 +43,12 @@ export const scroll = async (
 export const longTap = async (
   self: FlutterDriver,
   elementBase64: string,
-  durationOrOptions: number | {
+  options: {
     durationMilliseconds: number;
     frequency?: number;
-  } = 1000, // Default to 1000ms if nothing provided
+  },
 ) => {
-  const options = typeof durationOrOptions === 'number'
-    ? { durationMilliseconds: durationOrOptions }
-    : durationOrOptions;
-
-  const { durationMilliseconds, frequency = 60 } = options;
+  const { durationMilliseconds = 1000, frequency = 60 } = options;
 
   if (typeof durationMilliseconds !== 'number' || typeof frequency !== 'number') {
     throw new Error(`Invalid longTap options: ${JSON.stringify(options)}`);
