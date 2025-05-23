@@ -307,6 +307,44 @@ Please replace them properly with your client.
 | -                                                                                                                                  | :ok: | (Ruby) `driver.execute_script 'flutter:launchApp', 'bundleId', {arguments: ['arg1'], environment: {ENV1: 'env'}}` | Flutter Driver    |
 | dragAndDropWithCommandExtension                                                                                                    | :ok: | (Python) `driver.execute_script('flutter:dragAndDropWithCommandExtension', payload)` | Command Extension |
 
+# Flutter Visibility Assertions for Appium
+
+This module extends the `appium-flutter-driver` with custom visibility-related commands using `driver.execute()`.
+
+## ✅ Supported Commands
+| **Command**         | **Status** | **Example Usage**                                                                                                         | **Target** |
+|---------------------|------------|--------------------------------------------------------------------------------------------------------------------------|------------|
+| `assertVisible`     | ✅         | `driver.execute('flutter:assertVisible', { key: 'myKey' })`<br>`driver.execute('flutter:assertVisible', { text: 'Login' })` | Widget     |
+| `assertNotVisible`  | ✅         | `driver.execute('flutter:assertNotVisible', { key: 'hiddenWidget' })`                                                   | Widget     |
+| `assertTappable`    | ✅         | `driver.execute('flutter:assertTappable', { label: 'Submit' })`                                                          | Widget     |
+| `tap`               | ✅         | `driver.execute('flutter:tap', [{ key: 'submit_button' }])`                                                              | Widget     |
+| `click`             | ✅         | `driver.execute('flutter:click', { text: 'Continue' })`                                                                  | Widget     |
+ `getText`           | ✅         | `driver.execute('flutter:getText', { key: 'counterText' })`                             | Widget      |
+| `pageBack`          | ✅         | `await driver.execute('flutter:pageBack')`                                              | Navigation  |
+| `clear`             | ✅         | `await driver.execute('flutter:clear', { key: 'emailInput' })`                          | Input Field |
+
+
+
+## 🔍 Input Formats
+
+Each assertion supports the following input formats:
+
+- `{ key: 'valueKey' }`
+- `{ text: 'Text on widget' }`
+- `{ label: 'Tooltip text' }`
+
+These map to Flutter finders:
+- `byValueKey`
+- `byText`
+- `byTooltip`
+
+## 📦 Integration
+
+These commands are typically invoked using a client helper method like:
+
+```ts
+await assertVisible(driver, { key: 'submit_button' });
+
 **NOTE**
 >`flutter:launchApp` launches an app via instrument service. `mobile:activateApp` and `driver.activate_app` are via XCTest API. They are a bit different.
 
