@@ -76,6 +76,6 @@ class ExampleTests < Minitest::Test
     element = ::Appium::Flutter::Element.new(@driver, finder: text_finder)
     assert_equal 'Tap me!', element.text
 
-    driver.back
+    @driver.back
   end
 end
