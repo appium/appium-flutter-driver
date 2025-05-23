@@ -167,8 +167,10 @@ const commandHandlers: CommandMap = {
 
   click: async (driver, input: FinderInput) =>
     await click.call(driver, input),
+
   getText: async (driver, element: string) =>
     await getText.call(driver, element),
+
   clear: async (driver, input: FinderInput) =>
     await clear.call(driver, input),
 

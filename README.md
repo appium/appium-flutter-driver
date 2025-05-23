@@ -263,6 +263,7 @@ Please replace them properly with your client.
 | [FlutterDriver.connectedTo](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/FlutterDriver.connectedTo.html)           | :ok: | [`wdio.remote(opts)`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L33) | Session           |
 | [checkHealth](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/checkHealth.html)                                       | :ok: | `driver.execute('flutter:checkHealth')` | Session           |
 | clearTextbox                                                                                                                       | :ok: | `driver.elementClear(find.byType('TextField'))` | Session           |
+| `clear`       | :ok:  | `await driver.execute('flutter:clear', { key: 'emailInput' })`                          | Input Field |
 | [clearTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/clearTimeline.html)                                   | :ok: | `driver.execute('flutter:clearTimeline')` | Session           |
 | [enterText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/enterText.html)                                           | :ok: | `driver.elementSendKeys(find.byType('TextField'), 'I can enter text')` (no focus required) <br/> `driver.elementClick(find.byType('TextField')); driver.execute('flutter:enterText', 'I can enter text')` (focus required by tap/click first) | Session           |
 | [forceGC](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/forceGC.html)                                               | :ok: | `driver.execute('flutter:forceGC')` | Session           |
@@ -273,7 +274,8 @@ Please replace them properly with your client.
 | [getWidgetDiagnostics](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getWidgetDiagnostics.html)                     | :ok: (v2.8.0+) | `driver.execute('flutter:getWidgetDiagnostics', counterTextFinder, { includeProperties: true, subtreeDepth: 2 })` | Widget            |
 | [getRenderTree](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getRenderTree.html)                                   | :ok: | `driver.execute('flutter: getRenderTree')` | Session           |
 | [getSemanticsId](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getSemanticsId.html)                                 | :ok: | `driver.execute('flutter:getSemanticsId', counterTextFinder)` | Widget            |
-| [getText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getText.html)                                               | :ok: | [`driver.getElementText(counterTextFinder)`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L44) | Widget            |
+| [getText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getText.html)  | :ok: | [`driver.getElementText(counterTextFinder)`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L44) | Widget            |
+| [getText](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getText.html)      | :ok: | `driver.execute('flutter:getText', { key: 'counterText' })` | Widget            |
 | [getTopLeft](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getTopLeft.html)                                         | :ok: | `driver.execute('flutter:getTopLeft', buttonFinder)` | Widget            |
 | [getTopRight](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getTopRight.html)                                       | :ok: | `driver.execute('flutter:getTopRight', buttonFinder)` | Widget            |
 | [getVmFlags](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/getVmFlags.html)                                         | :x: |  | Session           |
@@ -292,7 +294,9 @@ Please replace them properly with your client.
 | [stopTracingAndDownloadTimeline](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/stopTracingAndDownloadTimeline.html) | :x: |  | Session           |
 | [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html)                                                       | :ok: | [`driver.elementClick(buttonFinder)`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L46) | Widget            |
 | [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html)                                                       | :ok: | [`driver.touchAction({action: 'tap', element: {elementId: buttonFinder}})`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L47) | Widget            |
-| [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html)                                                       | :ok: | [`driver.execute('flutter:clickElement', buttonFinder, {timeout:5000})`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L47) | Widget            |
+| [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html) | :ok: | [`driver.execute('flutter:clickElement', buttonFinder, {timeout:5000})`](https://github.com/appium/appium-flutter-driver/blob/5df7386b59bb99008cb4cff262552c7259bb2af2/example/src/index.js#L47) | Widget            |
+| [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html) | :ok:  | `driver.execute('flutter:tap', { key: 'submit_button' })` |Widget |
+| [tap](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/tap.html) | :ok:  | `driver.execute('flutter:click', { text: 'Continue' })` |Widget |
 | [traceAction](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/traceAction.html)                                       | :x: |  | Session           |
 | [waitFor](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitFor.html)                                               | :ok: | `driver.execute('flutter:waitFor', buttonFinder, 100)` | Widget            |
 | [waitForAbsent](https://api.flutter.dev/flutter/flutter_driver/FlutterDriver/waitForAbsent.html)                                   | :ok: | `driver.execute('flutter:waitForAbsent', buttonFinder)` | Widget            |
@@ -317,12 +321,13 @@ This module extends the `appium-flutter-driver` with custom visibility-related c
 | `assertVisible`     | ✅         | `driver.execute('flutter:assertVisible', { key: 'myKey' })`<br>`driver.execute('flutter:assertVisible', { text: 'Login' })` | Widget     |
 | `assertNotVisible`  | ✅         | `driver.execute('flutter:assertNotVisible', { key: 'hiddenWidget' })`                                                   | Widget     |
 | `assertTappable`    | ✅         | `driver.execute('flutter:assertTappable', { label: 'Submit' })`                                                          | Widget     |
-| `tap`               | ✅         | `driver.execute('flutter:tap', [{ key: 'submit_button' }])`                                                              | Widget     |
-| `click`             | ✅         | `driver.execute('flutter:click', { text: 'Continue' })`                                                                  | Widget     |
- `getText`           | ✅         | `driver.execute('flutter:getText', { key: 'counterText' })`                             | Widget      |
-| `clear`             | ✅         | `await driver.execute('flutter:clear', { key: 'emailInput' })`                          | Input Field |
 
+Below commands also support the same syntax.
 
+- `flutter:tap`
+- `flutter:click`
+- `flutter:getText`
+- `flutter:clear`
 
 ## 🔍 Input Formats
 
