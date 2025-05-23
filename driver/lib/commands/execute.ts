@@ -155,25 +155,18 @@ const commandHandlers: CommandMap = {
     }),
   assertVisible: async (driver, input: FinderInput, timeout = 5000) =>
     await assertVisible(driver, input, timeout),
-
   assertNotVisible: async (driver, input: FinderInput, timeout = 5000) =>
     await assertNotVisible(driver, input, timeout),
-
   assertTappable: async (driver, input: FinderInput, timeout = 5000) =>
     await assertTappable(driver, input, timeout),
-
   tap: async (driver, gestures: Record<string, any>[], longPress: boolean = false) =>
     await tap.call(driver, gestures, longPress),
-
   click: async (driver, input: FinderInput) =>
     await click.call(driver, input),
-
   getText: async (driver, element: string) =>
     await getText.call(driver, element),
-
   clear: async (driver, input: FinderInput) =>
     await clear.call(driver, input),
-
   getTextWithCommandExtension: async (driver, params: { findBy: string }) =>
     await driver.socket!.executeSocketCommand({
       command: 'getTextWithCommandExtension',
