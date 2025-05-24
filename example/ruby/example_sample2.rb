@@ -53,7 +53,7 @@ class ExampleTests < Minitest::Test
     assert_equal 'Tap me!', element.text
 
     element.click
-    driver.execute 'flutter:clickElement', text_finder, {timeout:1000}
+    @driver.execute 'flutter:clickElement', text_finder, {timeout:1000}
 
     text_finder = by_text 'Taps: 2'
     element = ::Appium::Flutter::Element.new(@driver, finder: text_finder)
