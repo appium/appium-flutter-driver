@@ -162,6 +162,10 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     return await this.proxydriver.terminateApp(appId);
   }
 
+  public async back() {
+    return await this.proxydriver.back();
+  }
+
   public async getOrientation(): Promise<string> {
     switch (_.toLower(this.internalCaps.platformName)) {
       case PLATFORM.IOS:
@@ -217,7 +221,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     } else if (cmd === `receiveAsyncResponse`) {
       logger.debug(`Executing FlutterDriver response '${cmd}'`);
       return await this.receiveAsyncResponse(...args);
-    } else if ([`setOrientation`, `getOrientation`].includes(cmd)) {
+    } else if ([`setOrientation`, `getOrientation`, `back`].includes(cmd)) {
       // The `setOrientation` and `getOrientation` commands are handled differently
       // for iOS and Android platforms. These commands are deferred to the base driver's
       // implementation (`super.executeCommand`) to ensure compatibility with both platforms

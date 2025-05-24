@@ -47,13 +47,16 @@ class ExampleTests < Minitest::Test
     @driver.context = 'FLUTTER'
 
     text_finder = by_text 'Tap me!'
+
+    @driver.execute_script 'flutter:assertVisible', {text: 'Tap me!'}, 10000
+
     element = ::Appium::Flutter::Element.new(@driver, finder: text_finder)
-    # @driver.execute_script('flutter:waitForTappable', text_finder, 1000)
+    # @driver.execute_script('flutter:waitForTappable', text_finder, 10000)
 
     assert_equal 'Tap me!', element.text
 
     element.click
-    element.click
+    @driver.execute_script 'flutter:clickElement', text_finder, {timeout:10000}
 
     text_finder = by_text 'Taps: 2'
     element = ::Appium::Flutter::Element.new(@driver, finder: text_finder)
@@ -75,5 +78,7 @@ class ExampleTests < Minitest::Test
     text_finder = by_text 'Tap me!'
     element = ::Appium::Flutter::Element.new(@driver, finder: text_finder)
     assert_equal 'Tap me!', element.text
+
+    @driver.back
   end
 end
