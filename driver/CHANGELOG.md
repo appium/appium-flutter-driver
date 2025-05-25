@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.16.0
+- Added shortcut commands below. Please check the README about the usage.
+    - `flutter:assertVisible`
+    - `flutter:assertNotVisible`
+    - `flutter:assertTappable`
+- Update Appium XCUITest driver dependency to 9.2.5
+
 ## 2.15.2
 - Fix device orientation change for iOS
 - Update Appium XCUITest driver dependency to 9.2.4
