@@ -6,16 +6,13 @@ import {
   scroll,
   scrollIntoView,
   scrollUntilVisible,
-  scrollUntilTapable,
-  pageBack
+  scrollUntilTapable
 } from './execute/scroll';
 import {
   waitFor,
   waitForAbsent,
   waitForTappable
 } from './execute/wait';
-import { clear, getText } from './element';
-import { tap, click } from './gesture';
 import {
   assertVisible,
   assertNotVisible,
@@ -135,7 +132,7 @@ const commandHandlers: CommandMap = {
     await driver.socket!.executeSocketCommand({ command: 'enter_text', text }),
   requestData: async (driver, message: string) =>
     await driver.socket!.executeSocketCommand({ command: 'request_data', message }),
-  longTap: async (driver, finder: string, durationOrOptions?: LongTapOptions) =>
+  longTap: async (driver, finder: string, durationOrOptions: LongTapOptions) =>
     await longTap(driver, finder, durationOrOptions),
   waitForFirstFrame: async (driver) =>
     await driver.executeElementCommand('waitForCondition', '', { conditionName: 'FirstFrameRasterizedCondition' }),
@@ -156,25 +153,10 @@ const commandHandlers: CommandMap = {
     }),
   assertVisible: async (driver, input: FinderInput, timeout = 5000) =>
     await assertVisible(driver, input, timeout),
-
   assertNotVisible: async (driver, input: FinderInput, timeout = 5000) =>
     await assertNotVisible(driver, input, timeout),
-
   assertTappable: async (driver, input: FinderInput, timeout = 5000) =>
     await assertTappable(driver, input, timeout),
-
-  tap: async (driver, gestures: Record<string, any>[], longPress: boolean = false) =>
-    await tap.call(driver, gestures, longPress),
-
-  click: async (driver, input: FinderInput) =>
-    await click.call(driver, input),
-  getText: async (driver, element: string) =>
-    await getText.call(driver, element),
-  pageBack: async (driver) =>
-    await pageBack.call(driver),
-  clear: async (driver, input: FinderInput) =>
-    await clear.call(driver, input),
-
   getTextWithCommandExtension: async (driver, params: { findBy: string }) =>
     await driver.socket!.executeSocketCommand({
       command: 'getTextWithCommandExtension',

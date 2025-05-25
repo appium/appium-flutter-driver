@@ -43,16 +43,12 @@ export const scroll = async (
 export const longTap = async (
   self: FlutterDriver,
   elementBase64: string,
-  durationOrOptions: number | {
+  options: {
     durationMilliseconds: number;
     frequency?: number;
-  } = 1000, // Default to 1000ms if nothing provided
+  },
 ) => {
-  const options = typeof durationOrOptions === 'number'
-    ? { durationMilliseconds: durationOrOptions }
-    : durationOrOptions;
-
-  const { durationMilliseconds, frequency = 60 } = options;
+  const { durationMilliseconds = 1000, frequency = 60 } = options;
 
   if (typeof durationMilliseconds !== 'number' || typeof frequency !== 'number') {
     throw new Error(`Invalid longTap options: ${JSON.stringify(options)}`);
@@ -203,14 +199,4 @@ export const scrollIntoView = async (
   const args = typeof timeout === `number` ? { alignment, timeout } : { alignment };
 
   return await self.executeElementCommand(`scrollIntoView`, elementBase64, args);
-};
-
-
-export const pageBack = async function (this: FlutterDriver): Promise<void> {
-  if (this.proxydriver && typeof this.proxydriver.back === 'function') {
-    return await this.proxydriver.back(); // use platform driver
-  }
-
-  // fallback
-  throw new Error(`Back navigation is not supported on this platform.`);
 };

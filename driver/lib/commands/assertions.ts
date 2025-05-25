@@ -36,15 +36,15 @@ function getFinderBase64(input: FinderInput): string {
   }
 
   if ('key' in input) {
-    return serializeFinder(byValueKey(input.key));
+    return byValueKey(input.key);
   }
 
   if ('text' in input) {
-    return serializeFinder(byText(input.text));
+    return byText(input.text);
   }
 
   if ('label' in input) {
-    return serializeFinder(byTooltip(input.label));
+    return byTooltip(input.label);
   }
 
   throw new Error('Invalid finder input: must provide key, text, label, raw finder, or FlutterElement');
