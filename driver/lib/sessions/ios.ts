@@ -61,6 +61,16 @@ async function requireFreePort(
   this: FlutterDriver,
   port: number
 ) {
+  // Try to close existing local server if it exists
+  if (this.localServer) { {
+    this.log.info(`Closing existing local server on port ${port}`);
+    await new Promise<void>((resolve) => {
+        this.localServer?.close(() => {
+            this.log.info(`Previous local server closed`);
+            resolve();
+        });
+    });
+  }}
   if ((await checkPortStatus(port, LOCALHOST)) !== `open`) {
     return;
   }
