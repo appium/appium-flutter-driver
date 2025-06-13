@@ -65,7 +65,7 @@ async function requireFreePort(
   if (this.localServer) {
     this.log.info(`Closing existing local server on port ${port}`);
     await new Promise<void>((resolve) => {
-        this.localServer?.close(() => {
+        this.localServer.close(() => {
             this.log.info(`Previous local server closed`);
             resolve();
         });
