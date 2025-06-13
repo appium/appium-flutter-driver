@@ -10,7 +10,7 @@ const osSpecificOps =
         'appium:platformName': 'Android',
         'appium:deviceName': 'Pixel 2',
         // @todo support non-unix style path
-        'appium:app': __dirname + '/../../apps/android-real-debug.apk' // download local to run faster and save bandwith
+        'appium:app': __dirname + '/../../apps/android-real-debug.apk' // download local to run faster and save bandwidth
         // app: 'https://github.com/truongsinh/appium-flutter-driver/releases/download/v0.0.4/android-real-debug.apk',
       }
     : process.env.APPIUM_OS === 'ios'
@@ -20,7 +20,7 @@ const osSpecificOps =
         'appium:deviceName': 'iPhone 13',
         'appium:connectionRetryTimeout': 60000,
         'appium:noReset': true,
-        'appium:app': __dirname + '/../../apps/ios-sim-debug.zip' // download local to run faster and save bandwith
+        'appium:app': __dirname + '/../../apps/ios-sim-debug.zip' // download local to run faster and save bandwidth
         // app: 'https://github.com/truongsinh/appium-flutter-driver/releases/download/v0.0.4/ios-sim-debug.zip',
       }
     : {};

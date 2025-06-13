@@ -116,7 +116,7 @@ SKIP_IOS=1 appium driver doctor flutter
 | appium:skipPortForward | Whether skip port forwarding from the flutter driver local to the device under test with `observatoryWsUri` capability. It helps you to manage the application under test, the observatory URL and the port forwarding configuration. The default is `true`. | true, false |
 | appium:remoteAdbHost | The IP/hostname of the remote host ADB is running on. This capability only makes sense for Android platform. Providing it will implicitly override the host for the Observatory URL if the latter is determined from device logs. localhost be default | 192.168.1.20
 | appium:adbPort | The port number ADB server is running on. This capability only makes sense for Android platform. 5037 by default | 9999
-| appium:forwardingPort | The port number that will be used to forward the traffic from the device under test to locahost. Only applicable if `skipPortForward` is falsy. Not applicable if the test is executed on iOS Simulator. By default, it is the same as in the provided or autodetected Observatory URL. | 9999
+| appium:forwardingPort | The port number that will be used to forward the traffic from the device under test to localhost. Only applicable if `skipPortForward` is falsy. Not applicable if the test is executed on iOS Simulator. By default, it is the same as in the provided or autodetected Observatory URL. | 9999
 
 ### UIA2/XCUITest driver
 
@@ -359,7 +359,7 @@ driver.execute_script 'flutter:waitFor', text_finder, 10000
 
 
 ### `isolate` handling
-#### Change the flutter engine attache to
+#### Change the flutter engine attach to
 
 1. Get available isolate ids
     - `id` key in the value of `isolates` by `flutter:getVMInfo`
@@ -485,7 +485,7 @@ For debugging or testing in other programming languages, you can use the APK ava
 - Input texts https://github.com/appium/appium-flutter-driver/issues/417
 - Looks hanging in `click` https://github.com/appium/appium-flutter-driver/issues/181#issuecomment-1323684510
     - `flutter:setFrameSync` may help
-- `flutter:waitFor` would help to handle "an element does not exist/is not enabled" behavior. [exmaple issue](https://github.com/appium/appium-flutter-driver/issues/693)
+- `flutter:waitFor` would help to handle "an element does not exist/is not enabled" behavior. [example issue](https://github.com/appium/appium-flutter-driver/issues/693)
 - Appium Inspector does not work with FLUTTER context
 - `enableFlutterDriverExtension()` must be called before calling `WidgetsFlutterBinding.ensureInitialized` to avoid `Binding is already initialized to WidgetsFlutterBinding` error which could cause `"ext.flutter.driver" is not found in "extensionRPCs"` error. [issue](https://github.com/appium/appium-flutter-driver/issues/756)
 
