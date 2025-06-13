@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.17.0
+- Fix ending forwarding port with `forwardingPort` capability on iOS with `terminateApp`
+- Update Appium XCUITest driver dependency to 9.6.1
+
 ## 2.16.0
 - Added shortcut commands below. Please check the README about the usage.
     - `flutter:assertVisible`
