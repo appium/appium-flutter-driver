@@ -65,7 +65,7 @@ export async function connectSocket(
           // `await` is needed so that rejected promise will be thrown and caught
           return await originalSocketCall.apply(socket, args);
         } catch (e) {
-          this.log.errorAndThrow(JSON.stringify(e));
+          this.log.errorWithException(new Error(JSON.stringify(e)));
         }
       };
       this.log.info(`Connecting to Dart Observatory: ${dartObservatoryURL}`);
