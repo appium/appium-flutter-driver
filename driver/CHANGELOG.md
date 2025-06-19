@@ -1,7 +1,7 @@
 # Changelog
 
 ## 2.18.0
-- Skip reconnecting the Dart VM if `activateApp` command was called for already running app in the background or foreground.
+- Skip reconnecting the Dart VM if `activateApp` command was called for already running app in the background or foreground in `FLUTTER` context
     - Such a reconnection works only for newly started processes
 
 ## 2.17.0
