@@ -220,7 +220,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     skipAttachObservatoryUrl: string, any: any
   }]]) {
     if (new RegExp(/^[\s]*mobile:[\s]*activateApp$/).test(args[0])) {
-      const { skipAttachObservatoryUrl = false} = args[1][0];
+      const { skipAttachObservatoryUrl = false } = args[1][0];
       await this.proxydriver.executeCommand(cmd, ...args);
       if (skipAttachObservatoryUrl) { return; }
       await reConnectFlutterDriver.bind(this)(this.internalCaps);
