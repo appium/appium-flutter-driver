@@ -199,7 +199,7 @@ You have a couple of methods to start the application under test by establishing
     1. Start a session without `app` capability
     2. Install the application under test via `driver.install_app` or `mobile:installApp` command
     3. Activate the app via `driver.activate_app` or `mobile:activateApp` command
-        - Then, appium-flutter-driver establish a connection with the Dart VM
+        - Then, appium-flutter-driver establish a connection with the Dart VM in `FLUTTER` context
 3. Launch the app outside the driver: for users who want to manage the application under test by yourselves
     1. Start a session without `app` capability
     2. Install the application under test via `driver.install_app` or `mobile:installApp` command etc

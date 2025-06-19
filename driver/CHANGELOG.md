@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.18.0
+- Skip reconnecting the Dart VM if `activateApp` command was called for already running app in the background or foreground.
+    - Such a reconnection works only for newly started processes
+
 ## 2.17.0
 - Fix ending forwarding port with `forwardingPort` capability on iOS with `terminateApp`
 - Update Appium XCUITest driver dependency to 9.6.1

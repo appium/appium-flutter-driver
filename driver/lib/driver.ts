@@ -146,6 +146,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
       this.proxydriver = null;
     }
 
+    this.socket = null;
     await super.deleteSession();
   }
 
@@ -154,11 +155,18 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async activateApp(appId: string) {
+    const appState = await this.proxydriver.queryAppState(appId);
+    logger.info(`[debug] app state: ${appState}`);
     this.proxydriver.activateApp(appId);
+
+    // RUNNING_IN_BACKGROUND for 3.
+    // RUNNING_IN_FOREGROUND for 4.
+    if (appState === 3 || appState === 4) { return; }
     await reConnectFlutterDriver.bind(this)(this.internalCaps);
   }
 
   public async terminateApp(appId: string) {
+    this.socket = null;
     return await this.proxydriver.terminateApp(appId);
   }
 
@@ -208,15 +216,26 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     return result;
   }
 
-  public async executeCommand(cmd: string, ...args: [string, [{skipAttachObservatoryUrl: string, any: any}]]) {
+  public async executeCommand(cmd: string, ...args: [string, [{
+    skipAttachObservatoryUrl: string, appId: string, bundleId: string, any: any
+  }]]) {
     if (new RegExp(/^[\s]*mobile:[\s]*activateApp$/).test(args[0])) {
-      const { skipAttachObservatoryUrl = false } = args[1][0];
+      const { skipAttachObservatoryUrl = false, appId = null, bundleId = null} = args[1][0];
+
+      if (skipAttachObservatoryUrl) {
+        await this.proxydriver.executeCommand(cmd, ...args);
+        return;
+      }
+
+      const appState = await this.proxydriver.queryAppState(appId || bundleId);
       await this.proxydriver.executeCommand(cmd, ...args);
-      if (skipAttachObservatoryUrl) { return; }
+      if (appState === 3 || appState === 4) { return; }
+
       await reConnectFlutterDriver.bind(this)(this.internalCaps);
       return;
     } else if (new RegExp(/^[\s]*mobile:[\s]*terminateApp$/).test(args[0])) {
       // to make the behavior as same as this.terminateApp
+      this.socket = null;
       return await this.proxydriver.executeCommand(cmd, ...args);
     } else if (cmd === `receiveAsyncResponse`) {
       logger.debug(`Executing FlutterDriver response '${cmd}'`);
