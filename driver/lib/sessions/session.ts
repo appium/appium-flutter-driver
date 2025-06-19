@@ -12,7 +12,7 @@ import { PLATFORM } from '../platform';
 export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: Record<string, any>) {
   // setup proxies - if platformName is not empty, make it less case sensitive
   if (!caps.platformName) {
-    this.log.errorAndThrow(`No platformName was given`);
+    this.log.errorWithException(new Error(`No platformName was given`));
   }
 
   switch (_.toLower(caps.platformName)) {
@@ -23,9 +23,11 @@ export const reConnectFlutterDriver = async function(this: FlutterDriver, caps: 
       this.socket = await connectAndroidSession.bind(this)(this.proxydriver, caps, true);
       break;
     default:
-      this.log.errorAndThrow(
-        `Unsupported platformName: ${caps.platformName}. ` +
-        `Only the following platforms are supported: ${_.keys(PLATFORM)}`
+      this.log.errorWithException(
+        new Error(
+          `Unsupported platformName: ${caps.platformName}. ` +
+          `Only the following platforms are supported: ${_.keys(PLATFORM)}`
+        )
       );
   }
 };
@@ -48,9 +50,11 @@ export const createSession: any = async function(this: FlutterDriver, sessionId:
         this.proxydriver.allowInsecure = this.allowInsecure;
         break;
       default:
-        this.log.errorAndThrow(
-          `Unsupported platformName: ${caps.platformName}. ` +
-          `Only the following platforms are supported: ${_.keys(PLATFORM)}`
+        this.log.errorWithException(
+          new Error(
+            `Unsupported platformName: ${caps.platformName}. ` +
+            `Only the following platforms are supported: ${_.keys(PLATFORM)}`
+          )
         );
     }
 
