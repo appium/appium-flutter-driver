@@ -390,6 +390,7 @@ These Appium commands can work across context
 - `getContexts`
 - `activateApp('appId')`/`mobile:activateApp`
     - `mobile:activateApp` has `skipAttachObservatoryUrl` key to not try to attach to an observatory url. e.g. `driver.execute_script 'mobile:activateApp', {skipAttachObservatoryUrl: true, appId: 'com.android.chrome'}`
+    - `activateApp` command skip reconnecting the DartVM when the process is alreday running
 - `terminateApp('appId')`/`mobile:terminateApp`
 - `installApp(appPath, options)`
 - `getClipboard`
