@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.18.0
+## 2.18.1/2.18.0
 - Update Appium UIAutomator2 driver dependency to 4.2.4
 - Update Appium XCUITest driver dependency to 9.9.1
     - Supports `appium driver run flutter download-wda-sim` command. It requires NodeJS 20+.
