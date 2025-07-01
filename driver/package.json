@@ -32,7 +32,7 @@
       ]
     },
     "scripts": {
-      "download-wda-sim": "./node_modules/appium-xcuitest-driver/scripts/download-wda-sim.mjs"
+      "download-wda-sim": "./scripts/download-wda-sim.mjs"
     }
   },
   "bin": {},
