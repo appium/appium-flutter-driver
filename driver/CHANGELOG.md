@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.18.0
+- Update Appium UIAutomator2 driver dependency to 4.2.4
+- Update Appium XCUITest driver dependency to 9.9.1
+    - Supports `appium driver run flutter download-wda-sim` command. It requires NodeJS 20+.
+
 ## 2.17.0
 - Fix ending forwarding port with `forwardingPort` capability on iOS with `terminateApp`
 - Update Appium XCUITest driver dependency to 9.6.1
