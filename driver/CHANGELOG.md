@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.19.0
+- Update Appium UIAutomator2 driver dependency to 4.2.9
+- Update Appium XCUITest driver dependency to 9.10.5
+
 ## 2.18.1/2.18.0
 - Update Appium UIAutomator2 driver dependency to 4.2.4
 - Update Appium XCUITest driver dependency to 9.9.1
