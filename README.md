@@ -42,7 +42,7 @@ If you'd like to test a release app, which can be released from app store as-is,
 
 ## Installation
 
-Appium Flutter Driver version 1.0 and higher require Appium 2.0.
+Appium Flutter Driver version `3.0.0` requires Appium 3.
 
 ```
 appium driver install --source=npm appium-flutter-driver

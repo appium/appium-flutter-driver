@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.0.0
+- Update Appium UIAutomator2 driver dependency to 5.0.0
+- Update Appium XCUITest driver dependency to 10.0.0
+- Follow Appium 3
+    - Required Node.js version has been bumped to ^20.19.0 || ^22.12.0 || >=24.0.0
+    - Required npm version has been bumped to >=10
+    - Requires **Appium 3.0.0+**
+
 ## 2.19.0
 - Update Appium UIAutomator2 driver dependency to 4.2.9
 - Update Appium XCUITest driver dependency to 9.10.5
