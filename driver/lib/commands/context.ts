@@ -14,12 +14,14 @@ export const setContext = async function(this: FlutterDriver, context: string) {
     // Set 'native context' when flutter driver sets the context to FLUTTER_CONTEXT_NAME
     if (this.proxydriver) {
       log.debug(`Setting downstream drier context to '${NATIVE_CONTEXT_NAME}' in context '${context}'.`);
+      // @ts-expect-error this exist in xcuitestdriver or uia2 driver
       await this.proxydriver.setContext(NATIVE_CONTEXT_NAME);
     }
   } else {
     // this case may be 'webview'
     if (this.proxydriver) {
       log.debug(`Setting downstream drier context to '${context}'.`);
+      // @ts-expect-error this exist in xcuitestdriver or uia2 driver
       await this.proxydriver.setContext(context);
       this.proxyWebViewActive = true;
     }
@@ -31,8 +33,13 @@ export const setContext = async function(this: FlutterDriver, context: string) {
 };
 
 export const getContexts = async function(this: FlutterDriver): Promise<string[]> {
-  const nativeContext = await this.proxydriver.getContexts();
-  return [...nativeContext, FLUTTER_CONTEXT_NAME];
+  // @ts-expect-error this exist in xcuitestdriver or uia2 driver
+  const nativeContext = await this.proxydriver?.getContexts();
+  if (nativeContext) {
+    return [...nativeContext as string[], FLUTTER_CONTEXT_NAME];
+  } else {
+    return [FLUTTER_CONTEXT_NAME];
+  }
 };
 
 export const driverShouldDoProxyCmd = function(this: FlutterDriver, command: string): boolean {

@@ -22,13 +22,11 @@ if (!process.env.SKIP_ANDROID) {
 let xcodeCheck;
 let xcodeToolsCheck;
 let envVarAndPathCheck;
-let optionalIdbCommandCheck;
 let optionalApplesimutilsCommandCheck;
 if (!process.env.SKIP_IOS) {
   xcodeCheck = iosDoctor.required.xcodeCheck;
   xcodeToolsCheck = iosDoctor.required.xcodeToolsCheck;
-  envVarAndPathCheck = iosDoctor.required.envVarAndPathCheck;
-  optionalIdbCommandCheck = iosDoctor.optional.optionalIdbCommandCheck;
+  envVarAndPathCheck = iosDoctor.required.homeEnvVarCheck;
   optionalApplesimutilsCommandCheck = iosDoctor.optional.optionalApplesimutilsCheck;
 }
 
@@ -37,5 +35,5 @@ export const optionalFfmpegCheck = androidDoctor.optionalFfmpegCheck;
 
 export {
   androidHomeCheck, javaHomeCheck, javaHomeValueCheck, androidSdkCheck, optionalBundletoolCheck, optionalGstreamerCheck,
-  xcodeCheck, xcodeToolsCheck, envVarAndPathCheck, optionalIdbCommandCheck, optionalApplesimutilsCommandCheck
+  xcodeCheck, xcodeToolsCheck, envVarAndPathCheck, optionalApplesimutilsCommandCheck
 };
