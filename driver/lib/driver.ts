@@ -17,11 +17,15 @@ import { click, longTap, performTouch, tap, tapEl } from './commands/gesture';
 import { getScreenshot } from './commands/screen';
 import { getClipboard, setClipboard } from './commands/clipboard';
 import { desiredCapConstraints } from './desired-caps';
-import XCUITestDriver from 'appium-xcuitest-driver';
+import { XCUITestDriver } from 'appium-xcuitest-driver';
 import { AndroidUiautomator2Driver } from 'appium-uiautomator2-driver';
 import type {
-  DefaultCreateSessionResult, DriverCaps, DriverData, W3CDriverCaps,
-  RouteMatcher
+  DefaultCreateSessionResult,
+  DriverCaps,
+  DriverData,
+   W3CDriverCaps,
+  RouteMatcher,
+  Orientation
 } from '@appium/types';
 import type { IsolateSocket } from './sessions/isolate_socket';
 import type { Server } from 'node:net';
@@ -47,7 +51,7 @@ const WEBVIEW_NO_PROXY = [
 class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   public socket: IsolateSocket | null;
   public locatorStrategies = [`key`, `css selector`];
-  public proxydriver: XCUITestDriver | AndroidUiautomator2Driver;
+  public proxydriver: XCUITestDriver | AndroidUiautomator2Driver | null;
   public device: any;
 
   public portForwardLocalPort: string | null;
@@ -131,7 +135,9 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
         break;
       case PLATFORM.ANDROID:
         if (this.portForwardLocalPort) {
-          await this.proxydriver?.adb?.removePortForward(this.portForwardLocalPort);
+          if (this.proxydriver) {
+            await (this.proxydriver as AndroidUiautomator2Driver).adb?.removePortForward(this.portForwardLocalPort);
+          }
         }
         break;
       }
@@ -139,7 +145,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     if (this.proxydriver) {
       this.log.info('Deleting the proxy driver session.');
       try {
-        await this.proxydriver.deleteSession();
+        await this.proxydriver.deleteSession(this.sessionId);
       } catch (e) {
         this.log.warn(e.message);
       }
@@ -150,44 +156,51 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async installApp(appPath: string, opts = {}) {
-    this.proxydriver.installApp(appPath, opts);
+    // @ts-expect-error this exist in xcuitestdriver or uia2 driver
+    this.proxydriver?.installApp(appPath, opts);
   }
 
   public async activateApp(appId: string) {
-    this.proxydriver.activateApp(appId);
+    // @ts-expect-error this exist in xcuitestdriver or uia2 driver
+    this.proxydriver?.activateApp(appId);
     await reConnectFlutterDriver.bind(this)(this.internalCaps);
   }
 
   public async terminateApp(appId: string) {
-    return await this.proxydriver.terminateApp(appId);
+    // @ts-expect-error this exist in xcuitestdriver or uia2 driver
+    return await this.proxydriver?.terminateApp(appId);
   }
 
   public async back() {
-    return await this.proxydriver.back();
+    // @ts-expect-error this exist in xcuitestdriver or uia2 driver
+    return await this.proxydriver?.back();
   }
 
-  public async getOrientation(): Promise<string> {
+  public async getOrientation(): Promise<string|null> {
+    if (!this.proxydriver) {
+      return null;
+    }
     switch (_.toLower(this.internalCaps.platformName)) {
       case PLATFORM.IOS:
-        return await this.proxydriver.proxyCommand('/orientation', 'GET');
+        return await (this.proxydriver as XCUITestDriver).proxyCommand('/orientation', 'GET');
       default:
-        return await this.proxydriver.getOrientation();
+        return await (this.proxydriver as AndroidUiautomator2Driver).getOrientation();
       }
   }
 
   public async setOrientation(orientation: string) {
     switch (_.toLower(this.internalCaps.platformName)) {
       case PLATFORM.IOS:
-        return await this.proxydriver.proxyCommand('/orientation', 'POST', {orientation});
+        return await (this.proxydriver as XCUITestDriver).proxyCommand('/orientation', 'POST', {orientation});
       default:
-        return await this.proxydriver.setOrientation(orientation);
+        return await (this.proxydriver as AndroidUiautomator2Driver).setOrientation(orientation as Orientation);
       }
   }
 
   public validateLocatorStrategy(strategy: string) {
     // @todo refactor DRY
     if (this.currentContext === `NATIVE_APP`) {
-      return this.proxydriver.validateLocatorStrategy(strategy);
+      return this.proxydriver?.validateLocatorStrategy(strategy);
     }
     super.validateLocatorStrategy(strategy, false);
   }
@@ -204,20 +217,21 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async proxyCommand (url: string, method: string, body = null) {
-    const result = await this.proxydriver.proxyCommand(url, method, body);
+    // @ts-expect-error this exist in xcuitestdriver or uia2 driver
+    const result = await this.proxydriver?.proxyCommand(url, method, body);
     return result;
   }
 
   public async executeCommand(cmd: string, ...args: [string, [{skipAttachObservatoryUrl: string, any: any}]]) {
     if (new RegExp(/^[\s]*mobile:[\s]*activateApp$/).test(args[0])) {
       const { skipAttachObservatoryUrl = false } = args[1][0];
-      await this.proxydriver.executeCommand(cmd, ...args);
+      await this.proxydriver?.executeCommand(cmd, ...args);
       if (skipAttachObservatoryUrl) { return; }
       await reConnectFlutterDriver.bind(this)(this.internalCaps);
       return;
     } else if (new RegExp(/^[\s]*mobile:[\s]*terminateApp$/).test(args[0])) {
       // to make the behavior as same as this.terminateApp
-      return await this.proxydriver.executeCommand(cmd, ...args);
+      return await this.proxydriver?.executeCommand(cmd, ...args);
     } else if (cmd === `receiveAsyncResponse`) {
       logger.debug(`Executing FlutterDriver response '${cmd}'`);
       return await this.receiveAsyncResponse(...args);
@@ -237,7 +251,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
         // All proxy commands needs to reset the FlutterDriver CommandTimeout
         // Here we manually reset the FlutterDriver CommandTimeout for commands that goes to proxy.
         this.clearNewCommandTimeout();
-        const result = await this.proxydriver.executeCommand(cmd, ...args);
+        const result = await this.proxydriver?.executeCommand(cmd, ...args);
         this.startNewCommandTimeout();
         return result;
       } else {
@@ -261,7 +275,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     // On iOS, WebView context is handled by XCUITest driver while Android is by chromedriver.
     // It means XCUITest driver should keep the XCUITest driver as a proxy,
     // while UIAutomator2 driver should proxy to chromedriver instead of UIA2 proxy.
-    return this.proxyWebViewActive && this.proxydriver.constructor.name !== XCUITestDriver.name;
+    return this.proxyWebViewActive && this.proxydriver?.constructor.name !== XCUITestDriver.name;
   }
 
   public canProxy(): boolean {
