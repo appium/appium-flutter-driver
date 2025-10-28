@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.1.0
+- Update Appium UIAutomator2 driver dependency to 6.0.2
+
 ## 3.0.1
 - Fix types
 - Update Appium XCUITest driver dependency to 10.0.1
