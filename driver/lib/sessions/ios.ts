@@ -112,7 +112,7 @@ export async function getObservatoryWsUri (
       );
     }
 
-    let lastMatch = null;
+    let lastMatch : LogEntry | null = null;
     try {
       lastMatch = await this._logmon.waitForLastMatchExist(
         caps.maxRetryCount,
