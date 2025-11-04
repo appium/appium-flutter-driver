@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.2.0
+- Fix log finding retry handling
+- Update Appium XCUITest driver dependency to 10.4.3
+- Update Appium UIAutomator2 driver dependency to 6.1.0
+
 ## 3.1.0
 - Update Appium UIAutomator2 driver dependency to 6.0.2
 
