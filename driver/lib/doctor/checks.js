@@ -2,7 +2,7 @@ import { doctor as androidDoctor } from 'appium-android-driver';
 import { doctor as iosDoctor } from 'appium-xcuitest-driver';
 
 // shared
-export const homeEnvVarCheck = iosDoctor.required.homeEnvVarCheck;
+export const homeEnvVarCheck = /** @type {any} */ (iosDoctor.required.homeEnvVarCheck);
 
 let androidHomeCheck;
 let javaHomeCheck;
@@ -22,13 +22,11 @@ if (!process.env.SKIP_ANDROID) {
 let xcodeCheck;
 let xcodeToolsCheck;
 let envVarAndPathCheck;
-let optionalIdbCommandCheck;
 let optionalApplesimutilsCommandCheck;
 if (!process.env.SKIP_IOS) {
   xcodeCheck = iosDoctor.required.xcodeCheck;
   xcodeToolsCheck = iosDoctor.required.xcodeToolsCheck;
-  envVarAndPathCheck = iosDoctor.required.envVarAndPathCheck;
-  optionalIdbCommandCheck = iosDoctor.optional.optionalIdbCommandCheck;
+  envVarAndPathCheck = /** @type {any} */ (iosDoctor.required.homeEnvVarCheck);
   optionalApplesimutilsCommandCheck = iosDoctor.optional.optionalApplesimutilsCheck;
 }
 
@@ -37,5 +35,5 @@ export const optionalFfmpegCheck = androidDoctor.optionalFfmpegCheck;
 
 export {
   androidHomeCheck, javaHomeCheck, javaHomeValueCheck, androidSdkCheck, optionalBundletoolCheck, optionalGstreamerCheck,
-  xcodeCheck, xcodeToolsCheck, envVarAndPathCheck, optionalIdbCommandCheck, optionalApplesimutilsCommandCheck
+  xcodeCheck, xcodeToolsCheck, envVarAndPathCheck, optionalApplesimutilsCommandCheck
 };

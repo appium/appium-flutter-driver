@@ -1,5 +1,39 @@
 # Changelog
 
+## 3.3.0
+- Update Appium XCUITest driver dependency to 10.11.0
+- Update Appium UIAutomator2 driver dependency to 6.7.1
+
+## 3.2.0
+- Fix log finding retry handling
+- Update Appium XCUITest driver dependency to 10.4.3
+- Update Appium UIAutomator2 driver dependency to 6.1.0
+
+## 3.1.0
+- Update Appium UIAutomator2 driver dependency to 6.0.2
+
+## 3.0.1
+- Fix types
+- Update Appium XCUITest driver dependency to 10.0.1
+- Update Appium UIAutomator2 driver dependency to 5.0.3
+
+## 3.0.0
+- Update Appium UIAutomator2 driver dependency to 5.0.0
+- Update Appium XCUITest driver dependency to 10.0.0
+- Follow Appium 3
+    - Required Node.js version has been bumped to ^20.19.0 || ^22.12.0 || >=24.0.0
+    - Required npm version has been bumped to >=10
+    - Requires **Appium 3.0.0+**
+
+## 2.19.0
+- Update Appium UIAutomator2 driver dependency to 4.2.9
+- Update Appium XCUITest driver dependency to 9.10.5
+
+## 2.18.1/2.18.0
+- Update Appium UIAutomator2 driver dependency to 4.2.4
+- Update Appium XCUITest driver dependency to 9.9.1
+    - Supports `appium driver run flutter download-wda-sim` command. It requires NodeJS 20+.
+
 ## 2.17.0
 - Fix ending forwarding port with `forwardingPort` capability on iOS with `terminateApp`
 - Update Appium XCUITest driver dependency to 9.6.1

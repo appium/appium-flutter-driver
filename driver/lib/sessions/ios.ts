@@ -1,5 +1,5 @@
 import { utilities } from 'appium-ios-device';
-import XCUITestDriver from 'appium-xcuitest-driver';
+import { XCUITestDriver } from 'appium-xcuitest-driver';
 import B from 'bluebird';
 import net from 'net';
 import { checkPortStatus } from 'portscanner';
@@ -8,11 +8,11 @@ import {
   extractObservatoryUrl,
   OBSERVATORY_URL_PATTERN
 } from './observatory';
-import type { InitialOpts } from '@appium/types';
 import type { IsolateSocket } from './isolate_socket';
 import { LogMonitor } from './log-monitor';
 import type { LogEntry } from './log-monitor';
 import type { FlutterDriver } from '../driver';
+import type { XCUITestDriverOpts } from 'appium-xcuitest-driver/build/lib/driver';
 
 const LOCALHOST = `127.0.0.1`;
 
@@ -21,7 +21,7 @@ export async function startIOSSession(
   caps: Record<string, any>, ...args: any[]
 ): Promise<[XCUITestDriver, IsolateSocket|null]> {
   this.log.info(`Starting an IOS proxy session`);
-  const iosdriver = new XCUITestDriver({} as InitialOpts);
+  const iosdriver = new XCUITestDriver({} as XCUITestDriverOpts);
   if (!caps.observatoryWsUri) {
     iosdriver.eventEmitter.once('syslogStarted', (syslog) => {
       this._logmon = new LogMonitor(syslog, async (entry: LogEntry) => {
@@ -34,6 +34,7 @@ export async function startIOSSession(
       this._logmon.start();
     });
   }
+  // @ts-expect-error can be ignored
   await iosdriver.createSession(...args);
 
   // the session starts without any apps
@@ -110,10 +111,16 @@ export async function getObservatoryWsUri (
         `Have you disabled it in capabilities?`
       );
     }
-    const lastMatch = await this._logmon.waitForLastMatchExist(
-      caps.maxRetryCount,
-      caps.retryBackoffTime
-    );
+
+    let lastMatch : LogEntry | null = null;
+    try {
+      lastMatch = await this._logmon.waitForLastMatchExist(
+        caps.maxRetryCount,
+        caps.retryBackoffTime
+      );
+    } catch (e) {
+      this.log.error(e);
+    }
     if (!lastMatch) {
       throw new Error(
         `No observatory URL matching to '${OBSERVATORY_URL_PATTERN}' was found in the device log. ` +

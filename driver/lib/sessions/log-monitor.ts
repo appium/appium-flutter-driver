@@ -21,6 +21,7 @@ export class LogMonitor {
     this._logsEmitter = logsEmitter;
     this._outputListener = null;
     this._filter = filter;
+    this._lastMatch = null;
   }
 
   get started(): boolean {

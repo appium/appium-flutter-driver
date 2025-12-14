@@ -17,18 +17,18 @@ concurrency:
 
 jobs:
   ios_test:
-    runs-on: macos-14
+    runs-on: macos-15
 
     env:
-      XCODE_VERSION: 16.2
+      XCODE_VERSION: 16.4
       IOS_DEVICE_NAME: iPhone 16 Plus
-      IOS_VERSION: 18.2
+      IOS_VERSION: 18.5
 
     steps:
     - uses: actions/checkout@v3
 
     - name: Install Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v6
       with:
         node-version: 'lts/*'
 
@@ -38,9 +38,9 @@ jobs:
         xcode-version: ${{ env.XCODE_VERSION }}
     - run: defaults write com.apple.iphonesimulator PasteboardAutomaticSync -bool false
 
-    - uses: futureware-tech/simulator-action@v3
+    - uses: futureware-tech/simulator-action@v4
       with:
-        # https://github.com/actions/runner-images/blob/main/images/macos/macos-14-arm64-Readme.md
+        # https://github.com/actions/runner-images/blob/main/images/macos/macos-15-arm64-Readme.md
         model: ${{ env.IOS_DEVICE_NAME }}
         os_version: ${{ env.IOS_VERSION }}
 
@@ -86,7 +86,7 @@ jobs:
         java-version: '17'
 
     - name: Install Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v6
       with:
         node-version: 'lts/*'
 
@@ -105,7 +105,7 @@ jobs:
         sudo udevadm trigger --name-match=kvm
 
     - name: AVD cache
-      uses: actions/cache@v3
+      uses: actions/cache@v5
       id: avd-cache
       with:
         path: |

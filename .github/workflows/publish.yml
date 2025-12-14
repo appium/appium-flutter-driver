@@ -12,12 +12,18 @@ on:
 #    # paths:
 #    #   - 'driver/**'
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write # to enable use of OIDC for trusted publishing and npm provenance
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v6
         with:
           node-version: 18
       - run: npm install
@@ -32,7 +38,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 2
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v6
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
@@ -51,7 +57,5 @@ jobs:
       - run: npx semantic-release --branches main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # to make the push failure
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         name: Release
         working-directory: driver
