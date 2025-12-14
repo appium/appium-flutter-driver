@@ -25,3 +25,13 @@ updates:
     directory: "/finder/ruby"
     schedule:
       interval: "weekly"
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      time: "11:00"
+      day: "tuesday"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci"
+      include: "scope"
