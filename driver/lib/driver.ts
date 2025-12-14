@@ -145,7 +145,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     if (this.proxydriver) {
       this.log.info('Deleting the proxy driver session.');
       try {
-        await this.proxydriver.deleteSession(this.sessionId);
+        await this.proxydriver.deleteSession(this.sessionId || undefined);
       } catch (e) {
         this.log.warn(e.message);
       }
