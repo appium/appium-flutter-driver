@@ -78,7 +78,7 @@
     "appium-ios-device": "^3.0.0",
     "appium-uiautomator2-driver": "^6.0.0",
     "appium-xcuitest-driver": "^10.0.0",
-    "asyncbox": "^4.0.1",
+    "asyncbox": "^6.0.1",
     "bluebird": "^3.1.1",
     "lodash": "^4.0.0",
     "portscanner": "^2.2.0",
