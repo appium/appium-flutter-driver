@@ -1,4 +1,4 @@
-import { URL } from 'url';
+import { URL } from 'node:url';
 import _ from 'lodash';
 import type { FlutterDriver } from '../driver';
 import { IsolateSocket } from './isolate_socket';
@@ -138,7 +138,7 @@ export async function connectSocket(
 
 export async function executeGetIsolateCommand(
   this: FlutterDriver,
-  isolateId: string|number
+  isolateId: string | number
 ) {
   this.log.debug(`>>> getIsolate`);
   const isolate = await (this.socket as IsolateSocket).call(`getIsolate`, { isolateId: `${isolateId}` });
