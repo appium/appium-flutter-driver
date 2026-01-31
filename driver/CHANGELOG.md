@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.4.0
+- Update Appium XCUITest driver dependency to 10.18.2
+- Update Appium UIAutomator2 driver dependency to 6.7.15
+- Update asyncbox to 6.0.1
+
 ## 3.3.0
 - Update Appium XCUITest driver dependency to 10.11.0
 - Update Appium UIAutomator2 driver dependency to 6.7.1
