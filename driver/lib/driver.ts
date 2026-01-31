@@ -176,7 +176,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     return await this.proxydriver?.back();
   }
 
-  public async getOrientation(): Promise<string|null> {
+  public async getOrientation(): Promise<string | null> {
     if (!this.proxydriver) {
       return null;
     }

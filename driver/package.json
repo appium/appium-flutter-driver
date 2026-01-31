@@ -62,7 +62,7 @@
     "appium": "^3.0.0"
   },
   "devDependencies": {
-    "@appium/eslint-config-appium-ts": "^2.0.0",
+    "@appium/eslint-config-appium-ts": "^3.0.0",
     "@appium/tsconfig": "^1.0.0",
     "@appium/types": "^1.0.0",
     "@semantic-release/changelog": "^6.0.3",

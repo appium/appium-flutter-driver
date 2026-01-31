@@ -6,7 +6,7 @@ interface ExecuteArgs {
 }
 
 export class IsolateSocket extends Client {
-    public isolateId: number|string = 0;
+    public isolateId: number | string = 0;
     public async executeSocketCommand(args: ExecuteArgs) {
         // call an RPC method with parameters
         return this.call(`ext.flutter.driver`, {

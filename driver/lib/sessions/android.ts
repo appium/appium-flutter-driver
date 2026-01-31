@@ -10,7 +10,7 @@ export async function startAndroidSession(
   this: FlutterDriver,
   caps: Record<string, any>,
   ...args: any[]
-): Promise<[AndroidUiautomator2Driver, IsolateSocket|null]> {
+): Promise<[AndroidUiautomator2Driver, IsolateSocket | null]> {
   this.log.info(`Starting an Android proxy session`);
   const androiddriver = new AndroidUiautomator2Driver({} as InitialOpts);
   if (!caps.observatoryWsUri) {

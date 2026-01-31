@@ -1,7 +1,7 @@
 import { utilities } from 'appium-ios-device';
 import { XCUITestDriver } from 'appium-xcuitest-driver';
 import B from 'bluebird';
-import net from 'net';
+import net from 'node:net';
 import { checkPortStatus } from 'portscanner';
 import {
   connectSocket,
@@ -19,7 +19,7 @@ const LOCALHOST = `127.0.0.1`;
 export async function startIOSSession(
   this: FlutterDriver,
   caps: Record<string, any>, ...args: any[]
-): Promise<[XCUITestDriver, IsolateSocket|null]> {
+): Promise<[XCUITestDriver, IsolateSocket | null]> {
   this.log.info(`Starting an IOS proxy session`);
   const iosdriver = new XCUITestDriver({} as XCUITestDriverOpts);
   if (!caps.observatoryWsUri) {

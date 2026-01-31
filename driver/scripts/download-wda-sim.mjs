@@ -2,9 +2,9 @@
 // in Appium 3 based version
 import {fs, logger, zip, net, node} from '@appium/support';
 import _ from 'lodash';
-import os from 'os';
+import os from 'node:os';
 import path from 'node:path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from 'node:url';
 
 const log = logger.getLogger('download-wda-sim');
 const wdaUrl = (version, zipFileName) =>
