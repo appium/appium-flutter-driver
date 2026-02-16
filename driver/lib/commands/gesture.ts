@@ -1,23 +1,19 @@
-import type { FlutterDriver } from '../driver';
-import { longTap as longClick} from './execute/scroll';
+import type {FlutterDriver} from '../driver';
+import {longTap as longClick} from './execute/scroll';
 
-export const click = async function(this: FlutterDriver, el: string) {
+export const click = async function (this: FlutterDriver, el: string) {
   const retVal = await this.tapEl(el, false);
   return retVal;
 };
 
-export const tapEl = async function(
-  this: FlutterDriver,
-  el: string,
-  longPress: boolean,
-) {
+export const tapEl = async function (this: FlutterDriver, el: string, longPress: boolean) {
   // perform a tap on the given element
   // if longPress is true, the tap becomes a longPress action
   const commandName = longPress ? `longPress` : `tap`;
   return await this.executeElementCommand(commandName, el);
 };
 
-export const tap = async function(
+export const tap = async function (
   this: FlutterDriver,
   gestures: Record<string, any>[],
   longPress: boolean,
@@ -28,7 +24,7 @@ export const tap = async function(
   await this.tapEl(elementId, longPress);
 };
 
-export const longTap = async function(
+export const longTap = async function (
   this: FlutterDriver,
   gestures: Record<string, any>[],
   ms: number,
@@ -36,13 +32,17 @@ export const longTap = async function(
   // pass duration if the wait action given by user.
   // If wait action is missing taking 10000 ms default
   const elementId = gestures[0].options.element;
-  return await longClick(this, elementId, {durationMilliseconds: ms, frequency: 30});
+  return await longClick(this, elementId, {
+    durationMilliseconds: ms,
+    frequency: 30,
+  });
 };
 
-export const performTouch = async function(this: FlutterDriver, gestures: Record<string, any>[]) {
+export const performTouch = async function (this: FlutterDriver, gestures: Record<string, any>[]) {
   if (gestures.length === 3) {
     if (
-      gestures[0].action === `longPress` && gestures[1].action === `wait` &&
+      gestures[0].action === `longPress` &&
+      gestures[1].action === `wait` &&
       gestures[2].action === `release`
     ) {
       return await this.longTap(gestures, gestures[1].options.ms);
@@ -50,10 +50,7 @@ export const performTouch = async function(this: FlutterDriver, gestures: Record
   } else if (gestures.length === 2) {
     if (gestures[0].action === `press` && gestures[1].action === `release`) {
       return await this.tap(gestures, false);
-    } else if (
-      gestures[0].action === `longPress` &&
-      gestures[1].action === `release`
-    ) {
+    } else if (gestures[0].action === `longPress` && gestures[1].action === `release`) {
       return await this.longTap(gestures, 10 * 1000);
     }
   } else if (gestures.length === 1) {

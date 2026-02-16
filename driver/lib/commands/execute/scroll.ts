@@ -1,7 +1,6 @@
-
 import _ from 'lodash';
-import { FlutterDriver } from '../../driver';
-import { waitFor, waitForTappable } from './wait';
+import {FlutterDriver} from '../../driver';
+import {waitFor, waitForTappable} from './wait';
 
 export const scroll = async (
   self: FlutterDriver,
@@ -13,7 +12,7 @@ export const scroll = async (
     frequency?: number;
   },
 ) => {
-  const { dx, dy, durationMilliseconds, frequency = 60 } = opts;
+  const {dx, dy, durationMilliseconds, frequency = 60} = opts;
 
   if (
     typeof dx !== `number` ||
@@ -48,7 +47,7 @@ export const longTap = async (
     frequency?: number;
   },
 ) => {
-  const { durationMilliseconds = 1000, frequency = 60 } = options;
+  const {durationMilliseconds = 1000, frequency = 60} = options;
 
   if (typeof durationMilliseconds !== 'number' || typeof frequency !== 'number') {
     throw new Error(`Invalid longTap options: ${JSON.stringify(options)}`);
@@ -100,7 +99,15 @@ export const scrollUntilVisible = async (
     waitTimeoutMilliseconds?: number;
   },
 ) => {
-  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0, durationMilliseconds = 100, frequency, waitTimeoutMilliseconds } = opts;
+  const {
+    item,
+    alignment = 0.0,
+    dxScroll = 0,
+    dyScroll = 0,
+    durationMilliseconds = 100,
+    frequency,
+    waitTimeoutMilliseconds,
+  } = opts;
 
   if (!validateOps(alignment, dxScroll, dyScroll)) {
     throw new Error(`${opts} is not a valid options`);
@@ -121,16 +128,18 @@ export const scrollUntilVisible = async (
         dx: dxScroll,
         dy: dyScroll,
         durationMilliseconds,
-        frequency
+        frequency,
       });
-    } catch { /* go to the next scroll */ }
+    } catch {
+      /* go to the next scroll */
+    }
   }
 
   if (!isVisible) {
     throw new Error(`Stop scrolling as timeout ${waitTimeoutMilliseconds}`);
   }
 
-  return scrollIntoView(self, item, { alignment });
+  return scrollIntoView(self, item, {alignment});
 };
 
 export const scrollUntilTapable = async (
@@ -146,7 +155,15 @@ export const scrollUntilTapable = async (
     waitTimeoutMilliseconds?: number;
   },
 ) => {
-  const { item, alignment = 0.0, dxScroll = 0, dyScroll = 0, durationMilliseconds = 100, frequency, waitTimeoutMilliseconds } = opts;
+  const {
+    item,
+    alignment = 0.0,
+    dxScroll = 0,
+    dyScroll = 0,
+    durationMilliseconds = 100,
+    frequency,
+    waitTimeoutMilliseconds,
+  } = opts;
 
   if (!validateOps(alignment, dxScroll, dyScroll)) {
     throw new Error(`${opts} is not a valid options`);
@@ -170,16 +187,18 @@ export const scrollUntilTapable = async (
         dx: dxScroll,
         dy: dyScroll,
         durationMilliseconds,
-        frequency
+        frequency,
       });
-    } catch { /* go to the next scroll */ }
+    } catch {
+      /* go to the next scroll */
+    }
   }
 
   if (!isVisible) {
     throw new Error(`Stop scrolling as timeout ${waitTimeoutMilliseconds}`);
   }
 
-  return scrollIntoView(self, item, { alignment });
+  return scrollIntoView(self, item, {alignment});
 };
 
 export const scrollIntoView = async (
@@ -190,13 +209,16 @@ export const scrollIntoView = async (
     timeout?: number;
   },
 ) => {
-  const { alignment = 0.0, timeout } = opts;
-  if (typeof alignment !== `number` || (typeof timeout !== `undefined` && typeof timeout !== `number`)) {
+  const {alignment = 0.0, timeout} = opts;
+  if (
+    typeof alignment !== `number` ||
+    (typeof timeout !== `undefined` && typeof timeout !== `number`)
+  ) {
     // @todo BaseDriver's errors.InvalidArgumentError();
     throw new Error(`${opts} is not a valid options`);
   }
 
-  const args = typeof timeout === `number` ? { alignment, timeout } : { alignment };
+  const args = typeof timeout === `number` ? {alignment, timeout} : {alignment};
 
   return await self.executeElementCommand(`scrollIntoView`, elementBase64, args);
 };

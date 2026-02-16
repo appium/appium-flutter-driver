@@ -53,6 +53,8 @@
     "clean": "npm run build -- --clean",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
+    "format": "prettier -w ./lib",
+    "format:check": "prettier --check ./lib",
     "prepublishOnly": "cp ../README.md ../LICENSE ./",
     "prepare": "npm run clean && npm run build",
     "test": "echo no test",
@@ -68,6 +70,7 @@
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "eslint": "^9.17.0",
+    "prettier": "^3.0.0",
     "semantic-release": "^25.0.2",
     "ts-node": "^10.9.1",
     "typescript": "~5.9"
@@ -83,5 +86,10 @@
     "lodash": "^4.0.0",
     "portscanner": "^2.2.0",
     "rpc-websockets": "^10.0.0"
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "printWidth": 100,
+    "singleQuote": true
   }
 }

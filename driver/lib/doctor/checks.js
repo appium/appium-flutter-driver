@@ -1,5 +1,5 @@
-import { doctor as androidDoctor } from 'appium-android-driver';
-import { doctor as iosDoctor } from 'appium-xcuitest-driver';
+import {doctor as androidDoctor} from 'appium-android-driver';
+import {doctor as iosDoctor} from 'appium-xcuitest-driver';
 
 // shared
 export const homeEnvVarCheck = /** @type {any} */ (iosDoctor.required.homeEnvVarCheck);
@@ -34,6 +34,14 @@ if (!process.env.SKIP_IOS) {
 export const optionalFfmpegCheck = androidDoctor.optionalFfmpegCheck;
 
 export {
-  androidHomeCheck, javaHomeCheck, javaHomeValueCheck, androidSdkCheck, optionalBundletoolCheck, optionalGstreamerCheck,
-  xcodeCheck, xcodeToolsCheck, envVarAndPathCheck, optionalApplesimutilsCommandCheck
+  androidHomeCheck,
+  javaHomeCheck,
+  javaHomeValueCheck,
+  androidSdkCheck,
+  optionalBundletoolCheck,
+  optionalGstreamerCheck,
+  xcodeCheck,
+  xcodeToolsCheck,
+  envVarAndPathCheck,
+  optionalApplesimutilsCommandCheck,
 };

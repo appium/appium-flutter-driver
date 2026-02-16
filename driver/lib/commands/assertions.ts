@@ -1,14 +1,14 @@
-import { FlutterDriver } from '../driver';
-import { byValueKey, byText, byTooltip } from 'appium-flutter-finder';
-import type { SerializableFinder } from 'appium-flutter-finder';
+import {FlutterDriver} from '../driver';
+import {byValueKey, byText, byTooltip} from 'appium-flutter-finder';
+import type {SerializableFinder} from 'appium-flutter-finder';
 
 export type FinderInput =
-  | { key: string }
-  | { text: string }
-  | { label: string }
+  | {key: string}
+  | {text: string}
+  | {label: string}
   | SerializableFinder
   | string
-  | { getRawFinder: () => SerializableFinder }; // FlutterElement-like input
+  | {getRawFinder: () => SerializableFinder}; // FlutterElement-like input
 
 // Serialize a finder to base64
 const serializeFinder = (finder: SerializableFinder): string =>
@@ -18,7 +18,7 @@ const serializeFinder = (finder: SerializableFinder): string =>
 const isRawFinder = (input: any): input is SerializableFinder =>
   input && typeof input === 'object' && typeof input.finderType === 'string';
 
-const isFlutterElementLike = (input: any): input is { getRawFinder: () => SerializableFinder } =>
+const isFlutterElementLike = (input: any): input is {getRawFinder: () => SerializableFinder} =>
   input && typeof input === 'object' && typeof input.getRawFinder === 'function';
 
 // Convert FinderInput to base64 string
@@ -47,7 +47,9 @@ function getFinderBase64(input: FinderInput): string {
     return byTooltip(input.label);
   }
 
-  throw new Error('Invalid finder input: must provide key, text, label, raw finder, or FlutterElement');
+  throw new Error(
+    'Invalid finder input: must provide key, text, label, raw finder, or FlutterElement',
+  );
 }
 
 // Generic helper to wrap assert commands
@@ -56,11 +58,14 @@ async function executeAssertion(
   command: string,
   input: FinderInput,
   timeout = 5000,
-  extraArgs: object = {}
+  extraArgs: object = {},
 ): Promise<void> {
   const base64 = getFinderBase64(input);
   try {
-    await driver.executeElementCommand(command, base64, { timeout, ...extraArgs });
+    await driver.executeElementCommand(command, base64, {
+      timeout,
+      ...extraArgs,
+    });
   } catch (err) {
     throw new Error(`Assertion failed on command "${command}" within ${timeout}ms\n${err}`);
   }
@@ -70,21 +75,17 @@ async function executeAssertion(
 export const assertVisible = async (
   driver: FlutterDriver,
   input: FinderInput,
-  timeout = 5000
-): Promise<void> =>
-  await executeAssertion(driver, 'waitFor', input, timeout, { visible: true });
+  timeout = 5000,
+): Promise<void> => await executeAssertion(driver, 'waitFor', input, timeout, {visible: true});
 
 export const assertNotVisible = async (
   driver: FlutterDriver,
   input: FinderInput,
-  timeout = 5000
-): Promise<void> =>
-  await executeAssertion(driver, 'waitForAbsent', input, timeout);
+  timeout = 5000,
+): Promise<void> => await executeAssertion(driver, 'waitForAbsent', input, timeout);
 
 export const assertTappable = async (
   driver: FlutterDriver,
   input: FinderInput,
-  timeout = 5000
-): Promise<void> =>
-  await executeAssertion(driver, 'waitForTappable', input, timeout);
-
+  timeout = 5000,
+): Promise<void> => await executeAssertion(driver, 'waitForTappable', input, timeout);
