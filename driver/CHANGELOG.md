@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.5.0
+- Update Appium XCUITest driver dependency to 10.22.0
+- Update Appium UIAutomator2 driver dependency to 6.8.2
+- Apply formatter
+
 ## 3.4.0
 - Update Appium XCUITest driver dependency to 10.18.2
 - Update Appium UIAutomator2 driver dependency to 6.7.15
