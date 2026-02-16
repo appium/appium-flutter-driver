@@ -48,6 +48,7 @@ jobs:
     - run: npm install -g appium
     - run: |
         npm install
+        appium driver install --source=local ./
         nohup appium --log-timestamp --log-no-colors > appium.log &
       working-directory:
         driver
