@@ -9,10 +9,7 @@ export const desiredCapConstraints = {
     isNumber: true,
   },
   platformName: {
-    inclusionCaseInsensitive: [
-      'iOS',
-      'Android',
-    ],
+    inclusionCaseInsensitive: ["iOS", "Android"],
     isString: true,
     presence: true,
   },
@@ -26,15 +23,15 @@ export const desiredCapConstraints = {
     isString: true,
   },
   skipPortForward: {
-    isBoolean: true
+    isBoolean: true,
   },
   adbPort: {
-    isNumber: true
+    isNumber: true,
   },
   remoteAdbHost: {
-    isString: true
+    isString: true,
   },
   forwardingPort: {
-    isNumber: true
+    isNumber: true,
   },
 } as const;

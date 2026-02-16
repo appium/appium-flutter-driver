@@ -1,8 +1,8 @@
-import type {EventEmitter} from 'node:events';
-import { retryInterval } from 'asyncbox';
+import type { EventEmitter } from "node:events";
+import { retryInterval } from "asyncbox";
 export interface LogEntry {
   timestamp: number;
-  level: string,
+  level: string;
   message: string;
 }
 
@@ -40,21 +40,17 @@ export class LogMonitor {
     maxRetryCount: number = DEFAULT_MAX_RETRY_COUNT,
     retryBackoffTime: number = DEFAULT_BACKOFF_TIME_MS,
   ): Promise<LogEntry | null> {
-    return await retryInterval(
-      maxRetryCount,
-      retryBackoffTime,
-      async () => {
-        if (this._lastMatch !== null) {
-          return this._lastMatch;
-        }
-        throw new Error(
-          `No matched log found with ${retryBackoffTime} ms interval ` +
+    return await retryInterval(maxRetryCount, retryBackoffTime, async () => {
+      if (this._lastMatch !== null) {
+        return this._lastMatch;
+      }
+      throw new Error(
+        `No matched log found with ${retryBackoffTime} ms interval ` +
           `up to ${maxRetryCount} times. Increasing appium:retryBackoffTime ` +
-          `and appium:maxRetryCount would help.`
-        );
-      },
-    );
-  };
+          `and appium:maxRetryCount would help.`,
+      );
+    });
+  }
 
   start(): this {
     if (this.started) {
@@ -63,7 +59,7 @@ export class LogMonitor {
 
     this._outputListener = this._onOutput.bind(this);
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    this._logsEmitter.on('output', this._outputListener!);
+    this._logsEmitter.on("output", this._outputListener!);
     return this;
   }
 
@@ -73,7 +69,7 @@ export class LogMonitor {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    this._logsEmitter.off('output', this._outputListener!);
+    this._logsEmitter.off("output", this._outputListener!);
     this._outputListener = null;
     return this;
   }

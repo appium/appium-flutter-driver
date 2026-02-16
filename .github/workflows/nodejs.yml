@@ -39,4 +39,5 @@ jobs:
     - run: |
         npm install
         npm run lint
+        npm run format:check
       working-directory: driver
