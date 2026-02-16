@@ -69,7 +69,7 @@
     "@appium/types": "^1.0.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "eslint": "^9.17.0",
+    "eslint": "^10.0.0",
     "prettier": "^3.0.0",
     "semantic-release": "^25.0.2",
     "ts-node": "^10.9.1",
