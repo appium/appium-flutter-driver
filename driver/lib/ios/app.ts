@@ -1,5 +1,5 @@
-import { services, INSTRUMENT_CHANNEL } from "appium-ios-device";
-import { log } from "./../logger";
+import {services, INSTRUMENT_CHANNEL} from 'appium-ios-device';
+import {log} from './../logger';
 
 /**
  * Launch the given bundle id via instrument service.
@@ -18,18 +18,16 @@ export const launchApp = async (
     );
     await instrumentService.callChannel(
       INSTRUMENT_CHANNEL.PROCESS_CONTROL,
-      "launchSuspendedProcessWithDevicePath:bundleIdentifier:environment:arguments:options:",
-      "",
+      'launchSuspendedProcessWithDevicePath:bundleIdentifier:environment:arguments:options:',
+      '',
       bundleId,
       env,
       args,
-      { StartSuspendedKey: 0, KillExisting: 1 },
+      {StartSuspendedKey: 0, KillExisting: 1},
     );
     return true;
   } catch (err) {
-    log.warn(
-      `Failed to launch '${bundleId}'. Original error: ${err.stderr || err.message}`,
-    );
+    log.warn(`Failed to launch '${bundleId}'. Original error: ${err.stderr || err.message}`);
     return false;
   } finally {
     if (instrumentService) {

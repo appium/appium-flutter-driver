@@ -1,19 +1,14 @@
-import type { FlutterDriver } from "../driver";
-import { log } from "../logger";
+import type {FlutterDriver} from '../driver';
+import {log} from '../logger';
 
 export const FLUTTER_CONTEXT_NAME = `FLUTTER`;
 export const NATIVE_CONTEXT_NAME = `NATIVE_APP`;
 
-export const getCurrentContext = async function (
-  this: FlutterDriver,
-): Promise<string> {
+export const getCurrentContext = async function (this: FlutterDriver): Promise<string> {
   return this.currentContext;
 };
 
-export const setContext = async function (
-  this: FlutterDriver,
-  context: string,
-) {
+export const setContext = async function (this: FlutterDriver, context: string) {
   if ([FLUTTER_CONTEXT_NAME, NATIVE_CONTEXT_NAME].includes(context)) {
     this.proxyWebViewActive = false;
     // Set 'native context' when flutter driver sets the context to FLUTTER_CONTEXT_NAME
@@ -41,9 +36,7 @@ export const setContext = async function (
   }
 };
 
-export const getContexts = async function (
-  this: FlutterDriver,
-): Promise<string[]> {
+export const getContexts = async function (this: FlutterDriver): Promise<string[]> {
   // @ts-expect-error this exist in xcuitestdriver or uia2 driver
   const nativeContext = await this.proxydriver?.getContexts();
   if (nativeContext) {
@@ -53,10 +46,7 @@ export const getContexts = async function (
   }
 };
 
-export const driverShouldDoProxyCmd = function (
-  this: FlutterDriver,
-  command: string,
-): boolean {
+export const driverShouldDoProxyCmd = function (this: FlutterDriver, command: string): boolean {
   if (!this.proxydriver) {
     return false;
   }

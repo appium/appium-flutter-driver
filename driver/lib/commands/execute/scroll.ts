@@ -1,6 +1,6 @@
-import _ from "lodash";
-import { FlutterDriver } from "../../driver";
-import { waitFor, waitForTappable } from "./wait";
+import _ from 'lodash';
+import {FlutterDriver} from '../../driver';
+import {waitFor, waitForTappable} from './wait';
 
 export const scroll = async (
   self: FlutterDriver,
@@ -12,7 +12,7 @@ export const scroll = async (
     frequency?: number;
   },
 ) => {
-  const { dx, dy, durationMilliseconds, frequency = 60 } = opts;
+  const {dx, dy, durationMilliseconds, frequency = 60} = opts;
 
   if (
     typeof dx !== `number` ||
@@ -47,16 +47,13 @@ export const longTap = async (
     frequency?: number;
   },
 ) => {
-  const { durationMilliseconds = 1000, frequency = 60 } = options;
+  const {durationMilliseconds = 1000, frequency = 60} = options;
 
-  if (
-    typeof durationMilliseconds !== "number" ||
-    typeof frequency !== "number"
-  ) {
+  if (typeof durationMilliseconds !== 'number' || typeof frequency !== 'number') {
     throw new Error(`Invalid longTap options: ${JSON.stringify(options)}`);
   }
 
-  return await self.executeElementCommand("scroll", elementBase64, {
+  return await self.executeElementCommand('scroll', elementBase64, {
     dx: 0,
     dy: 0,
     duration: durationMilliseconds * 1000,
@@ -80,10 +77,7 @@ const validateOps = (alignment: any, dxScroll: any, dyScroll: any): boolean => {
   return true;
 };
 
-const shouldRetry = (
-  startAt: number,
-  waitTimeoutMilliseconds?: number,
-): boolean => {
+const shouldRetry = (startAt: number, waitTimeoutMilliseconds?: number): boolean => {
   if (!waitTimeoutMilliseconds) {
     // Then, the scroll should continue infinitely
     return true;
@@ -145,7 +139,7 @@ export const scrollUntilVisible = async (
     throw new Error(`Stop scrolling as timeout ${waitTimeoutMilliseconds}`);
   }
 
-  return scrollIntoView(self, item, { alignment });
+  return scrollIntoView(self, item, {alignment});
 };
 
 export const scrollUntilTapable = async (
@@ -204,7 +198,7 @@ export const scrollUntilTapable = async (
     throw new Error(`Stop scrolling as timeout ${waitTimeoutMilliseconds}`);
   }
 
-  return scrollIntoView(self, item, { alignment });
+  return scrollIntoView(self, item, {alignment});
 };
 
 export const scrollIntoView = async (
@@ -215,7 +209,7 @@ export const scrollIntoView = async (
     timeout?: number;
   },
 ) => {
-  const { alignment = 0.0, timeout } = opts;
+  const {alignment = 0.0, timeout} = opts;
   if (
     typeof alignment !== `number` ||
     (typeof timeout !== `undefined` && typeof timeout !== `number`)
@@ -224,12 +218,7 @@ export const scrollIntoView = async (
     throw new Error(`${opts} is not a valid options`);
   }
 
-  const args =
-    typeof timeout === `number` ? { alignment, timeout } : { alignment };
+  const args = typeof timeout === `number` ? {alignment, timeout} : {alignment};
 
-  return await self.executeElementCommand(
-    `scrollIntoView`,
-    elementBase64,
-    args,
-  );
+  return await self.executeElementCommand(`scrollIntoView`, elementBase64, args);
 };

@@ -9,7 +9,7 @@ export const desiredCapConstraints = {
     isNumber: true,
   },
   platformName: {
-    inclusionCaseInsensitive: ["iOS", "Android"],
+    inclusionCaseInsensitive: ['iOS', 'Android'],
     isString: true,
     presence: true,
   },

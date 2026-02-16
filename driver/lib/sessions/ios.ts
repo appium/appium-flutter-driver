@@ -1,18 +1,14 @@
-import { utilities } from "appium-ios-device";
-import { XCUITestDriver } from "appium-xcuitest-driver";
-import B from "bluebird";
-import net from "node:net";
-import { checkPortStatus } from "portscanner";
-import {
-  connectSocket,
-  extractObservatoryUrl,
-  OBSERVATORY_URL_PATTERN,
-} from "./observatory";
-import type { IsolateSocket } from "./isolate_socket";
-import { LogMonitor } from "./log-monitor";
-import type { LogEntry } from "./log-monitor";
-import type { FlutterDriver } from "../driver";
-import type { XCUITestDriverOpts } from "appium-xcuitest-driver/build/lib/driver";
+import {utilities} from 'appium-ios-device';
+import {XCUITestDriver} from 'appium-xcuitest-driver';
+import B from 'bluebird';
+import net from 'node:net';
+import {checkPortStatus} from 'portscanner';
+import {connectSocket, extractObservatoryUrl, OBSERVATORY_URL_PATTERN} from './observatory';
+import type {IsolateSocket} from './isolate_socket';
+import {LogMonitor} from './log-monitor';
+import type {LogEntry} from './log-monitor';
+import type {FlutterDriver} from '../driver';
+import type {XCUITestDriverOpts} from 'appium-xcuitest-driver/build/lib/driver';
 
 const LOCALHOST = `127.0.0.1`;
 
@@ -24,7 +20,7 @@ export async function startIOSSession(
   this.log.info(`Starting an IOS proxy session`);
   const iosdriver = new XCUITestDriver({} as XCUITestDriverOpts);
   if (!caps.observatoryWsUri) {
-    iosdriver.eventEmitter.once("syslogStarted", (syslog) => {
+    iosdriver.eventEmitter.once('syslogStarted', (syslog) => {
       this._logmon = new LogMonitor(syslog, async (entry: LogEntry) => {
         if (extractObservatoryUrl(entry)) {
           this.log.debug(`Matched the syslog line '${entry.message}'`);
@@ -52,11 +48,7 @@ export async function connectIOSSession(
   caps: Record<string, any>,
   clearLog: boolean = false,
 ): Promise<IsolateSocket> {
-  const observatoryWsUri = await getObservatoryWsUri.bind(this)(
-    iosdriver,
-    caps,
-    clearLog,
-  );
+  const observatoryWsUri = await getObservatoryWsUri.bind(this)(iosdriver, caps, clearLog);
   return await connectSocket.bind(this)(observatoryWsUri, iosdriver, caps);
 }
 
@@ -67,9 +59,7 @@ async function requireFreePort(this: FlutterDriver, port: number) {
     await new Promise<void>((resolve) => {
       this.localServer?.close((err) => {
         if (err) {
-          this.log.error(
-            `Error occurred while closing the local server: ${err.message}`,
-          );
+          this.log.error(`Error occurred while closing the local server: ${err.message}`);
           return resolve(); // Resolve even if there's an error to avoid hanging
         }
         this.log.info(`Previous local server closed`);
@@ -80,9 +70,7 @@ async function requireFreePort(this: FlutterDriver, port: number) {
   if ((await checkPortStatus(port, LOCALHOST)) !== `open`) {
     return;
   }
-  this.log.warn(
-    `Port #${port} is busy. Did you quit the previous driver session(s) properly?`,
-  );
+  this.log.warn(`Port #${port} is busy. Did you quit the previous driver session(s) properly?`);
   throw new Error(
     `The port :${port} is occupied by an other process. ` +
       `You can either quit that process or select another free port.`,
@@ -146,7 +134,7 @@ export async function getObservatoryWsUri(
   urlObject.port = localPort;
 
   this.log.info(`Running on iOS real device`);
-  const { udid } = proxydriver.opts;
+  const {udid} = proxydriver.opts;
   await requireFreePort.bind(this)(localPort);
   this.localServer = net.createServer(async (localSocket) => {
     let remoteSocket;
@@ -165,14 +153,14 @@ export async function getObservatoryWsUri(
       destroyCommChannel();
       localSocket.destroy();
     });
-    remoteSocket.on("error", (e) => this.log.debug(e));
+    remoteSocket.on('error', (e) => this.log.debug(e));
 
     localSocket.once(`end`, destroyCommChannel);
     localSocket.once(`close`, () => {
       destroyCommChannel();
       remoteSocket.destroy();
     });
-    localSocket.on("error", (e) => this.log.warn(e.message));
+    localSocket.on('error', (e) => this.log.warn(e.message));
     localSocket.pipe(remoteSocket);
     remoteSocket.pipe(localSocket);
   });
@@ -185,14 +173,10 @@ export async function getObservatoryWsUri(
     await listeningPromise;
   } catch (e) {
     this.localServer = null;
-    throw new Error(
-      `Cannot listen on the local port ${localPort}. Original error: ${e.message}`,
-    );
+    throw new Error(`Cannot listen on the local port ${localPort}. Original error: ${e.message}`);
   }
 
-  this.log.info(
-    `Forwarding the remote port ${remotePort} to the local port ${localPort}`,
-  );
+  this.log.info(`Forwarding the remote port ${remotePort} to the local port ${localPort}`);
 
   process.on(`beforeExit`, () => {
     this.localServer?.close();

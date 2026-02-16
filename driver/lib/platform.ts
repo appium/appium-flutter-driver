@@ -1,4 +1,4 @@
 export const PLATFORM = {
-  IOS: "ios",
-  ANDROID: "android",
+  IOS: 'ios',
+  ANDROID: 'android',
 } as const;

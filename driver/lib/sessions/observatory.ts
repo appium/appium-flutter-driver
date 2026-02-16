@@ -1,10 +1,10 @@
-import { URL } from "node:url";
-import _ from "lodash";
-import type { FlutterDriver } from "../driver";
-import { IsolateSocket } from "./isolate_socket";
-import { decode } from "./base64url";
-import type { LogEntry } from "./log-monitor";
-import { retryInterval } from "asyncbox";
+import {URL} from 'node:url';
+import _ from 'lodash';
+import type {FlutterDriver} from '../driver';
+import {IsolateSocket} from './isolate_socket';
+import {decode} from './base64url';
+import type {LogEntry} from './log-monitor';
+import {retryInterval} from 'asyncbox';
 
 const truncateLength = 500;
 // https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183
@@ -43,9 +43,7 @@ export async function connectSocket(
 
     // Add an 'error' event handler for the client socket
     const onErrorListener = (ex: Error) => {
-      this.log.error(
-        `Connection to ${dartObservatoryURL} got an error: ${ex.message}`,
-      );
+      this.log.error(`Connection to ${dartObservatoryURL} got an error: ${ex.message}`);
       removeListenerAndResolve(null);
     };
     socket.on(`error`, onErrorListener);
@@ -86,9 +84,7 @@ export async function connectSocket(
         };
         this.log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
         // To accept 'main.dart:main()' and 'main'
-        const mainIsolateData = vm.isolates.find((e) =>
-          e.name.includes(`main`),
-        );
+        const mainIsolateData = vm.isolates.find((e) => e.name.includes(`main`));
         if (!mainIsolateData) {
           this.log.error(`Cannot get Dart main isolate info`);
           removeListenerAndResolve(null);
@@ -101,30 +97,26 @@ export async function connectSocket(
 
       // It could take time to load the expected module.
       try {
-        await retryInterval(
-          moduleCheckIntervalCount,
-          moduleCheckIntervalMs,
-          async () => {
-            const isolate = (await socket.call(`getIsolate`, {
-              isolateId: `${socket.isolateId}`,
-            })) as {
-              extensionRPCs: [string] | null;
-            } | null;
-            if (!isolate) {
-              throw new Error(`Cannot get main Dart Isolate`);
-            }
-            if (!Array.isArray(isolate.extensionRPCs)) {
-              throw new Error(
-                `Cannot get Dart extensionRPCs from isolate ${JSON.stringify(isolate)}`,
-              );
-            }
-            if (isolate.extensionRPCs.indexOf(`ext.flutter.driver`) < 0) {
-              throw new Error(
-                `"ext.flutter.driver" is not found in "extensionRPCs" ${JSON.stringify(isolate.extensionRPCs)}`,
-              );
-            }
-          },
-        );
+        await retryInterval(moduleCheckIntervalCount, moduleCheckIntervalMs, async () => {
+          const isolate = (await socket.call(`getIsolate`, {
+            isolateId: `${socket.isolateId}`,
+          })) as {
+            extensionRPCs: [string] | null;
+          } | null;
+          if (!isolate) {
+            throw new Error(`Cannot get main Dart Isolate`);
+          }
+          if (!Array.isArray(isolate.extensionRPCs)) {
+            throw new Error(
+              `Cannot get Dart extensionRPCs from isolate ${JSON.stringify(isolate)}`,
+            );
+          }
+          if (isolate.extensionRPCs.indexOf(`ext.flutter.driver`) < 0) {
+            throw new Error(
+              `"ext.flutter.driver" is not found in "extensionRPCs" ${JSON.stringify(isolate.extensionRPCs)}`,
+            );
+          }
+        });
       } catch (e) {
         this.log.error(e.message);
         removeListenerAndResolve(null);
@@ -146,17 +138,12 @@ export async function connectSocket(
   );
 }
 
-export async function executeGetIsolateCommand(
-  this: FlutterDriver,
-  isolateId: string | number,
-) {
+export async function executeGetIsolateCommand(this: FlutterDriver, isolateId: string | number) {
   this.log.debug(`>>> getIsolate`);
   const isolate = await (this.socket as IsolateSocket).call(`getIsolate`, {
     isolateId: `${isolateId}`,
   });
-  this.log.debug(
-    `<<< ${_.truncate(JSON.stringify(isolate), { length: truncateLength })}`,
-  );
+  this.log.debug(`<<< ${_.truncate(JSON.stringify(isolate), {length: truncateLength})}`);
   return isolate;
 }
 
@@ -170,9 +157,7 @@ export async function executeGetVMCommand(this: FlutterDriver) {
       },
     ];
   };
-  this.log.debug(
-    `<<< ${_.truncate(JSON.stringify(vm), { length: truncateLength })}`,
-  );
+  this.log.debug(`<<< ${_.truncate(JSON.stringify(vm), {length: truncateLength})}`);
   return vm;
 }
 
@@ -183,11 +168,9 @@ export async function executeElementCommand(
   extraArgs = {},
 ) {
   const elementObject = elementBase64 ? JSON.parse(decode(elementBase64)) : {};
-  const serializedCommand = { command, ...elementObject, ...extraArgs };
+  const serializedCommand = {command, ...elementObject, ...extraArgs};
   this.log.debug(`>>> ${JSON.stringify(serializedCommand)}`);
-  const data = await (this.socket as IsolateSocket).executeSocketCommand(
-    serializedCommand,
-  );
+  const data = await (this.socket as IsolateSocket).executeSocketCommand(serializedCommand);
   this.log.debug(`<<< ${JSON.stringify(data)} | previous command ${command}`);
   if (data.isError) {
     throw new Error(

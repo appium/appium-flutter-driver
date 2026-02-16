@@ -1,4 +1,4 @@
-import { Client } from "rpc-websockets";
+import {Client} from 'rpc-websockets';
 
 interface ExecuteArgs {
   command: string;

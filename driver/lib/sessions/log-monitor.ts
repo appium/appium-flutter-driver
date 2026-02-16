@@ -1,5 +1,5 @@
-import type { EventEmitter } from "node:events";
-import { retryInterval } from "asyncbox";
+import type {EventEmitter} from 'node:events';
+import {retryInterval} from 'asyncbox';
 export interface LogEntry {
   timestamp: number;
   level: string;
@@ -59,7 +59,7 @@ export class LogMonitor {
 
     this._outputListener = this._onOutput.bind(this);
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    this._logsEmitter.on("output", this._outputListener!);
+    this._logsEmitter.on('output', this._outputListener!);
     return this;
   }
 
@@ -69,7 +69,7 @@ export class LogMonitor {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    this._logsEmitter.off("output", this._outputListener!);
+    this._logsEmitter.off('output', this._outputListener!);
     this._outputListener = null;
     return this;
   }

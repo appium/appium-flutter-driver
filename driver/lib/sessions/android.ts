@@ -1,14 +1,10 @@
-import { AndroidUiautomator2Driver } from "appium-uiautomator2-driver";
-import {
-  connectSocket,
-  extractObservatoryUrl,
-  OBSERVATORY_URL_PATTERN,
-} from "./observatory";
-import type { InitialOpts, StringRecord } from "@appium/types";
-import type { IsolateSocket } from "./isolate_socket";
-import { FlutterDriver } from "../driver";
-import { LogMonitor } from "./log-monitor";
-import type { LogEntry } from "./log-monitor";
+import {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
+import {connectSocket, extractObservatoryUrl, OBSERVATORY_URL_PATTERN} from './observatory';
+import type {InitialOpts, StringRecord} from '@appium/types';
+import type {IsolateSocket} from './isolate_socket';
+import {FlutterDriver} from '../driver';
+import {LogMonitor} from './log-monitor';
+import type {LogEntry} from './log-monitor';
 
 export async function startAndroidSession(
   this: FlutterDriver,
@@ -18,7 +14,7 @@ export async function startAndroidSession(
   this.log.info(`Starting an Android proxy session`);
   const androiddriver = new AndroidUiautomator2Driver({} as InitialOpts);
   if (!caps.observatoryWsUri) {
-    androiddriver.eventEmitter.once("syslogStarted", (syslog) => {
+    androiddriver.eventEmitter.once('syslogStarted', (syslog) => {
       this._logmon = new LogMonitor(syslog, async (entry: LogEntry) => {
         if (extractObservatoryUrl(entry)) {
           this.log.debug(`Matched the syslog line '${entry.message}'`);
@@ -37,10 +33,7 @@ export async function startAndroidSession(
     return [androiddriver, null];
   }
 
-  return [
-    androiddriver,
-    await connectAndroidSession.bind(this)(androiddriver, caps),
-  ];
+  return [androiddriver, await connectAndroidSession.bind(this)(androiddriver, caps)];
 }
 
 export async function connectAndroidSession(
@@ -49,11 +42,7 @@ export async function connectAndroidSession(
   caps: Record<string, any>,
   clearLog: boolean = false,
 ): Promise<IsolateSocket> {
-  const observatoryWsUri = await getObservatoryWsUri.bind(this)(
-    androiddriver,
-    caps,
-    clearLog,
-  );
+  const observatoryWsUri = await getObservatoryWsUri.bind(this)(androiddriver, caps, clearLog);
   return await connectSocket.bind(this)(observatoryWsUri, caps);
 }
 
@@ -107,10 +96,7 @@ export async function getObservatoryWsUri(
   const remotePort = urlObject.port;
   this.portForwardLocalPort = caps.forwardingPort ?? remotePort;
   urlObject.port = this.portForwardLocalPort as string;
-  await proxydriver.adb.forwardPort(
-    this.portForwardLocalPort as string,
-    remotePort,
-  );
+  await proxydriver.adb.forwardPort(this.portForwardLocalPort as string, remotePort);
   if (!caps.observatoryWsUri && proxydriver.adb.adbHost) {
     urlObject.host = proxydriver.adb.adbHost;
   }

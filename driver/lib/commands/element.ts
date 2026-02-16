@@ -1,9 +1,6 @@
-import { FlutterDriver } from "../driver";
+import {FlutterDriver} from '../driver';
 
-export const getText = async function (
-  this: FlutterDriver,
-  el: string,
-): Promise<string | null> {
+export const getText = async function (this: FlutterDriver, el: string): Promise<string | null> {
   const response = await this.executeElementCommand(`get_text`, el);
   return response.text;
 };
@@ -16,9 +13,7 @@ export const setValue = async function (
   const clickPromise = this.click(el); // acquire focus
   let text = ``;
   if (textInput instanceof Array) {
-    text = textInput.reduce(
-      (previousValue, currentValue) => `${previousValue}${currentValue}`,
-    );
+    text = textInput.reduce((previousValue, currentValue) => `${previousValue}${currentValue}`);
   } else if (typeof textInput === `string`) {
     text = textInput;
   } else {
