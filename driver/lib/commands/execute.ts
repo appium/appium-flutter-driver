@@ -162,6 +162,11 @@ const commandHandlers: CommandMap = {
       command: 'getTextWithCommandExtension',
       findBy: params.findBy,
     }),
+  customCommandExtension: async (driver, params) =>
+    await driver.socket.executeSocketCommand({
+      command: params.command,
+      ...params.args,
+    }),
 };
 export const execute = async function (this: FlutterDriver, rawCommand: string, args: any[]) {
   const matching = rawCommand.match(flutterCommandRegex);
