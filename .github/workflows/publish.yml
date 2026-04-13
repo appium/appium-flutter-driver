@@ -25,7 +25,8 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: 18
+          node-version: lts/*
+          check-latest: true
       - run: npm install
         working-directory: driver
       - run: npm test
@@ -40,22 +41,10 @@ jobs:
           fetch-depth: 2
       - uses: actions/setup-node@v6
         with:
-          node-version: 18
-          registry-url: https://registry.npmjs.org/
-      - run: npm install --no-package-lock
+          node-version: lts/*
+          check-latest: true
+      - run: npm install
         working-directory: driver
-      - name: update npm-shrinkwrap.json
-        working-directory: driver
-        run: |
-          rm -rf package-lock.json node_modules
-          npm prune --omit=dev --omit=peer --no-package-lock
-          npm shrinkwrap --omit=dev --omit=peer
-          git diff
-      - run: npm install --only=dev --no-package-lock
-        name: Install dev dependencies for the release
-        working-directory: driver
-      - run: npx semantic-release --branches main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        name: Release
+      - run: npm publish
+        name: Publish the package
         working-directory: driver
