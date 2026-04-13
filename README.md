@@ -509,8 +509,9 @@ $ git commit -am 'chore: bump version'
 $ git tag <version number> # e.g. git tag v0.0.32
 $ git push origin v0.0.32
 $ git push origin main
-$ npm publish
 ```
+
+Then, trigger `publish.yml` workflow to publish the package to npm.
 
 ### Java implementation
 
