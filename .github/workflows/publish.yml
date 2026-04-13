@@ -25,7 +25,8 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: 18
+          node-version: lts/*
+          check-latest: true
       - run: npm install
         working-directory: driver
       - run: npm test
@@ -44,8 +45,6 @@ jobs:
           check-latest: true
       - run: npm install
         working-directory: driver
-          npm shrinkwrap --omit=dev --omit=peer
-          git diff
       - run: npm publish
         name: Publish the package
         working-directory: driver
