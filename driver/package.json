@@ -79,7 +79,7 @@
     "appium-flutter-finder": "^0.2.0",
     "appium-ios-device": "^3.0.0",
     "appium-uiautomator2-driver": "^7.0.0",
-    "appium-xcuitest-driver": "^10.0.0",
+    "appium-xcuitest-driver": "^11.0.0",
     "asyncbox": "^6.0.1",
     "bluebird": "^3.1.1",
     "lodash": "^4.0.0",
