@@ -3,6 +3,7 @@
   "extends": "@appium/tsconfig/tsconfig.json",
   "compilerOptions": {
     "esModuleInterop": true,
+    "rootDir": ".",
     "outDir": "build",
     "types": ["node", "mocha"],
     "checkJs": true
