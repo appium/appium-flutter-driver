@@ -83,7 +83,7 @@ function injectDartVmServicePortFlags(caps: Record<string, any>): void {
   if (typeof port !== 'number') {
     return;
   }
-  caps.processArguments = caps.processArguments ?? {};
+  caps.processArguments ??= {};
   const existing: any[] = Array.isArray(caps.processArguments.args)
     ? caps.processArguments.args
     : [];
@@ -172,9 +172,7 @@ export async function getObservatoryWsUri(
           `LogMonitor scan exhausted; falling back to ` +
             `dartVmServicePort=${caps.dartVmServicePort} from capabilities`,
         );
-        urlObject = new URL(`http://${LOCALHOST}:${caps.dartVmServicePort}/`);
-        urlObject.protocol = `ws`;
-        urlObject.pathname += `ws`;
+        urlObject = new URL(`ws://${LOCALHOST}:${caps.dartVmServicePort}/ws`);
       } else {
         throw new Error(
           `No observatory URL matching to '${OBSERVATORY_URL_PATTERN}' was found in the device log. ` +
