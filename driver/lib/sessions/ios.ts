@@ -12,12 +12,17 @@ import type {XCUITestDriverOpts} from 'appium-xcuitest-driver/build/lib/driver';
 
 const LOCALHOST = `127.0.0.1`;
 
+const VM_SERVICE_PORT_FLAG = `--vm-service-port`;
+const OBSERVATORY_PORT_FLAG = `--observatory-port`;
+const DISABLE_SERVICE_AUTH_CODES_FLAG = `--disable-service-auth-codes`;
+
 export async function startIOSSession(
   this: FlutterDriver,
   caps: Record<string, any>,
   ...args: any[]
 ): Promise<[XCUITestDriver, IsolateSocket | null]> {
   this.log.info(`Starting an IOS proxy session`);
+  injectDartVmServicePortFlags(caps);
   const iosdriver = new XCUITestDriver({} as XCUITestDriverOpts);
   if (!caps.observatoryWsUri) {
     iosdriver.eventEmitter.once('syslogStarted', (syslog) => {
@@ -50,6 +55,47 @@ export async function connectIOSSession(
 ): Promise<IsolateSocket> {
   const observatoryWsUri = await getObservatoryWsUri.bind(this)(iosdriver, caps, clearLog);
   return await connectSocket.bind(this)(observatoryWsUri, iosdriver, caps);
+}
+
+/**
+ * If `dartVmServicePort` capability is set, mutate `caps.processArguments.args`
+ * so the Flutter engine binds the Dart VM service to that exact port at launch.
+ *
+ * Both flag names are injected because the canonical name changed across
+ * Flutter releases. Flutter <3.10 only recognises `--observatory-port`; Flutter
+ * >=3.10 recognises `--vm-service-port` (the legacy alias was deprecated in
+ * engine commit 396c7fd0bd in Jan 2023 and subsequently removed from some
+ * builds). The Flutter engine silently ignores unknown flags, so sending both
+ * with the same value is safe across the entire Flutter version range — each
+ * engine picks up whichever name it knows.
+ *
+ * Any pre-existing `--vm-service-port=*` or `--observatory-port=*` entries in
+ * `caps.processArguments.args` are stripped before injection so the cap is the
+ * authoritative source.
+ *
+ * If `dartVmServicePort` is not set, the caps are left untouched.
+ * @param caps The W3C capabilities passed to the driver session.
+ */
+function injectDartVmServicePortFlags(caps: Record<string, any>): void {
+  const port = caps.dartVmServicePort;
+  if (typeof port !== 'number') {
+    return;
+  }
+  caps.processArguments = caps.processArguments ?? {};
+  const existing: any[] = Array.isArray(caps.processArguments.args)
+    ? caps.processArguments.args
+    : [];
+  const filtered = existing.filter(
+    (arg) =>
+      typeof arg !== 'string' ||
+      (!arg.startsWith(`${VM_SERVICE_PORT_FLAG}=`) && !arg.startsWith(`${OBSERVATORY_PORT_FLAG}=`)),
+  );
+  filtered.push(`${VM_SERVICE_PORT_FLAG}=${port}`);
+  filtered.push(`${OBSERVATORY_PORT_FLAG}=${port}`);
+  if (!filtered.some((arg) => typeof arg === 'string' && arg === DISABLE_SERVICE_AUTH_CODES_FLAG)) {
+    filtered.push(DISABLE_SERVICE_AUTH_CODES_FLAG);
+  }
+  caps.processArguments.args = filtered;
 }
 
 async function requireFreePort(this: FlutterDriver, port: number) {
@@ -116,13 +162,30 @@ export async function getObservatoryWsUri(
       this.log.error(e);
     }
     if (!lastMatch) {
-      throw new Error(
-        `No observatory URL matching to '${OBSERVATORY_URL_PATTERN}' was found in the device log. ` +
-          `Please make sure the application under test is configured properly according to ` +
-          `https://github.com/appium/appium-flutter-driver#usage and that it does not crash on startup.`,
-      );
+      // If `dartVmServicePort` is set, the engine was instructed to bind to
+      // that exact port at launch via the flags injected by
+      // `injectDartVmServicePortFlags`. The syslog line normally confirms this,
+      // but iOS unified-logging privacy filters can silently drop the Flutter
+      // framework's "Dart VM service is listening on …" line on some launches.
+      // Fall back to the requested port — the engine is reachable there.
+      if (typeof caps.dartVmServicePort === 'number') {
+        this.log.info(
+          `LogMonitor scan exhausted; falling back to ` +
+            `dartVmServicePort=${caps.dartVmServicePort} from capabilities`,
+        );
+        urlObject = new URL(`http://${LOCALHOST}:${caps.dartVmServicePort}/`);
+        urlObject.protocol = `ws`;
+        urlObject.pathname += `ws`;
+      } else {
+        throw new Error(
+          `No observatory URL matching to '${OBSERVATORY_URL_PATTERN}' was found in the device log. ` +
+            `Please make sure the application under test is configured properly according to ` +
+            `https://github.com/appium/appium-flutter-driver#usage and that it does not crash on startup.`,
+        );
+      }
+    } else {
+      urlObject = extractObservatoryUrl(lastMatch) as URL;
     }
-    urlObject = extractObservatoryUrl(lastMatch) as URL;
   }
   if (!proxydriver.isRealDevice()) {
     this.log.info(`Running on iOS simulator`);
