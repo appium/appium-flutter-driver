@@ -13,7 +13,6 @@ import type {XCUITestDriverOpts} from 'appium-xcuitest-driver/build/lib/driver';
 const LOCALHOST = `127.0.0.1`;
 
 const VM_SERVICE_PORT_FLAG = `--vm-service-port`;
-const OBSERVATORY_PORT_FLAG = `--observatory-port`;
 const DISABLE_SERVICE_AUTH_CODES_FLAG = `--disable-service-auth-codes`;
 
 export async function startIOSSession(
@@ -59,19 +58,22 @@ export async function connectIOSSession(
 
 /**
  * If `dartVmServicePort` capability is set, mutate `caps.processArguments.args`
- * so the Flutter engine binds the Dart VM service to that exact port at launch.
+ * so the Flutter engine binds the Dart VM service to that exact port at launch,
+ * with auth codes disabled so the well-known fallback URL is reachable.
  *
- * Both flag names are injected because the canonical name changed across
- * Flutter releases. Flutter <3.10 only recognises `--observatory-port`; Flutter
- * >=3.10 recognises `--vm-service-port` (the legacy alias was deprecated in
- * engine commit 396c7fd0bd in Jan 2023 and subsequently removed from some
- * builds). The Flutter engine silently ignores unknown flags, so sending both
- * with the same value is safe across the entire Flutter version range — each
- * engine picks up whichever name it knows.
+ * Two flags are injected:
+ *   * `--vm-service-port=<port>` — tells the engine which port to bind.
+ *     Requires Flutter >=3.10 (engine commit 396c7fd0bd, Jan 2023). The
+ *     legacy `--observatory-port` alias is intentionally not injected here.
+ *   * `--disable-service-auth-codes` — drops the random auth-code path
+ *     component from the service URL. Without this, the engine binds to
+ *     `http://127.0.0.1:<port>/<auth>/`, and a fallback constructed without
+ *     observing the auth code would fail the WebSocket handshake.
  *
- * Any pre-existing `--vm-service-port=*` or `--observatory-port=*` entries in
- * `caps.processArguments.args` are stripped before injection so the cap is the
- * authoritative source.
+ * Any pre-existing `--vm-service-port=*` entries in `caps.processArguments.args`
+ * are stripped first so this cap is the authoritative source for the port.
+ * Other entries (including a user-supplied `--observatory-port=*`) are left
+ * untouched.
  *
  * If `dartVmServicePort` is not set, the caps are left untouched.
  * @param caps The W3C capabilities passed to the driver session.
@@ -86,12 +88,9 @@ function injectDartVmServicePortFlags(caps: Record<string, any>): void {
     ? caps.processArguments.args
     : [];
   const filtered = existing.filter(
-    (arg) =>
-      typeof arg !== 'string' ||
-      (!arg.startsWith(`${VM_SERVICE_PORT_FLAG}=`) && !arg.startsWith(`${OBSERVATORY_PORT_FLAG}=`)),
+    (arg) => typeof arg !== 'string' || !arg.startsWith(`${VM_SERVICE_PORT_FLAG}=`),
   );
   filtered.push(`${VM_SERVICE_PORT_FLAG}=${port}`);
-  filtered.push(`${OBSERVATORY_PORT_FLAG}=${port}`);
   if (!filtered.some((arg) => typeof arg === 'string' && arg === DISABLE_SERVICE_AUTH_CODES_FLAG)) {
     filtered.push(DISABLE_SERVICE_AUTH_CODES_FLAG);
   }
