@@ -34,4 +34,7 @@ export const desiredCapConstraints = {
   forwardingPort: {
     isNumber: true,
   },
+  dartVmServicePort: {
+    isNumber: true,
+  },
 } as const;

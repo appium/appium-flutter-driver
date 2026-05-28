@@ -117,6 +117,7 @@ SKIP_IOS=1 appium driver doctor flutter
 | appium:remoteAdbHost | The IP/hostname of the remote host ADB is running on. This capability only makes sense for Android platform. Providing it will implicitly override the host for the Observatory URL if the latter is determined from device logs. localhost be default | 192.168.1.20
 | appium:adbPort | The port number ADB server is running on. This capability only makes sense for Android platform. 5037 by default | 9999
 | appium:forwardingPort | The port number that will be used to forward the traffic from the device under test to localhost. Only applicable if `skipPortForward` is falsy. Not applicable if the test is executed on iOS Simulator. By default, it is the same as in the provided or autodetected Observatory URL. | 9999
+| appium:dartVmServicePort | **iOS only. Requires Flutter ≥3.10.** Pin the Dart VM service to a known port at app launch. The driver injects `--vm-service-port=<port>` and `--disable-service-auth-codes` into `processArguments.args` so the Flutter engine deterministically binds to this port with no auth-code path component. Also used as the fallback URL when the syslog scan exhausts without finding the Dart VM service URL (e.g. when iOS unified-logging privacy filters drop the "Dart VM service is listening on …" line). Existing `--vm-service-port=*` entries in `processArguments.args` are stripped and replaced; other entries are left untouched. Does not apply when `observatoryWsUri` is also set (the latter takes precedence for connection). | 8283
 
 ### UIA2/XCUITest driver
 
