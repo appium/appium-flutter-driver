@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.7.0
+- Add `appium:dartVmServicePort` capability to configure the port for the Dart VM service connection
+- Update Appium UIAutomator2 driver dependency to 7.5.2
+
 ## 3.6.0
 - Update Appium XCUITest driver dependency to 10.43.1
 - Update Appium UIAutomator2 driver dependency to 7.1.2
