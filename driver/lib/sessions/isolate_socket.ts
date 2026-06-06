@@ -8,12 +8,13 @@ interface ExecuteArgs {
 export class IsolateSocket extends Client {
   // ensure the instance has the expected runtime members
   public isolateId: number | string = 0;
+
   // declare members that come from the base `Client`/`CommonClient` so
   // TypeScript recognizes their presence when using `IsolateSocket`.
-  public on: (...args: any[]) => any;
-  public removeListener: (...args: any[]) => any;
-  public call: (...args: any[]) => Promise<any>;
-  public close: (...args: any[]) => void;
+  declare public on: (...args: any[]) => any;
+  declare public removeListener: (...args: any[]) => any;
+  declare public call: (...args: any[]) => Promise<any>;
+  declare public close: (...args: any[]) => void;
 
   constructor(address?: string) {
     // Forward to the underlying rpc-websockets Client constructor
