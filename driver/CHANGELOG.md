@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.7.1
+- Fix [TypeScript declaration issues in `IsolateSocket` class](https://github.com/appium/appium-flutter-driver/issues/872)
+
 ## 3.7.0
 - Add `appium:dartVmServicePort` capability to configure the port for the Dart VM service connection
 - Update Appium UIAutomator2 driver dependency to 7.5.2
