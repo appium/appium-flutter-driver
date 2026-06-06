@@ -3,14 +3,11 @@
 
 name: publish driver
 
-# FIXME
-# npm token kep raising as invalid while it had proper one.
 on:
   workflow_dispatch:
-#  push:
-#    branches: [ main ]
-#    # paths:
-#    #   - 'driver/**'
+  push:
+    tags:
+      - 'v[0-9]*.[0-9]*.[0-9]*'
 
 permissions:
   contents: write
