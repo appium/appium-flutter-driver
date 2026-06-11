@@ -19,22 +19,44 @@ const DISABLE_SERVICE_AUTH_CODES_EXTRA = `disable-service-auth-codes`;
  *   * `disable-service-auth-codes` (bool) → `--disable-service-auth-codes` — drops the random
  *     auth-code path so the well-known `ws://<host>:<port>/ws` URL is reachable.
  *
- * uiautomator2 appends `caps.optionalIntentArguments` to the `am start` that launches the app, so
- * when `dartVmServicePort` is set we add `--ei vm-service-port <port> --ez disable-service-auth-codes
- * true` there (stripping any prior `vm-service-port` extra so this cap is authoritative). Flutter's
- * own tooling discovers the port from the log instead, but the embedding honours the extra.
+ * uiautomator2 appends `optionalIntentArguments` to the `am start` that launches the app, so when
+ * `dartVmServicePort` is set we add `--ei vm-service-port <port> --ez disable-service-auth-codes
+ * true` there. CRITICAL: the proxydriver launches the app from the createSession `args` (a deep
+ * clone of the original capabilities — see driver.ts), NOT from the post-`super.createSession`
+ * `caps` object; mutating `caps` is a no-op for the launch. So we set the cap on the capability
+ * objects *inside* `args`, covering both the W3C (`alwaysMatch`) and JSONWP (flat) shapes, and
+ * strip any prior `vm-service-port` extra so this cap is authoritative. Flutter's own tooling
+ * discovers the port from the log instead, but the embedding honours the extra.
  *
- * If `dartVmServicePort` is not set, the caps are left untouched.
+ * If `dartVmServicePort` is not set, the args are left untouched.
  */
-function injectDartVmServicePortIntentArgs(caps: Record<string, any>): void {
+function injectDartVmServicePortIntentArgs(caps: Record<string, any>, args: any[]): void {
   const port = caps.dartVmServicePort;
   if (typeof port !== 'number') {
     return;
   }
-  const existing = typeof caps.optionalIntentArguments === 'string' ? caps.optionalIntentArguments : '';
-  const cleaned = existing.replace(/--ei\s+vm-service-port\s+\d+/g, ' ').replace(/\s+/g, ' ').trim();
   const injected = `--ei ${VM_SERVICE_PORT_EXTRA} ${port} --ez ${DISABLE_SERVICE_AUTH_CODES_EXTRA} true`;
-  caps.optionalIntentArguments = cleaned ? `${cleaned} ${injected}` : injected;
+  const merge = (existing: unknown): string => {
+    const base =
+      typeof existing === 'string'
+        ? existing
+            .replace(/--ei\s+vm-service-port\s+\d+/g, ' ')
+            .replace(/--ez\s+disable-service-auth-codes\s+true/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim()
+        : '';
+    return base ? `${base} ${injected}` : injected;
+  };
+  for (const a of args) {
+    if (!a || typeof a !== 'object' || Array.isArray(a)) {
+      continue;
+    }
+    if (a.alwaysMatch && typeof a.alwaysMatch === 'object') {
+      a.alwaysMatch['appium:optionalIntentArguments'] = merge(a.alwaysMatch['appium:optionalIntentArguments']);
+    } else if ('platformName' in a || 'appium:automationName' in a || 'optionalIntentArguments' in a) {
+      (a as Record<string, unknown>).optionalIntentArguments = merge((a as Record<string, unknown>).optionalIntentArguments);
+    }
+  }
 }
 
 export async function startAndroidSession(
@@ -43,7 +65,12 @@ export async function startAndroidSession(
   ...args: any[]
 ): Promise<[AndroidUiautomator2Driver, IsolateSocket | null]> {
   this.log.info(`Starting an Android proxy session`);
-  injectDartVmServicePortIntentArgs(caps);
+  injectDartVmServicePortIntentArgs(caps, args);
+  if (typeof caps.dartVmServicePort === `number`) {
+    this.log.info(
+      `Pinning Dart VM Service to port ${caps.dartVmServicePort} via the vm-service-port launch-intent extra`,
+    );
+  }
   const androiddriver = new AndroidUiautomator2Driver({} as InitialOpts);
   if (!caps.observatoryWsUri) {
     androiddriver.eventEmitter.once('syslogStarted', (syslog) => {
