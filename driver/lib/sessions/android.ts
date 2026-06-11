@@ -6,12 +6,44 @@ import {FlutterDriver} from '../driver';
 import {LogMonitor} from './log-monitor';
 import type {LogEntry} from './log-monitor';
 
+const VM_SERVICE_PORT_EXTRA = `vm-service-port`;
+const DISABLE_SERVICE_AUTH_CODES_EXTRA = `disable-service-auth-codes`;
+
+/**
+ * Android analogue of iOS's `injectDartVmServicePortFlags`. iOS injects engine switches via
+ * `processArguments`; Android has no such launch-args channel, but Flutter's Android embedding
+ * (`FlutterShellArgs.fromIntent`) reads two launch-intent extras:
+ *
+ *   * `vm-service-port` (int) → the `--vm-service-port=<port>` engine switch — binds the Dart VM
+ *     service to that exact port instead of a random one.
+ *   * `disable-service-auth-codes` (bool) → `--disable-service-auth-codes` — drops the random
+ *     auth-code path so the well-known `ws://<host>:<port>/ws` URL is reachable.
+ *
+ * uiautomator2 appends `caps.optionalIntentArguments` to the `am start` that launches the app, so
+ * when `dartVmServicePort` is set we add `--ei vm-service-port <port> --ez disable-service-auth-codes
+ * true` there (stripping any prior `vm-service-port` extra so this cap is authoritative). Flutter's
+ * own tooling discovers the port from the log instead, but the embedding honours the extra.
+ *
+ * If `dartVmServicePort` is not set, the caps are left untouched.
+ */
+function injectDartVmServicePortIntentArgs(caps: Record<string, any>): void {
+  const port = caps.dartVmServicePort;
+  if (typeof port !== 'number') {
+    return;
+  }
+  const existing = typeof caps.optionalIntentArguments === 'string' ? caps.optionalIntentArguments : '';
+  const cleaned = existing.replace(/--ei\s+vm-service-port\s+\d+/g, ' ').replace(/\s+/g, ' ').trim();
+  const injected = `--ei ${VM_SERVICE_PORT_EXTRA} ${port} --ez ${DISABLE_SERVICE_AUTH_CODES_EXTRA} true`;
+  caps.optionalIntentArguments = cleaned ? `${cleaned} ${injected}` : injected;
+}
+
 export async function startAndroidSession(
   this: FlutterDriver,
   caps: Record<string, any>,
   ...args: any[]
 ): Promise<[AndroidUiautomator2Driver, IsolateSocket | null]> {
   this.log.info(`Starting an Android proxy session`);
+  injectDartVmServicePortIntentArgs(caps);
   const androiddriver = new AndroidUiautomator2Driver({} as InitialOpts);
   if (!caps.observatoryWsUri) {
     androiddriver.eventEmitter.once('syslogStarted', (syslog) => {
