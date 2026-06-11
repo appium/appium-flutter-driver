@@ -53,6 +53,9 @@ const commandHandlers: CommandMap = {
     await reConnectFlutterDriver.bind(driver)(driver.internalCaps);
   },
   checkHealth: async (driver) => (await driver.executeElementCommand('get_health')).status,
+  // The observatory WS URL the driver discovered + connected to (ws://host:port/[auth-code]/ws), or
+  // null if not connected. Lets an external client attach its own Dart VM Service connection.
+  getVMServiceUrl: async (driver) => driver.connectedVmServiceUrl,
   getVMInfo: async (driver) => await driver.executeGetVMCommand(),
   getRenderTree: async (driver) => (await driver.executeElementCommand('get_render_tree')).tree,
   getOffset: async (driver, elementBase64: string, options: OffsetOptions) =>
