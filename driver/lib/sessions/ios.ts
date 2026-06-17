@@ -43,6 +43,35 @@ export async function startIOSSession(
     return [iosdriver, null];
   }
 
+  // appium-xcuitest starts the device-log capture by spawning `xcrun simctl spawn <udid> log
+  // stream`, which on loaded CI simulators intermittently fails to start ("The process did not
+  // start within 10000ms") or hits a transient "Simulator is not running". appium swallows that
+  // error ("Continuing without capturing device logs") without retrying, leaving `this._logmon`
+  // unset — and since the Dart VM Service URL binds a random, auth-coded port that can only be read
+  // from that log, getObservatoryWsUri() below would throw "mandatory syslog service must be
+  // running". Re-invoke the capture a few times: a success re-emits `syslogStarted`, which the
+  // once-handler registered above turns into `this._logmon`. Only the log-discovery path needs it.
+  if (!caps.observatoryWsUri && !this._logmon) {
+    const maxAttempts = 5;
+    for (let attempt = 1; attempt <= maxAttempts && !this._logmon; attempt += 1) {
+      this.log.warn(
+        `Device-log capture did not start during session create; retrying (attempt ${attempt}/${maxAttempts})`,
+      );
+      await B.delay(2000);
+      try {
+        await iosdriver.startLogCapture();
+      } catch (e) {
+        this.log.debug(`startLogCapture retry ${attempt} failed: ${(e as Error).stack ?? e}`);
+      }
+    }
+    if (!this._logmon) {
+      this.log.warn(
+        `Device-log capture still not started after ${maxAttempts} retries; ` +
+          `getObservatoryWsUri will fall back to dartVmServicePort if set, otherwise fail.`,
+      );
+    }
+  }
+
   return [iosdriver, await connectIOSSession.bind(this)(iosdriver, caps)];
 }
 
