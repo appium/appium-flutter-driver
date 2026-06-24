@@ -163,6 +163,8 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
         break;
     }
 
+    this.connectedVmServiceUrl = null;
+
     if (this.proxydriver) {
       this.log.info('Deleting the proxy driver session.');
       try {

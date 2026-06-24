@@ -23,10 +23,10 @@ const DISABLE_SERVICE_AUTH_CODES_EXTRA = `disable-service-auth-codes`;
  * `dartVmServicePort` is set we add `--ei vm-service-port <port> --ez disable-service-auth-codes
  * true` there. CRITICAL: the proxydriver launches the app from the createSession `args` (a deep
  * clone of the original capabilities — see driver.ts), NOT from the post-`super.createSession`
- * `caps` object; mutating `caps` is a no-op for the launch. So we set the cap on the capability
- * objects *inside* `args`, covering both the W3C (`alwaysMatch`) and JSONWP (flat) shapes, and
- * strip any prior `vm-service-port` extra so this cap is authoritative. Flutter's own tooling
- * discovers the port from the log instead, but the embedding honours the extra.
+ * `caps` object; mutating `caps` is a no-op for the launch. So we set the cap on the W3C
+ * capability object (`alwaysMatch`) *inside* `args`, and strip any prior `vm-service-port` extra so
+ * this cap is authoritative. Flutter's own tooling discovers the port from the log instead, but the
+ * embedding honours the extra.
  *
  * If `dartVmServicePort` is not set, the args are left untouched.
  */
@@ -52,9 +52,9 @@ function injectDartVmServicePortIntentArgs(caps: Record<string, any>, args: any[
       continue;
     }
     if (a.alwaysMatch && typeof a.alwaysMatch === 'object') {
-      a.alwaysMatch['appium:optionalIntentArguments'] = merge(a.alwaysMatch['appium:optionalIntentArguments']);
-    } else if ('platformName' in a || 'appium:automationName' in a || 'optionalIntentArguments' in a) {
-      (a as Record<string, unknown>).optionalIntentArguments = merge((a as Record<string, unknown>).optionalIntentArguments);
+      a.alwaysMatch['appium:optionalIntentArguments'] = merge(
+        a.alwaysMatch['appium:optionalIntentArguments'],
+      );
     }
   }
 }
