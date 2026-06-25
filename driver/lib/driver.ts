@@ -63,6 +63,12 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   public localServer: Server | null;
   protected _logmon: LogMonitor | null;
 
+  // The observatory WS URL (ws://host:port/[auth-code]/ws) the driver discovered, forwarded, and
+  // connected to. Exposed via the `flutter:getVMServiceUrl` command so an external client (e.g. a
+  // test harness wanting its own Dart VM Service connection for `evaluate` / service extensions) can
+  // attach to the same VM Service instead of trying to rediscover or pin the port itself.
+  public connectedVmServiceUrl: string | null;
+
   // Used to keep the capabilities internally
   public internalCaps: DriverCaps<FluttertDriverConstraints>;
 
@@ -112,6 +118,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
 
     // Used to keep the port for port forward to clear the pair.
     this.portForwardLocalPort = null;
+    this.connectedVmServiceUrl = null;
 
     // Used for iOS to end the local server to proxy the request.
     this.localServer = null;
@@ -155,6 +162,8 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
         }
         break;
     }
+
+    this.connectedVmServiceUrl = null;
 
     if (this.proxydriver) {
       this.log.info('Deleting the proxy driver session.');

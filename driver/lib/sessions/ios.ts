@@ -93,6 +93,7 @@ export async function connectIOSSession(
   clearLog: boolean = false,
 ): Promise<IsolateSocket> {
   const observatoryWsUri = await getObservatoryWsUri.bind(this)(iosdriver, caps, clearLog);
+  this.connectedVmServiceUrl = observatoryWsUri;
   return await connectSocket.bind(this)(observatoryWsUri, iosdriver, caps);
 }
 
