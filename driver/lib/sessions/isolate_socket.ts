@@ -20,7 +20,7 @@ export class IsolateSocket extends Client {
     // Forward to the underlying rpc-websockets Client constructor
     // (address and optional options are supported by the upstream Client).
     // Use `any` to avoid widening the signature here.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
     // @ts-ignore - runtime call is valid; types are provided by the package
     super(address as any);
   }

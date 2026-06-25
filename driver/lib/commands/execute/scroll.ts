@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import {FlutterDriver} from '../../driver';
+import type {FlutterDriver} from '../../driver';
 import {waitFor, waitForTappable} from './wait';
 
 export const scroll = async (

@@ -48,44 +48,6 @@ export async function startIOSSession(
   return [iosdriver, await connectIOSSession.bind(this)(iosdriver, caps)];
 }
 
-async function ensureDeviceLogCaptureStarted(
-  this: FlutterDriver,
-  iosdriver: XCUITestDriver,
-  caps: Record<string, any>,
-): Promise<void> {
-  if (caps.observatoryWsUri || this._logmon) {
-    return;
-  }
-
-  // appium-xcuitest starts the device-log capture by spawning `xcrun simctl spawn <udid> log`
-  // stream`, which on loaded CI simulators intermittently fails to start ("The process did not
-  // start within 10000ms") or hits a transient "Simulator is not running". appium swallows that
-  // error ("Continuing without capturing device logs") without retrying, leaving `this._logmon`
-  // unset — and since the Dart VM Service URL binds a random, auth-coded port that can only be read
-  // from that log, getObservatoryWsUri() below would throw "mandatory syslog service must be
-  // running". Re-invoke the capture a few times: a success re-emits `syslogStarted`, which the
-  // once-handler registered above turns into `this._logmon`. Only the log-discovery path needs it.
-  const maxAttempts = 5;
-  for (let attempt = 1; attempt <= maxAttempts && !this._logmon; attempt += 1) {
-    this.log.warn(
-      `Device-log capture did not start during session create; retrying (attempt ${attempt}/${maxAttempts})`,
-    );
-    await B.delay(2000);
-    try {
-      await iosdriver.startLogCapture();
-    } catch (e) {
-      this.log.debug(`startLogCapture retry ${attempt} failed: ${(e as Error).stack ?? e}`);
-    }
-  }
-
-  if (!this._logmon) {
-    this.log.warn(
-      `Device-log capture still not started after ${maxAttempts} retries; ` +
-        `getObservatoryWsUri will fall back to dartVmServicePort if set, otherwise fail.`,
-    );
-  }
-}
-
 export async function connectIOSSession(
   this: FlutterDriver,
   iosdriver: XCUITestDriver,
@@ -95,72 +57,6 @@ export async function connectIOSSession(
   const observatoryWsUri = await getObservatoryWsUri.bind(this)(iosdriver, caps, clearLog);
   this.connectedVmServiceUrl = observatoryWsUri;
   return await connectSocket.bind(this)(observatoryWsUri, iosdriver, caps);
-}
-
-/**
- * If `dartVmServicePort` capability is set, mutate `caps.processArguments.args`
- * so the Flutter engine binds the Dart VM service to that exact port at launch,
- * with auth codes disabled so the well-known fallback URL is reachable.
- *
- * Two flags are injected:
- *   * `--vm-service-port=<port>` — tells the engine which port to bind.
- *     Requires Flutter >=3.10 (engine commit 396c7fd0bd, Jan 2023). The
- *     legacy `--observatory-port` alias is intentionally not injected here.
- *   * `--disable-service-auth-codes` — drops the random auth-code path
- *     component from the service URL. Without this, the engine binds to
- *     `http://127.0.0.1:<port>/<auth>/`, and a fallback constructed without
- *     observing the auth code would fail the WebSocket handshake.
- *
- * Any pre-existing `--vm-service-port=*` entries in `caps.processArguments.args`
- * are stripped first so this cap is the authoritative source for the port.
- * Other entries (including a user-supplied `--observatory-port=*`) are left
- * untouched.
- *
- * If `dartVmServicePort` is not set, the caps are left untouched.
- * @param caps The W3C capabilities passed to the driver session.
- */
-function injectDartVmServicePortFlags(caps: Record<string, any>): void {
-  const port = caps.dartVmServicePort;
-  if (typeof port !== 'number') {
-    return;
-  }
-  caps.processArguments ??= {};
-  const existing: any[] = Array.isArray(caps.processArguments.args)
-    ? caps.processArguments.args
-    : [];
-  const filtered = existing.filter(
-    (arg) => typeof arg !== 'string' || !arg.startsWith(`${VM_SERVICE_PORT_FLAG}=`),
-  );
-  filtered.push(`${VM_SERVICE_PORT_FLAG}=${port}`);
-  if (!filtered.some((arg) => typeof arg === 'string' && arg === DISABLE_SERVICE_AUTH_CODES_FLAG)) {
-    filtered.push(DISABLE_SERVICE_AUTH_CODES_FLAG);
-  }
-  caps.processArguments.args = filtered;
-}
-
-async function requireFreePort(this: FlutterDriver, port: number) {
-  // Try to close existing local server if it exists
-  if (this.localServer) {
-    this.log.info(`Closing existing local server on port ${port}`);
-    await new Promise<void>((resolve) => {
-      this.localServer?.close((err) => {
-        if (err) {
-          this.log.error(`Error occurred while closing the local server: ${err.message}`);
-          return resolve(); // Resolve even if there's an error to avoid hanging
-        }
-        this.log.info(`Previous local server closed`);
-        resolve();
-      });
-    });
-  }
-  if ((await checkPortStatus(port, LOCALHOST)) !== `open`) {
-    return;
-  }
-  this.log.warn(`Port #${port} is busy. Did you quit the previous driver session(s) properly?`);
-  throw new Error(
-    `The port :${port} is occupied by an other process. ` +
-      `You can either quit that process or select another free port.`,
-  );
 }
 
 export async function getObservatoryWsUri(
@@ -284,4 +180,108 @@ export async function getObservatoryWsUri(
     this.localServer = null;
   });
   return urlObject.toJSON();
+}
+
+async function ensureDeviceLogCaptureStarted(
+  this: FlutterDriver,
+  iosdriver: XCUITestDriver,
+  caps: Record<string, any>,
+): Promise<void> {
+  if (caps.observatoryWsUri || this._logmon) {
+    return;
+  }
+
+  // appium-xcuitest starts the device-log capture by spawning `xcrun simctl spawn <udid> log`
+  // stream`, which on loaded CI simulators intermittently fails to start ("The process did not
+  // start within 10000ms") or hits a transient "Simulator is not running". appium swallows that
+  // error ("Continuing without capturing device logs") without retrying, leaving `this._logmon`
+  // unset — and since the Dart VM Service URL binds a random, auth-coded port that can only be read
+  // from that log, getObservatoryWsUri() below would throw "mandatory syslog service must be
+  // running". Re-invoke the capture a few times: a success re-emits `syslogStarted`, which the
+  // once-handler registered above turns into `this._logmon`. Only the log-discovery path needs it.
+  const maxAttempts = 5;
+  for (let attempt = 1; attempt <= maxAttempts && !this._logmon; attempt += 1) {
+    this.log.warn(
+      `Device-log capture did not start during session create; retrying (attempt ${attempt}/${maxAttempts})`,
+    );
+    await B.delay(2000);
+    try {
+      await iosdriver.startLogCapture();
+    } catch (e) {
+      this.log.debug(`startLogCapture retry ${attempt} failed: ${(e as Error).stack ?? e}`);
+    }
+  }
+
+  if (!this._logmon) {
+    this.log.warn(
+      `Device-log capture still not started after ${maxAttempts} retries; ` +
+        `getObservatoryWsUri will fall back to dartVmServicePort if set, otherwise fail.`,
+    );
+  }
+}
+
+/**
+ * If `dartVmServicePort` capability is set, mutate `caps.processArguments.args`
+ * so the Flutter engine binds the Dart VM service to that exact port at launch,
+ * with auth codes disabled so the well-known fallback URL is reachable.
+ *
+ * Two flags are injected:
+ *   * `--vm-service-port=<port>` — tells the engine which port to bind.
+ *     Requires Flutter >=3.10 (engine commit 396c7fd0bd, Jan 2023). The
+ *     legacy `--observatory-port` alias is intentionally not injected here.
+ *   * `--disable-service-auth-codes` — drops the random auth-code path
+ *     component from the service URL. Without this, the engine binds to
+ *     `http://127.0.0.1:<port>/<auth>/`, and a fallback constructed without
+ *     observing the auth code would fail the WebSocket handshake.
+ *
+ * Any pre-existing `--vm-service-port=*` entries in `caps.processArguments.args`
+ * are stripped first so this cap is the authoritative source for the port.
+ * Other entries (including a user-supplied `--observatory-port=*`) are left
+ * untouched.
+ *
+ * If `dartVmServicePort` is not set, the caps are left untouched.
+ * @param caps The W3C capabilities passed to the driver session.
+ */
+function injectDartVmServicePortFlags(caps: Record<string, any>): void {
+  const port = caps.dartVmServicePort;
+  if (typeof port !== 'number') {
+    return;
+  }
+  caps.processArguments ??= {};
+  const existing: any[] = Array.isArray(caps.processArguments.args)
+    ? caps.processArguments.args
+    : [];
+  const filtered = existing.filter(
+    (arg) => typeof arg !== 'string' || !arg.startsWith(`${VM_SERVICE_PORT_FLAG}=`),
+  );
+  filtered.push(`${VM_SERVICE_PORT_FLAG}=${port}`);
+  if (!filtered.some((arg) => typeof arg === 'string' && arg === DISABLE_SERVICE_AUTH_CODES_FLAG)) {
+    filtered.push(DISABLE_SERVICE_AUTH_CODES_FLAG);
+  }
+  caps.processArguments.args = filtered;
+}
+
+async function requireFreePort(this: FlutterDriver, port: number) {
+  // Try to close existing local server if it exists
+  if (this.localServer) {
+    this.log.info(`Closing existing local server on port ${port}`);
+    await new Promise<void>((resolve) => {
+      this.localServer?.close((err) => {
+        if (err) {
+          this.log.error(`Error occurred while closing the local server: ${err.message}`);
+          return resolve(); // Resolve even if there's an error to avoid hanging
+        }
+        this.log.info(`Previous local server closed`);
+        resolve();
+      });
+    });
+  }
+  if ((await checkPortStatus(port, LOCALHOST)) !== `open`) {
+    return;
+  }
+  this.log.warn(`Port #${port} is busy. Did you quit the previous driver session(s) properly?`);
+  throw new Error(
+    `The port :${port} is occupied by an other process. ` +
+      `You can either quit that process or select another free port.`,
+  );
 }
