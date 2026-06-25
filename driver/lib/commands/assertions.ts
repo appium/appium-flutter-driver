@@ -1,4 +1,4 @@
-import {FlutterDriver} from '../driver';
+import type {FlutterDriver} from '../driver';
 import {byValueKey, byText, byTooltip} from 'appium-flutter-finder';
 import type {SerializableFinder} from 'appium-flutter-finder';
 
@@ -67,7 +67,9 @@ async function executeAssertion(
       ...extraArgs,
     });
   } catch (err) {
-    throw new Error(`Assertion failed on command "${command}" within ${timeout}ms\n${err}`);
+    throw new Error(`Assertion failed on command "${command}" within ${timeout}ms\n${err}`, {
+      cause: err,
+    });
   }
 }
 

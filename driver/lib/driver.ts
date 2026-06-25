@@ -24,7 +24,7 @@ import {getScreenshot} from './commands/screen';
 import {getClipboard, setClipboard} from './commands/clipboard';
 import {desiredCapConstraints} from './desired-caps';
 import {XCUITestDriver} from 'appium-xcuitest-driver';
-import {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
+import type {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
 import type {
   DefaultCreateSessionResult,
   DriverCaps,
@@ -51,7 +51,7 @@ const WEBVIEW_NO_PROXY = [
   [`POST`, new RegExp(`^/session/[^/]+/orientation`)],
   [`POST`, new RegExp(`^/session/[^/]+/touch/multi/perform`)],
   [`POST`, new RegExp(`^/session/[^/]+/touch/perform`)],
-] as import('@appium/types').RouteMatcher[];
+] as RouteMatcher[];
 
 class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   public socket: IsolateSocket | null;
@@ -61,8 +61,6 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
 
   public portForwardLocalPort: string | null;
   public localServer: Server | null;
-  protected _logmon: LogMonitor | null;
-
   // The observatory WS URL (ws://host:port/[auth-code]/ws) the driver discovered, forwarded, and
   // connected to. Exposed via the `flutter:getVMServiceUrl` command so an external client (e.g. a
   // test harness wanting its own Dart VM Service connection for `evaluate` / service extensions) can
@@ -100,14 +98,15 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   // context
 
   public getContexts = getContexts;
-  public getCurrentContext = getCurrentContext;
-  public setContext = setContext;
-  protected currentContext = FLUTTER_CONTEXT_NAME;
-  private driverShouldDoProxyCmd = driverShouldDoProxyCmd;
-
   // content
   public getClipboard = getClipboard;
   public setClipboard = setClipboard;
+
+  public getCurrentContext = getCurrentContext;
+  public setContext = setContext;
+  protected _logmon: LogMonitor | null;
+  protected currentContext = FLUTTER_CONTEXT_NAME;
+  private driverShouldDoProxyCmd = driverShouldDoProxyCmd;
 
   constructor(opts, shouldValidateCaps: boolean) {
     super(opts, shouldValidateCaps);
@@ -180,12 +179,12 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
 
   public async installApp(appPath: string, opts = {}) {
     // @ts-expect-error this exist in xcuitestdriver or uia2 driver
-    this.proxydriver?.installApp(appPath, opts);
+    await this.proxydriver?.installApp(appPath, opts);
   }
 
   public async activateApp(appId: string) {
     // @ts-expect-error this exist in xcuitestdriver or uia2 driver
-    this.proxydriver?.activateApp(appId);
+    await this.proxydriver?.activateApp(appId);
     await reConnectFlutterDriver.bind(this)(this.internalCaps);
   }
 
@@ -284,9 +283,9 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
         // Only FlutterDriver CommandTimeout is used; Proxy is disabled
         // All proxy commands needs to reset the FlutterDriver CommandTimeout
         // Here we manually reset the FlutterDriver CommandTimeout for commands that goes to proxy.
-        this.clearNewCommandTimeout();
+        await this.clearNewCommandTimeout();
         const result = await this.proxydriver?.executeCommand(cmd, ...args);
-        this.startNewCommandTimeout();
+        await this.startNewCommandTimeout();
         return result;
       } else {
         logger.debug(`Executing Flutter driver command '${cmd}'`);

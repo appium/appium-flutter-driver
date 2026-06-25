@@ -2,7 +2,7 @@ import {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
 import {connectSocket, extractObservatoryUrl, OBSERVATORY_URL_PATTERN} from './observatory';
 import type {InitialOpts, StringRecord} from '@appium/types';
 import type {IsolateSocket} from './isolate_socket';
-import {FlutterDriver} from '../driver';
+import type {FlutterDriver} from '../driver';
 import {LogMonitor} from './log-monitor';
 import type {LogEntry} from './log-monitor';
 
@@ -10,55 +10,8 @@ const VM_SERVICE_PORT_EXTRA = `vm-service-port`;
 const DISABLE_SERVICE_AUTH_CODES_EXTRA = `disable-service-auth-codes`;
 
 /**
- * Android analogue of iOS's `injectDartVmServicePortFlags`. iOS injects engine switches via
- * `processArguments`; Android has no such launch-args channel, but Flutter's Android embedding
- * (`FlutterShellArgs.fromIntent`) reads two launch-intent extras:
- *
- *   * `vm-service-port` (int) → the `--vm-service-port=<port>` engine switch — binds the Dart VM
- *     service to that exact port instead of a random one.
- *   * `disable-service-auth-codes` (bool) → `--disable-service-auth-codes` — drops the random
- *     auth-code path so the well-known `ws://<host>:<port>/ws` URL is reachable.
- *
- * uiautomator2 appends `optionalIntentArguments` to the `am start` that launches the app, so when
- * `dartVmServicePort` is set we add `--ei vm-service-port <port> --ez disable-service-auth-codes
- * true` there. CRITICAL: the proxydriver launches the app from the createSession `args` (a deep
- * clone of the original capabilities — see driver.ts), NOT from the post-`super.createSession`
- * `caps` object; mutating `caps` is a no-op for the launch. So we set the cap on the W3C
- * capability object (`alwaysMatch`) *inside* `args`, and strip any prior `vm-service-port` extra so
- * this cap is authoritative. Flutter's own tooling discovers the port from the log instead, but the
- * embedding honours the extra.
- *
- * If `dartVmServicePort` is not set, the args are left untouched.
+ * Starts the Android proxy driver and connects to the Flutter observatory.
  */
-function injectDartVmServicePortIntentArgs(caps: Record<string, any>, args: any[]): void {
-  const port = caps.dartVmServicePort;
-  if (typeof port !== 'number') {
-    return;
-  }
-  const injected = `--ei ${VM_SERVICE_PORT_EXTRA} ${port} --ez ${DISABLE_SERVICE_AUTH_CODES_EXTRA} true`;
-  const merge = (existing: unknown): string => {
-    const base =
-      typeof existing === 'string'
-        ? existing
-            .replace(/--ei\s+vm-service-port\s+\d+/g, ' ')
-            .replace(/--ez\s+disable-service-auth-codes\s+true/g, ' ')
-            .replace(/\s+/g, ' ')
-            .trim()
-        : '';
-    return base ? `${base} ${injected}` : injected;
-  };
-  for (const a of args) {
-    if (!a || typeof a !== 'object' || Array.isArray(a)) {
-      continue;
-    }
-    if (a.alwaysMatch && typeof a.alwaysMatch === 'object') {
-      a.alwaysMatch['appium:optionalIntentArguments'] = merge(
-        a.alwaysMatch['appium:optionalIntentArguments'],
-      );
-    }
-  }
-}
-
 export async function startAndroidSession(
   this: FlutterDriver,
   caps: Record<string, any>,
@@ -95,6 +48,9 @@ export async function startAndroidSession(
   return [androiddriver, await connectAndroidSession.bind(this)(androiddriver, caps)];
 }
 
+/**
+ * Connects an Android session to the Flutter observatory socket.
+ */
 export async function connectAndroidSession(
   this: FlutterDriver,
   androiddriver: AndroidUiautomator2Driver,
@@ -106,6 +62,9 @@ export async function connectAndroidSession(
   return await connectSocket.bind(this)(observatoryWsUri, caps);
 }
 
+/**
+ * Reads Android device logs until the Flutter observatory WebSocket URL is found.
+ */
 export async function getObservatoryWsUri(
   this: FlutterDriver,
   proxydriver: AndroidUiautomator2Driver,
@@ -161,4 +120,54 @@ export async function getObservatoryWsUri(
     urlObject.host = proxydriver.adb.adbHost;
   }
   return urlObject.toJSON();
+}
+
+/**
+ * Android analogue of iOS's `injectDartVmServicePortFlags`. iOS injects engine switches via
+ * `processArguments`; Android has no such launch-args channel, but Flutter's Android embedding
+ * (`FlutterShellArgs.fromIntent`) reads two launch-intent extras:
+ *
+ *   * `vm-service-port` (int) → the `--vm-service-port=<port>` engine switch — binds the Dart VM
+ *     service to that exact port instead of a random one.
+ *   * `disable-service-auth-codes` (bool) → `--disable-service-auth-codes` — drops the random
+ *     auth-code path so the well-known `ws://<host>:<port>/ws` URL is reachable.
+ *
+ * uiautomator2 appends `optionalIntentArguments` to the `am start` that launches the app, so when
+ * `dartVmServicePort` is set we add `--ei vm-service-port <port> --ez disable-service-auth-codes
+ * true` there. CRITICAL: the proxydriver launches the app from the createSession `args` (a deep
+ * clone of the original capabilities — see driver.ts), NOT from the post-`super.createSession`
+ * `caps` object; mutating `caps` is a no-op for the launch. So we set the cap on the W3C
+ * capability object (`alwaysMatch`) *inside* `args`, and strip any prior `vm-service-port` extra so
+ * this cap is authoritative. Flutter's own tooling discovers the port from the log instead, but the
+ * embedding honours the extra.
+ *
+ * If `dartVmServicePort` is not set, the args are left untouched.
+ */
+function injectDartVmServicePortIntentArgs(caps: Record<string, any>, args: any[]): void {
+  const port = caps.dartVmServicePort;
+  if (typeof port !== 'number') {
+    return;
+  }
+  const injected = `--ei ${VM_SERVICE_PORT_EXTRA} ${port} --ez ${DISABLE_SERVICE_AUTH_CODES_EXTRA} true`;
+  const merge = (existing: unknown): string => {
+    const base =
+      typeof existing === 'string'
+        ? existing
+            .replace(/--ei\s+vm-service-port\s+\d+/g, ' ')
+            .replace(/--ez\s+disable-service-auth-codes\s+true/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim()
+        : '';
+    return base ? `${base} ${injected}` : injected;
+  };
+  for (const a of args) {
+    if (!a || typeof a !== 'object' || Array.isArray(a)) {
+      continue;
+    }
+    if (a.alwaysMatch && typeof a.alwaysMatch === 'object') {
+      a.alwaysMatch['appium:optionalIntentArguments'] = merge(
+        a.alwaysMatch['appium:optionalIntentArguments'],
+      );
+    }
+  }
 }
