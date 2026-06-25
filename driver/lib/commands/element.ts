@@ -11,7 +11,7 @@ export const setValue = async function (
   el: string,
 ) {
   const clickPromise = this.click(el); // acquire focus
-  let text = ``;
+  let text: string;
   if (textInput instanceof Array) {
     text = textInput.reduce((previousValue, currentValue) => `${previousValue}${currentValue}`);
   } else if (typeof textInput === `string`) {

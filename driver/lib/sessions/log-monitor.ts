@@ -28,12 +28,12 @@ export class LogMonitor {
     return Boolean(this._outputListener);
   }
 
-  clearlastMatch() {
-    this._lastMatch = null;
-  }
-
   get lastMatch(): LogEntry | null {
     return this._lastMatch;
+  }
+
+  clearlastMatch() {
+    this._lastMatch = null;
   }
 
   async waitForLastMatchExist(

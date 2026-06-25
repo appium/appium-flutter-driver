@@ -67,7 +67,7 @@ async function executeAssertion(
       ...extraArgs,
     });
   } catch (err) {
-    throw new Error(`Assertion failed on command "${command}" within ${timeout}ms\n${err}`);
+    throw new Error(`Assertion failed on command "${command}" within ${timeout}ms\n${err}`, {cause: err});
   }
 }
 

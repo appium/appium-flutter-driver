@@ -15,6 +15,9 @@ const LOCALHOST = `127.0.0.1`;
 const VM_SERVICE_PORT_FLAG = `--vm-service-port`;
 const DISABLE_SERVICE_AUTH_CODES_FLAG = `--disable-service-auth-codes`;
 
+/**
+ * Starts the iOS proxy driver and connects to the Flutter observatory.
+ */
 export async function startIOSSession(
   this: FlutterDriver,
   caps: Record<string, any>,
@@ -48,6 +51,9 @@ export async function startIOSSession(
   return [iosdriver, await connectIOSSession.bind(this)(iosdriver, caps)];
 }
 
+/**
+ * Connects an iOS session to the Flutter observatory socket.
+ */
 export async function connectIOSSession(
   this: FlutterDriver,
   iosdriver: XCUITestDriver,
@@ -59,6 +65,9 @@ export async function connectIOSSession(
   return await connectSocket.bind(this)(observatoryWsUri, iosdriver, caps);
 }
 
+/**
+ * Reads iOS device logs until the Flutter observatory WebSocket URL is found.
+ */
 export async function getObservatoryWsUri(
   this: FlutterDriver,
   proxydriver: XCUITestDriver,
@@ -170,7 +179,9 @@ export async function getObservatoryWsUri(
     await listeningPromise;
   } catch (e) {
     this.localServer = null;
-    throw new Error(`Cannot listen on the local port ${localPort}. Original error: ${e.message}`);
+    throw new Error(`Cannot listen on the local port ${localPort}. Original error: ${e.message}`, {
+      cause: e,
+    });
   }
 
   this.log.info(`Forwarding the remote port ${remotePort} to the local port ${localPort}`);

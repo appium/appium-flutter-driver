@@ -4,7 +4,7 @@ import {util} from '@appium/support';
 export const decode = (
   input: string | {ELEMENT: string} | {[util.W3C_WEB_ELEMENT_IDENTIFIER]: string},
 ): string => {
-  let base64String: string = ``;
+  let base64String: string;
   if (_.isString(input)) {
     base64String = input as string;
   } else if (_.has(input, util.W3C_WEB_ELEMENT_IDENTIFIER)) {

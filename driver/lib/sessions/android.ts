@@ -9,6 +9,9 @@ import type {LogEntry} from './log-monitor';
 const VM_SERVICE_PORT_EXTRA = `vm-service-port`;
 const DISABLE_SERVICE_AUTH_CODES_EXTRA = `disable-service-auth-codes`;
 
+/**
+ * Starts the Android proxy driver and connects to the Flutter observatory.
+ */
 export async function startAndroidSession(
   this: FlutterDriver,
   caps: Record<string, any>,
@@ -45,6 +48,9 @@ export async function startAndroidSession(
   return [androiddriver, await connectAndroidSession.bind(this)(androiddriver, caps)];
 }
 
+/**
+ * Connects an Android session to the Flutter observatory socket.
+ */
 export async function connectAndroidSession(
   this: FlutterDriver,
   androiddriver: AndroidUiautomator2Driver,
@@ -56,6 +62,9 @@ export async function connectAndroidSession(
   return await connectSocket.bind(this)(observatoryWsUri, caps);
 }
 
+/**
+ * Reads Android device logs until the Flutter observatory WebSocket URL is found.
+ */
 export async function getObservatoryWsUri(
   this: FlutterDriver,
   proxydriver: AndroidUiautomator2Driver,

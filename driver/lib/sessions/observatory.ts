@@ -22,6 +22,9 @@ const moduleCheckIntervalCount = 30;
 const moduleCheckIntervalMs = 500;
 
 // SOCKETS
+/**
+ * Opens an isolate socket for the given Flutter observatory URL.
+ */
 export async function connectSocket(
   this: FlutterDriver,
   dartObservatoryURL: string,
@@ -138,6 +141,9 @@ export async function connectSocket(
   );
 }
 
+/**
+ * Fetches isolate metadata from the connected Flutter VM service.
+ */
 export async function executeGetIsolateCommand(this: FlutterDriver, isolateId: string | number) {
   this.log.debug(`>>> getIsolate`);
   const isolate = await (this.socket as IsolateSocket).call(`getIsolate`, {
@@ -147,6 +153,9 @@ export async function executeGetIsolateCommand(this: FlutterDriver, isolateId: s
   return isolate;
 }
 
+/**
+ * Fetches VM metadata from the connected Flutter VM service.
+ */
 export async function executeGetVMCommand(this: FlutterDriver) {
   this.log.debug(`>>> getVM`);
   const vm = (await (this.socket as IsolateSocket).call(`getVM`)) as {
@@ -161,6 +170,9 @@ export async function executeGetVMCommand(this: FlutterDriver) {
   return vm;
 }
 
+/**
+ * Executes an element command through the connected Flutter isolate socket.
+ */
 export async function executeElementCommand(
   this: FlutterDriver,
   command: string,
@@ -180,6 +192,9 @@ export async function executeElementCommand(
   return data.response;
 }
 
+/**
+ * Extracts the Flutter observatory URL from a device log entry.
+ */
 export function extractObservatoryUrl(logEntry: LogEntry): URL | null {
   const match = logEntry.message.match(OBSERVATORY_URL_PATTERN);
   if (!match) {
