@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.8.0
+- Feat add `appium:dartVmServicePort` capability for Android[#880](https://github.com/appium/appium-flutter-driver/pull/880)
+- Fix retry device-log capture so VM-service discovery survives flaky simctl[#881](https://github.com/appium/appium-flutter-driver/pull/881)
+- Update Appium UIAutomator2 driver dependency to 7.6.2
+
 ## 3.7.1
 - Fix [TypeScript declaration issues in `IsolateSocket` class](https://github.com/appium/appium-flutter-driver/issues/872)
 
