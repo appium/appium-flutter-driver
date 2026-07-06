@@ -1,4 +1,4 @@
-import {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
+import type {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
 import {connectSocket, extractObservatoryUrl, OBSERVATORY_URL_PATTERN} from './observatory';
 import type {InitialOpts, StringRecord} from '@appium/types';
 import type {IsolateSocket} from './isolate_socket';
@@ -24,6 +24,7 @@ export async function startAndroidSession(
       `Pinning Dart VM Service to port ${caps.dartVmServicePort} via the vm-service-port launch-intent extra`,
     );
   }
+  const {AndroidUiautomator2Driver} = await import('appium-uiautomator2-driver');
   const androiddriver = new AndroidUiautomator2Driver({} as InitialOpts);
   if (!caps.observatoryWsUri) {
     androiddriver.eventEmitter.once('syslogStarted', (syslog) => {

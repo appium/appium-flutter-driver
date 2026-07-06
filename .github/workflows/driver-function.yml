@@ -46,12 +46,12 @@ jobs:
 
     # Start Appium
     - run: npm install -g appium
-    - run: |
-        npm install
-        appium driver install --source=local ./
-        nohup appium --log-timestamp --log-no-colors > appium.log &
+    - run: npm install
       working-directory:
         driver
+    - run: |
+        appium driver install --source=local driver
+        nohup appium --log-timestamp --log-no-colors > appium.log &
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
@@ -69,7 +69,7 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: appium-ios.log
-        path: driver/appium.log
+        path: appium.log
 
   android_test:
     runs-on: ubuntu-latest
@@ -93,11 +93,12 @@ jobs:
 
     # Start Appium
     - run: npm install -g appium
-    - run: |
-        npm install
-        nohup appium --log-timestamp --log-no-colors > appium.log &
+    - run: npm install
       working-directory:
         driver
+    - run: |
+        appium driver install --source=local driver
+        nohup appium --log-timestamp --log-no-colors > appium.log &
 
     - name: Enable KVM group perms
       run: |
@@ -154,4 +155,4 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: appium-android.log
-        path: driver/appium.log
+        path: appium.log
