@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.9.0
+- Update Appium UIAutomator2 driver dependency to 8.1.0
+
 ## 3.8.0
 - Feat add `appium:dartVmServicePort` capability for Android[#880](https://github.com/appium/appium-flutter-driver/pull/880)
 - Fix retry device-log capture so VM-service discovery survives flaky simctl[#881](https://github.com/appium/appium-flutter-driver/pull/881)
