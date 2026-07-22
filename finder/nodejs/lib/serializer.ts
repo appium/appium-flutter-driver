@@ -1,13 +1,13 @@
 import { encode } from './base64url';
 import { deserialize } from './deserializer';
 
+export type SerializableFinder = string;
+export type Pattern = string | RegExp;
+
 // @todo consider using protobuf
 function serialize(obj: object) {
   return encode(JSON.stringify(obj));
 }
-
-export type SerializableFinder = string;
-export type Pattern = string | RegExp;
 
 export const ancestor = (args: {
   of: SerializableFinder;
@@ -15,7 +15,7 @@ export const ancestor = (args: {
   matchRoot?: boolean;
   firstMatchOnly?: boolean;
 }) => {
-  const { of, matching, matchRoot = false, firstMatchOnly = false} = args;
+  const {of, matching, matchRoot = false, firstMatchOnly = false} = args;
   const a: any = {
     finderType: `Ancestor`,
     firstMatchOnly: `${firstMatchOnly}`,
@@ -25,13 +25,13 @@ export const ancestor = (args: {
   Object.entries(deserialize(of)).forEach(
     ([key, value]) => (ofParam[key] = value),
   );
-  a[`of`] = JSON.stringify(ofParam);
+  a.of = JSON.stringify(ofParam);
 
   const matchingPara: any = {};
   Object.entries(deserialize(matching)).forEach(
     ([key, value]) => (matchingPara[key] = value),
   );
-  a[`matching`] = JSON.stringify(matchingPara);
+  a.matching = JSON.stringify(matchingPara);
 
   return serialize(a);
 };
@@ -68,7 +68,7 @@ export const descendant = (args: {
   matchRoot?: boolean;
   firstMatchOnly?: boolean;
 }) => {
-  const { of, matching, matchRoot = false , firstMatchOnly = false} = args;
+  const {of, matching, matchRoot = false, firstMatchOnly = false} = args;
   const a: any = {
     finderType: `Descendant`,
     firstMatchOnly: `${firstMatchOnly}`,
@@ -78,13 +78,13 @@ export const descendant = (args: {
   Object.entries(deserialize(of)).forEach(
     ([key, value]) => (ofParam[key] = value),
   );
-  a[`of`] = JSON.stringify(ofParam);
+  a.of = JSON.stringify(ofParam);
 
   const matchingParam: any = {};
   Object.entries(deserialize(matching)).forEach(
     ([key, value]) => (matchingParam[key] = value),
   );
-  a[`matching`] = JSON.stringify(matchingParam);
+  a.matching = JSON.stringify(matchingParam);
 
   return serialize(a);
 };

@@ -9,7 +9,7 @@ export const encode = (input: string) =>
     .replace(/\//g, `_`);
 
 export const decode = (input: string | {[key: string]: string}) => {
-  let base64String: string = ``;
+  let base64String: string;
   if (typeof input === `string`) {
     base64String = input;
   } else if (typeof input === `object` && W3C_ELEMENT in input) {

@@ -1,4 +1,3 @@
-// tslint:disable:object-literal-sort-keys
 import expect from 'expect';
 import * as find from './serializer';
 
