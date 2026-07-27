@@ -1,3 +1,6 @@
-import appiumConfig, {defineConfig} from '@appium/oxc-config/oxfmt';
+import appiumConfig, {defineConfig, ignorePatterns} from '@appium/oxc-config/oxfmt';
 
-export default defineConfig(appiumConfig);
+export default defineConfig({
+  ...appiumConfig,
+  ignorePatterns: [...ignorePatterns, 'npm-shrinkwrap.json'],
+});
