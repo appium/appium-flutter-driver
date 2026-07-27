@@ -57,7 +57,7 @@
     "@appium/tsconfig": "^1.0.0",
     "@appium/types": "^1.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "~6.0"
+    "typescript": "~7.0"
   },
   "peerDependencies": {
     "appium": "^3.0.0"
