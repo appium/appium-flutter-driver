@@ -1,14 +1,16 @@
+import net from 'node:net';
+
 import {utilities} from 'appium-ios-device';
 import {XCUITestDriver} from 'appium-xcuitest-driver';
+import type {XCUITestDriverOpts} from 'appium-xcuitest-driver/build/lib/driver';
 import B from 'bluebird';
-import net from 'node:net';
 import {checkPortStatus} from 'portscanner';
-import {connectSocket, extractObservatoryUrl, OBSERVATORY_URL_PATTERN} from './observatory';
+
+import type {FlutterDriver} from '../driver';
 import type {IsolateSocket} from './isolate_socket';
 import {LogMonitor} from './log-monitor';
 import type {LogEntry} from './log-monitor';
-import type {FlutterDriver} from '../driver';
-import type {XCUITestDriverOpts} from 'appium-xcuitest-driver/build/lib/driver';
+import {connectSocket, extractObservatoryUrl, OBSERVATORY_URL_PATTERN} from './observatory';
 
 const LOCALHOST = `127.0.0.1`;
 
@@ -99,10 +101,7 @@ export async function getObservatoryWsUri(
 
     let lastMatch: LogEntry | null = null;
     try {
-      lastMatch = await this._logmon.waitForLastMatchExist(
-        caps.maxRetryCount,
-        caps.retryBackoffTime,
-      );
+      lastMatch = await this._logmon.waitForLastMatchExist(caps.maxRetryCount, caps.retryBackoffTime);
     } catch (e) {
       this.log.error(e);
     }
@@ -259,12 +258,8 @@ function injectDartVmServicePortFlags(caps: Record<string, any>): void {
     return;
   }
   caps.processArguments ??= {};
-  const existing: any[] = Array.isArray(caps.processArguments.args)
-    ? caps.processArguments.args
-    : [];
-  const filtered = existing.filter(
-    (arg) => typeof arg !== 'string' || !arg.startsWith(`${VM_SERVICE_PORT_FLAG}=`),
-  );
+  const existing: any[] = Array.isArray(caps.processArguments.args) ? caps.processArguments.args : [];
+  const filtered = existing.filter((arg) => typeof arg !== 'string' || !arg.startsWith(`${VM_SERVICE_PORT_FLAG}=`));
   filtered.push(`${VM_SERVICE_PORT_FLAG}=${port}`);
   if (!filtered.some((arg) => typeof arg === 'string' && arg === DISABLE_SERVICE_AUTH_CODES_FLAG)) {
     filtered.push(DISABLE_SERVICE_AUTH_CODES_FLAG);

@@ -1,6 +1,7 @@
-import type {FlutterDriver} from '../driver';
 import {byValueKey, byText, byTooltip} from 'appium-flutter-finder';
 import type {SerializableFinder} from 'appium-flutter-finder';
+
+import type {FlutterDriver} from '../driver';
 
 export type FinderInput =
   | {key: string}
@@ -11,8 +12,7 @@ export type FinderInput =
   | {getRawFinder: () => SerializableFinder}; // FlutterElement-like input
 
 // Serialize a finder to base64
-const serializeFinder = (finder: SerializableFinder): string =>
-  Buffer.from(JSON.stringify(finder)).toString('base64');
+const serializeFinder = (finder: SerializableFinder): string => Buffer.from(JSON.stringify(finder)).toString('base64');
 
 // Type guards
 const isRawFinder = (input: any): input is SerializableFinder =>
@@ -47,9 +47,7 @@ function getFinderBase64(input: FinderInput): string {
     return byTooltip(input.label);
   }
 
-  throw new Error(
-    'Invalid finder input: must provide key, text, label, raw finder, or FlutterElement',
-  );
+  throw new Error('Invalid finder input: must provide key, text, label, raw finder, or FlutterElement');
 }
 
 // Generic helper to wrap assert commands
@@ -74,20 +72,11 @@ async function executeAssertion(
 }
 
 // Exported assertion commands
-export const assertVisible = async (
-  driver: FlutterDriver,
-  input: FinderInput,
-  timeout = 5000,
-): Promise<void> => await executeAssertion(driver, 'waitFor', input, timeout, {visible: true});
+export const assertVisible = async (driver: FlutterDriver, input: FinderInput, timeout = 5000): Promise<void> =>
+  await executeAssertion(driver, 'waitFor', input, timeout, {visible: true});
 
-export const assertNotVisible = async (
-  driver: FlutterDriver,
-  input: FinderInput,
-  timeout = 5000,
-): Promise<void> => await executeAssertion(driver, 'waitForAbsent', input, timeout);
+export const assertNotVisible = async (driver: FlutterDriver, input: FinderInput, timeout = 5000): Promise<void> =>
+  await executeAssertion(driver, 'waitForAbsent', input, timeout);
 
-export const assertTappable = async (
-  driver: FlutterDriver,
-  input: FinderInput,
-  timeout = 5000,
-): Promise<void> => await executeAssertion(driver, 'waitForTappable', input, timeout);
+export const assertTappable = async (driver: FlutterDriver, input: FinderInput, timeout = 5000): Promise<void> =>
+  await executeAssertion(driver, 'waitForTappable', input, timeout);

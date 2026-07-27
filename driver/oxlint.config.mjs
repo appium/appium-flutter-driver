@@ -1,3 +1,3 @@
-import appiumConfig, {defineConfig, ignorePatterns} from '@appium/oxc-config/oxlint';
+import appiumConfig, {defineConfig} from '@appium/oxc-config/oxlint';
 
 export default defineConfig(appiumConfig);

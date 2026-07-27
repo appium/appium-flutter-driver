@@ -1,23 +1,76 @@
 {
   "name": "appium-flutter-driver",
+  "version": "3.9.0",
   "description": "Appium Flutter driver",
   "keywords": [
     "appium",
     "flutter"
   ],
-  "version": "3.9.0",
-  "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
   "license": "MIT",
+  "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/appium/appium-flutter-driver.git"
+  },
+  "bin": {},
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib",
+    "build",
+    "!build/tsconfig.tsbuildinfo",
+    "LICENSE",
+    "npm-shrinkwrap.json",
+    "scripts"
+  ],
+  "main": "./build/lib/driver.js",
+  "types": "./build/lib/index.d.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "npm run build -- --watch",
+    "clean": "npm run build -- --clean",
+    "lint": "oxlint -c oxlint.config.mjs .",
+    "lint:fix": "oxlint -c oxlint.config.mjs --fix .",
+    "format": "oxfmt -c oxfmt.config.mjs .",
+    "format:check": "oxfmt -c oxfmt.config.mjs --check .",
+    "prepublishOnly": "cp ../README.md ../LICENSE ./",
+    "prepare": "npm run clean && npm run build",
+    "test": "echo no test",
+    "clean-dependency": "rm -rf node_modules && rm -f package-lock.json"
+  },
+  "dependencies": {
+    "appium-android-driver": "^13.0.0",
+    "appium-flutter-finder": "^0.2.0",
+    "appium-ios-device": "^3.0.0",
+    "appium-uiautomator2-driver": "^8.1.0",
+    "appium-xcuitest-driver": "^10.0.0",
+    "asyncbox": "^6.0.1",
+    "bluebird": "^3.1.1",
+    "lodash": "^4.0.0",
+    "portscanner": "^2.2.0",
+    "rpc-websockets": "^10.0.0"
+  },
+  "devDependencies": {
+    "@appium/oxc-config": "^1.1.0",
+    "@appium/semantic-release-config": "^1.1.0",
+    "@appium/tsconfig": "^1.0.0",
+    "@appium/types": "^1.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "~6.0"
+  },
+  "peerDependencies": {
+    "appium": "^3.0.0"
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "printWidth": 100,
+    "singleQuote": true
   },
   "engines": {
     "node": "^20.19.0 || ^22.12.0 || >=24.0.0",
     "npm": ">=10"
   },
-  "main": "./build/lib/driver.js",
-  "types": "./build/lib/index.d.ts",
   "appium": {
     "driverName": "flutter",
     "automationName": "Flutter",
@@ -34,58 +87,5 @@
     "scripts": {
       "download-wda-sim": "./scripts/download-wda-sim.mjs"
     }
-  },
-  "bin": {},
-  "directories": {
-    "lib": "lib"
-  },
-  "files": [
-    "lib",
-    "build",
-    "!build/tsconfig.tsbuildinfo",
-    "LICENSE",
-    "npm-shrinkwrap.json",
-    "scripts"
-  ],
-  "scripts": {
-    "build": "tsc -b",
-    "dev": "npm run build -- --watch",
-    "clean": "npm run build -- --clean",
-    "lint": "oxlint -c oxlint.config.mjs .",
-    "lint:fix": "oxlint -c oxlint.config.mjs --fix .",
-    "format": "oxfmt -c oxfmt.config.mjs .",
-    "format:check": "oxfmt -c oxfmt.config.mjs --check .",
-    "prepublishOnly": "cp ../README.md ../LICENSE ./",
-    "prepare": "npm run clean && npm run build",
-    "test": "echo no test",
-    "clean-dependency": "rm -rf node_modules && rm -f package-lock.json"
-  },
-  "peerDependencies": {
-    "appium": "^3.0.0"
-  },
-  "devDependencies": {
-    "@appium/oxc-config": "^1.1.0",
-    "@appium/semantic-release-config": "^1.1.0",
-    "@appium/tsconfig": "^1.0.0",
-    "@appium/types": "^1.0.0",
-    "ts-node": "^10.9.1",
-    "typescript": "~6.0"
-  },
-  "dependencies": {
-    "appium-android-driver": "^13.0.0",
-    "appium-flutter-finder": "^0.2.0",
-    "appium-ios-device": "^3.0.0",
-    "appium-uiautomator2-driver": "^8.1.0",
-    "appium-xcuitest-driver": "^10.0.0",
-    "asyncbox": "^6.0.1",
-    "bluebird": "^3.1.1",
-    "lodash": "^4.0.0",
-    "portscanner": "^2.2.0",
-    "rpc-websockets": "^10.0.0"
-  },
-  "prettier": {
-    "bracketSpacing": false,
-    "printWidth": 100,
-    "singleQuote": true
   }
 }

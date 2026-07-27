@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import type {FlutterDriver} from '../../driver';
 import {waitFor, waitForTappable} from './wait';
 
@@ -62,11 +63,7 @@ export const longTap = async (
 };
 
 const validateOps = (alignment: any, dxScroll: any, dyScroll: any): boolean => {
-  if (
-    typeof alignment !== `number` ||
-    typeof dxScroll !== `number` ||
-    typeof dyScroll !== `number`
-  ) {
+  if (typeof alignment !== `number` || typeof dxScroll !== `number` || typeof dyScroll !== `number`) {
     return false;
   }
 
@@ -210,10 +207,7 @@ export const scrollIntoView = async (
   },
 ) => {
   const {alignment = 0.0, timeout} = opts;
-  if (
-    typeof alignment !== `number` ||
-    (typeof timeout !== `undefined` && typeof timeout !== `number`)
-  ) {
+  if (typeof alignment !== `number` || (typeof timeout !== `undefined` && typeof timeout !== `number`)) {
     // @todo BaseDriver's errors.InvalidArgumentError();
     throw new Error(`${opts} is not a valid options`);
   }

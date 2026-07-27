@@ -1,18 +1,12 @@
+import B from 'bluebird';
+
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type {FlutterDriver} from '../driver';
 import {reConnectFlutterDriver} from '../sessions/session';
-import {
-  longTap,
-  scroll,
-  scrollIntoView,
-  scrollUntilVisible,
-  scrollUntilTapable,
-} from './execute/scroll';
-import {waitFor, waitForAbsent, waitForTappable} from './execute/wait';
-import {assertVisible, assertNotVisible, assertTappable, type FinderInput} from './assertions';
-
 import {launchApp} from './../ios/app';
-import B from 'bluebird';
+import {assertVisible, assertNotVisible, assertTappable, type FinderInput} from './assertions';
+import {longTap, scroll, scrollIntoView, scrollUntilVisible, scrollUntilTapable} from './execute/scroll';
+import {waitFor, waitForAbsent, waitForTappable} from './execute/wait';
 
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
 
@@ -86,11 +80,7 @@ const commandHandlers: CommandMap = {
       throw new Error(`Could not clear timeline, response was ${JSON.stringify(response)}`);
     }
   },
-  getRenderObjectDiagnostics: async (
-    driver,
-    elementBase64: string,
-    opts: DiagnosticsOptions = {},
-  ) => {
+  getRenderObjectDiagnostics: async (driver, elementBase64: string, opts: DiagnosticsOptions = {}) => {
     const {subtreeDepth = 0, includeProperties = true} = opts;
     return await driver.executeElementCommand('get_diagnostics_tree', elementBase64, {
       diagnosticsType: 'renderObject',
@@ -108,26 +98,19 @@ const commandHandlers: CommandMap = {
   },
   getSemanticsId: async (driver, elementBase64: string) =>
     (await driver.executeElementCommand('get_semantics_id', elementBase64)).id,
-  waitForAbsent: async (driver, finder: string, timeout?: number) =>
-    await waitForAbsent(driver, finder, timeout),
-  waitFor: async (driver, finder: string, timeout?: number) =>
-    await waitFor(driver, finder, timeout),
-  waitForTappable: async (driver, finder: string, timeout?: number) =>
-    await waitForTappable(driver, finder, timeout),
+  waitForAbsent: async (driver, finder: string, timeout?: number) => await waitForAbsent(driver, finder, timeout),
+  waitFor: async (driver, finder: string, timeout?: number) => await waitFor(driver, finder, timeout),
+  waitForTappable: async (driver, finder: string, timeout?: number) => await waitForTappable(driver, finder, timeout),
   scroll: async (driver, finder: string, opts: any) => await scroll(driver, finder, opts),
-  scrollUntilVisible: async (driver, finder: string, opts: any) =>
-    await scrollUntilVisible(driver, finder, opts),
-  scrollUntilTapable: async (driver, finder: string, opts: any) =>
-    await scrollUntilTapable(driver, finder, opts),
-  scrollIntoView: async (driver, finder: string, opts: any) =>
-    await scrollIntoView(driver, finder, opts),
+  scrollUntilVisible: async (driver, finder: string, opts: any) => await scrollUntilVisible(driver, finder, opts),
+  scrollUntilTapable: async (driver, finder: string, opts: any) => await scrollUntilTapable(driver, finder, opts),
+  scrollIntoView: async (driver, finder: string, opts: any) => await scrollIntoView(driver, finder, opts),
   setTextEntryEmulation: async (driver, enabled: boolean) =>
     await driver.socket!.executeSocketCommand({
       command: 'set_text_entry_emulation',
       enabled,
     }),
-  enterText: async (driver, text: string) =>
-    await driver.socket!.executeSocketCommand({command: 'enter_text', text}),
+  enterText: async (driver, text: string) => await driver.socket!.executeSocketCommand({command: 'enter_text', text}),
   requestData: async (driver, message: string) =>
     await driver.socket!.executeSocketCommand({
       command: 'request_data',
@@ -154,12 +137,10 @@ const commandHandlers: CommandMap = {
       command: 'dragAndDropWithCommandExtension',
       ...params,
     }),
-  assertVisible: async (driver, input: FinderInput, timeout = 5000) =>
-    await assertVisible(driver, input, timeout),
+  assertVisible: async (driver, input: FinderInput, timeout = 5000) => await assertVisible(driver, input, timeout),
   assertNotVisible: async (driver, input: FinderInput, timeout = 5000) =>
     await assertNotVisible(driver, input, timeout),
-  assertTappable: async (driver, input: FinderInput, timeout = 5000) =>
-    await assertTappable(driver, input, timeout),
+  assertTappable: async (driver, input: FinderInput, timeout = 5000) => await assertTappable(driver, input, timeout),
   getTextWithCommandExtension: async (driver, params: {findBy: string}) =>
     await driver.socket!.executeSocketCommand({
       command: 'getTextWithCommandExtension',

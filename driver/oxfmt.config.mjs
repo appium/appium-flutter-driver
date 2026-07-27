@@ -1,3 +1,3 @@
-import appiumConfig, {defineConfig, ignorePatterns} from '@appium/oxc-config/oxfmt';
+import appiumConfig, {defineConfig} from '@appium/oxc-config/oxfmt';
 
 export default defineConfig(appiumConfig);

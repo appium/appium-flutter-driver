@@ -2,11 +2,7 @@ import type {FlutterDriver} from '../../driver';
 
 const waitForConstructor =
   (command: `waitForAbsent` | `waitFor` | `waitForTappable`) =>
-  async (
-    self: FlutterDriver,
-    elementBase64: string,
-    durationMilliseconds?: number,
-  ): Promise<string> => {
+  async (self: FlutterDriver, elementBase64: string, durationMilliseconds?: number): Promise<string> => {
     let args = {};
 
     if (typeof durationMilliseconds === `number`) {
