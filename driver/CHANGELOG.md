@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.9.1
+- Update internal lint/format
+
 ## 3.9.0
 - Update Appium UIAutomator2 driver dependency to 8.1.0
 
