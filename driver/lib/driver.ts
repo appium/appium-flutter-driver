@@ -1,14 +1,20 @@
+import type {Server} from 'node:net';
+
+import type {
+  DefaultCreateSessionResult,
+  DriverCaps,
+  DriverData,
+  W3CDriverCaps,
+  RouteMatcher,
+  Orientation,
+} from '@appium/types';
+import type {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
+import {XCUITestDriver} from 'appium-xcuitest-driver';
+import {BaseDriver} from 'appium/driver';
 // @ts-ignore: no 'errors' export module
 import _ from 'lodash';
-import {BaseDriver} from 'appium/driver';
-import {log as logger} from './logger';
-import {
-  executeElementCommand,
-  executeGetVMCommand,
-  executeGetIsolateCommand,
-} from './sessions/observatory';
-import {PLATFORM} from './platform';
-import {createSession, reConnectFlutterDriver} from './sessions/session';
+
+import {getClipboard, setClipboard} from './commands/clipboard';
 import {
   driverShouldDoProxyCmd,
   FLUTTER_CONTEXT_NAME,
@@ -21,21 +27,13 @@ import {clear, getText, setValue} from './commands/element';
 import {execute} from './commands/execute';
 import {click, longTap, performTouch, tap, tapEl} from './commands/gesture';
 import {getScreenshot} from './commands/screen';
-import {getClipboard, setClipboard} from './commands/clipboard';
 import {desiredCapConstraints} from './desired-caps';
-import {XCUITestDriver} from 'appium-xcuitest-driver';
-import type {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
-import type {
-  DefaultCreateSessionResult,
-  DriverCaps,
-  DriverData,
-  W3CDriverCaps,
-  RouteMatcher,
-  Orientation,
-} from '@appium/types';
+import {log as logger} from './logger';
+import {PLATFORM} from './platform';
 import type {IsolateSocket} from './sessions/isolate_socket';
-import type {Server} from 'node:net';
 import type {LogMonitor} from './sessions/log-monitor';
+import {executeElementCommand, executeGetVMCommand, executeGetIsolateCommand} from './sessions/observatory';
+import {createSession, reConnectFlutterDriver} from './sessions/session';
 
 type FluttertDriverConstraints = typeof desiredCapConstraints;
 // Need to not proxy in WebView context
@@ -123,16 +121,9 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     this.localServer = null;
   }
 
-  public async createSession(
-    ...args
-  ): Promise<DefaultCreateSessionResult<FluttertDriverConstraints>> {
+  public async createSession(...args): Promise<DefaultCreateSessionResult<FluttertDriverConstraints>> {
     const [sessionId, caps] = await super.createSession(
-      ...(JSON.parse(JSON.stringify(args)) as [
-        W3CDriverCaps,
-        W3CDriverCaps,
-        W3CDriverCaps,
-        DriverData[],
-      ]),
+      ...(JSON.parse(JSON.stringify(args)) as [W3CDriverCaps, W3CDriverCaps, W3CDriverCaps, DriverData[]]),
     );
     this.internalCaps = caps;
     return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args)));
@@ -154,9 +145,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
       case PLATFORM.ANDROID:
         if (this.portForwardLocalPort) {
           if (this.proxydriver) {
-            await (this.proxydriver as AndroidUiautomator2Driver).adb?.removePortForward(
-              this.portForwardLocalPort,
-            );
+            await (this.proxydriver as AndroidUiautomator2Driver).adb?.removePortForward(this.portForwardLocalPort);
           }
         }
         break;
@@ -217,9 +206,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
           orientation,
         });
       default:
-        return await (this.proxydriver as AndroidUiautomator2Driver).setOrientation(
-          orientation as Orientation,
-        );
+        return await (this.proxydriver as AndroidUiautomator2Driver).setOrientation(orientation as Orientation);
     }
   }
 
@@ -231,9 +218,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     super.validateLocatorStrategy(strategy, false);
   }
 
-  validateDesiredCaps(
-    caps: DriverCaps<FluttertDriverConstraints>,
-  ): caps is DriverCaps<FluttertDriverConstraints> {
+  validateDesiredCaps(caps: DriverCaps<FluttertDriverConstraints>): caps is DriverCaps<FluttertDriverConstraints> {
     // check with the base class, and return if it fails
     const res = super.validateDesiredCaps(caps);
     if (!res) {
@@ -250,10 +235,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     return result;
   }
 
-  public async executeCommand(
-    cmd: string,
-    ...args: [string, [{skipAttachObservatoryUrl: string; any: any}]]
-  ) {
+  public async executeCommand(cmd: string, ...args: [string, [{skipAttachObservatoryUrl: string; any: any}]]) {
     if (new RegExp(/^[\s]*mobile:[\s]*activateApp$/).test(args[0])) {
       const {skipAttachObservatoryUrl = false} = args[1][0];
       await this.proxydriver?.executeCommand(cmd, ...args);

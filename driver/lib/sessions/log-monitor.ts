@@ -1,4 +1,5 @@
 import type {EventEmitter} from 'node:events';
+
 import {retryInterval} from 'asyncbox';
 export interface LogEntry {
   timestamp: number;

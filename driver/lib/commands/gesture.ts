@@ -13,22 +13,14 @@ export const tapEl = async function (this: FlutterDriver, el: string, longPress:
   return await this.executeElementCommand(commandName, el);
 };
 
-export const tap = async function (
-  this: FlutterDriver,
-  gestures: Record<string, any>[],
-  longPress: boolean,
-) {
+export const tap = async function (this: FlutterDriver, gestures: Record<string, any>[], longPress: boolean) {
   // parse the given gestures array to call the appropriate tap method
   // if longPress is true, the tap is a long press action
   const elementId = gestures[0].options.element;
   await this.tapEl(elementId, longPress);
 };
 
-export const longTap = async function (
-  this: FlutterDriver,
-  gestures: Record<string, any>[],
-  ms: number,
-) {
+export const longTap = async function (this: FlutterDriver, gestures: Record<string, any>[], ms: number) {
   // pass duration if the wait action given by user.
   // If wait action is missing taking 10000 ms default
   const elementId = gestures[0].options.element;
@@ -40,11 +32,7 @@ export const longTap = async function (
 
 export const performTouch = async function (this: FlutterDriver, gestures: Record<string, any>[]) {
   if (gestures.length === 3) {
-    if (
-      gestures[0].action === `longPress` &&
-      gestures[1].action === `wait` &&
-      gestures[2].action === `release`
-    ) {
+    if (gestures[0].action === `longPress` && gestures[1].action === `wait` && gestures[2].action === `release`) {
       return await this.longTap(gestures, gestures[1].options.ms);
     }
   } else if (gestures.length === 2) {

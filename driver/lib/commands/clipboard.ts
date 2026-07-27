@@ -6,11 +6,7 @@ import type {FlutterDriver} from '../driver';
  * @param content the content to get the clipboard
  * @param contentType the contentType to set the data type
  */
-export const setClipboard = async function (
-  this: FlutterDriver,
-  content: string,
-  contentType: string,
-) {
+export const setClipboard = async function (this: FlutterDriver, content: string, contentType: string) {
   // @ts-expect-error this exist in xcuitestdriver or uia2 driver
   await this.proxydriver?.setClipboard(content, contentType);
 };

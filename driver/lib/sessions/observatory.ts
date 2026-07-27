@@ -1,10 +1,12 @@
 import {URL} from 'node:url';
-import _ from 'lodash';
-import type {FlutterDriver} from '../driver';
-import {IsolateSocket} from './isolate_socket';
-import {decode} from './base64url';
-import type {LogEntry} from './log-monitor';
+
 import {retryInterval} from 'asyncbox';
+import _ from 'lodash';
+
+import type {FlutterDriver} from '../driver';
+import {decode} from './base64url';
+import {IsolateSocket} from './isolate_socket';
+import type {LogEntry} from './log-monitor';
 
 const truncateLength = 500;
 // https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183
@@ -110,9 +112,7 @@ export async function connectSocket(
             throw new Error(`Cannot get main Dart Isolate`);
           }
           if (!Array.isArray(isolate.extensionRPCs)) {
-            throw new Error(
-              `Cannot get Dart extensionRPCs from isolate ${JSON.stringify(isolate)}`,
-            );
+            throw new Error(`Cannot get Dart extensionRPCs from isolate ${JSON.stringify(isolate)}`);
           }
           if (isolate.extensionRPCs.indexOf(`ext.flutter.driver`) < 0) {
             throw new Error(
@@ -136,8 +136,7 @@ export async function connectSocket(
   }
 
   throw new Error(
-    `Cannot connect to the Dart Observatory URL ${dartObservatoryURL}. ` +
-      `Check the server log for more details`,
+    `Cannot connect to the Dart Observatory URL ${dartObservatoryURL}. ` + `Check the server log for more details`,
   );
 }
 
@@ -185,9 +184,7 @@ export async function executeElementCommand(
   const data = await (this.socket as IsolateSocket).executeSocketCommand(serializedCommand);
   this.log.debug(`<<< ${JSON.stringify(data)} | previous command ${command}`);
   if (data.isError) {
-    throw new Error(
-      `Cannot execute command ${command}, server response ${JSON.stringify(data, null, 2)}`,
-    );
+    throw new Error(`Cannot execute command ${command}, server response ${JSON.stringify(data, null, 2)}`);
   }
   return data.response;
 }

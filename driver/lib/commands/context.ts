@@ -13,9 +13,7 @@ export const setContext = async function (this: FlutterDriver, context: string) 
     this.proxyWebViewActive = false;
     // Set 'native context' when flutter driver sets the context to FLUTTER_CONTEXT_NAME
     if (this.proxydriver) {
-      log.debug(
-        `Setting downstream drier context to '${NATIVE_CONTEXT_NAME}' in context '${context}'.`,
-      );
+      log.debug(`Setting downstream drier context to '${NATIVE_CONTEXT_NAME}' in context '${context}'.`);
       // @ts-expect-error this exist in xcuitestdriver or uia2 driver
       await this.proxydriver.setContext(NATIVE_CONTEXT_NAME);
     }
@@ -30,9 +28,7 @@ export const setContext = async function (this: FlutterDriver, context: string) 
   }
   this.currentContext = context;
   if (context === FLUTTER_CONTEXT_NAME) {
-    log.debug(
-      `Downstream driver context is set as 'NATIVE_APP' in 'FLUTTER' context to handle the native app.`,
-    );
+    log.debug(`Downstream driver context is set as 'NATIVE_APP' in 'FLUTTER' context to handle the native app.`);
   }
 };
 
