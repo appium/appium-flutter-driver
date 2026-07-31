@@ -41,7 +41,6 @@ $ git commit -am 'chore: bump version of appium-flutter-finder'
 $ git tag js-finder-<version number> # e.g. git tag js-finder-0.0.23
 $ git push origin js-finder-0.0.23
 $ git push origin main
-$ npm publish
 ```
 
 ## Changelog

@@ -1,7 +1,5 @@
+import assert from 'node:assert/strict';
 import {describe, it} from 'node:test';
-
-import {expect} from 'expect';
-
 import * as find from './serializer.js';
 
 void describe(`serializer`, () => {
@@ -18,7 +16,7 @@ void describe(`serializer`, () => {
       }),
       firstMatchOnly: true,
     });
-    expect(observed).toBe(expected);
+    assert.strictEqual(observed, expected);
   });
   void it(`descendant`, () => {
     const expected = `eyJmaW5kZXJUeXBlIjoiRGVzY2VuZGFudCIsImZpcnN0TWF0Y2hPbmx5IjoiZmFsc2UiLCJtYXRjaFJvb3QiOiJmYWxzZSIsIm9mIjoie1wiZmluZGVyVHlwZVwiOlwiRGVzY2VuZGFudFwiLFwiZmlyc3RNYXRjaE9ubHlcIjpcImZhbHNlXCIsXCJtYXRjaFJvb3RcIjpcImZhbHNlXCIsXCJvZlwiOlwie1xcXCJmaW5kZXJUeXBlXFxcIjpcXFwiUGFnZUJhY2tcXFwifVwiLFwibWF0Y2hpbmdcIjpcIntcXFwiZmluZGVyVHlwZVxcXCI6XFxcIlBhZ2VCYWNrXFxcIn1cIn0iLCJtYXRjaGluZyI6IntcImZpbmRlclR5cGVcIjpcIkRlc2NlbmRhbnRcIixcImZpcnN0TWF0Y2hPbmx5XCI6XCJmYWxzZVwiLFwibWF0Y2hSb290XCI6XCJmYWxzZVwiLFwib2ZcIjpcIntcXFwiZmluZGVyVHlwZVxcXCI6XFxcIlBhZ2VCYWNrXFxcIn1cIixcIm1hdGNoaW5nXCI6XCJ7XFxcImZpbmRlclR5cGVcXFwiOlxcXCJQYWdlQmFja1xcXCJ9XCJ9In0`;
@@ -32,44 +30,50 @@ void describe(`serializer`, () => {
         matching: find.pageBack(),
       }),
     });
-    expect(observed).toBe(expected);
+    assert.strictEqual(observed, expected);
   });
   void it(`text`, () => {
     const expected = find.byText(`This is 2nd route`);
-    expect(expected).toBe(`eyJmaW5kZXJUeXBlIjoiQnlUZXh0IiwidGV4dCI6IlRoaXMgaXMgMm5kIHJvdXRlIn0`);
+    assert.strictEqual(expected, `eyJmaW5kZXJUeXBlIjoiQnlUZXh0IiwidGV4dCI6IlRoaXMgaXMgMm5kIHJvdXRlIn0`);
   });
   void it(`pageBack`, () => {
     const expected = find.pageBack();
-    expect(expected).toBe(`eyJmaW5kZXJUeXBlIjoiUGFnZUJhY2sifQ`);
+    assert.strictEqual(expected, `eyJmaW5kZXJUeXBlIjoiUGFnZUJhY2sifQ`);
   });
   void it(`bySemanticsLabel String`, () => {
     const expected = find.bySemanticsLabel(`simple`);
-    expect(expected).toBe(`eyJmaW5kZXJUeXBlIjoiQnlTZW1hbnRpY3NMYWJlbCIsImlzUmVnRXhwIjpmYWxzZSwibGFiZWwiOiJzaW1wbGUifQ`);
+    assert.strictEqual(
+      expected,
+      `eyJmaW5kZXJUeXBlIjoiQnlTZW1hbnRpY3NMYWJlbCIsImlzUmVnRXhwIjpmYWxzZSwibGFiZWwiOiJzaW1wbGUifQ`,
+    );
   });
   void it(`bySemanticsLabel RegEx`, () => {
     const expected = find.bySemanticsLabel(/complicated/);
-    expect(expected).toBe(
+    assert.strictEqual(
+      expected,
       `eyJmaW5kZXJUeXBlIjoiQnlTZW1hbnRpY3NMYWJlbCIsImlzUmVnRXhwIjp0cnVlLCJsYWJlbCI6ImNvbXBsaWNhdGVkIn0`,
     );
   });
   void it(`byValueKey String`, () => {
     const expected = find.byValueKey(`42`);
-    expect(expected).toBe(
+    assert.strictEqual(
+      expected,
       `eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjoiNDIiLCJrZXlWYWx1ZVR5cGUiOiJTdHJpbmcifQ`,
     );
   });
   void it(`byValueKey Int`, () => {
     const expected = find.byValueKey(42);
-    expect(expected).toBe(
+    assert.strictEqual(
+      expected,
       `eyJmaW5kZXJUeXBlIjoiQnlWYWx1ZUtleSIsImtleVZhbHVlU3RyaW5nIjo0Miwia2V5VmFsdWVUeXBlIjoiaW50In0`,
     );
   });
   void it(`byTooltip`, () => {
     const expected = find.byTooltip(`myText`);
-    expect(expected).toBe(`eyJmaW5kZXJUeXBlIjoiQnlUb29sdGlwTWVzc2FnZSIsInRleHQiOiJteVRleHQifQ`);
+    assert.strictEqual(expected, `eyJmaW5kZXJUeXBlIjoiQnlUb29sdGlwTWVzc2FnZSIsInRleHQiOiJteVRleHQifQ`);
   });
   void it(`byType`, () => {
     const expected = find.byType(`myText`);
-    expect(expected).toBe(`eyJmaW5kZXJUeXBlIjoiQnlUeXBlIiwidHlwZSI6Im15VGV4dCJ9`);
+    assert.strictEqual(expected, `eyJmaW5kZXJUeXBlIjoiQnlUeXBlIiwidHlwZSI6Im15VGV4dCJ9`);
   });
 });
