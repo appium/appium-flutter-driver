@@ -136,7 +136,7 @@ export async function connectSocket(
   }
 
   throw new Error(
-    `Cannot connect to the Dart Observatory URL ${dartObservatoryURL}. ` + `Check the server log for more details`,
+    `Cannot connect to the Dart Observatory URL ${dartObservatoryURL}. Check the server log for more details`,
   );
 }
 

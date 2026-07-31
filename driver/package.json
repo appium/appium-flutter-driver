@@ -62,11 +62,6 @@
   "peerDependencies": {
     "appium": "^3.0.0"
   },
-  "prettier": {
-    "bracketSpacing": false,
-    "printWidth": 100,
-    "singleQuote": true
-  },
   "engines": {
     "node": "^20.19.0 || ^22.12.0 || >=24.0.0",
     "npm": ">=10"
