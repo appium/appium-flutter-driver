@@ -1,8 +1,8 @@
 import {describe, it} from 'node:test';
 
-import expect from 'expect';
+import {expect} from 'expect';
 
-import {decode, encode} from './base64url';
+import {decode, encode} from './base64url.js';
 
 void describe(`base64url`, () => {
   void it(`decode multiple occurrences of +/=`, () => {

@@ -1,8 +1,8 @@
 import {describe, it} from 'node:test';
 
-import expect from 'expect';
+import {expect} from 'expect';
 
-import * as find from './serializer';
+import * as find from './serializer.js';
 
 void describe(`serializer`, () => {
   void it(`ancestor`, () => {
