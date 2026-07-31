@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {describe, it} from 'node:test';
 
-import {decode, encode} from './base64url';
+import {decode, encode} from './base64url.js';
 
 void describe(`base64url`, () => {
   void it(`decode multiple occurrences of +/=`, () => {

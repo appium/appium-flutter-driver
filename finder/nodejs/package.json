@@ -21,7 +21,15 @@
     "!build/**/*_test.*",
     "!build/tsconfig.tsbuildinfo"
   ],
+  "type": "module",
   "main": "./build/lib/serializer.js",
+  "types": "./build/lib/serializer.d.ts",
+  "exports": {
+    ".": {
+      "types": "./build/lib/serializer.d.ts",
+      "import": "./build/lib/serializer.js"
+    }
+  },
   "scripts": {
     "test": "npm run compile && node --test build/lib/*_test.js",
     "prepublishOnly": "cp ../../LICENSE ./",

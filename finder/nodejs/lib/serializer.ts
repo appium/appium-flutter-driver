@@ -1,5 +1,5 @@
-import {encode} from './base64url';
-import {deserialize} from './deserializer';
+import {encode} from './base64url.js';
+import {deserialize} from './deserializer.js';
 
 // @todo consider using protobuf
 function serialize(obj: object) {

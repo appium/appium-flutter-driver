@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {describe, it} from 'node:test';
 
-import * as find from './serializer';
+import * as find from './serializer.js';
 
 void describe(`serializer`, () => {
   void it(`ancestor`, () => {
