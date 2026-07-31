@@ -21,7 +21,7 @@ void describe(`base64url`, () => {
         decode({'element-6066-11e4-a52e-4f735466cecf': `1L3Xst+9zp/Gncqt1rXTkde92onGrN6ozq/dpdyX3ZnEu9+TyIhhYQ==`}),
       ).toBe(`Խײ߽ΟƝʭֵӑ׽ډƬިίݥܗݙĻߓȈaa`);
     });
-    void it(`throws Error for strang object`, () => {
+    void it(`throws Error for strange object`, () => {
       expect(() => decode({foo: `bar`})).toThrow();
     });
   });
