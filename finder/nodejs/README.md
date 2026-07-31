@@ -15,7 +15,7 @@ $ npm publish
 ```
 
 ## Changelog
-- 0.2.1
+- 0.2.1/0.2.2
   - Use ox as format/lint
 - 0.2.0
   - Fix type of `matchRoot` and `firstMatchOnly` in `ancestor` and `descendant`
