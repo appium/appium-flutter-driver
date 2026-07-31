@@ -46,7 +46,7 @@ $ git push origin main
 ## Changelog
 - 0.3.0
   - Convert to ESM
-- 0.2.1/0.2.2
+- 0.2.1/0.2.2/0.2.3
   - Use ox as format/lint
 - 0.2.0
   - Fix type of `matchRoot` and `firstMatchOnly` in `ancestor` and `descendant`

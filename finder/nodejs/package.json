@@ -1,6 +1,6 @@
 {
   "name": "appium-flutter-finder",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Finder for Appium Flutter driver",
   "keywords": [
     "appium",
