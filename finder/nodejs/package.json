@@ -36,6 +36,6 @@
     "@appium/tsconfig": "^1.0.0",
     "@types/node": "^26.0.0",
     "expect": "^30.0.0",
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   }
 }
