@@ -5,7 +5,7 @@
     "esModuleInterop": true,
     "rootDir": ".",
     "outDir": "build",
-    "types": ["node", "mocha"],
+    "types": ["node"],
     "checkJs": true
   },
   "include": ["lib"]
