@@ -44,5 +44,6 @@ jobs:
     - run: |
         npm install
         npm run lint
+        npm run format:check
         npm run test
       working-directory: finder/nodejs

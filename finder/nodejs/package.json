@@ -1,18 +1,17 @@
 {
   "name": "appium-flutter-finder",
+  "version": "0.2.0",
   "description": "Finder for Appium Flutter driver",
   "keywords": [
     "appium",
     "flutter"
   ],
-  "version": "0.2.0",
-  "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
   "license": "MIT",
+  "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/truongsinh/appium-flutter-driver.git"
   },
-  "main": "./build/serializer.js",
   "bin": {},
   "directories": {
     "lib": "lib"
@@ -20,23 +19,23 @@
   "files": [
     "build"
   ],
+  "main": "./build/serializer.js",
   "scripts": {
-    "test": "mocha --require ts-node/register lib/**/*_test.ts",
+    "test": "npm run compile && node --test build/lib/*_test.js",
     "prepublishOnly": "cp ../../LICENSE ./",
     "prepare": "npm run clean && npm run compile",
     "clean": "rm -rf build",
     "compile": "tsc",
-    "lint": "tslint 'lib/**/*.ts'"
+    "lint": "oxlint -c oxlint.config.mjs .",
+    "lint:fix": "oxlint -c oxlint.config.mjs --fix .",
+    "format": "oxfmt -c oxfmt.config.mjs .",
+    "format:check": "oxfmt -c oxfmt.config.mjs --check ."
   },
   "devDependencies": {
-    "@appium/eslint-config-appium-ts": "^3.0.0",
+    "@appium/oxc-config": "^1.1.0",
     "@appium/tsconfig": "^1.0.0",
-    "@types/mocha": "10.0.10",
     "@types/node": "^26.0.0",
     "expect": "^30.0.0",
-    "mocha": "^11.0.1",
-    "ts-node": "^10.9.2",
-    "tslint": "^6.1.3",
     "typescript": "^6.0.3"
   }
 }

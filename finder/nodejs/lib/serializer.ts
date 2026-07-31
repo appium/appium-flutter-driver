@@ -1,5 +1,5 @@
-import { encode } from './base64url';
-import { deserialize } from './deserializer';
+import {encode} from './base64url';
+import {deserialize} from './deserializer';
 
 // @todo consider using protobuf
 function serialize(obj: object) {
@@ -15,22 +15,18 @@ export const ancestor = (args: {
   matchRoot?: boolean;
   firstMatchOnly?: boolean;
 }) => {
-  const { of, matching, matchRoot = false, firstMatchOnly = false} = args;
+  const {of, matching, matchRoot = false, firstMatchOnly = false} = args;
   const a: any = {
     finderType: `Ancestor`,
     firstMatchOnly: `${firstMatchOnly}`,
     matchRoot: `${matchRoot}`,
   };
   const ofParam: any = {};
-  Object.entries(deserialize(of)).forEach(
-    ([key, value]) => (ofParam[key] = value),
-  );
+  Object.entries(deserialize(of)).forEach(([key, value]) => (ofParam[key] = value));
   a[`of`] = JSON.stringify(ofParam);
 
   const matchingPara: any = {};
-  Object.entries(deserialize(matching)).forEach(
-    ([key, value]) => (matchingPara[key] = value),
-  );
+  Object.entries(deserialize(matching)).forEach(([key, value]) => (matchingPara[key] = value));
   a[`matching`] = JSON.stringify(matchingPara);
 
   return serialize(a);
@@ -68,22 +64,18 @@ export const descendant = (args: {
   matchRoot?: boolean;
   firstMatchOnly?: boolean;
 }) => {
-  const { of, matching, matchRoot = false , firstMatchOnly = false} = args;
+  const {of, matching, matchRoot = false, firstMatchOnly = false} = args;
   const a: any = {
     finderType: `Descendant`,
     firstMatchOnly: `${firstMatchOnly}`,
     matchRoot: `${matchRoot}`,
   };
   const ofParam: any = {};
-  Object.entries(deserialize(of)).forEach(
-    ([key, value]) => (ofParam[key] = value),
-  );
+  Object.entries(deserialize(of)).forEach(([key, value]) => (ofParam[key] = value));
   a[`of`] = JSON.stringify(ofParam);
 
   const matchingParam: any = {};
-  Object.entries(deserialize(matching)).forEach(
-    ([key, value]) => (matchingParam[key] = value),
-  );
+  Object.entries(deserialize(matching)).forEach(([key, value]) => (matchingParam[key] = value));
   a[`matching`] = JSON.stringify(matchingParam);
 
   return serialize(a);
