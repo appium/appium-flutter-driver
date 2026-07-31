@@ -17,7 +17,9 @@
     "lib": "lib"
   },
   "files": [
-    "build"
+    "build",
+    "!build/**/*_test.*",
+    "!build/tsconfig.tsbuildinfo"
   ],
   "main": "./build/lib/serializer.js",
   "scripts": {
