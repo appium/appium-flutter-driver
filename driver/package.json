@@ -54,10 +54,9 @@
   "devDependencies": {
     "@appium/oxc-config": "^1.1.0",
     "@appium/semantic-release-config": "^1.1.0",
-    "@appium/tsconfig": "^1.0.0",
+    "@appium/tsconfig": "^1.2.0",
     "@appium/types": "^1.0.0",
-    "ts-node": "^10.9.1",
-    "typescript": "~6.0"
+    "ts-node": "^10.9.1"
   },
   "peerDependencies": {
     "appium": "^3.0.0"
