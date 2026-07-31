@@ -7,15 +7,17 @@ Companion `finder` for [Appium Flutter Driver](https://www.npmjs.com/package/app
 ```
 $ cd finder/nodejs
 $ npm version <major|minor|patch>
-$ git commit -am 'chore: bump version'
+$ git commit -am 'chore: bump version of appium-flutter-finder'
 $ git tag js-finder-<version number> # e.g. git tag js-finder-0.0.23
 $ git push origin js-finder-0.0.23
 $ npm publish
 ```
 
 ## Changelog
+- 0.2.1
+  - Use ox as format/lint
 - 0.2.0
-    - Fix type of `matchRoot` and `firstMatchOnly` in `ancestor` and `descendant`
+  - Fix type of `matchRoot` and `firstMatchOnly` in `ancestor` and `descendant`
 - 0.1.0
   - Add `firstMatchOnly` in `ancestor` and `descendant`
 - 0.0.23
