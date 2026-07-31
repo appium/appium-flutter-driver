@@ -19,7 +19,7 @@
   "files": [
     "build"
   ],
-  "main": "./build/serializer.js",
+  "main": "./build/lib/serializer.js",
   "scripts": {
     "test": "npm run compile && node --test build/lib/*_test.js",
     "prepublishOnly": "cp ../../LICENSE ./",
