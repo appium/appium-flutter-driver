@@ -35,9 +35,7 @@
   },
   "devDependencies": {
     "@appium/oxc-config": "^1.1.0",
-    "@appium/tsconfig": "^1.0.0",
-    "@types/node": "^26.0.0",
-    "expect": "^30.0.0",
-    "typescript": "^6.0.3"
+    "@appium/tsconfig": "^1.2.0",
+    "@types/node": "^26.0.0"
   }
 }
