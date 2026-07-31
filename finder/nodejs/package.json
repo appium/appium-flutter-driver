@@ -10,7 +10,7 @@
   "author": "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/truongsinh/appium-flutter-driver.git"
+    "url": "git+https://github.com/appium/appium-flutter-driver.git"
   },
   "bin": {},
   "directories": {
