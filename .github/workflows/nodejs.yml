@@ -14,6 +14,9 @@ on:
       - 'driver/**'
     branches: [ main ]
 
+permissions:
+  contents: read
+
 jobs:
   node_matrix:
     uses: appium/appium-workflows/.github/workflows/node-lts-matrix.yml@main

@@ -12,7 +12,6 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  issues: write
   id-token: write # to enable use of OIDC for trusted publishing and npm provenance
 
 jobs:

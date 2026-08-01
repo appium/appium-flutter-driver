@@ -18,6 +18,9 @@ on:
       - 'finder/ruby/**'
     branches: [ main ]
 
+permissions:
+  contents: read
+
 jobs:
   test:
 
