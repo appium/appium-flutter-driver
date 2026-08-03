@@ -40,7 +40,7 @@
     "clean-dependency": "rm -rf node_modules && rm -f package-lock.json"
   },
   "dependencies": {
-    "appium-android-driver": "^13.0.0",
+    "appium-android-driver": "^14.0.4",
     "appium-flutter-finder": "^0.2.0",
     "appium-ios-device": "^3.0.0",
     "appium-uiautomator2-driver": "^8.1.0",
