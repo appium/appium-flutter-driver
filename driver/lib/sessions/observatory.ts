@@ -91,9 +91,7 @@ export async function connectSocket(
               !Array.isArray(isolate.extensionRPCs) ||
               !isolate.extensionRPCs.includes(`ext.flutter.driver`)
             ) {
-              throw new Error(
-                `"ext.flutter.driver" is not available in isolate ${isolateId}`,
-              );
+              throw new Error(`"ext.flutter.driver" is not available in isolate ${isolateId}`);
             }
 
             socket.isolateId = isolateId;
