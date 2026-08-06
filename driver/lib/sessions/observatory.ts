@@ -75,56 +75,80 @@ export async function connectSocket(
       };
       this.log.info(`Connecting to Dart Observatory: ${dartObservatoryURL}`);
 
-      if (isolateId) {
-        this.log.info(`Listing the given isolate id: ${isolateId}`);
-        socket.isolateId = isolateId;
-      } else {
-        const vm = (await socket.call(`getVM`)) as {
-          isolates: [
-            {
-              name: string;
-              id: number;
-            },
-          ];
-        };
-        this.log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
-        // To accept 'main.dart:main()' and 'main'
-        const mainIsolateData = vm.isolates.find((e) => e.name.includes(`main`));
-        if (!mainIsolateData) {
-          this.log.error(`Cannot get Dart main isolate info`);
-          removeListenerAndResolve(null);
-          socket.close();
-          return;
-        }
-        // e.g. 'isolates/2978358234363215', '2978358234363215'
-        socket.isolateId = mainIsolateData.id;
-      }
-
-      // It could take time to load the expected module.
       try {
         await retryInterval(moduleCheckIntervalCount, moduleCheckIntervalMs, async () => {
-          const isolate = (await socket.call(`getIsolate`, {
-            isolateId: `${socket.isolateId}`,
-          })) as {
-            extensionRPCs: [string] | null;
+          if (isolateId) {
+            this.log.info(`Checking the given isolate id: ${isolateId}`);
+
+            const isolate = (await socket.call(`getIsolate`, {
+              isolateId: `${isolateId}`,
+            })) as {
+              extensionRPCs: string[] | null;
+            } | null;
+
+            if (
+              !isolate ||
+              !Array.isArray(isolate.extensionRPCs) ||
+              !isolate.extensionRPCs.includes(`ext.flutter.driver`)
+            ) {
+              throw new Error(
+                `"ext.flutter.driver" is not available in isolate ${isolateId}`,
+              );
+            }
+
+            socket.isolateId = isolateId;
+            return;
+          }
+
+          // Refresh the isolate list on every retry because a background
+          // engine may start before the UI engine.
+          const vm = (await socket.call(`getVM`)) as {
+            isolates: Array<{
+              name: string;
+              id: string | number;
+              isolateGroupId?: string;
+            }>;
           } | null;
-          if (!isolate) {
-            throw new Error(`Cannot get main Dart Isolate`);
+
+          if (!vm || !Array.isArray(vm.isolates)) {
+            throw new Error(`Cannot get Dart VM isolate list`);
           }
-          if (!Array.isArray(isolate.extensionRPCs)) {
-            throw new Error(`Cannot get Dart extensionRPCs from isolate ${JSON.stringify(isolate)}`);
+
+          this.log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
+
+          for (const candidate of vm.isolates) {
+            const isolate = (await socket.call(`getIsolate`, {
+              isolateId: `${candidate.id}`,
+            })) as {
+              extensionRPCs: string[] | null;
+            } | null;
+
+            if (
+              isolate &&
+              Array.isArray(isolate.extensionRPCs) &&
+              isolate.extensionRPCs.includes(`ext.flutter.driver`)
+            ) {
+              socket.isolateId = candidate.id;
+
+              this.log.info(
+                `Selected Flutter driver isolate: ${candidate.id} ` +
+                  `(${candidate.name}, group ${candidate.isolateGroupId ?? `unknown`})`,
+              );
+
+              return;
+            }
           }
-          if (isolate.extensionRPCs.indexOf(`ext.flutter.driver`) < 0) {
-            throw new Error(
-              `"ext.flutter.driver" is not found in "extensionRPCs" ${JSON.stringify(isolate.extensionRPCs)}`,
-            );
-          }
+
+          throw new Error(`"ext.flutter.driver" was not found in any Dart isolate`);
         });
       } catch (e) {
-        this.log.error(e.message);
+        const message = e instanceof Error ? e.message : String(e);
+        this.log.error(message);
         removeListenerAndResolve(null);
+        socket.close();
         return;
       }
+
       removeListenerAndResolve(socket);
     };
     socket.on(`open`, onOpenListener);
