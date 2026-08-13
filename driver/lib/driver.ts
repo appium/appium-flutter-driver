@@ -248,6 +248,8 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
       // to make the behavior as same as this.terminateApp
       return await this.proxydriver?.executeCommand(cmd, ...args);
     } else if (cmd === `receiveAsyncResponse`) {
+      // TODO: Remove 'receiveAsyncResponse' as legacy behavior.
+      // Dependent UIA2/XCUITest drivers should not have this method for now.
       logger.debug(`Executing FlutterDriver response '${cmd}'`);
       return await this.receiveAsyncResponse(...args);
     } else if ([`setOrientation`, `getOrientation`, `back`].includes(cmd)) {
