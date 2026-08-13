@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.10.0
+- Update Appium XCUITest driver dependency from 10.43.1 to 11.17.7
+    - WebDriverAgent is updated from 11.4.x to 15.1.x, adding Xcode 27 build support and iOS 27-related fixes.
+    - XCUITest commands proxied through the Flutter driver's native and webview contexts follow the v11 API. The `mobile: startPcap`, `mobile: stopPcap`, and `mobile: listXCTestsInTestBundle` commands and the `appium:launchWithIDB` extension have been removed.
+    - The `appium:appInstallStrategy`, `appium:calendarAccessAuthorized`, `appium:useSimpleBuildTest`, `appium:waitForQuiescence`, and `appium:simpleIsVisibleCheck` capabilities have been removed. Use `appium:waitForIdleTimeout` to tune idle behavior instead of `appium:waitForQuiescence`.
+    - Native XCTest helpers, certificate management, and crash-report access on real iOS/tvOS 18+ devices now use RemoteXPC. Some of these features require a RemoteXPC tunnel.
+    - The legacy `appium.contextUpdated` BiDi event has been removed. Use `appium:xcuitest.contextUpdated` instead.
+    - The legacy XCUITest `receive_async_response` endpoint and JavaScript async-callback flow have been removed.
+
 ## 3.9.1
 - Update internal lint/format
 
