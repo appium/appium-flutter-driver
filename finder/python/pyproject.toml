@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Appium-Flutter-Finder"
+version = "0.8.1"
+description = "An extension of finder for Appium flutter"
+readme = "README.md"
+license = "MIT"
+authors = [
+  {name = "Kazuaki Matsuo", email = "fly.49.89.over@gmail.com"},
+]
+keywords = [
+  "appium",
+  "flutter",
+  "python client",
+  "mobile automation",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Environment :: Console",
+  "Environment :: MacOS X",
+  "Environment :: Win32 (MS Windows)",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Other Audience",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Software Development :: Testing",
+]
+dependencies = [
+  "Appium-Python-Client>=2.0.0,<7",
+]
+
+[project.urls]
+Homepage = "https://github.com/appium/appium-flutter-driver"
+
+[tool.setuptools.packages.find]
+include = ["appium_flutter_finder*"]
