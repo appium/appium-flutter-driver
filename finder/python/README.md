@@ -10,20 +10,20 @@ Supported Python version follows appium python client.
     ```
 
 2. Install from source, via [PyPi](https://pypi.org). From ['Appium-Flutter-Finder'](https://pypi.org/project/Appium-Flutter-Finder/),
-download and unarchive the source tarball (Appium-Flutter-Finder-X.X.tar.gz).
+download and unarchive the source tarball (`appium_flutter_finder-X.X.tar.gz`).
 
     ```shell
-    tar -xvf Appium-Flutter-Finder-X.X.tar.gz
-    cd Appium-Flutter-Finder-X.X
-    python setup.py install
+    tar -xvf appium_flutter_finder-X.X.tar.gz
+    cd appium_flutter_finder-X.X
+    python -m pip install .
     ```
 
-3. Install from source via [GitHub](https://github.com/appium/python-client).
+3. Install from source via [GitHub](https://github.com/appium/appium-flutter-driver).
 
     ```shell
-    git clone git@github.com:appium/python-client.git
-    cd python-client
-    python setup.py install
+    git clone git@github.com:appium/appium-flutter-driver.git
+    cd appium-flutter-driver/finder/python
+    python -m pip install .
     ```
 
 # How to use
@@ -31,18 +31,17 @@ Examples can be found out [here](../../example/python/example.py).
 
 # Release
 
-```
-pip install twine
-```
-
-```
-python setup.py sdist
-twine upload dist/Appium-Flutter-Finder-X.X.tar.gz
+```shell
+python -m pip install --upgrade build twine
+python -m build
+python -m twine check dist/*
+python -m twine upload dist/appium_flutter_finder-*
 ```
 
 # Changelog
 - 0.8.1
     - Relax the Appium-Python-Client upper version to accept v6
+    - Migrate package metadata and builds to `pyproject.toml`
 - 0.8.0
     - Update the limit of python appium client version
 - 0.7.0

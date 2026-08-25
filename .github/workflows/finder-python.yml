@@ -5,10 +5,12 @@ on:
   push:
     paths:
       - 'finder/python/**'
+      - '.github/workflows/finder-python.yml'
     branches: [ main ]
   pull_request:
     paths:
       - 'finder/python/**'
+      - '.github/workflows/finder-python.yml'
     branches: [ main ]
 
 permissions:
@@ -32,10 +34,17 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pylint pytest Appium-Python-Client
+        python -m pip install build pylint pytest twine Appium-Python-Client
     - name: Analyzing the code with pylint
       run: pylint tests/ appium_flutter_finder/
       working-directory: finder/python
     - name: Run tests
       run: pytest tests/**
+      working-directory: finder/python
+    - name: Build distributions
+      run: |
+        python -m build
+        python -m twine check dist/*
+        ls dist/appium_flutter_finder-*.tar.gz
+        ls dist/appium_flutter_finder-*.whl
       working-directory: finder/python
