@@ -39,9 +39,10 @@ python -m twine upload dist/appium_flutter_finder-*
 ```
 
 # Changelog
+- 0.8.2
+    - Migrate package metadata and builds to `pyproject.toml`
 - 0.8.1
     - Relax the Appium-Python-Client upper version to accept v6
-    - Migrate package metadata and builds to `pyproject.toml`
 - 0.8.0
     - Update the limit of python appium client version
 - 0.7.0

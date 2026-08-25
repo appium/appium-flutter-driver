@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "Appium-Flutter-Finder"
-version = "0.8.1"
+version = "0.8.2"
 description = "An extension of finder for Appium flutter"
 readme = "README.md"
 license = "MIT"
