@@ -1,12 +1,12 @@
 import B from 'bluebird';
 
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import type {FlutterDriver} from '../driver';
-import {reConnectFlutterDriver} from '../sessions/session';
-import {launchApp} from './../ios/app';
-import {assertVisible, assertNotVisible, assertTappable, type FinderInput} from './assertions';
-import {longTap, scroll, scrollIntoView, scrollUntilVisible, scrollUntilTapable} from './execute/scroll';
-import {waitFor, waitForAbsent, waitForTappable} from './execute/wait';
+import type {FlutterDriver} from '../driver.js';
+import {reConnectFlutterDriver} from '../sessions/session.js';
+import {launchApp} from './../ios/app.js';
+import {assertVisible, assertNotVisible, assertTappable, type FinderInput} from './assertions.js';
+import {longTap, scroll, scrollIntoView, scrollUntilVisible, scrollUntilTapable} from './execute/scroll.js';
+import {waitFor, waitForAbsent, waitForTappable} from './execute/wait.js';
 
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
 

@@ -1,6 +1,6 @@
 import {services, INSTRUMENT_CHANNEL} from 'appium-ios-device';
 
-import {log} from './../logger';
+import {log} from './../logger.js';
 
 /**
  * Launch the given bundle id via instrument service.

@@ -1,4 +1,4 @@
-import type {FlutterDriver} from '../driver';
+import type {FlutterDriver} from '../driver.js';
 
 export const getText = async function (this: FlutterDriver, el: string): Promise<string | null> {
   const response = await this.executeElementCommand(`get_text`, el);

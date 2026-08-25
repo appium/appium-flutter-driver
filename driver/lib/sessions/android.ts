@@ -1,11 +1,11 @@
 import type {InitialOpts, StringRecord} from '@appium/types';
 import type {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
 
-import type {FlutterDriver} from '../driver';
-import type {IsolateSocket} from './isolate_socket';
-import {LogMonitor} from './log-monitor';
-import type {LogEntry} from './log-monitor';
-import {connectSocket, extractObservatoryUrl, OBSERVATORY_URL_PATTERN} from './observatory';
+import type {FlutterDriver} from '../driver.js';
+import type {IsolateSocket} from './isolate_socket.js';
+import {LogMonitor} from './log-monitor.js';
+import type {LogEntry} from './log-monitor.js';
+import {connectSocket, extractObservatoryUrl, OBSERVATORY_URL_PATTERN} from './observatory.js';
 
 const VM_SERVICE_PORT_EXTRA = `vm-service-port`;
 const DISABLE_SERVICE_AUTH_CODES_EXTRA = `disable-service-auth-codes`;

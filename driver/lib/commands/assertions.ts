@@ -1,6 +1,6 @@
-import type {SerializableFinder} from 'appium-flutter-finder';
+import {byValueKey, byText, byTooltip, type SerializableFinder} from 'appium-flutter-finder';
 
-import type {FlutterDriver} from '../driver';
+import type {FlutterDriver} from '../driver.js';
 
 export type FinderInput =
   | {key: string}
@@ -9,10 +9,6 @@ export type FinderInput =
   | SerializableFinder
   | string
   | {getRawFinder: () => SerializableFinder}; // FlutterElement-like input
-
-let finderModule: Promise<typeof import('appium-flutter-finder')> | undefined;
-
-const loadFinder = () => (finderModule ??= import('appium-flutter-finder'));
 
 // Serialize a finder to base64
 const serializeFinder = (finder: SerializableFinder): string => Buffer.from(JSON.stringify(finder)).toString('base64');
@@ -25,7 +21,7 @@ const isFlutterElementLike = (input: any): input is {getRawFinder: () => Seriali
   input && typeof input === 'object' && typeof input.getRawFinder === 'function';
 
 // Convert FinderInput to base64 string
-async function getFinderBase64(input: FinderInput): Promise<string> {
+function getFinderBase64(input: FinderInput): string {
   if (typeof input === 'string') {
     return input; // already base64
   }
@@ -37,8 +33,6 @@ async function getFinderBase64(input: FinderInput): Promise<string> {
   if (isRawFinder(input)) {
     return serializeFinder(input);
   }
-
-  const {byValueKey, byText, byTooltip} = await loadFinder();
 
   if ('key' in input) {
     return byValueKey(input.key);
@@ -63,7 +57,7 @@ async function executeAssertion(
   timeout = 5000,
   extraArgs: object = {},
 ): Promise<void> {
-  const base64 = await getFinderBase64(input);
+  const base64 = getFinderBase64(input);
   try {
     await driver.executeElementCommand(command, base64, {
       timeout,

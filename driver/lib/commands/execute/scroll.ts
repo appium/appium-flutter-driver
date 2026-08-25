@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
-import type {FlutterDriver} from '../../driver';
-import {waitFor, waitForTappable} from './wait';
+import type {FlutterDriver} from '../../driver.js';
+import {waitFor, waitForTappable} from './wait.js';
 
 export const scroll = async (
   self: FlutterDriver,
