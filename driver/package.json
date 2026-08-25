@@ -36,7 +36,7 @@
     "format:check": "oxfmt -c oxfmt.config.mjs --check .",
     "prepublishOnly": "cp ../README.md ../LICENSE ./",
     "prepare": "npm run clean && npm run build",
-    "test": "echo no test",
+    "test": "npm run build && node --test test/*.test.cjs",
     "clean-dependency": "rm -rf node_modules && rm -f package-lock.json"
   },
   "dependencies": {
