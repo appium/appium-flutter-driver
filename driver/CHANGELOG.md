@@ -1,6 +1,6 @@
 # Changelog
 
-## Next
+## 4.0.0
 - Convert the driver package from CommonJS to ESM
 
 ## 3.10.1
