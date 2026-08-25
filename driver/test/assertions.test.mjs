@@ -1,9 +1,9 @@
-const assert = require('node:assert/strict');
-const {it} = require('node:test');
+import assert from 'node:assert/strict';
+import {it} from 'node:test';
 
-const {assertVisible} = require('../build/lib/commands/assertions.js');
+import {assertVisible} from '../build/lib/commands/assertions.js';
 
-it('loads the ESM finder from the CommonJS driver', async () => {
+it('loads the ESM finder from the ESM driver', async () => {
   let command;
   let finder;
   let options;
@@ -22,4 +22,10 @@ it('loads the ESM finder from the CommonJS driver', async () => {
     keyValueType: 'String',
   });
   assert.deepEqual(options, {timeout: 5000, visible: true});
+});
+
+it('loads the driver entry point as ESM', async () => {
+  const {FlutterDriver} = await import('../build/lib/driver.js');
+
+  assert.equal(typeof FlutterDriver, 'function');
 });

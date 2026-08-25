@@ -1,5 +1,5 @@
-import type {FlutterDriver} from '../driver';
-import {log} from '../logger';
+import type {FlutterDriver} from '../driver.js';
+import {log} from '../logger.js';
 
 export const FLUTTER_CONTEXT_NAME = `FLUTTER`;
 export const NATIVE_CONTEXT_NAME = `NATIVE_APP`;

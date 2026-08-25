@@ -10,11 +10,11 @@ import type {
 } from '@appium/types';
 import type {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
 import {XCUITestDriver} from 'appium-xcuitest-driver';
-import {BaseDriver} from 'appium/driver';
+import {BaseDriver} from 'appium/driver.js';
 // @ts-ignore: no 'errors' export module
 import _ from 'lodash';
 
-import {getClipboard, setClipboard} from './commands/clipboard';
+import {getClipboard, setClipboard} from './commands/clipboard.js';
 import {
   driverShouldDoProxyCmd,
   FLUTTER_CONTEXT_NAME,
@@ -22,18 +22,18 @@ import {
   getCurrentContext,
   NATIVE_CONTEXT_NAME,
   setContext,
-} from './commands/context';
-import {clear, getText, setValue} from './commands/element';
-import {execute} from './commands/execute';
-import {click, longTap, performTouch, tap, tapEl} from './commands/gesture';
-import {getScreenshot} from './commands/screen';
-import {desiredCapConstraints} from './desired-caps';
-import {log as logger} from './logger';
-import {PLATFORM} from './platform';
-import type {IsolateSocket} from './sessions/isolate_socket';
-import type {LogMonitor} from './sessions/log-monitor';
-import {executeElementCommand, executeGetVMCommand, executeGetIsolateCommand} from './sessions/observatory';
-import {createSession, reConnectFlutterDriver} from './sessions/session';
+} from './commands/context.js';
+import {clear, getText, setValue} from './commands/element.js';
+import {execute} from './commands/execute.js';
+import {click, longTap, performTouch, tap, tapEl} from './commands/gesture.js';
+import {getScreenshot} from './commands/screen.js';
+import {desiredCapConstraints} from './desired-caps.js';
+import {log as logger} from './logger.js';
+import {PLATFORM} from './platform.js';
+import type {IsolateSocket} from './sessions/isolate_socket.js';
+import type {LogMonitor} from './sessions/log-monitor.js';
+import {executeElementCommand, executeGetVMCommand, executeGetIsolateCommand} from './sessions/observatory.js';
+import {createSession, reConnectFlutterDriver} from './sessions/session.js';
 
 type FluttertDriverConstraints = typeof desiredCapConstraints;
 // Need to not proxy in WebView context

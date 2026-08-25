@@ -2,10 +2,10 @@ import type {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
 import type {XCUITestDriver} from 'appium-xcuitest-driver';
 import _ from 'lodash';
 
-import type {FlutterDriver} from '../driver';
-import {PLATFORM} from '../platform';
-import {startAndroidSession, connectAndroidSession} from './android';
-import {startIOSSession, connectIOSSession} from './ios';
+import type {FlutterDriver} from '../driver.js';
+import {PLATFORM} from '../platform.js';
+import {startAndroidSession, connectAndroidSession} from './android.js';
+import {startIOSSession, connectIOSSession} from './ios.js';
 
 export const reConnectFlutterDriver = async function (this: FlutterDriver, caps: Record<string, any>) {
   // setup proxies - if platformName is not empty, make it less case sensitive

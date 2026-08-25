@@ -1,5 +1,8 @@
 # Changelog
 
+## 4.0.0
+- Convert the driver package from CommonJS to ESM
+
 ## 3.10.1
 - Fix loading the ESM-only `appium-flutter-finder` dependency from the CommonJS driver ([#923](https://github.com/appium/appium-flutter-driver/issues/923))
 

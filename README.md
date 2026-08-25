@@ -44,6 +44,8 @@ If you'd like to test a release app, which can be released from app store as-is,
 
 Appium Flutter Driver version `3.0.0` requires Appium 3.
 
+The driver package is ESM-only. Appium loads it as an extension automatically; programmatic Node.js consumers must use `import` or dynamic `import()` instead of `require()`.
+
 ```
 appium driver install --source=npm appium-flutter-driver
 ```
