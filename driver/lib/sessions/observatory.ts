@@ -3,10 +3,10 @@ import {URL} from 'node:url';
 import {retryInterval} from 'asyncbox';
 import _ from 'lodash';
 
-import type {FlutterDriver} from '../driver';
-import {decode} from './base64url';
-import {IsolateSocket} from './isolate_socket';
-import type {LogEntry} from './log-monitor';
+import type {FlutterDriver} from '../driver.js';
+import {decode} from './base64url.js';
+import {IsolateSocket} from './isolate_socket.js';
+import type {LogEntry} from './log-monitor.js';
 
 const truncateLength = 500;
 // https://github.com/flutter/flutter/blob/f90b019c68edf4541a4c8273865a2b40c2c01eb3/dev/devicelab/lib/framework/runner.dart#L183

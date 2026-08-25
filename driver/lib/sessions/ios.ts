@@ -2,15 +2,15 @@ import net from 'node:net';
 
 import {utilities} from 'appium-ios-device';
 import {XCUITestDriver} from 'appium-xcuitest-driver';
-import type {XCUITestDriverOpts} from 'appium-xcuitest-driver/build/lib/driver';
+import type {XCUITestDriverOpts} from 'appium-xcuitest-driver/build/lib/driver.js';
 import B from 'bluebird';
 import {checkPortStatus} from 'portscanner';
 
-import type {FlutterDriver} from '../driver';
-import type {IsolateSocket} from './isolate_socket';
-import {LogMonitor} from './log-monitor';
-import type {LogEntry} from './log-monitor';
-import {connectSocket, extractObservatoryUrl, OBSERVATORY_URL_PATTERN} from './observatory';
+import type {FlutterDriver} from '../driver.js';
+import type {IsolateSocket} from './isolate_socket.js';
+import {LogMonitor} from './log-monitor.js';
+import type {LogEntry} from './log-monitor.js';
+import {connectSocket, extractObservatoryUrl, OBSERVATORY_URL_PATTERN} from './observatory.js';
 
 const LOCALHOST = `127.0.0.1`;
 

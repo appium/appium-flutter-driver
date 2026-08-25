@@ -1,4 +1,4 @@
-import type {FlutterDriver} from '../driver';
+import type {FlutterDriver} from '../driver.js';
 
 /**
  * Set clipboard content via each native app driver

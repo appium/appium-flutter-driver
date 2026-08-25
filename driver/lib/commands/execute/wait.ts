@@ -1,4 +1,4 @@
-import type {FlutterDriver} from '../../driver';
+import type {FlutterDriver} from '../../driver.js';
 
 const waitForConstructor =
   (command: `waitForAbsent` | `waitFor` | `waitForTappable`) =>
