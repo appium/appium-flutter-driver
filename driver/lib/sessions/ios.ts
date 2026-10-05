@@ -259,7 +259,7 @@ async function ensureDeviceLogCaptureStarted(
  * @param caps The processed capabilities of the driver session.
  * @param w3cCapsList The raw W3C capabilities forwarded to XCUITest.
  */
-export function injectDartVmServicePortFlags(caps: Record<string, any>, w3cCapsList: any[] = []): void {
+function injectDartVmServicePortFlags(caps: Record<string, any>, w3cCapsList: any[] = []): void {
   const port = caps.dartVmServicePort;
   if (typeof port !== 'number') {
     return;

@@ -1,42 +1,60 @@
 import assert from 'node:assert/strict';
-import {it} from 'node:test';
+import {afterEach, beforeEach, it, mock} from 'node:test';
 
-import {injectDartVmServicePortFlags} from '../build/lib/sessions/ios.js';
+import {XCUITestDriver} from 'appium-xcuitest-driver';
 
+import {startIOSSession} from '../build/lib/sessions/ios.js';
+
+const noopLog = {info() {}, debug() {}, warn() {}, error() {}};
 const w3cCaps = (alwaysMatch = {}, firstMatch = [{}]) => ({alwaysMatch, firstMatch});
 
-it('mirrors the injected VM service flags into the W3C caps forwarded to XCUITest', () => {
+let forwardedArgs;
+
+beforeEach(() => {
+  forwardedArgs = undefined;
+  mock.method(XCUITestDriver.prototype, 'createSession', async (...args) => {
+    forwardedArgs = args;
+  });
+});
+
+afterEach(() => mock.restoreAll());
+
+// Without `app`/`bundleId`, startIOSSession returns right after creating the XCUITest session,
+// so these tests only exercise what gets forwarded to XCUITest.
+const start = (caps, ...args) => startIOSSession.call({log: noopLog}, caps, ...args);
+
+it('forwards the injected VM service flags to XCUITest', async () => {
   const caps = {dartVmServicePort: 9123, processArguments: {args: ['--foo'], env: {A: '1'}}};
   const forwarded = w3cCaps({'appium:dartVmServicePort': 9123}, [
     {'appium:processArguments': {args: ['--foo'], env: {A: '1'}}},
   ]);
 
-  injectDartVmServicePortFlags(caps, [forwarded, undefined, {}]);
+  await start(caps, forwarded, undefined, {});
 
-  const expected = {args: ['--foo', '--vm-service-port=9123', '--disable-service-auth-codes'], env: {A: '1'}};
-  assert.deepEqual(caps.processArguments, expected);
-  assert.deepEqual(forwarded.alwaysMatch['appium:processArguments'], expected);
+  assert.equal(forwardedArgs[0], forwarded);
+  assert.deepEqual(forwarded.alwaysMatch['appium:processArguments'], {
+    args: ['--foo', '--vm-service-port=9123', '--disable-service-auth-codes'],
+    env: {A: '1'},
+  });
   assert.deepEqual(forwarded.firstMatch, [{}]);
 });
 
-it('replaces a user-supplied --vm-service-port with the capability value', () => {
+it('replaces a user-supplied --vm-service-port with the capability value', async () => {
   const caps = {dartVmServicePort: 9123, processArguments: {args: ['--vm-service-port=1']}};
   const forwarded = w3cCaps();
 
-  injectDartVmServicePortFlags(caps, [forwarded]);
+  await start(caps, forwarded);
 
-  assert.deepEqual(forwarded.alwaysMatch['appium:processArguments'].args, [
+  assert.deepEqual(forwardedArgs[0].alwaysMatch['appium:processArguments'].args, [
     '--vm-service-port=9123',
     '--disable-service-auth-codes',
   ]);
 });
 
-it('leaves both caps untouched when dartVmServicePort is not set', () => {
-  const caps = {};
+it('forwards the W3C caps unchanged when dartVmServicePort is not set', async () => {
   const forwarded = w3cCaps({'appium:app': 'x'});
 
-  injectDartVmServicePortFlags(caps, [forwarded]);
+  await start({}, forwarded);
 
-  assert.deepEqual(caps, {});
-  assert.deepEqual(forwarded, w3cCaps({'appium:app': 'x'}));
+  assert.deepEqual(forwardedArgs[0], w3cCaps({'appium:app': 'x'}));
 });
