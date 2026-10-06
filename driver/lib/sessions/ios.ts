@@ -26,7 +26,7 @@ export async function startIOSSession(
   ...args: any[]
 ): Promise<[XCUITestDriver, IsolateSocket | null]> {
   this.log.info(`Starting an IOS proxy session`);
-  injectDartVmServicePortFlags(caps);
+  injectDartVmServicePortFlags(caps, args);
   const iosdriver = new XCUITestDriver({} as XCUITestDriverOpts);
   if (!caps.observatoryWsUri) {
     iosdriver.eventEmitter.once('syslogStarted', (syslog) => {
@@ -249,10 +249,17 @@ async function ensureDeviceLogCaptureStarted(
  * Other entries (including a user-supplied `--observatory-port=*`) are left
  * untouched.
  *
+ * `caps` is the driver's own processed copy, while XCUITest is started from the
+ * raw W3C capabilities in `w3cCapsList`, so the resulting `processArguments` are
+ * mirrored into each of their `alwaysMatch` (and dropped from `firstMatch` to
+ * avoid a duplicate-key validation error). Otherwise the flags never reach the
+ * app under test.
+ *
  * If `dartVmServicePort` is not set, the caps are left untouched.
- * @param caps The W3C capabilities passed to the driver session.
+ * @param caps The processed capabilities of the driver session.
+ * @param w3cCapsList The raw W3C capabilities forwarded to XCUITest.
  */
-function injectDartVmServicePortFlags(caps: Record<string, any>): void {
+function injectDartVmServicePortFlags(caps: Record<string, any>, w3cCapsList: any[] = []): void {
   const port = caps.dartVmServicePort;
   if (typeof port !== 'number') {
     return;
@@ -265,6 +272,16 @@ function injectDartVmServicePortFlags(caps: Record<string, any>): void {
     filtered.push(DISABLE_SERVICE_AUTH_CODES_FLAG);
   }
   caps.processArguments.args = filtered;
+
+  for (const w3cCaps of w3cCapsList) {
+    if (!w3cCaps?.alwaysMatch || typeof w3cCaps.alwaysMatch !== 'object') {
+      continue;
+    }
+    w3cCaps.alwaysMatch['appium:processArguments'] = caps.processArguments;
+    for (const firstMatch of Array.isArray(w3cCaps.firstMatch) ? w3cCaps.firstMatch : []) {
+      delete firstMatch?.['appium:processArguments'];
+    }
+  }
 }
 
 async function requireFreePort(this: FlutterDriver, port: number) {
