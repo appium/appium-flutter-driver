@@ -23,6 +23,10 @@ export class IsolateSocket extends Client {
 
     // @ts-ignore - runtime call is valid; types are provided by the package
     super(address as any);
+    // rpc-websockets keeps a pending call until a reply or its timeout arrives, and
+    // executeSocketCommand sets no timeout. Reject pending calls when the Dart VM connection
+    // closes (e.g. the app crashed or relaunched) so the command fails instead of hanging.
+    this.on(`close`, () => this.rejectPendingCalls());
   }
 
   public async executeSocketCommand(args: ExecuteArgs) {
@@ -34,5 +38,15 @@ export class IsolateSocket extends Client {
       isError: boolean;
       response: any;
     }>;
+  }
+
+  private rejectPendingCalls() {
+    const queue: Record<string, {promise: [unknown, (err: Error) => void]; timeout?: NodeJS.Timeout}> =
+      (this as any).queue ?? {};
+    for (const [id, {promise, timeout}] of Object.entries(queue)) {
+      clearTimeout(timeout);
+      delete queue[id];
+      promise[1](new Error(`The Dart VM connection was closed before it replied`));
+    }
   }
 }
