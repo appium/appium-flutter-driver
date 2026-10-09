@@ -172,16 +172,8 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async activateApp(appId: string) {
-    if (_.toLower(this.internalCaps.platformName) === PLATFORM.IOS) {
-      // Relaunch with the session's processArguments so engine flags such as the VM service
-      // port survive an app restart, as they did at session start.
-      // processArguments belongs to XCUITest's caps, not ours, so it is untyped here.
-      const {args, env} = (this.internalCaps as Record<string, any>).processArguments ?? {};
-      await (this.proxydriver as XCUITestDriver).activateApp(appId, {arguments: args, environment: env});
-    } else {
-      // @ts-expect-error this exist in xcuitestdriver or uia2 driver
-      await this.proxydriver?.activateApp(appId);
-    }
+    // @ts-expect-error this exist in xcuitestdriver or uia2 driver
+    await this.proxydriver?.activateApp(appId);
     await reConnectFlutterDriver.bind(this)(this.internalCaps);
   }
 
@@ -244,7 +236,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async executeCommand(cmd: string, ...args: [string, [{skipAttachObservatoryUrl: string; any: any}]]) {
-    if (new RegExp(/^[\s]*mobile:[\s]*activateApp$/).test(args[0])) {
+    if (new RegExp(/^[\s]*mobile:[\s]*(activateApp|launchApp)$/).test(args[0])) {
       const {skipAttachObservatoryUrl = false} = args[1][0];
       await this.proxydriver?.executeCommand(cmd, ...args);
       if (skipAttachObservatoryUrl) {

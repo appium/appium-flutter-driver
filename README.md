@@ -394,6 +394,8 @@ These Appium commands can work across context
 - `getContexts`
 - `activateApp('appId')`/`mobile:activateApp`
     - `mobile:activateApp` has `skipAttachObservatoryUrl` key to not try to attach to an observatory url. e.g. `driver.execute_script 'mobile:activateApp', {skipAttachObservatoryUrl: true, appId: 'com.android.chrome'}`
+- `mobile:launchApp` (iOS)
+    - Relaunches the app with `arguments`/`environment` via XCUITest, then attaches to the observatory url (`skipAttachObservatoryUrl` is honored as well). Use it instead of `activateApp` when the app needs launch arguments again, e.g. with `appium:dartVmServicePort`: `driver.execute_script 'mobile:launchApp', {bundleId: 'com.example.bundleId', arguments: ['--vm-service-port=8283', '--disable-service-auth-codes']}`
 - `terminateApp('appId')`/`mobile:terminateApp`
 - `installApp(appPath, options)`
 - `getClipboard`
