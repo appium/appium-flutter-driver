@@ -236,7 +236,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async executeCommand(cmd: string, ...args: [string, [{skipAttachObservatoryUrl: string; any: any}]]) {
-    if (new RegExp(/^[\s]*mobile:[\s]*activateApp$/).test(args[0])) {
+    if (new RegExp(/^[\s]*mobile:[\s]*(activateApp|launchApp)$/).test(args[0])) {
       const {skipAttachObservatoryUrl = false} = args[1][0];
       await this.proxydriver?.executeCommand(cmd, ...args);
       if (skipAttachObservatoryUrl) {
