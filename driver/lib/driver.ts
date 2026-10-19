@@ -238,12 +238,19 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   public async executeCommand(cmd: string, ...args: [string, [{skipAttachObservatoryUrl: string; any: any}]]) {
     if (new RegExp(/^[\s]*mobile:[\s]*(activateApp|launchApp)$/).test(args[0])) {
       const {skipAttachObservatoryUrl = false} = args[1][0];
-      await this.proxydriver?.executeCommand(cmd, ...args);
-      if (skipAttachObservatoryUrl) {
+      // This bypasses BaseDriver.executeCommand, so pause the FlutterDriver CommandTimeout here:
+      // the reconnect can wait for the observatory URL much longer than newCommandTimeout.
+      await this.clearNewCommandTimeout();
+      try {
+        await this.proxydriver?.executeCommand(cmd, ...args);
+        if (skipAttachObservatoryUrl) {
+          return;
+        }
+        await reConnectFlutterDriver.bind(this)(this.internalCaps);
         return;
+      } finally {
+        await this.startNewCommandTimeout();
       }
-      await reConnectFlutterDriver.bind(this)(this.internalCaps);
-      return;
     } else if (new RegExp(/^[\s]*mobile:[\s]*terminateApp$/).test(args[0])) {
       // to make the behavior as same as this.terminateApp
       return await this.proxydriver?.executeCommand(cmd, ...args);
