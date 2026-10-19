@@ -1,5 +1,12 @@
 # Changelog
 
+## 4.1.0
+- Fix forwarding `appium:dartVmServicePort` launch arguments to XCUITest so the iOS app starts its Dart VM service on the configured port ([#933](https://github.com/appium/appium-flutter-driver/pull/933))
+- Fix `mobile:launchApp` on iOS to work across contexts and reconnect to the Dart VM after launching the app, honoring `skipAttachObservatoryUrl` ([#936](https://github.com/appium/appium-flutter-driver/pull/936))
+- Pause `newCommandTimeout` during `mobile:activateApp` and `mobile:launchApp` to prevent the session from ending while waiting for Dart VM reconnection ([#940](https://github.com/appium/appium-flutter-driver/pull/940))
+- Update Appium Android driver dependency from 13.4.0 to 14.0.6 ([#920](https://github.com/appium/appium-flutter-driver/pull/920))
+- Update Appium UIAutomator2 driver dependency to 8.7.0
+
 ## 4.0.0
 - Convert the driver package from CommonJS to ESM
 
