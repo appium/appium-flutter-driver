@@ -70,7 +70,7 @@ export async function connectSocket(
           // `await` is needed so that rejected promise will be thrown and caught
           return await originalSocketCall.apply(socket, args);
         } catch (e) {
-          this.log.errorWithException(new Error(JSON.stringify(e)));
+          this.log.errorWithException(e instanceof Error ? e : new Error(JSON.stringify(e)));
         }
       };
       this.log.info(`Connecting to Dart Observatory: ${dartObservatoryURL}`);
@@ -183,6 +183,11 @@ export async function executeElementCommand(
   this.log.debug(`>>> ${JSON.stringify(serializedCommand)}`);
   const data = await (this.socket as IsolateSocket).executeSocketCommand(serializedCommand);
   this.log.debug(`<<< ${JSON.stringify(data)} | previous command ${command}`);
+  if (!data) {
+    throw new Error(
+      `Cannot execute command ${command}, no response from the Dart VM. Check the server log for the connection error`,
+    );
+  }
   if (data.isError) {
     throw new Error(`Cannot execute command ${command}, server response ${JSON.stringify(data, null, 2)}`);
   }
