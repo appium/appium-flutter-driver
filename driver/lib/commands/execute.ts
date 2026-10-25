@@ -4,7 +4,16 @@ import B from 'bluebird';
 import type {FlutterDriver} from '../driver.js';
 import {reConnectFlutterDriver} from '../sessions/session.js';
 import {launchApp} from './../ios/app.js';
-import {assertVisible, assertNotVisible, assertTappable, type FinderInput} from './assertions.js';
+import {
+  assertVisible,
+  assertNotVisible,
+  assertTappable,
+  isVisible,
+  isNotVisible,
+  isAbsent,
+  isTappable,
+  type FinderInput,
+} from './assertions.js';
 import {longTap, scroll, scrollIntoView, scrollUntilVisible, scrollUntilTapable} from './execute/scroll.js';
 import {waitFor, waitForAbsent, waitForTappable} from './execute/wait.js';
 
@@ -141,6 +150,10 @@ const commandHandlers: CommandMap = {
   assertNotVisible: async (driver, input: FinderInput, timeout = 5000) =>
     await assertNotVisible(driver, input, timeout),
   assertTappable: async (driver, input: FinderInput, timeout = 5000) => await assertTappable(driver, input, timeout),
+  isVisible: async (driver, input: FinderInput, timeout = 5000) => await isVisible(driver, input, timeout),
+  isNotVisible: async (driver, input: FinderInput, timeout = 5000) => await isNotVisible(driver, input, timeout),
+  isAbsent: async (driver, input: FinderInput, timeout = 5000) => await isAbsent(driver, input, timeout),
+  isTappable: async (driver, input: FinderInput, timeout = 5000) => await isTappable(driver, input, timeout),
   getTextWithCommandExtension: async (driver, params: {findBy: string}) =>
     await driver.socket!.executeSocketCommand({
       command: 'getTextWithCommandExtension',
