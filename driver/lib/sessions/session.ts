@@ -7,18 +7,23 @@ import {PLATFORM} from '../platform.js';
 import {startAndroidSession, connectAndroidSession} from './android.js';
 import {startIOSSession, connectIOSSession} from './ios.js';
 
-export const reConnectFlutterDriver = async function (this: FlutterDriver, caps: Record<string, any>) {
+export const reConnectFlutterDriver = async function (
+  this: FlutterDriver,
+  caps: Record<string, any>,
+  clearLog: boolean = true,
+) {
   // setup proxies - if platformName is not empty, make it less case sensitive
   if (!caps.platformName) {
     this.log.errorWithException(new Error(`No platformName was given`));
   }
 
+  const previousSocket = this.socket;
   switch (_.toLower(caps.platformName)) {
     case PLATFORM.IOS:
-      this.socket = await connectIOSSession.bind(this)(this.proxydriver, caps, true);
+      this.socket = await connectIOSSession.bind(this)(this.proxydriver, caps, clearLog);
       break;
     case PLATFORM.ANDROID:
-      this.socket = await connectAndroidSession.bind(this)(this.proxydriver, caps, true);
+      this.socket = await connectAndroidSession.bind(this)(this.proxydriver, caps, clearLog);
       break;
     default:
       this.log.errorWithException(
@@ -27,6 +32,11 @@ export const reConnectFlutterDriver = async function (this: FlutterDriver, caps:
             `Only the following platforms are supported: ${_.keys(PLATFORM)}`,
         ),
       );
+  }
+  if (previousSocket && previousSocket !== this.socket) {
+    try {
+      previousSocket.close();
+    } catch {}
   }
 };
 
