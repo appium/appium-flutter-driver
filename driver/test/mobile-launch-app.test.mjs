@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import {EventEmitter} from 'node:events';
+import net from 'node:net';
 import {it, mock} from 'node:test';
 
+import {utilities} from 'appium-ios-device';
 import {Server} from 'rpc-websockets';
 
 import {FlutterDriver} from '../build/lib/driver.js';
@@ -163,4 +165,64 @@ it('captures a new observatory URL emitted while mobile: launchApp is executing'
   );
 
   assert.equal(driver.connectedVmServiceUrl, 'ws://127.0.0.1:2/new=/ws');
+});
+
+it('closes existing socket and forwarding connections before restarting localServer on real iOS device activateApp', async () => {
+  const server = new Server({host: '127.0.0.1', port: 0});
+  await new Promise((resolve) => server.on('listening', resolve));
+  const {port: remotePort} = server.wss.address();
+  server.register('getVM', () => ({isolates: [{name: 'main', id: 'isolates/1'}]}), '/ws');
+  server.register('getIsolate', () => ({extensionRPCs: ['ext.flutter.driver']}), '/ws');
+
+  const probe = net.createServer();
+  await new Promise((resolve) => probe.listen(0, '127.0.0.1', resolve));
+  const forwardingPort = probe.address().port;
+  await new Promise((resolve) => probe.close(resolve));
+
+  const connectPortMock = mock.method(utilities, 'connectPort', async (_udid, targetPort) => {
+    const sock = net.connect(Number(targetPort), '127.0.0.1');
+    await new Promise((resolve, reject) => {
+      sock.once('connect', resolve);
+      sock.once('error', reject);
+    });
+    return sock;
+  });
+
+  const driver = fakeDriver();
+  driver.internalCaps = {platformName: 'iOS', forwardingPort};
+  driver.proxydriver.isRealDevice = () => true;
+  driver.proxydriver.opts = {udid: 'real-device-udid'};
+
+  const {emitter, logmon} = createLogMonitor();
+  driver._logmon = logmon;
+  emitter.emit('output', {
+    timestamp: Date.now(),
+    level: 'I',
+    message: `flutter: The Dart VM service is listening on http://127.0.0.1:${remotePort}/`,
+  });
+  await new Promise((resolve) => setImmediate(resolve));
+
+  try {
+    // Initial connection sets up driver.localServer and a live WebSocket through it
+    await FlutterDriver.prototype.activateApp.call(driver, 'com.example.app');
+    const firstServer = driver.localServer;
+    const firstSocket = driver.socket;
+    assert.ok(firstServer);
+    assert.ok(firstSocket);
+    assert.equal(driver.connectedVmServiceUrl, `ws://127.0.0.1:${forwardingPort}/ws`);
+
+    // Second activateApp with no new log line while the first connection is still alive
+    await FlutterDriver.prototype.activateApp.call(driver, 'com.example.app');
+    assert.ok(driver.localServer);
+    assert.notEqual(driver.localServer, firstServer);
+    assert.ok(driver.socket);
+    assert.notEqual(driver.socket, firstSocket);
+    assert.equal(driver.connectedVmServiceUrl, `ws://127.0.0.1:${forwardingPort}/ws`);
+    assert.ok(connectPortMock.mock.callCount() >= 2);
+  } finally {
+    connectPortMock.mock.restore();
+    driver.socket?.close();
+    driver.localServer?.close();
+    await server.close();
+  }
 });
