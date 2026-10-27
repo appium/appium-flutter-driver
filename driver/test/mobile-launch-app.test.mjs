@@ -6,6 +6,7 @@ import {it, mock} from 'node:test';
 import {utilities} from 'appium-ios-device';
 import {Server} from 'rpc-websockets';
 
+import {driverShouldDoProxyCmd} from '../build/lib/commands/context.js';
 import {FlutterDriver} from '../build/lib/driver.js';
 import {LogMonitor} from '../build/lib/sessions/log-monitor.js';
 import {extractObservatoryUrl} from '../build/lib/sessions/observatory.js';
@@ -17,6 +18,14 @@ function fakeDriver() {
   const events = [];
   return {
     events,
+    sessionId: 'test-session',
+    isCommandsQueueEnabled: true,
+    commandsQueueGuard: {
+      queues: {},
+      acquire: async (_key, fn) => await fn(),
+    },
+    eventEmitter: new EventEmitter(),
+    _eventHistory: {commands: []},
     log: noopLog,
     currentContext: 'FLUTTER',
     internalCaps: {platformName: 'iOS'},
@@ -27,6 +36,8 @@ function fakeDriver() {
     },
     clearNewCommandTimeout: async () => events.push('clearTimeout'),
     startNewCommandTimeout: async () => events.push('startTimeout'),
+    driverShouldDoProxyCmd,
+    activateApp: FlutterDriver.prototype.activateApp,
     reconnectAfterAppLaunch: FlutterDriver.prototype.reconnectAfterAppLaunch,
   };
 }
@@ -98,7 +109,7 @@ it('pauses newCommandTimeout during activateApp and reuses the active observator
   await new Promise((resolve) => setImmediate(resolve));
 
   try {
-    await FlutterDriver.prototype.activateApp.call(driver, 'com.example.app');
+    await FlutterDriver.prototype.executeCommand.call(driver, 'activateApp', 'com.example.app');
     assert.equal(driver.connectedVmServiceUrl, `ws://127.0.0.1:${port}/ws`);
     assert.equal(driver.socket.isolateId, 'isolates/1');
     assert.deepEqual(driver.events, ['clearTimeout', 'activateApp', 'startTimeout']);

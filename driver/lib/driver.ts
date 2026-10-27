@@ -172,15 +172,10 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async activateApp(appId: string) {
-    await this.clearNewCommandTimeout();
-    try {
-      await this.reconnectAfterAppLaunch(async () => {
-        // @ts-expect-error this exist in xcuitestdriver or uia2 driver
-        await this.proxydriver?.activateApp(appId);
-      }, true);
-    } finally {
-      await this.startNewCommandTimeout();
-    }
+    await this.reconnectAfterAppLaunch(async () => {
+      // @ts-expect-error this exist in xcuitestdriver or uia2 driver
+      await this.proxydriver?.activateApp(appId);
+    }, true);
   }
 
   public async terminateApp(appId: string) {
