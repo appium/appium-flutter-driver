@@ -78,9 +78,7 @@ export async function getObservatoryWsUri(
   clearLog: boolean = false,
 ): Promise<string> {
   if (clearLog) {
-    this._logmon?.clearlastMatch();
-    this._logmon?.stop();
-    this._logmon?.start();
+    this._logmon?.reset();
   }
 
   let urlObject;

@@ -38,7 +38,6 @@ function fakeDriver() {
     startNewCommandTimeout: async () => events.push('startTimeout'),
     driverShouldDoProxyCmd,
     activateApp: FlutterDriver.prototype.activateApp,
-    reconnectAfterAppLaunch: FlutterDriver.prototype.reconnectAfterAppLaunch,
   };
 }
 

@@ -2,6 +2,7 @@ import B from 'bluebird';
 
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type {FlutterDriver} from '../driver.js';
+import {reconnectAfterAppLaunch} from '../sessions/app-launch.js';
 import {reConnectFlutterDriver} from '../sessions/session.js';
 import {launchApp} from './../ios/app.js';
 import {assertVisible, assertNotVisible, assertTappable, type FinderInput} from './assertions.js';
@@ -40,8 +41,9 @@ interface OffsetOptions {
 const commandHandlers: CommandMap = {
   launchApp: async (driver, appId: string, opts = {}) => {
     const {arguments: args = [], environment: env = {}} = opts;
-    await launchApp(driver.internalCaps.udid!, appId, args, env);
-    await reConnectFlutterDriver.bind(driver)(driver.internalCaps);
+    await reconnectAfterAppLaunch.bind(driver)(async () => {
+      await launchApp(driver.internalCaps.udid!, appId, args, env);
+    });
   },
   connectObservatoryWsUrl: async (driver) => {
     await reConnectFlutterDriver.bind(driver)(driver.internalCaps);

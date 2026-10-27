@@ -30,10 +30,11 @@ import {getScreenshot} from './commands/screen.js';
 import {desiredCapConstraints} from './desired-caps.js';
 import {log as logger} from './logger.js';
 import {PLATFORM} from './platform.js';
+import {reconnectAfterAppLaunch} from './sessions/app-launch.js';
 import type {IsolateSocket} from './sessions/isolate_socket.js';
 import type {LogMonitor} from './sessions/log-monitor.js';
 import {executeElementCommand, executeGetVMCommand, executeGetIsolateCommand} from './sessions/observatory.js';
-import {createSession, reConnectFlutterDriver} from './sessions/session.js';
+import {createSession} from './sessions/session.js';
 
 type FluttertDriverConstraints = typeof desiredCapConstraints;
 // Need to not proxy in WebView context
@@ -172,7 +173,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async activateApp(appId: string) {
-    await this.reconnectAfterAppLaunch(async () => {
+    await reconnectAfterAppLaunch.bind(this)(async () => {
       // @ts-expect-error this exist in xcuitestdriver or uia2 driver
       await this.proxydriver?.activateApp(appId);
     }, true);
@@ -248,7 +249,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
           await this.proxydriver?.executeCommand(cmd, ...args);
           return;
         }
-        await this.reconnectAfterAppLaunch(async () => {
+        await reconnectAfterAppLaunch.bind(this)(async () => {
           await this.proxydriver?.executeCommand(cmd, ...args);
         }, isActivateApp);
         return;
@@ -310,32 +311,6 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     // As same as proxyActive, all request should got to each driver
     // so that they can handle http request properly
     return this.proxyWebViewActive;
-  }
-
-  private async reconnectAfterAppLaunch(launchFn: () => Promise<void>, allowExistingSession = false) {
-    const previousMatch = this._logmon?.lastMatch ?? null;
-    if (this._logmon) {
-      this._logmon.clearlastMatch();
-      this._logmon.stop();
-      this._logmon.start();
-    }
-    await launchFn();
-    if (allowExistingSession && this._logmon && !this._logmon.lastMatch && previousMatch) {
-      this._logmon.restoreLastMatch(previousMatch);
-      try {
-        await reConnectFlutterDriver.bind(this)(this.internalCaps, false);
-        return;
-      } catch (e) {
-        this.log.debug(
-          `Previous observatory URL is no longer reachable after app activation (${(e as Error).message}); ` +
-            `waiting for a new observatory URL in device logs`,
-        );
-        if (this._logmon.lastMatch === previousMatch) {
-          this._logmon.clearlastMatch();
-        }
-      }
-    }
-    await reConnectFlutterDriver.bind(this)(this.internalCaps, false);
   }
 }
 
