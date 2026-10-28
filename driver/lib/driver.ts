@@ -30,10 +30,11 @@ import {getScreenshot} from './commands/screen.js';
 import {desiredCapConstraints} from './desired-caps.js';
 import {log as logger} from './logger.js';
 import {PLATFORM} from './platform.js';
+import {reconnectAfterAppLaunch} from './sessions/app-launch.js';
 import type {IsolateSocket} from './sessions/isolate_socket.js';
 import type {LogMonitor} from './sessions/log-monitor.js';
 import {executeElementCommand, executeGetVMCommand, executeGetIsolateCommand} from './sessions/observatory.js';
-import {createSession, reConnectFlutterDriver} from './sessions/session.js';
+import {createSession} from './sessions/session.js';
 
 type FluttertDriverConstraints = typeof desiredCapConstraints;
 // Need to not proxy in WebView context
@@ -172,9 +173,10 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async activateApp(appId: string) {
-    // @ts-expect-error this exist in xcuitestdriver or uia2 driver
-    await this.proxydriver?.activateApp(appId);
-    await reConnectFlutterDriver.bind(this)(this.internalCaps);
+    await reconnectAfterAppLaunch.bind(this)(async () => {
+      // @ts-expect-error this exist in xcuitestdriver or uia2 driver
+      await this.proxydriver?.activateApp(appId);
+    }, true);
   }
 
   public async terminateApp(appId: string) {
@@ -237,16 +239,19 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
 
   public async executeCommand(cmd: string, ...args: [string, [{skipAttachObservatoryUrl: string; any: any}]]) {
     if (new RegExp(/^[\s]*mobile:[\s]*(activateApp|launchApp)$/).test(args[0])) {
-      const {skipAttachObservatoryUrl = false} = args[1][0];
+      const {skipAttachObservatoryUrl = false} = args[1]?.[0] ?? {};
+      const isActivateApp = /^[\s]*mobile:[\s]*activateApp$/.test(args[0]);
       // This bypasses BaseDriver.executeCommand, so pause the FlutterDriver CommandTimeout here:
       // the reconnect can wait for the observatory URL much longer than newCommandTimeout.
       await this.clearNewCommandTimeout();
       try {
-        await this.proxydriver?.executeCommand(cmd, ...args);
         if (skipAttachObservatoryUrl) {
+          await this.proxydriver?.executeCommand(cmd, ...args);
           return;
         }
-        await reConnectFlutterDriver.bind(this)(this.internalCaps);
+        await reconnectAfterAppLaunch.bind(this)(async () => {
+          await this.proxydriver?.executeCommand(cmd, ...args);
+        }, isActivateApp);
         return;
       } finally {
         await this.startNewCommandTimeout();
