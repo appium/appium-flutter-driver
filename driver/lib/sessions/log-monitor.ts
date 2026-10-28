@@ -37,6 +37,10 @@ export class LogMonitor {
     this._lastMatch = null;
   }
 
+  restoreLastMatch(match: LogEntry | null) {
+    this._lastMatch ??= match;
+  }
+
   async waitForLastMatchExist(
     maxRetryCount: number = DEFAULT_MAX_RETRY_COUNT,
     retryBackoffTime: number = DEFAULT_BACKOFF_TIME_MS,

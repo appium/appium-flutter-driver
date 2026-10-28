@@ -172,9 +172,10 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async activateApp(appId: string) {
-    // @ts-expect-error this exist in xcuitestdriver or uia2 driver
-    await this.proxydriver?.activateApp(appId);
-    await reConnectFlutterDriver.bind(this)(this.internalCaps);
+    await this.reconnectAfterAppLaunch(async () => {
+      // @ts-expect-error this exist in xcuitestdriver or uia2 driver
+      await this.proxydriver?.activateApp(appId);
+    }, true);
   }
 
   public async terminateApp(appId: string) {
@@ -237,16 +238,19 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
 
   public async executeCommand(cmd: string, ...args: [string, [{skipAttachObservatoryUrl: string; any: any}]]) {
     if (new RegExp(/^[\s]*mobile:[\s]*(activateApp|launchApp)$/).test(args[0])) {
-      const {skipAttachObservatoryUrl = false} = args[1][0];
+      const {skipAttachObservatoryUrl = false} = args[1]?.[0] ?? {};
+      const isActivateApp = /^[\s]*mobile:[\s]*activateApp$/.test(args[0]);
       // This bypasses BaseDriver.executeCommand, so pause the FlutterDriver CommandTimeout here:
       // the reconnect can wait for the observatory URL much longer than newCommandTimeout.
       await this.clearNewCommandTimeout();
       try {
-        await this.proxydriver?.executeCommand(cmd, ...args);
         if (skipAttachObservatoryUrl) {
+          await this.proxydriver?.executeCommand(cmd, ...args);
           return;
         }
-        await reConnectFlutterDriver.bind(this)(this.internalCaps);
+        await this.reconnectAfterAppLaunch(async () => {
+          await this.proxydriver?.executeCommand(cmd, ...args);
+        }, isActivateApp);
         return;
       } finally {
         await this.startNewCommandTimeout();
@@ -306,6 +310,32 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     // As same as proxyActive, all request should got to each driver
     // so that they can handle http request properly
     return this.proxyWebViewActive;
+  }
+
+  private async reconnectAfterAppLaunch(launchFn: () => Promise<void>, allowExistingSession = false) {
+    const previousMatch = this._logmon?.lastMatch ?? null;
+    if (this._logmon) {
+      this._logmon.clearlastMatch();
+      this._logmon.stop();
+      this._logmon.start();
+    }
+    await launchFn();
+    if (allowExistingSession && this._logmon && !this._logmon.lastMatch && previousMatch) {
+      this._logmon.restoreLastMatch(previousMatch);
+      try {
+        await reConnectFlutterDriver.bind(this)(this.internalCaps, false);
+        return;
+      } catch (e) {
+        this.log.debug(
+          `Previous observatory URL is no longer reachable after app activation (${(e as Error).message}); ` +
+            `waiting for a new observatory URL in device logs`,
+        );
+        if (this._logmon.lastMatch === previousMatch) {
+          this._logmon.clearlastMatch();
+        }
+      }
+    }
+    await reConnectFlutterDriver.bind(this)(this.internalCaps, false);
   }
 }
 
