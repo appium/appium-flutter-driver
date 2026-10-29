@@ -70,7 +70,7 @@ const commandHandlers: CommandMap = {
   },
   setIsolateId: async (driver, isolateId: string) => {
     driver.socket!.isolateId = isolateId;
-    return await driver.socket!.call('getIsolate', {isolateId});
+    return await driver.socket!.getIsolate(isolateId);
   },
   getIsolate: async (driver, isolateId?: string) =>
     await driver.executeGetIsolateCommand(isolateId || driver.socket!.isolateId!),

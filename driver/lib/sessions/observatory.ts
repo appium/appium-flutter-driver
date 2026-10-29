@@ -23,6 +23,39 @@ export const OBSERVATORY_URL_PATTERN = new RegExp(
 const moduleCheckIntervalCount = 30;
 const moduleCheckIntervalMs = 500;
 
+async function selectFlutterDriverIsolate(
+  this: FlutterDriver,
+  socket: IsolateSocket,
+  isolateId?: string | number,
+): Promise<void> {
+  if (isolateId) {
+    if (!(await socket.hasFlutterDriverExtension(isolateId))) {
+      throw new Error(`"ext.flutter.driver" is not found in the given isolate ${isolateId}`);
+    }
+    return;
+  }
+
+  const vm = await socket.getVM();
+  if (!Array.isArray(vm?.isolates)) {
+    throw new Error(`Cannot get Dart VM isolate info`);
+  }
+  this.log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
+
+  for (const candidate of vm.isolates) {
+    if (!(await socket.hasFlutterDriverExtension(candidate.id))) {
+      continue;
+    }
+    // e.g. 'isolates/2978358234363215' or '2978358234363215'
+    socket.isolateId = candidate.id;
+    this.log.info(
+      `Selected Flutter driver isolate: ${candidate.id} (${candidate.name}, group ${candidate.isolateGroupId ?? `unknown`})`,
+    );
+    return;
+  }
+
+  throw new Error(`"ext.flutter.driver" is not found in any Dart isolate`);
+}
+
 // SOCKETS
 /**
  * Opens an isolate socket for the given Flutter observatory URL.
@@ -84,47 +117,7 @@ export async function connectSocket(
       // retry because a background engine can start before the UI isolate that exposes the driver.
       try {
         await retryInterval(moduleCheckIntervalCount, moduleCheckIntervalMs, async () => {
-          if (isolateId) {
-            const isolate = (await socket.call(`getIsolate`, {
-              isolateId: `${isolateId}`,
-            })) as {
-              extensionRPCs: string[] | null;
-            } | null;
-            if (!Array.isArray(isolate?.extensionRPCs) || !isolate.extensionRPCs.includes(`ext.flutter.driver`)) {
-              throw new Error(`"ext.flutter.driver" is not found in the given isolate ${isolateId}`);
-            }
-            return;
-          }
-
-          const vm = (await socket.call(`getVM`)) as {
-            isolates?: Array<{
-              name: string;
-              id: string | number;
-              isolateGroupId?: string;
-            }>;
-          } | null;
-          if (!Array.isArray(vm?.isolates)) {
-            throw new Error(`Cannot get Dart VM isolate info`);
-          }
-          this.log.info(`Listing all isolates: ${JSON.stringify(vm.isolates)}`);
-
-          for (const candidate of vm.isolates) {
-            const isolate = (await socket.call(`getIsolate`, {
-              isolateId: `${candidate.id}`,
-            })) as {
-              extensionRPCs: string[] | null;
-            } | null;
-            if (Array.isArray(isolate?.extensionRPCs) && isolate.extensionRPCs.includes(`ext.flutter.driver`)) {
-              // e.g. 'isolates/2978358234363215' or '2978358234363215'
-              socket.isolateId = candidate.id;
-              this.log.info(
-                `Selected Flutter driver isolate: ${candidate.id} (${candidate.name}, group ${candidate.isolateGroupId ?? `unknown`})`,
-              );
-              return;
-            }
-          }
-
-          throw new Error(`"ext.flutter.driver" is not found in any Dart isolate`);
+          await selectFlutterDriverIsolate.call(this, socket, isolateId);
         });
       } catch (e) {
         this.log.error(e.message);
@@ -151,9 +144,7 @@ export async function connectSocket(
  */
 export async function executeGetIsolateCommand(this: FlutterDriver, isolateId: string | number) {
   this.log.debug(`>>> getIsolate`);
-  const isolate = await (this.socket as IsolateSocket).call(`getIsolate`, {
-    isolateId: `${isolateId}`,
-  });
+  const isolate = await (this.socket as IsolateSocket).getIsolate(isolateId);
   this.log.debug(`<<< ${_.truncate(JSON.stringify(isolate), {length: truncateLength})}`);
   return isolate;
 }
@@ -163,14 +154,7 @@ export async function executeGetIsolateCommand(this: FlutterDriver, isolateId: s
  */
 export async function executeGetVMCommand(this: FlutterDriver) {
   this.log.debug(`>>> getVM`);
-  const vm = (await (this.socket as IsolateSocket).call(`getVM`)) as {
-    isolates: [
-      {
-        name: string;
-        id: number;
-      },
-    ];
-  };
+  const vm = await (this.socket as IsolateSocket).getVM();
   this.log.debug(`<<< ${_.truncate(JSON.stringify(vm), {length: truncateLength})}`);
   return vm;
 }
