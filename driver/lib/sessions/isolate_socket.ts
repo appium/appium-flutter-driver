@@ -14,6 +14,17 @@ export interface IsolateInfo {
   extensionRPCs?: string[] | null;
 }
 
+/**
+ * Thrown when the Dart VM connection drops before a call got its reply, or when a call is made
+ * while the connection is down.
+ */
+export class DartVmConnectionClosedError extends Error {
+  constructor(message = `The Dart VM connection was closed before it replied`) {
+    super(message);
+    this.name = `DartVmConnectionClosedError`;
+  }
+}
+
 interface ExecuteArgs {
   command: string;
   [key: string]: any;
@@ -67,13 +78,20 @@ export class IsolateSocket extends Client {
     }>;
   }
 
+  /**
+   * Whether the Dart VM connection is open. rpc-websockets keeps this state in a private field.
+   */
+  public get isConnected(): boolean {
+    return Boolean((this as any).ready);
+  }
+
   private rejectPendingCalls() {
     const queue: Record<string, {promise: [unknown, (err: Error) => void]; timeout?: NodeJS.Timeout}> =
       (this as any).queue ?? {};
     for (const [id, {promise, timeout}] of Object.entries(queue)) {
       clearTimeout(timeout);
       delete queue[id];
-      promise[1](new Error(`The Dart VM connection was closed before it replied`));
+      promise[1](new DartVmConnectionClosedError());
     }
   }
 }
