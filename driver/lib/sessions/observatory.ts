@@ -153,7 +153,7 @@ export async function connectSocket(
       setUpSocket().catch((e) => {
         this.log.error(`Cannot set up the connection to ${dartObservatoryURL}: ${e.message}`);
         removeListenerAndResolve(null);
-        socket.close();
+        socket.dispose();
       });
     };
     socket.on(`open`, onOpenListener);

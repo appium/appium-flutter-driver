@@ -11,7 +11,6 @@ const noopLog = {info() {}, debug() {}, warn() {}, error() {}, errorWithExceptio
 const sockets = [];
 let server;
 let url;
-let reconnected;
 
 // A fake Dart VM service that drops the connection while a Flutter Driver command is pending,
 // like an app that crashes or relaunches in the middle of `waitForAbsent`.
@@ -20,12 +19,11 @@ before(async () => {
   await new Promise((resolve) => server.on('listening', resolve));
   url = `ws://127.0.0.1:${server.wss.address().port}/ws`;
   server.register('getIsolate', () => ({extensionRPCs: ['ext.flutter.driver']}), '/ws');
-  // Drop the caller's connection during the initial VM lookup. rpc-websockets reconnects the
-  // dropped socket after 1 s; `reconnected` resolves with the server side of that connection.
+  // Drop the caller's connection during the initial VM lookup. By default rpc-websockets would
+  // reconnect the dropped socket after 1 s.
   server.register(
     'getVM',
     (_params, socketId) => {
-      reconnected = new Promise((resolve) => server.once('connection', resolve));
       server.namespaces['/ws'].clients.get(socketId).terminate();
       return new Promise(() => {});
     },
@@ -45,14 +43,17 @@ before(async () => {
 
 after(async () => {
   for (const socket of sockets) {
-    socket.reconnect = false;
-    socket.close();
+    socket.dispose();
+  }
+  // Drop any connection that is still open so that closing the server cannot hang.
+  for (const client of server.wss.clients) {
+    client.terminate();
   }
   await server.close();
 });
 
-// Keep this test first: it waits for the reconnect of its own socket, and the sockets of later
-// tests would also reconnect to this server.
+// Keep this test first: it counts the connections to the server, and the sockets of later tests
+// reconnect to this server.
 it('fails to connect instead of hanging when the Dart VM connection closes during getVM', {timeout: 5000}, async () => {
   const unhandled = [];
   const onUnhandled = (reason) => unhandled.push(reason);
@@ -67,9 +68,17 @@ it('fails to connect instead of hanging when the Dart VM connection closes durin
   }
   assert.deepEqual(unhandled, []);
   assert.match(errors.join('\n'), /Cannot set up the connection to .+: The Dart VM connection was closed/);
-  // connectSocket no longer listens to the dropped socket. Close its reconnect with a normal
-  // closure (code 1000) so rpc-websockets stops reconnecting it.
-  (await reconnected).close(1000);
+  // The abandoned socket must not reconnect. Wait longer than the rpc-websockets reconnect
+  // interval (1 s) and check that the server sees no new connection.
+  let reconnects = 0;
+  const onConnection = () => reconnects++;
+  server.on('connection', onConnection);
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+  } finally {
+    server.off('connection', onConnection);
+  }
+  assert.equal(reconnects, 0);
 });
 
 it('rejects a pending command when the Dart VM connection closes', {timeout: 5000}, async () => {

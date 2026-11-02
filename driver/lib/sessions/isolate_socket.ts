@@ -85,6 +85,21 @@ export class IsolateSocket extends Client {
     return Boolean((this as any).ready);
   }
 
+  /**
+   * Closes this client for good, without the automatic reconnect of rpc-websockets.
+   * When the connection drops, rpc-websockets clears its socket and schedules a reconnect before
+   * the `close` event fires. `close()` only closes an existing socket, so it cannot stop that
+   * reconnect, and disabling reconnection alone does not stop it either because the scheduled
+   * callback calls `_connect()` anyway. Clear the scheduled reconnect too.
+   */
+  public dispose(): void {
+    const client = this as any;
+    client.reconnect = false;
+    clearTimeout(client.reconnect_timer_id);
+    client.reconnect_timer_id = undefined;
+    this.close();
+  }
+
   private rejectPendingCalls() {
     const queue: Record<string, {promise: [unknown, (err: Error) => void]; timeout?: NodeJS.Timeout}> =
       (this as any).queue ?? {};
