@@ -14,6 +14,17 @@ export interface IsolateInfo {
   extensionRPCs?: string[] | null;
 }
 
+/**
+ * Thrown when the Dart VM connection drops before a call got its reply, or when a call is made
+ * while the connection is down.
+ */
+export class DartVmConnectionClosedError extends Error {
+  constructor(message = `The Dart VM connection was closed before it replied`) {
+    super(message);
+    this.name = `DartVmConnectionClosedError`;
+  }
+}
+
 interface ExecuteArgs {
   command: string;
   [key: string]: any;
@@ -37,6 +48,10 @@ export class IsolateSocket extends Client {
 
     // @ts-ignore - runtime call is valid; types are provided by the package
     super(address as any);
+    // rpc-websockets keeps a pending call until a reply or its timeout arrives, and
+    // executeSocketCommand sets no timeout. Reject pending calls when the Dart VM connection
+    // closes (e.g. the app crashed or relaunched) so the command fails instead of hanging.
+    this.on(`close`, () => this.rejectPendingCalls());
   }
 
   public async getVM(): Promise<VMInfo | null> {
@@ -61,5 +76,37 @@ export class IsolateSocket extends Client {
       isError: boolean;
       response: any;
     }>;
+  }
+
+  /**
+   * Whether the Dart VM connection is open. rpc-websockets keeps this state in a private field.
+   */
+  public get isConnected(): boolean {
+    return Boolean((this as any).ready);
+  }
+
+  /**
+   * Closes this client for good, without the automatic reconnect of rpc-websockets.
+   * When the connection drops, rpc-websockets clears its socket and schedules a reconnect before
+   * the `close` event fires. `close()` only closes an existing socket, so it cannot stop that
+   * reconnect, and disabling reconnection alone does not stop it either because the scheduled
+   * callback calls `_connect()` anyway. Clear the scheduled reconnect too.
+   */
+  public dispose(): void {
+    const client = this as any;
+    client.reconnect = false;
+    clearTimeout(client.reconnect_timer_id);
+    client.reconnect_timer_id = undefined;
+    this.close();
+  }
+
+  private rejectPendingCalls() {
+    const queue: Record<string, {promise: [unknown, (err: Error) => void]; timeout?: NodeJS.Timeout}> =
+      (this as any).queue ?? {};
+    for (const [id, {promise, timeout}] of Object.entries(queue)) {
+      clearTimeout(timeout);
+      delete queue[id];
+      promise[1](new DartVmConnectionClosedError());
+    }
   }
 }
