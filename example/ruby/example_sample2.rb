@@ -49,6 +49,8 @@ class ExampleTests < Minitest::Test
     text_finder = by_text 'Tap me!'
 
     @driver.execute_script 'flutter:assertVisible', {text: 'Tap me!'}, 10000
+    assert_equal true, (@driver.execute_script 'flutter:isVisible', {text: 'Tap me!'}, 10000)
+    assert_equal false, (@driver.execute_script 'flutter:isVisible', {text: 'Non-existent'}, 500)
 
     element = ::Appium::Flutter::Element.new(@driver, finder: text_finder)
     # @driver.execute_script('flutter:waitForTappable', text_finder, 10000)

@@ -322,6 +322,10 @@ This module extends the `appium-flutter-driver` with custom visibility-related c
 | `assertVisible`     | ✅         | `driver.execute('flutter:assertVisible', { key: 'myKey' })`<br>`driver.execute('flutter:assertVisible', { text: 'Login' })` | Widget     |
 | `assertNotVisible`  | ✅         | `driver.execute('flutter:assertNotVisible', { key: 'hiddenWidget' })`                                                   | Widget     |
 | `assertTappable`    | ✅         | `driver.execute('flutter:assertTappable', { label: 'Submit' })`                                                          | Widget     |
+| `isVisible`         | ✅         | `driver.execute('flutter:isVisible', { key: 'myKey' }, 3000)`                                                            | Widget     |
+| `isNotVisible`      | ✅         | `driver.execute('flutter:isNotVisible', { key: 'hiddenWidget' }, 3000)`                                                  | Widget     |
+| `isAbsent`          | ✅         | `driver.execute('flutter:isAbsent', { key: 'hiddenWidget' }, 3000)`                                                      | Widget     |
+| `isTappable`        | ✅         | `driver.execute('flutter:isTappable', { label: 'Submit' }, 3000)`                                                        | Widget     |
 
 ## 🔍 Input Formats
 
