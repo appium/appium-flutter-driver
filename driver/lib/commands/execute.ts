@@ -11,6 +11,28 @@ import {waitFor, waitForAbsent, waitForTappable} from './execute/wait.js';
 
 const flutterCommandRegex = /^[\s]*flutter[\s]*:(.+)/;
 
+// Mirrors Flutter's TextInputAction enum from
+// packages/flutter_driver/lib/src/common/text_input_action.dart.
+export const TEXT_INPUT_ACTIONS = [
+  'none',
+  'unspecified',
+  'done',
+  'go',
+  'search',
+  'send',
+  'next',
+  'previous',
+  'continueAction',
+  'join',
+  'route',
+  'emergencyCall',
+  'newline',
+] as const;
+
+export type TextInputAction = (typeof TEXT_INPUT_ACTIONS)[number];
+
+const VALID_TEXT_INPUT_ACTIONS: ReadonlySet<string> = new Set(TEXT_INPUT_ACTIONS);
+
 // Define types for better type safety
 type CommandHandler = (driver: FlutterDriver, ...args: any[]) => Promise<any>;
 type CommandMap = Record<string, CommandHandler>;
@@ -113,6 +135,20 @@ const commandHandlers: CommandMap = {
       enabled,
     }),
   enterText: async (driver, text: string) => await driver.socket!.executeSocketCommand({command: 'enter_text', text}),
+  sendTextInputAction: async (driver, action: TextInputAction) => {
+    if (typeof action !== 'string' || !VALID_TEXT_INPUT_ACTIONS.has(action)) {
+      let formattedAction: string;
+      try {
+        formattedAction = JSON.stringify(action) ?? String(action);
+      } catch {
+        formattedAction = String(action);
+      }
+      throw new Error(
+        `Invalid text input action: ${formattedAction}. Valid actions are: ${TEXT_INPUT_ACTIONS.join(', ')}`,
+      );
+    }
+    return await driver.executeElementCommand('send_text_input_action', '', {action});
+  },
   requestData: async (driver, message: string) =>
     await driver.socket!.executeSocketCommand({
       command: 'request_data',
