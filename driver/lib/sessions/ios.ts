@@ -1,8 +1,8 @@
 import net from 'node:net';
 
+import type {W3CDriverCaps} from '@appium/types';
 import {utilities} from 'appium-ios-device';
 import {XCUITestDriver} from 'appium-xcuitest-driver';
-import type {XCUITestDriverOpts} from 'appium-xcuitest-driver/build/lib/driver.js';
 import B from 'bluebird';
 import {checkPortStatus} from 'portscanner';
 
@@ -24,11 +24,11 @@ const DISABLE_SERVICE_AUTH_CODES_FLAG = `--disable-service-auth-codes`;
 export async function startIOSSession(
   this: FlutterDriver,
   caps: Record<string, any>,
-  ...args: any[]
+  w3cCaps: W3CDriverCaps,
 ): Promise<[XCUITestDriver, IsolateSocket | null]> {
   this.log.info(`Starting an IOS proxy session`);
-  injectDartVmServicePortFlags(caps, args);
-  const iosdriver = new XCUITestDriver({} as XCUITestDriverOpts);
+  injectDartVmServicePortFlags(caps, w3cCaps);
+  const iosdriver = new XCUITestDriver({} as ConstructorParameters<typeof XCUITestDriver>[0]);
   if (!caps.observatoryWsUri) {
     iosdriver.eventEmitter.once('syslogStarted', (syslog) => {
       this._logmon = new LogMonitor(syslog, async (entry: LogEntry) => {
@@ -41,8 +41,7 @@ export async function startIOSSession(
       this._logmon.start();
     });
   }
-  // @ts-expect-error can be ignored
-  await iosdriver.createSession(...args);
+  await iosdriver.createSession(w3cCaps);
 
   // the session starts without any apps
   if (caps.app === undefined && caps.bundleId === undefined) {
@@ -255,16 +254,16 @@ async function ensureDeviceLogCaptureStarted(
  * untouched.
  *
  * `caps` is the driver's own processed copy, while XCUITest is started from the
- * raw W3C capabilities in `w3cCapsList`, so the resulting `processArguments` are
- * mirrored into each of their `alwaysMatch` (and dropped from `firstMatch` to
+ * raw W3C capabilities in `w3cCaps`, so the resulting `processArguments` are
+ * mirrored into its `alwaysMatch` (and dropped from `firstMatch` to
  * avoid a duplicate-key validation error). Otherwise the flags never reach the
  * app under test.
  *
  * If `dartVmServicePort` is not set, the caps are left untouched.
  * @param caps The processed capabilities of the driver session.
- * @param w3cCapsList The raw W3C capabilities forwarded to XCUITest.
+ * @param w3cCaps The raw W3C capabilities forwarded to XCUITest.
  */
-function injectDartVmServicePortFlags(caps: Record<string, any>, w3cCapsList: any[] = []): void {
+function injectDartVmServicePortFlags(caps: Record<string, any>, w3cCaps: W3CDriverCaps): void {
   const port = caps.dartVmServicePort;
   if (typeof port !== 'number') {
     return;
@@ -278,14 +277,10 @@ function injectDartVmServicePortFlags(caps: Record<string, any>, w3cCapsList: an
   }
   caps.processArguments.args = filtered;
 
-  for (const w3cCaps of w3cCapsList) {
-    if (!w3cCaps?.alwaysMatch || typeof w3cCaps.alwaysMatch !== 'object') {
-      continue;
-    }
-    w3cCaps.alwaysMatch['appium:processArguments'] = caps.processArguments;
-    for (const firstMatch of Array.isArray(w3cCaps.firstMatch) ? w3cCaps.firstMatch : []) {
-      delete firstMatch?.['appium:processArguments'];
-    }
+  w3cCaps.alwaysMatch ??= {};
+  w3cCaps.alwaysMatch['appium:processArguments'] = caps.processArguments;
+  for (const firstMatch of w3cCaps.firstMatch ?? []) {
+    delete firstMatch['appium:processArguments'];
   }
 }
 

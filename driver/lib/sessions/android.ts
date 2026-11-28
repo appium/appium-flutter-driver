@@ -1,4 +1,4 @@
-import type {InitialOpts, StringRecord} from '@appium/types';
+import type {StringRecord, W3CDriverCaps} from '@appium/types';
 import type {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
 
 import type {FlutterDriver} from '../driver.js';
@@ -16,17 +16,17 @@ const DISABLE_SERVICE_AUTH_CODES_EXTRA = `disable-service-auth-codes`;
 export async function startAndroidSession(
   this: FlutterDriver,
   caps: Record<string, any>,
-  ...args: any[]
+  w3cCaps: W3CDriverCaps,
 ): Promise<[AndroidUiautomator2Driver, IsolateSocket | null]> {
   this.log.info(`Starting an Android proxy session`);
-  injectDartVmServicePortIntentArgs(caps, args);
+  injectDartVmServicePortIntentArgs(caps, w3cCaps);
   if (typeof caps.dartVmServicePort === `number`) {
     this.log.info(
       `Pinning Dart VM Service to port ${caps.dartVmServicePort} via the vm-service-port launch-intent extra`,
     );
   }
   const {AndroidUiautomator2Driver} = await import('appium-uiautomator2-driver');
-  const androiddriver = new AndroidUiautomator2Driver({} as InitialOpts);
+  const androiddriver = new AndroidUiautomator2Driver();
   if (!caps.observatoryWsUri) {
     androiddriver.eventEmitter.once('syslogStarted', (syslog) => {
       this._logmon = new LogMonitor(syslog, async (entry: LogEntry) => {
@@ -39,8 +39,7 @@ export async function startAndroidSession(
       this._logmon.start();
     });
   }
-  //@ts-ignore Args are ok
-  await androiddriver.createSession(...args);
+  await androiddriver.createSession(w3cCaps);
 
   // the session starts without any apps
   if (caps.app === undefined && caps.appPackage === undefined) {
@@ -140,7 +139,7 @@ export async function getObservatoryWsUri(
  *
  * If `dartVmServicePort` is not set, the args are left untouched.
  */
-function injectDartVmServicePortIntentArgs(caps: Record<string, any>, args: any[]): void {
+function injectDartVmServicePortIntentArgs(caps: Record<string, any>, w3cCaps: W3CDriverCaps): void {
   const port = caps.dartVmServicePort;
   if (typeof port !== 'number') {
     return;
@@ -157,12 +156,9 @@ function injectDartVmServicePortIntentArgs(caps: Record<string, any>, args: any[
         : '';
     return base ? `${base} ${injected}` : injected;
   };
-  for (const a of args) {
-    if (!a || typeof a !== 'object' || Array.isArray(a)) {
-      continue;
-    }
-    if (a.alwaysMatch && typeof a.alwaysMatch === 'object') {
-      a.alwaysMatch['appium:optionalIntentArguments'] = merge(a.alwaysMatch['appium:optionalIntentArguments']);
-    }
+  w3cCaps.alwaysMatch ??= {};
+  w3cCaps.alwaysMatch['appium:optionalIntentArguments'] = merge(caps.optionalIntentArguments);
+  for (const firstMatch of w3cCaps.firstMatch ?? []) {
+    delete firstMatch['appium:optionalIntentArguments'];
   }
 }

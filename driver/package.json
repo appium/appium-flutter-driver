@@ -41,11 +41,11 @@
     "clean-dependency": "rm -rf node_modules && rm -f package-lock.json"
   },
   "dependencies": {
-    "appium-android-driver": "^14.0.6",
+    "appium-android-driver": "^16.1.4",
     "appium-flutter-finder": "^0.3.0",
     "appium-ios-device": "^3.0.0",
-    "appium-uiautomator2-driver": "^8.1.0",
-    "appium-xcuitest-driver": "^11.0.0",
+    "appium-uiautomator2-driver": "^10.4.1",
+    "appium-xcuitest-driver": "^13.8.2",
     "asyncbox": "^6.0.1",
     "bluebird": "^3.1.1",
     "lodash": "^4.0.0",
@@ -56,14 +56,14 @@
     "@appium/oxc-config": "^1.1.0",
     "@appium/semantic-release-config": "^1.1.0",
     "@appium/tsconfig": "^1.2.0",
-    "@appium/types": "^1.0.0",
+    "@appium/types": "^3.0.0",
     "ts-node": "^10.9.1"
   },
   "peerDependencies": {
-    "appium": "^3.0.0"
+    "appium": "^4.0.0"
   },
   "engines": {
-    "node": "^20.19.0 || ^22.12.0 || >=24.0.0",
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0",
     "npm": ">=10"
   },
   "appium": {

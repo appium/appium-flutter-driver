@@ -1,3 +1,4 @@
+import type {W3CDriverCaps} from '@appium/types';
 import type {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
 import type {XCUITestDriver} from 'appium-xcuitest-driver';
 import _ from 'lodash';
@@ -41,19 +42,24 @@ export const reConnectFlutterDriver = async function (
   }
 };
 
-export const createSession: any = async function (this: FlutterDriver, sessionId: string, caps, ...args) {
+export const createSession: any = async function (
+  this: FlutterDriver,
+  sessionId: string,
+  caps,
+  w3cCaps: W3CDriverCaps,
+) {
   try {
     // setup proxies - if platformName is not empty, make it less case sensitive
     switch (_.toLower(caps.platformName)) {
       case PLATFORM.IOS:
-        [this.proxydriver, this.socket] = await startIOSSession.bind(this)(caps, ...args);
+        [this.proxydriver, this.socket] = await startIOSSession.bind(this)(caps, w3cCaps);
         (this.proxydriver as XCUITestDriver).relaxedSecurityEnabled = this.relaxedSecurityEnabled;
         (this.proxydriver as XCUITestDriver).denyInsecure = this.denyInsecure;
         (this.proxydriver as XCUITestDriver).allowInsecure = this.allowInsecure;
 
         break;
       case PLATFORM.ANDROID:
-        [this.proxydriver, this.socket] = await startAndroidSession.bind(this)(caps, ...args);
+        [this.proxydriver, this.socket] = await startAndroidSession.bind(this)(caps, w3cCaps);
         (this.proxydriver as AndroidUiautomator2Driver).relaxedSecurityEnabled = this.relaxedSecurityEnabled;
         (this.proxydriver as AndroidUiautomator2Driver).denyInsecure = this.denyInsecure;
         (this.proxydriver as AndroidUiautomator2Driver).allowInsecure = this.allowInsecure;

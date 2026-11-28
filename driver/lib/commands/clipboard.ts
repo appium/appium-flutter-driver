@@ -17,6 +17,5 @@ export const setClipboard = async function (this: FlutterDriver, content: string
  * @param contentType the contentType to set the data type
  */
 export const getClipboard = async function (this: FlutterDriver, contentType: string) {
-  // @ts-expect-error this exist in xcuitestdriver or uia2 driver
   await this.proxydriver?.getClipboard(contentType);
 };
