@@ -29,9 +29,9 @@ it('forwards the injected VM service flags to XCUITest', async () => {
     {'appium:processArguments': {args: ['--foo'], env: {A: '1'}}},
   ]);
 
-  await start(caps, forwarded, undefined, {});
+  await start(caps, forwarded);
 
-  assert.equal(forwardedArgs[0], forwarded);
+  assert.deepEqual(forwardedArgs, [forwarded]);
   assert.deepEqual(forwarded.alwaysMatch['appium:processArguments'], {
     args: ['--foo', '--vm-service-port=9123', '--disable-service-auth-codes'],
     env: {A: '1'},

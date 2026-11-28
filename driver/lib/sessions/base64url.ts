@@ -1,4 +1,4 @@
-import {util} from '@appium/support';
+import {util} from 'appium/support.js';
 import _ from 'lodash';
 
 export const decode = (input: string | {ELEMENT: string} | {[util.W3C_WEB_ELEMENT_IDENTIFIER]: string}): string => {

@@ -48,12 +48,12 @@ jobs:
         os_version: ${{ env.IOS_VERSION }}
 
     # Start Appium
-    - run: npm install -g appium
+    - run: npm install -g appium@4
     - run: npm install
       working-directory:
         driver
     - run: |
-        appium driver install --source=local driver
+        appium driver install --source=local "$GITHUB_WORKSPACE/driver"
         nohup appium --log-timestamp --log-no-colors > appium.log &
 
     - name: Set up Ruby
@@ -95,12 +95,12 @@ jobs:
         node-version: 'lts/*'
 
     # Start Appium
-    - run: npm install -g appium
+    - run: npm install -g appium@4
     - run: npm install
       working-directory:
         driver
     - run: |
-        appium driver install --source=local driver
+        appium driver install --source=local "$GITHUB_WORKSPACE/driver"
         nohup appium --log-timestamp --log-no-colors > appium.log &
 
     - name: Enable KVM group perms

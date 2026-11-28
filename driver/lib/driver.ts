@@ -1,16 +1,9 @@
 import type {Server} from 'node:net';
 
-import type {
-  DefaultCreateSessionResult,
-  DriverCaps,
-  DriverData,
-  W3CDriverCaps,
-  RouteMatcher,
-  Orientation,
-} from '@appium/types';
+import type {DefaultCreateSessionResult, DriverCaps, W3CDriverCaps, RouteMatcher, Orientation} from '@appium/types';
 import type {AndroidUiautomator2Driver} from 'appium-uiautomator2-driver';
 import {XCUITestDriver} from 'appium-xcuitest-driver';
-import {BaseDriver} from 'appium/driver.js';
+import {BaseDriver, runWithCommandTimeout} from 'appium/driver.js';
 // @ts-ignore: no 'errors' export module
 import _ from 'lodash';
 
@@ -122,12 +115,10 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     this.localServer = null;
   }
 
-  public async createSession(...args): Promise<DefaultCreateSessionResult<FluttertDriverConstraints>> {
-    const [sessionId, caps] = await super.createSession(
-      ...(JSON.parse(JSON.stringify(args)) as [W3CDriverCaps, W3CDriverCaps, W3CDriverCaps, DriverData[]]),
-    );
+  public async createSession(w3cCaps: W3CDriverCaps): Promise<DefaultCreateSessionResult<FluttertDriverConstraints>> {
+    const [sessionId, caps] = await super.createSession(structuredClone(w3cCaps));
     this.internalCaps = caps;
-    return createSession.bind(this)(sessionId, caps, ...JSON.parse(JSON.stringify(args)));
+    return createSession.call(this, sessionId, caps, structuredClone(w3cCaps));
   }
 
   public async deleteSession() {
@@ -168,24 +159,20 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
   }
 
   public async installApp(appPath: string, opts = {}) {
-    // @ts-expect-error this exist in xcuitestdriver or uia2 driver
     await this.proxydriver?.installApp(appPath, opts);
   }
 
   public async activateApp(appId: string) {
     await reconnectAfterAppLaunch.bind(this)(async () => {
-      // @ts-expect-error this exist in xcuitestdriver or uia2 driver
       await this.proxydriver?.activateApp(appId);
     }, true);
   }
 
   public async terminateApp(appId: string) {
-    // @ts-expect-error this exist in xcuitestdriver or uia2 driver
     return await this.proxydriver?.terminateApp(appId);
   }
 
   public async back() {
-    // @ts-expect-error this exist in xcuitestdriver or uia2 driver
     return await this.proxydriver?.back();
   }
 
@@ -241,10 +228,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
     if (new RegExp(/^[\s]*mobile:[\s]*(activateApp|launchApp)$/).test(args[0])) {
       const {skipAttachObservatoryUrl = false} = args[1]?.[0] ?? {};
       const isActivateApp = /^[\s]*mobile:[\s]*activateApp$/.test(args[0]);
-      // This bypasses BaseDriver.executeCommand, so pause the FlutterDriver CommandTimeout here:
-      // the reconnect can wait for the observatory URL much longer than newCommandTimeout.
-      await this.clearNewCommandTimeout();
-      try {
+      return await runWithCommandTimeout(this, async () => {
         if (skipAttachObservatoryUrl) {
           await this.proxydriver?.executeCommand(cmd, ...args);
           return;
@@ -252,18 +236,15 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
         await reconnectAfterAppLaunch.bind(this)(async () => {
           await this.proxydriver?.executeCommand(cmd, ...args);
         }, isActivateApp);
-        return;
-      } finally {
-        await this.startNewCommandTimeout();
-      }
+      });
     } else if (new RegExp(/^[\s]*mobile:[\s]*terminateApp$/).test(args[0])) {
       // to make the behavior as same as this.terminateApp
-      return await this.proxydriver?.executeCommand(cmd, ...args);
+      return await runWithCommandTimeout(this, async () => await this.proxydriver?.executeCommand(cmd, ...args));
     } else if (cmd === `receiveAsyncResponse`) {
       // TODO: Remove 'receiveAsyncResponse' as legacy behavior.
       // Dependent UIA2/XCUITest drivers should not have this method for now.
       logger.debug(`Executing FlutterDriver response '${cmd}'`);
-      return await this.receiveAsyncResponse(...args);
+      return await runWithCommandTimeout(this, () => this.receiveAsyncResponse(...args));
     } else if ([`setOrientation`, `getOrientation`, `back`].includes(cmd)) {
       // The `setOrientation` and `getOrientation` commands are handled differently
       // for iOS and Android platforms. These commands are deferred to the base driver's
@@ -275,14 +256,7 @@ class FlutterDriver extends BaseDriver<FluttertDriverConstraints> {
       if (this.driverShouldDoProxyCmd(cmd)) {
         logger.debug(`Executing proxied driver command '${cmd}'`);
 
-        // There are 2 CommandTimeout (FlutterDriver and proxy)
-        // Only FlutterDriver CommandTimeout is used; Proxy is disabled
-        // All proxy commands needs to reset the FlutterDriver CommandTimeout
-        // Here we manually reset the FlutterDriver CommandTimeout for commands that goes to proxy.
-        await this.clearNewCommandTimeout();
-        const result = await this.proxydriver?.executeCommand(cmd, ...args);
-        await this.startNewCommandTimeout();
-        return result;
+        return await runWithCommandTimeout(this, async () => await this.proxydriver?.executeCommand(cmd, ...args));
       } else {
         logger.debug(`Executing Flutter driver command '${cmd}'`);
         return await super.executeCommand(cmd, ...args);
